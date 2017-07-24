@@ -17,10 +17,11 @@ import com.umeng.analytics.MobclickAgent;
 import mr.li.dance.R;
 import mr.li.dance.broadcast.BroadcastManager;
 import mr.li.dance.models.UserInfo;
-import mr.li.dance.ui.activitys.MyDanceWebActivity;
 import mr.li.dance.ui.activitys.LoginActivity;
-import mr.li.dance.ui.activitys.mine.MyCollectActivity;
+import mr.li.dance.ui.activitys.MyDanceWebActivity;
+import mr.li.dance.ui.activitys.mine.AccountActivity;
 import mr.li.dance.ui.activitys.mine.MyAlbumActivity;
+import mr.li.dance.ui.activitys.mine.MyCollectActivity;
 import mr.li.dance.ui.activitys.mine.MyGuanzhuActivity;
 import mr.li.dance.ui.activitys.mine.MyMessageActivity;
 import mr.li.dance.ui.activitys.mine.SettingActivity;
@@ -30,8 +31,8 @@ import mr.li.dance.ui.adapters.MineAdapter;
 import mr.li.dance.ui.fragments.BaseListFragment;
 import mr.li.dance.ui.widget.MineItemDecoration;
 import mr.li.dance.utils.AppConfigs;
-import mr.li.dance.utils.glide.ImageLoaderManager;
 import mr.li.dance.utils.UserInfoManager;
+import mr.li.dance.utils.glide.ImageLoaderManager;
 
 /**
  * 作者: Lixuewei
@@ -152,12 +153,15 @@ public class MineFragment extends BaseListFragment {
                 MyAlbumActivity.lunch(getActivity(), 0x005);
                 break;
             case 4:
-                SuggestActivity.lunch(getActivity());
+                AccountActivity.lunch(getActivity());
                 break;
             case 5:
+                SuggestActivity.lunch(getActivity());
+            break;
+            case 6:
                 MyDanceWebActivity.lunch(getActivity(), MyDanceWebActivity.ABOUTTYPE, "关于我们");
                 break;
-            case 6:
+            case 7:
                 SettingActivity.lunch(getActivity());
                 break;
 

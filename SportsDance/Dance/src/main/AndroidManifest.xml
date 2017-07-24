@@ -137,6 +137,13 @@
         <activity
             android:name=".ui.activitys.mine.MyAlbumActivity"
             android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.activitys.mine.AccountActivity"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activitys.mine.WithdrawdepositActivity"
+                  android:screenOrientation="portrait"/>
+
+
         <activity
             android:name=".ui.activitys.match.SearchMatchActivity"
             android:screenOrientation="portrait"/>

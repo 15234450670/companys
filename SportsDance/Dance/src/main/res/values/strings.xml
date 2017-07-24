@@ -15,6 +15,8 @@
     <string name="mine_guanzhu">我的关注</string>
     <string name="mine_album">我的相册</string>
     <string name="mine_suggest">意见反馈</string>
+    <string name="mine_money">我的账户</string>
+    <string name="mine_money_mingxi">账户明细</string>
     <string name="mine_about">关于我们</string>
     <string name="mine_setting">设置</string>
     <string name="inputbindmobile">请输入绑定的手机号</string>
@@ -67,4 +69,6 @@
 
     <string name="system_download_component_disable">下载服务不用,请您启用</string>
     <string name="system_download_description">版本更新</string>
+
+
 </resources>

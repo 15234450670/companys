@@ -1,7 +1,6 @@
 package mr.li.dance.ui.adapters;
 
 import android.content.Context;
-import android.util.Log;
 
 import mr.li.dance.R;
 
@@ -13,9 +12,10 @@ import mr.li.dance.R;
 
 public class MineAdapter extends BaseRecyclerAdapter {
     int[] iconResIds = new int[]{R.drawable.mine_icon_006, R.drawable.mine_icon_005, R.drawable.mine_icon_003,
-            R.drawable.mine_icon_008, R.drawable.mine_icon_002, R.drawable.mine_icon_001, R.drawable.mine_icon_007};
+            R.drawable.mine_icon_008,R.drawable.mine_account,R.drawable.mine_icon_002, R.drawable.mine_icon_001, R.drawable.mine_icon_007};
+
     int[] nameStr = new int[]{R.string.collect_video, R.string.collect_album, R.string.mine_guanzhu,
-            R.string.mine_album, R.string.mine_suggest, R.string.mine_about, R.string.mine_setting};
+            R.string.mine_album,R.string.mine_money, R.string.mine_suggest, R.string.mine_about, R.string.mine_setting};
 
 
     public MineAdapter(Context ctx) {

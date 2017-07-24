@@ -23,8 +23,14 @@
     <dimen name="textsize24">12sp</dimen>
     <dimen name="textsize22">11sp</dimen>
     <dimen name="textsize20">10sp</dimen>
+    <dimen name="textsize18">9sp</dimen>
     <dimen name="textsize16">8sp</dimen>
     <dimen name="textsize12">6sp</dimen>
+    <dimen name="textsize60">30sp</dimen>
+    <dimen name="textsize72">36sp</dimen>
+    <dimen name="textsize120">60sp</dimen>
+    <dimen name="textsize56">28sp</dimen>
+
 
     <dimen name="spacing_2">1dp</dimen>
     <dimen name="spacing_6">3dp</dimen>

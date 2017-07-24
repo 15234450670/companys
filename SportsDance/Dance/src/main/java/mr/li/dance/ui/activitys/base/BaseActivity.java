@@ -41,17 +41,14 @@ import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.StringResponse;
 import mr.li.dance.models.UpdateVersion;
 import mr.li.dance.ui.activitys.DownLoadApkActivity;
-import mr.li.dance.ui.activitys.MainActivity;
 import mr.li.dance.ui.dialogs.LoadDialog;
 import mr.li.dance.ui.dialogs.UpdateApkDialog;
-import mr.li.dance.utils.AndroidBug54971Workaround;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.DanceViewHolder;
 import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.MyStrUtil;
 import mr.li.dance.utils.NToast;
 import mr.li.dance.utils.Utils;
-import mr.li.dance.utils.glide.ImageLoaderManager;
 import mr.li.dance.utils.updater.Updater;
 import mr.li.dance.utils.updater.UpdaterConfig;
 import mr.li.dance.utils.updater.UpdaterUtils;
@@ -124,6 +121,7 @@ public abstract class BaseActivity extends FragmentActivity implements HttpListe
 
     // 初始化公共头部
     private void initTitleView() {
+
         mContentView = (ViewFlipper) super.findViewById(R.id.layout_container);
         mHeadLayout = (RelativeLayout) super.findViewById(R.id.layout_title);
         mHeadRightText = (TextView) findViewById(R.id.text_right);
@@ -153,8 +151,6 @@ public abstract class BaseActivity extends FragmentActivity implements HttpListe
         mEditor = mSp.edit();
 
     }
-
-    ;
 
     protected String getmUserId() {
         return mSp.getString(AppConfigs.USERID, "");

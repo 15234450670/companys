@@ -165,6 +165,27 @@
         <item name="android:textSize">30sp</item>
     </style>
 
+    <style name="mine_text_money">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/textsize120</item>
+        <item name="android:textColor">#cd9a41</item>
+    </style>
+   <style name="mine_radiobtn_mingxi">
+       <item name="android:layout_width">match_parent</item>
+       <item name="android:layout_height">wrap_content</item>
+       <item name="android:button">@null</item>
+       <item name="android:textSize">@dimen/textsize36</item>
+       <item name="android:textColor">#333333</item>
+   </style>
+    <style name="item_mine_rv" parent="text_style">
+        <item name="android:textSize">@dimen/textsize36</item>
+        <item name="android:textColor">#666666</item>
+        <item name="android:paddingTop">@dimen/spacing_30</item>
+
+    </style>
+
+
     <style name="FullScreenDialog" parent="android:Theme.Dialog">
 
         <!-- 窗口设为无标题 -->

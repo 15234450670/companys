@@ -12,6 +12,7 @@
     <color name="home_text_default_color">#949493</color>
     <color name="home_text_hover_color">#FF4081</color>
 
+    <color name="mine_back_many">#f3f2f7</color>
 
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
