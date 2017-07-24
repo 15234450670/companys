@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:background="@color/mine_back_many"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+    >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:scaleType="fitXY"
+                android:layout_height="wrap_content"
+                android:src="@drawable/mine_tixian_01"/>
+
+            <TextView
+                android:id="@+id/mine_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#cd9a41"
+                android:textSize="@dimen/textsize60"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="7000"/>
+
+            <TextView
+                style="@style/text_style"
+                android:layout_centerInParent="true"
+                android:layout_toRightOf="@+id/mine_money"
+                android:text="元"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize30"/>
+            <TextView
+                android:textColor="@color/white"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_below="@+id/mine_money"
+                android:layout_height="wrap_content"
+                android:text="总金额"/>
+
+        </RelativeLayout>
+
+        <RadioButton
+            style="@style/mine_radiobtn_mingxi"
+            android:layout_marginLeft="@dimen/spacing_20"
+            android:layout_marginRight="@dimen/spacing_20"
+            android:background="@color/rc_text_color_primary_inverse"
+            android:drawableLeft="@drawable/mine_accounts"
+            android:paddingBottom="@dimen/spacing_30"
+            android:paddingTop="@dimen/spacing_30"
+            android:text="账户明细"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/mine_back_many">
+
+        </View>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+            android:id="@+id/mine_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_20"
+            android:layout_marginRight="@dimen/spacing_20"
+            android:background="@color/white">
+        </android.support.v7.widget.RecyclerView>
+        </ScrollView>
+
+
+
+</LinearLayout>
