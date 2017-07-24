@@ -30,7 +30,6 @@ public class AccountActivity extends BaseListActivity {
         setTitle("账单明细");
         mHeadRightText.setVisibility(View.VISIBLE);
         mHeadRightText.setBackgroundResource(R.drawable.mine_withdrawdeposit_ref);
-        mHeadRightText.setPadding(0,5,10,5);
         mHeadRightText.setText("提现");
     }
 
