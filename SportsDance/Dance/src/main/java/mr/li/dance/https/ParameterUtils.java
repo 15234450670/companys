@@ -156,7 +156,15 @@ public class ParameterUtils {
         request.add("appid", appid);
         return request;
     }
-
+    /**
+     * 提现Item
+     */
+    public Request<String> getTiXianInfoMap(String userid,String page){
+        Request<String> request = getBaseRequestForPost("/redpacket.detail");
+        request.add("userid", userid);
+        request.add("page",page);
+        return request;
+    }
     /**
      * 忘记密码
      *

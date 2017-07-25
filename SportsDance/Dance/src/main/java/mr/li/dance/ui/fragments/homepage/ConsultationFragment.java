@@ -49,6 +49,7 @@ public class ConsultationFragment extends BaseListFragment {
     @Override
     public void initData() {
         Request<String> request = ParameterUtils.getSingleton().getHomeZxMap();
+
         request(AppConfigs.home_zx, request, false);
 
     }

@@ -167,6 +167,7 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
             default:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_base, null);
                 viewHolder = new HomeViewHolder(mContext, view);
+
                 break;
         }
         return viewHolder;
@@ -259,7 +260,6 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
         String userId = UserInfoManager.getSingleton().getUserId(mContext);
         Log.e("userId",userId);
         Request<String> huoDongInfoMap = ParameterUtils.getSingleton().getHuoDongInfoMap(appId, appsecret, url, userId);
-
         CallServer.getRequestInstance().add(mContext, 0, huoDongInfoMap, new HttpListener(){
             @Override
             public void onSucceed(int what, String response) {
@@ -309,6 +309,7 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
         }, true, true);
 
     }
+
 
     private void bindType2(final AdverViewHolder holder, int position) {
         holder.danceViewHolder.setText(R.id.type_tv, "热门推荐");
@@ -412,6 +413,7 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
                         MatchDetailActivity.lunch(mContext, mDatas.get(position).getCompete_id());
                         break;
                     case 10106://外联
+
                         String url = mDatas.get(position).getUrl();
                         String wailianId = mDatas.get(position).getId();
                         if (!MyStrUtil.isEmpty(url)) {
@@ -438,7 +440,6 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
         });
         holder.setViewDatas(mDatas.get(position));
     }
-
 
     @Override
     public int getItemViewType(int position) {

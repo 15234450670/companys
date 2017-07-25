@@ -19,10 +19,7 @@
 
             <TextView
                 android:id="@+id/mines_money"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#cd9a41"
-                android:textSize="@dimen/textsize60"
+                style="@style/mine_text_money"
                 android:layout_centerInParent="true"
                 android:text="7000"/>
 
@@ -75,6 +72,7 @@
             android:layout_marginRight="@dimen/spacing_20"
             android:background="@color/white">
         </android.support.v7.widget.RecyclerView>
+
         </ScrollView>
 
 

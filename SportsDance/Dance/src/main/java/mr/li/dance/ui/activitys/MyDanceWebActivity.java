@@ -11,7 +11,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
-import com.umeng.analytics.MobclickAgent;
 import com.yolanda.nohttp.rest.Request;
 
 import mr.li.dance.R;
@@ -62,7 +61,6 @@ public class MyDanceWebActivity extends BaseActivity {
         mWebView.setVerticalScrollbarOverlay(true);
 
         WebSettings webSettings = mWebView.getSettings();
-        
         webSettings.setLoadWithOverviewMode(true);
         webSettings.setJavaScriptEnabled(true);
         webSettings.setUseWideViewPort(true);
@@ -76,7 +74,7 @@ public class MyDanceWebActivity extends BaseActivity {
         //        if (dm.densityDpi > 240 ) {
 //            webSettings.setDefaultFontSize(20); //可以取1-72之间的任意值，默认16
 //        }
-//        webSettings.setTextSize(WebSettings.TextSize.LARGER); //可
+       // webSettings.setTextSize(WebSettings.TextSize.LARGEST); //可
 
 
         if (Build.VERSION.SDK_INT > 11) {
@@ -135,7 +133,6 @@ public class MyDanceWebActivity extends BaseActivity {
             default:
                 mWebView.loadUrl(shareUrl);
                 break;
-
         }
 
     }
@@ -257,6 +254,5 @@ public class MyDanceWebActivity extends BaseActivity {
             String h5Content = reponseResult.getData();
             mWebView.loadData(h5Content, "text/html; charset=UTF-8", null);//这种写法可以正确解码
         }
-
     }
 }

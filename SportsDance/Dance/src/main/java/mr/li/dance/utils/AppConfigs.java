@@ -99,7 +99,7 @@ public class AppConfigs {
     public final static int passport_password = 0x0054;
     public final static int login_retrieve = 0x0055;
     public final static int home_WlinkClick = 0x0056;
-
+    public final static int item_tx = 0x0057;
     public static String getDomainUrl() {
         return DomainUrl;
     }

@@ -82,7 +82,7 @@
                 android:layout_height="26dp"
                 android:clickable="true"
                 android:onClick="onHeadRightButtonClick"
-
+                android:layout_marginRight="10dp"
                 android:visibility="gone" />
         </LinearLayout>
 

@@ -16,8 +16,6 @@ public class MyMessageAdapter extends BaseRecyclerAdapter<MyMessageInfo> {
         super(ctx);
     }
 
-
-
     @Override
     public int getItemLayoutId(int viewType) {
         return R.layout.item_message;
