@@ -77,9 +77,7 @@ public class AccountActivity extends BaseListActivity<Mine_itemInfo> {
         Log.e("明细",response);
         if (what==AppConfigs.item_tx) {
             Mine_itemInfo reponseResult = JsonMananger.getReponseResult(response, Mine_itemInfo.class);
-              adapter.add(reponseResult);
-
-
+            adapter.add(reponseResult);
         }
     }
     /**

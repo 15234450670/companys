@@ -24,17 +24,6 @@ public class WithdrawdepositActivity extends BaseActivity {
        setTitle("提现");
     }
 
-    /*@Override
-    public void onClick(View view) {
-         switch (view.getId()){
-             case R.id.mine_zfb_btn:
-                 Toast.makeText(mContext, "支付宝", Toast.LENGTH_SHORT).show();
-                 break;
-             case R.id.mine_tixian_btn:
-                 Toast.makeText(mContext, "提现", Toast.LENGTH_SHORT).show();
-                 break;
-         }
-    }*/
     public void btn1(View v){
         Toast.makeText(mContext, "支付宝", Toast.LENGTH_SHORT).show();
     }
