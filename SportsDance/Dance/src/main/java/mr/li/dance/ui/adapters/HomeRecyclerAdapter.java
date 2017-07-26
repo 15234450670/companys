@@ -212,6 +212,7 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
                         case 10106://外联
 
                             if (!MyStrUtil.isEmpty(bannerInfo.getUrl())) {
+
                                 MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, "",bannerInfo.getUrl(), bannerInfo.getId());
                             }
                             break;
@@ -255,7 +256,7 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
         Log.e("appId",appId);
         String appsecret = bannerInfo.getAppsecret();
         Log.e("appsecret",appsecret);
-        String url = bannerInfo.getUrl();
+        final String url = bannerInfo.getUrl();
         Log.e("url:::::",url);
         String userId = UserInfoManager.getSingleton().getUserId(mContext);
         Log.e("userId",userId);
@@ -266,7 +267,7 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
 
                 HuoDongInfo reponseResult = JsonMananger.getReponseResult(response, HuoDongInfo.class);
                 Log.e("sdfsdf","请求了:"+reponseResult.getData());
-                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, "", reponseResult.getData(), bannerInfo.getId());
+                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, "", reponseResult.getData(), url,bannerInfo.getId());
             }
 
             @Override
@@ -287,7 +288,7 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
         Log.e("appId:::",appId);
         String appsecret = base.getApp_secret();
         Log.e("appsecret::::",appsecret);
-        String url = base.getUrl();
+        final String url = base.getUrl();
         Log.e("url:::::",url);
         String userId = UserInfoManager.getSingleton().getUserId(mContext);
         Log.e("userId",userId);
@@ -299,7 +300,7 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
 
                 HuoDongInfo reponseResult = JsonMananger.getReponseResult(response, HuoDongInfo.class);
                 Log.e("sdfsdf","请求了:"+reponseResult.getData());
-                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, "", reponseResult.getData(), base.getId());
+                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, "", reponseResult.getData(), url, base.getId());
             }
 
             @Override

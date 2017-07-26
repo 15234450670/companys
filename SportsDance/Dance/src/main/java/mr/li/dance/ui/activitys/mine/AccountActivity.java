@@ -68,6 +68,7 @@ public class AccountActivity extends BaseListActivity<Mine_itemInfo> {
         String userId = UserInfoManager.getSingleton().getUserInfo(this).getUserid();
         Log.e("mine_userid:",userId);
         Request<String> request = ParameterUtils.getSingleton().getTiXianInfoMap(userId, "1");
+        Log.e("request",request.url());
         request(AppConfigs.item_tx,request,false);
 }
 
@@ -78,6 +79,11 @@ public class AccountActivity extends BaseListActivity<Mine_itemInfo> {
         if (what==AppConfigs.item_tx) {
             Mine_itemInfo reponseResult = JsonMananger.getReponseResult(response, Mine_itemInfo.class);
             adapter.add(reponseResult);
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 7ab8cbb99b0c0ef1e68f927b8e08fe520e260cc1
         }
     }
     /**

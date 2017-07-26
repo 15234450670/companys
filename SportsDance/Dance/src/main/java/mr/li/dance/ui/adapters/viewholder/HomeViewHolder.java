@@ -56,7 +56,8 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
             case 10105://赛事
                 bindMatch(homeListItemInfo);
                 break;
-            case 10106|10107://外联
+            case 10106://外联
+            case 10107:
                 bindOther(homeListItemInfo);
                 break;
             default:
@@ -96,7 +97,8 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
                 mShareContent = homeListItemInfo.getCompete_name();
                 countID = AppConfigs.CLICK_EVENT_22;
                 break;
-            case 10106|10107://外联
+            case 10106://外联
+            case 10107:
                 shareUrl = homeListItemInfo.getUrl();
                 if (MyStrUtil.isEmpty(shareUrl)) {
                     return;

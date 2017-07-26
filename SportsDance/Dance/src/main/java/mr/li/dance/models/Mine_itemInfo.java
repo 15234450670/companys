@@ -13,7 +13,6 @@ import mr.li.dance.https.response.BaseResponse;
  */
 public class Mine_itemInfo extends BaseResponse {
 
-
     /**
      * errorCode : 200
      * data : {"remaining_sum":"7.80","detail":[{"is_draw":"1","money":"0.50","get_money":"0.00","time":"2017-07-25 13:48:11"},{"is_draw":"1","money":"0.70","get_money":"0.00","time":"2017-07-25 09:27:09"},{"is_draw":"1","money":"0.50","get_money":"0.00","time":"2017-07-25 09:27:01"},{"is_draw":"1","money":"0.40","get_money":"0.00","time":"2017-07-24 15:56:30"},{"is_draw":"1","money":"0.60","get_money":"0.00","time":"2017-07-24 10:10:41"}]}

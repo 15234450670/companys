@@ -166,8 +166,8 @@ public class ParameterUtils {
         return request;
     }
     /**
-     * 忘记密码
      *
+     * 忘记密码
      * @param mobile
      * @param password
      * @return

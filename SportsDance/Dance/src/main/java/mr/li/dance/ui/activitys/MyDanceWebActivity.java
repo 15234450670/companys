@@ -3,6 +3,7 @@ package mr.li.dance.ui.activitys;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -47,6 +48,7 @@ public class MyDanceWebActivity extends BaseActivity {
     private int wailianId;
     private boolean showShare;
     private String mCountId;//分享统计Id
+    private String url;
 
     @Override
     public int getContentViewId() {
@@ -108,30 +110,30 @@ public class MyDanceWebActivity extends BaseActivity {
                     updateWaiLian();
                 }
                 mCountId = AppConfigs.CLICK_EVENT_23;
-                mWebView.loadUrl(shareUrl);
+                mWebView.loadUrl(url);
                 break;
             case ZIXUNTYPE:
                 mCountId = AppConfigs.CLICK_EVENT_21;
-                mWebView.loadUrl(shareUrl);
+                mWebView.loadUrl(url);
                 break;
             case KAOJI:
                 mCountId = AppConfigs.CLICK_EVENT_24;
-                mWebView.loadUrl(shareUrl);
+                mWebView.loadUrl(url);
                 break;
             case MATCHOTHER1:
                 mCountId = AppConfigs.CLICK_EVENT_25;
-                mWebView.loadUrl(shareUrl);
+                mWebView.loadUrl(url);
                 break;
             case MATCHOTHER2:
                 mCountId = AppConfigs.CLICK_EVENT_26;
-                mWebView.loadUrl(shareUrl);
+                mWebView.loadUrl(url);
                 break;
             case MATCHOTHER3:
                 mCountId = AppConfigs.CLICK_EVENT_27;
-                mWebView.loadUrl(shareUrl);
+                mWebView.loadUrl(url);
                 break;
             default:
-                mWebView.loadUrl(shareUrl);
+                mWebView.loadUrl(url);
                 break;
         }
 
@@ -148,7 +150,9 @@ public class MyDanceWebActivity extends BaseActivity {
         super.getIntentData();
         mWebType = mIntentExtras.getInt("webtype", 0);
         titleName = mIntentExtras.getString("title");
-        shareUrl = mIntentExtras.getString("url");
+        shareUrl = mIntentExtras.getString("shareUrl");
+        url = mIntentExtras.getString("url");
+        Log.e(shareUrl, url);
         wailianId = mIntentExtras.getInt("wailianid", -1);
         showShare = mIntentExtras.getBoolean("showshare", false);
     }
@@ -209,6 +213,17 @@ public class MyDanceWebActivity extends BaseActivity {
         context.startActivity(intent);
     }
 
+    public static void lunch(Context context, int type, String title, String url, String shareUrl, String wailianId) {
+        Intent intent = new Intent(context, MyDanceWebActivity.class);
+        intent.putExtra("title", title);
+        intent.putExtra("url", url);
+        intent.putExtra("webtype", type);
+        intent.putExtra("shareUrl", shareUrl);
+        intent.putExtra("wailianid", wailianId);
+        intent.putExtra("showshare", true);
+        context.startActivity(intent);
+    }
+
     public static void lunch(Context context, int type, String title, String url) {
         lunch(context, type, title, url, false);
     }
@@ -235,6 +250,8 @@ public class MyDanceWebActivity extends BaseActivity {
             mShareUtils = new ShareUtils(this);
         }
         mShareUtils.showShareDilaog(mCountId,shareUrl, mShareContent);
+        Log.e("url--------",shareUrl);
+        Log.e("url-+++++++++--",url);
 
     }
 

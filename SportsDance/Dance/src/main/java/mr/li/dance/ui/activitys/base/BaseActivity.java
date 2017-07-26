@@ -293,7 +293,7 @@ public abstract class BaseActivity extends FragmentActivity implements HttpListe
     public void request(int requestCode, Request request) {
         request.setCancelSign(this);
         request(requestCode, request, false);
-    }
+}
 
     public void request(int requestCode, Request request, boolean showLoading) {
         request.setCancelSign(this);
