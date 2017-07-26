@@ -80,6 +80,17 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         return this;
     }
 
+    public RecyclerViewHolder setTextAndColor(int viewId, String value, int color) {
+        TextView view = findViewById(viewId);
+        if(null == view){
+            return this;
+        }
+        view.setText(value);
+        view.setTextColor(color);
+        view.setVisibility(View.VISIBLE);
+        return this;
+    }
+
     public RecyclerViewHolder setBackground(int viewId, int resId) {
         View view = findViewById(viewId);
         view.setBackgroundResource(resId);

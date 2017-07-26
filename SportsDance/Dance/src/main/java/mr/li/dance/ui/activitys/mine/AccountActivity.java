@@ -30,14 +30,12 @@ import mr.li.dance.utils.UserInfoManager;
 public class AccountActivity extends BaseListActivity {
     Mine_item_adapter adapters;
     private Mine_itemInfo reponseResult;
-
-    @Override
-    public void initViews() {
+   int page = 0;
+    public void initViewss() {
         setTitle("账单明细");
         mRightIv.setVisibility(View.VISIBLE);
         mRightIv.setBackgroundResource(R.drawable.mine_tixian_btn);
     }
-
     @Override
     public void initDatas() {
         super.initDatas();
@@ -50,6 +48,7 @@ public class AccountActivity extends BaseListActivity {
     }
     @Override
     public int getContentViewId() {
+        initViewss();
         return R.layout.activity_account;
     }
     /**
@@ -72,7 +71,7 @@ public class AccountActivity extends BaseListActivity {
     public void MineInfo(){
         String userId = UserInfoManager.getSingleton().getUserInfo(this).getUserid();
         Log.e("mine_userid:",userId);
-        Request<String> request = ParameterUtils.getSingleton().getTiXianInfoMap("29807", "1");
+        Request<String> request = ParameterUtils.getSingleton().getTiXianInfoMap("29807", page+"");
         Log.e("request",request.url());
         request(AppConfigs.item_tx,request,false);
 
@@ -85,9 +84,12 @@ public class AccountActivity extends BaseListActivity {
         if (what==AppConfigs.item_tx&&!MyStrUtil.isEmpty(response)) {
             reponseResult = JsonMananger.getReponseResult(response, Mine_itemInfo.class);
             mDanceViewHolder.setText(R.id.mines_money, reponseResult.getData().getRemaining_sum());
-            Log.e("sssssssssssss", reponseResult.getData().getDetail().get(0).getTime());
-            adapters = new Mine_item_adapter(this);
+          //  detail = reponseResult.getData().getDetail();
             adapters.add(reponseResult);
+
+            Log.e("sssssssssssss", reponseResult.getData().getDetail().get(0).getTime());
+
+
         } else{
             Toast.makeText(mContext, "您未参与活动", Toast.LENGTH_SHORT).show();
         }
@@ -96,10 +98,20 @@ public class AccountActivity extends BaseListActivity {
     /**
      * 上啦加载
      */
-   /* @Override
+    @Override
     public void loadMore() {
         super.loadMore();
-    }*/
+          page++;
+        MineInfo();
+    }
+
+    @Override
+    public void refresh() {
+        super.refresh();
+        MineInfo();
+
+    }
+
     /**
      * 条目点击事件
      */

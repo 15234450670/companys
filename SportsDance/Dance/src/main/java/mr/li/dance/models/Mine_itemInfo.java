@@ -99,4 +99,5 @@ public class Mine_itemInfo extends BaseResponse {
             }
         }
     }
+
 }
