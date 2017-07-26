@@ -21,7 +21,7 @@
                 android:id="@+id/mines_money"
                 style="@style/mine_text_money"
                 android:layout_centerInParent="true"
-                android:text="7000"/>
+               />
 
             <TextView
                 style="@style/text_style"
@@ -60,21 +60,21 @@
         android:text="账户明细"
         android:id="@+id/radioButton" />
 
-    <ScrollView
+    <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
+        android:id="@+id/refresh"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/spacing_20"
+        android:layout_marginRight="@dimen/spacing_20"
+        android:background="@color/white"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:overScrollMode="never" />
 
-            <android.support.v7.widget.RecyclerView
-            android:id="@+id/mine_rv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/spacing_20"
-            android:layout_marginRight="@dimen/spacing_20"
-            android:background="@color/white">
-        </android.support.v7.widget.RecyclerView>
-
-        </ScrollView>
-
+    </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
 
 
 </LinearLayout>

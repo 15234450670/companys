@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.yolanda.nohttp.rest.Request;
 
@@ -15,6 +16,7 @@ import mr.li.dance.ui.activitys.base.BaseListActivity;
 import mr.li.dance.ui.adapters.Mine_item_adapter;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
+import mr.li.dance.utils.MyStrUtil;
 import mr.li.dance.utils.UserInfoManager;
 
 /**
@@ -25,13 +27,9 @@ import mr.li.dance.utils.UserInfoManager;
  * 修订历史:
  */
 
-public class AccountActivity extends BaseListActivity<Mine_itemInfo> {
-    Mine_item_adapter adapter;
-
-    @Override
-    public int getContentViewId() {
-        return R.layout.activity_account;
-    }
+public class AccountActivity extends BaseListActivity {
+    Mine_item_adapter adapters;
+    private Mine_itemInfo reponseResult;
 
     @Override
     public void initViews() {
@@ -40,65 +38,74 @@ public class AccountActivity extends BaseListActivity<Mine_itemInfo> {
         mRightIv.setBackgroundResource(R.drawable.mine_tixian_btn);
     }
 
+    @Override
+    public void initDatas() {
+        super.initDatas();
+        MineInfo();
+    }
+    @Override
+    public RecyclerView.Adapter getAdapter() {
+        adapters = new Mine_item_adapter(this);
+        return adapters;
+    }
+    @Override
+    public int getContentViewId() {
+        return R.layout.activity_account;
+    }
     /**
      * 点击右边按钮
      */
     @Override
     public void onHeadRightButtonClick(View v) {
         super.onHeadRightButtonClick(v);
-        startActivity(new Intent(this,WithdrawdepositActivity.class));
+        Intent intent=new Intent(this,WithdrawdepositActivity.class);
+        intent.putExtra("back_money",reponseResult.getData().getRemaining_sum());
+        startActivity(intent);
     }
 
     public static void lunch(Context context) {
         context.startActivity(new Intent(context, AccountActivity.class));
     }
 
-    @Override
-    public RecyclerView.Adapter getAdapter() {
-        adapter = new Mine_item_adapter(this);
-        return adapter;
-    }
 
-    @Override
-    public void initDatas() {
-        super.initDatas();
-        MineInfo();
-    }
+
     public void MineInfo(){
         String userId = UserInfoManager.getSingleton().getUserInfo(this).getUserid();
         Log.e("mine_userid:",userId);
-        Request<String> request = ParameterUtils.getSingleton().getTiXianInfoMap(userId, "1");
+        Request<String> request = ParameterUtils.getSingleton().getTiXianInfoMap("29807", "1");
         Log.e("request",request.url());
         request(AppConfigs.item_tx,request,false);
+
 }
 
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
         Log.e("明细",response);
-        if (what==AppConfigs.item_tx) {
-            Mine_itemInfo reponseResult = JsonMananger.getReponseResult(response, Mine_itemInfo.class);
-            adapter.add(reponseResult);
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 7ab8cbb99b0c0ef1e68f927b8e08fe520e260cc1
+        if (what==AppConfigs.item_tx&&!MyStrUtil.isEmpty(response)) {
+            reponseResult = JsonMananger.getReponseResult(response, Mine_itemInfo.class);
+            mDanceViewHolder.setText(R.id.mines_money, reponseResult.getData().getRemaining_sum());
+            Log.e("sssssssssssss", reponseResult.getData().getDetail().get(0).getTime());
+            adapters = new Mine_item_adapter(this);
+            adapters.add(reponseResult);
+        } else{
+            Toast.makeText(mContext, "您未参与活动", Toast.LENGTH_SHORT).show();
         }
     }
+
     /**
      * 上啦加载
      */
-    @Override
+   /* @Override
     public void loadMore() {
         super.loadMore();
-    }
+    }*/
     /**
      * 条目点击事件
      */
 
     @Override
-    public void itemClick(int position, Mine_itemInfo value) {
+    public void itemClick(int position, Object value) {
 
     }
 }

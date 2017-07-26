@@ -23,27 +23,28 @@
                android:textColor="@color/white"
                android:background="@drawable/shap_cicler_btn"
               />
-                   <RelativeLayout
-                       android:layout_width="match_parent"
-                       android:layout_height="@dimen/spacing_410">
-                       <TextView
 
-                           android:id="@+id/tixian_money"
-                           android:text="7000"
-                           android:gravity="center"
-                           style="@style/mine_text_money"
-                           android:background="@drawable/tixian_ref"
-                           android:layout_centerInParent="true"
-                         />
-                       <TextView
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="总金额"
-                           android:layout_alignBottom="@+id/tixian_money"
-                           android:layout_centerHorizontal="true"
-                           android:layout_marginBottom="@dimen/spacing_30"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_410">
 
-                   </RelativeLayout>
+        <TextView
+            android:id="@+id/tixian_money"
+            style="@style/mine_text_money"
+            android:layout_centerInParent="true"
+            android:background="@drawable/tixian_ref"
+            android:gravity="center"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tixian_money"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/spacing_30"
+            android:text="总金额"/>
+
+    </RelativeLayout>
+
     <Button
         android:id="@+id/mine_tixian_btn"
 

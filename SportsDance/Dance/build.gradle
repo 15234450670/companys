@@ -15,8 +15,8 @@ android {
         applicationId "mr.li.dance"
         minSdkVersion 19
         targetSdkVersion 19
-        versionCode 3
-        versionName "1.2.0"
+        versionCode 4
+        versionName "1.3.0"
         ndk {
             // 设置支持的SO库架构
             abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'

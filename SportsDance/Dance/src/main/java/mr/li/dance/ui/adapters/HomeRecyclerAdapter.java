@@ -167,7 +167,6 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
             default:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_base, null);
                 viewHolder = new HomeViewHolder(mContext, view);
-
                 break;
         }
         return viewHolder;
@@ -284,14 +283,15 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
      */
     public void huodong_listView(final BaseHomeItem base){
 
-        String appId = base.getApp_id();
+        String appId = "JK48ada5a480e37d41";
         Log.e("appId:::",appId);
-        String appsecret = base.getApp_secret();
+        String appsecret ="32dae2ac34079322325d28cfa0825w3aa";
         Log.e("appsecret::::",appsecret);
         final String url = base.getUrl();
         Log.e("url:::::",url);
         String userId = UserInfoManager.getSingleton().getUserId(mContext);
         Log.e("userId",userId);
+        final String title = base.getTitle();
         Request<String> huoDongInfoMap = ParameterUtils.getSingleton().getHuoDongInfoMap(appId, appsecret, url, userId);
 
         CallServer.getRequestInstance().add(mContext, 0, huoDongInfoMap, new HttpListener(){
@@ -300,7 +300,7 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
 
                 HuoDongInfo reponseResult = JsonMananger.getReponseResult(response, HuoDongInfo.class);
                 Log.e("sdfsdf","请求了:"+reponseResult.getData());
-                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, "", reponseResult.getData(), url, base.getId());
+                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, title, reponseResult.getData(), url, base.getId());
             }
 
             @Override

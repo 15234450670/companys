@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import mr.li.dance.R;
 import mr.li.dance.ui.activitys.base.BaseActivity;
+import mr.li.dance.utils.MyStrUtil;
 
 /**
  *  描述: 提现页面
@@ -22,6 +23,17 @@ public class WithdrawdepositActivity extends BaseActivity {
     @Override
     public void initViews() {
        setTitle("提现");
+    }
+
+    @Override
+    public void getIntentData() {
+        super.getIntentData();
+        String back_money = mIntentExtras.getString("back_money");
+        if (!MyStrUtil.isEmpty(back_money)) {
+            mDanceViewHolder.setText(R.id.tixian_money,back_money);
+        }
+
+
     }
 
     public void btn1(View v){

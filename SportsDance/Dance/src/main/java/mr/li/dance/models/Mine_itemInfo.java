@@ -13,9 +13,9 @@ import mr.li.dance.https.response.BaseResponse;
  */
 public class Mine_itemInfo extends BaseResponse {
 
+
     /**
-     * errorCode : 200
-     * data : {"remaining_sum":"7.80","detail":[{"is_draw":"1","money":"0.50","get_money":"0.00","time":"2017-07-25 13:48:11"},{"is_draw":"1","money":"0.70","get_money":"0.00","time":"2017-07-25 09:27:09"},{"is_draw":"1","money":"0.50","get_money":"0.00","time":"2017-07-25 09:27:01"},{"is_draw":"1","money":"0.40","get_money":"0.00","time":"2017-07-24 15:56:30"},{"is_draw":"1","money":"0.60","get_money":"0.00","time":"2017-07-24 10:10:41"}]}
+     * data : {"remaining_sum":"47.40","detail":[{"is_draw":"1","money":"0.00","get_money":"0.00","time":"2017-07-26 13:59:11"},{"is_draw":"1","money":"5.90","get_money":"0.00","time":"2017-07-26 13:51:08"},{"is_draw":"1","money":"1.30","get_money":"0.00","time":"2017-07-26 13:51:06"},{"is_draw":"1","money":"1.30","get_money":"0.00","time":"2017-07-26 13:51:04"},{"is_draw":"1","money":"8.60","get_money":"0.00","time":"2017-07-26 13:51:02"}]}
      */
 
     private DataBean data;
@@ -30,8 +30,8 @@ public class Mine_itemInfo extends BaseResponse {
 
     public static class DataBean {
         /**
-         * remaining_sum : 7.80
-         * detail : [{"is_draw":"1","money":"0.50","get_money":"0.00","time":"2017-07-25 13:48:11"},{"is_draw":"1","money":"0.70","get_money":"0.00","time":"2017-07-25 09:27:09"},{"is_draw":"1","money":"0.50","get_money":"0.00","time":"2017-07-25 09:27:01"},{"is_draw":"1","money":"0.40","get_money":"0.00","time":"2017-07-24 15:56:30"},{"is_draw":"1","money":"0.60","get_money":"0.00","time":"2017-07-24 10:10:41"}]
+         * remaining_sum : 47.40
+         * detail : [{"is_draw":"1","money":"0.00","get_money":"0.00","time":"2017-07-26 13:59:11"},{"is_draw":"1","money":"5.90","get_money":"0.00","time":"2017-07-26 13:51:08"},{"is_draw":"1","money":"1.30","get_money":"0.00","time":"2017-07-26 13:51:06"},{"is_draw":"1","money":"1.30","get_money":"0.00","time":"2017-07-26 13:51:04"},{"is_draw":"1","money":"8.60","get_money":"0.00","time":"2017-07-26 13:51:02"}]
          */
 
         private String remaining_sum;
@@ -56,9 +56,9 @@ public class Mine_itemInfo extends BaseResponse {
         public static class DetailBean {
             /**
              * is_draw : 1
-             * money : 0.50
+             * money : 0.00
              * get_money : 0.00
-             * time : 2017-07-25 13:48:11
+             * time : 2017-07-26 13:59:11
              */
 
             private String is_draw;
