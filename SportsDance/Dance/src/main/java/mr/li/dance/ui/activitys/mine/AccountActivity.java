@@ -19,6 +19,7 @@ import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.MyStrUtil;
 import mr.li.dance.utils.UserInfoManager;
 
+
 /**
  * 作者: yjd
  * 版本: 1.0
@@ -32,7 +33,9 @@ public class AccountActivity extends BaseListActivity {
     private Mine_itemInfo reponseResult;
     int page = 0;
 
-    public void initViewss() {
+    @Override
+    public void initViews() {
+        super.initViews();
         setTitle("账单明细");
         mRightIv.setVisibility(View.VISIBLE);
         mRightIv.setBackgroundResource(R.drawable.mine_tixian_btn);
@@ -40,9 +43,7 @@ public class AccountActivity extends BaseListActivity {
 
     @Override
     public void initDatas() {
-
         super.initDatas();
-        initViewss();
         MineInfo();
     }
     @Override
@@ -63,9 +64,10 @@ public class AccountActivity extends BaseListActivity {
     @Override
     public void onHeadRightButtonClick(View v) {
         super.onHeadRightButtonClick(v);
-        Intent intent=new Intent(this,WithdrawdepositActivity.class);
+
         String remaining_sum = reponseResult.getData().getRemaining_sum();
         if (!MyStrUtil.isEmpty(remaining_sum)) {
+            Intent intent=new Intent(this,WithdrawdepositActivity.class);
             intent.putExtra("back_money",reponseResult.getData().getRemaining_sum());
             startActivity(intent);
 

@@ -3,7 +3,6 @@ package mr.li.dance.ui.activitys;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.view.View;
 
 import com.yolanda.nohttp.rest.Request;
@@ -89,6 +88,9 @@ public class PerfectInfoActivity extends BaseActivity implements View.OnClickLis
         }
     }
 
+    /**
+     * 提交信息
+     */
     private void subimt() {
         String name = mDanceViewHolder.getTextValue(R.id.name_tv);
         String card = mDanceViewHolder.getTextValue(R.id.card_tv);
@@ -121,7 +123,7 @@ public class PerfectInfoActivity extends BaseActivity implements View.OnClickLis
             startActivity(new Intent(this, MainActivity.class));
         } else {
             setResult(RESULT_OK);
-        }
+    }
         finish();
     }
 

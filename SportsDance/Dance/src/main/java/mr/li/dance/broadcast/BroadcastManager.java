@@ -12,7 +12,6 @@ import android.content.IntentFilter;
 
 import com.yolanda.nohttp.error.ServerError;
 
-import java.net.HttpRetryException;
 import java.util.HashMap;
 import java.util.Map;
 

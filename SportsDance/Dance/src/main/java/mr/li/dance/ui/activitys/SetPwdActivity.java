@@ -50,7 +50,7 @@ public class SetPwdActivity extends BaseActivity implements View.OnClickListener
         setTitle("设置登录密码");
     }
 
-    public static void lunch(Context context, String mobile, int setType) {
+       public static void lunch(Context context, String mobile, int setType) {
         Intent intent = new Intent(context, SetPwdActivity.class);
         intent.putExtra("mobile", mobile);
         intent.putExtra("settype", setType);
@@ -93,7 +93,12 @@ public class SetPwdActivity extends BaseActivity implements View.OnClickListener
             if (setType == 0) {
                 setThirdPwd();
             } else if (setType == -1) {
-                SetHeadNickActivity.lunch(this, mMobile, pwd);
+                //请求网络
+
+
+
+
+                // SetHeadNickActivity.lunch(this, mMobile, pwd);
             } else {
                 setPwd(pwd);
             }
@@ -132,5 +137,8 @@ public class SetPwdActivity extends BaseActivity implements View.OnClickListener
             PerfectInfoActivity.lunch(this, userInfo.getUserid());
         }
 
+        startActivity(new Intent(this, MainActivity.class));
+
     }
+
 }
