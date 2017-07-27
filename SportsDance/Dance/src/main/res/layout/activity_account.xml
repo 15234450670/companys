@@ -21,6 +21,7 @@
                 android:id="@+id/mines_money"
                 style="@style/mine_text_money"
                 android:layout_centerInParent="true"
+                android:text="0.0"
                />
 
             <TextView
@@ -59,7 +60,10 @@
         android:paddingTop="@dimen/spacing_30"
         android:text="账户明细"
         android:id="@+id/radioButton" />
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/mine_back_many"/>
     <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
         android:id="@+id/refresh"
         android:layout_width="match_parent"

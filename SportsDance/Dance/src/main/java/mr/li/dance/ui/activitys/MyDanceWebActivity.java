@@ -254,7 +254,6 @@ public class MyDanceWebActivity extends BaseActivity {
         Log.e("url-+++++++++--",url);
         Log.e("tttttt::::",mShareContent);
 
-        Log.e("tttttt::--:",mCountId);
     }
 
     ShareUtils mShareUtils;

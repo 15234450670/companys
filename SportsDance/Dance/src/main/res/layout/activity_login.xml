@@ -146,14 +146,17 @@
             </RelativeLayout>
 
             <LinearLayout
+                android:layout_marginTop="@dimen/spacing_40"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_above="@+id/companymobile_tv"
+                 android:orientation="horizontal"
+                android:gravity="center"
                 android:layout_below="@+id/top_layout"
-                android:gravity="center">
+              >
 
                 <ImageView
                     android:id="@+id/wx_iv"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/login_icon_003" />
@@ -173,15 +176,6 @@
                     android:src="@drawable/login_icon_004" />-->
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/companymobile_tv"
-                style="@style/text_yellow_style_22"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="@dimen/spacing_50"
-                android:background="@color/home_bg_color"
-                android:text="客服电话:010-60521234"
-                android:textColor="#ffffff" />
         </RelativeLayout>
     </LinearLayout>
 </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
