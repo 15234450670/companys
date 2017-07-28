@@ -36,11 +36,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:ellipsize="end"
-            android:gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+          android:gravity="center"
+
+
+            android:paddingRight="48dip"
             android:singleLine="true"
-            android:text=""
+            android:text="sssssssss"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/left_layout"/>
 

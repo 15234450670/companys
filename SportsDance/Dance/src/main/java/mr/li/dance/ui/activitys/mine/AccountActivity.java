@@ -33,9 +33,9 @@ public class AccountActivity extends BaseListActivity {
     private Mine_itemInfo reponseResult;
     int page = 0;
 
-    @Override
-    public void initViews() {
-        super.initViews();
+
+    public void initViewss() {
+
         setTitle("账单明细");
         mRightIv.setVisibility(View.VISIBLE);
         mRightIv.setBackgroundResource(R.drawable.mine_tixian_btn);
@@ -44,6 +44,7 @@ public class AccountActivity extends BaseListActivity {
     @Override
     public void initDatas() {
         super.initDatas();
+        initViewss();
         MineInfo();
     }
     @Override
@@ -114,13 +115,10 @@ public class AccountActivity extends BaseListActivity {
         MineInfo();
     }
 
-    /**
-     * 刷新
-     */
     @Override
     public void refresh() {
         super.refresh();
-
+        isRefresh = false;
     }
 
     /**

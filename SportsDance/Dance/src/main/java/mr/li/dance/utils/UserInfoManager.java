@@ -138,7 +138,10 @@ public class UserInfoManager {
         mUserInfo.setReal_name(real_name);
         saveUserInfo(context, mUserInfo);
     }
-
+    public void saveNickname(Context context, String nickname) {
+        mUserInfo.setNickname(nickname);
+        saveUserInfo(context, mUserInfo);
+    }
     public void saveSex(Context context, String sex) {
         mUserInfo.setSex(sex);
         saveUserInfo(context, mUserInfo);

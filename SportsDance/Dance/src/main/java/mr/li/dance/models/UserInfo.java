@@ -15,8 +15,53 @@ public class UserInfo {
     private String sex;
     private String id_card;
     private String picture_src;
-
     private String is_login;
+
+    private String password;
+    private String device_token;
+    private String version;
+    private String phone_xh;
+    private String nickname;
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getDevice_token() {
+        return device_token;
+    }
+
+    public void setDevice_token(String device_token) {
+        this.device_token = device_token;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public String getPhone_xh() {
+        return phone_xh;
+    }
+
+    public void setPhone_xh(String phone_xh) {
+        this.phone_xh = phone_xh;
+    }
 
     public void setUserid(String userid) {
         this.userid = userid;

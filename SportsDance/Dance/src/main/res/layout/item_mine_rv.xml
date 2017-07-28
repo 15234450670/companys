@@ -15,16 +15,17 @@
         <TextView
             android:id="@+id/item_title"
             style="@style/item_mine_rv"
-
+                     android:text="dasd"
             />
 
             <TextView
                 android:id="@+id/item_date"
                 style="@style/text_style"
-
+                               android:text="dasda "
                 android:textColor="#999999"
-                android:textSize="@dimen/textsize18"
-                android:paddingBottom="@dimen/spacing_30"/>
+                android:textSize="@dimen/textsize20"
+                android:paddingTop="@dimen/spacing_8"
+                android:paddingBottom="@dimen/spacing_20"/>
 
 
     </LinearLayout>

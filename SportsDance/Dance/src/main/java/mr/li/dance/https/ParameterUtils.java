@@ -166,6 +166,22 @@ public class ParameterUtils {
         return request;
     }
     /**
+     *   快速注册
+     */
+    public Request<String> getRegisterMap(String version, String mobile, String password,String device_token,
+                                          String is_equipment,String phone_xh) {
+        Request<String> request = getBaseRequestForPost("/passport.nicknames");
+        request.setCacheMode(CacheMode.ONLY_REQUEST_NETWORK);
+        request.add("version", version);
+        request.add("is_equipment", is_equipment);
+        request.add("mobile", mobile);
+        request.add("password", password);
+        request.add("phone_xh", phone_xh);
+        request.add("device_token",device_token) ;
+        return request;
+    }
+
+    /**
      *
      * 忘记密码
      * @param mobile

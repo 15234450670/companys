@@ -1,41 +1,28 @@
 package mr.li.dance.ui.activitys;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
-import com.tencent.connect.common.Constants;
-import com.tencent.tauth.Tencent;
-import com.tencent.tauth.UiError;
-import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.shareboard.SnsPlatform;
-import com.umeng.socialize.utils.SocializeUtils;
 import com.yolanda.nohttp.rest.Request;
 
 import java.util.Map;
 
 import mr.li.dance.R;
-import mr.li.dance.broadcast.BroadcastManager;
 import mr.li.dance.https.CallServer;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.StringResponse;
 import mr.li.dance.https.response.UserInfoResponse;
 import mr.li.dance.models.UserInfo;
-import mr.li.dance.ui.activitys.base.BaseActivity;
-import mr.li.dance.ui.dialogs.LoadDialog;
-import mr.li.dance.ui.otherload.BaseUiListener;
 import mr.li.dance.ui.otherload.OtherLoadManager;
 import mr.li.dance.utils.AppConfigs;
-import mr.li.dance.utils.DialogWithYesOrNoUtils;
 import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.NLog;
 import mr.li.dance.utils.NToast;

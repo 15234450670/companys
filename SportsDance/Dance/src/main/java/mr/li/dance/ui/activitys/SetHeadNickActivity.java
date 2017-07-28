@@ -153,7 +153,8 @@ public class SetHeadNickActivity extends BaseActivity implements View.OnClickLis
             if (!MyStrUtil.isEmpty(fileUrlList)) {
                 newHeadUrl = fileUrlList.get(0);
 
-            }else{ subimt();
+            }else{
+                subimt();
                 NToast.shortToast(this,"头像上传失败");
             }
         } else {

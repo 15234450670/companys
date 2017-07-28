@@ -3,6 +3,7 @@ package mr.li.dance.ui.activitys;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import com.yolanda.nohttp.rest.Request;
@@ -19,6 +20,7 @@ import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.MyStrUtil;
 import mr.li.dance.utils.NToast;
 import mr.li.dance.utils.UserInfoManager;
+import mr.li.dance.utils.Utils;
 
 /**
  * 作者: Lixuewei
@@ -93,18 +95,31 @@ public class SetPwdActivity extends BaseActivity implements View.OnClickListener
             if (setType == 0) {
                 setThirdPwd();
             } else if (setType == -1) {
-                //请求网络
-
-
-
-
-                // SetHeadNickActivity.lunch(this, mMobile, pwd);
+                Register();
+            // SetHeadNickActivity.lunch(this, mMobile, pwd);
             } else {
                 setPwd(pwd);
             }
         }
 
     }
+
+    /**
+     * 手机号码注册
+     */
+    private void Register() {
+        String deviceToken = DanceApplication.getInstance().getDeviceToken();
+        Log.e("deviceToken:",deviceToken);
+        String version = Utils.getVersionName(this);
+        Log.e("version:",version);
+        String phone_xh = Utils.getSystemModel();
+        Log.e("phone_xh:",phone_xh);
+        String pwd = mDanceViewHolder.getTextValue(R.id.pwd_tv);
+        Log.e("pwd:",pwd);
+        Request<String> request = ParameterUtils.getSingleton().getRegisterMap(version, mMobile, pwd, deviceToken, "1", phone_xh);
+        request(AppConfigs.passport_register, request, true);
+    }
+
 
     private void setPwd(String pwd) {
         Request<String> request = ParameterUtils.getSingleton().getFindBackPwdMap(mMobile, pwd);
@@ -127,14 +142,22 @@ public class SetPwdActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void onSucceed(int what, String response) {
         if (what == AppConfigs.login_retrieve) {
+            Log.e("response",response);
             StringResponse reponseResult = JsonMananger.getReponseResult(response, StringResponse.class);
             NToast.shortToast(this, reponseResult.getData());
             finish();
         } else {
             UserInfoResponse infoResponse = JsonMananger.getReponseResult(response, UserInfoResponse.class);
             UserInfo userInfo = infoResponse.getData();
+            String nickname = infoResponse.getData().getNickname();
+            Log.e("nickname:",nickname);
+            if (!MyStrUtil.isEmpty(nickname)) {
+                  userInfo.setUsername(nickname);
+            }
+
             UserInfoManager.getSingleton().saveLoginInfo(this, userInfo);
-            PerfectInfoActivity.lunch(this, userInfo.getUserid());
+
+         //   PerfectInfoActivity.lunch(this, userInfo.getUserid());
         }
 
         startActivity(new Intent(this, MainActivity.class));
