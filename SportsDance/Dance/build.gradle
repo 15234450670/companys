@@ -63,6 +63,8 @@ dependencies {
     compile 'com.alibaba:fastjson:1.2.32'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
+    compile files('libs/alipaySdk-20170710.jar')
+
 
 }
 build.mustRunAfter ':LePlayerSkin:build'

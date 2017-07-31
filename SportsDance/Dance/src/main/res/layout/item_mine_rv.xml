@@ -1,45 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+              android:layout_width="match_parent"
               android:layout_height="wrap_content"
-    android:orientation="vertical">
+              android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/item_title"
-            style="@style/item_mine_rv"
-                     android:text="dasd"
-            />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/item_title"
+                style="@style/item_mine_rv"
+                />
 
             <TextView
                 android:id="@+id/item_date"
                 style="@style/text_style"
-                               android:text="dasda "
-                android:textColor="#999999"
-                android:textSize="@dimen/textsize20"
+                android:paddingBottom="@dimen/spacing_20"
                 android:paddingTop="@dimen/spacing_8"
-                android:paddingBottom="@dimen/spacing_20"/>
+                android:textColor="#999999"
+                android:textSize="@dimen/textsize20"/>
 
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/item_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_45"
+            android:textSize="@dimen/textsize28"
+
+            />
 
     </LinearLayout>
 
-      <TextView
-          android:id="@+id/item_money"
-          android:layout_marginTop="@dimen/spacing_45"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:textSize="@dimen/textsize28"
-
-         />
-
-    </LinearLayout>
     <View
         android:id="@+id/views"
         android:layout_width="match_parent"
