@@ -50,9 +50,9 @@ public class ParameterUtils {
         request.setCacheMode(CacheMode.REQUEST_NETWORK_FAILED_READ_CACHE);
         return request;
     }
+
     /**
      * 获取验证码
-     *
      * @param mobile
      * @return
      */
@@ -64,7 +64,6 @@ public class ParameterUtils {
 
     /**
      * 找回密码发送验证码
-     *
      * @param mobile
      * @return
      */
@@ -73,9 +72,9 @@ public class ParameterUtils {
         request.add("mobile", mobile);
         return request;
     }
+
     /**
      * 第三方登录获取验证码
-     *
      * @param mobile
      * @return
      */
@@ -84,9 +83,9 @@ public class ParameterUtils {
         request.add("mobile", mobile);
         return request;
     }
+
     /**
      * 修改密码
-     *
      * @param mobile
      * @param old_password
      * @param password
@@ -104,12 +103,11 @@ public class ParameterUtils {
 
     /**
      * 验证验证码
-     *
      * @param mobile
      * @param identifyingCode
      * @return
      */
-    public Request<String> getCheckCodeMap(int type,String mobile, String identifyingCode) {
+    public Request<String> getCheckCodeMap(int type, String mobile, String identifyingCode) {
         Request<String> request = getBaseRequestForPost("/passport.register");
         request.add("type", type);
         request.add("mobile", mobile);
@@ -117,7 +115,7 @@ public class ParameterUtils {
         return request;
     }
 
-    public Request<String> getUserInfo(){
+    public Request<String> getUserInfo() {
 
         Request<String> request = getBaseRequestForPost("/passport.register");
 
@@ -126,7 +124,6 @@ public class ParameterUtils {
 
     /**
      * 补充资料
-     *
      * @param userid
      * @param real_name
      * @param id_card
@@ -141,7 +138,7 @@ public class ParameterUtils {
     }
 
     /**
-     *   活动
+     * 活动
      * @param appid
      * @param appsecret
      * @param url
@@ -156,20 +153,22 @@ public class ParameterUtils {
         request.add("appid", appid);
         return request;
     }
+
     /**
      * 提现Item
      */
-    public Request<String> getTiXianInfoMap(String userid,String page){
+    public Request<String> getTiXianInfoMap(String userid, String page) {
         Request<String> request = getBaseRequestForPost("/redpacket.detail");
         request.add("userid", userid);
-        request.add("page",page);
+        request.add("page", page);
         return request;
     }
+
     /**
-     *   快速注册
+     * 快速注册
      */
-    public Request<String> getRegisterMap(String version, String mobile, String password,String device_token,
-                                          String is_equipment,String phone_xh) {
+    public Request<String> getRegisterMap(String version, String mobile, String password, String device_token,
+                                          String is_equipment, String phone_xh) {
         Request<String> request = getBaseRequestForPost("/passport.nicknames");
         request.setCacheMode(CacheMode.ONLY_REQUEST_NETWORK);
         request.add("version", version);
@@ -177,12 +176,20 @@ public class ParameterUtils {
         request.add("mobile", mobile);
         request.add("password", password);
         request.add("phone_xh", phone_xh);
-        request.add("device_token",device_token) ;
+        request.add("device_token", device_token);
+        return request;
+    }
+    /**
+     * 绑定支付宝
+     */
+    public Request<String> getBoundZFB(String userid, String alipayid) {
+        Request<String> request = getBaseRequestForPost("/redpacket.bind");
+        request.add("userid", userid);
+        request.add("alipayid", alipayid);
         return request;
     }
 
     /**
-     *
      * 忘记密码
      * @param mobile
      * @param password
@@ -198,14 +205,13 @@ public class ParameterUtils {
 
     /**
      * 设置头像和昵称和密码
-     *
      * @param mobile
      * @param password
      * @param picture
      * @param username
      * @return
      */
-    public Request<String> getSetNickNameInfoMap(String device_token,String mobile, String password, String picture, String username,String version,String phone_xh) {
+    public Request<String> getSetNickNameInfoMap(String device_token, String mobile, String password, String picture, String username, String version, String phone_xh) {
         Request<String> request = getBaseRequestForPost("/passport.nickname");
         request.add("mobile", mobile);
         request.add("password", password);
@@ -219,13 +225,12 @@ public class ParameterUtils {
 
     /**
      * 登录
-     *
      * @param version
      * @param mobile
      * @param password
      * @return
      */
-    public Request<String> getLoginMap(String version, String mobile, String password,String phone_xh) {
+    public Request<String> getLoginMap(String version, String mobile, String password, String phone_xh) {
         Request<String> request = getBaseRequestForPost("/login.loginMob");
         request.setCacheMode(CacheMode.ONLY_REQUEST_NETWORK);
         request.add("version", version);
@@ -238,16 +243,15 @@ public class ParameterUtils {
 
     /**
      * 推荐页面获取
-     *
      * @return
      */
     public Request<String> getHomeIndexMap() {
         Request<String> request = getBaseRequestCacheForPost("/home.index");
         return request;
     }
+
     /**
      * 推荐页面分页获取
-     *
      * @param indexPage
      * @return
      */
@@ -260,7 +264,6 @@ public class ParameterUtils {
 
     /**
      * 获取首页直播
-     *
      * @return
      */
     public Request<String> getHomeZhiboMap() {
@@ -268,14 +271,15 @@ public class ParameterUtils {
 
         return request;
     }
+
     public Request<String> getHomeZhiboMapFromServer() {
         Request<String> request = getBaseRequestForPost("/home.zhibo");
 
         return request;
     }
+
     /**
      * 首页分页获取直播
-     *
      * @param indexPage
      * @return
      */
@@ -288,7 +292,6 @@ public class ParameterUtils {
 
     /**
      * 直播详情
-     *
      * @param id
      * @return
      */
@@ -301,7 +304,6 @@ public class ParameterUtils {
 
     /**
      * 视频详情
-     *
      * @param id
      * @return
      */
@@ -314,20 +316,20 @@ public class ParameterUtils {
 
     /**
      * 首页获取点播（视频）
-     *
      * @return
      */
     public Request<String> getHomeDianboMap() {
         Request<String> request = getBaseRequestCacheForPost("/home.dianbo");
         return request;
     }
+
     public Request<String> getHomeDianboMapFromServer() {
         Request<String> request = getBaseRequestForPost("/home.dianbo");
         return request;
     }
+
     /**
      * 首页分页获取点播（视频）
-     *
      * @return
      */
     public Request<String> getHomeDianboPageMap(int indexPage) {
@@ -339,7 +341,6 @@ public class ParameterUtils {
 
     /**
      * 获取视频分类列表
-     *
      * @param indexPage
      * @param app_type_id
      * @return
@@ -354,7 +355,6 @@ public class ParameterUtils {
 
     /**
      * 首页获取资讯
-     *
      * @return
      */
     public Request<String> getHomeZxMap() {
@@ -362,14 +362,15 @@ public class ParameterUtils {
 
         return request;
     }
+
     public Request<String> getHomeZxMapFromServer() {
         Request<String> request = getBaseRequestForPost("/home.zx");
 
         return request;
     }
+
     /**
      * 首页分页获取资讯
-     *
      * @param indexPage
      * @return
      */
@@ -380,13 +381,12 @@ public class ParameterUtils {
         return request;
     }
 
-    private void LogPage(int indexPage){
-        NLog.i("ParameterUtils","page == "+indexPage);
+    private void LogPage(int indexPage) {
+        NLog.i("ParameterUtils", "page == " + indexPage);
     }
 
     /**
      * 获取分类资讯列表
-     *
      * @param indexPage
      * @param
      * @return
@@ -401,7 +401,6 @@ public class ParameterUtils {
 
     /**
      * 首页获取图片
-     *
      * @return
      */
     public Request<String> getHomeAlbumMap(int indexPage) {
@@ -410,6 +409,7 @@ public class ParameterUtils {
         LogPage(indexPage);
         return request;
     }
+
     public Request<String> getHomeAlbumMapFromServer(int indexPage) {
         Request<String> request = getBaseRequestForPost("/home.album");
 
@@ -417,6 +417,7 @@ public class ParameterUtils {
         LogPage(indexPage);
         return request;
     }
+
     public Request<String> getHomeSearchMap(String type, String content, int page) {
         Request<String> request = getBaseRequestForPost("/home.Search");
         request.add("type", type);
@@ -429,7 +430,6 @@ public class ParameterUtils {
 
     /**
      * 获取相册详情
-     *
      * @param id
      * @return
      */
@@ -442,7 +442,6 @@ public class ParameterUtils {
 
     /**
      * 分页获取相册内图片
-     *
      * @param id
      * @param indexPage
      * @return
@@ -469,7 +468,6 @@ public class ParameterUtils {
 
     /**
      * 个人相册页面
-     *
      * @param userid
      * @param attention_userid
      * @return
@@ -483,7 +481,6 @@ public class ParameterUtils {
 
     /**
      * 个人相册页面分页获取相册
-     *
      * @param attention_userid
      * @param indexPage
      * @return
@@ -499,7 +496,6 @@ public class ParameterUtils {
 
     /**
      * 关注操作
-     *
      * @param userid
      * @param attention_userid
      * @param attention
@@ -515,7 +511,6 @@ public class ParameterUtils {
 
     /**
      * 获取赛事首页
-     *
      * @return
      */
     public Request<String> getMatchMap() {
@@ -523,14 +518,15 @@ public class ParameterUtils {
 
         return request;
     }
+
     public Request<String> getMatchMapFromServer() {
         Request<String> request = getBaseRequestForPost("/match.index");
 
         return request;
     }
+
     /**
      * 赛事首页分页获取
-     *
      * @param indexPage
      * @return
      */
@@ -543,7 +539,6 @@ public class ParameterUtils {
 
     /**
      * 赛事搜索的接口
-     *
      * @param date
      * @param content
      * @param indexPage
@@ -567,7 +562,6 @@ public class ParameterUtils {
 
     /**
      * 赛事分类接口
-     *
      * @param date
      * @param indexPage
      * @return
@@ -584,7 +578,6 @@ public class ParameterUtils {
 
     /**
      * 赛事详情
-     *
      * @param id
      * @return
      */
@@ -596,7 +589,6 @@ public class ParameterUtils {
 
     /**
      * 成绩查询
-     *
      * @param id
      * @return
      */
@@ -610,7 +602,6 @@ public class ParameterUtils {
 
     /**
      * 成绩查询名次的接口
-     *
      * @param group_name
      * @param page
      * @return
@@ -626,7 +617,6 @@ public class ParameterUtils {
 
     /**
      * 赛事视频的接口
-     *
      * @return
      */
     public Request<String> getMatchVedioMap(String id) {
@@ -637,7 +627,6 @@ public class ParameterUtils {
 
     /**
      * 赛事视频列表的接口
-     *
      * @param id
      * @param page
      * @return
@@ -652,7 +641,6 @@ public class ParameterUtils {
 
     /**
      * 精彩图片
-     *
      * @param title
      * @return
      */
@@ -665,7 +653,6 @@ public class ParameterUtils {
 
     /**
      * 直播视频详情的接口
-     *
      * @param title
      * @param page
      * @return
@@ -692,26 +679,27 @@ public class ParameterUtils {
 
     /**
      * 关于我们
-     *
      * @return
      */
     public Request<String> getAboutUsMap() {
         Request<String> request = getBaseRequestForPost("/user.aboutUs");
         return request;
     }
+
     public Request<String> getxcUploadDetailMap() {
         Request<String> request = getBaseRequestForPost("/user.xcUploadDetail");
         return request;
     }
-    public Request<String> getMatch_Jsgz_Sx_SCB_Map(String compete_id,String w_page) {
+
+    public Request<String> getMatch_Jsgz_Sx_SCB_Map(String compete_id, String w_page) {
         Request<String> request = getBaseRequestForPost("/match.graphicDetails");
-        request.add("compete_id",compete_id);
-        request.add("w_page",w_page);
+        request.add("compete_id", compete_id);
+        request.add("w_page", w_page);
         return request;
     }
+
     /**
      * 意见反馈
-     *
      * @param userid
      * @return
      */
@@ -723,7 +711,6 @@ public class ParameterUtils {
 
     /**
      * 发送问题反馈
-     *
      * @param username
      * @return
      */
@@ -737,7 +724,6 @@ public class ParameterUtils {
 
     /**
      * 我的相册
-     *
      * @param userid
      * @return
      */
@@ -749,7 +735,6 @@ public class ParameterUtils {
 
     /**
      * 我的关注
-     *
      * @param userid
      * @return
      */
@@ -761,9 +746,9 @@ public class ParameterUtils {
 
     /**
      * 我的收藏
-     *
      * @param userid
-     * @param xc_video // 相册的收藏：   10601 // 视频的收藏：   10602
+     * @param xc_video
+     *         // 相册的收藏：   10601 // 视频的收藏：   10602
      * @param page
      * @return
      */
@@ -778,7 +763,6 @@ public class ParameterUtils {
 
     /**
      * 版本控制
-     *
      * @param version
      * @return
      */
@@ -791,7 +775,6 @@ public class ParameterUtils {
 
     /**
      * 上传头像
-     *
      * @param filepath
      * @return
      */
@@ -858,10 +841,12 @@ public class ParameterUtils {
 
     /**
      * 考级证书查询
-     *
-     * @param idn  身份证号
-     * @param name 姓名
-     * @param type 类型 1：已考 2：全部  3：未考
+     * @param idn
+     *         身份证号
+     * @param name
+     *         姓名
+     * @param type
+     *         类型 1：已考 2：全部  3：未考
      * @return
      */
     public Request<String> getKaojiCertificateMap(String idn, String name, int type) {
@@ -871,6 +856,7 @@ public class ParameterUtils {
         request.add("type", type);
         return request;
     }
+
     public Request<String> getMyMessage(String userid, int page) {
         Request<String> request = getBaseRequestForPost("/user.myInfo");
         request.add("userid", userid);
@@ -878,28 +864,31 @@ public class ParameterUtils {
         LogPage(page);
         return request;
     }
+
     public Request<String> getMyMessageDetail(int mes_id) {
         Request<String> request = getBaseRequestForPost("/user.myInfoDetail");
         request.add("mes_id", mes_id);
         return request;
     }
-//    openid ：uid (新浪的uid ，微信的openid ，qq的openid)
-//    source  登录方式 10402.qq   10403.微博  10404.微信
-//    mobile_type  手机类型  1.Android  2.ios
-//    varsion  App版本号
-//    phone_xh  手机型号
-    public Request<String> getPassportIsOpenId(String openid,String source,String version,String phone_xh) {
+
+    //    openid ：uid (新浪的uid ，微信的openid ，qq的openid)
+    //    source  登录方式 10402.qq   10403.微博  10404.微信
+    //    mobile_type  手机类型  1.Android  2.ios
+    //    varsion  App版本号
+    //    phone_xh  手机型号
+    public Request<String> getPassportIsOpenId(String openid, String source, String version, String phone_xh) {
         Request<String> request = getBaseRequestForPost("/passport.isOpenid");
         request.add("openid", openid);
         request.add("source", source);
         request.add("mobile_type", 1);
         request.add("version", version);
         request.add("phone_xh", phone_xh);
-        String parmars = "openid = "+openid+" source="+source+" mobile_type="+1+" varsion="+version+" phone_xh="+phone_xh;
-        NLog.i("ParameterUtils","parmars == "+parmars);
+        String parmars = "openid = " + openid + " source=" + source + " mobile_type=" + 1 + " varsion=" + version + " phone_xh=" + phone_xh;
+        NLog.i("ParameterUtils", "parmars == " + parmars);
         return request;
     }
-    public Request<String> getPassportEdMobile(String device_token,String openid,String source,String mobile,String picture,String version,String phone_xh) {
+
+    public Request<String> getPassportEdMobile(String device_token, String openid, String source, String mobile, String picture, String version, String phone_xh) {
         Request<String> request = getBaseRequestForPost("/passport.edMobile");
         request.add("openid", openid);
         request.add("source", source);
@@ -909,13 +898,13 @@ public class ParameterUtils {
         request.add("version", version);
         request.add("phone_xh", phone_xh);
         request.add("mobile_type", 1);
-        String parmars = "openid = "+openid+" source="+source+" mobile="+mobile;
-        NLog.i("ParameterUtils","parmars == "+parmars);
+        String parmars = "openid = " + openid + " source=" + source + " mobile=" + mobile;
+        NLog.i("ParameterUtils", "parmars == " + parmars);
         return request;
     }
 
-    public Request<String> getPassportPassword(String device_token,String openid,String mobile,String source,String username,
-                                               String picture,String password,String password_y) {
+    public Request<String> getPassportPassword(String device_token, String openid, String mobile, String source, String username,
+                                               String picture, String password, String password_y) {
         Request<String> request = getBaseRequestForPost("/passport.password");
         request.add("device_token", device_token);
         request.add("openid", openid);
@@ -927,8 +916,8 @@ public class ParameterUtils {
         request.add("password_y", password_y);
         request.add("is_equipment", 1);
 
-        String parmars = "openid = "+openid+" source="+source+" mobile="+mobile;
-        NLog.i("ParameterUtils","parmars == "+parmars);
+        String parmars = "openid = " + openid + " source=" + source + " mobile=" + mobile;
+        NLog.i("ParameterUtils", "parmars == " + parmars);
         return request;
     }
 

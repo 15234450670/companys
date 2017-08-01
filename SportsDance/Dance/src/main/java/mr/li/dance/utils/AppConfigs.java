@@ -8,7 +8,7 @@ package mr.li.dance.utils;
 
 public class AppConfigs {
    private final static String MAINurl = "http://work.cdsf.org.cn";//测试环境
-  //private final static String MAINurl = "http://cdsf.org.cn";//正式环境
+ // private final static String MAINurl = "http://cdsf.org.cn";//正式环境
 
     private final static String DomainUrl = MAINurl + "/mobileClient";
     private final static String SHAREURL = MAINurl + "/h5";
@@ -100,6 +100,7 @@ public class AppConfigs {
     public final static int login_retrieve = 0x0055;
     public final static int home_WlinkClick = 0x0056;
     public final static int item_tx = 0x0057;
+ public final static int BoundZFB = 0x0058;
     public static String getDomainUrl() {
         return DomainUrl;
     }

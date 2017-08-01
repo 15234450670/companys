@@ -23,7 +23,6 @@ import com.umeng.message.PushAgent;
 import com.umeng.message.UTrack;
 import com.umeng.message.UmengMessageHandler;
 import com.umeng.message.UmengNotificationClickHandler;
-import com.umeng.message.common.UmLog;
 import com.umeng.message.entity.UMessage;
 import com.umeng.socialize.Config;
 import com.umeng.socialize.PlatformConfig;

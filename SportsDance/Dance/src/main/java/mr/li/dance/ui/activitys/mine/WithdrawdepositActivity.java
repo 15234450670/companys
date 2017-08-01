@@ -11,13 +11,17 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.alipay.sdk.app.AuthTask;
+import com.yolanda.nohttp.rest.Request;
 
 import java.util.Map;
 
 import mr.li.dance.R;
+import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.ui.activitys.base.BaseActivity;
+import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.AuthResult;
 import mr.li.dance.utils.MyStrUtil;
+import mr.li.dance.utils.UserInfoManager;
 import mr.li.dance.utils.util.OrderInfoUtil2_0;
 
 /**
@@ -90,13 +94,13 @@ public class WithdrawdepositActivity extends BaseActivity {
                         // 传入，则支付账户为该授权账户
                         String resultCode = authResult.getResultCode();
                         String authCode = authResult.getAuthCode();
+                        resultUser_id = authResult.getResultUser_id();
+                        Log.e("resultUser_id:", resultUser_id);
+                        Log.e("xxxxxxxxxxxxxxxx", authResult.toString() );
                         if (resultCode.equals("200")) {
                             mDanceViewHolder.setText(R.id.mine_zfb_btn, "重新绑定支付宝");
-
                         }
-
                         Toast.makeText(WithdrawdepositActivity.this, "授权成功", Toast.LENGTH_SHORT).show();
-
                     } else {
                         // 其他状态值则为授权失败
                         Toast.makeText(WithdrawdepositActivity.this, "授权失败", Toast.LENGTH_SHORT).show();
@@ -110,6 +114,7 @@ public class WithdrawdepositActivity extends BaseActivity {
 
 
     };
+    private String resultUser_id;
 
     @Override
     public int getContentViewId() {
@@ -194,5 +199,23 @@ public class WithdrawdepositActivity extends BaseActivity {
         Thread authThread = new Thread(authRunnable);
         authThread.start();
     }
+    /**
+     *绑定上传
+     */
+    public void BoundZFB(){
+        String userId = UserInfoManager.getSingleton().getUserId(mContext);
+        if (!MyStrUtil.isEmpty(resultUser_id)) {
+            Request<String> boundZFB = ParameterUtils.getSingleton().getBoundZFB(userId, resultUser_id);
+                          request(AppConfigs.BoundZFB,boundZFB,false);
+        }
 
+    }
+
+    @Override
+    public void onSucceed(int what, String response) {
+        super.onSucceed(what, response);
+        if (what==AppConfigs.BoundZFB) {
+
+        }
+    }
 }

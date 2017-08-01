@@ -80,23 +80,25 @@ public class SetPwdActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void onClick(View view) {
         String pwd = mDanceViewHolder.getTextValue(R.id.pwd_tv);
-        String repeatpwd = mDanceViewHolder.getTextValue(R.id.repeatpwd_tv);
-        if (MyStrUtil.isEmpty(pwd)) {
-            NToast.shortToast(this, "请输入密码");
-            return;
-        }
-        if (MyStrUtil.isEmpty(repeatpwd)) {
-            NToast.shortToast(this, "请再次输入密码");
-            return;
-        }
-        if (!TextUtils.equals(pwd, repeatpwd)) {
-            NToast.shortToast(this, "俩次密码输入不一致");
-        } else {
+            String repeatpwd = mDanceViewHolder.getTextValue(R.id.repeatpwd_tv);
+            if (MyStrUtil.isEmpty(pwd)) {
+                NToast.shortToast(this, "请输入密码");
+                return;
+            }
+            if (MyStrUtil.isEmpty(repeatpwd)) {
+                NToast.shortToast(this, "请再次输入密码");
+                return;
+            }
+            if (!TextUtils.equals(pwd, repeatpwd)) {
+                NToast.shortToast(this, "俩次密码输入不一致");
+            } else {
             if (setType == 0) {
+                Log.e("setType:",setType+"");
                 setThirdPwd();
             } else if (setType == -1) {
-                Register();
-            // SetHeadNickActivity.lunch(this, mMobile, pwd);
+                   Register();
+                Log.e("setType",setType+"");
+                //  SetHeadNickActivity.lunch(this, mMobile, pwd);
             } else {
                 setPwd(pwd);
             }
@@ -146,22 +148,41 @@ public class SetPwdActivity extends BaseActivity implements View.OnClickListener
             StringResponse reponseResult = JsonMananger.getReponseResult(response, StringResponse.class);
             NToast.shortToast(this, reponseResult.getData());
             finish();
-        } else {
+
+        }
+        /**
+         * 第三方回调
+         */
+        else if (what == AppConfigs.passport_password) {
+
             UserInfoResponse infoResponse = JsonMananger.getReponseResult(response, UserInfoResponse.class);
             UserInfo userInfo = infoResponse.getData();
-            String nickname = infoResponse.getData().getNickname();
-            Log.e("nickname:",nickname);
-            if (!MyStrUtil.isEmpty(nickname)) {
-                  userInfo.setUsername(nickname);
-            }
+            UserInfoManager.getSingleton().saveLoginInfo(this, userInfo);
+            finish();
+            // PerfectInfoActivity.lunch(this, userInfo.getUserid());
 
+        }
+        /**
+         * 手机注册回调
+         */
+        else if (what == AppConfigs.passport_register) {
+            UserInfoResponse infoResponse = JsonMananger.getReponseResult(response, UserInfoResponse.class);
+            UserInfo userInfo = infoResponse.getData();
+
+                String nickname = infoResponse.getData().getNickname();
+                Log.e("nickname:",nickname);
+                if (!MyStrUtil.isEmpty(nickname)) {
+                    userInfo.setUsername(nickname);
+
+            }
             UserInfoManager.getSingleton().saveLoginInfo(this, userInfo);
 
-         //   PerfectInfoActivity.lunch(this, userInfo.getUserid());
+            // PerfectInfoActivity.lunch(this, userInfo.getUserid());
         }
 
         startActivity(new Intent(this, MainActivity.class));
 
     }
+
 
 }

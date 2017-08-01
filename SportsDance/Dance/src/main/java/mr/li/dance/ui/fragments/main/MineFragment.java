@@ -152,6 +152,8 @@ public class MineFragment extends BaseListFragment {
                 MobclickAgent.onEvent(getActivity(), AppConfigs.CLICK_EVENT_12);
                 MyAlbumActivity.lunch(getActivity(), 0x005);
                 break;
+            /**
+             * 我的账户             */
             case 4:
                 AccountActivity.lunch(getActivity());
                 break;
@@ -165,7 +167,7 @@ public class MineFragment extends BaseListFragment {
                 SettingActivity.lunch(getActivity());
                 break;
 
-        }
+    }
     }
 
     @Override
