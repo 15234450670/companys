@@ -100,7 +100,9 @@ public class AppConfigs {
     public final static int login_retrieve = 0x0055;
     public final static int home_WlinkClick = 0x0056;
     public final static int item_tx = 0x0057;
- public final static int BoundZFB = 0x0058;
+    public final static int Bound_ZFB = 0x0058;
+    public final static int Bound_state = 0x0059;
+
     public static String getDomainUrl() {
         return DomainUrl;
     }

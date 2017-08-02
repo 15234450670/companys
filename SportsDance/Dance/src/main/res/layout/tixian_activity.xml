@@ -19,7 +19,6 @@
                android:onClick="btn1"
                android:id="@+id/mine_zfb_btn"
                style="@style/mine_tixian_btn"
-               android:text="验证支付宝"
                android:textColor="@color/white"
                android:background="@drawable/shap_cicler_btn"
               />

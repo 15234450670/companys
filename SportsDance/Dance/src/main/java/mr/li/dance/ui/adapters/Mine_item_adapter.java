@@ -33,24 +33,25 @@ public class Mine_item_adapter extends BaseRecyclerAdapter<Mine_itemInfo>{
         if (MyStrUtil.isEmpty(detail)) {
             Toast.makeText(mContext, "没有参与活动", Toast.LENGTH_SHORT).show();
             holder.setVisibility(R.id.views, View.INVISIBLE);
-        }else
-        for (int i = 0; i < detail.size(); i++) {
-            String is_draw = detail.get(i).getIs_draw();
-            Log.e("is_draw:--",is_draw);
-            if (!MyStrUtil.isEmpty(is_draw)) {
-                if (is_draw.equals("1")) {
-                    holder.setText(R.id.item_title,"抽奖");
-                    holder.setText(R.id.item_date,detail.get(i).getTime());
-                  //  holder.setBackground(R.id.item_money,R.color.mine_item_add);
-                    holder.setTextAndColor(R.id.item_money,"+ "+detail.get(i).getMoney()+" 元", R.color.mine_item_add);
+        }else {
+            for (int i = 0; i < detail.size(); i++) {
+                String is_draw = detail.get(i).getIs_draw();
+                Log.e("is_draw:--", is_draw);
+                if (!MyStrUtil.isEmpty(is_draw)) {
+                    if (is_draw.equals("1")) {
+                        holder.setText(R.id.item_title, "抽奖");
+                        holder.setText(R.id.item_date, detail.get(i).getTime());
+                        holder.setTextAndColor(R.id.item_money, "+ " + detail.get(i).getMoney() + " 元", R.color.mine_item_add);
 
-                }else{
-                    holder.setText(R.id.item_title,"提现");
-                    holder.setText(R.id.item_date,detail.get(i).getTime());
-                    holder.setTextAndColor(R.id.item_money ,"- "+detail.get(i).getMoney()+" 元" , R.color.mine_item_fu);
+                    } else {
+                        holder.setText(R.id.item_title, "提现");
+                        holder.setText(R.id.item_date, detail.get(i).getTime());
+                        holder.setTextAndColor(R.id.item_money, "- " + detail.get(i).getMoney() + " 元", R.color.mine_item_fu);
+                    }
                 }
             }
-            }
+        }
+
     }
 
 

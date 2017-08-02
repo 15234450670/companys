@@ -180,12 +180,48 @@ public class ParameterUtils {
         return request;
     }
     /**
+     * 绑定状态判断
+     */
+    public Request<String> getBound_state(String userid) {
+        Request<String> request = getBaseRequestForPost("/redpacket.isAlipay");
+        request.add("userid", userid);
+        return request;
+    }
+    /**
+     * 绑定状态判断
+     */
+    public Request<String> getTiXian_state(String userid) {
+        Request<String> request = getBaseRequestForPost("/redpacket.isGetMoney");
+        request.add("userid", userid);
+        return request;
+    }
+    /**
+     * 提现操作
+     */
+    public Request<String> getTiXian(String userid,String money,int times,int result,String sign) {
+        Request<String> request = getBaseRequestForPost("/redpacket.getMoney");
+        request.add("userid", userid);
+        request.add("money", money);
+        request.add("times", times);
+        request.add("result", result);
+        request.add("sign", sign);
+        return request;
+    }
+    /**
      * 绑定支付宝
      */
-    public Request<String> getBoundZFB(String userid, String alipayid) {
+    public Request<String> getBoundZFB(String userid, String alipay) {
         Request<String> request = getBaseRequestForPost("/redpacket.bind");
         request.add("userid", userid);
-        request.add("alipayid", alipayid);
+        request.add("alipay", alipay);
+        return request;
+    }
+    /**
+     * 获取服务器时间
+     */
+    public Request<String> getTime(String userid) {
+        Request<String> request = getBaseRequestForPost("/redpacket.getTime");
+        request.add("userid", userid);
         return request;
     }
 
