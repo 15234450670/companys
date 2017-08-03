@@ -14,8 +14,6 @@ import android.widget.Toast;
 import com.alipay.sdk.app.AuthTask;
 import com.yolanda.nohttp.rest.Request;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.Map;
 
 import mr.li.dance.R;
@@ -23,8 +21,8 @@ import mr.li.dance.https.CallServer;
 import mr.li.dance.https.HttpListener;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.models.BoundZFBInfo;
+import mr.li.dance.models.Bound_ZFB_state;
 import mr.li.dance.models.TiXianOkInfo;
-import mr.li.dance.models.TiXianStateInfo;
 import mr.li.dance.models.Time;
 import mr.li.dance.ui.activitys.base.BaseActivity;
 import mr.li.dance.utils.AppConfigs;
@@ -64,7 +62,7 @@ public class WithdrawdepositActivity extends BaseActivity {
     /**
      * 工具地址：https://doc.open.alipay.com/docs/doc.htm?treeId=291&articleId=106097&docType=1
      */
-    public static final String RSA2_PRIVATE      = "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCrBUG2bls333HdsroDZ" +
+    public static final  String RSA2_PRIVATE      = "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCrBUG2bls333HdsroDZ" +
             "UXrqzONoNJVZrFSzxNKCx0ILtg02LbxYouggEA99jF0Y1PmZ0EBZ4KoI7+kMAJHq5T/wjT3XHjOH0iB6RWKqAy7w/zCFDN+iBB+Xzuq" +
             "/Khv9NwsGSx6bFyRbykjKHZ2lirBSc1ntV1vEsFcga6uPgwVD/YLe9GNCORenHTq2Dp6njqylOiDQH4KZckAlc7GVjw4IChOuC1i/S" +
             "FQWBc7MLedGJw/4NTPNg3y0h6e0azK1HTBqgjcFhMe6xXk9PJl5QOIVFbh7H0E2EXEz0z/5m3Jtd0aAP7V5xLRIwCgZHfUubbIeZLw" +
@@ -82,12 +80,12 @@ public class WithdrawdepositActivity extends BaseActivity {
             "S0DV3NnBeo8L2eFBgUnUb1pjVks1KMwn8KUcM/nP+rsc9t/loGKLrHe02wUNZw3t3zO5u7U8U2XYdqm7oY/ANtYbbQS+Z8P7TZbYz5" +
             "cAldhd8x9MC2WEY/+Uk=";
     //支付宝公 钥
-    public static final String alipay_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqwVBtm5bN99x3bK6A2VF66szjaDSVWaxUs8TSgsdCC7YNNi28WKLoIBAPfYxdGNT5mdBAWeCqCO/pDACR6uU/8I091x4zh9IgekViqgMu8P8whQzfogQfl87qvyob/TcLBksemxckW8pIyh2dpYqwUnNZ7VdbxLBXIGurj4MFQ/2C3vRjQjkXpx06tg6ep46spTog0B+CmXJAJXOxlY8OCAoTrgtYv0hUFgXOzC3nRicP+DUzzYN8tIentGsytR0waoI3BYTHusV5PTyZeUDiFRW4ex9BNhFxM9M/+ZtybXdGgD+1ecS0SMAoGR31Lm2yHmS8Il0h2vhaNRSID44bwIDAQAB";
-    public static final String RSA_PRIVATE       = "";
-    private static final int SDK_AUTH_FLAG = 2;
+    public static final  String alipay_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqwVBtm5bN99x3bK6A2VF66szjaDSVWaxUs8TSgsdCC7YNNi28WKLoIBAPfYxdGNT5mdBAWeCqCO/pDACR6uU/8I091x4zh9IgekViqgMu8P8whQzfogQfl87qvyob/TcLBksemxckW8pIyh2dpYqwUnNZ7VdbxLBXIGurj4MFQ/2C3vRjQjkXpx06tg6ep46spTog0B+CmXJAJXOxlY8OCAoTrgtYv0hUFgXOzC3nRicP+DUzzYN8tIentGsytR0waoI3BYTHusV5PTyZeUDiFRW4ex9BNhFxM9M/+ZtybXdGgD+1ecS0SMAoGR31Lm2yHmS8Il0h2vhaNRSID44bwIDAQAB";
+    public static final  String RSA_PRIVATE       = "";
+    private static final int    SDK_AUTH_FLAG     = 2;
     private String back_money;
 
-    private int state;
+
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
         @SuppressWarnings("unused")
@@ -111,6 +109,7 @@ public class WithdrawdepositActivity extends BaseActivity {
                             mDanceViewHolder.setText(R.id.mine_zfb_btn, "重新绑定支付宝");
                         }
                         Toast.makeText(WithdrawdepositActivity.this, "授权成功", Toast.LENGTH_SHORT).show();
+                        finish();
                     } else {
                         // 其他状态值则为授权失败
                         Toast.makeText(WithdrawdepositActivity.this, "授权失败", Toast.LENGTH_SHORT).show();
@@ -124,10 +123,9 @@ public class WithdrawdepositActivity extends BaseActivity {
 
 
     };
-    private TiXianStateInfo reponseResult;
-    private int times;
-    private int result;
     private TiXianOkInfo okInfo;
+    private int          start;
+    //  private TiXianStateInfo reponseResult;
 
     @Override
     public int getContentViewId() {
@@ -137,31 +135,30 @@ public class WithdrawdepositActivity extends BaseActivity {
     @Override
     public void initViews() {
         setTitle("提现");
+
     }
 
     @Override
     public void getIntentData() {
         super.getIntentData();
         back_money = mIntentExtras.getString("back_money");
-        state = mIntentExtras.getInt("state");
-        Log.e("TI_state",state+"");
+        start = mIntentExtras.getInt("start");
         if (!MyStrUtil.isEmpty(back_money)) {
             mDanceViewHolder.setText(R.id.tixian_money, back_money);
         }
+        if (!MyStrUtil.isEmpty(start) && start == 1) {
+            mDanceViewHolder.setText(R.id.mine_zfb_btn, "重新绑定支付宝");
+        } else {
+            mDanceViewHolder.setText(R.id.mine_zfb_btn, "验证支付宝");
+        }
     }
+
     @Override
     public void initDatas() {
         super.initDatas();
-        if (state==1) {
-            mDanceViewHolder.setText(R.id.mine_zfb_btn,"重新绑定支付宝");
-        } else {
-            mDanceViewHolder.setText(R.id.mine_zfb_btn,"验证支付宝");
-        }
-        getTime();
-        TiXianState();
-
+        //  Bound();
+        // TiXianState();
     }
-
 
 
     /**
@@ -175,103 +172,73 @@ public class WithdrawdepositActivity extends BaseActivity {
      * 提现
      */
     public void btn2(View v) {
-        /**
-         * 绑定状态判断
-         */
-        if (!MyStrUtil.isEmpty(state)&&state==1) {
+
+        if (!MyStrUtil.isEmpty(start) && start == 1) {
             TiXian();
         } else {
             Toast.makeText(mContext, "请验证支付宝", Toast.LENGTH_SHORT).show();
         }
-        /**
-         * 提现状态判断
-         */
-        if (reponseResult.getData().getStart()==1 && state==1) {
-            Log.e("xxxxx",reponseResult.getData().getStart()+"");
-            Intent intent = new Intent(this, TiXianZhongActivity.class);
-            startActivity(intent);
-        }else{
-        Log.e("xx","dddddddddddddddd");
-         TiXian();
-        }
+
+    }
+
+    /**
+     * 绑定状态判断
+     */
+    public void Bound() {
+        String userId = UserInfoManager.getSingleton().getUserId(mContext);
+        Request<String> bound_state = ParameterUtils.getSingleton().getBound_state(userId);
+        CallServer.getRequestInstance().add(this, AppConfigs.Bound_state, bound_state, new HttpListener() {
+            @Override
+            public void onSucceed(int what, String response) {
+                Bound_ZFB_state bound = JsonMananger.getReponseResult(response, Bound_ZFB_state.class);
+            }
+
+            @Override
+            public void onFailed(int what, int responseCode, String response) {
+
+            }
+        }, false, true);
 
     }
 
 
     private void TiXian() {
         if (!MyStrUtil.isEmpty(back_money)) {
-            double aa=Double.parseDouble(back_money);
-            BigDecimal beichushu=new BigDecimal(aa);
-            BigDecimal chushu=new BigDecimal(100000000);
-            BigDecimal result=beichushu.divide(chushu,new MathContext(4));//MathConText(4)表示结
-            double v = result.doubleValue();
-            if (v>=10.00) {
-             //提现操作
-               getTiXianOperation();
-            } else if (v>=0.00&&v<10.00) {
-                startActivity(new Intent(WithdrawdepositActivity.this,TiXianError.class));
+            Log.e("money", back_money);
+            double v = Double.parseDouble(back_money);
+            java.text.DecimalFormat df = new java.text.DecimalFormat("#.00");
+            df.format(v);
+            Log.e("v", v + "");
+            if (v >= 10.0) {
+               getTimes();
+            } else if (v >= 0.0 && v < 10.0) {
+                startActivity(new Intent(WithdrawdepositActivity.this, TiXianError.class));
             }
-
-
-        } /*else {
-            Toast.makeText(mContext, "账户余额为空", Toast.LENGTH_SHORT).show();
-        }*/
+        }
     }
 
-    /**
-     * 提现操作
-     */
-    private void getTiXianOperation() {
-        String userId = UserInfoManager.getSingleton().getUserId(this);
-        String appsecret = "ec78223ce3cc5bbfc549672f6e4ede34";
-       /* Map<String,String> map = new HashMap<String, String>();
-        map.put("userId",userId);
-        map.put("time",String.valueOf(times));
-        final List<Map.Entry<String, String>> list = new MapSort().sortMap(map);
-        for (final Map.Entry<String, String> m : list) {
-            Log.e("map::",(m.getKey() + ":" + m.getValue()));
-        }*/
-        String str = "time"+"="+times +"&"+ "userid"+"="+userId+"&"+"key"+"="+appsecret;
-        String s = MD5Utils.md5Utils(str);
-        String sign = s.toUpperCase();
-        Log.e("ssss:+:",sign);
-        Request<String> tiXian = ParameterUtils.getSingleton().getTiXian(userId, back_money, times, result, sign);
-        CallServer.getRequestInstance().add(this, 0, tiXian, new HttpListener() {
-            @Override
-            public void onSucceed(int what, String response) {
-                okInfo = JsonMananger.getReponseResult(response, TiXianOkInfo.class);
-                Intent intent = new Intent(WithdrawdepositActivity.this, TiXianZhongActivity.class);
-                intent.putExtra("money",okInfo.getData().getMoney());
-                intent.putExtra("time",okInfo.getData().getTime());
-                startActivity(intent);
-            }
-
-            @Override
-            public void onFailed(int what, int responseCode, String response) {
-                         Log.e("responseCode",responseCode+"");
-            }
-        },false,true);
-    }
 
     /**
-     *判断提现状态
+     * 判断提现状态
      */
-    private void TiXianState() {
+    /*private void TiXianState() {
         String userId = UserInfoManager.getSingleton().getUserId(this);
         Request<String> tiXian_state = ParameterUtils.getSingleton().getTiXian_state(userId);
         CallServer.getRequestInstance().add(this, 0, tiXian_state, new HttpListener() {
             @Override
             public void onSucceed(int what, String response) {
                 reponseResult = JsonMananger.getReponseResult(response, TiXianStateInfo.class);
+
             }
 
             @Override
             public void onFailed(int what, int responseCode, String response) {
 
             }
-        },true,true);
+        }, true, true);
 
-    }
+    }*/
+
     /**
      * 支付宝账户授权业务
      * @param v
@@ -326,54 +293,80 @@ public class WithdrawdepositActivity extends BaseActivity {
         Thread authThread = new Thread(authRunnable);
         authThread.start();
     }
+
     /**
-     *绑定上传
+     * 绑定上传
      */
-    public void BoundZFB(String resultUser_id){
+    public void BoundZFB(String resultUser_id) {
         String userId = UserInfoManager.getSingleton().getUserId(this);
-        Log.e("sssssssss::",userId);
-        Log.e("aaaaaaaaa::",resultUser_id);
+        Log.e("sssssssss::", userId);
+        Log.e("aaaaaaaaa::", resultUser_id);
         if (!MyStrUtil.isEmpty(resultUser_id)) {
             Request<String> boundZFB = ParameterUtils.getSingleton().getBoundZFB(userId, resultUser_id);
             CallServer.getRequestInstance().add(this, AppConfigs.Bound_ZFB, boundZFB, new HttpListener() {
                 @Override
                 public void onSucceed(int what, String response) {
-                    if (what== AppConfigs.Bound_ZFB) {
+                    if (what == AppConfigs.Bound_ZFB) {
                         BoundZFBInfo zfbInfo = JsonMananger.getReponseResult(response, BoundZFBInfo.class);
-                        Log.e("zfbInfo::",zfbInfo.getData());
+                        Log.e("zfbInfo::", zfbInfo.getData());
                     }
                 }
 
                 @Override
                 public void onFailed(int what, int responseCode, String response) {
-                    Log.e("失败了::",responseCode+"");
+                    Log.e("失败了::", responseCode + "");
                 }
-            },true,true);
+            }, true, true);
         }
 
     }
 
     /**
-     * 获取服务器时间
+     * 获取服务器时间  实现提现
      */
-    private void getTime() {
+    private void getTimes() {
         final String userId = UserInfoManager.getSingleton().getUserId(this);
-        Request<String> time = ParameterUtils.getSingleton().getTime(userId);
+        final Request<String> time = ParameterUtils.getSingleton().getTime(userId);
         CallServer.getRequestInstance().add(this, 0, time, new HttpListener() {
             @Override
             public void onSucceed(int what, String response) {
                 Time reponseResult = JsonMananger.getReponseResult(response, Time.class);
-                times = reponseResult.getData().getTime();
-                result = reponseResult.getData().getResult();
-                Log.e("times++", times +"");
-                Log.e("result--", result +"");
+               int times = reponseResult.getData().getTime();
+               int result = reponseResult.getData().getResult();
+                String userId = UserInfoManager.getSingleton().getUserId(WithdrawdepositActivity.this);
+                String appsecret = "ec78223ce3cc5bbfc549672f6e4ede34";
+
+                String str = "time" + "=" + times + "&" + "userid" + "=" + userId + "&" + "key" + "=" + appsecret;
+                Log.e("str",str);
+                String s = MD5Utils.md5Utils(str);
+                String sign = s.toUpperCase();
+                Log.e("ssss:+:", sign);
+                Request<String> tiXian = ParameterUtils.getSingleton().getTiXian(userId, back_money, times, result, sign);
+
+                CallServer.getRequestInstance().add(WithdrawdepositActivity.this, 0, tiXian, new HttpListener() {
+                    @Override
+                    public void onSucceed(int what, String response) {
+                        okInfo = JsonMananger.getReponseResult(response, TiXianOkInfo.class);
+                        Intent intent = new Intent(WithdrawdepositActivity.this, TiXianZhongActivity.class);
+                        intent.putExtra("money", okInfo.getData().getMoney());
+                        intent.putExtra("time", okInfo.getData().getTime());
+                        Log.e("xxxx", "ccccccccccccccccccccc");
+                        startActivity(intent);
+                        finish();
+                    }
+
+                    @Override
+                    public void onFailed(int what, int responseCode, String response) {
+                        Log.e("responseCode", responseCode + "");
+                    }
+                }, false, true);
             }
 
             @Override
             public void onFailed(int what, int responseCode, String response) {
 
             }
-        },true,true);
+        }, true, true);
     }
 
 }

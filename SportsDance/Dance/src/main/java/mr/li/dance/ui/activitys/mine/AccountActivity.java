@@ -10,9 +10,12 @@ import android.widget.Toast;
 import com.yolanda.nohttp.rest.Request;
 
 import mr.li.dance.R;
+import mr.li.dance.https.CallServer;
+import mr.li.dance.https.HttpListener;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.models.Bound_ZFB_state;
 import mr.li.dance.models.Mine_itemInfo;
+import mr.li.dance.models.TiXianStateInfo;
 import mr.li.dance.ui.activitys.base.BaseListActivity;
 import mr.li.dance.ui.adapters.Mine_item_adapter;
 import mr.li.dance.utils.AppConfigs;
@@ -33,7 +36,8 @@ public class AccountActivity extends BaseListActivity {
     Mine_item_adapter adapters;
     private Mine_itemInfo reponseResult;
     int page = 0;
-    private Bound_ZFB_state.DataBean data;
+    private TiXianStateInfo state;
+    private int start;
 
 
     public void initViewss() {
@@ -49,6 +53,8 @@ public class AccountActivity extends BaseListActivity {
         initViewss();
         MineInfo();
         Bound();
+        TiXianState();
+
     }
     @Override
     public RecyclerView.Adapter getAdapter() {
@@ -68,22 +74,27 @@ public class AccountActivity extends BaseListActivity {
     @Override
     public void onHeadRightButtonClick(View v) {
         super.onHeadRightButtonClick(v);
-
-        String remaining_sum = reponseResult.getData().getRemaining_sum();
-        if (!MyStrUtil.isEmpty(remaining_sum)) {
-            Intent intent=new Intent(this,WithdrawdepositActivity.class);
-            intent.putExtra("back_money",reponseResult.getData().getRemaining_sum());
-            intent.putExtra("state",data.getStart());
+        if (state.getData().getStart()==1) {
+            Intent intent = new Intent(this, TiXianZhongActivity.class);
+            intent.putExtra("money", state.getData().getMoney());
+            intent.putExtra("time", state.getData().getTime());
             startActivity(intent);
-
+            finish();
+        } else {
+            String remaining_sum = reponseResult.getData().getRemaining_sum();
+            if (!MyStrUtil.isEmpty(remaining_sum)) {
+                Intent intent=new Intent(this,WithdrawdepositActivity.class);
+                intent.putExtra("back_money",reponseResult.getData().getRemaining_sum());
+                intent.putExtra("start",start);
+                startActivity(intent);
+                finish();
+            }
         }
     }
 
     public static void lunch(Context context) {
         context.startActivity(new Intent(context, AccountActivity.class));
     }
-
-
     /**
      * 请求
      */
@@ -95,14 +106,6 @@ public class AccountActivity extends BaseListActivity {
 
     }
 
-    /**
-     * 绑定状态
-     */
-    public void Bound(){
-        String userId = UserInfoManager.getSingleton().getUserId(mContext);
-        Request<String> bound_state = ParameterUtils.getSingleton().getBound_state(userId);
-        request(AppConfigs.Bound_state,bound_state,false);
-    }
 
     @Override
     public void onSucceed(int what, String response) {
@@ -111,7 +114,7 @@ public class AccountActivity extends BaseListActivity {
             case  AppConfigs.item_tx:
                 if (what==AppConfigs.item_tx&&!MyStrUtil.isEmpty(response)) {
                     reponseResult = JsonMananger.getReponseResult(response, Mine_itemInfo.class);
-                    Log.e("url",reponseResult.getErrorCode()+"");
+                    Log.e("ErrorCode",reponseResult.getErrorCode()+"");
                     mDanceViewHolder.setText(R.id.mines_money, reponseResult.getData().getRemaining_sum());
                     adapters.add(reponseResult);
                 } else{
@@ -120,13 +123,38 @@ public class AccountActivity extends BaseListActivity {
                 break;
             case AppConfigs.Bound_state:
                 Bound_ZFB_state reponseResult = JsonMananger.getReponseResult(response, Bound_ZFB_state.class);
-                data = reponseResult.getData();
-                Log.e("data", data.getStart()+"");
+                start = reponseResult.getData().getStart();
                 break;
         }
 
     }
+    /**
+     * 提现状态
+     */
+    private void TiXianState() {
+        String userId = UserInfoManager.getSingleton().getUserId(this);
+        Request<String> tiXian_state = ParameterUtils.getSingleton().getTiXian_state(userId);
+        CallServer.getRequestInstance().add(this, 0, tiXian_state, new HttpListener() {
+            @Override
+            public void onSucceed(int what, String response) {
+                state = JsonMananger.getReponseResult(response, TiXianStateInfo.class);
+            }
 
+            @Override
+            public void onFailed(int what, int responseCode, String response) {
+
+            }
+        }, true, true);
+
+    }
+    /**
+     * 绑定状态
+     */
+    public void Bound() {
+        String userId = UserInfoManager.getSingleton().getUserId(mContext);
+        Request<String> bound_state = ParameterUtils.getSingleton().getBound_state(userId);
+        request(AppConfigs.Bound_state,bound_state,false);
+    }
     /**
      * 上啦加载
      */

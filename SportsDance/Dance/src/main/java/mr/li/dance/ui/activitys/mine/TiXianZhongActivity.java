@@ -32,6 +32,7 @@ public class TiXianZhongActivity extends BaseActivity {
         time = mIntentExtras.getString("time");
     }
 
+
     @Override
     public void initDatas() {
         super.initDatas();

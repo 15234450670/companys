@@ -39,14 +39,14 @@ public class Mine_item_adapter extends BaseRecyclerAdapter<Mine_itemInfo>{
                 Log.e("is_draw:--", is_draw);
                 if (!MyStrUtil.isEmpty(is_draw)) {
                     if (is_draw.equals("1")) {
-                        holder.setText(R.id.item_title, "抽奖");
+                        holder.setText(R.id.item_title, "红包");
                         holder.setText(R.id.item_date, detail.get(i).getTime());
-                        holder.setTextAndColor(R.id.item_money, "+ " + detail.get(i).getMoney() + " 元", R.color.mine_item_add);
+                        holder.setTextAndColor(R.id.item_money, "+ " + detail.get(i).getGet_money() + " 元", R.color.mine_item_add);
 
                     } else {
                         holder.setText(R.id.item_title, "提现");
                         holder.setText(R.id.item_date, detail.get(i).getTime());
-                        holder.setTextAndColor(R.id.item_money, "- " + detail.get(i).getMoney() + " 元", R.color.mine_item_fu);
+                        holder.setTextAndColor(R.id.item_money, "- " + detail.get(i).getGet_money()+ " 元", R.color.mine_item_fu);
                     }
                 }
             }
