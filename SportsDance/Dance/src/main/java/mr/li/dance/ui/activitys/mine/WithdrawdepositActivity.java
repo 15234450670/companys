@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.alipay.sdk.app.AuthTask;
 import com.yolanda.nohttp.rest.Request;
 
+import java.text.DecimalFormat;
 import java.util.Map;
 
 import mr.li.dance.R;
@@ -206,7 +207,7 @@ public class WithdrawdepositActivity extends BaseActivity {
         if (!MyStrUtil.isEmpty(back_money)) {
             Log.e("money", back_money);
             double v = Double.parseDouble(back_money);
-            java.text.DecimalFormat df = new java.text.DecimalFormat("#.00");
+            DecimalFormat    df   = new DecimalFormat("#.00");
             df.format(v);
             Log.e("v", v + "");
             if (v >= 10.0) {

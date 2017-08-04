@@ -41,7 +41,6 @@
 
             android:paddingRight="48dip"
             android:singleLine="true"
-            android:text="sssssssss"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/left_layout"/>
 
