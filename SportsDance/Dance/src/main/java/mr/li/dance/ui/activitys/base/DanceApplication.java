@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.os.Handler;
+import android.support.multidex.MultiDex;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
@@ -75,6 +76,7 @@ public class DanceApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        MultiDex.install(this);
         instance = this;
         initLeShi();
         NoHttp.initialize(this); // NoHttp默认初始化。

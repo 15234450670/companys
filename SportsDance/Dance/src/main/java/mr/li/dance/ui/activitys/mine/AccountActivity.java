@@ -2,15 +2,11 @@ package mr.li.dance.ui.activitys.mine;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.liaoinstan.springview.container.RotationFooter;
-import com.liaoinstan.springview.widget.SpringView;
 import com.yolanda.nohttp.rest.Request;
 
 import java.util.List;
@@ -22,7 +18,8 @@ import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.models.Bound_ZFB_state;
 import mr.li.dance.models.Mine_itemInfo;
 import mr.li.dance.models.TiXianStateInfo;
-import mr.li.dance.ui.activitys.base.BaseActivity;
+import mr.li.dance.ui.activitys.base.BaseListActivity;
+import mr.li.dance.ui.adapters.Mine_item_adapter;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.MyStrUtil;
@@ -37,15 +34,12 @@ import mr.li.dance.utils.UserInfoManager;
  * 修订历史:
  */
 
-public class AccountActivity extends BaseActivity {
-    //Mine_item_adapter adapters;
-    private Mine_itemInfo reponseResult;
-    int page = 0;
+public class AccountActivity extends BaseListActivity {
+    Mine_item_adapter adapters;
+    int page = 1;
     private TiXianStateInfo state;
     private int             start;
-    private RecyclerView    rv;
-    private SpringView sp;
-
+    private Mine_itemInfo reponseResult;
 
     public void initViewss() {
         setTitle("账单明细");
@@ -56,15 +50,15 @@ public class AccountActivity extends BaseActivity {
     @Override
     public void initDatas() {
         super.initDatas();
-        sp = (SpringView) findViewById(R.id.sp);
+      /*  sp = (SpringView) findViewById(R.id.sp);
         rv = (RecyclerView) findViewById(R.id.rv);
-        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setLayoutManager(new LinearLayoutManager(this));*/
         initViewss();
         MineInfo();
         Bound();
         TiXianState();
 
-        sp.setType(SpringView.Type.FOLLOW);
+       /* sp.setType(SpringView.Type.FOLLOW);
 
         //sp.setHeader(new RotationHeader(this));
         sp.setFooter(new RotationFooter(this));
@@ -86,33 +80,31 @@ public class AccountActivity extends BaseActivity {
                     }
                 },2000);
             }
-        });
+        });*/
 
 
     }
 
-   /* @Override
+    @Override
     public RecyclerView.Adapter getAdapter() {
         adapters = new Mine_item_adapter(this);
         return adapters;
-    }*/
+    }
 
 
     @Override
     public int getContentViewId() {
-
         return R.layout.activity_account;
     }
-
     @Override
     public void initViews() {
-
+        super.initViews();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        MineInfo();
+        // MineInfo();
         Bound();
         TiXianState();
     }
@@ -152,13 +144,13 @@ public class AccountActivity extends BaseActivity {
         String userId = UserInfoManager.getSingleton().getUserId(mContext);
         Log.e("mine_userid:", userId);
         Request<String> request = ParameterUtils.getSingleton().getTiXianInfoMap(userId, page + "");
+        Log.e("page",page+"");
         request(AppConfigs.item_tx, request, false);
-
     }
-
 
     @Override
     public void onSucceed(int what, String response) {
+        super.onSucceed(what, response);
         Log.e("明细+++++++:", response);
         switch (what) {
             case AppConfigs.item_tx:
@@ -166,17 +158,16 @@ public class AccountActivity extends BaseActivity {
                 Log.e("ErrorCode", reponseResult.getErrorCode() + "");
                 mDanceViewHolder.setText(R.id.mines_money, reponseResult.getData().getRemaining_sum());
                 List<Mine_itemInfo.DataBean.DetailBean> detail = reponseResult.getData().getDetail();
-                if (!MyStrUtil.isEmpty(detail)) {
-                    rv.setAdapter(new MyAdapter(this, detail));
-                    //  adapters.add(reponseResult);
+                if (!detail.isEmpty()) {
+                    adapters.addList(isRefresh, detail);
                 } else {
                     Toast.makeText(mContext, "暂无更多信息", Toast.LENGTH_SHORT).show();
                 }
 
                 break;
             case AppConfigs.Bound_state:
-                Bound_ZFB_state reponseResult = JsonMananger.getReponseResult(response, Bound_ZFB_state.class);
-                start = reponseResult.getData().getStart();
+                Bound_ZFB_state reponseResults = JsonMananger.getReponseResult(response, Bound_ZFB_state.class);
+                start = reponseResults.getData().getStart();
                 break;
         }
 
@@ -213,25 +204,31 @@ public class AccountActivity extends BaseActivity {
     /**
      * 上啦加载
      */
-   /* @Override
+    @Override
     public void loadMore() {
         super.loadMore();
-          page++;
+        page++;
+
         MineInfo();
+
     }
 
+    /**
+     *   下拉刷新
+     */
     @Override
     public void refresh() {
         super.refresh();
-        isRefresh = false;
+        page = 1;
+        MineInfo();
+
     }
 
-    *//**
+    /**
      * 条目点击事件
-     *//*
+     */
 
     @Override
     public void itemClick(int position, Object value) {
-
-    }*/
+    }
 }

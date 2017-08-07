@@ -1,4 +1,4 @@
-package mr.li.dance.ui.activitys.mine;
+package mr.li.dance.ui.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -17,7 +17,7 @@ import mr.li.dance.models.Mine_itemInfo;
  * 作者: SuiFeng
  * 版本:
  * 创建日期:2017/8/4 0004
- * 描述:
+ * 描述:暂时没什么用
  * 修订历史:
  */
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {

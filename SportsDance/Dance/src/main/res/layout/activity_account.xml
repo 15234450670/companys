@@ -68,20 +68,24 @@
         android:layout_height="2dp"
         android:background="@color/mine_back_many"/>
 
-    <com.liaoinstan.springview.widget.SpringView
-        android:id="@+id/sp"
+    <!--   <com.liaoinstan.springview.widget.SpringView
+         android:id="@+id/sp"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content">-->
+    <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
+        android:id="@+id/refresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv"
+            android:id="@+id/recyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/spacing_20"
             android:layout_marginRight="@dimen/spacing_20"
             android:background="@color/white"
             android:overScrollMode="never"/>
-    </com.liaoinstan.springview.widget.SpringView>
+    </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
+    <!-- </com.liaoinstan.springview.widget.SpringView>-->
 
 
 </LinearLayout>

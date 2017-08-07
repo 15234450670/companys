@@ -31,6 +31,7 @@ import mr.li.dance.utils.AuthResult;
 import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.MD5Utils;
 import mr.li.dance.utils.MyStrUtil;
+import mr.li.dance.utils.NToast;
 import mr.li.dance.utils.UserInfoManager;
 import mr.li.dance.utils.util.OrderInfoUtil2_0;
 
@@ -80,11 +81,8 @@ public class WithdrawdepositActivity extends BaseActivity {
             "mTqu5jq0/BOORo8Lkp3ujbRFQmliOZ8CNXRNdY3R4Vq42/JsCgYEAjTBPCiycYWsPEUdzczhm1Nuf5U7DY6yfn+2LgmefJsVdCXcLOo" +
             "S0DV3NnBeo8L2eFBgUnUb1pjVks1KMwn8KUcM/nP+rsc9t/loGKLrHe02wUNZw3t3zO5u7U8U2XYdqm7oY/ANtYbbQS+Z8P7TZbYz5" +
             "cAldhd8x9MC2WEY/+Uk=";
-    //支付宝公 钥
-    public static final  String alipay_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqwVBtm5bN99x3bK6A2VF66szjaDSVWaxUs8TSgsdCC7YNNi28WKLoIBAPfYxdGNT5mdBAWeCqCO/pDACR6uU/8I091x4zh9IgekViqgMu8P8whQzfogQfl87qvyob/TcLBksemxckW8pIyh2dpYqwUnNZ7VdbxLBXIGurj4MFQ/2C3vRjQjkXpx06tg6ep46spTog0B+CmXJAJXOxlY8OCAoTrgtYv0hUFgXOzC3nRicP+DUzzYN8tIentGsytR0waoI3BYTHusV5PTyZeUDiFRW4ex9BNhFxM9M/+ZtybXdGgD+1ecS0SMAoGR31Lm2yHmS8Il0h2vhaNRSID44bwIDAQAB";
     public static final  String RSA_PRIVATE       = "";
     private static final int    SDK_AUTH_FLAG     = 2;
-    private String back_money;
 
 
     @SuppressLint("HandlerLeak")
@@ -107,10 +105,9 @@ public class WithdrawdepositActivity extends BaseActivity {
                         String resultUser_id = authResult.getResultUser_id();
                         if (resultCode.equals("200")) {
                             BoundZFB(resultUser_id);
-                            mDanceViewHolder.setText(R.id.mine_zfb_btn, "重新绑定支付宝");
                         }
                         Toast.makeText(WithdrawdepositActivity.this, "授权成功", Toast.LENGTH_SHORT).show();
-                        finish();
+                        //finish();
                     } else {
                         // 其他状态值则为授权失败
                         Toast.makeText(WithdrawdepositActivity.this, "授权失败", Toast.LENGTH_SHORT).show();
@@ -124,9 +121,9 @@ public class WithdrawdepositActivity extends BaseActivity {
 
 
     };
-    private TiXianOkInfo okInfo;
-    private int          start;
-    //  private TiXianStateInfo reponseResult;
+    private TiXianOkInfo    okInfo;
+    private String          back_money;
+    private int             start;
 
     @Override
     public int getContentViewId() {
@@ -144,6 +141,10 @@ public class WithdrawdepositActivity extends BaseActivity {
         super.getIntentData();
         back_money = mIntentExtras.getString("back_money");
         start = mIntentExtras.getInt("start");
+        bandStatus(start, back_money);
+    }
+
+    private void bandStatus(int start, String back_money){
         if (!MyStrUtil.isEmpty(back_money)) {
             mDanceViewHolder.setText(R.id.tixian_money, back_money);
         }
@@ -152,13 +153,6 @@ public class WithdrawdepositActivity extends BaseActivity {
         } else {
             mDanceViewHolder.setText(R.id.mine_zfb_btn, "验证支付宝");
         }
-    }
-
-    @Override
-    public void initDatas() {
-        super.initDatas();
-        //  Bound();
-        // TiXianState();
     }
 
 
@@ -173,13 +167,7 @@ public class WithdrawdepositActivity extends BaseActivity {
      * 提现
      */
     public void btn2(View v) {
-
-        if (!MyStrUtil.isEmpty(start) && start == 1) {
-            TiXian();
-        } else {
-            Toast.makeText(mContext, "请验证支付宝", Toast.LENGTH_SHORT).show();
-        }
-
+        Bound();
     }
 
     /**
@@ -192,11 +180,18 @@ public class WithdrawdepositActivity extends BaseActivity {
             @Override
             public void onSucceed(int what, String response) {
                 Bound_ZFB_state bound = JsonMananger.getReponseResult(response, Bound_ZFB_state.class);
+                int s = bound.getData().getStart();
+                start = s;
+                if (!MyStrUtil.isEmpty(start) && start == 1) {
+                    TiXian();
+                } else {
+                    Toast.makeText(mContext, "请验证支付宝", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
             public void onFailed(int what, int responseCode, String response) {
-
+                NToast.shortToast(WithdrawdepositActivity.this, "失败");
             }
         }, false, true);
 
@@ -211,34 +206,13 @@ public class WithdrawdepositActivity extends BaseActivity {
             df.format(v);
             Log.e("v", v + "");
             if (v >= 10.0) {
-               getTimes();
+                getTimes();
             } else if (v >= 0.0 && v < 10.0) {
                 startActivity(new Intent(WithdrawdepositActivity.this, TiXianError.class));
             }
         }
     }
 
-
-    /**
-     * 判断提现状态
-     */
-    /*private void TiXianState() {
-        String userId = UserInfoManager.getSingleton().getUserId(this);
-        Request<String> tiXian_state = ParameterUtils.getSingleton().getTiXian_state(userId);
-        CallServer.getRequestInstance().add(this, 0, tiXian_state, new HttpListener() {
-            @Override
-            public void onSucceed(int what, String response) {
-                reponseResult = JsonMananger.getReponseResult(response, TiXianStateInfo.class);
-
-            }
-
-            @Override
-            public void onFailed(int what, int responseCode, String response) {
-
-            }
-        }, true, true);
-
-    }*/
 
     /**
      * 支付宝账户授权业务
@@ -310,6 +284,7 @@ public class WithdrawdepositActivity extends BaseActivity {
                     if (what == AppConfigs.Bound_ZFB) {
                         BoundZFBInfo zfbInfo = JsonMananger.getReponseResult(response, BoundZFBInfo.class);
                         Log.e("zfbInfo::", zfbInfo.getData());
+                        mDanceViewHolder.setText(R.id.mine_zfb_btn, "重新绑定支付宝");
                     }
                 }
 
@@ -332,8 +307,8 @@ public class WithdrawdepositActivity extends BaseActivity {
             @Override
             public void onSucceed(int what, String response) {
                 Time reponseResult = JsonMananger.getReponseResult(response, Time.class);
-               int times = reponseResult.getData().getTime();
-               int result = reponseResult.getData().getResult();
+                int times = reponseResult.getData().getTime();
+                int result = reponseResult.getData().getResult();
                 String userId = UserInfoManager.getSingleton().getUserId(WithdrawdepositActivity.this);
                 String appsecret = "ec78223ce3cc5bbfc549672f6e4ede34";
 
