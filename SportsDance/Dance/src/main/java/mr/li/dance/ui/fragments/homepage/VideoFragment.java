@@ -1,24 +1,15 @@
 package mr.li.dance.ui.fragments.homepage;
 
-import android.os.Handler;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
-import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
-import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
-import com.lcodecore.tkrefreshlayout.header.bezierlayout.BezierLayout;
-import com.lcodecore.tkrefreshlayout.header.progresslayout.ProgressLayout;
 import com.yolanda.nohttp.rest.Request;
 
 import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.HomeVideoIndexResponse;
 import mr.li.dance.https.response.HomeVideoResponse;
-import mr.li.dance.https.response.HomeZhiBoIndexResponse;
-import mr.li.dance.https.response.HomeZhiBoResponse;
 import mr.li.dance.ui.adapters.VideoPageAdapter;
-import mr.li.dance.ui.fragments.BaseFragment;
 import mr.li.dance.ui.fragments.BaseListFragment;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
@@ -68,12 +59,14 @@ public class VideoFragment extends BaseListFragment {
     public void loadMore() {
         super.loadMore();
         Request<String> request = ParameterUtils.getSingleton().getHomeDianboPageMap(mVideoPageAdapter.getNextPage());
+
         request(AppConfigs.home_dianboPage, request, false);
     }
 
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
+        Log.e("respone",response);
         if (what == AppConfigs.home_dianbo) {
             HomeVideoResponse homeResponse = JsonMananger.getReponseResult(response, HomeVideoResponse.class);
             mVideoPageAdapter.refresh(homeResponse);

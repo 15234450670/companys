@@ -7,8 +7,8 @@ package mr.li.dance.utils;
  */
 
 public class AppConfigs {
-   private final static String MAINurl = "http://work.cdsf.org.cn";//测试环境
- // private final static String MAINurl = "http://cdsf.org.cn";//正式环境
+  private final static String MAINurl = "http://work.cdsf.org.cn";//测试环境
+   //private final static String MAINurl = "http://cdsf.org.cn";//正式环境
 
     private final static String DomainUrl = MAINurl + "/mobileClient";
     private final static String SHAREURL = MAINurl + "/h5";
@@ -136,6 +136,8 @@ public class AppConfigs {
     public final static String CLICK_EVENT_25 = "25";//赛事章程
     public final static String CLICK_EVENT_26 = "26";//赛事设项目
     public final static String CLICK_EVENT_27 = "27";//赛程表
-
+    public final static String CLICK_EVENT_28 = "28";//加号
+  public final static String CLICK_EVENT_29 = "29";//成绩查询
+  public final static String CLICK_EVENT_30 = "30";//音乐
 
 }

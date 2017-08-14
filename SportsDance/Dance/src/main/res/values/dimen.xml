@@ -68,6 +68,9 @@
     <dimen name="spacing_112">56dp</dimen>
     <dimen name="spacing_118">59dp</dimen>
     <dimen name="spacing_135">68dp</dimen>
+    <dimen name="spacing_150">75dp</dimen>
+    <dimen name="spacing_190">95dp</dimen>
+    <dimen name="spacing_19">8dp</dimen>
 
     <dimen name="spacing_200">100dp</dimen>
     <dimen name="spacing_234">117dp</dimen>
@@ -93,4 +96,6 @@
     <dimen name="spacing_600">300dp</dimen>
     <dimen name="item_height">60dp</dimen>
     <dimen name="item_margin">10dp</dimen>
+    <dimen name="spacing_360">180dp</dimen>
+    <dimen name="spacing_384">192dp</dimen>
 </resources>

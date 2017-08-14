@@ -177,6 +177,15 @@ public abstract class BaseActivity extends FragmentActivity implements HttpListe
         setHeadRightButtonVisibility(View.GONE);
         mRightIv.setImageResource(iamgeResId);
     }
+   /* protected void setRightImage2(int iamgeResId,int iamgeResId2) {
+        setRightImage(iamgeResId, -1);
+        mRightLayout.setVisibility(View.VISIBLE);
+        mRightIv.setVisibility(View.VISIBLE);
+        mRightIv2.setVisibility(View.VISIBLE);
+        setHeadRightButtonVisibility(View.GONE);
+        mRightIv.setImageResource(iamgeResId);
+        mRightIv2.setImageResource(iamgeResId2);
+    }*/
 
     protected void setRightTextAndImage(String righttext, int iamgeResId) {
         mRightLayout.setVisibility(View.VISIBLE);

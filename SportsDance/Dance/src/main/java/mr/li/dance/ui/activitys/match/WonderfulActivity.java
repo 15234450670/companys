@@ -5,25 +5,21 @@ import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.umeng.analytics.MobclickAgent;
 import com.yolanda.nohttp.rest.Request;
-
-import java.util.List;
 
 import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.MatchPicResponse;
-import mr.li.dance.https.response.MatchVideoResponse;
 import mr.li.dance.https.response.StringResponse;
 import mr.li.dance.models.AlbumInfo;
 import mr.li.dance.models.Match;
-import mr.li.dance.models.Video;
 import mr.li.dance.ui.activitys.album.AlbumActivity;
 import mr.li.dance.ui.activitys.base.BaseListActivity;
-import mr.li.dance.ui.activitys.video.VideoDetailActivity;
-import mr.li.dance.ui.adapters.MatchVideoAdapter;
 import mr.li.dance.ui.adapters.WonderfulPicAdapter;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
+import mr.li.dance.utils.ShareUtils;
 
 /**
  * 作者: Lixuewei
@@ -60,7 +56,7 @@ public class WonderfulActivity extends BaseListActivity<AlbumInfo> {
         super.initViews();
         mRefreshLayout.setEnableLoadmore(false);
         setTitle("赛事图片");
-        setRightImage(R.drawable.home_icon_007);
+        setRightImage(R.drawable.home_icon_007,R.drawable.share_icon_001);
     }
 
     @Override
@@ -116,5 +112,19 @@ public class WonderfulActivity extends BaseListActivity<AlbumInfo> {
     public void onHeadRightButtonClick(View v) {
         super.onHeadRightButtonClick(v);
         SearchMatchPicActivity.lunch(this, mMatchId);
+
+    }
+    public void onHeadRightButtonClick2(View v) {
+        showShareDialog();
+    }
+
+    ShareUtils mShareUtils;
+
+    private void showShareDialog() {
+        MobclickAgent.onEvent(this, AppConfigs.CLICK_EVENT_29);
+        if (mShareUtils == null) {
+            mShareUtils = new ShareUtils(this);
+        }
+        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, "http://work.cdsf.org.cn/mobileClient/match.graphicDetailsf?compete_id=236&w_page=10701", "123456");
     }
 }

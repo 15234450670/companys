@@ -3,10 +3,9 @@ package mr.li.dance.ui.activitys.video;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.yolanda.nohttp.rest.Request;
-
-import java.util.List;
 
 import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
@@ -79,13 +78,14 @@ public class VideoListActivity extends BaseListActivity<Video> {
     @Override
     public void loadMore() {
         super.loadMore();
-        Request<String> request = ParameterUtils.getSingleton().getVideoListMap(mAdapter.getNextPage(), mTypeId);
+        Request<String> request = ParameterUtils.getSingleton().getVideoListMap(1+mAdapter.getNextPage(), mTypeId);
         request(AppConfigs.home_dianboList, request, false);
     }
 
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
+        Log.e("xxxxxx",response);
         HomeVideoIndexResponse reponseResult = JsonMananger.getReponseResult(response, HomeVideoIndexResponse.class);
         if (isRefresh) {
             mAdapter.refresh(reponseResult.getData());

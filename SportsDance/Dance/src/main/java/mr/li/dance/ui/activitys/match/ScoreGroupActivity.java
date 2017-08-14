@@ -3,7 +3,9 @@ package mr.li.dance.ui.activitys.match;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
+import com.umeng.analytics.MobclickAgent;
 import com.yolanda.nohttp.rest.Request;
 
 import java.util.List;
@@ -16,6 +18,7 @@ import mr.li.dance.ui.activitys.base.BaseListActivity;
 import mr.li.dance.ui.adapters.ScoreGroupAdapter;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
+import mr.li.dance.utils.ShareUtils;
 
 /**
  * 作者: Lixuewei
@@ -40,11 +43,11 @@ public class ScoreGroupActivity extends BaseListActivity<ScoreGroupInfo> {
         mMatchId = mIntentExtras.getString("matchid");
     }
 
-
     @Override
     public void initViews() {
         super.initViews();
         setTitle("成绩单");
+        setRightImage(R.drawable.share_icon_001);
         Request<String> request = ParameterUtils.getSingleton().getmScoreQueryMap(mMatchId, 1);
         request(AppConfigs.match_scoreQuery, request, true);
     }
@@ -56,6 +59,7 @@ public class ScoreGroupActivity extends BaseListActivity<ScoreGroupInfo> {
 
     private void getData(int index) {
         Request<String> request = ParameterUtils.getSingleton().getmScoreQueryMap(mMatchId, index);
+
         request(AppConfigs.match_scoreQuery, request, false);
     }
 
@@ -84,6 +88,7 @@ public class ScoreGroupActivity extends BaseListActivity<ScoreGroupInfo> {
         StringResponse stringResponse = JsonMananger.getReponseResult(response, StringResponse.class);
         String dataStr = stringResponse.getData();
         List<ScoreGroupInfo> list = JsonMananger.jsonToList(dataStr, ScoreGroupInfo.class);
+
         mScorefromAdapter.addList(isRefresh, list);
     }
 
@@ -94,4 +99,18 @@ public class ScoreGroupActivity extends BaseListActivity<ScoreGroupInfo> {
         context.startActivity(intent);
     }
 
+    @Override
+    public void onHeadRightButtonClick(View v) {
+        super.onHeadRightButtonClick(v);
+        showShareDialog();
+    }
+    ShareUtils mShareUtils;
+
+    private void showShareDialog() {
+        MobclickAgent.onEvent(this, AppConfigs.CLICK_EVENT_29);
+        if (mShareUtils == null) {
+            mShareUtils = new ShareUtils(this);
+        }
+        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, "http://work.cdsf.org.cn/mobileClient/match.graphicDetailsf?compete_id=236&w_page=10701", "123456");
+    }
 }

@@ -1,7 +1,6 @@
 package mr.li.dance.ui.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import java.util.List;
@@ -13,7 +12,6 @@ import mr.li.dance.models.BaseItemAdapterType;
 import mr.li.dance.models.Video;
 import mr.li.dance.models.ZhiBoInfo;
 import mr.li.dance.models.ZiXunInfo;
-import mr.li.dance.models.ZiXunType;
 import mr.li.dance.utils.MyStrUtil;
 
 /**
@@ -129,6 +127,7 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
     }
 
     public void loadMore(List list) {
+
         addList(list);
     }
 

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -32,6 +33,7 @@ import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.MD5Utils;
 import mr.li.dance.utils.MyStrUtil;
 import mr.li.dance.utils.NToast;
+import mr.li.dance.utils.TimeOut;
 import mr.li.dance.utils.UserInfoManager;
 import mr.li.dance.utils.util.OrderInfoUtil2_0;
 
@@ -64,7 +66,7 @@ public class WithdrawdepositActivity extends BaseActivity {
     /**
      * 工具地址：https://doc.open.alipay.com/docs/doc.htm?treeId=291&articleId=106097&docType=1
      */
-    public static final  String RSA2_PRIVATE      = "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCrBUG2bls333HdsroDZ" +
+    public static final  String  RSA2_PRIVATE  = "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCrBUG2bls333HdsroDZ" +
             "UXrqzONoNJVZrFSzxNKCx0ILtg02LbxYouggEA99jF0Y1PmZ0EBZ4KoI7+kMAJHq5T/wjT3XHjOH0iB6RWKqAy7w/zCFDN+iBB+Xzuq" +
             "/Khv9NwsGSx6bFyRbykjKHZ2lirBSc1ntV1vEsFcga6uPgwVD/YLe9GNCORenHTq2Dp6njqylOiDQH4KZckAlc7GVjw4IChOuC1i/S" +
             "FQWBc7MLedGJw/4NTPNg3y0h6e0azK1HTBqgjcFhMe6xXk9PJl5QOIVFbh7H0E2EXEz0z/5m3Jtd0aAP7V5xLRIwCgZHfUubbIeZLw" +
@@ -81,8 +83,8 @@ public class WithdrawdepositActivity extends BaseActivity {
             "mTqu5jq0/BOORo8Lkp3ujbRFQmliOZ8CNXRNdY3R4Vq42/JsCgYEAjTBPCiycYWsPEUdzczhm1Nuf5U7DY6yfn+2LgmefJsVdCXcLOo" +
             "S0DV3NnBeo8L2eFBgUnUb1pjVks1KMwn8KUcM/nP+rsc9t/loGKLrHe02wUNZw3t3zO5u7U8U2XYdqm7oY/ANtYbbQS+Z8P7TZbYz5" +
             "cAldhd8x9MC2WEY/+Uk=";
-    public static final  String RSA_PRIVATE       = "";
-    private static final int    SDK_AUTH_FLAG     = 2;
+    public static final  String  RSA_PRIVATE   = "";
+    private static final int     SDK_AUTH_FLAG = 2;
 
 
     @SuppressLint("HandlerLeak")
@@ -121,9 +123,9 @@ public class WithdrawdepositActivity extends BaseActivity {
 
 
     };
-    private TiXianOkInfo    okInfo;
-    private String          back_money;
-    private int             start;
+    private TiXianOkInfo okInfo;
+    private String       back_money;
+    private int          start;
 
     @Override
     public int getContentViewId() {
@@ -144,12 +146,14 @@ public class WithdrawdepositActivity extends BaseActivity {
         bandStatus(start, back_money);
     }
 
-    private void bandStatus(int start, String back_money){
+    private void bandStatus(int start, String back_money) {
         if (!MyStrUtil.isEmpty(back_money)) {
             mDanceViewHolder.setText(R.id.tixian_money, back_money);
         }
         if (!MyStrUtil.isEmpty(start) && start == 1) {
             mDanceViewHolder.setText(R.id.mine_zfb_btn, "重新绑定支付宝");
+            mDanceViewHolder.setButton(R.id.mine_tixian_btn, Color.WHITE);
+
         } else {
             mDanceViewHolder.setText(R.id.mine_zfb_btn, "验证支付宝");
         }
@@ -167,7 +171,10 @@ public class WithdrawdepositActivity extends BaseActivity {
      * 提现
      */
     public void btn2(View v) {
-        Bound();
+        if (TimeOut.isFastClick()) {
+            Bound();
+            return;
+        }
     }
 
     /**
@@ -183,6 +190,7 @@ public class WithdrawdepositActivity extends BaseActivity {
                 int s = bound.getData().getStart();
                 start = s;
                 if (!MyStrUtil.isEmpty(start) && start == 1) {
+                    mDanceViewHolder.setButton(R.id.mine_tixian_btn, Color.WHITE);
                     TiXian();
                 } else {
                     Toast.makeText(mContext, "请验证支付宝", Toast.LENGTH_SHORT).show();
@@ -202,10 +210,11 @@ public class WithdrawdepositActivity extends BaseActivity {
         if (!MyStrUtil.isEmpty(back_money)) {
             Log.e("money", back_money);
             double v = Double.parseDouble(back_money);
-            DecimalFormat    df   = new DecimalFormat("#.00");
+            DecimalFormat df = new DecimalFormat("#.00");
             df.format(v);
             Log.e("v", v + "");
             if (v >= 10.0) {
+
                 getTimes();
             } else if (v >= 0.0 && v < 10.0) {
                 startActivity(new Intent(WithdrawdepositActivity.this, TiXianError.class));
@@ -313,7 +322,7 @@ public class WithdrawdepositActivity extends BaseActivity {
                 String appsecret = "ec78223ce3cc5bbfc549672f6e4ede34";
 
                 String str = "time" + "=" + times + "&" + "userid" + "=" + userId + "&" + "key" + "=" + appsecret;
-                Log.e("str",str);
+                Log.e("str", str);
                 String s = MD5Utils.md5Utils(str);
                 String sign = s.toUpperCase();
                 Log.e("ssss:+:", sign);
@@ -322,11 +331,11 @@ public class WithdrawdepositActivity extends BaseActivity {
                 CallServer.getRequestInstance().add(WithdrawdepositActivity.this, 0, tiXian, new HttpListener() {
                     @Override
                     public void onSucceed(int what, String response) {
+
                         okInfo = JsonMananger.getReponseResult(response, TiXianOkInfo.class);
                         Intent intent = new Intent(WithdrawdepositActivity.this, TiXianZhongActivity.class);
                         intent.putExtra("money", okInfo.getData().getMoney());
                         intent.putExtra("time", okInfo.getData().getTime());
-                        Log.e("xxxx", "ccccccccccccccccccccc");
                         startActivity(intent);
                         finish();
                     }

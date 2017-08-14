@@ -57,27 +57,26 @@ import mr.li.dance.utils.UserInfoManager;
 public class HomeRecyclerAdapter extends DanceBaseAdapter {
 
     Context mContext;
-    private List<BannerInfo> mLunBoDatas;
+    private List<BannerInfo>   mLunBoDatas;
     private List<BaseHomeItem> mDatas;
 
     ArrayList<MathcRecommend> mathcRecommends;
 
-    private int mExtraCount = 2;//除了列表额外的加载项目数
-    private final int TYPE_1 = 1;//轮播页面
-    private final int TYPE_2 = 2;//赛事上下滚动的
-    private final int TYPE_ZHIBO = 3;//直播
-    private final int TYPE_DianBO = 4;//点播
-    private final int TYPE_ZIXUNONPIC = 5;//资讯1张图
+    private       int mExtraCount         = 2;//除了列表额外的加载项目数
+    private final int TYPE_1              = 1;//轮播页面
+    private final int TYPE_2              = 2;//赛事上下滚动的
+    private final int TYPE_ZHIBO          = 3;//直播
+    private final int TYPE_DianBO         = 4;//点播
+    private final int TYPE_ZIXUNONPIC     = 5;//资讯1张图
     private final int TYPE_ZIXU_THREE_PIC = 6;//资讯3张图
-    private final int TYPE_XIANGCE = 7;//相册
-    private final int TYPE_SAISHI = 8;//赛事
-    private final int TYPE_WAILIAN = 9;//外联
-    private final int TYPE_MAIN = 10;//正常的列表加载页面
+    private final int TYPE_XIANGCE        = 7;//相册
+    private final int TYPE_SAISHI         = 8;//赛事
+    private final int TYPE_WAILIAN        = 9;//外联
+    private final int TYPE_MAIN           = 10;//正常的列表加载页面
 
 
     /**
      * 构造器
-     *
      * @param
      */
     public HomeRecyclerAdapter(Context context) {
@@ -189,55 +188,46 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
             @Override
             public void itemClick(int position) {
                 BannerInfo bannerInfo = mLunBoDatas.get(position);
-                Log.e("sss",UserInfoManager.getSingleton().isLoading(mContext)+"");
+                Log.e("sss", UserInfoManager.getSingleton().isLoading(mContext) + "");
 
-                    switch (bannerInfo.getType()) {
-                        case 10101://直播
-                            ZhiBoDetailActivity.lunch(mContext, bannerInfo.getNumber());
-                            break;
-                        case 10102://点播
-                            VideoDetailActivity.lunch(mContext, bannerInfo.getNumber());
-                            break;
-                        case 10103://z咨询
-                            String url = String.format(AppConfigs.ZixunShareUrl,  bannerInfo.getNumber());
-                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE,  "",url, true);
-                            break;
-                        case 10104://图片
-                            AlbumActivity.lunch(mContext, bannerInfo.getNumber(), "");
-                            break;
-                        case 10105://赛事
-                            MatchDetailActivity.lunch(mContext, bannerInfo.getNumber());
-                            break;
-                        case 10106://外联
+                switch (bannerInfo.getType()) {
+                    case 10101://直播
+                        ZhiBoDetailActivity.lunch(mContext, bannerInfo.getNumber());
+                        break;
+                    case 10102://点播
+                        VideoDetailActivity.lunch(mContext, bannerInfo.getNumber());
+                        break;
+                    case 10103://z咨询
+                        String url = String.format(AppConfigs.ZixunShareUrl, bannerInfo.getNumber());
+                        MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, "", url, true);
+                        break;
+                    case 10104://图片
+                        AlbumActivity.lunch(mContext, bannerInfo.getNumber(), "");
+                        break;
+                    case 10105://赛事
+                        MatchDetailActivity.lunch(mContext, bannerInfo.getNumber());
+                        break;
+                    case 10106://外联
 
+                        if (!MyStrUtil.isEmpty(bannerInfo.getUrl())) {
+
+                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, "", bannerInfo.getUrl(), bannerInfo.getId());
+                        }
+                        break;
+                    case 10107://活动
+                        if (mContext != null && UserInfoManager.getSingleton().isLoading(mContext)) {
                             if (!MyStrUtil.isEmpty(bannerInfo.getUrl())) {
-
-                                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, "",bannerInfo.getUrl(), bannerInfo.getId());
+                                huodong(bannerInfo);
                             }
-                            break;
-                        case 10107://活动
-                            if(mContext!=null && UserInfoManager.getSingleton().isLoading(mContext)){
-                                if (!MyStrUtil.isEmpty(bannerInfo.getUrl())){
-                                    huodong(bannerInfo);
-                                }
-                            }else{
-                                if(mContext!=null) {
-                                    mContext.startActivity(new Intent(mContext, LoginActivity.class));
-                                }
+                        } else {
+                            if (mContext != null) {
+                                mContext.startActivity(new Intent(mContext, LoginActivity.class));
                             }
+                        }
 
-                            break;
+                        break;
 
-                    }
-
-                /*if(mContext!=null && UserInfoManager.getSingleton().isLoading(mContext)){
-
-                }else{
-                    if(mContext!=null) {
-                        mContext.startActivity(new Intent(mContext, LoginActivity.class));
-                    }
-                }*/
-
+                }
             }
         });
         if (!MyStrUtil.isEmpty(mLunBoDatas)) {
@@ -250,62 +240,61 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
      * 活动轮播图参数拼接
      * @param bannerInfo
      */
-    public void huodong(final BannerInfo bannerInfo){
+    public void huodong(final BannerInfo bannerInfo) {
         String appId = bannerInfo.getAppid();
-        Log.e("appId",appId);
         String appsecret = bannerInfo.getAppsecret();
-        Log.e("appsecret",appsecret);
         final String url = bannerInfo.getUrl();
-        Log.e("url:::::",url);
         String userId = UserInfoManager.getSingleton().getUserId(mContext);
-        Log.e("userId",userId);
         Request<String> huoDongInfoMap = ParameterUtils.getSingleton().getHuoDongInfoMap(appId, appsecret, url, userId);
-        CallServer.getRequestInstance().add(mContext, 0, huoDongInfoMap, new HttpListener(){
+        CallServer.getRequestInstance().add(mContext, 0, huoDongInfoMap, new HttpListener() {
             @Override
             public void onSucceed(int what, String response) {
 
                 HuoDongInfo reponseResult = JsonMananger.getReponseResult(response, HuoDongInfo.class);
-                Log.e("sdfsdf","请求了:"+reponseResult.getData());
-                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, "", reponseResult.getData(), url,bannerInfo.getId());
+                Log.e("sdfsdf", "请求了:" + reponseResult.getData());
+                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, "", reponseResult.getData(), url, bannerInfo.getId());
             }
 
             @Override
             public void onFailed(int what, int responseCode, String response) {
-                Log.e("sdfsdf","失败了"+responseCode);
+                Log.e("sdfsdf", "失败了" + responseCode);
             }
         }, true, true);
 
     }
 
     /**
-     *  活动列表参数拼接
+     * 活动列表参数拼接
      * @param base
      */
-    public void huodong_listView(final BaseHomeItem base){
+    public void huodong_listView(final BaseHomeItem base) {
 
-        String appId = "JK48ada5a480e37d41";
-        Log.e("appId:::",appId);
-        String appsecret ="32dae2ac34079322325d28cfa0825w3aa";
-        Log.e("appsecret::::",appsecret);
+        String appId = "JK48ada5a480e37d411";
+        Log.e("appId:::", appId);
+
+        String appsecret = "32dae2ac34079322325d28cfa0825w3aa1";
+        Log.e("appsecret::::", appsecret);
         final String url = base.getUrl();
-        Log.e("url:::::",url);
+
+        Log.e("url:::::", url);
         String userId = UserInfoManager.getSingleton().getUserId(mContext);
-        Log.e("userId",userId);
+        Log.e("userId", userId);
         final String title = base.getTitle();
         Request<String> huoDongInfoMap = ParameterUtils.getSingleton().getHuoDongInfoMap(appId, appsecret, url, userId);
 
-        CallServer.getRequestInstance().add(mContext, 0, huoDongInfoMap, new HttpListener(){
+        CallServer.getRequestInstance().add(mContext, 0, huoDongInfoMap, new HttpListener() {
             @Override
             public void onSucceed(int what, String response) {
 
                 HuoDongInfo reponseResult = JsonMananger.getReponseResult(response, HuoDongInfo.class);
-                Log.e("sdfsdf","请求了:"+reponseResult.getData());
+                Log.e("sdfsdf", "请求了:" + reponseResult.getData());
                 MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, title, reponseResult.getData(), url, base.getId());
+
             }
 
             @Override
             public void onFailed(int what, int responseCode, String response) {
-                Log.e("sdfsdf","失败了"+responseCode);
+                Log.e("sdfsdf", "失败了" + responseCode);
             }
         }, true, true);
 
@@ -380,7 +369,7 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
                                 break;
                         }
                         match_icon.setImageResource(imageResId);
-//                        ImageLoaderManager.getSingleton().Load(mContext,imageResId,match_icon);
+                        //                        ImageLoaderManager.getSingleton().Load(mContext,imageResId,match_icon);
 
                     }
                     holder.viewSwitcher.showNext();
@@ -405,7 +394,7 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
                         break;
                     case 10103://赛事资讯
                         String saiShiurl = String.format(AppConfigs.ZixunShareUrl, String.valueOf(mDatas.get(position).getId()));
-                        MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, mDatas.get(position).getCompete_name(), saiShiurl,true);
+                        MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, mDatas.get(position).getCompete_name(), saiShiurl, true);
                         break;
                     case 10104://赛事相册
                         AlbumActivity.lunch(mContext, mDatas.get(position).getId(), mDatas.get(position).getCompete_name());
@@ -418,18 +407,18 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
                         String url = mDatas.get(position).getUrl();
                         String wailianId = mDatas.get(position).getId();
                         if (!MyStrUtil.isEmpty(url)) {
-                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, mDatas.get(position).getTitle(), url,wailianId);
+                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, mDatas.get(position).getTitle(), url, wailianId);
                         }
                         break;
                     case 10107:
                         BaseHomeItem baseHomeItem = mDatas.get(position);
-                        Log.e("baseHomeItem",baseHomeItem.toString());
-                        if(mContext!=null && UserInfoManager.getSingleton().isLoading(mContext)){
-                            if (!MyStrUtil.isEmpty(baseHomeItem.getUrl())){
+                        Log.e("baseHomeItem", baseHomeItem.toString());
+                        if (mContext != null && UserInfoManager.getSingleton().isLoading(mContext)) {
+                            if (!MyStrUtil.isEmpty(baseHomeItem.getUrl())) {
                                 huodong_listView(baseHomeItem);
                             }
-                        }else{
-                            if(mContext!=null) {
+                        } else {
+                            if (mContext != null) {
                                 mContext.startActivity(new Intent(mContext, LoginActivity.class));
                             }
                         }
@@ -478,11 +467,11 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
 
 
     class AdverViewHolder extends BaseViewHolder {
-        public DownTimer downTimer;
-        public RadioGroup mRadioGroup;
-        public RadioButton first_rb;
-        public RadioButton second_rb;
-        public RadioButton third_rb;
+        public DownTimer    downTimer;
+        public RadioGroup   mRadioGroup;
+        public RadioButton  first_rb;
+        public RadioButton  second_rb;
+        public RadioButton  third_rb;
         public ViewSwitcher viewSwitcher;
         LayoutInflater inflater;
 

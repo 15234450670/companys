@@ -25,6 +25,7 @@ public class ScoreGroupAdapter extends BaseRecyclerAdapter<ScoreGroupInfo> {
     public void bindData(RecyclerViewHolder holder, int position, ScoreGroupInfo item) {
         holder.setText(R.id.groupname_tv, item.getGroup_name());
         holder.setText(R.id.groupnum_tv, item.getNum());
+
     }
 
 }

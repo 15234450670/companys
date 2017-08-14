@@ -291,6 +291,7 @@ public class VideoPageAdapter extends DanceBaseAdapter {
     }
 
     public void loadMore(HomeVideoIndexResponse response) {
+
         ArrayList<Video> videos = response.getData();
         if (!MyStrUtil.isEmpty(videos)) {
             mDatas.addAll(videos);

@@ -145,7 +145,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
     }
 
     public int getNextPage(){
-        return currentPage+1;
+        return currentPage++;
     }
 
 }

@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -131,6 +132,7 @@ public class MatchDetailActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.guize_layout:
                 String guize_url = String.format(AppConfigs.SAISHIShareUrl, String.valueOf(mMatchId), String.valueOf(10701));
+                Log.e("xxx",guize_url);
                 MyDanceWebActivity.lunch(this, MyDanceWebActivity.MATCHOTHER1, "赛事规则", guize_url, true);
                 break;
             case R.id.shexiang_layout:

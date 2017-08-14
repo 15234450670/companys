@@ -29,8 +29,7 @@ public class BaseHomeItem {
 
     private String activity_id;//直播主题ID
     private String video_unique;//点播标识
-    private String app_id;
-    private  String app_secret;
+
 
 
     public String getId() {
@@ -178,37 +177,5 @@ public class BaseHomeItem {
         this.writer = writer;
     }
 
-    @Override
-    public String toString() {
-        return "BaseHomeItem{" +
-                "id='" + id + '\'' +
-                ", type=" + type +
-                ", compete_id='" + compete_id + '\'' +
-                ", compete_name='" + compete_name + '\'' +
-                ", picture_app='" + picture_app + '\'' +
-                ", start_time='" + start_time + '\'' +
-                ", compete_type=" + compete_type +
-                ", end_time='" + end_time + '\'' +
-                ", title='" + title + '\'' +
-                ", img_num='" + img_num + '\'' +
-                ", picture='" + picture + '\'' +
-                ", picture_2='" + picture_2 + '\'' +
-                ", picture_3='" + picture_3 + '\'' +
-                ", writer='" + writer + '\'' +
-                ", photos='" + photos + '\'' +
-                ", url='" + url + '\'' +
-                ", activity_id='" + activity_id + '\'' +
-                ", video_unique='" + video_unique + '\'' +
-                ", appid='" + app_id + '\'' +
-                ", appsecret='" + app_secret + '\'' +
-                '}';
-    }
 
-    public String getApp_id() {
-        return app_id;
-    }
-
-    public String getApp_secret() {
-        return app_secret;
-    }
 }

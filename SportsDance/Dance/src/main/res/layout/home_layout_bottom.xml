@@ -85,8 +85,24 @@
                 android:textColor="@color/bottom_text_default_color"
                 android:textSize="12sp" />
 
-
         </mr.li.dance.ui.widget.BottomRelativeLayout>
+
+        <!--<mr.li.dance.ui.widget.BottomRelativeLayout
+            android:id="@+id/fabu_layout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="3dp" >
+            <ImageView
+                android:id="@+id/fabu_icon"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:focusable="false"
+                android:src="@drawable/fabu_icon" />
+        </mr.li.dance.ui.widget.BottomRelativeLayout>-->
 
 
         <mr.li.dance.ui.widget.BottomRelativeLayout
@@ -94,7 +110,6 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-
             android:gravity="center"
             android:padding="3dp"
             app:default_icon="@drawable/home_icon_0013"

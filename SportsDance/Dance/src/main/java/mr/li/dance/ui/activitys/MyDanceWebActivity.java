@@ -3,7 +3,6 @@ package mr.li.dance.ui.activitys;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -49,7 +48,7 @@ public class MyDanceWebActivity extends BaseActivity {
     private boolean showShare;
     private String mCountId;//分享统计Id
     private String url;
-
+    private String shareUrl;
     @Override
     public int getContentViewId() {
         return R.layout.activity_webview;
@@ -150,9 +149,8 @@ public class MyDanceWebActivity extends BaseActivity {
         super.getIntentData();
         mWebType = mIntentExtras.getInt("webtype", 0);
         titleName = mIntentExtras.getString("title");
-        shareUrl = mIntentExtras.getString("shareUrl");
+        shareUrl = mIntentExtras.getString("url");
         url = mIntentExtras.getString("url");
-        Log.e(shareUrl, url);
         wailianId = mIntentExtras.getInt("wailianid", -1);
         showShare = mIntentExtras.getBoolean("showshare", false);
     }
@@ -237,7 +235,7 @@ public class MyDanceWebActivity extends BaseActivity {
         super.initDatas();
     }
 
-    private String shareUrl;
+
 
 
     private void showShareDialog() {
@@ -250,9 +248,6 @@ public class MyDanceWebActivity extends BaseActivity {
             mShareUtils = new ShareUtils(this);
         }
         mShareUtils.showShareDilaog(mCountId,shareUrl, mShareContent);
-        Log.e("url--------",shareUrl);
-        Log.e("url-+++++++++--",url);
-        Log.e("tttttt::::",mShareContent);
 
     }
 

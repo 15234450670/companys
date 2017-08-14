@@ -89,6 +89,10 @@ public class DanceViewHolder {
         View view = findViewById(viewId);
         view.setBackgroundResource(resId);
     }
+    public void setButton(int viewId, int resId) {
+        Button view = findViewById(viewId);
+       view.setTextColor(resId);
+    }
 
     public void setImageResDrawable(int viewId, int resId, int defaultId) {
         ImageView view = getImageView(viewId);

@@ -12,11 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mr.li.dance.R;
-import mr.li.dance.https.response.HomeIndexResponse;
-import mr.li.dance.https.response.HomeResponse;
 import mr.li.dance.https.response.HomeZhiBoIndexResponse;
 import mr.li.dance.https.response.HomeZhiBoResponse;
-import mr.li.dance.models.HomeListItemInfo;
 import mr.li.dance.models.QuickZhiboInfo;
 import mr.li.dance.models.ZhiBoInfo;
 import mr.li.dance.ui.adapters.viewholder.BaseViewHolder;

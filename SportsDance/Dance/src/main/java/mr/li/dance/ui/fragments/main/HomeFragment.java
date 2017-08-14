@@ -5,31 +5,25 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.RadioGroup;
 
-
 import com.umeng.analytics.MobclickAgent;
-import com.yolanda.nohttp.rest.Request;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import mr.li.dance.R;
-import mr.li.dance.https.CallServer;
-import mr.li.dance.https.HttpListener;
-import mr.li.dance.https.ParameterUtils;
-import mr.li.dance.https.response.HomeResponse;
 import mr.li.dance.ui.activitys.SearchActivity;
 import mr.li.dance.ui.fragments.BaseFragment;
 import mr.li.dance.ui.fragments.homepage.ConsultationFragment;
 import mr.li.dance.ui.fragments.homepage.DirectseedingFragment;
+import mr.li.dance.ui.fragments.homepage.MusicFragment;
 import mr.li.dance.ui.fragments.homepage.PictureFragment;
 import mr.li.dance.ui.fragments.homepage.RecommendFragment;
 import mr.li.dance.ui.fragments.homepage.VideoFragment;
-import mr.li.dance.utils.AndroidBug54971Workaround;
 import mr.li.dance.utils.AppConfigs;
-import mr.li.dance.utils.JsonMananger;
 
 /**
  * 作者: Lixuewei
@@ -39,20 +33,22 @@ import mr.li.dance.utils.JsonMananger;
  * 修订历史:
  */
 public class HomeFragment extends BaseFragment implements ViewPager.OnPageChangeListener, View.OnClickListener, RadioGroup.OnCheckedChangeListener {
-    ViewPager mViewPaper;
+    ViewPager            mViewPaper;
     FragmentPagerAdapter mPagerAdapter;
     private RadioGroup mTitleRg;
     private List<Fragment> mFragment = new ArrayList<>();
 
     @Override
     public void initData() {
-        setScreen();
-//        AndroidBug54971Workaround.assistActivity(danceViewHolder.getView(R.id.home_viewpager));
+    setScreen();
+        //        AndroidBug54971Workaround.assistActivity(danceViewHolder.getView(R.id.home_viewpager));
         mFragment.add(new RecommendFragment());
         mFragment.add(new DirectseedingFragment());
         mFragment.add(new VideoFragment());
         mFragment.add(new ConsultationFragment());
+        mFragment.add(new MusicFragment());   //音乐
         mFragment.add(new PictureFragment());
+        Log.e("size",mFragment.size()+"");
         FragmentManager mFragmentManager = getChildFragmentManager();
         mPagerAdapter = new FragmentPagerAdapter(mFragmentManager) {
             @Override
@@ -65,7 +61,6 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                 return mFragment.size();
             }
         };
-
     }
 
     @Override
@@ -113,6 +108,9 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                 mTitleRg.check(R.id.consultation_rb);
                 break;
             case 4:
+                mTitleRg.check(R.id.music_rb);
+                break;
+            case 5:
                 mTitleRg.check(R.id.picture_rb);
                 break;
         }
@@ -149,9 +147,13 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
                 MobclickAgent.onEvent(getActivity(), AppConfigs.CLICK_EVENT_4);
                 mViewPaper.setCurrentItem(3);
                 break;
+            case R.id.music_rb:
+                MobclickAgent.onEvent(getActivity(), AppConfigs.CLICK_EVENT_30);
+                mViewPaper.setCurrentItem(4);
+                break;
             case R.id.picture_rb:
                 MobclickAgent.onEvent(getActivity(), AppConfigs.CLICK_EVENT_5);
-                mViewPaper.setCurrentItem(4);
+                mViewPaper.setCurrentItem(5);
                 break;
         }
     }

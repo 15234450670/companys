@@ -59,11 +59,12 @@ import mr.li.dance.utils.updater.UpdaterUtils;
 
 public class MainActivity extends FragmentActivity implements View.OnClickListener, HttpListener {
     FragmentManager mFragmentManager;
-    BaseFragment mCurrentFragment, mHomePageFragment, mMathcFragment, mMineFragment;
+    BaseFragment    mCurrentFragment, mHomePageFragment, mMathcFragment, mMineFragment;
     ExaminationFragment mExaminationFragment;
     private static boolean isExit = false;
 
-    private PushAgent mPushAgent;
+    private PushAgent            mPushAgent;
+   // private BottomRelativeLayout fabu_layout;
 
     protected void setScreen() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -117,11 +118,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         match_layout = (BottomRelativeLayout) findViewById(R.id.match_layout);
         examination_layout = (BottomRelativeLayout) findViewById(R.id.examination_layout);
         mine_layout = (BottomRelativeLayout) findViewById(R.id.mine_layout);
-
+       // fabu_layout = (BottomRelativeLayout) findViewById(R.id.fabu_layout);
         home_layout.setOnClickListener(this);
         match_layout.setOnClickListener(this);
         examination_layout.setOnClickListener(this);
         mine_layout.setOnClickListener(this);
+      // fabu_layout.setOnClickListener(this);
         home_layout.setClicked(true);
 
         mCurrentFragment = mHomePageFragment;
@@ -155,6 +157,14 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 mCurrentFragment = mMathcFragment;
                 match_layout.setClicked(true);
                 break;
+            /**
+             * 发布
+             */
+          /*  case R.id.fabu_layout:
+                FabuDialog fabuDialog;
+                fabuDialog = new FabuDialog(this);
+                fabuDialog.dispaly();
+                break;*/
             case R.id.examination_layout:
 
                 if (!UserInfoManager.getSingleton().isLoading(this)) {
@@ -169,6 +179,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     examination_layout.setClicked(true);
                     break;
                 }
+
             case R.id.mine_layout:
                 MobclickAgent.onEvent(this, AppConfigs.CLICK_EVENT_9);
                 if (!mMineFragment.isAdded()) {
@@ -181,6 +192,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         transaction.show(mCurrentFragment);
         transaction.commit();
     }
+
 
     private void changeTextViewColor() {
         home_layout.setClicked(false);

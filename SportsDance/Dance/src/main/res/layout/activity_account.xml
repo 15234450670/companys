@@ -69,13 +69,14 @@
         android:background="@color/mine_back_many"/>
 
     <!--   <com.liaoinstan.springview.widget.SpringView
-         android:id="@+id/sp"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content">-->
+     android:id="@+id/sp"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content">-->
     <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
         android:id="@+id/refresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="1">
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview"
             android:layout_width="match_parent"
@@ -86,6 +87,14 @@
             android:overScrollMode="never"/>
     </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
     <!-- </com.liaoinstan.springview.widget.SpringView>-->
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="20dp"
+          android:gravity="center"
+          android:layout_marginTop="@dimen/spacing_20"
+          android:layout_marginBottom="@dimen/spacing_20"
+          android:textSize="@dimen/textsize20"
 
+          android:text="只提供近3个月的明细，如需更多请联系客服"/>
 
 </LinearLayout>

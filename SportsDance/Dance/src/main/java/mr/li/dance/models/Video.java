@@ -130,4 +130,6 @@ public class Video extends BaseHomeItem {
     public void setImg_fm(String img_fm) {
         this.img_fm = img_fm;
     }
+
+
 }

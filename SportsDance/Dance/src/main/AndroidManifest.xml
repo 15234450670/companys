@@ -138,14 +138,18 @@
             android:name=".ui.activitys.mine.MyAlbumActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.activitys.mine.AccountActivity"
-                  android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activitys.mine.WithdrawdepositActivity"
-                  android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activitys.mine.TiXianZhongActivity"
-                  android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activitys.mine.TiXianError"
-                  android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activitys.mine.AccountActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activitys.mine.WithdrawdepositActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activitys.mine.TiXianZhongActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activitys.mine.TiXianError"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".ui.activitys.match.SearchMatchActivity"
@@ -189,6 +193,12 @@
             android:name=".ui.activitys.album.ImageShowActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity
+            android:name=".ui.TXT.PictureActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.TXT.PostVideoActivity"
+                  android:screenOrientation="portrait"/>
+
 
         <service
             android:name="com.letvcloud.cmf.MediaService"
@@ -257,12 +267,11 @@
         </activity>
 
 
-
         <activity
             android:name=".ui.activitys.mine.H5PayDemoActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind" >
+            android:screenOrientation="behind">
         </activity>
 
         <!-- alipay sdk begin -->
@@ -272,16 +281,15 @@
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
+            android:windowSoftInputMode="adjustResize|stateHidden">
         </activity>
         <activity
             android:name="com.alipay.sdk.app.H5AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
+            android:windowSoftInputMode="adjustResize|stateHidden">
         </activity>
-
 
 
     </application>
