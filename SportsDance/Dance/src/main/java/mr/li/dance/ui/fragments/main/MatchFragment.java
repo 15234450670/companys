@@ -77,7 +77,6 @@ public class MatchFragment extends BaseListFragment {
             MatchIndexResponse matchResponse = JsonMananger.getReponseResult(response, MatchIndexResponse.class);
             mMatchpAdapter.loadMore(matchResponse);
         }
-
     }
 
     @Override

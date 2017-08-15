@@ -169,6 +169,7 @@ public class MatchPageAdapter extends DanceBaseAdapter {
                     BannerInfo bannerInfo = mLunBoDatas.get(position);
                     switch (bannerInfo.getType()) {
                         case 10101://直播
+
                             ZhiBoDetailActivity.lunch(mContext, bannerInfo.getNumber());
                             break;
                         case 10102://点播

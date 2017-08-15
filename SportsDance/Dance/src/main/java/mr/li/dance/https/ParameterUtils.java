@@ -153,6 +153,13 @@ public class ParameterUtils {
         request.add("appid", appid);
         return request;
     }
+    /**
+     * 音乐轮播图类型
+     */
+    public Request<String> getMusicInfoMap() {
+        Request<String> request = getBaseRequestForPost("/home.music");
+        return request;
+    }
 
     /**
      * 提现Item
@@ -635,6 +642,15 @@ public class ParameterUtils {
         LogPage(indexPage);
         return request;
     }
+    /**
+     * 成绩分享
+     */
+    public Request<String> getmScoreShareMap(String id) {
+        Request<String> request = getBaseRequestForPost("/match.shareGrade");
+        request.add("id", id);
+        return request;
+    }
+
 
     /**
      * 成绩查询名次的接口
@@ -660,7 +676,14 @@ public class ParameterUtils {
         request.add("id", id);
         return request;
     }
-
+    /*
+    分享视频
+     */
+    public Request<String> getMatchShareVedioMap(String id) {
+        Request<String> request = getBaseRequestCacheForPost("/match.shareVedio");
+        request.add("id", id);
+        return request;
+    }
     /**
      * 赛事视频列表的接口
      * @param id
@@ -686,7 +709,14 @@ public class ParameterUtils {
         request.add("title", title);
         return request;
     }
-
+    /**
+     * 图片分享
+     */
+    public Request<String> getWonderfulPicShareMap(String id) {
+        Request<String> request = getBaseRequestForPost("/match.sharePicture");
+        request.add("id", id);
+        return request;
+    }
     /**
      * 直播视频详情的接口
      * @param title

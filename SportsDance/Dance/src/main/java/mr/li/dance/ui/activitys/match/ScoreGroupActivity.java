@@ -3,6 +3,7 @@ package mr.li.dance.ui.activitys.match;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.umeng.analytics.MobclickAgent;
@@ -13,6 +14,7 @@ import java.util.List;
 import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.StringResponse;
+import mr.li.dance.models.MatchShareInfo;
 import mr.li.dance.models.ScoreGroupInfo;
 import mr.li.dance.ui.activitys.base.BaseListActivity;
 import mr.li.dance.ui.adapters.ScoreGroupAdapter;
@@ -31,7 +33,6 @@ public class ScoreGroupActivity extends BaseListActivity<ScoreGroupInfo> {
     ScoreGroupAdapter mScorefromAdapter;
     private String mMatchId;
 
-
     @Override
     public int getContentViewId() {
         return R.layout.activity_groupscore;
@@ -41,6 +42,7 @@ public class ScoreGroupActivity extends BaseListActivity<ScoreGroupInfo> {
     public void getIntentData() {
         super.getIntentData();
         mMatchId = mIntentExtras.getString("matchid");
+        Log.e("id++++++++:::",mMatchId);
     }
 
     @Override
@@ -85,11 +87,19 @@ public class ScoreGroupActivity extends BaseListActivity<ScoreGroupInfo> {
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
-        StringResponse stringResponse = JsonMananger.getReponseResult(response, StringResponse.class);
-        String dataStr = stringResponse.getData();
-        List<ScoreGroupInfo> list = JsonMananger.jsonToList(dataStr, ScoreGroupInfo.class);
+        if (what==AppConfigs.match_scoreQuery) {
+            StringResponse stringResponse = JsonMananger.getReponseResult(response, StringResponse.class);
+            String dataStr = stringResponse.getData();
+            List<ScoreGroupInfo> list = JsonMananger.jsonToList(dataStr, ScoreGroupInfo.class);
+            mScorefromAdapter.addList(isRefresh, list);
+        } else if (what==AppConfigs.match_share_cj) {
+            MatchShareInfo reponseResult = JsonMananger.getReponseResult(response, MatchShareInfo.class);
+           String shareCJ = reponseResult.getData();
+            showShareDialog(shareCJ);
+            Log.e("data",shareCJ);
+        }
 
-        mScorefromAdapter.addList(isRefresh, list);
+
     }
 
 
@@ -102,15 +112,24 @@ public class ScoreGroupActivity extends BaseListActivity<ScoreGroupInfo> {
     @Override
     public void onHeadRightButtonClick(View v) {
         super.onHeadRightButtonClick(v);
-        showShareDialog();
+        ShareCJ();
+    }
+
+
+
+    /**
+     * 分享成绩
+     */
+    public void ShareCJ(){
+        Request<String> stringRequest = ParameterUtils.getSingleton().getmScoreShareMap(mMatchId);
+        request(AppConfigs.match_share_cj, stringRequest, false);
     }
     ShareUtils mShareUtils;
-
-    private void showShareDialog() {
+    private void showShareDialog(String data) {
         MobclickAgent.onEvent(this, AppConfigs.CLICK_EVENT_29);
         if (mShareUtils == null) {
             mShareUtils = new ShareUtils(this);
         }
-        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, "http://work.cdsf.org.cn/mobileClient/match.graphicDetailsf?compete_id=236&w_page=10701", "123456");
+        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, data,"成绩单");
     }
 }

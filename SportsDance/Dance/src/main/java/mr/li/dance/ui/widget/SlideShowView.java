@@ -419,6 +419,21 @@ public class SlideShowView extends FrameLayout {
         }
         resetUi();
     }
+    public void setImageUrls1(List<ImageView> list) {
+        if (isRuning) {
+            return;
+        }
+        stopPlay();
+        imageViewsList.clear();
+        if (null != list) {
+            imageViewsList.addAll(list);
+        }
+
+        if (viewPager == null) {
+            return;
+        }
+        resetUi();
+    }
 
     /**
      * 异步任务,获取数据

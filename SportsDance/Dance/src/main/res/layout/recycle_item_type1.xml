@@ -13,5 +13,4 @@
         android:scaleType="centerCrop"
         android:src="@drawable/bk_defalt" />
 
-    <include layout="@layout/split_line" />
 </LinearLayout>

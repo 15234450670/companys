@@ -14,6 +14,7 @@ import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.MatchVideoResponse;
 import mr.li.dance.https.response.StringResponse;
 import mr.li.dance.models.Match;
+import mr.li.dance.models.MatchShareInfo;
 import mr.li.dance.models.Video;
 import mr.li.dance.ui.activitys.base.BaseListActivity;
 import mr.li.dance.ui.activitys.video.VideoDetailActivity;
@@ -105,7 +106,11 @@ public class MatchVideoActivity extends BaseListActivity<Video> {
             match.setAddress(videoResponse.getAddress());
             mMatchVideoAdapter.setmMatchInfo(match);
             mMatchVideoAdapter.addList(isRefresh, videoResponse.getAlbum());
-        } else {
+        } else if (what==AppConfigs.match_share_cj) {
+            MatchShareInfo reponseResult = JsonMananger.getReponseResult(response, MatchShareInfo.class);
+            String share = reponseResult.getData();
+            showShareDialog(share);
+        }else {
             MatchVideoResponse videoResponse = JsonMananger.getReponseResult(dataStr, MatchVideoResponse.class);
             mMatchVideoAdapter.addList(isRefresh,  videoResponse.getAlbum());
 
@@ -122,15 +127,23 @@ public class MatchVideoActivity extends BaseListActivity<Video> {
     @Override
     public void onHeadRightButtonClick(View v) {
         super.onHeadRightButtonClick(v);
-        showShareDialog();
+        ShareVideo();
+    }
+
+    /**
+     * 分享
+     */
+    public void ShareVideo(){
+        Request<String> stringRequest = ParameterUtils.getSingleton().getMatchShareVedioMap(mMatchId);
+        request(AppConfigs.match_share_cj, stringRequest, false);
     }
     ShareUtils mShareUtils;
 
-    private void showShareDialog() {
+    private void showShareDialog(String share) {
         MobclickAgent.onEvent(this, AppConfigs.CLICK_EVENT_29);
         if (mShareUtils == null) {
             mShareUtils = new ShareUtils(this);
         }
-        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, "http://work.cdsf.org.cn/mobileClient/match.graphicDetailsf?compete_id=236&w_page=10701", "123456");
+        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, share, "赛事视频");
     }
 }

@@ -83,6 +83,7 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
         mContext = context;
         mDatas = new ArrayList<BaseHomeItem>();
         mLunBoDatas = new ArrayList<>();
+
         mathcRecommends = new ArrayList<>();
     }
 
@@ -93,7 +94,6 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
         } else {
             return mDatas.size() + mExtraCount;
         }
-
     }
 
     public void loadMore(HomeIndexResponse homeResponse) {
@@ -111,6 +111,7 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
         ArrayList<BannerInfo> bannerInfos = homeResponse.getData().getBanner();
         if (!MyStrUtil.isEmpty(bannerInfos)) {
             mLunBoDatas.addAll(bannerInfos);
+            Log.e("mLun",mLunBoDatas.size()+"");
         }
 
         ArrayList<MathcRecommend> match_recommend = homeResponse.getData().getMatch_recommend();
@@ -224,6 +225,9 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
                                 mContext.startActivity(new Intent(mContext, LoginActivity.class));
                             }
                         }
+                        break;
+                    case 10108:
+
 
                         break;
 
@@ -299,6 +303,8 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
         }, true, true);
 
     }
+
+
 
 
     private void bindType2(final AdverViewHolder holder, int position) {
