@@ -33,6 +33,7 @@ import mr.li.dance.ui.activitys.LoginActivity;
 import mr.li.dance.ui.activitys.MyDanceWebActivity;
 import mr.li.dance.ui.activitys.album.AlbumActivity;
 import mr.li.dance.ui.activitys.match.MatchDetailActivity;
+import mr.li.dance.ui.activitys.music.SongActivity;
 import mr.li.dance.ui.activitys.video.VideoDetailActivity;
 import mr.li.dance.ui.activitys.video.ZhiBoDetailActivity;
 import mr.li.dance.ui.adapters.viewholder.BaseViewHolder;
@@ -227,7 +228,7 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
                         }
                         break;
                     case 10108:
-
+                        SongActivity.lunch(mContext, bannerInfo.getNumber());
 
                         break;
 
@@ -391,6 +392,7 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 switch (mDatas.get(position).getType()) {
                     case 10101://直播
                         ZhiBoDetailActivity.lunch(mContext, mDatas.get(position).getId());
@@ -429,6 +431,10 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
                             }
                         }
                         break;
+                    case 10108:
+                        SongActivity.lunch(mContext, mDatas.get(position).getId());
+                        break;
+
                     default:
                         break;
                 }

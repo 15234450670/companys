@@ -81,6 +81,7 @@
     <dimen name="spacing_350">175dp</dimen>
     <dimen name="spacing_398">200dp</dimen>
     <dimen name="spacing_410">210dp</dimen>
+    <dimen name="spacing_244">123dp</dimen>
     <dimen name="spacing_230">115dp</dimen>
     <dimen name="spacing_170">86dp</dimen>
     <dimen name="spacing_160">80dp</dimen>

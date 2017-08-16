@@ -76,7 +76,8 @@ public class AppConfigs {
     public final static int user_sendOpinion          = 0x0032;//d
     public final static int user_collection           = 0x0033;//d
     public final static int home_collectionList       = 0x0034;//d
-    public final static int home_music                = 0x0035;
+
+
 
     public final static int getMatch_index_code     = 0x0035;
     public final static int match_indexList         = 0x0036;
@@ -103,7 +104,8 @@ public class AppConfigs {
     public final static int Bound_ZFB               = 0x0058;
     public final static int Bound_state             = 0x0059;
     public final static int match_share_cj             = 0x0060;
-
+    public final static int home_music                = 0x0061;
+    public final static int home_music_page                = 0x0062;
     public static String getDomainUrl() {
         return DomainUrl;
     }

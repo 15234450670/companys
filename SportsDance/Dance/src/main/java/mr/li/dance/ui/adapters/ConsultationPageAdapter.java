@@ -30,6 +30,7 @@ import mr.li.dance.ui.activitys.LoginActivity;
 import mr.li.dance.ui.activitys.MyDanceWebActivity;
 import mr.li.dance.ui.activitys.album.AlbumActivity;
 import mr.li.dance.ui.activitys.match.MatchDetailActivity;
+import mr.li.dance.ui.activitys.music.DanceMusicActivity;
 import mr.li.dance.ui.activitys.video.VideoDetailActivity;
 import mr.li.dance.ui.activitys.video.ZhiBoDetailActivity;
 import mr.li.dance.ui.activitys.zixun.ZiXunListActivity;
@@ -207,6 +208,9 @@ public class ConsultationPageAdapter extends DanceBaseAdapter {
                                         }
                                     }
                                     break;
+                                case 10108:
+                                    DanceMusicActivity.lunch(mContext,bannerInfo.getNumber());
+                                    break;
                             }
                     }
                 });
@@ -304,8 +308,8 @@ public class ConsultationPageAdapter extends DanceBaseAdapter {
         if (!MyStrUtil.isEmpty(bannerInfos)) {
             mLunBoDatas.addAll(bannerInfos);
         }
-
         ArrayList<ZiXunInfo> ziXunInfos = response.getData().getZxRec();
+
         if (!MyStrUtil.isEmpty(ziXunInfos)) {
             mDatas.addAll(ziXunInfos);
         }

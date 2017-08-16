@@ -28,6 +28,7 @@ import mr.li.dance.ui.activitys.MyDanceWebActivity;
 import mr.li.dance.ui.activitys.album.AlbumActivity;
 import mr.li.dance.ui.activitys.match.MatchDetailActivity;
 import mr.li.dance.ui.activitys.match.MatchTypeListActivity;
+import mr.li.dance.ui.activitys.music.DanceMusicActivity;
 import mr.li.dance.ui.activitys.video.VideoDetailActivity;
 import mr.li.dance.ui.activitys.video.ZhiBoDetailActivity;
 import mr.li.dance.ui.adapters.viewholder.BaseViewHolder;
@@ -199,6 +200,9 @@ public class MatchPageAdapter extends DanceBaseAdapter {
                                     mContext.startActivity(new Intent(mContext, LoginActivity.class));
                                 }
                             }
+                            break;
+                        case 10108:
+                            DanceMusicActivity.lunch(mContext,bannerInfo.getNumber());
                             break;
                     }
             }

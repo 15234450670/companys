@@ -69,7 +69,7 @@
         android:layout_marginRight="@dimen/spacing_25"
         android:gravity="center"
         android:singleLine="true"
-        android:text="2017-09-09" />
+         />
 
 
     <LinearLayout

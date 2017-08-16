@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.yolanda.nohttp.rest.Request;
 
@@ -17,19 +18,19 @@ import mr.li.dance.R;
 import mr.li.dance.https.CallServer;
 import mr.li.dance.https.HttpListener;
 import mr.li.dance.https.ParameterUtils;
-import mr.li.dance.https.response.HomeIndexResponse;
+import mr.li.dance.https.response.MusicResponse;
 import mr.li.dance.models.BannerInfo;
-import mr.li.dance.models.BaseHomeItem;
 import mr.li.dance.models.HuoDongInfo;
-import mr.li.dance.models.MusicInfo;
+import mr.li.dance.models.MusicIndexPesponse;
+import mr.li.dance.models.MusicRecAppBean;
 import mr.li.dance.ui.activitys.LoginActivity;
 import mr.li.dance.ui.activitys.MyDanceWebActivity;
 import mr.li.dance.ui.activitys.album.AlbumActivity;
 import mr.li.dance.ui.activitys.match.MatchDetailActivity;
-import mr.li.dance.ui.activitys.music.DanceMusicActivity;
+import mr.li.dance.ui.activitys.music.SongActivity;
 import mr.li.dance.ui.activitys.video.VideoDetailActivity;
 import mr.li.dance.ui.activitys.video.ZhiBoDetailActivity;
-import mr.li.dance.ui.adapters.viewholder.Music_item_ViewHolder;
+import mr.li.dance.ui.adapters.viewholder.BaseViewHolder;
 import mr.li.dance.ui.widget.SlideShowView;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
@@ -48,50 +49,49 @@ public class MusicAdapter extends DanceBaseAdapter {
     private final int TYPE_2 = 2;//列表
 
     Context mContext;
-    private List<BannerInfo>   mLunBoDatas;
-    private List<BaseHomeItem> mDatas;
+    private List<BannerInfo>      mLunBoDatas;
+    private List<MusicRecAppBean> mDatas;
 
     public MusicAdapter(Context context) {
         mContext = context;
         mLunBoDatas = new ArrayList<>();
         mDatas = new ArrayList<>();
+
     }
-    public void loadMore(HomeIndexResponse homeResponse) {
-        ArrayList indexRec = homeResponse.getData();
-        if (!MyStrUtil.isEmpty(indexRec)) {
-            currentPage++;
-        }
-        addDataItems(indexRec);
-    }
-    public void refresh(MusicInfo.DataBean homeResponse) {
-        currentPage = 1;
+
+    public void refresh(MusicResponse homeResponse) {
+        super.refresh();
         mLunBoDatas.clear();
-
-       /* if (!MyStrUtil.isEmpty(banner)) {
-            mLunBoDatas.addAll(banner);
-            Log.e("xxxxxxx", mLunBoDatas.size() + "");
-        }
         mDatas.clear();
-        ArrayList<BaseHomeItem> indexRec = homeResponse.getData().getIndexRec();
-        addDataItems(indexRec);*/
+        ArrayList<BannerInfo> banner = homeResponse.getData().getBanner();
+        if (!MyStrUtil.isEmpty(banner)) {
+            mLunBoDatas.addAll(banner);
+        }
+        ArrayList<MusicRecAppBean> music_item = homeResponse.getData().getMusicRecApp();
+        if (!MyStrUtil.isEmpty(music_item)) {
+            mDatas.addAll(music_item);
+        }
+
+        notifyDataSetChanged();
     }
 
+    public void loadMore(MusicIndexPesponse indexResponse) {
+        ArrayList<MusicRecAppBean> music_item = indexResponse.getData();
+        if (!MyStrUtil.isEmpty(music_item)) {
+            mDatas.addAll(music_item);
+            Log.e("mDatas", mDatas.size() + "");
+            super.loadMore();
+        }
+        notifyDataSetChanged();
+    }
 
     @Override
     public int getItemCount() {
-        if (MyStrUtil.isEmpty(mLunBoDatas) && MyStrUtil.isEmpty(mDatas)) {
+        if (MyStrUtil.isEmpty(mDatas) && MyStrUtil.isEmpty(mLunBoDatas)) {
             return 0;
         } else {
             return mDatas.size();
         }
-    }
-
-    public void addDataItems(ArrayList<BaseHomeItem> dataArray) {
-        if (!MyStrUtil.isEmpty(dataArray)) {
-            mDatas.addAll(dataArray);
-            Log.e("mDatas", mDatas.toString());
-        }
-        notifyDataSetChanged();
     }
 
     @Override
@@ -105,7 +105,7 @@ public class MusicAdapter extends DanceBaseAdapter {
                 break;
             case TYPE_2:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.music_rec_type_2, null);
-                viewHolder = new Music_item_ViewHolder(mContext, view);
+                viewHolder = new MyViewHolder(view);
                 break;
         }
         return viewHolder;
@@ -115,19 +115,17 @@ public class MusicAdapter extends DanceBaseAdapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof MyViewHolder1) {
             bindType1((MyViewHolder1) holder, position);
-        } else if (holder instanceof Music_item_ViewHolder) {
-            bindType2((Music_item_ViewHolder) holder, position);
+        } else if (holder instanceof MyViewHolder) {
+            bindType2((MyViewHolder) holder, position);
         }
-
     }
 
     private void bindType1(MyViewHolder1 holder, int position) {
         holder.slideShowView.setOnGolistener(new SlideShowView.BannerClickListener() {
             @Override
             public void itemClick(int position) {
-                BannerInfo bannerInfo = mLunBoDatas.get(position);
                 Log.e("sss", UserInfoManager.getSingleton().isLoading(mContext) + "");
-
+                BannerInfo bannerInfo = mLunBoDatas.get(position);
                 switch (bannerInfo.getType()) {
                     case 10101://直播
                         ZhiBoDetailActivity.lunch(mContext, bannerInfo.getNumber());
@@ -162,7 +160,9 @@ public class MusicAdapter extends DanceBaseAdapter {
                                 mContext.startActivity(new Intent(mContext, LoginActivity.class));
                             }
                         }
-
+                        break;
+                    case 10108:
+                        SongActivity.lunch(mContext, bannerInfo.getNumber());
                         break;
 
                 }
@@ -173,6 +173,7 @@ public class MusicAdapter extends DanceBaseAdapter {
             holder.slideShowView.startPlay();
         }
     }
+
     public void huodong(final BannerInfo bannerInfo) {
         String appId = bannerInfo.getAppid();
         String appsecret = bannerInfo.getAppsecret();
@@ -196,35 +197,33 @@ public class MusicAdapter extends DanceBaseAdapter {
 
     }
 
-    private void bindType2(final Music_item_ViewHolder holder, final int position) {
-
+    private void bindType2(final MyViewHolder holder, final int position) {
+        final MusicRecAppBean musicRecAppBean = mDatas.get(position);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (mDatas.get(position).getType()) {
-                    case 10101://直播
-                        DanceMusicActivity.lunch(mContext);
-                        break;
-                    case 10102://点播
-                        DanceMusicActivity.lunch(mContext);
-                        break;
 
-                    default:
-                        break;
-                }
+                Toast.makeText(mContext, "这是" + position + "----" + musicRecAppBean.getId(), Toast.LENGTH_SHORT).show();
             }
         });
-        holder.setViewDatas(mDatas.get(position));
+        if (!MyStrUtil.isEmpty(musicRecAppBean.getImg())) {
+            holder.danceViewHolder.setImageByUrlOrFilePath(R.id.item_pic, musicRecAppBean.getImg(), R.drawable.default_video);
+        } else {
+
+        }
+
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position==0) {
+        if (position == 0) {
             return TYPE_1;
-        }  else {
+        } else {
             return TYPE_2;
         }
+
     }
+
 
     class MyViewHolder1 extends RecyclerView.ViewHolder {
         SlideShowView slideShowView;
@@ -232,6 +231,14 @@ public class MusicAdapter extends DanceBaseAdapter {
         public MyViewHolder1(View itemView) {
             super(itemView);
             slideShowView = (SlideShowView) itemView.findViewById(R.id.slideShowView);
+        }
+    }
+
+    class MyViewHolder extends BaseViewHolder {
+
+        public MyViewHolder(View itemView) {
+            super(mContext, itemView);
+
         }
     }
 

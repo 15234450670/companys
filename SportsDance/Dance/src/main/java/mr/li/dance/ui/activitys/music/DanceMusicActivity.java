@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import mr.li.dance.R;
 import mr.li.dance.ui.activitys.base.BaseListActivity;
@@ -18,9 +19,11 @@ import mr.li.dance.ui.adapters.DanceMusicAdapter;
  */
 public class DanceMusicActivity extends BaseListActivity {
     DanceMusicAdapter adapter;
+    String            mMatchId;
 
     @Override
     public void itemClick(int position, Object value) {
+
     }
 
 
@@ -31,10 +34,17 @@ public class DanceMusicActivity extends BaseListActivity {
     }
 
     @Override
+    public void getIntentData() {
+        super.getIntentData();
+        mMatchId = mIntentExtras.getString("matchid");
+        Log.e("match",mMatchId);
+    }
+
+    @Override
     public void initViews() {
         super.initViews();
         setTitle("舞蹈");
-        mRecyclerview.setLayoutManager(new GridLayoutManager(this,3));
+        mRecyclerview.setLayoutManager(new GridLayoutManager(this, 3));
 
     }
 
@@ -48,8 +58,9 @@ public class DanceMusicActivity extends BaseListActivity {
         super.onSucceed(what, response);
     }
 
-    public static  void lunch(Context context) {
-        Intent intent = new Intent(context,DanceMusicActivity.class);
+    public static void lunch(Context context, String matchid) {
+        Intent intent = new Intent(context, DanceMusicActivity.class);
+        intent.putExtra("matchid", matchid);
         context.startActivity(intent);
     }
 

@@ -1,7 +1,6 @@
 package mr.li.dance.ui.fragments.homepage;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.yolanda.nohttp.rest.Request;
 
@@ -11,7 +10,6 @@ import mr.li.dance.https.response.HomeZxResponse;
 import mr.li.dance.https.response.ZiXunIndexResponse;
 import mr.li.dance.models.ZiXunInfo;
 import mr.li.dance.ui.activitys.MyDanceWebActivity;
-
 import mr.li.dance.ui.adapters.ConsultationPageAdapter;
 import mr.li.dance.ui.fragments.BaseListFragment;
 import mr.li.dance.utils.AppConfigs;
@@ -32,7 +30,6 @@ public class ConsultationFragment extends BaseListFragment {
     public void initViews() {
         super.initViews();
         danceViewHolder.setText(R.id.title_tv, "咨询");
-
     }
 
     @Override
@@ -49,7 +46,6 @@ public class ConsultationFragment extends BaseListFragment {
     @Override
     public void initData() {
         Request<String> request = ParameterUtils.getSingleton().getHomeZxMap();
-
         request(AppConfigs.home_zx, request, false);
 
     }
@@ -71,7 +67,6 @@ public class ConsultationFragment extends BaseListFragment {
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
-        Log.e("咨询轮播图", response);
         if (what == AppConfigs.home_zx) {
             HomeZxResponse reponseResult = JsonMananger.getReponseResult(response, HomeZxResponse.class);
             mPageAdapter.refresh(reponseResult);

@@ -154,10 +154,18 @@ public class ParameterUtils {
         return request;
     }
     /**
-     * 音乐轮播图类型
+     * 音乐界面
      */
     public Request<String> getMusicInfoMap() {
         Request<String> request = getBaseRequestForPost("/home.music");
+        return request;
+    }
+    /**
+     * 音乐分页
+     */
+    public Request<String> getMusicInfoMapIndex(String page) {
+        Request<String> request = getBaseRequestForPost("/home.musicPage");
+        request.add("page", page);
         return request;
     }
 

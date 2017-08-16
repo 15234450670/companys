@@ -10,7 +10,6 @@ package mr.li.dance.models;
 public class BannerInfo {
 
     private String id;
-
     private String img;
     private int type;
     private String title;
