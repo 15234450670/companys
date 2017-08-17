@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.yolanda.nohttp.rest.Request;
 
@@ -27,6 +26,7 @@ import mr.li.dance.ui.activitys.LoginActivity;
 import mr.li.dance.ui.activitys.MyDanceWebActivity;
 import mr.li.dance.ui.activitys.album.AlbumActivity;
 import mr.li.dance.ui.activitys.match.MatchDetailActivity;
+import mr.li.dance.ui.activitys.music.DanceMusicActivity;
 import mr.li.dance.ui.activitys.music.SongActivity;
 import mr.li.dance.ui.activitys.video.VideoDetailActivity;
 import mr.li.dance.ui.activitys.video.ZhiBoDetailActivity;
@@ -202,10 +202,11 @@ public class MusicAdapter extends DanceBaseAdapter {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DanceMusicActivity.lunch(mContext,musicRecAppBean.getId(),musicRecAppBean.getName());
 
-                Toast.makeText(mContext, "这是" + position + "----" + musicRecAppBean.getId(), Toast.LENGTH_SHORT).show();
             }
         });
+
         if (!MyStrUtil.isEmpty(musicRecAppBean.getImg())) {
             holder.danceViewHolder.setImageByUrlOrFilePath(R.id.item_pic, musicRecAppBean.getImg(), R.drawable.default_video);
         } else {

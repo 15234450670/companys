@@ -168,6 +168,23 @@ public class ParameterUtils {
         request.add("page", page);
         return request;
     }
+    /**
+     * 歌单界面
+     */
+    public Request<String> getMusicInfoGeDanMap(String id,String page) {
+        Request<String> request = getBaseRequestForPost("/music.musicList");
+        request.add("page",page);
+        request.add("id",id);
+        return request;
+    }
+    /**
+     *  舞蹈界面
+     */
+    public Request<String> getMusicInfoMapWuDao(String id) {
+        Request<String> request = getBaseRequestForPost("/music.musicClass");
+        request.add("id", id);
+        return request;
+    }
 
     /**
      * 提现Item

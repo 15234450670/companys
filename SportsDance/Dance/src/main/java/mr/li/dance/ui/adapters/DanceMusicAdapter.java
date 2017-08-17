@@ -1,8 +1,11 @@
 package mr.li.dance.ui.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
-import android.view.ViewGroup;
+import android.view.View;
+
+import mr.li.dance.R;
+import mr.li.dance.models.DanceMusic;
+import mr.li.dance.ui.activitys.music.SongActivity;
 
 /**
  * 作者: SuiFeng
@@ -11,24 +14,27 @@ import android.view.ViewGroup;
  * 描述:
  * 修订历史:
  */
-public class DanceMusicAdapter extends DanceBaseAdapter {
-    Context context;
-    public DanceMusicAdapter(Context context) {
-        this.context = context;
+public class DanceMusicAdapter extends BaseRecyclerAdapter<DanceMusic.DataBean> {
+     Context context;
+    public DanceMusicAdapter(Context ctx) {
+        super(ctx);
+        this.context = ctx;
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+    public int getItemLayoutId(int viewType) {
+        return R.layout.dance_item;
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return 0;
+    public void bindData(RecyclerViewHolder holder, int position, final DanceMusic.DataBean item) {
+        holder.setImageByUrlOrFilePaths(R.id.wudao_pic, item.getImg_fm());
+        holder.setText(R.id.wudao_name, item.getTitle());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SongActivity.lunch(context,item.getId());
+            }
+        });
     }
 }

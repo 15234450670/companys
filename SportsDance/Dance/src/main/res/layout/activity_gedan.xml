@@ -7,13 +7,14 @@
          android:layout_width="match_parent"
          android:layout_height="@dimen/spacing_410">
       <ImageView
+          android:id="@+id/gd_bg"
           android:layout_width="match_parent"
-          android:background="@color/Yellow"
-          android:layout_height="@dimen/spacing_410"/>
+          android:scaleType="fitXY"
+          android:layout_height="match_parent"/>
          <ImageView
              android:id="@+id/img_head"
              android:layout_width="@dimen/spacing_244"
-             android:src="@drawable/ic_launcher"
+
              android:layout_marginLeft="@dimen/spacing_30"
              android:layout_alignParentBottom="true"
              android:layout_marginBottom="@dimen/spacing_30"
@@ -51,38 +52,43 @@
      </RelativeLayout>
     <include layout="@layout/list_layout" />
       <RelativeLayout
+
           android:layout_width="match_parent"
-          android:background="@color/black"
+          android:background="@color/light_black"
           android:layout_height="@dimen/spacing_100">
          <LinearLayout
+             android:id="@+id/gd_black"
              android:layout_width="match_parent"
              android:orientation="horizontal"
              android:layout_height="match_parent">
              <ImageView
+                 android:id="@+id/gd_pic"
                  android:layout_width="wrap_content"
-                 android:src="@drawable/ic_launcher"
+                 android:src="@drawable/icon_mydefault"
                  android:layout_marginTop="@dimen/spacing_12"
                  android:layout_marginLeft="@dimen/spacing_20"
                  android:layout_marginBottom="@dimen/spacing_12"
                  android:layout_height="@dimen/spacing_76"/>
                    <TextView
+                       android:id="@+id/gd_txt"
                        android:layout_width="wrap_content"
                        android:layout_gravity="center"
                        android:layout_height="wrap_content"
                        android:layout_marginLeft="@dimen/spacing_10"
-                       android:text="告诉我"
+
                        android:textColor="@color/white"/>
              <View
                  android:layout_width="0dp"
                  android:layout_weight="1"
                  android:layout_height="1dp"/>
              <ImageView
+                 android:id="@+id/gd_bo"
                  android:layout_marginTop="@dimen/spacing_22"
                  android:layout_marginLeft="@dimen/spacing_20"
                  android:layout_marginBottom="@dimen/spacing_22"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:src="@drawable/ic_launcher"/>
+                android:background="@drawable/gedan_selector"/>
          </LinearLayout>
       </RelativeLayout>
 </LinearLayout>

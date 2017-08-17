@@ -552,6 +552,7 @@ public class TwinklingRefreshLayout extends RelativeLayout implements PullListen
         return mChildHelper.dispatchNestedPreFling(velocityX, velocityY);
     }
 
+
     /************************************** 开放api区  *****************************************/
     //设置默认的header class 名
     public static void setDefaultHeader(String className) {

@@ -25,17 +25,17 @@ public class Mine_item_adapter extends BaseRecyclerAdapter<Mine_itemInfo.DataBea
     @Override
     public void bindData(RecyclerViewHolder holder, int position, Mine_itemInfo.DataBean.DetailBean item) {
 
-        if(item.getIs_draw().equals("1")){
+        if (item.getIs_draw().equals("1")) {
 
-                holder.setText(R.id.item_title, "红包");
-                holder.setText(R.id.item_date,item.getTime());
-                holder.setTextAndColor(R.id.item_money, "+ " + item.getMoney() + " 元", mContext.getResources().getColor(R.color.mine_item_add));
+            holder.setText(R.id.item_title, "红包");
+            holder.setText(R.id.item_date, item.getTime());
+            holder.setTextAndColor(R.id.item_money, "+ " + item.getMoney() + " 元", mContext.getResources().getColor(R.color.mine_item_add));
 
-        }else if(item.getIs_draw().equals("2")){
+        } else if (item.getIs_draw().equals("2")) {
             holder.setText(R.id.item_title, "提现");
             holder.setText(R.id.item_date, item.getTime());
             holder.setTextAndColor(R.id.item_money, "- " + item.getGet_money() + " 元", mContext.getResources().getColor(R.color.mine_item_fu));
-        }else{
+        } else {
 
         }
     }

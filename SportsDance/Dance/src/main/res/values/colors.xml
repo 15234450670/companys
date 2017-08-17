@@ -29,7 +29,7 @@
     <color name="transparent">#00000000</color>
 
     <color name="progressbackground">#feb264</color>
-
+     <color name="gedan_item">#ddb35a</color>
     <color name="ksw_md_ripple_normal">#1E000000</color>
     <color name="ksw_md_solid_shadow">#33000000</color>
     <color name="ksw_md_solid_normal">#ECECEC</color>

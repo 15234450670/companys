@@ -65,6 +65,13 @@ public class ImageLoaderManager {
             e.printStackTrace();
         }
     }
+    public void Load(Context context, String resId, ImageView imageView) {
+        try {
+            Glide.with(context).load(resId).diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * 加载模糊图片
@@ -89,7 +96,21 @@ public class ImageLoaderManager {
             e.printStackTrace();
         }
     }
+    public void LoadMoHu_gedan(Context context, String imgUrl, ImageView imageView) {
+        if (context == null) {
+            return;
+        }
 
+        NLog.d("ImageLoaderManager", "imgUrl = " + imgUrl);
+        try {
+            Glide.with(context)
+                    .load(imgUrl)
+                    .bitmapTransform(new BlurTransformation(context, 16)).thumbnail(0.5f)//高斯模糊
+                    .into(imageView);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void LoadCircle(Context context, String imgUrl, ImageView imageView, int defaultDrawable) {
         if (context == null) {

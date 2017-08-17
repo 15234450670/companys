@@ -108,7 +108,18 @@ public class DanceViewHolder {
             ImageLoaderManager.getSingleton().Load(mContext, urlOrFilePath, view, defaultId);
         }
     }
-
+    public void setImageByUrlOrFilePaths(int viewId, String urlOrFilePath) {
+        ImageView view = getImageView(viewId);
+        if (view != null) {
+            ImageLoaderManager.getSingleton().Load(mContext, urlOrFilePath, view);
+        }
+    }
+    public void setImageByUrlOrFilePaths1(int viewId,int id) {
+        ImageView view = getImageView(viewId);
+        if (view != null) {
+            ImageLoaderManager.getSingleton().Load(mContext, id, view);
+        }
+    }
     public void setRoundImageByUrlOrFilePath(int viewId, String urlOrFilePath, int defaultId) {
         ImageView view = getImageView(viewId);
         if (view != null) {

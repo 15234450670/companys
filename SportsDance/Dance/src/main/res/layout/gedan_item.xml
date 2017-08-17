@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/spacing_88"
+              android:background="@color/home_bg_color"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/bg_lin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_10"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:layout_weight="1"
+        >
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/gd_bo"
+             android:layout_marginTop="@dimen/spacing_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/gd_bo"/>
+
+        <TextView
+            android:id="@+id/gd_music"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_38"
+            android:text="告诉我"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize30"/>
+    </RelativeLayout>
+
+    <View
+
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/main_theme_color"/>
+
+</LinearLayout>

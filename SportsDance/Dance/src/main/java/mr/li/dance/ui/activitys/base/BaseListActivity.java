@@ -3,9 +3,6 @@ package mr.li.dance.ui.activitys.base;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.LinearLayout;
 
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
@@ -92,6 +89,7 @@ public abstract class BaseListActivity<T> extends BaseActivity implements ListVi
         super.onSucceed(what, response);
         if (isRefresh) {
             mRefreshLayout.finishRefreshing();
+
         } else {
             mRefreshLayout.finishLoadmore();
         }
