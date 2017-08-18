@@ -50,6 +50,7 @@
     <dimen name="spacing_35">17.5dp</dimen>
     <dimen name="spacing_38">19dp</dimen>
     <dimen name="spacing_40">20dp</dimen>
+    <dimen name="spacing_44">22dp</dimen>
     <dimen name="spacing_46">23dp</dimen>
     <dimen name="spacing_45">22.5dp</dimen>
     <dimen name="spacing_48">24dp</dimen>

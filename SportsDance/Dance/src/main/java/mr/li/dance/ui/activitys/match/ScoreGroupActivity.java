@@ -95,7 +95,7 @@ public class ScoreGroupActivity extends BaseListActivity<ScoreGroupInfo> {
         } else if (what==AppConfigs.match_share_cj) {
             MatchShareInfo reponseResult = JsonMananger.getReponseResult(response, MatchShareInfo.class);
            String shareCJ = reponseResult.getData();
-            showShareDialog(shareCJ);
+          //  showShareDialog(shareCJ);
             Log.e("data",shareCJ);
         }
 
@@ -112,7 +112,7 @@ public class ScoreGroupActivity extends BaseListActivity<ScoreGroupInfo> {
     @Override
     public void onHeadRightButtonClick(View v) {
         super.onHeadRightButtonClick(v);
-        ShareCJ();
+        showShareDialog();
     }
 
 
@@ -125,11 +125,12 @@ public class ScoreGroupActivity extends BaseListActivity<ScoreGroupInfo> {
         request(AppConfigs.match_share_cj, stringRequest, false);
     }
     ShareUtils mShareUtils;
-    private void showShareDialog(String data) {
+    private void showShareDialog() {
         MobclickAgent.onEvent(this, AppConfigs.CLICK_EVENT_29);
         if (mShareUtils == null) {
             mShareUtils = new ShareUtils(this);
         }
-        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, data,"成绩单");
+
+        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, "http://work.cdsf.org.cn/h5/share.cjfx?id="+mMatchId,"成绩单");
     }
 }

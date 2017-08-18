@@ -109,7 +109,7 @@ public class MatchVideoActivity extends BaseListActivity<Video> {
         } else if (what==AppConfigs.match_share_cj) {
             MatchShareInfo reponseResult = JsonMananger.getReponseResult(response, MatchShareInfo.class);
             String share = reponseResult.getData();
-            showShareDialog(share);
+          //  showShareDialog(share);
         }else {
             MatchVideoResponse videoResponse = JsonMananger.getReponseResult(dataStr, MatchVideoResponse.class);
             mMatchVideoAdapter.addList(isRefresh,  videoResponse.getAlbum());
@@ -127,7 +127,8 @@ public class MatchVideoActivity extends BaseListActivity<Video> {
     @Override
     public void onHeadRightButtonClick(View v) {
         super.onHeadRightButtonClick(v);
-        ShareVideo();
+      //  ShareVideo();
+        showShareDialog();
     }
 
     /**
@@ -139,11 +140,12 @@ public class MatchVideoActivity extends BaseListActivity<Video> {
     }
     ShareUtils mShareUtils;
 
-    private void showShareDialog(String share) {
+    private void showShareDialog() {
         MobclickAgent.onEvent(this, AppConfigs.CLICK_EVENT_29);
         if (mShareUtils == null) {
             mShareUtils = new ShareUtils(this);
         }
-        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, share, "赛事视频");
+
+        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, "http://work.cdsf.org.cn/h5/share.spfx?id="+mMatchId, "赛事视频");
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.yolanda.nohttp.rest.Request;
@@ -50,6 +51,7 @@ public class SongActivity extends BaseListActivity {
         setTitle("歌单");
         Request<String> musicInfoGeDanMap = ParameterUtils.getSingleton().getMusicInfoGeDanMap(mItemId, String.valueOf(page));
         request(AppConfigs.home_music_gedan, musicInfoGeDanMap, false);
+
     }
 
     @Override
@@ -77,10 +79,12 @@ public class SongActivity extends BaseListActivity {
         List<GeDanInfo.DataBean.ListBean> list = reponseResult.getData().getList();
         if (!list.isEmpty()) {
             mAdapter.addList(isRefresh, list);
-
+            mDanceViewHolder.setText(R.id.gd_txt,list.get(0).getTitle());
         } else {
+            mDanceViewHolder.setViewVisibility(R.id.gd_black, View.INVISIBLE);
             Toast.makeText(mContext, "暂无更多信息", Toast.LENGTH_SHORT).show();
         }
+
 
     }
 

@@ -135,7 +135,6 @@ public class WithdrawdepositActivity extends BaseActivity {
     @Override
     public void initViews() {
         setTitle("提现");
-
     }
 
     @Override

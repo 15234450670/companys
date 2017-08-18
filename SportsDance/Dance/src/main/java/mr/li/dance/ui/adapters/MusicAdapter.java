@@ -197,6 +197,7 @@ public class MusicAdapter extends DanceBaseAdapter {
 
     }
 
+
     private void bindType2(final MyViewHolder holder, final int position) {
         final MusicRecAppBean musicRecAppBean = mDatas.get(position);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -208,7 +209,8 @@ public class MusicAdapter extends DanceBaseAdapter {
         });
 
         if (!MyStrUtil.isEmpty(musicRecAppBean.getImg())) {
-            holder.danceViewHolder.setImageByUrlOrFilePath(R.id.item_pic, musicRecAppBean.getImg(), R.drawable.default_video);
+            //holder.danceViewHolder.setImageByUrlOrFilePath(R.id.item_pic, musicRecAppBean.getImg(), R.drawable.default_video);
+            holder.danceViewHolder.setRoundImageByUrlOrFilePath(R.id.item_pic, musicRecAppBean.getImg(), R.drawable.default_video);
         } else {
 
         }

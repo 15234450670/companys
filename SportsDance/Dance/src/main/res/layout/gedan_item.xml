@@ -20,7 +20,7 @@
              android:layout_marginTop="@dimen/spacing_6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/gd_bo"/>
+            android:src="@drawable/laba"/>
 
         <TextView
             android:id="@+id/gd_music"

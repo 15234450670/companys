@@ -98,7 +98,7 @@ public class WonderfulActivity extends BaseListActivity<AlbumInfo> {
         } else if (what==AppConfigs.match_share_cj) {
             MatchShareInfo reponseResult = JsonMananger.getReponseResult(response, MatchShareInfo.class);
             String share = reponseResult.getData();
-            showShareDialog(share);
+          //  showShareDialog(share);
             Log.e("data",share);
         } else {
 //            List<Video> list = JsonMananger.jsonToList(dataStr, Video.class);
@@ -122,7 +122,8 @@ public class WonderfulActivity extends BaseListActivity<AlbumInfo> {
 
     }
     public void onHeadRightButtonClick2(View v) {
-        SharePicture();
+       // SharePicture();
+        showShareDialog();
     }
     public void SharePicture(){
         Request<String> stringRequest = ParameterUtils.getSingleton().getmScoreShareMap(mMatchId);
@@ -130,11 +131,11 @@ public class WonderfulActivity extends BaseListActivity<AlbumInfo> {
     }
     ShareUtils mShareUtils;
 
-    private void showShareDialog(String share) {
+    private void showShareDialog() {
         MobclickAgent.onEvent(this, AppConfigs.CLICK_EVENT_29);
         if (mShareUtils == null) {
             mShareUtils = new ShareUtils(this);
         }
-        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, share, "精彩图片");
+        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, "http://work.cdsf.org.cn/h5/share.tpfx?id="+mMatchId, "精彩图片");
     }
 }

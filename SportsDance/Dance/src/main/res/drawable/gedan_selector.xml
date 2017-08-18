@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:state_pressed="false"
-        android:drawable="@drawable/gedan_bo" />
-    <item
-        android:state_pressed="true"
-        android:drawable="@drawable/stop" />
 
     <item
-        android:drawable="@drawable/gedan_bo" />
+        android:drawable="@drawable/gd_bo"/>
+
+    <item android:drawable="@drawable/gd_bo" android:state_selected="false"/>
+    <item android:drawable="@drawable/gd_stop" android:state_selected="true"/>
 </selector>
