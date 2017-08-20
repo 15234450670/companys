@@ -82,6 +82,8 @@ public class GeDanInfo extends BaseResponse {
             private String id;
             private String music_address;
             private String title;
+            public boolean isFalse;
+
 
             public String getId() {
                 return id;

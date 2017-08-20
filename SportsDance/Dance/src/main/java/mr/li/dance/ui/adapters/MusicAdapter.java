@@ -90,7 +90,7 @@ public class MusicAdapter extends DanceBaseAdapter {
         if (MyStrUtil.isEmpty(mDatas) && MyStrUtil.isEmpty(mLunBoDatas)) {
             return 0;
         } else {
-            return mDatas.size();
+            return mDatas.size()+1;
         }
     }
 
@@ -116,7 +116,7 @@ public class MusicAdapter extends DanceBaseAdapter {
         if (holder instanceof MyViewHolder1) {
             bindType1((MyViewHolder1) holder, position);
         } else if (holder instanceof MyViewHolder) {
-            bindType2((MyViewHolder) holder, position);
+            bindType2((MyViewHolder) holder, position-1);
         }
     }
 

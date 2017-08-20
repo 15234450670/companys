@@ -1,7 +1,6 @@
 package mr.li.dance.ui.fragments;
 
 
-import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,8 +11,6 @@ import com.lcodecore.tkrefreshlayout.header.bezierlayout.BezierLayout;
 
 import mr.li.dance.R;
 import mr.li.dance.ui.adapters.ListViewItemClickListener;
-import mr.li.dance.ui.widget.FullyLinearLayoutManager;
-import mr.li.dance.utils.DanceViewHolder;
 
 /**
  * 作者: Lixuewei

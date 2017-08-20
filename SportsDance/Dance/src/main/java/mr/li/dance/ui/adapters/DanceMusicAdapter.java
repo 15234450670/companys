@@ -1,5 +1,6 @@
 package mr.li.dance.ui.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 
@@ -33,7 +34,7 @@ public class DanceMusicAdapter extends BaseRecyclerAdapter<DanceMusic.DataBean> 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SongActivity.lunch(context,item.getId());
+                SongActivity.lunch((Activity) context,item.getId());
             }
         });
     }

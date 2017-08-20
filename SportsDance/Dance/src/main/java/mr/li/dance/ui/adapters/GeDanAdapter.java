@@ -2,11 +2,9 @@ package mr.li.dance.ui.adapters;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.ImageView;
 
 import mr.li.dance.R;
 import mr.li.dance.models.GeDanInfo;
-import mr.li.dance.ui.activitys.music.PlayMusicActivity;
 import mr.li.dance.utils.DanceViewHolder;
 
 /**
@@ -17,11 +15,8 @@ import mr.li.dance.utils.DanceViewHolder;
  * 修订历史:
  */
 public class GeDanAdapter extends BaseRecyclerAdapter<GeDanInfo.DataBean.ListBean> {
-
-
     DanceViewHolder mDanceViewHolder;
-    Context         context;
-    boolean         is;
+    Context context;
 
     public GeDanAdapter(Context context, DanceViewHolder mDanceViewHolder) {
         super(context);
@@ -36,52 +31,32 @@ public class GeDanAdapter extends BaseRecyclerAdapter<GeDanInfo.DataBean.ListBea
     }
 
     @Override
-    public void bindData(final RecyclerViewHolder holder, final int position, final GeDanInfo.DataBean.ListBean item) {
+    public void bindData(final RecyclerViewHolder holder, int position, final GeDanInfo.DataBean.ListBean item) {
         holder.setText(R.id.gd_music, item.getTitle());
-       final ImageView gd_bo = mDanceViewHolder.getImageView(R.id.gd_bo);
-        final ImageView gd_stop = mDanceViewHolder.getImageView(R.id.gd_stop);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (is) {
-                    holder.setVisibility(R.id.gd_bo, View.VISIBLE);
-                    holder.setTextAndColor(R.id.gd_music, item.getTitle(), mContext.getResources().getColor(R.color.gedan_item));
-                    mDanceViewHolder.setText(R.id.gd_txt, item.getTitle());
-                    gd_bo.setVisibility(View.INVISIBLE);
-                    gd_stop.setVisibility(View.VISIBLE);
-                    is = false;
-
-                } else {
-                    holder.setVisibility(R.id.gd_bo, View.INVISIBLE);
-                    holder.setTextAndColor(R.id.gd_music, item.getTitle(), mContext.getResources().getColor(R.color.white));
-                    gd_bo.setVisibility(View.VISIBLE);
-                    gd_stop.setVisibility(View.INVISIBLE);
-                    is = true;
-                }
-
-
-            }
-        });
-
-        /**
-         * 跳转到播放器
-         */
-        mDanceViewHolder.setClickListener(R.id.gd_tiao, new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String textValue = mDanceViewHolder.getTextValue(R.id.gd_txt);
-                PlayMusicActivity.lunch(context,textValue);
-            }
-        });
-        /**
-         * 播放
-         */
-        mDanceViewHolder.setClickListener(R.id.gd_bo, new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
+        if (item.isFalse) {
+            holder.setVisibility(R.id.item_gd_laba, View.VISIBLE);
+            holder.setTextAndColor(R.id.gd_music, item.getTitle(), mContext.getResources().getColor(R.color.gedan_item));
+            mDanceViewHolder.setText(R.id.gd_txt, item.getTitle());
+           // item_gd_laba.setVisibility(View.GONE);
+        } else {
+            holder.setVisibility(R.id.item_gd_laba, View.GONE);
+            holder.setTextAndColor(R.id.gd_music, item.getTitle(), mContext.getResources().getColor(R.color.white));
+           // item_gd_laba.setVisibility(View.VISIBLE);
+        }
 
     }
+
+    /**
+     * 改变歌单状态
+     *
+     * @param position 那条数据
+     */
+    public void selectItem(int position) {
+        for (int i = 0; i < mData.size(); i++) {
+            GeDanInfo.DataBean.ListBean item = mData.get(i);
+            item.isFalse = (position == i ? true : false);
+        }
+        notifyDataSetChanged();
+    }
+
 }

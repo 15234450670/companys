@@ -11,7 +11,14 @@
         android:layout_height="0dp"
         android:clipChildren="true"
 
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        />
+       <ImageView
+           android:id="@+id/floatImage"
+           android:layout_gravity="right"
+           android:src="@mipmap/ic_launcher"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content" />
 
     <include layout="@layout/home_layout_bottom" />
 

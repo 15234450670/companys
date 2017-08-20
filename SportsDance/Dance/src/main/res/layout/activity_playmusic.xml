@@ -34,7 +34,7 @@
             android:src="@drawable/cicler_zhuan"
             android:id="@+id/imageView6"/>
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/image_pic"
             android:layout_width="@dimen/spacing_234"
             android:layout_height="@dimen/spacing_234"
             android:src="@drawable/ic_launcher"
@@ -83,14 +83,14 @@
                android:layout_weight="1"
                android:src="@drawable/one_circulation" />
            <ImageView
-               android:id="@+id/playing_pre"
+               android:id="@+id/playing_up"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:layout_gravity="center_vertical"
                android:layout_weight="1"
                android:src="@drawable/up_music" />
 
-           <Button
+           <ImageView
                android:id="@+id/playing_play"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"

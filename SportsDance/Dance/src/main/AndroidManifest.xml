@@ -21,6 +21,8 @@
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
 
+
+
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
@@ -211,6 +213,8 @@
         <service
             android:name="com.letvcloud.cmf.MediaService"
             android:process=":cmf"/>
+
+        <service android:name=".ui.activitys.music.MusicService"></service>
 
         <!-- 第三方登录分享 -->
 

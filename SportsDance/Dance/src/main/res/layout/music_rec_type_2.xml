@@ -12,5 +12,5 @@
             android:id="@+id/item_pic"
             android:layout_width="match_parent"
             android:scaleType="fitXY"
-            android:layout_height="match_parent"/>
+            android:layout_height="@dimen/spacing_384"/>
 </LinearLayout>
