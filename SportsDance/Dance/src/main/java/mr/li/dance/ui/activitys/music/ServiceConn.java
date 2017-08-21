@@ -4,9 +4,11 @@ import android.content.ComponentName;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 /**
- * 
- * @author ��˹ͻ��С�ֶ�
- *	����ӿ��� 
+ * 作者: SuiFeng
+ * 版本:
+ * 创建日期:2017/8/18
+ * 描述:
+ * 修订历史:
  */
 public class ServiceConn implements ServiceConnection{
 

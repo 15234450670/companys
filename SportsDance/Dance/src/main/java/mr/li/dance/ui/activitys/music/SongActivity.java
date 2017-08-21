@@ -38,7 +38,7 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
     MusicService.MyBinder myBinder;
     SingListBean singListBean = new SingListBean();
     private ImageView iv;
-
+    private  boolean isTiao;
     @Override
     public RecyclerView.Adapter getAdapter() {
         mAdapter = new GeDanAdapter(this, mDanceViewHolder);
@@ -93,7 +93,6 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
         if (!list.isEmpty()) {
             mAdapter.addList(isRefresh, list);
             singListBean.list = mAdapter.getmList();
-            mDanceViewHolder.setText(R.id.gd_txt, list.get(0).getTitle());
         } else {
             mDanceViewHolder.setViewVisibility(R.id.gd_black, View.INVISIBLE);
             Toast.makeText(mContext, "暂无更多信息", Toast.LENGTH_SHORT).show();
@@ -108,9 +107,26 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
          * 播放
          */
         iv.setOnClickListener(new View.OnClickListener() {
+            boolean flagDoubleCick = false;
             @Override
             public void onClick(View view) {
-                iv.setSelected(myBinder.binderStartOrPause());
+                if (!flagDoubleCick) {      //是否是第一次点击
+                    mAdapter.selectItem(0);
+                    String url = mAdapter.getmList().get(0).getMusic_address();
+                    if(myBinder != null) {
+                        Toast.makeText(mContext, "加载中,请稍后...", Toast.LENGTH_SHORT).show();
+                        myBinder.binderPlay(url);
+                        isTiao = true;
+                        singListBean.position = 0;
+                        singListBean.isFalse = true;
+                        iv.setSelected(true);
+                    }
+                    flagDoubleCick = true;
+                } else {
+                    iv.setSelected(myBinder.binderStartOrPause());
+                }
+
+
             }
         });
 
@@ -120,14 +136,19 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
         mDanceViewHolder.setClickListener(R.id.gd_tiao, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    TextView textView = mDanceViewHolder.getTextView(R.id.gd_txt);
-                    singListBean.title= textView.getText().toString();
-                    String json = JsonMananger.beanToJson(singListBean);
-                    PlayMusicActivity.lunch(SongActivity.this, json);
-                } catch (ServerError serverError) {
-                    serverError.printStackTrace();
+                if (isTiao) {
+                    try {
+                        TextView textView = mDanceViewHolder.getTextView(R.id.gd_txt);
+                        singListBean.titles= textView.getText().toString();
+                        String json = JsonMananger.beanToJson(singListBean);
+                        PlayMusicActivity.lunch(SongActivity.this, json);
+                    } catch (ServerError serverError) {
+                        serverError.printStackTrace();
+                    }
+                } else {
+                    Toast.makeText(mContext, "请选择要播放的歌曲", Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
 
@@ -167,27 +188,35 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
         request(AppConfigs.home_music_gedan, musicInfoGeDanMap, false);
     }
 
+    /**
+     *点击条目播放音乐
+     */
     @Override
     public void itemClick(int position, GeDanInfo.DataBean.ListBean value) {
         mAdapter.selectItem(position);
         String url = value.getMusic_address();
         if(myBinder != null){
             Toast.makeText(mContext, "加载中,请稍后...", Toast.LENGTH_SHORT).show();
-            Log.e("sdfsd", url);
-            int time = myBinder.binderPlay(url);
+            myBinder.binderPlay(url);
+            isTiao =  true;
             singListBean.position = position;
+            singListBean.isFalse = true;
             iv.setSelected(true);
         }
     }
 
+    /**
+     *回调方法
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         iv.setSelected(myBinder.binderIsPlaying());
         int pos = data.getIntExtra("position", -1);
         mAdapter.selectItem(pos);
         mRecyclerview.scrollToPosition(pos);
         mDanceViewHolder.setText(R.id.gd_txt, mAdapter.getmList().get(pos).getTitle());
-        Toast.makeText(this, "yunxingle5", Toast.LENGTH_SHORT).show();
+
     }
 }

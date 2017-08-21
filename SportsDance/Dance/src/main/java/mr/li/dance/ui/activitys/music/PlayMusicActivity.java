@@ -1,5 +1,7 @@
 package mr.li.dance.ui.activitys.music;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +9,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -25,21 +28,21 @@ import mr.li.dance.utils.glide.ImageLoaderManager;
 /**
  * 作者: SuiFeng
  * 版本:
- * 创建日期:2017/8/18 0018
- * 描述:
+ * 创建日期:2017/8/18
+ * 描述:    播放界面
  * 修订历史:
  */
 public class PlayMusicActivity extends BaseActivity implements BasePopwindow.PopAction {
-    SingListBean bean;
+    SingListBean          bean;
     MusicService.MyBinder myBinder;
     private SeekBar seek;
 
     private int mPosition;
-    SimpleDateFormat sdf = new SimpleDateFormat("m:ss");
-    Handler handler = new Handler(new Handler.Callback() {
+    SimpleDateFormat sdf     = new SimpleDateFormat("m:ss");
+    Handler          handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message message) {
-            if(message.what != 0){
+            if (message.what != 0) {
                 int totalTime = myBinder.getBduration();
                 seek.setMax(totalTime);
                 tv_right.setText(sdf.format(totalTime));
@@ -55,12 +58,15 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
             return true;
         }
     });
-    private TextView tv_left;
-    private TextView tv_right;
+    private TextView                          tv_left;
+    private TextView                          tv_right;
     private List<GeDanInfo.DataBean.ListBean> list;
-    private ImageView playing_play;
-    private SingListPop singPop;
-    private TextView music_title;
+    private ImageView                         playing_play;
+    private SingListPop                       singPop;
+    private TextView                          music_title;
+    private int                               totalTime;
+    private ObjectAnimator                    anim1;
+    private ObjectAnimator                    anim2;
 
     @Override
     public int getContentViewId() {
@@ -80,7 +86,14 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
     }
 
     @Override
+    public void initDatas() {
+        super.initDatas();
+        Rotate();
+    }
+
+    @Override
     public void initViews() {
+
         ServiceConn conn = new ServiceConn();
 
         ImageLoaderManager.getSingleton().LoadCircle(PlayMusicActivity.this, bean.img_url, mDanceViewHolder.getImageView(R.id.image_pic), R.drawable.icon_mydefault);
@@ -117,6 +130,16 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
             @Override
             public void onClick(View view) {
                 playing_play.setSelected(myBinder.binderStartOrPause());
+                Log.e("xxx", myBinder.binderStartOrPause() + "");
+                if (myBinder.binderStartOrPause()) {
+                    anim1.start();
+                    anim2.start();
+
+                } else {
+                    anim1.end();
+                    anim2.end();
+
+                }
             }
         });
 
@@ -124,10 +147,16 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
             @Override
             public void binderHasCreated(MusicService.MyBinder mb) {
                 myBinder = mb;
-                int totalTime = myBinder.getBduration();
+                totalTime = myBinder.getBduration();
                 seek.setMax(totalTime);
+
                 tv_right.setText(sdf.format(totalTime));
                 playing_play.setSelected(myBinder.binderIsPlaying());
+                Log.e("xxxxxxx", myBinder.binderIsPlaying() + "");
+                if (myBinder.binderIsPlaying()) {
+                    anim1.start();
+                    anim2.start();
+                }
                 int l = myBinder.binderGetCurrentPosition();
                 if (l > 0) {
                     seek.setProgress(l);
@@ -143,15 +172,47 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
         list = bean.list;
         setTitle(bean.title);
         music_title = (TextView) findViewById(R.id.title);
-        music_title.setText(list.get(bean.position).getTitle());
+        if (bean.isFalse) {
+            music_title.setText(list.get(bean.position).getTitle());
+        } else {
+            music_title.setText("");
+        }
         findViewById(R.id.playing_playlist).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 singPop.showBottom();
             }
         });
-        ImageView playing_up = (ImageView) findViewById(R.id.playing_up);
-        ImageView playing_next = (ImageView) findViewById(R.id.playing_next);
+        /**
+         * 上一首
+         */
+        findViewById(R.id.playing_up).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        /**
+         * 下一首
+         */
+        findViewById(R.id.playing_next).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for (int i = 0; i < list.size(); i++) {
+
+                }
+            }
+        });
+        /**
+         * 控制播放类型
+         */
+        findViewById(R.id.playing_mode).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
 
         singPop = new SingListPop(this);
         singPop.list = list;
@@ -159,16 +220,35 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
 
     }
 
+    private void Rotate() {
+        ImageView imageView = (ImageView) findViewById(R.id.imageView6);
+        ImageView image_pic = (ImageView) findViewById(R.id.image_pic);
+        anim1 = ObjectAnimator.ofFloat(imageView, "rotation", 0f, 360f);
+        anim2 = ObjectAnimator.ofFloat(image_pic, "rotation", 0f, 360f);
+        anim1.setDuration(3500);
+        anim1.setInterpolator(new LinearInterpolator());
+        anim1.setRepeatCount(ValueAnimator.INFINITE);
+        anim2.setDuration(3500);
+        anim2.setInterpolator(new LinearInterpolator());
+        anim2.setRepeatCount(ValueAnimator.INFINITE);
+
+    }
+
+
     public static void lunch(Context context, String json) {
         Intent intent = new Intent(context, PlayMusicActivity.class);
         intent.putExtra("title", json);
         Activity a = (Activity) context;
         a.startActivityForResult(intent, 750);
     }
+    public static void lunch(Context context) {
+        Intent intent = new Intent(context, PlayMusicActivity.class);
+        context.startActivity(intent);
+    }
 
     @Override
     public void onAction(int type, Object o) {
-        if(type != BasePopwindow.POP_DISMISS && type != BasePopwindow.BUTTON_CANCEL){
+        if (type != BasePopwindow.POP_DISMISS && type != BasePopwindow.BUTTON_CANCEL) {
             mPosition = type;
             myBinder.binderPlay(list.get(type).getMusic_address());
             playing_play.setSelected(true);

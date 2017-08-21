@@ -25,6 +25,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/textsize30"/>
         <ImageView
+
             android:layout_marginLeft="@dimen/spacing_118"
             android:layout_marginRight="@dimen/spacing_118"
             android:layout_marginTop="@dimen/spacing_76"

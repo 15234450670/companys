@@ -15,8 +15,9 @@
         />
        <ImageView
            android:id="@+id/floatImage"
+           android:visibility="gone"
            android:layout_gravity="right"
-           android:src="@mipmap/ic_launcher"
+           android:src="@drawable/suspend"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content" />
 

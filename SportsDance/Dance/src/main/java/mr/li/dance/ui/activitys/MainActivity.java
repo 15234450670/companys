@@ -1,5 +1,7 @@
 package mr.li.dance.ui.activitys;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -17,6 +19,8 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.LinearInterpolator;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.umeng.analytics.MobclickAgent;
@@ -32,6 +36,9 @@ import mr.li.dance.https.HttpListener;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.StringResponse;
 import mr.li.dance.models.UpdateVersion;
+import mr.li.dance.ui.activitys.music.MusicService;
+import mr.li.dance.ui.activitys.music.PlayMusicActivity;
+import mr.li.dance.ui.activitys.music.ServiceConn;
 import mr.li.dance.ui.dialogs.UpdateApkDialog;
 import mr.li.dance.ui.fragments.BaseFragment;
 import mr.li.dance.ui.fragments.main.ExaminationFragment;
@@ -62,9 +69,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     BaseFragment    mCurrentFragment, mHomePageFragment, mMathcFragment, mMineFragment;
     ExaminationFragment mExaminationFragment;
     private static boolean isExit = false;
-
+    MusicService.MyBinder myBinder;
     private PushAgent            mPushAgent;
-   // private BottomRelativeLayout fabu_layout;
+    private ImageView floatImage;
+    private ObjectAnimator animator;
+    private ObjectAnimator a;
+    // private BottomRelativeLayout fabu_layout;
 
     protected void setScreen() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -83,9 +93,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         setContentView(getContentViewId());
         initDatas();
         initViews();
+        Scale();
         mPushAgent = PushAgent.getInstance(getApplicationContext());
         mPushAgent.onAppStart();
         MobclickAgent.onEvent(this, AppConfigs.CLICK_EVENT_17);
+
     }
 
 
@@ -107,6 +119,38 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         mMathcFragment = new MatchFragment();
         mExaminationFragment = new ExaminationFragment();
         mMineFragment = new MineFragment();
+        ServiceConn conn = new ServiceConn();
+        conn.getMyBinder(new ServiceConn.binderCreateFinish() {
+            @Override
+            public void binderHasCreated(MusicService.MyBinder mb) {
+                myBinder = mb;
+                if (myBinder!=null) {
+                    boolean b = myBinder.binderIsPlaying();
+                    if (b) {
+                        floatImage.setVisibility(View.VISIBLE);
+                        animator.start();
+                        a.start();
+
+                    }
+                } else {
+                    floatImage.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+        Intent intent = new Intent(this, MusicService.class);
+        bindService(intent, conn, BIND_AUTO_CREATE);
+    }
+
+    private void Scale() {
+        animator = ObjectAnimator.ofFloat(floatImage, "scaleY", 1f, 1.2f, 1f);
+        a = ObjectAnimator.ofFloat(floatImage, "scaleX", 1f, 1.2f, 1f);
+        animator.setDuration(1500);
+        animator.setInterpolator(new LinearInterpolator());
+        animator.setRepeatCount(ValueAnimator.INFINITE);
+        a.setDuration(1500);
+        a.setInterpolator(new LinearInterpolator());
+        a.setRepeatCount(ValueAnimator.INFINITE);
+
     }
 
 
@@ -119,13 +163,14 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         examination_layout = (BottomRelativeLayout) findViewById(R.id.examination_layout);
         mine_layout = (BottomRelativeLayout) findViewById(R.id.mine_layout);
        // fabu_layout = (BottomRelativeLayout) findViewById(R.id.fabu_layout);
+        floatImage = (ImageView) findViewById(R.id.floatImage);
         home_layout.setOnClickListener(this);
         match_layout.setOnClickListener(this);
         examination_layout.setOnClickListener(this);
         mine_layout.setOnClickListener(this);
       // fabu_layout.setOnClickListener(this);
         home_layout.setClicked(true);
-
+        floatImage.setOnClickListener(this);
         mCurrentFragment = mHomePageFragment;
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
         transaction.add(R.id.content_fl, mHomePageFragment).show(mHomePageFragment);
@@ -133,6 +178,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         checkVersion();
 
     }
+
 
 
     @Override
@@ -187,6 +233,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 }
                 mCurrentFragment = mMineFragment;
                 mine_layout.setClicked(true);
+                break;
+            case R.id.floatImage :
+                PlayMusicActivity.lunch(this);
                 break;
         }
         transaction.show(mCurrentFragment);

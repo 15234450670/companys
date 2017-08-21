@@ -7,11 +7,12 @@ import android.os.Binder;
 import android.os.IBinder;
 
 /**
- * 类的用途：音乐服务
- * Created by ：杨珺达
- * date：2017/8/19
+ * 作者: SuiFeng
+ * 版本:
+ * 创建日期:2017/8/18
+ * 描述:   服务控制类
+ * 修订历史:
  */
-
 public class MusicService extends Service {
 
     private MediaPlayer mp;

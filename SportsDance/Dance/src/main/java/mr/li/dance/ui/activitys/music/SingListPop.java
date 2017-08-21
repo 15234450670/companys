@@ -15,9 +15,11 @@ import mr.li.dance.R;
 import mr.li.dance.models.GeDanInfo;
 
 /**
- * 类的用途：
- * Created by ：杨珺达
- * date：2017/8/20
+ * 作者: SuiFeng
+ * 版本:
+ * 创建日期:2017/8/18 0018
+ * 描述:    PoPUpWindows
+ * 修订历史:
  */
 
 public class SingListPop extends BasePopwindow{

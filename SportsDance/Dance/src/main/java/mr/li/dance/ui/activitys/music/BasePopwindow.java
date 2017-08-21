@@ -11,9 +11,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.PopupWindow;
 
 /**
- * Create by:Popwindow基类
- * Author:张大可
- * Create Date:2017/8/2 10:43
+ * 作者: SuiFeng
+ * 版本:
+ * 创建日期:2017/8/20
+ * 描述:    Popwindow基类
+ * 修订历史:
  */
 public abstract class BasePopwindow implements View.OnClickListener{
 
