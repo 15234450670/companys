@@ -6,6 +6,10 @@ import android.media.MediaPlayer;
 import android.os.Binder;
 import android.os.IBinder;
 
+import java.util.List;
+
+import mr.li.dance.models.GeDanInfo;
+
 /**
  * 作者: SuiFeng
  * 版本:
@@ -17,6 +21,15 @@ public class MusicService extends Service {
 
     private MediaPlayer mp;
     private onPlayerCompletion opc;
+    private List<GeDanInfo.DataBean.ListBean> musicList;
+    private int position = -1;
+    private int totalTime;
+    private int currentPosition;
+    private MpStarted ms;
+
+    public interface MpStarted{
+        void onStart(int totalT);
+    }
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -35,7 +48,8 @@ public class MusicService extends Service {
     }
 
     //播放音乐 返回总时长
-    public int playMusic(String path){
+    public int playMusic(String path, int position){
+        this.position = position;
         if(mp!=null&&path!=null){
             mp.reset();
             try {
@@ -45,6 +59,10 @@ public class MusicService extends Service {
                     @Override
                     public void onPrepared(MediaPlayer mediaPlayer) {
                         mediaPlayer.start();
+                        totalTime = mediaPlayer.getDuration();
+                        if(ms != null){
+                            ms.onStart(totalTime);
+                        }
                     }
                 });
             } catch (Exception e) {
@@ -59,6 +77,7 @@ public class MusicService extends Service {
     public boolean startOrPause(){
         if(mp!=null){
             if(mp.isPlaying()){
+                currentPosition = mp.getCurrentPosition();
                 mp.pause();
             }else{
                 mp.start();
@@ -132,7 +151,85 @@ public class MusicService extends Service {
         }
     }
 
+    public List<GeDanInfo.DataBean.ListBean> getMusicList() {
+        return musicList;
+    }
+
+    public void setMusicList(List<GeDanInfo.DataBean.ListBean> musicList) {
+        this.musicList = musicList;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    public int getTotalTime() {
+        return totalTime;
+    }
+
+    public int getCurrentTime(){
+        return currentPosition;
+    }
+
+    public boolean firstPlay(){
+        if(position < 0){
+            playMusic(musicList.get(0).getMusic_address(), 0);
+            position = 0;
+            return true;
+        } else {
+            return startOrPause();
+        }
+    }
+
+    public String getTitle(){
+        if(position < 0){
+            return "";
+        } else {
+            return musicList.get(position).getTitle();
+        }
+    }
+
     public class MyBinder extends Binder {
+
+        public void setMs(MpStarted st){
+            ms = st;
+        }
+
+        public String mGetTitle(){
+            return getTitle();
+        }
+
+        public boolean mFirstPlay(){
+            return firstPlay();
+        }
+
+        public int mGetTotalTime() {
+            return getTotalTime();
+        }
+
+        public int mGetCurrentTime(){
+            return getCurrentTime();
+        }
+
+        public void mSetMusicList(List<GeDanInfo.DataBean.ListBean> musicList){
+            setMusicList(musicList);
+        }
+
+        public List<GeDanInfo.DataBean.ListBean> mGetMusicList(){
+            return getMusicList();
+        }
+
+        public int mGetPosition(){
+            return getPosition();
+        }
+
+        public void mSetPosition(int position){
+            setPosition(position);
+        }
 
         //播放结束后的选择
         public void getPlayerCompletion(onPlayerCompletion bopc){
@@ -173,8 +270,8 @@ public class MusicService extends Service {
         }
 
         //播放 返回总长
-        public int binderPlay(String path){
-            return playMusic(path);
+        public int binderPlay(String path, int pos){
+            return playMusic(path, pos);
         }
 
         //停止

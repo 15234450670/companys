@@ -92,11 +92,22 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacksAndMessages(null);
+    }
+
+    @Override
     public void initViews() {
 
         ServiceConn conn = new ServiceConn();
 
-        ImageLoaderManager.getSingleton().LoadCircle(PlayMusicActivity.this, bean.img_url, mDanceViewHolder.getImageView(R.id.image_pic), R.drawable.icon_mydefault);
+        if(SongActivity.imageUrl != null){
+            ImageLoaderManager.getSingleton().LoadCircle(PlayMusicActivity.this, SongActivity.imageUrl, mDanceViewHolder.getImageView(R.id.image_pic), R.drawable.icon_mydefault);
+        }else {
+
+        }
+
         seek = (SeekBar) findViewById(R.id.seekBar);
 
         tv_left = (TextView) findViewById(R.id.time_left);
@@ -147,36 +158,43 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
             @Override
             public void binderHasCreated(MusicService.MyBinder mb) {
                 myBinder = mb;
-                totalTime = myBinder.getBduration();
-                seek.setMax(totalTime);
-
-                tv_right.setText(sdf.format(totalTime));
-                playing_play.setSelected(myBinder.binderIsPlaying());
-                Log.e("xxxxxxx", myBinder.binderIsPlaying() + "");
-                if (myBinder.binderIsPlaying()) {
-                    anim1.start();
-                    anim2.start();
+                if(myBinder.mGetPosition() > -1){
+                    totalTime = myBinder.getBduration();
+                    seek.setMax(totalTime);
+                    music_title.setText(myBinder.mGetTitle());
+                    tv_right.setText(sdf.format(totalTime));
+                    playing_play.setSelected(myBinder.binderIsPlaying());
+                    Log.e("xxxxxxx", myBinder.binderIsPlaying() + "");
+                    if (myBinder.binderIsPlaying()) {
+                        anim1.start();
+                        anim2.start();
+                    }
+                    if(myBinder.binderIsPlaying()){
+                        int l = myBinder.binderGetCurrentPosition();
+                        seek.setProgress(l);
+                        handler.sendEmptyMessage(0);
+                    } else {
+                        seek.setProgress(myBinder.mGetCurrentTime());
+                        handler.sendEmptyMessage(0);
+                    }
                 }
-                int l = myBinder.binderGetCurrentPosition();
-                if (l > 0) {
-                    seek.setProgress(l);
-                    handler.sendEmptyMessage(0);
-                }
-
+                myBinder.setMs(new MusicService.MpStarted() {
+                    @Override
+                    public void onStart(int totalT) {
+                        totalTime = myBinder.getBduration();
+                        seek.setMax(totalTime);
+                        tv_right.setText(sdf.format(totalTime));
+                        music_title.setText(myBinder.mGetTitle());
+                        playing_play.setSelected(true);
+                    }
+                });
             }
         });
         Intent intent = new Intent(this, MusicService.class);
         bindService(intent, conn, BIND_AUTO_CREATE);
 
-        mPosition = bean.position;
-        list = bean.list;
-        setTitle(bean.title);
+        setTitle(SongActivity.allTitle);
         music_title = (TextView) findViewById(R.id.title);
-        if (bean.isFalse) {
-            music_title.setText(list.get(bean.position).getTitle());
-        } else {
-            music_title.setText("");
-        }
         findViewById(R.id.playing_playlist).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -198,9 +216,7 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
         findViewById(R.id.playing_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for (int i = 0; i < list.size(); i++) {
 
-                }
             }
         });
         /**
@@ -212,7 +228,6 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
 
             }
         });
-
 
         singPop = new SingListPop(this);
         singPop.list = list;
@@ -235,9 +250,9 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
     }
 
 
-    public static void lunch(Context context, String json) {
+    public static void lunch(Context context, String title) {
         Intent intent = new Intent(context, PlayMusicActivity.class);
-        intent.putExtra("title", json);
+        intent.putExtra("title", title);
         Activity a = (Activity) context;
         a.startActivityForResult(intent, 750);
     }
@@ -250,7 +265,7 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
     public void onAction(int type, Object o) {
         if (type != BasePopwindow.POP_DISMISS && type != BasePopwindow.BUTTON_CANCEL) {
             mPosition = type;
-            myBinder.binderPlay(list.get(type).getMusic_address());
+            myBinder.binderPlay(list.get(type).getMusic_address(), type);
             playing_play.setSelected(true);
             music_title.setText(list.get(type).getTitle());
             handler.sendEmptyMessageDelayed(1, 3000);

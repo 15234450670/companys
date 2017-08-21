@@ -120,7 +120,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         mExaminationFragment = new ExaminationFragment();
         mMineFragment = new MineFragment();
         ServiceConn conn = new ServiceConn();
-        conn.getMyBinder(new ServiceConn.binderCreateFinish() {
+        /*conn.getMyBinder(new ServiceConn.binderCreateFinish() {
             @Override
             public void binderHasCreated(MusicService.MyBinder mb) {
                 myBinder = mb;
@@ -136,11 +136,14 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     floatImage.setVisibility(View.INVISIBLE);
                 }
             }
-        });
+        });*/
         Intent intent = new Intent(this, MusicService.class);
         bindService(intent, conn, BIND_AUTO_CREATE);
     }
 
+    /**
+     * 缩放动画
+     */
     private void Scale() {
         animator = ObjectAnimator.ofFloat(floatImage, "scaleY", 1f, 1.2f, 1f);
         a = ObjectAnimator.ofFloat(floatImage, "scaleX", 1f, 1.2f, 1f);
