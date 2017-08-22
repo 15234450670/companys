@@ -120,7 +120,6 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
         if (!list.isEmpty()) {
             mAdapter.addList(isRefresh, list);
             singListBean.list = mAdapter.getmList();
-
             if(myBinder != null){
                 myBinder.mSetMusicList(list);
                 int a = myBinder.mGetPosition();
@@ -131,7 +130,10 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
         } else {
             mDanceViewHolder.setViewVisibility(R.id.gd_black, View.INVISIBLE);
             Toast.makeText(mContext, "暂无更多信息", Toast.LENGTH_SHORT).show();
+
         }
+
+
     }
 
     @Override
@@ -158,7 +160,7 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
             @Override
             public void onClick(View view) {
                 if (myBinder != null && myBinder.mGetPosition() > -1) {
-                    PlayMusicActivity.lunch(SongActivity.this, null);
+                    PlayMusicActivity.lunch(SongActivity.this);
                 } else {
                     Toast.makeText(mContext, "请选择要播放的歌曲", Toast.LENGTH_SHORT).show();
                 }

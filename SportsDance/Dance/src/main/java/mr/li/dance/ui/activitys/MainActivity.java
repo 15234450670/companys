@@ -120,23 +120,13 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         mExaminationFragment = new ExaminationFragment();
         mMineFragment = new MineFragment();
         ServiceConn conn = new ServiceConn();
-        /*conn.getMyBinder(new ServiceConn.binderCreateFinish() {
+        conn.getMyBinder(new ServiceConn.binderCreateFinish() {
             @Override
             public void binderHasCreated(MusicService.MyBinder mb) {
-                myBinder = mb;
-                if (myBinder!=null) {
-                    boolean b = myBinder.binderIsPlaying();
-                    if (b) {
-                        floatImage.setVisibility(View.VISIBLE);
-                        animator.start();
-                        a.start();
-
-                    }
-                } else {
-                    floatImage.setVisibility(View.INVISIBLE);
-                }
+                 myBinder = mb;
+                Toast.makeText(MainActivity.this, "sss", Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
         Intent intent = new Intent(this, MusicService.class);
         bindService(intent, conn, BIND_AUTO_CREATE);
     }
@@ -179,6 +169,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         transaction.add(R.id.content_fl, mHomePageFragment).show(mHomePageFragment);
         transaction.commit();
         checkVersion();
+       
 
     }
 

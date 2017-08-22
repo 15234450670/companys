@@ -21,14 +21,13 @@
             android:layout_marginRight="@dimen/spacing_112"
             android:layout_marginTop="@dimen/spacing_76"
             android:gravity="center"
-            android:text="追梦赤子心"
             android:textColor="@color/white"
             android:textSize="@dimen/textsize30"/>
         <ImageView
 
             android:layout_marginLeft="@dimen/spacing_118"
             android:layout_marginRight="@dimen/spacing_118"
-            android:layout_marginTop="@dimen/spacing_76"
+            android:layout_marginTop="@dimen/spacing_46"
             android:layout_below="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -69,54 +68,66 @@
                android:layout_marginRight="@dimen/spacing_15"
                android:textColor="@color/white"/>
        </LinearLayout>
-       <LinearLayout
+       <RelativeLayout
+
            android:layout_marginBottom="@dimen/spacing_24"
            android:layout_below="@+id/lin"
            android:layout_marginTop="@dimen/spacing_44"
            android:layout_width="match_parent"
            android:orientation="horizontal"
-           android:layout_height="wrap_content">
+           android:layout_height="wrap_content"
+           >
            <ImageView
+               android:layout_centerVertical="true"
                android:id="@+id/playing_mode"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:layout_gravity="center_vertical"
-               android:layout_weight="1"
+               android:layout_marginLeft="@dimen/spacing_50"
                android:src="@drawable/one_circulation" />
-           <ImageView
-               android:id="@+id/playing_up"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_gravity="center_vertical"
-               android:layout_weight="1"
-               android:src="@drawable/up_music" />
 
-           <ImageView
+         <ImageView
+             android:layout_centerVertical="true"
+             android:id="@+id/playing_up"
+             android:layout_width="@dimen/spacing_92"
+             android:layout_height="@dimen/spacing_92"
+             android:layout_gravity="center_vertical"
+             android:layout_marginLeft="@dimen/spacing_86"
+             android:src="@drawable/up_music"
+             android:layout_toEndOf="@+id/playing_mode"/>
+
+        <ImageView
                android:id="@+id/playing_play"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
+               android:layout_width="@dimen/spacing_135"
+               android:layout_height="@dimen/spacing_135"
                android:layout_gravity="center_vertical"
-               android:layout_weight="1"
-              android:background="@drawable/bo_selector"
-              />
+               android:background="@drawable/bo_selector"
+         android:layout_centerVertical="true"
+               android:layout_marginLeft="@dimen/spacing_40"
+               android:layout_toEndOf="@+id/playing_up"/>
 
-           <ImageView
-               android:id="@+id/playing_next"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_gravity="center_vertical"
-               android:layout_weight="1"
-               android:src="@drawable/down_music" />
+              <ImageView
+                  android:id="@+id/playing_next"
+                  android:layout_width="@dimen/spacing_92"
+                  android:layout_height="@dimen/spacing_92"
+                  android:layout_gravity="center_vertical"
+                  android:layout_centerVertical="true"
+                  android:src="@drawable/down_music"
+                  android:layout_marginLeft="@dimen/spacing_40"
+                  android:layout_toEndOf="@+id/playing_play"/>
 
-           <ImageView
-               android:id="@+id/playing_playlist"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_gravity="center_vertical"
-               android:layout_weight="1"
-               android:src="@drawable/item_music" />
+        <ImageView
+                android:id="@+id/playing_playlist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/spacing_24"
+                android:src="@drawable/item_music" />
 
-       </LinearLayout>
+       </RelativeLayout>
     </RelativeLayout>
 
 

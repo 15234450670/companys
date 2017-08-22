@@ -81,7 +81,6 @@ public class DanceMusicActivity extends BaseListActivity {
         if (!data.isEmpty()) {
             adapter.addList(isRefresh, data);
         } else {
-
             Toast.makeText(mContext, "此歌单暂无信息", Toast.LENGTH_SHORT).show();
         }
 

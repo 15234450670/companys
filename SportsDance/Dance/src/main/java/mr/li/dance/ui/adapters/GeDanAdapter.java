@@ -37,11 +37,9 @@ public class GeDanAdapter extends BaseRecyclerAdapter<GeDanInfo.DataBean.ListBea
             holder.setVisibility(R.id.item_gd_laba, View.VISIBLE);
             holder.setTextAndColor(R.id.gd_music, item.getTitle(), mContext.getResources().getColor(R.color.gedan_item));
             mDanceViewHolder.setText(R.id.gd_txt, item.getTitle());
-           // item_gd_laba.setVisibility(View.GONE);
         } else {
             holder.setVisibility(R.id.item_gd_laba, View.GONE);
             holder.setTextAndColor(R.id.gd_music, item.getTitle(), mContext.getResources().getColor(R.color.white));
-           // item_gd_laba.setVisibility(View.VISIBLE);
         }
 
     }

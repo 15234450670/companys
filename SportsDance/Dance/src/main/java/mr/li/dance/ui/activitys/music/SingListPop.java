@@ -1,10 +1,11 @@
 package mr.li.dance.ui.activitys.music;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -25,6 +26,8 @@ import mr.li.dance.models.GeDanInfo;
 public class SingListPop extends BasePopwindow{
 
     public List<GeDanInfo.DataBean.ListBean> list;
+    private ListView lv;
+
 
     public SingListPop(Activity context) {
         super(context);
@@ -43,7 +46,13 @@ public class SingListPop extends BasePopwindow{
 
     @Override
     protected void initPopwindowView() {
-        final ListView lv = (ListView) findPopViewById(R.id.lv);
+        lv = (ListView) findPopViewById(R.id.lv);
+
+        ppw.setAnimationStyle(R.style.anim_menu_bottombar);
+    }
+
+    @Override
+    protected void initPopwindowData() {
         lv.setAdapter(new BaseAdapter() {
             @Override
             public int getCount() {
@@ -63,25 +72,20 @@ public class SingListPop extends BasePopwindow{
             @Override
             public View getView(int i, View view, ViewGroup viewGroup) {
                 View inflate = View.inflate(context, R.layout.lv_item, null);
-                TextView lv_title = (TextView) inflate.findViewById(R.id.lv_title);
+                ImageView item_gd_laba  = (ImageView) inflate.findViewById(R.id.item_gd_laba);
+                TextView lv_title = (TextView) inflate.findViewById(R.id.gd_music);
                 lv_title.setText(list.get(i).getTitle());
+                if (list.get(i).isFalse) {
+                    item_gd_laba.setVisibility(View.VISIBLE);
+                    lv_title.setTextColor(Color.RED);
+                } else {
+                    item_gd_laba.setVisibility(View.GONE);
+                    lv_title.setTextColor(Color.BLACK);
+                }
+
                 return inflate;
             }
         });
-
-        //条目点击事件
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                transportAction(i, null);
-            }
-        });
-        ppw.setAnimationStyle(R.style.anim_menu_bottombar);
-    }
-
-    @Override
-    protected void initPopwindowData() {
-
     }
 
     @Override

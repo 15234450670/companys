@@ -10,6 +10,7 @@ import java.util.List;
 
 import mr.li.dance.models.GeDanInfo;
 
+
 /**
  * 作者: SuiFeng
  * 版本:
@@ -26,6 +27,7 @@ public class MusicService extends Service {
     private int totalTime;
     private int currentPosition;
     private MpStarted ms;
+
 
     public interface MpStarted{
         void onStart(int totalT);
@@ -93,6 +95,12 @@ public class MusicService extends Service {
             mp.stop();
         }
     }
+    //暂停播放
+    public void Pauses(){
+        if(mp!=null){
+            mp.pause();
+        }
+    }
 
     public int getSDuration(){
         if(mp!=null){
@@ -148,6 +156,7 @@ public class MusicService extends Service {
     public void startPlay(){
         if(mp!=null){
             mp.start();
+
         }
     }
 
@@ -193,7 +202,44 @@ public class MusicService extends Service {
         }
     }
 
+    /**
+     * 上一首
+     */
+    public void UpMusic(String path, int position){
+        // stop();
+        Pauses();
+            if(position==0){
+                playMusic(path,musicList.size()-1);
+            }else{
+                playMusic(path,position-1);
+            }
+    }
+
+    /**
+     * 下一首
+     */
+    public void NextMusic(String path, int position){
+        // stop();
+        Pauses();
+        if(position==musicList.size()-1){
+            playMusic(path,0);
+        }else{
+            playMusic(path,position+1);
+        }
+    }
+
+
     public class MyBinder extends Binder {
+        public void mPause(){
+            Pauses();
+        }
+
+        public void mUpMusic(String path, int position){
+            UpMusic(path,position);
+        }
+        public void mNextMusic(String path, int position){
+            NextMusic(path,position);
+        }
 
         public void setMs(MpStarted st){
             ms = st;
