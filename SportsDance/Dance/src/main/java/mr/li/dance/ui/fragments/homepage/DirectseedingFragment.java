@@ -10,6 +10,7 @@ import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.HomeZhiBoIndexResponse;
 import mr.li.dance.https.response.HomeZhiBoResponse;
 import mr.li.dance.models.ZhiBoInfo;
+import mr.li.dance.ui.activitys.MainActivity;
 import mr.li.dance.ui.activitys.base.DanceApplication;
 import mr.li.dance.ui.activitys.video.ZhiBoDetailActivity;
 import mr.li.dance.ui.adapters.DirectseedingAdapter;
@@ -87,7 +88,12 @@ public class DirectseedingFragment extends BaseListFragment {
             Toast.makeText(getActivity(), "CDE未初始化完成,不能播放...", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        if (MainActivity.myBinder!=null){
+           if (MainActivity.myBinder.binderIsPlaying()){
+               MainActivity.myBinder.binderStartOrPause();
+           }
+        }
         ZhiBoDetailActivity.lunch(getActivity(), zhiBoInfo.getId());
+
     }
 }

@@ -69,7 +69,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     BaseFragment    mCurrentFragment, mHomePageFragment, mMathcFragment, mMineFragment;
     ExaminationFragment mExaminationFragment;
     private static boolean isExit = false;
-    MusicService.MyBinder myBinder;
+    public static  MusicService.MyBinder myBinder;
     private PushAgent            mPushAgent;
     private ImageView floatImage;
     private ObjectAnimator animator;
@@ -130,6 +130,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         Intent intent = new Intent(this, MusicService.class);
         bindService(intent, conn, BIND_AUTO_CREATE);
     }
+
 
     /**
      * 缩放动画
@@ -393,6 +394,15 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         }
         wasBackground = false;
+        if (myBinder!=null){
+            if (myBinder.binderIsPlaying()){
+                floatImage.setVisibility(View.VISIBLE);
+                animator.start();
+                a.start();
+            }else{
+                floatImage.setVisibility(View.GONE);
+            }
+        }
     }
 
     public void onPause() {

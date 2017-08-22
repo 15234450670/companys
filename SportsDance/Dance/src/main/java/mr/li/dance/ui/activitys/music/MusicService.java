@@ -21,52 +21,74 @@ import mr.li.dance.models.GeDanInfo;
 public class MusicService extends Service {
 
     private MediaPlayer mp;
-    private onPlayerCompletion opc;
     private List<GeDanInfo.DataBean.ListBean> musicList;
     private int position = -1;
     private int totalTime;
     private int currentPosition;
     private MpStarted ms;
 
+    private int STATE = 1;
+
+    public static final int RANDOM = 2;
+    public static final int SINGLE = 0;
+    public static final int PLAYLIST = 1;
+
 
     public interface MpStarted{
         void onStart(int totalT);
+    }
+
+    public void playStatus(){
+        switch (STATE) {
+            case RANDOM:
+                int i = PlayerUtiles.random(musicList.size(), position);
+                position = i;
+                playMusic(position);
+                break;
+            case SINGLE:
+                mp.start();
+                break;
+            case PLAYLIST:
+                NextMusic();
+                break;
+        }
     }
 
     @Override
     public IBinder onBind(Intent intent) {
         if(mp==null){
             mp = new MediaPlayer();
+            mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    mediaPlayer.start();
+                    totalTime = mediaPlayer.getDuration();
+                    if(ms != null){
+                        ms.onStart(totalTime);
+                    }
+                }
+            });
+           /* mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    playStatus();
+                }
+            });*/
         }
         MyBinder mb = new MyBinder();
         //给MediaPlayer添加结束后的监听
-        mb.playerCompletion();
         return mb;
     }
 
-    //播放结束后的接口回调
-    public interface onPlayerCompletion{
-        void onCompletion();
-    }
-
     //播放音乐 返回总时长
-    public int playMusic(String path, int position){
+    public int playMusic(int position){
         this.position = position;
-        if(mp!=null&&path!=null){
+        if(mp!=null){
             mp.reset();
             try {
-                mp.setDataSource(path);
+                mp.setDataSource(musicList.get(position).getMusic_address());
                 mp.prepareAsync();
-                mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                    @Override
-                    public void onPrepared(MediaPlayer mediaPlayer) {
-                        mediaPlayer.start();
-                        totalTime = mediaPlayer.getDuration();
-                        if(ms != null){
-                            ms.onStart(totalTime);
-                        }
-                    }
-                });
+
             } catch (Exception e) {
                 return -2;
             }
@@ -95,12 +117,7 @@ public class MusicService extends Service {
             mp.stop();
         }
     }
-    //暂停播放
-    public void Pauses(){
-        if(mp!=null){
-            mp.pause();
-        }
-    }
+
 
     public int getSDuration(){
         if(mp!=null){
@@ -186,7 +203,7 @@ public class MusicService extends Service {
 
     public boolean firstPlay(){
         if(position < 0){
-            playMusic(musicList.get(0).getMusic_address(), 0);
+            playMusic(0);
             position = 0;
             return true;
         } else {
@@ -205,40 +222,42 @@ public class MusicService extends Service {
     /**
      * 上一首
      */
-    public void UpMusic(String path, int position){
-        // stop();
-        Pauses();
-            if(position==0){
-                playMusic(path,musicList.size()-1);
-            }else{
-                playMusic(path,position-1);
-            }
+    public void UpMusic(){
+        if(position==0){
+            position = musicList.size() - 1;
+        } else {
+            position--;
+        }
+        playMusic(position);
     }
 
     /**
      * 下一首
      */
-    public void NextMusic(String path, int position){
-        // stop();
-        Pauses();
+    public void NextMusic(){
+        position++;
         if(position==musicList.size()-1){
-            playMusic(path,0);
-        }else{
-            playMusic(path,position+1);
+            position = 0;
         }
+        playMusic(position);
     }
 
 
     public class MyBinder extends Binder {
-        public void mPause(){
-            Pauses();
+
+        public void setStatus(int status){
+            STATE = status;
         }
 
-        public void mUpMusic(String path, int position){
-            UpMusic(path,position);
+        public int getStatus(){
+            return STATE;
         }
-        public void mNextMusic(String path, int position){
-            NextMusic(path,position);
+
+        public void mUpMusic(){
+            UpMusic();
+        }
+        public void mNextMusic(){
+            NextMusic();
         }
 
         public void setMs(MpStarted st){
@@ -277,24 +296,6 @@ public class MusicService extends Service {
             setPosition(position);
         }
 
-        //播放结束后的选择
-        public void getPlayerCompletion(onPlayerCompletion bopc){
-            opc = bopc;
-        }
-
-        public void playerCompletion(){
-
-            mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-
-                @Override
-                public void onCompletion(MediaPlayer mp) {
-                    if(opc!=null){
-                        opc.onCompletion();
-                    }
-                }
-            });
-        }
-
         //开始播放
         public void binderStartPlay(){
             startPlay();
@@ -316,8 +317,8 @@ public class MusicService extends Service {
         }
 
         //播放 返回总长
-        public int binderPlay(String path, int pos){
-            return playMusic(path, pos);
+        public int binderPlay(int pos){
+            return playMusic(pos);
         }
 
         //停止

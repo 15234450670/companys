@@ -209,10 +209,9 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
     @Override
     public void itemClick(int position, GeDanInfo.DataBean.ListBean value) {
         mAdapter.selectItem(position);
-        String url = value.getMusic_address();
         if(myBinder != null){
             Toast.makeText(mContext, "加载中,请稍后...", Toast.LENGTH_SHORT).show();
-            myBinder.binderPlay(url, position);
+            myBinder.binderPlay(position);
             iv.setSelected(true);
         }
     }

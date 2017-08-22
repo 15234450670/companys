@@ -32,8 +32,6 @@ import mr.li.dance.utils.glide.ImageLoaderManager;
 public class PlayMusicActivity extends BaseActivity implements BasePopwindow.PopAction {
     MusicService.MyBinder myBinder;
     private SeekBar seek;
-
-   // private int mPosition;
     SimpleDateFormat sdf     = new SimpleDateFormat("m:ss");
     Handler          handler = new Handler(new Handler.Callback() {
         @Override
@@ -80,6 +78,11 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
     protected void onDestroy() {
         super.onDestroy();
         handler.removeCallbacksAndMessages(null);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -131,16 +134,16 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
         playing_play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                playing_play.setSelected(myBinder.binderStartOrPause());
-                Log.e("xxx", myBinder.binderStartOrPause() + "");
-                if (myBinder.binderStartOrPause()) {
-                    anim1.start();
-                    anim2.start();
-
-                } else {
-                    anim1.cancel();
-                    anim2.cancel();
-
+                boolean f = myBinder.binderStartOrPause();
+                playing_play.setSelected(f);
+                if(f){
+                    if(anim1.isPaused()){
+                        resumeAnim();
+                    }else{
+                        startAnim();
+                    }
+                }else{
+                    pauseAnim();
                 }
             }
         });
@@ -149,16 +152,18 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
             @Override
             public void binderHasCreated(MusicService.MyBinder mb) {
                 myBinder = mb;
+                if(myBinder.binderIsPlaying()){
+                    startAnim();
+                }
+                rs.setChange(myBinder.getStatus());
+
                 if (myBinder.mGetPosition() > -1) {
                     totalTime = myBinder.getBduration();
                     seek.setMax(totalTime);
                     music_title.setText(myBinder.mGetTitle());
                     tv_right.setText(sdf.format(totalTime));
                     playing_play.setSelected(myBinder.binderIsPlaying());
-                    if (myBinder.binderIsPlaying()) {
-                        anim1.start();
-                        anim2.start();
-                    }
+
                     if (myBinder.binderIsPlaying()) {
                         int l = myBinder.binderGetCurrentPosition();
                         seek.setProgress(l);
@@ -176,30 +181,30 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
                         tv_right.setText(sdf.format(totalTime));
                         music_title.setText(myBinder.mGetTitle());
                         playing_play.setSelected(true);
+                        handler.sendEmptyMessage(0);
+                        startAnim();
                     }
                 });
                 if (!MyStrUtil.isEmpty( myBinder)) {
                     List<GeDanInfo.DataBean.ListBean> listBeen = myBinder.mGetMusicList();
                     Log.e("listBeen",listBeen.toString());
+                    singPop.list = listBeen;
+                    singPop.popAdapter.notifyDataSetChanged();
                 }
-                ImageView play_mode = (ImageView) findViewById(R.id.playing_mode);
-                rs = new RepeatState(play_mode,PlayMusicActivity.this);
+
+
             }
         });
         Intent intent = new Intent(this, MusicService.class);
         bindService(intent, conn, BIND_AUTO_CREATE);
-
         singPop = new SingListPop(this);
-        if (myBinder!=null) {
-            List<GeDanInfo.DataBean.ListBean> listBeen = myBinder.mGetMusicList();
-            singPop.list = listBeen;
-            Log.e("listBeen",listBeen.toString());
-        }
         singPop.setAction(this);
          //弹出列表
         findViewById(R.id.playing_playlist).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int p = myBinder.mGetPosition();
+                singPop.setChange(p);
                 singPop.showBottom();
             }
         });
@@ -211,8 +216,7 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
             @Override
             public void onClick(View view) {
                 if (myBinder!=null) {
-
-                 myBinder.mUpMusic(myBinder.mGetMusicList().get(myBinder.mGetPosition()).getMusic_address(),myBinder.mGetPosition());
+                    myBinder.mUpMusic();
                 }
             }
         });
@@ -223,23 +227,40 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
             @Override
             public void onClick(View view) {
                 if (myBinder!=null) {
-
-                    myBinder.mNextMusic(myBinder.mGetMusicList().get(myBinder.mGetPosition()).getMusic_address(),myBinder.mGetPosition());
+                    myBinder.mNextMusic();
                 }
             }
         });
         /**
          * 控制播放类型
          */
-        findViewById(R.id.playing_mode).setOnClickListener(new View.OnClickListener() {
+        ImageView play_mode = (ImageView) findViewById(R.id.playing_mode);
+        rs = new RepeatState(play_mode);
+        rs.setStatus(new RepeatState.MusicStatus() {
             @Override
-            public void onClick(View view) {
-
+            public void onStatus(int status) {
+                if(myBinder != null){
+                    myBinder.setStatus(rs.state);
+                }
             }
         });
-
-
     }
+
+    private void startAnim(){
+        anim1.start();
+        anim2.start();
+    }
+
+    private void pauseAnim(){
+        anim1.pause();
+        anim2.pause();
+    }
+
+    private void resumeAnim(){
+        anim1.resume();
+        anim2.resume();
+    }
+
 
     private void Rotate() {
         ImageView imageView = (ImageView) findViewById(R.id.imageView6);
@@ -264,11 +285,9 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
     @Override
     public void onAction(int type, Object o) {
         if (type != BasePopwindow.POP_DISMISS && type != BasePopwindow.BUTTON_CANCEL) {
-           // mPosition = type;
-            myBinder.binderPlay(list.get(type).getMusic_address(), type);
+            myBinder.binderPlay(type);
             playing_play.setSelected(true);
-            music_title.setText(list.get(type).getTitle());
-            handler.sendEmptyMessageDelayed(1, 3000);
+            music_title.setText(o.toString());
         }
     }
 }
