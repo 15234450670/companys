@@ -66,14 +66,15 @@ import mr.li.dance.utils.updater.UpdaterUtils;
 
 public class MainActivity extends FragmentActivity implements View.OnClickListener, HttpListener {
     FragmentManager mFragmentManager;
-    BaseFragment    mCurrentFragment, mHomePageFragment, mMathcFragment, mMineFragment;
+    BaseFragment mCurrentFragment, mHomePageFragment, mMathcFragment, mMineFragment;
     ExaminationFragment mExaminationFragment;
     private static boolean isExit = false;
-    public static  MusicService.MyBinder myBinder;
-    private PushAgent            mPushAgent;
+    public static MusicService.MyBinder myBinder;
+    private PushAgent mPushAgent;
     private ImageView floatImage;
     private ObjectAnimator animator;
     private ObjectAnimator a;
+    private ServiceConn conn;
     // private BottomRelativeLayout fabu_layout;
 
     protected void setScreen() {
@@ -119,11 +120,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         mMathcFragment = new MatchFragment();
         mExaminationFragment = new ExaminationFragment();
         mMineFragment = new MineFragment();
-        ServiceConn conn = new ServiceConn();
+        conn = new ServiceConn();
         conn.getMyBinder(new ServiceConn.binderCreateFinish() {
             @Override
             public void binderHasCreated(MusicService.MyBinder mb) {
-                 myBinder = mb;
+                myBinder = mb;
             }
         });
         Intent intent = new Intent(this, MusicService.class);
@@ -155,13 +156,13 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         match_layout = (BottomRelativeLayout) findViewById(R.id.match_layout);
         examination_layout = (BottomRelativeLayout) findViewById(R.id.examination_layout);
         mine_layout = (BottomRelativeLayout) findViewById(R.id.mine_layout);
-       // fabu_layout = (BottomRelativeLayout) findViewById(R.id.fabu_layout);
+        // fabu_layout = (BottomRelativeLayout) findViewById(R.id.fabu_layout);
         floatImage = (ImageView) findViewById(R.id.floatImage);
         home_layout.setOnClickListener(this);
         match_layout.setOnClickListener(this);
         examination_layout.setOnClickListener(this);
         mine_layout.setOnClickListener(this);
-      // fabu_layout.setOnClickListener(this);
+        // fabu_layout.setOnClickListener(this);
         home_layout.setClicked(true);
         floatImage.setOnClickListener(this);
         mCurrentFragment = mHomePageFragment;
@@ -169,10 +170,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         transaction.add(R.id.content_fl, mHomePageFragment).show(mHomePageFragment);
         transaction.commit();
         checkVersion();
-       
 
     }
-
 
 
     @Override
@@ -228,7 +227,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 mCurrentFragment = mMineFragment;
                 mine_layout.setClicked(true);
                 break;
-            case R.id.floatImage :
+            case R.id.floatImage:
                 PlayMusicActivity.lunch(this);
                 break;
         }
@@ -393,12 +392,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         }
         wasBackground = false;
-        if (myBinder!=null){
-            if (myBinder.binderIsPlaying()){
+        if (myBinder != null) {
+            if (myBinder.binderIsPlaying()) {
                 floatImage.setVisibility(View.VISIBLE);
                 animator.start();
                 a.start();
-            }else{
+            } else {
                 floatImage.setVisibility(View.GONE);
             }
         }
@@ -427,5 +426,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     public boolean wasBackground = false;    //声明一个布尔变量,记录当前的活动背景
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(conn);
+        mHandler.removeCallbacksAndMessages(null);
+    }
 }

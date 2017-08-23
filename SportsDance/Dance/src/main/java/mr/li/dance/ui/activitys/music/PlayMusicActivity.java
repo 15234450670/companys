@@ -65,8 +65,8 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
     private ObjectAnimator                    anim1;
     private ObjectAnimator                    anim2;
     private RepeatState rs;
-    private String min;
-    private String musicid;
+    private ServiceConn conn;
+
 
     @Override
     public int getContentViewId() {
@@ -80,24 +80,6 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
     }
 
     @Override
-    public void getIntentData() {
-        super.getIntentData();
-        if (mIntentExtras!=null) {
-            min = mIntentExtras.getString("classid");
-            musicid = mIntentExtras.getString("id");
-            Log.e("mItemId",min);
-            Log.e("musicid",musicid);
-        }
-
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        handler.removeCallbacksAndMessages(null);
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
     }
@@ -108,7 +90,7 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
         setTitle(SongActivity.allTitle);
         setRightImage(R.drawable.share_icon_001);
         //绑定服务
-        ServiceConn conn = new ServiceConn();
+        conn = new ServiceConn();
 
         if (SongActivity.imageUrl != null) {
             //设置转盘图片
@@ -293,14 +275,6 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
 
     }
 
-
-    public static void lunch(Context context,String classid,String id) {
-        Intent intent = new Intent(context, PlayMusicActivity.class);
-        intent.putExtra("classid",classid);
-        intent.putExtra("id",id);
-        context.startActivity(intent);
-    }
-
     public static void lunch(Context context) {
         Intent intent = new Intent(context, PlayMusicActivity.class);
         context.startActivity(intent);
@@ -326,7 +300,12 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
             mShareUtils = new ShareUtils(this);
         }
 
-        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, "http://work.cdsf.org.cn/h5/share.gqfx?classid="+min+"musicid="+musicid,"音乐");
+        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, "http://work.cdsf.org.cn/h5/share.gqfx?classid="+SongActivity.mItemId+"musicid="+myBinder.mGetMusicList().get(myBinder.mGetPosition()).getMusic_address(),"音乐");
     }
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(conn);
+        handler.removeCallbacksAndMessages(null);
+    }
 }

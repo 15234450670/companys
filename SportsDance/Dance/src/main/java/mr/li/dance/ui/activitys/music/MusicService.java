@@ -7,9 +7,7 @@ import android.os.Binder;
 import android.os.IBinder;
 
 import java.util.List;
-
 import mr.li.dance.models.GeDanInfo;
-
 
 /**
  * 作者: SuiFeng
@@ -36,6 +34,7 @@ public class MusicService extends Service {
 
     public interface MpStarted {
         void onStart(int totalT);
+
     }
 
     public void playStatus() {
@@ -55,27 +54,44 @@ public class MusicService extends Service {
     }
 
     @Override
-    public IBinder onBind(Intent intent) {
+    public void onCreate() {
+        super.onCreate();
         if (mp == null) {
             mp = new MediaPlayer();
             mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mediaPlayer) {
-                    mediaPlayer.start();
                     totalTime = mediaPlayer.getDuration();
+                    mediaPlayer.start();
                     if (ms != null) {
                         ms.onStart(totalTime);
                     }
                 }
             });
-            /*mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mediaPlayer) {
-                    Toast.makeText(MusicService.this, "完了", Toast.LENGTH_SHORT).show();
+                    playStatus();
+                    //Toast.makeText(MusicService.this, "完了", Toast.LENGTH_SHORT).show();
                 }
-            });*/
+            });
+            mp.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+                @Override
+                public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
 
+                    return true;
+                }
+            });
         }
+    }
+
+    public void mpReset(){
+        mp.reset();
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+
         MyBinder mb = new MyBinder();
         return mb;
     }
@@ -92,7 +108,7 @@ public class MusicService extends Service {
             } catch (Exception e) {
                 return -2;
             }
-            return mp.getDuration();
+            return 1;
         }
         return -1;
     }
@@ -231,7 +247,7 @@ public class MusicService extends Service {
      */
     public void UpMusic() {
         if (position == 0) {
-            position = musicList.size() - 1;
+            position = musicList.size()-1;
         } else {
             position--;
         }
@@ -243,7 +259,7 @@ public class MusicService extends Service {
      */
     public void NextMusic() {
         position++;
-        if (position == musicList.size() - 1) {
+        if (position == musicList.size()) {
             position = 0;
         }
         playMusic(position);
@@ -291,6 +307,10 @@ public class MusicService extends Service {
 
         public void mSetMusicList(List<GeDanInfo.DataBean.ListBean> musicList) {
             setMusicList(musicList);
+        }
+
+        public void mReset(){
+            mpReset();
         }
 
         public List<GeDanInfo.DataBean.ListBean> mGetMusicList() {

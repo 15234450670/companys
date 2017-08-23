@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.yolanda.nohttp.rest.Request;
@@ -28,8 +27,8 @@ import mr.li.dance.utils.JsonMananger;
  */
 public class DanceMusicActivity extends BaseListActivity {
     DanceMusicAdapter adapter;
-    String            mMatchId;
-    String            name;
+    String mMatchId;
+    String name;
 
     @Override
     public void itemClick(int position, Object value) {
@@ -53,9 +52,10 @@ public class DanceMusicActivity extends BaseListActivity {
     @Override
     public void getIntentData() {
         super.getIntentData();
-        mMatchId = mIntentExtras.getString("matchid");
-        name = mIntentExtras.getString("name");
-        Log.e("match", mMatchId);
+        if (mIntentExtras != null) {
+            mMatchId = mIntentExtras.getString("matchid");
+            name = mIntentExtras.getString("name");
+        }
     }
 
     @Override
@@ -86,7 +86,6 @@ public class DanceMusicActivity extends BaseListActivity {
 
     }
 
-
     public static void lunch(Context context, String matchid, String name) {
         Intent intent = new Intent(context, DanceMusicActivity.class);
         intent.putExtra("matchid", matchid);
@@ -99,7 +98,6 @@ public class DanceMusicActivity extends BaseListActivity {
         intent.putExtra("matchid", matchid);
         context.startActivity(intent);
     }
-
 
     @Override
     public void refresh() {
