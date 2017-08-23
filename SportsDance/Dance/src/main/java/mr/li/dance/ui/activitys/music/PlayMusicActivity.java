@@ -13,13 +13,17 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
+
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 import mr.li.dance.R;
 import mr.li.dance.models.GeDanInfo;
 import mr.li.dance.ui.activitys.base.BaseActivity;
+import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.MyStrUtil;
+import mr.li.dance.utils.ShareUtils;
 import mr.li.dance.utils.glide.ImageLoaderManager;
 
 /**
@@ -54,7 +58,6 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
     });
     private TextView                          tv_left;
     private TextView                          tv_right;
-    private List<GeDanInfo.DataBean.ListBean> list;
     private ImageView                         playing_play;
     private SingListPop                       singPop;
     private TextView                          music_title;
@@ -62,6 +65,8 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
     private ObjectAnimator                    anim1;
     private ObjectAnimator                    anim2;
     private RepeatState rs;
+    private String min;
+    private String musicid;
 
     @Override
     public int getContentViewId() {
@@ -72,6 +77,18 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
     public void initDatas() {
         super.initDatas();
         Rotate();
+    }
+
+    @Override
+    public void getIntentData() {
+        super.getIntentData();
+        if (mIntentExtras!=null) {
+            min = mIntentExtras.getString("classid");
+            musicid = mIntentExtras.getString("id");
+            Log.e("mItemId",min);
+            Log.e("musicid",musicid);
+        }
+
     }
 
     @Override
@@ -89,7 +106,7 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
     public void initViews() {
         //设置歌单标题
         setTitle(SongActivity.allTitle);
-
+        setRightImage(R.drawable.share_icon_001);
         //绑定服务
         ServiceConn conn = new ServiceConn();
 
@@ -277,11 +294,17 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
     }
 
 
+    public static void lunch(Context context,String classid,String id) {
+        Intent intent = new Intent(context, PlayMusicActivity.class);
+        intent.putExtra("classid",classid);
+        intent.putExtra("id",id);
+        context.startActivity(intent);
+    }
+
     public static void lunch(Context context) {
         Intent intent = new Intent(context, PlayMusicActivity.class);
         context.startActivity(intent);
     }
-
     @Override
     public void onAction(int type, Object o) {
         if (type != BasePopwindow.POP_DISMISS && type != BasePopwindow.BUTTON_CANCEL) {
@@ -290,4 +313,20 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
             music_title.setText(o.toString());
         }
     }
+
+    @Override
+    public void onHeadRightButtonClick(View v) {
+        super.onHeadRightButtonClick(v);
+        showShareDialog();
+    }
+    ShareUtils mShareUtils;
+    private void showShareDialog() {
+        MobclickAgent.onEvent(this, AppConfigs.CLICK_EVENT_29);
+        if (mShareUtils == null) {
+            mShareUtils = new ShareUtils(this);
+        }
+
+        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, "http://work.cdsf.org.cn/h5/share.gqfx?classid="+min+"musicid="+musicid,"音乐");
+    }
+
 }

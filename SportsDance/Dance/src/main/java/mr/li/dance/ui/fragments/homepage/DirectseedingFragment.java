@@ -89,11 +89,8 @@ public class DirectseedingFragment extends BaseListFragment {
             return;
         }
         if (MainActivity.myBinder!=null){
-           if (MainActivity.myBinder.binderIsPlaying()){
-               MainActivity.myBinder.binderStartOrPause();
-           }
+            MainActivity.myBinder.binderPause();
         }
         ZhiBoDetailActivity.lunch(getActivity(), zhiBoInfo.getId());
-
     }
 }

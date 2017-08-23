@@ -24,6 +24,7 @@ import mr.li.dance.models.BannerInfo;
 import mr.li.dance.models.HuoDongInfo;
 import mr.li.dance.models.Match;
 import mr.li.dance.ui.activitys.LoginActivity;
+import mr.li.dance.ui.activitys.MainActivity;
 import mr.li.dance.ui.activitys.MyDanceWebActivity;
 import mr.li.dance.ui.activitys.album.AlbumActivity;
 import mr.li.dance.ui.activitys.match.MatchDetailActivity;
@@ -50,16 +51,15 @@ import mr.li.dance.utils.UserInfoManager;
 public class MatchPageAdapter extends DanceBaseAdapter {
 
     Context mContext;
-    public static final int TYPE_1 = 0xff01;
-    public static final int TYPE_2 = 0xff02;
-    public static final int TYPE_3 = 0xff03;
+    public static final int TYPE_1    = 0xff01;
+    public static final int TYPE_2    = 0xff02;
+    public static final int TYPE_3    = 0xff03;
     public static final int TYPE_MAIN = 0xffff;
-    private List<Match> mDatas;
+    private List<Match>      mDatas;
     private List<BannerInfo> mLunBoDatas;
 
     /**
      * 构造器
-     *
      * @param
      */
     public MatchPageAdapter(Context context) {
@@ -167,51 +167,72 @@ public class MatchPageAdapter extends DanceBaseAdapter {
         holder.slideShowView.setOnGolistener(new SlideShowView.BannerClickListener() {
             @Override
             public void itemClick(int position) {
-                    BannerInfo bannerInfo = mLunBoDatas.get(position);
-                    switch (bannerInfo.getType()) {
-                        case 10101://直播
+                BannerInfo bannerInfo = mLunBoDatas.get(position);
+                switch (bannerInfo.getType()) {
+                    case 10101://直播
+                        if (MainActivity.myBinder!=null){
+                            MainActivity.myBinder.binderPause();
+                        }
+                        ZhiBoDetailActivity.lunch(mContext, bannerInfo.getNumber());
+                        break;
+                    case 10102://点播
+                        if (MainActivity.myBinder!=null){
+                            MainActivity.myBinder.binderPause();
+                        }
+                        VideoDetailActivity.lunch(mContext, bannerInfo.getNumber());
+                        break;
+                    case 10103://z咨询
+                        if (MainActivity.myBinder!=null){
+                            MainActivity.myBinder.binderPause();
+                        }
+                        String url = String.format(AppConfigs.ZixunShareUrl, bannerInfo.getNumber());
+                        MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, "", url, true);
+                        break;
+                    case 10104://图片
+                        if (MainActivity.myBinder!=null){
+                            MainActivity.myBinder.binderPause();
+                        }
+                        AlbumActivity.lunch(mContext, bannerInfo.getNumber(), "");
+                        break;
+                    case 10105://赛事
+                        if (MainActivity.myBinder!=null){
+                            MainActivity.myBinder.binderPause();
+                        }
+                        MatchDetailActivity.lunch(mContext, bannerInfo.getNumber());
+                        break;
+                    case 10106://外联
+                        if (MainActivity.myBinder!=null){
+                            MainActivity.myBinder.binderPause();
+                        }
+                        if (!MyStrUtil.isEmpty(bannerInfo.getUrl())) {
+                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, "", bannerInfo.getUrl(), bannerInfo.getId());
+                        }
+                    case 10107://活动
 
-                            ZhiBoDetailActivity.lunch(mContext, bannerInfo.getNumber());
-                            break;
-                        case 10102://点播
-                            VideoDetailActivity.lunch(mContext, bannerInfo.getNumber());
-                            break;
-                        case 10103://z咨询
-                            String url = String.format(AppConfigs.ZixunShareUrl, bannerInfo.getNumber());
-                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, "", url, true);
-                            break;
-                        case 10104://图片
-                            AlbumActivity.lunch(mContext, bannerInfo.getNumber(), "");
-                            break;
-                        case 10105://赛事
-                            MatchDetailActivity.lunch(mContext, bannerInfo.getNumber());
-                            break;
-                        case 10106://外联
+                        if (mContext != null && UserInfoManager.getSingleton().isLoading(mContext)) {
                             if (!MyStrUtil.isEmpty(bannerInfo.getUrl())) {
-                                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, "", bannerInfo.getUrl(), bannerInfo.getId());
+                                huodong(bannerInfo);
                             }
-                        case 10107://活动
-                            if(mContext!=null && UserInfoManager.getSingleton().isLoading(mContext)){
-                                if (!MyStrUtil.isEmpty(bannerInfo.getUrl())){
-                                    huodong(bannerInfo);
-                                }
-                            }else{
-                                if(mContext!=null) {
-                                    mContext.startActivity(new Intent(mContext, LoginActivity.class));
-                                }
+                        } else {
+                            if (mContext != null) {
+                                mContext.startActivity(new Intent(mContext, LoginActivity.class));
                             }
-                            break;
-                        case 10108:
-                            DanceMusicActivity.lunch(mContext,bannerInfo.getNumber());
-                            break;
-                    }
+                        }
+                        break;
+                    case 10108:
+                        if (MainActivity.myBinder!=null){
+                            MainActivity.myBinder.binderPause();
+                        }
+                        DanceMusicActivity.lunch(mContext, bannerInfo.getNumber());
+                        break;
+                }
             }
         });
         holder.slideShowView.setImageUrls(mLunBoDatas);
         holder.slideShowView.startPlay();
     }
 
-    public void huodong(final BannerInfo bannerInfo){
+    public void huodong(final BannerInfo bannerInfo) {
         String appId = bannerInfo.getId();
         String appsecret = bannerInfo.getAppsecret();
         String url = bannerInfo.getUrl();
@@ -219,18 +240,21 @@ public class MatchPageAdapter extends DanceBaseAdapter {
 
         Request<String> huoDongInfoMap = ParameterUtils.getSingleton().getHuoDongInfoMap(appId, appsecret, url, userId);
 
-        CallServer.getRequestInstance().add(mContext, 0, huoDongInfoMap, new HttpListener(){
+        CallServer.getRequestInstance().add(mContext, 0, huoDongInfoMap, new HttpListener() {
             @Override
             public void onSucceed(int what, String response) {
 
                 HuoDongInfo reponseResult = JsonMananger.getReponseResult(response, HuoDongInfo.class);
-                Log.e("sdfsdf","请求了:"+reponseResult.getData());
+                Log.e("sdfsdf", "请求了:" + reponseResult.getData());
+                if (MainActivity.myBinder!=null){
+                    MainActivity.myBinder.binderPause();
+                }
                 MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, "", reponseResult.getData(), bannerInfo.getId());
             }
 
             @Override
             public void onFailed(int what, int responseCode, String response) {
-                Log.e("sdfsdf","失败了"+responseCode);
+                Log.e("sdfsdf", "失败了" + responseCode);
             }
         }, true, true);
 
@@ -251,6 +275,9 @@ public class MatchPageAdapter extends DanceBaseAdapter {
                     case R.id.type3_layout:
                         type = 10003;
                         break;
+                }
+                if (MainActivity.myBinder!=null){
+                    MainActivity.myBinder.binderPause();
                 }
                 MatchTypeListActivity.lunch(mContext, type);
             }
@@ -273,6 +300,9 @@ public class MatchPageAdapter extends DanceBaseAdapter {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (MainActivity.myBinder!=null){
+                    MainActivity.myBinder.binderPause();
+                }
                 MatchDetailActivity.lunch(mContext, mDatas.get(position).getId());
             }
         });
@@ -300,7 +330,7 @@ public class MatchPageAdapter extends DanceBaseAdapter {
                 String shareUrl = String.format(AppConfigs.SHAREGAME, match.getId());
                 String mShareContent = match.getName();
                 String countID = AppConfigs.CLICK_EVENT_22;
-                shareUtils.showShareDilaog(countID,shareUrl, mShareContent);
+                shareUtils.showShareDilaog(countID, shareUrl, mShareContent);
             }
         });
 
@@ -311,20 +341,23 @@ public class MatchPageAdapter extends DanceBaseAdapter {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (MainActivity.myBinder!=null){
+                    MainActivity.myBinder.binderPause();
+                }
                 MatchDetailActivity.lunch(mContext, match.getId());
             }
         });
 
-//        holder.danceViewHolder.setClickListener(R.id.share_layout, new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                ShareUtils shareUtils = new ShareUtils((Activity) mContext);
-//                String shareUrl = String.format(AppConfigs.SHAREGAME, match.getId());
-//                String mShareContent = match.getTitle();
-//                String countID = AppConfigs.CLICK_EVENT_22;
-//                shareUtils.showShareDilaog(countID,shareUrl, mShareContent);
-//            }
-//        });
+        //        holder.danceViewHolder.setClickListener(R.id.share_layout, new View.OnClickListener() {
+        //            @Override
+        //            public void onClick(View view) {
+        //                ShareUtils shareUtils = new ShareUtils((Activity) mContext);
+        //                String shareUrl = String.format(AppConfigs.SHAREGAME, match.getId());
+        //                String mShareContent = match.getTitle();
+        //                String countID = AppConfigs.CLICK_EVENT_22;
+        //                shareUtils.showShareDilaog(countID,shareUrl, mShareContent);
+        //            }
+        //        });
 
 
         if (mDatas.get(position).isFirst()) {

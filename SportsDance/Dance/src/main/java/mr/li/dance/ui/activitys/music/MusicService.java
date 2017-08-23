@@ -20,25 +20,25 @@ import mr.li.dance.models.GeDanInfo;
  */
 public class MusicService extends Service {
 
-    private MediaPlayer mp;
+    private MediaPlayer                       mp;
     private List<GeDanInfo.DataBean.ListBean> musicList;
     private int position = -1;
-    private int totalTime;
-    private int currentPosition;
+    private int       totalTime;
+    private int       currentPosition;
     private MpStarted ms;
 
     private int STATE = 1;
 
-    public static final int RANDOM = 2;
-    public static final int SINGLE = 0;
+    public static final int RANDOM   = 2;
+    public static final int SINGLE   = 0;
     public static final int PLAYLIST = 1;
 
 
-    public interface MpStarted{
+    public interface MpStarted {
         void onStart(int totalT);
     }
 
-    public void playStatus(){
+    public void playStatus() {
         switch (STATE) {
             case RANDOM:
                 int i = PlayerUtiles.random(musicList.size(), position);
@@ -56,34 +56,34 @@ public class MusicService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        if(mp==null){
+        if (mp == null) {
             mp = new MediaPlayer();
             mp.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mediaPlayer) {
                     mediaPlayer.start();
                     totalTime = mediaPlayer.getDuration();
-                    if(ms != null){
+                    if (ms != null) {
                         ms.onStart(totalTime);
                     }
                 }
             });
-           /* mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            /*mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mediaPlayer) {
-                    playStatus();
+                    Toast.makeText(MusicService.this, "完了", Toast.LENGTH_SHORT).show();
                 }
             });*/
+
         }
         MyBinder mb = new MyBinder();
-        //给MediaPlayer添加结束后的监听
         return mb;
     }
 
     //播放音乐 返回总时长
-    public int playMusic(int position){
+    public int playMusic(int position) {
         this.position = position;
-        if(mp!=null){
+        if (mp != null) {
             mp.reset();
             try {
                 mp.setDataSource(musicList.get(position).getMusic_address());
@@ -98,12 +98,12 @@ public class MusicService extends Service {
     }
 
     //播放或暂停
-    public boolean startOrPause(){
-        if(mp!=null){
-            if(mp.isPlaying()){
+    public boolean startOrPause() {
+        if (mp != null) {
+            if (mp.isPlaying()) {
                 currentPosition = mp.getCurrentPosition();
                 mp.pause();
-            }else{
+            } else {
                 mp.start();
             }
             return mp.isPlaying();
@@ -112,26 +112,33 @@ public class MusicService extends Service {
     }
 
     //停止播放
-    public void stop(){
-        if(mp!=null){
+    public void stop() {
+        if (mp != null) {
             mp.stop();
+        }
+    }
+    //暂停
+    public void Pause(){
+        if (mp!=null) {
+            currentPosition = mp.getCurrentPosition();
+            mp.pause();
         }
     }
 
 
-    public int getSDuration(){
-        if(mp!=null){
+    public int getSDuration() {
+        if (mp != null) {
             return mp.getDuration();
         }
         return -1;
     }
 
     //获得已播放的时长
-    public int getCurrentPosition(){
-        if(mp!=null){
-            if(mp.isPlaying()){
+    public int getCurrentPosition() {
+        if (mp != null) {
+            if (mp.isPlaying()) {
                 return mp.getCurrentPosition();
-            }else{
+            } else {
                 return -1;
             }
         }
@@ -139,15 +146,15 @@ public class MusicService extends Service {
     }
 
     //选择播放位置
-    public void playerSeekTo(int porgress){
-        if(mp!=null){
+    public void playerSeekTo(int porgress) {
+        if (mp != null) {
             mp.seekTo(porgress);
         }
     }
 
     //释放资源
-    public void release(){
-        if(mp.isPlaying()){
+    public void release() {
+        if (mp.isPlaying()) {
             mp.stop();
         }
         mp.release();
@@ -155,23 +162,23 @@ public class MusicService extends Service {
     }
 
     //获取播放状态
-    public boolean isPlaying(){
-        if(mp!=null){
+    public boolean isPlaying() {
+        if (mp != null) {
             return mp.isPlaying();
         }
         return false;
     }
 
     //重置播放器
-    public void playerReset(){
-        if(mp!=null){
+    public void playerReset() {
+        if (mp != null) {
             mp.reset();
         }
     }
 
     //开始播放
-    public void startPlay(){
-        if(mp!=null){
+    public void startPlay() {
+        if (mp != null) {
             mp.start();
 
         }
@@ -197,12 +204,12 @@ public class MusicService extends Service {
         return totalTime;
     }
 
-    public int getCurrentTime(){
+    public int getCurrentTime() {
         return currentPosition;
     }
 
-    public boolean firstPlay(){
-        if(position < 0){
+    public boolean firstPlay() {
+        if (position < 0) {
             playMusic(0);
             position = 0;
             return true;
@@ -211,8 +218,8 @@ public class MusicService extends Service {
         }
     }
 
-    public String getTitle(){
-        if(position < 0){
+    public String getTitle() {
+        if (position < 0) {
             return "";
         } else {
             return musicList.get(position).getTitle();
@@ -222,8 +229,8 @@ public class MusicService extends Service {
     /**
      * 上一首
      */
-    public void UpMusic(){
-        if(position==0){
+    public void UpMusic() {
+        if (position == 0) {
             position = musicList.size() - 1;
         } else {
             position--;
@@ -234,41 +241,43 @@ public class MusicService extends Service {
     /**
      * 下一首
      */
-    public void NextMusic(){
+    public void NextMusic() {
         position++;
-        if(position==musicList.size()-1){
+        if (position == musicList.size() - 1) {
             position = 0;
         }
         playMusic(position);
     }
 
 
+
     public class MyBinder extends Binder {
 
-        public void setStatus(int status){
+        public void setStatus(int status) {
             STATE = status;
         }
 
-        public int getStatus(){
+        public int getStatus() {
             return STATE;
         }
 
-        public void mUpMusic(){
+        public void mUpMusic() {
             UpMusic();
         }
-        public void mNextMusic(){
+
+        public void mNextMusic() {
             NextMusic();
         }
 
-        public void setMs(MpStarted st){
+        public void setMs(MpStarted st) {
             ms = st;
         }
 
-        public String mGetTitle(){
+        public String mGetTitle() {
             return getTitle();
         }
 
-        public boolean mFirstPlay(){
+        public boolean mFirstPlay() {
             return firstPlay();
         }
 
@@ -276,72 +285,75 @@ public class MusicService extends Service {
             return getTotalTime();
         }
 
-        public int mGetCurrentTime(){
+        public int mGetCurrentTime() {
             return getCurrentTime();
         }
 
-        public void mSetMusicList(List<GeDanInfo.DataBean.ListBean> musicList){
+        public void mSetMusicList(List<GeDanInfo.DataBean.ListBean> musicList) {
             setMusicList(musicList);
         }
 
-        public List<GeDanInfo.DataBean.ListBean> mGetMusicList(){
+        public List<GeDanInfo.DataBean.ListBean> mGetMusicList() {
             return getMusicList();
         }
 
-        public int mGetPosition(){
+        public int mGetPosition() {
             return getPosition();
         }
 
-        public void mSetPosition(int position){
+        public void mSetPosition(int position) {
             setPosition(position);
         }
 
         //开始播放
-        public void binderStartPlay(){
+        public void binderStartPlay() {
             startPlay();
         }
 
         //重置播放器
-        public void binderPlayerReset(){
+        public void binderPlayerReset() {
             playerReset();
         }
 
         //获取播放状态
-        public boolean binderIsPlaying(){
+        public boolean binderIsPlaying() {
             return isPlaying();
         }
 
         //释放资源
-        public void binderRelease(){
+        public void binderRelease() {
             release();
         }
 
         //播放 返回总长
-        public int binderPlay(int pos){
+        public int binderPlay(int pos) {
             return playMusic(pos);
         }
 
         //停止
-        public void binderStop(){
+        public void binderStop() {
             stop();
+        }
+        public void binderPause() {
+            Pause();
         }
 
         //暂停或开始 返回当前状态
-        public boolean binderStartOrPause(){
+        public boolean binderStartOrPause() {
             return startOrPause();
         }
 
         //获得已播放时长
-        public int binderGetCurrentPosition(){
+        public int binderGetCurrentPosition() {
             return getCurrentPosition();
         }
 
         //拉动
-        public void binderPlayerSeekTo(int porgress){
+        public void binderPlayerSeekTo(int porgress) {
             playerSeekTo(porgress);
         }
 
-        public int getBduration(){
+        public int getBduration() {
             return getSDuration();
         }
 

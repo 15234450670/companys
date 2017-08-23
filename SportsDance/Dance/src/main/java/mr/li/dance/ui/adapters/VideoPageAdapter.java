@@ -17,6 +17,7 @@ import mr.li.dance.https.response.HomeVideoResponse;
 import mr.li.dance.models.HomeTypeBtn;
 import mr.li.dance.models.QuickZhiboInfo;
 import mr.li.dance.models.Video;
+import mr.li.dance.ui.activitys.MainActivity;
 import mr.li.dance.ui.activitys.video.VideoDetailActivity;
 import mr.li.dance.ui.activitys.video.VideoListActivity;
 import mr.li.dance.ui.adapters.viewholder.BaseViewHolder;
@@ -164,7 +165,11 @@ public class VideoPageAdapter extends DanceBaseAdapter {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (MainActivity.myBinder!=null){
+                        MainActivity.myBinder.binderPause();
+                    }
                     VideoDetailActivity.lunch(mContext, zhiboInfo.getId());
+
                 }
             });
 
@@ -175,7 +180,11 @@ public class VideoPageAdapter extends DanceBaseAdapter {
             speedAdapter.setItemClickListener(new ListViewItemClickListener() {
                 @Override
                 public void itemClick(int position, Object value) {
+                    if (MainActivity.myBinder!=null){
+                        MainActivity.myBinder.binderPause();
+                    }
                     VideoDetailActivity.lunch(mContext, mQuickList.get(position).getId());
+
                 }
             });
 
@@ -226,7 +235,11 @@ public class VideoPageAdapter extends DanceBaseAdapter {
                 adapter.setItemClickListener(new ListViewItemClickListener<HomeTypeBtn>() {
                     @Override
                     public void itemClick(int position, HomeTypeBtn value) {
+                        if (MainActivity.myBinder!=null){
+                            MainActivity.myBinder.binderPause();
+                        }
                         VideoListActivity.lunch(mContext, value.getName(), value.getId());
+
                     }
                 });
             }
@@ -241,7 +254,11 @@ public class VideoPageAdapter extends DanceBaseAdapter {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (MainActivity.myBinder!=null){
+                    MainActivity.myBinder.binderPause();
+                }
                 VideoDetailActivity.lunch(mContext, video.getId());
+
             }
         });
         holder.danceViewHolder.setClickListener(R.id.share_layout, new View.OnClickListener() {

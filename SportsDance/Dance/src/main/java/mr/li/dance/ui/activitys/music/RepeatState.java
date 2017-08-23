@@ -31,8 +31,8 @@ public class RepeatState implements OnClickListener {
         this.tv_repeatMode = tv_repeatMode;
         this.tv_repeatMode.setOnClickListener(this);
         list = new ArrayList<Integer>();
-        list.add(R.drawable.one_circulation);
         list.add(R.drawable.item_circulation);
+        list.add(R.drawable.one_circulation);
         list.add(R.drawable.match_circulation);
         tv_repeatMode.setImageResource(list.get(state));
     }
@@ -41,8 +41,8 @@ public class RepeatState implements OnClickListener {
         return state;
     }
 
-    public void setState(int state) {
-        this.state = state;
+    public void setState(int states) {
+        this.state = states;
     }
 
     public void changeState() {
@@ -70,8 +70,8 @@ public class RepeatState implements OnClickListener {
         void onStatus(int status);
     }
 
-    public void setStatus(MusicStatus ms){
-        this.ms = ms;
+    public void setStatus(MusicStatus musicStatus){
+        this.ms = musicStatus;
     }
 
 }

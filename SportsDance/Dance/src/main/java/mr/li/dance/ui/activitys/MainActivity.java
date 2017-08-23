@@ -124,7 +124,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             @Override
             public void binderHasCreated(MusicService.MyBinder mb) {
                  myBinder = mb;
-                Toast.makeText(MainActivity.this, "sss", Toast.LENGTH_SHORT).show();
             }
         });
         Intent intent = new Intent(this, MusicService.class);

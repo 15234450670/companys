@@ -66,7 +66,7 @@ public class VideoFragment extends BaseListFragment {
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
-        Log.e("respone",response);
+        Log.e("respone", response);
         if (what == AppConfigs.home_dianbo) {
             HomeVideoResponse homeResponse = JsonMananger.getReponseResult(response, HomeVideoResponse.class);
             mVideoPageAdapter.refresh(homeResponse);
