@@ -62,10 +62,11 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
                 myBinder = mb;
                 int a = myBinder.mGetPosition();
                 if (a > -1) {
-                    mAdapter.selectItem(myBinder.mGetPosition());
+                    mAdapter.selectItem(a);
+                    mRecyclerview.smoothScrollToPosition(a);
                     iv.setSelected(myBinder.binderIsPlaying());
                 }
-                myBinder.mSetMusicList(mAdapter.getmList());
+                //myBinder.mSetMusicList(mAdapter.getmList());
                 myBinder.setMs(new MusicService.MpStarted() {
                     @Override
                     public void onStart(int totalT) {
@@ -75,7 +76,6 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
 
                     }
                 });
-
 
             }
         });
@@ -120,13 +120,16 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
             ImageLoaderManager.getSingleton().LoadMoHu(this, "", mDanceViewHolder.getImageView(R.id.gd_bg), R.drawable.kaoji_defaulticon);
         }
         List<GeDanInfo.DataBean.ListBean> list = reponseResult.getData().getList();
-        mAdapter.addList(isRefresh, list);
+        Log.e("xxxx",list.size()+"");
         if (!list.isEmpty()) {
+            mAdapter.addList(isRefresh, list);
+
             if (myBinder != null) {
                 myBinder.mSetMusicList(mAdapter.getmList());
                 int a = myBinder.mGetPosition();
                 if (a > -1) {
                     mAdapter.selectItem(myBinder.mGetPosition());
+                    mRecyclerview.smoothScrollToPosition(a);
                 }
             }
         } else {
@@ -140,6 +143,7 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
     public void initViews() {
         super.initViews();
         mRefreshLayout.setEnableLoadmore(false);
+        mRefreshLayout.setEnableRefresh(false);
         setRightImage(R.drawable.share_icon_001);
         iv = (ImageView) findViewById(R.id.gd_bo);
         /**

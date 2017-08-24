@@ -17,7 +17,7 @@
                 android:id="@+id/wudao_pic"
                 android:layout_width="@dimen/spacing_244"
                 android:layout_height="@dimen/spacing_244"
-
+                android:scaleType="fitXY"
                 android:src="@drawable/ic_launcher"/>
 
             <TextView

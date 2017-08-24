@@ -29,7 +29,7 @@ public class DanceMusicAdapter extends BaseRecyclerAdapter<DanceMusic.DataBean> 
 
     @Override
     public void bindData(RecyclerViewHolder holder, int position, final DanceMusic.DataBean item) {
-        holder.setImageByUrlOrFilePaths(R.id.wudao_pic, item.getImg_fm());
+        holder.setImageByUrlOrFilePath(R.id.wudao_pic, item.getImg_fm(),R.drawable.default_video);
         holder.setText(R.id.wudao_name, item.getTitle());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

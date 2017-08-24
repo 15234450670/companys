@@ -52,12 +52,12 @@ public class MusicService extends Service {
                 break;
         }
     }
+
     public void Random(){
         int i = PlayerUtiles.random(musicList.size(), position);
         position = i;
         playMusic(position);
     }
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -251,13 +251,28 @@ public class MusicService extends Service {
      * 上一首
      */
     public void UpMusic() {
-
         if (position == 0) {
             position = musicList.size()-1;
         } else {
             position--;
         }
-        playMusic(position);
+        upAndNext(position);
+    }
+
+    /**
+     * 播放
+     * @param position
+     */
+    public void upAndNext(int position){
+        switch (STATE) {
+            case SINGLE:
+            case PLAYLIST:
+                playMusic(position);
+                break;
+            case RANDOM:
+                Random();
+                break;
+        }
     }
 
     /**
@@ -268,7 +283,7 @@ public class MusicService extends Service {
         if (position == musicList.size()) {
             position = 0;
         }
-        playMusic(position);
+        upAndNext(position);
     }
 
 
