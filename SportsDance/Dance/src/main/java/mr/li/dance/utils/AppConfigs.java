@@ -33,8 +33,8 @@ public class AppConfigs {
     public final static String SHAREMOV       = SHAREURL + "/share.mov?id=%s";
     //赛事分享
     public final static String SHAREGAME      = SHAREURL + "/share.game?id=%s";
-
-
+    //音乐分享
+    public final static String SHAREMUSIC     = SHAREURL + "/share.gdfx?id=";
     public final static String KEY_PLAY_UUID = "7fjvplaumn";
     public final static String KEY_PLAY_PU   = "393628f9df";
 

@@ -215,7 +215,20 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
             @Override
             public void onClick(View view) {
                 if (myBinder!=null) {
-                    myBinder.mUpMusic();
+                    int status = myBinder.getStatus();
+                    switch (status){
+                        case 0:
+                            myBinder.mUpMusic();
+                            break;
+                        case 1:
+                            myBinder.mUpMusic();
+                            break;
+                        case 2:
+                             myBinder.mRandom();
+                            break;
+                    }
+
+
                 }
             }
         });
@@ -226,7 +239,18 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
             @Override
             public void onClick(View view) {
                 if (myBinder!=null) {
-                    myBinder.mNextMusic();
+                    int status = myBinder.getStatus();
+                    switch (status){
+                        case 0:
+                            myBinder.mNextMusic();
+                            break;
+                        case 1:
+                            myBinder.mNextMusic();
+                            break;
+                        case 2:
+                            myBinder.mRandom();
+                            break;
+                    }
                 }
             }
         });

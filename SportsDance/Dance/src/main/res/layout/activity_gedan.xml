@@ -17,7 +17,6 @@
         <ImageView
             android:id="@+id/img_head"
             android:layout_width="@dimen/spacing_244"
-
             android:layout_height="@dimen/spacing_244"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/spacing_30"
@@ -25,20 +24,17 @@
 
         <TextView
             android:id="@+id/text_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/play_muisc"
             android:layout_alignTop="@+id/img_head"
             android:layout_marginStart="@dimen/spacing_30"
             android:layout_toEndOf="@+id/img_head"
-            android:text="dddd"
             android:textColor="@color/white"
             android:textSize="@dimen/textsize30"
             />
 
         <ImageView
             android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/play_muisc"
             android:layout_alignBottom="@+id/img_head"
             android:layout_marginBottom="@dimen/spacing_20"
             android:layout_marginStart="@dimen/spacing_30"
@@ -47,12 +43,10 @@
 
         <TextView
             android:id="@+id/text_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/play_muisc"
             android:layout_alignBottom="@+id/imageView4"
             android:layout_marginStart="@dimen/spacing_10"
             android:layout_toEndOf="@+id/imageView4"
-            android:text="dasdasd0"
             android:textColor="@color/white"
             android:textSize="@dimen/textsize24"/>
     </RelativeLayout>
@@ -84,23 +78,21 @@
 
             <TextView
                 android:id="@+id/gd_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/play_muisc"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/spacing_10"
                 android:textColor="@color/white"/>
         </LinearLayout>
         <RelativeLayout
-            android:layout_width="wrap_content"
+            style="@style/play_muisc"
             android:layout_marginBottom="@dimen/spacing_22"
             android:layout_marginRight="@dimen/spacing_30"
             android:layout_marginTop="@dimen/spacing_22"
-            android:layout_height="wrap_content">
+            >
             <ImageView
                 android:clickable="true"
                 android:id="@+id/gd_bo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/play_muisc"
                 android:background="@drawable/play_pause" />
 
         </RelativeLayout>

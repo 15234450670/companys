@@ -60,11 +60,15 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
             case 10107:
                 bindOther(homeListItemInfo);
                 break;
+            case 10108:
+                bindMusic(homeListItemInfo);
             default:
                 break;
         }
 
     }
+
+
 
     private void toShre(BaseHomeItem homeListItemInfo) {
         int type = homeListItemInfo.getType();
@@ -106,12 +110,20 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
                 mShareContent = homeListItemInfo.getTitle();
                 countID = AppConfigs.CLICK_EVENT_23;
                 break;
+            case 10108:
+                shareUrl = String.format(AppConfigs.SHAREMUSIC, homeListItemInfo.getId());
+                mShareContent = homeListItemInfo.getTitle();
+                break;
             default:
                 break;
         }
         shareUtils.showShareDilaog(countID, shareUrl, mShareContent);
     }
-
+    private void bindMusic(BaseHomeItem music) {
+        danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, music.getPicture_app(), R.drawable.default_video);
+        danceViewHolder.setText(R.id.name, music.getTitle());
+        danceViewHolder.setText(R.id.time_tv, music.getCreate_time());
+    }
 
     private void bindZhibo(BaseHomeItem zhibo) {
         danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, zhibo.getPicture_app(), R.drawable.default_video);

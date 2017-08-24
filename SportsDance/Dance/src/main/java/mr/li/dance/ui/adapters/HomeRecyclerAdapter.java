@@ -74,7 +74,7 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
     private final int TYPE_SAISHI         = 8;//赛事
     private final int TYPE_WAILIAN        = 9;//外联
     private final int TYPE_MAIN           = 10;//正常的列表加载页面
-
+    private final int TYPE_MUSIC        = 11;//外联
 
     /**
      * 构造器
@@ -162,6 +162,10 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_match_notitle, null);
                 viewHolder = new HomeViewHolder(mContext, view);
                 break;
+            case TYPE_MUSIC:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recommend_music_item, null);
+                viewHolder = new HomeViewHolder(mContext, view);
+                break;
             case TYPE_ZHIBO:
             case TYPE_DianBO:
             case TYPE_WAILIAN:
@@ -229,7 +233,6 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
                         break;
                     case 10108:
                         SongActivity.lunch(mContext, bannerInfo.getNumber());
-
                         break;
 
                 }
@@ -470,6 +473,8 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
                     return TYPE_WAILIAN;
                 case 10107:
                     return TYPE_XIANGCE;
+                case 10108:
+                    return TYPE_MUSIC;
                 default:
                     return TYPE_MAIN;
 

@@ -26,6 +26,15 @@ public class BaseHomeItem {
     private String photos;//图片数量
     ////////////////////////////////////////////////////
     private String url;//外联的url
+    private String create_time;
+
+    public String getCreate_time() {
+        return create_time;
+    }
+
+    public void setCreate_time(String create_time) {
+        this.create_time = create_time;
+    }
 
     private String activity_id;//直播主题ID
     private String video_unique;//点播标识

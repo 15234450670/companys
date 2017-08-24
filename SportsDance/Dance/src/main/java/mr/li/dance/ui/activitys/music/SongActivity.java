@@ -38,12 +38,10 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
     GeDanAdapter          mAdapter;
     MusicService.MyBinder myBinder;
     private       ImageView                         iv;
-    private       TextView                          textView;
+    private       TextView                          gd_txt;
     public static String                            allTitle;
     public static String                            imageUrl;
-    private       List<GeDanInfo.DataBean.ListBean> list;
     private ServiceConn conn;
-
     @Override
     public RecyclerView.Adapter getAdapter() {
         mAdapter = new GeDanAdapter(this, mDanceViewHolder);
@@ -72,13 +70,13 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
                     @Override
                     public void onStart(int totalT) {
                         iv.setSelected(true);
-                        textView.setText(myBinder.mGetTitle());
+                        gd_txt.setText(myBinder.mGetTitle());
                         mAdapter.selectItem(myBinder.mGetPosition());
+
                     }
                 });
-                if (myBinder.mGetMusicList()==null){
 
-                }
+
             }
         });
         Intent intent = new Intent(this, MusicService.class);
@@ -90,15 +88,15 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
         super.onResume();
         if (myBinder != null) {
             mAdapter.selectItem(myBinder.mGetPosition());
-            textView.setText(myBinder.mGetTitle());
+            gd_txt.setText(myBinder.mGetTitle());
             iv.setSelected(myBinder.binderIsPlaying());
+
         }
     }
 
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
-        Log.e("log", response);
         GeDanInfo reponseResult = JsonMananger.getReponseResult(response, GeDanInfo.class);
 
         imageUrl = reponseResult.getData().getImg_fm();
@@ -121,10 +119,9 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
             mDanceViewHolder.setImageByUrlOrFilePaths1(R.id.img_head, R.drawable.kaoji_defaulticon);
             ImageLoaderManager.getSingleton().LoadMoHu(this, "", mDanceViewHolder.getImageView(R.id.gd_bg), R.drawable.kaoji_defaulticon);
         }
-        list = reponseResult.getData().getList();
-
+        List<GeDanInfo.DataBean.ListBean> list = reponseResult.getData().getList();
+        mAdapter.addList(isRefresh, list);
         if (!list.isEmpty()) {
-            mAdapter.addList(isRefresh, list);
             if (myBinder != null) {
                 myBinder.mSetMusicList(mAdapter.getmList());
                 int a = myBinder.mGetPosition();
@@ -135,15 +132,14 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
         } else {
             mDanceViewHolder.setViewVisibility(R.id.gd_black, View.INVISIBLE);
             Toast.makeText(mContext, "暂无更多信息", Toast.LENGTH_SHORT).show();
-
         }
-
-
+        
     }
 
     @Override
     public void initViews() {
         super.initViews();
+        mRefreshLayout.setEnableLoadmore(false);
         setRightImage(R.drawable.share_icon_001);
         iv = (ImageView) findViewById(R.id.gd_bo);
         /**
@@ -156,7 +152,7 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
             }
         });
 
-        textView = mDanceViewHolder.getTextView(R.id.gd_txt);
+        gd_txt = mDanceViewHolder.getTextView(R.id.gd_txt);
 
         /**
          * 跳转到播放器
@@ -239,10 +235,6 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
         mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, "http://work.cdsf.org.cn/h5/share.gdfx?id=" + mItemId, "歌单");
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unbindService(conn);
-    }
+
 
 }

@@ -52,6 +52,11 @@ public class MusicService extends Service {
                 break;
         }
     }
+    public void Random(){
+        int i = PlayerUtiles.random(musicList.size(), position);
+        position = i;
+        playMusic(position);
+    }
 
     @Override
     public void onCreate() {
@@ -246,6 +251,7 @@ public class MusicService extends Service {
      * 上一首
      */
     public void UpMusic() {
+
         if (position == 0) {
             position = musicList.size()-1;
         } else {
@@ -268,6 +274,9 @@ public class MusicService extends Service {
 
 
     public class MyBinder extends Binder {
+        public void mRandom(){
+                 Random();
+        }
 
         public void setStatus(int status) {
             STATE = status;

@@ -1,26 +1,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main_show"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:background="@color/home_bg_color"
-    android:orientation="vertical">
-    <FrameLayout
-        android:id="@+id/content_fl"
+              android:id="@+id/main_show"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/home_bg_color"
+              android:fitsSystemWindows="true"
+              android:orientation="vertical"
+    >
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:clipChildren="true"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
-        android:layout_weight="1"
-        />
-       <ImageView
-           android:id="@+id/floatImage"
-           android:visibility="gone"
-           android:layout_gravity="right"
-           android:src="@drawable/suspend"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content" />
+        <FrameLayout
+            android:id="@+id/content_fl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="true"
+            />
 
-    <include layout="@layout/home_layout_bottom" />
+        <ImageView
+            android:id="@+id/floatImage"
+            style="@style/play_muisc"
+            android:visibility="gone"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/suspend"
+            />
+    </RelativeLayout>
+
+
+    <include
+        layout="@layout/home_layout_bottom"/>
+
 
 </LinearLayout>
