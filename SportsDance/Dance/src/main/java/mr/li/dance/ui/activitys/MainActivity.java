@@ -392,12 +392,14 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         }
         wasBackground = false;
-        if (myBinder != null&&myBinder.binderIsPlaying()) {
+        if (myBinder != null) {
             if (myBinder.binderIsPlaying()) {
                 floatImage.setVisibility(View.VISIBLE);
                 animator.start();
                 a.start();
             } else {
+                animator.cancel();
+                a.cancel();
                 floatImage.setVisibility(View.GONE);
             }
         }

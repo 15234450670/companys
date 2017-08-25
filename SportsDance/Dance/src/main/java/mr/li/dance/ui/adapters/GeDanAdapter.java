@@ -57,5 +57,12 @@ public class GeDanAdapter extends BaseRecyclerAdapter<GeDanInfo.DataBean.ListBea
         notifyDataSetChanged();
     }
 
+    public void selectNull(){
+        for (int i = 0; i < mData.size(); i++) {
+            GeDanInfo.DataBean.ListBean item = mData.get(i);
+            item.isFalse = false;
+        }
+        notifyDataSetChanged();
+    }
 
 }

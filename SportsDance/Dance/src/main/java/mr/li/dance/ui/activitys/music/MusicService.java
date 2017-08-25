@@ -31,6 +31,7 @@ public class MusicService extends Service {
     public static final int SINGLE   = 0;
     public static final int PLAYLIST = 1;
 
+    public String id;
 
     public interface MpStarted {
         void onStart(int totalT);
@@ -95,7 +96,6 @@ public class MusicService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-
         MyBinder mb = new MyBinder();
         return mb;
     }
@@ -208,7 +208,15 @@ public class MusicService extends Service {
         return musicList;
     }
 
-    public void setMusicList(List<GeDanInfo.DataBean.ListBean> musicList) {
+    public void setMusicList(List<GeDanInfo.DataBean.ListBean> musicList, String listId) {
+        if(id == null){
+            id = listId;
+            this.musicList = musicList;
+        }
+    }
+
+    public void setList(List<GeDanInfo.DataBean.ListBean> musicList, String id){
+        this.id = id;
         this.musicList = musicList;
     }
 
@@ -285,7 +293,9 @@ public class MusicService extends Service {
         upAndNext(position);
     }
 
-
+    public boolean isSameList(String listId){
+        return id == null? false : id.equals(listId);
+    }
 
     public class MyBinder extends Binder {
         public void mRandom(){
@@ -298,6 +308,14 @@ public class MusicService extends Service {
 
         public int getStatus() {
             return STATE;
+        }
+
+        public boolean mIsSameList(String id){
+            return isSameList(id);
+        }
+
+        public void mSetList(List<GeDanInfo.DataBean.ListBean> musicList, String id){
+            setList(musicList, id);
         }
 
         public void mUpMusic() {
@@ -328,8 +346,8 @@ public class MusicService extends Service {
             return getCurrentTime();
         }
 
-        public void mSetMusicList(List<GeDanInfo.DataBean.ListBean> musicList) {
-            setMusicList(musicList);
+        public void mSetMusicList(List<GeDanInfo.DataBean.ListBean> musicList, String listId) {
+            setMusicList(musicList, listId);
         }
 
         public void mReset(){
