@@ -77,14 +77,13 @@ public class MusicService extends Service {
                 @Override
                 public void onCompletion(MediaPlayer mediaPlayer) {
                     playStatus();
-                    //Toast.makeText(MusicService.this, "完了", Toast.LENGTH_SHORT).show();
                 }
             });
             mp.setOnErrorListener(new MediaPlayer.OnErrorListener() {
                 @Override
                 public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
-
-                    return true;
+                    playerReset();
+                    return false;
                 }
             });
         }

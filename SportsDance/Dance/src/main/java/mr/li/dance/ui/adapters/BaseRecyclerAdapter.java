@@ -20,7 +20,7 @@ import mr.li.dance.utils.MyStrUtil;
  */
 
 public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> {
-    public int currentPage=0;
+    public int currentPage=1;
     protected final List<T> mData;
     protected final Context mContext;
     protected LayoutInflater mInflater;
@@ -114,7 +114,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
 
     public void addList(boolean isRefresh, List<T> list) {
         if (isRefresh) {
-            currentPage = 0;
+            currentPage = 1;
             mData.clear();
         }
         if (!MyStrUtil.isEmpty(list)) {

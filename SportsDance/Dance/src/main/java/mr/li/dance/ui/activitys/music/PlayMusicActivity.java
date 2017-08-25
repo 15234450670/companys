@@ -68,6 +68,7 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
     private ServiceConn conn;
 
 
+
     @Override
     public int getContentViewId() {
         return R.layout.activity_playmusic;
@@ -77,11 +78,6 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
     public void initDatas() {
         super.initDatas();
         Rotate();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
     }
 
     @Override
@@ -234,7 +230,7 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
          * 控制播放类型
          */
         ImageView play_mode = (ImageView) findViewById(R.id.playing_mode);
-        rs = new RepeatState(play_mode);
+        rs = new RepeatState(play_mode,PlayMusicActivity.this);
         rs.setStatus(new RepeatState.MusicStatus() {
             @Override
             public void onStatus(int status) {
@@ -300,7 +296,9 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
             mShareUtils = new ShareUtils(this);
         }
 
-        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, "http://work.cdsf.org.cn/h5/share.gqfx?classid="+SongActivity.mItemId+"musicid="+myBinder.mGetMusicList().get(myBinder.mGetPosition()).getMusic_address(),"音乐");
+        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, "http://work.cdsf.org.cn/h5/share.gqfx?classid="
+                +SongActivity.mItemId+"&"+"musicid="
+                +myBinder.mGetMusicList().get(myBinder.mGetPosition()).getId(),myBinder.mGetMusicList().get(myBinder.mGetPosition()).getTitle());
     }
     @Override
     protected void onDestroy() {

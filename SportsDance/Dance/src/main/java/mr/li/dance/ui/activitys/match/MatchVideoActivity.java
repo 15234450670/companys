@@ -81,7 +81,7 @@ public class MatchVideoActivity extends BaseListActivity<Video> {
     public void loadMore() {
         super.loadMore();
         Request<String> request = ParameterUtils.getSingleton().getMatchVedioListMap(mMatchId, mMatchVideoAdapter.getNextPage());
-        Log.e("赛事界面",mMatchVideoAdapter.getNextPage()+"") ;
+
         request(AppConfigs.match_matchVedioList, request, false);
     }
 

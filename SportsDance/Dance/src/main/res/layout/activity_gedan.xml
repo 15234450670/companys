@@ -39,7 +39,9 @@
             android:layout_marginBottom="@dimen/spacing_20"
             android:layout_marginStart="@dimen/spacing_30"
             android:layout_toEndOf="@+id/img_head"
-            android:src="@drawable/ej"/>
+            android:src="@drawable/ej"
+            android:visibility="gone"
+            />
 
         <TextView
             android:id="@+id/text_count"

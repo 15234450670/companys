@@ -1,8 +1,10 @@
 package mr.li.dance.ui.activitys.music;
 
+import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -26,10 +28,11 @@ public class RepeatState implements OnClickListener {
      * 2，随机播放
      */
     public int state = 1;
-
-    public RepeatState(ImageView tv_repeatMode) {
+      Context mContext;
+    public RepeatState(ImageView tv_repeatMode, Context context) {
         this.tv_repeatMode = tv_repeatMode;
         this.tv_repeatMode.setOnClickListener(this);
+        this.mContext = context;
         list = new ArrayList<Integer>();
         list.add(R.drawable.one_circulation);
         list.add(R.drawable.item_circulation);
@@ -50,6 +53,13 @@ public class RepeatState implements OnClickListener {
             state = 0;
         }
         tv_repeatMode.setImageResource(list.get(state));
+        if (state == 0) {
+            Toast.makeText(mContext, "单曲循环", Toast.LENGTH_SHORT).show();
+        } else if (state == 1) {
+            Toast.makeText(mContext, "列表循环", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(mContext, "随机播放", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

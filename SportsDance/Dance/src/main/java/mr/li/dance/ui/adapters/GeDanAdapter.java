@@ -57,4 +57,5 @@ public class GeDanAdapter extends BaseRecyclerAdapter<GeDanInfo.DataBean.ListBea
         notifyDataSetChanged();
     }
 
+
 }
