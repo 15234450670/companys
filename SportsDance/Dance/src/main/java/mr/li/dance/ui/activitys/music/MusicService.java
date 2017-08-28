@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Binder;
 import android.os.IBinder;
+import android.util.Log;
 
 import java.util.List;
+
 import mr.li.dance.models.GeDanInfo;
 
 /**
@@ -54,11 +56,12 @@ public class MusicService extends Service {
         }
     }
 
-    public void Random(){
+    public void Random() {
         int i = PlayerUtiles.random(musicList.size(), position);
         position = i;
         playMusic(position);
     }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -83,14 +86,14 @@ public class MusicService extends Service {
             mp.setOnErrorListener(new MediaPlayer.OnErrorListener() {
                 @Override
                 public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
-                    playerReset();
+               //     playerReset();
                     return false;
                 }
             });
         }
     }
 
-    public void mpReset(){
+    public void mpReset() {
         mp.reset();
     }
 
@@ -107,6 +110,7 @@ public class MusicService extends Service {
             mp.reset();
             try {
                 mp.setDataSource(musicList.get(position).getMusic_address());
+                Log.e("hahahaha:::",musicList.get(position).getMusic_address()) ;
                 mp.prepareAsync();
 
             } catch (Exception e) {
@@ -137,9 +141,10 @@ public class MusicService extends Service {
             mp.stop();
         }
     }
+
     //暂停
-    public void Pause(){
-        if (mp!=null) {
+    public void Pause() {
+        if (mp != null) {
             currentPosition = mp.getCurrentPosition();
             mp.pause();
         }
@@ -209,13 +214,13 @@ public class MusicService extends Service {
     }
 
     public void setMusicList(List<GeDanInfo.DataBean.ListBean> musicList, String listId) {
-        if(id == null){
+        if (id == null) {
             id = listId;
             this.musicList = musicList;
         }
     }
 
-    public void setList(List<GeDanInfo.DataBean.ListBean> musicList, String id){
+    public void setList(List<GeDanInfo.DataBean.ListBean> musicList, String id) {
         this.id = id;
         this.musicList = musicList;
     }
@@ -259,7 +264,7 @@ public class MusicService extends Service {
      */
     public void UpMusic() {
         if (position == 0) {
-            position = musicList.size()-1;
+            position = musicList.size() - 1;
         } else {
             position--;
         }
@@ -270,7 +275,7 @@ public class MusicService extends Service {
      * 播放
      * @param position
      */
-    public void upAndNext(int position){
+    public void upAndNext(int position) {
         switch (STATE) {
             case SINGLE:
             case PLAYLIST:
@@ -293,13 +298,13 @@ public class MusicService extends Service {
         upAndNext(position);
     }
 
-    public boolean isSameList(String listId){
-        return id == null? false : id.equals(listId);
+    public boolean isSameList(String listId) {
+        return id == null ? false : id.equals(listId);
     }
 
     public class MyBinder extends Binder {
-        public void mRandom(){
-                 Random();
+        public void mRandom() {
+            Random();
         }
 
         public void setStatus(int status) {
@@ -310,11 +315,11 @@ public class MusicService extends Service {
             return STATE;
         }
 
-        public boolean mIsSameList(String id){
+        public boolean mIsSameList(String id) {
             return isSameList(id);
         }
 
-        public void mSetList(List<GeDanInfo.DataBean.ListBean> musicList, String id){
+        public void mSetList(List<GeDanInfo.DataBean.ListBean> musicList, String id) {
             setList(musicList, id);
         }
 
@@ -350,7 +355,7 @@ public class MusicService extends Service {
             setMusicList(musicList, listId);
         }
 
-        public void mReset(){
+        public void mReset() {
             mpReset();
         }
 
@@ -395,6 +400,7 @@ public class MusicService extends Service {
         public void binderStop() {
             stop();
         }
+
         public void binderPause() {
             Pause();
         }

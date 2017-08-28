@@ -162,7 +162,7 @@ public class MusicAdapter extends DanceBaseAdapter {
                         }
                         break;
                     case 10108:
-                        SongActivity.lunch(mContext, bannerInfo.getNumber());
+                        SongActivity.lunch(mContext, bannerInfo.getNumber(),bannerInfo.getTitle());
                         break;
 
                 }

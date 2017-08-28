@@ -3,6 +3,7 @@ package mr.li.dance.ui.activitys;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -114,6 +115,8 @@ public class MyDanceWebActivity extends BaseActivity {
             case ZIXUNTYPE:
                 mCountId = AppConfigs.CLICK_EVENT_21;
                 mWebView.loadUrl(url);
+                Log.e("url:::",url);
+                Log.e("ssssurl:::",shareUrl);
                 break;
             case KAOJI:
                 mCountId = AppConfigs.CLICK_EVENT_24;

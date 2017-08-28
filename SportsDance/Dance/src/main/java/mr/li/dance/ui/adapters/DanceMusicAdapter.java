@@ -34,7 +34,7 @@ public class DanceMusicAdapter extends BaseRecyclerAdapter<DanceMusic.DataBean> 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SongActivity.lunch((Activity) context,item.getId());
+                SongActivity.lunch((Activity) context,item.getId(),item.getTitle());
             }
         });
     }

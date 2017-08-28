@@ -66,7 +66,7 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
     private ObjectAnimator                    anim2;
     private RepeatState rs;
     private ServiceConn conn;
-
+    private String title;
 
 
     @Override
@@ -83,7 +83,8 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
     @Override
     public void initViews() {
         //设置歌单标题
-        setTitle(SongActivity.allTitle);
+        music_title = (TextView) findViewById(R.id.title);
+        music_title.setText(SongActivity.allTitle);
         setRightImage(R.drawable.share_icon_001);
         //绑定服务
         conn = new ServiceConn();
@@ -142,7 +143,7 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
                 }
             }
         });
-        music_title = (TextView) findViewById(R.id.title);
+
         conn.getMyBinder(new ServiceConn.binderCreateFinish() {
             @Override
             public void binderHasCreated(MusicService.MyBinder mb) {
@@ -155,7 +156,8 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
                 if (myBinder.mGetPosition() > -1) {
                     totalTime = myBinder.getBduration();
                     seek.setMax(totalTime);
-                    music_title.setText(myBinder.mGetTitle());
+                   // music_title.setText(myBinder.mGetTitle());
+                    setTitle(myBinder.mGetTitle());
                     tv_right.setText(sdf.format(totalTime));
                     playing_play.setSelected(myBinder.binderIsPlaying());
 
@@ -174,7 +176,8 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
                         totalTime = myBinder.getBduration();
                         seek.setMax(totalTime);
                         tv_right.setText(sdf.format(totalTime));
-                        music_title.setText(myBinder.mGetTitle());
+                       // music_title.setText(myBinder.mGetTitle());
+                        setTitle(myBinder.mGetTitle());
                         playing_play.setSelected(true);
                         handler.sendEmptyMessage(0);
                         startAnim();
@@ -275,12 +278,16 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
         Intent intent = new Intent(context, PlayMusicActivity.class);
         context.startActivity(intent);
     }
+
+
+
     @Override
     public void onAction(int type, Object o) {
         if (type != BasePopwindow.POP_DISMISS && type != BasePopwindow.BUTTON_CANCEL) {
             myBinder.binderPlay(type);
             playing_play.setSelected(true);
-            music_title.setText(o.toString());
+           // music_title.setText(o.toString());
+            setTitle(o.toString());
         }
     }
 
@@ -297,7 +304,7 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
         }
 
         mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, "http://work.cdsf.org.cn/h5/share.gqfx?classid="
-                +SongActivity.mItemId+"&"+"musicid="
+                +SongActivity.mItemId+"&g"+"musicid="
                 +myBinder.mGetMusicList().get(myBinder.mGetPosition()).getId(),myBinder.mGetMusicList().get(myBinder.mGetPosition()).getTitle());
     }
     @Override

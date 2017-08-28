@@ -3,6 +3,7 @@ package mr.li.dance.ui.activitys.zixun;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.yolanda.nohttp.rest.Request;
 
@@ -39,6 +40,7 @@ public class ZiXunListActivity extends BaseListActivity<ZiXunInfo> {
             title = xunInfo.getTitle();
         }
         String url = String.format(AppConfigs.ZixunShareUrl, String.valueOf(xunInfo.getId()));
+        Log.e("xxx",url);
         MyDanceWebActivity.lunch(this, MyDanceWebActivity.ZIXUNTYPE, title,url, true);
     }
 

@@ -232,7 +232,7 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
                         }
                         break;
                     case 10108:
-                        SongActivity.lunch(mContext, bannerInfo.getNumber());
+                        SongActivity.lunch(mContext, bannerInfo.getNumber(),bannerInfo.getTitle());
                         break;
 
                 }
@@ -435,7 +435,7 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
                         }
                         break;
                     case 10108:
-                        SongActivity.lunch(mContext, mDatas.get(position).getId());
+                        SongActivity.lunch(mContext, mDatas.get(position).getId(),mDatas.get(position).getTitle());
                         break;
 
                     default:

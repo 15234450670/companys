@@ -294,6 +294,7 @@ public class ConsultationPageAdapter extends DanceBaseAdapter {
                 String shareUrl = String.format(AppConfigs.ZixunShareUrl, ziXunInfo.getId());
                 String mShareContent = ziXunInfo.getTitle();
                 shareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_21,shareUrl, mShareContent);
+
             }
         });
 

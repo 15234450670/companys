@@ -17,11 +17,11 @@ import android.widget.PopupWindow;
  * 描述:    Popwindow基类
  * 修订历史:
  */
-public abstract class BasePopwindow implements View.OnClickListener{
+public abstract class BasePopwindow implements View.OnClickListener {
 
     protected PopupWindow ppw;
-    protected Activity context;
-    protected Object object;
+    protected Activity    context;
+    protected Object      object;
 
     //确定按钮被点击
     public static final int BUTTON_SURE = 10022;
@@ -37,26 +37,26 @@ public abstract class BasePopwindow implements View.OnClickListener{
 
     private PopAction pa;
 
-    public interface PopAction{
+    public interface PopAction {
         void onAction(int type, Object o);
     }
 
-    public void setAction(PopAction pa){
+    public void setAction(PopAction pa) {
         this.pa = pa;
     }
 
-    public BasePopwindow(Activity context){
+    public BasePopwindow(Activity context) {
         this.context = context;
         int viewId = getPopwindowViewId();
 
-        if(viewId < 1){
+        if (viewId < 1) {
             throw new IllegalStateException("请设置popwindow的布局！！");
         }
 
         view = LayoutInflater.from(context).inflate(viewId, null);
         this.ppw = createPop(view);
 
-        if(ppw == null){
+        if (ppw == null) {
             throw new IllegalStateException("请创建popwindow！！");
         }
 
@@ -75,32 +75,32 @@ public abstract class BasePopwindow implements View.OnClickListener{
         initPopwindowData();
     }
 
-    protected PopupWindow createPop(View view){
+    protected PopupWindow createPop(View view) {
         return new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
     //显示popwindow在某个view的中间
-    public void showPopwindowMiddle(View parent){
+    public void showPopwindowMiddle(View parent) {
         showPopwindow(parent, Gravity.CENTER);
     }
 
     //显示popwindow
-    public void showPopwindow(View parent, int gravity){
+    public void showPopwindow(View parent, int gravity) {
         showPopwindow(parent, gravity, 0, 0);
     }
 
-    public void showBottom(){
+    public void showBottom() {
         View view = context.findViewById(android.R.id.content);
         showPopwindow(view, Gravity.BOTTOM, 0, 0);
     }
 
     //在那个控件下显示
-    public void showPopwindowBelow(View view){
+    public void showPopwindowBelow(View view) {
         ppw.showAsDropDown(view);
     }
 
     //显示popwindow
-    public void showPopwindow(View parent, int gravity, int x, int y){
+    public void showPopwindow(View parent, int gravity, int x, int y) {
         initDataBeforeShow();
         backgroundAlpaha(0.5f);
 
@@ -112,18 +112,18 @@ public abstract class BasePopwindow implements View.OnClickListener{
     }
 
     //显示popwindow在屏幕中间
-    public void showPopwindowInScreenMiddle(){
+    public void showPopwindowInScreenMiddle() {
         View view = context.findViewById(android.R.id.content);
         showPopwindowMiddle(view);
     }
 
     //隐藏popwindow
-    public void dimissPopwindow(){
+    public void dimissPopwindow() {
         ppw.dismiss();
     }
 
     //初始化
-    private void init(){
+    private void init() {
         ppw.setOutsideTouchable(true);
         ppw.setFocusable(true);
         //透明的背景
@@ -132,24 +132,24 @@ public abstract class BasePopwindow implements View.OnClickListener{
     }
 
     //找寻控件
-    protected View findPopViewById(int resourceId){
+    protected View findPopViewById(int resourceId) {
         return view.findViewById(resourceId);
     }
 
     //给控件添加监听
-    protected void addClickListener(View view){
+    protected void addClickListener(View view) {
         view.setOnClickListener(this);
     }
 
     //接口回调
-    protected void transportAction(int type, Object o){
-        if(pa != null){
+    protected void transportAction(int type, Object o) {
+        if (pa != null) {
             pa.onAction(type, o);
         }
     }
 
     //结束释放资源
-    public void destroy(){
+    public void destroy() {
         context = null;
         ppw = null;
         pa = null;

@@ -27,8 +27,8 @@ import mr.li.dance.utils.JsonMananger;
  */
 public class DanceMusicActivity extends BaseListActivity {
     DanceMusicAdapter adapter;
-    String mMatchId;
-    String name;
+    String            mMatchId;
+    String            name;
 
     @Override
     public void itemClick(int position, Object value) {

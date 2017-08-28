@@ -34,14 +34,15 @@ import mr.li.dance.utils.glide.ImageLoaderManager;
  */
 public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> {
     int page = 1;
-   public static String                mItemId;
+    public static String mItemId, name;
     GeDanAdapter          mAdapter;
     MusicService.MyBinder myBinder;
-    private       ImageView                         iv;
-    private       TextView                          gd_txt;
-    public static String                            allTitle;
-    public static String                            imageUrl;
-    private ServiceConn conn;
+    private       ImageView   iv;
+    private       TextView    gd_txt;
+    public static String      allTitle;
+    public static String      imageUrl;
+    private       ServiceConn conn;
+
     @Override
     public RecyclerView.Adapter getAdapter() {
         mAdapter = new GeDanAdapter(this, mDanceViewHolder);
@@ -61,7 +62,7 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
             public void binderHasCreated(MusicService.MyBinder mb) {
                 myBinder = mb;
                 int a = myBinder.mGetPosition();
-                if (a > -1 ) {
+                if (a > -1) {
                     iv.setSelected(myBinder.binderIsPlaying());
                     gd_txt.setText(myBinder.mGetTitle());
                     //mAdapter.selectItem(myBinder.mGetPosition());
@@ -97,7 +98,7 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
-        Log.e("ggg",response);
+        Log.e("ggg", response);
         GeDanInfo reponseResult = JsonMananger.getReponseResult(response, GeDanInfo.class);
         imageUrl = reponseResult.getData().getImg_fm();
         if (!MyStrUtil.isEmpty(reponseResult.getData().getTitle())) {
@@ -123,12 +124,12 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
         List<GeDanInfo.DataBean.ListBean> list = reponseResult.getData().getList();
         if (!list.isEmpty()) {
             mAdapter.addList(isRefresh, list);
-
             if (myBinder != null) {
                 myBinder.mSetMusicList(mAdapter.getmList(), mItemId);
                 int a = myBinder.mGetPosition();
-                if (a > -1 ) {
-                    if(myBinder.mIsSameList(mItemId)){
+                if (a > -1) {
+                    if (myBinder.mIsSameList(mItemId)) {
+
                         mAdapter.selectItem(myBinder.mGetPosition());
                         mRecyclerview.smoothScrollToPosition(a);
                     }
@@ -138,7 +139,7 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
             mDanceViewHolder.setViewVisibility(R.id.gd_black, View.INVISIBLE);
             Toast.makeText(mContext, "暂无更多信息", Toast.LENGTH_SHORT).show();
         }
-        
+
     }
 
     @Override
@@ -168,15 +169,14 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
 
             @Override
             public void onClick(View view) {
-                if (myBinder != null && myBinder.mGetPosition() > -1  ) {
+                if (myBinder != null && myBinder.mGetPosition() > -1) {
 
-                        PlayMusicActivity.lunch(SongActivity.this);
+                    PlayMusicActivity.lunch(SongActivity.this);
                 } else {
                     Toast.makeText(mContext, "请选择要播放的歌曲", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
     }
 
     @Override
@@ -184,23 +184,26 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
         return R.layout.activity_gedan;
     }
 
-    public static void lunch(Context context, String mItemId) {
+    public static void lunch(Context context, String mItemId, String name) {
         Intent intent = new Intent(context, SongActivity.class);
         intent.putExtra("itemid", mItemId);
+        intent.putExtra("name", name);
         context.startActivity(intent);
     }
 
     @Override
     public void getIntentData() {
         super.getIntentData();
-        mItemId = mIntentExtras.getString("itemid");
-        Log.e("ml", mItemId + "");
+        if (!MyStrUtil.isEmpty(mIntentExtras)) {
+            mItemId = mIntentExtras.getString("itemid");
+            name = mIntentExtras.getString("name");
+            Log.e("ml", mItemId + "");
+        }
     }
 
     @Override
     public void loadMore() {
         super.loadMore();
-
         page++;
         Request<String> musicInfoGeDanMap = ParameterUtils.getSingleton().getMusicInfoGeDanMap(mItemId, String.valueOf(page));
         request(AppConfigs.home_music_gedan, musicInfoGeDanMap, false);
@@ -223,7 +226,7 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
         if (myBinder != null) {
             Toast.makeText(mContext, "加载中,请稍后...", Toast.LENGTH_SHORT).show();
             myBinder.binderPlay(position);
-            if(!myBinder.mIsSameList(mItemId)){
+            if (!myBinder.mIsSameList(mItemId)) {
                 myBinder.mSetList(mAdapter.getmList(), mItemId);
             }
             iv.setSelected(true);
@@ -244,7 +247,7 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
             mShareUtils = new ShareUtils(this);
         }
 
-        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, "http://work.cdsf.org.cn/h5/share.gdfx?id=" + mItemId, "歌单");
+        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, "http://work.cdsf.org.cn/h5/share.gdfx?id=" + mItemId, name);
     }
 
     @Override
@@ -252,4 +255,5 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
         super.onDestroy();
         unbindService(conn);
     }
+
 }
