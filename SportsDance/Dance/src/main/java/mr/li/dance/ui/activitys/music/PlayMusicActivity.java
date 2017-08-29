@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
@@ -185,7 +184,6 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
                 });
                 if (!MyStrUtil.isEmpty( myBinder)) {
                     List<GeDanInfo.DataBean.ListBean> listBeen = myBinder.mGetMusicList();
-                    Log.e("listBeen",listBeen.toString());
                     singPop.list = listBeen;
                     singPop.popAdapter.notifyDataSetChanged();
                 }

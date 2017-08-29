@@ -86,7 +86,7 @@ public class MusicService extends Service {
             mp.setOnErrorListener(new MediaPlayer.OnErrorListener() {
                 @Override
                 public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
-               //     playerReset();
+                    //     playerReset();
                     return false;
                 }
             });
@@ -109,8 +109,8 @@ public class MusicService extends Service {
         if (mp != null) {
             mp.reset();
             try {
+                Log.e("xxx", musicList.toString());
                 mp.setDataSource(musicList.get(position).getMusic_address());
-                Log.e("hahahaha:::",musicList.get(position).getMusic_address()) ;
                 mp.prepareAsync();
 
             } catch (Exception e) {
@@ -213,17 +213,6 @@ public class MusicService extends Service {
         return musicList;
     }
 
-    public void setMusicList(List<GeDanInfo.DataBean.ListBean> musicList, String listId) {
-        if (id == null) {
-            id = listId;
-            this.musicList = musicList;
-        }
-    }
-
-    public void setList(List<GeDanInfo.DataBean.ListBean> musicList, String id) {
-        this.id = id;
-        this.musicList = musicList;
-    }
 
     public int getPosition() {
         return position;
@@ -298,11 +287,25 @@ public class MusicService extends Service {
         upAndNext(position);
     }
 
+    public void setMusicList(List<GeDanInfo.DataBean.ListBean> musicList, String listId) {
+        if (id == null) {
+            id = listId;
+            this.musicList = musicList;
+        }
+    }
+
+    public void setList(List<GeDanInfo.DataBean.ListBean> musicList, String id) {
+        this.id = id;
+        this.musicList = musicList;
+    }
+
     public boolean isSameList(String listId) {
         return id == null ? false : id.equals(listId);
     }
 
     public class MyBinder extends Binder {
+
+
         public void mRandom() {
             Random();
         }
@@ -321,6 +324,10 @@ public class MusicService extends Service {
 
         public void mSetList(List<GeDanInfo.DataBean.ListBean> musicList, String id) {
             setList(musicList, id);
+        }
+
+        public void mSetMusicList(List<GeDanInfo.DataBean.ListBean> musicList, String listId) {
+            setMusicList(musicList, listId);
         }
 
         public void mUpMusic() {
@@ -351,9 +358,6 @@ public class MusicService extends Service {
             return getCurrentTime();
         }
 
-        public void mSetMusicList(List<GeDanInfo.DataBean.ListBean> musicList, String listId) {
-            setMusicList(musicList, listId);
-        }
 
         public void mReset() {
             mpReset();

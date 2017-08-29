@@ -46,8 +46,7 @@ public class GeDanAdapter extends BaseRecyclerAdapter<GeDanInfo.DataBean.ListBea
 
     /**
      * 改变歌单状态
-     *
-     * @param position 那条数据
+     * position 那条数据
      */
     public void selectItem(int position) {
         for (int i = 0; i < mData.size(); i++) {
