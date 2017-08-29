@@ -32,7 +32,7 @@ public class MusicService extends Service {
     public static final int RANDOM   = 2;
     public static final int SINGLE   = 0;
     public static final int PLAYLIST = 1;
-
+  public  static  boolean isPlay;
     public String id;
 
     public interface MpStarted {
@@ -109,6 +109,7 @@ public class MusicService extends Service {
         if (mp != null) {
             mp.reset();
             try {
+                isPlay = true;
                 Log.e("xxx", musicList.toString());
                 mp.setDataSource(musicList.get(position).getMusic_address());
                 mp.prepareAsync();
@@ -125,9 +126,11 @@ public class MusicService extends Service {
     public boolean startOrPause() {
         if (mp != null) {
             if (mp.isPlaying()) {
+                isPlay = false;
                 currentPosition = mp.getCurrentPosition();
                 mp.pause();
             } else {
+                isPlay = true;
                 mp.start();
             }
             return mp.isPlaying();
@@ -138,7 +141,9 @@ public class MusicService extends Service {
     //停止播放
     public void stop() {
         if (mp != null) {
+            isPlay = false;
             mp.stop();
+
         }
     }
 
@@ -146,6 +151,7 @@ public class MusicService extends Service {
     public void Pause() {
         if (mp != null) {
             currentPosition = mp.getCurrentPosition();
+            isPlay = false;
             mp.pause();
         }
     }

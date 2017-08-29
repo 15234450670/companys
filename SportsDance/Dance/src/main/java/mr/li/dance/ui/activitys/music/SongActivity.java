@@ -220,11 +220,11 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
         mAdapter.selectItem(position);
         if (myBinder != null) {
             Toast.makeText(mContext, "加载中,请稍后...", Toast.LENGTH_SHORT).show();
-            myBinder.binderPlay(position);
+
             if (!myBinder.mIsSameList(mItemId)) {
                 myBinder.mSetList(mAdapter.getmList(), mItemId);
-                // myBinder.mSetMusicList(mAdapter.getmList(), mItemId);
             }
+            myBinder.binderPlay(position);
             iv.setSelected(true);
         }
     }

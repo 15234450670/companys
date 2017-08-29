@@ -393,7 +393,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         }
         wasBackground = false;
         if (myBinder != null) {
-            if (myBinder.binderIsPlaying()) {
+            if (MusicService.isPlay) {
                 floatImage.setVisibility(View.VISIBLE);
                 animator.start();
                 a.start();
