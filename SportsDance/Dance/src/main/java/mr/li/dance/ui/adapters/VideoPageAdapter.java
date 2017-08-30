@@ -165,7 +165,7 @@ public class VideoPageAdapter extends DanceBaseAdapter {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (MainActivity.myBinder!=null){
+                    if (MainActivity.myBinder.binderIsPlaying()){
                         MainActivity.myBinder.binderPause();
                     }
                     VideoDetailActivity.lunch(mContext, zhiboInfo.getId());
@@ -180,7 +180,7 @@ public class VideoPageAdapter extends DanceBaseAdapter {
             speedAdapter.setItemClickListener(new ListViewItemClickListener() {
                 @Override
                 public void itemClick(int position, Object value) {
-                    if (MainActivity.myBinder!=null){
+                    if (MainActivity.myBinder.binderIsPlaying()){
                         MainActivity.myBinder.binderPause();
                     }
                     VideoDetailActivity.lunch(mContext, mQuickList.get(position).getId());
@@ -235,7 +235,7 @@ public class VideoPageAdapter extends DanceBaseAdapter {
                 adapter.setItemClickListener(new ListViewItemClickListener<HomeTypeBtn>() {
                     @Override
                     public void itemClick(int position, HomeTypeBtn value) {
-                        if (MainActivity.myBinder!=null){
+                        if (MainActivity.myBinder.binderIsPlaying()){
                             MainActivity.myBinder.binderPause();
                         }
                         VideoListActivity.lunch(mContext, value.getName(), value.getId());
@@ -254,7 +254,7 @@ public class VideoPageAdapter extends DanceBaseAdapter {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (MainActivity.myBinder!=null){
+                if (MainActivity.myBinder.binderIsPlaying()){
                     MainActivity.myBinder.binderPause();
                 }
                 VideoDetailActivity.lunch(mContext, video.getId());

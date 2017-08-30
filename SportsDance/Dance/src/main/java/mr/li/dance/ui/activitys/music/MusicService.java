@@ -21,10 +21,10 @@ import mr.li.dance.models.GeDanInfo;
 public class MusicService extends Service {
 
     private MediaPlayer                       mp;
-    private List<GeDanInfo.DataBean.ListBean> musicList;
-    private int position = -1;
-    private int       totalTime;
-    private int       currentPosition;
+    private List<GeDanInfo.DataBean.ListBean> musicList;      //数据集合
+    private int position = -1;           //当前播放位置
+    private int       totalTime;                 //总进度
+    private int       currentPosition;         //暂停后保存进度
     private MpStarted ms;
 
     private int STATE = 1;
@@ -32,8 +32,8 @@ public class MusicService extends Service {
     public static final int RANDOM   = 2;
     public static final int SINGLE   = 0;
     public static final int PLAYLIST = 1;
-  public  static  boolean isPlay;
-    public String id;
+    public static boolean isPlay;    //播放状态
+    public        String  id;             //记录歌单ID
 
     public interface MpStarted {
         void onStart(int totalT);

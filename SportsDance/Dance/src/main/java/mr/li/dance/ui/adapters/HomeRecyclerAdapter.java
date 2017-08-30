@@ -30,6 +30,7 @@ import mr.li.dance.models.BaseHomeItem;
 import mr.li.dance.models.HuoDongInfo;
 import mr.li.dance.models.MathcRecommend;
 import mr.li.dance.ui.activitys.LoginActivity;
+import mr.li.dance.ui.activitys.MainActivity;
 import mr.li.dance.ui.activitys.MyDanceWebActivity;
 import mr.li.dance.ui.activitys.album.AlbumActivity;
 import mr.li.dance.ui.activitys.match.MatchDetailActivity;
@@ -198,9 +199,17 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
 
                 switch (bannerInfo.getType()) {
                     case 10101://直播
+                        if (MainActivity.myBinder.binderIsPlaying()){
+                            MainActivity.floatImage.setVisibility(View.GONE);
+                            MainActivity.myBinder.binderPause();
+                        }
                         ZhiBoDetailActivity.lunch(mContext, bannerInfo.getNumber());
                         break;
                     case 10102://点播
+                        if (MainActivity.myBinder.binderIsPlaying()){
+                            MainActivity.floatImage.setVisibility(View.GONE);
+                            MainActivity.myBinder.binderPause();
+                        }
                         VideoDetailActivity.lunch(mContext, bannerInfo.getNumber());
                         break;
                     case 10103://z咨询
@@ -211,10 +220,10 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
                         AlbumActivity.lunch(mContext, bannerInfo.getNumber(), "");
                         break;
                     case 10105://赛事
+
                         MatchDetailActivity.lunch(mContext, bannerInfo.getNumber());
                         break;
                     case 10106://外联
-
                         if (!MyStrUtil.isEmpty(bannerInfo.getUrl())) {
 
                             MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, "", bannerInfo.getUrl(), bannerInfo.getId());
@@ -332,6 +341,10 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
                             id = mathcRecommends.get(2).getId();
                             break;
                     }
+                    if (MainActivity.myBinder.binderIsPlaying()){
+                        MainActivity.floatImage.setVisibility(View.GONE);
+                        MainActivity.myBinder.binderPause();
+                    }
                     MatchDetailActivity.lunch(mContext, id);
                 }
             });
@@ -398,9 +411,15 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
 
                 switch (mDatas.get(position).getType()) {
                     case 10101://直播
+                        if (MainActivity.myBinder.binderIsPlaying()){
+                            MainActivity.myBinder.binderPause();
+                        }
                         ZhiBoDetailActivity.lunch(mContext, mDatas.get(position).getId());
                         break;
                     case 10102://点播
+                        if (MainActivity.myBinder.binderIsPlaying()){
+                            MainActivity.myBinder.binderPause();
+                        }
                         VideoDetailActivity.lunch(mContext, mDatas.get(position).getId());
                         break;
                     case 10103://赛事资讯
@@ -411,10 +430,12 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
                         AlbumActivity.lunch(mContext, mDatas.get(position).getId(), mDatas.get(position).getCompete_name());
                         break;
                     case 10105://赛事
+                        if (MainActivity.myBinder.binderIsPlaying()){
+                            MainActivity.myBinder.binderPause();
+                        }
                         MatchDetailActivity.lunch(mContext, mDatas.get(position).getCompete_id());
                         break;
                     case 10106://外联
-
                         String url = mDatas.get(position).getUrl();
                         String wailianId = mDatas.get(position).getId();
                         if (!MyStrUtil.isEmpty(url)) {

@@ -71,7 +71,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private static boolean isExit = false;
     public static MusicService.MyBinder myBinder;
     private PushAgent mPushAgent;
-    private ImageView floatImage;
+    public static ImageView floatImage;
     private ObjectAnimator animator;
     private ObjectAnimator a;
     private ServiceConn conn;

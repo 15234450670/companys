@@ -134,7 +134,7 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
 
         } else {
             mDanceViewHolder.setViewVisibility(R.id.gd_black, View.INVISIBLE);
-            Toast.makeText(mContext, "暂无更多信息", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "暂无信息", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -219,8 +219,7 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
     public void itemClick(int position, GeDanInfo.DataBean.ListBean value) {
         mAdapter.selectItem(position);
         if (myBinder != null) {
-            Toast.makeText(mContext, "加载中,请稍后...", Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(mContext, "加载中,请稍候...", Toast.LENGTH_SHORT).show();
             if (!myBinder.mIsSameList(mItemId)) {
                 myBinder.mSetList(mAdapter.getmList(), mItemId);
             }
@@ -243,7 +242,7 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
             mShareUtils = new ShareUtils(this);
         }
 
-        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, "http://work.cdsf.org.cn/h5/share.gdfx?id=" + mItemId, name);
+        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, AppConfigs.SHAREMUSIC + mItemId, name);
     }
 
     @Override

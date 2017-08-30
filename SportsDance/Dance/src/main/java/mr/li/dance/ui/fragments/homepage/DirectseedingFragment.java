@@ -88,7 +88,7 @@ public class DirectseedingFragment extends BaseListFragment {
             Toast.makeText(getActivity(), "CDE未初始化完成,不能播放...", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (MainActivity.myBinder!=null){
+        if (MainActivity.myBinder.binderIsPlaying()){
             MainActivity.myBinder.binderPause();
         }
         ZhiBoDetailActivity.lunch(getActivity(), zhiBoInfo.getId());

@@ -7,8 +7,8 @@ package mr.li.dance.utils;
  */
 
 public class AppConfigs {
-    private final static String MAINurl = "http://work.cdsf.org.cn";//测试环境
-    //private final static String MAINurl = "http://cdsf.org.cn";//正式环境
+    //private final static String MAINurl = "http://work.cdsf.org.cn";//测试环境
+    private final static String MAINurl = "http://cdsf.org.cn";//正式环境
 
     private final static String DomainUrl = MAINurl + "/mobileClient";
     private final static String SHAREURL  = MAINurl + "/h5";
@@ -35,6 +35,8 @@ public class AppConfigs {
     public final static String SHAREGAME      = SHAREURL + "/share.game?id=%s";
     //音乐分享
     public final static String SHAREMUSIC     = SHAREURL + "/share.gdfx?id=";
+    //播放界面分享
+    public final static String SHAREMUSICS     = SHAREURL + "/share.gqfx?classid=";
     public final static String KEY_PLAY_UUID = "7fjvplaumn";
     public final static String KEY_PLAY_PU   = "393628f9df";
 
