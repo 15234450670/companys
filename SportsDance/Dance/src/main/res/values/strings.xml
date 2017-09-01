@@ -4,6 +4,7 @@
     <string name="match">赛事</string>
     <string name="examination">考级</string>
     <string name="mine">我的</string>
+
     <string name="recommend">推荐</string>
     <string name="directseeding">直播</string>
     <string name="vadio">视频</string>
@@ -71,5 +72,10 @@
     <string name="system_download_component_disable">下载服务不用,请您启用</string>
     <string name="system_download_description">版本更新</string>
 
+    <string name="new_zx">资讯</string>
+    <string name="new_teach">教学</string>
+    <string name="new_video">视频</string>
+    <string name="new_music">音乐</string>
+    <string name="new_pic">图片</string>
 
 </resources>

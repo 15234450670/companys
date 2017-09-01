@@ -75,7 +75,7 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
     private final int TYPE_SAISHI         = 8;//赛事
     private final int TYPE_WAILIAN        = 9;//外联
     private final int TYPE_MAIN           = 10;//正常的列表加载页面
-    private final int TYPE_MUSIC        = 11;//外联
+    private final int TYPE_MUSIC        = 11;//音乐
 
     /**
      * 构造器
