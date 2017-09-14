@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_marginTop="@dimen/spacing_10"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginLeft="@dimen/spacing_20"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            android:src="@drawable/back_icon" />
+        <LinearLayout
+            android:id="@+id/search_layout"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="@dimen/spacing_50"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/spacing_30"
+            android:background="@drawable/search_shape_corner"
+            android:gravity="center_vertical"
+            >
+
+            <ImageView
+                android:layout_marginLeft="@dimen/spacing_20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_marchsearch" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textSize="@dimen/textsize24"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_30"
+                android:text="搜索您需要的内容"
+                android:textColor="#999999" />
+
+        </LinearLayout>
+        <ImageView
+            android:layout_marginLeft="@dimen/spacing_10"
+            android:layout_marginRight="@dimen/spacing_20"
+            android:id="@+id/btn_music"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/spacing_60"
+            android:src="@drawable/btn_music"/>
+    </LinearLayout>
+
+</LinearLayout>

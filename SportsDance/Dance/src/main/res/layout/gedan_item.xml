@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:background="@color/home_bg_color"
+
               android:orientation="vertical">
 
     <LinearLayout
@@ -24,9 +24,8 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/spacing_88"
             android:layout_marginLeft="@dimen/spacing_20"
-            android:text="告诉我"
+            android:textColor="@color/black"
             android:gravity="center_vertical"
-            android:textColor="@color/white"
             android:textSize="@dimen/textsize30"/>
     </LinearLayout>
 

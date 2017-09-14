@@ -119,6 +119,7 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
         }
         shareUtils.showShareDilaog(countID, shareUrl, mShareContent);
     }
+
     private void bindMusic(BaseHomeItem music) {
         danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, music.getPicture_app(), R.drawable.default_video);
         danceViewHolder.setText(R.id.name, music.getTitle());
@@ -149,10 +150,10 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
         danceViewHolder.setText(R.id.name, baseHomeItem.getTitle());
         danceViewHolder.setText(R.id.time_tv, baseHomeItem.getStart_time());
         danceViewHolder.setViewVisibility(R.id.typeicon_tv, View.INVISIBLE);
-        danceViewHolder.setText(R.id.from_tv, "来源: " + baseHomeItem.getWriter());
+        danceViewHolder.setText(R.id.from_tv,  baseHomeItem.getWriter());
         danceViewHolder.setViewVisibility(R.id.picnum_tv, View.INVISIBLE);
         danceViewHolder.setViewVisibility(R.id.top_layout, View.GONE);
-        if ("1".equals(baseHomeItem.getImg_num())) {
+       /* if ("1".equals(baseHomeItem.getImg_num())) {
 
             danceViewHolder.getTextView(R.id.name).setTextColor(mContext.getResources().getColor(R.color.yeelow_color));
             danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, baseHomeItem.getPicture(), R.drawable.default_video);
@@ -160,7 +161,7 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
             danceViewHolder.setRoundImageByUrlOrFilePath(R.id.pic1_iv, baseHomeItem.getPicture(), R.drawable.default_video);
             danceViewHolder.setRoundImageByUrlOrFilePath(R.id.pic2_iv, baseHomeItem.getPicture_2(), R.drawable.default_video);
             danceViewHolder.setRoundImageByUrlOrFilePath(R.id.pic3_iv, baseHomeItem.getPicture_3(), R.drawable.default_video);
-        }
+        }*/
     }
 
     private void bindImageInfo(BaseHomeItem albumInfo) {

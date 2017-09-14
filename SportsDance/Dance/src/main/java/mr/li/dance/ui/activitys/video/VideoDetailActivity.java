@@ -29,7 +29,6 @@ import mr.li.dance.models.BaseItemAdapterType;
 import mr.li.dance.models.Video;
 import mr.li.dance.ui.activitys.LoginActivity;
 import mr.li.dance.ui.activitys.base.BaseListActivity;
-import mr.li.dance.ui.activitys.mine.MyCollectActivity;
 import mr.li.dance.ui.adapters.BaseItemAdapter;
 import mr.li.dance.ui.widget.VideoLayoutParams;
 import mr.li.dance.utils.AppConfigs;
@@ -102,7 +101,6 @@ public class VideoDetailActivity extends BaseListActivity {
     public void initViews() {
         super.initViews();
         setTitle("视频详情");
-
         mDanceViewHolder.setText(R.id.type_tv, "赛事相关视频");
         mRefreshLayout.setEnableLoadmore(false);
         videoView = new UIVodVideoView(this);
@@ -276,13 +274,14 @@ public class VideoDetailActivity extends BaseListActivity {
 
     @Override
     public void onBackPressed() {
-        if (isFromCollectpage && !isCollected) {
+       /* if (isFromCollectpage && !isCollected) {
             MyCollectActivity.lunch(this, true, mItemId);
             finish();
         } else {
             super.onBackPressed();
-        }
-
+        }*/
+             finish();
+        super.onBackPressed();
     }
 
     @Override

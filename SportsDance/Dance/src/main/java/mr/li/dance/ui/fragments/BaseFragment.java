@@ -20,12 +20,12 @@ import mr.li.dance.R;
 import mr.li.dance.https.CallServer;
 import mr.li.dance.https.HttpListener;
 import mr.li.dance.https.response.StringResponse;
-import mr.li.dance.ui.fragments.main.MatchFragment;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.DanceViewHolder;
 import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.MyStrUtil;
 import mr.li.dance.utils.NToast;
+import mr.li.dance.utils.StatusBarUtil;
 
 /**
  * 作者: Lixuewei
@@ -48,6 +48,7 @@ public abstract class BaseFragment extends Fragment implements HttpListener {
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);//B
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(getResources().getColor(R.color.home_bg_color));
+            StatusBarUtil.StatusBarLightMode(getActivity());
         }
     }
 
@@ -63,6 +64,7 @@ public abstract class BaseFragment extends Fragment implements HttpListener {
         initViews();
         return mView;
     }
+
 
     public abstract void initData();
 

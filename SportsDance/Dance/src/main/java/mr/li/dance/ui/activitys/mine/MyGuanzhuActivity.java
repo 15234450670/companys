@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Toast;
 
 import com.yanzhenjie.recyclerview.swipe.Closeable;
 import com.yanzhenjie.recyclerview.swipe.OnSwipeMenuItemClickListener;
@@ -20,7 +19,6 @@ import java.util.List;
 import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.MyGuanzhuListResponse;
-import mr.li.dance.models.AlbumInfo;
 import mr.li.dance.models.UserInfo;
 import mr.li.dance.ui.activitys.SwipeListActivity;
 import mr.li.dance.ui.activitys.album.UserAlbumActivity;
@@ -40,6 +38,7 @@ import mr.li.dance.utils.UserInfoManager;
 
 
 public class MyGuanzhuActivity extends SwipeListActivity<UserInfo> {
+
     MyGuanzhuAdapter mAdapter;
     UserInfo mCancelUserInfo;
 

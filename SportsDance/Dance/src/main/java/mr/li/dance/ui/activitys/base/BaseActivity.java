@@ -48,6 +48,7 @@ import mr.li.dance.utils.DanceViewHolder;
 import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.MyStrUtil;
 import mr.li.dance.utils.NToast;
+import mr.li.dance.utils.StatusBarUtil;
 import mr.li.dance.utils.Utils;
 import mr.li.dance.utils.updater.Updater;
 import mr.li.dance.utils.updater.UpdaterConfig;
@@ -88,6 +89,7 @@ public abstract class BaseActivity extends FragmentActivity implements HttpListe
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);//B
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(getResources().getColor(R.color.home_bg_color));
+            StatusBarUtil.StatusBarLightMode(this);
         }
     }
 

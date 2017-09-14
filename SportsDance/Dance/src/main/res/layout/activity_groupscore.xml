@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:background="@color/home_bg_color"
+
     android:layout_height="match_parent">
     <RelativeLayout
         android:id="@+id/mobile_layout"
@@ -16,11 +16,13 @@
         >
 
         <TextView
+            android:textColor="#333333"
             android:id="@+id/groupname_tv"
             style="@style/text_white_style_32"
             android:layout_centerVertical="true"
             android:text="组别" />
         <TextView
+            android:textColor="#333333"
             android:id="@+id/groupnum_tv"
             style="@style/text_white_style_32"
             android:layout_alignParentRight="true"

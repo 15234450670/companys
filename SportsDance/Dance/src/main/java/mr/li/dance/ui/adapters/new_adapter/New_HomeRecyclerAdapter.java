@@ -28,12 +28,16 @@ import mr.li.dance.ui.activitys.MyDanceWebActivity;
 import mr.li.dance.ui.activitys.album.AlbumActivity;
 import mr.li.dance.ui.activitys.match.MatchDetailActivity;
 import mr.li.dance.ui.activitys.music.SongActivity;
+import mr.li.dance.ui.activitys.newActivitys.MessageActivity;
+import mr.li.dance.ui.activitys.newActivitys.MusicActivity;
+import mr.li.dance.ui.activitys.newActivitys.PicActivity;
+import mr.li.dance.ui.activitys.newActivitys.TeachActivity;
+import mr.li.dance.ui.activitys.newActivitys.VideoActivity;
 import mr.li.dance.ui.activitys.video.VideoDetailActivity;
 import mr.li.dance.ui.activitys.video.ZhiBoDetailActivity;
 import mr.li.dance.ui.adapters.DanceBaseAdapter;
 import mr.li.dance.ui.adapters.viewholder.BaseViewHolder;
 import mr.li.dance.ui.adapters.viewholder.HomeViewHolder;
-import mr.li.dance.ui.widget.BottomRelativeLayout;
 import mr.li.dance.ui.widget.SlideShowView;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
@@ -53,7 +57,7 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
     private final int TYPE_2         = 2;//按钮
     private final int TYPE_SMALL_PIC = 3;//小图
     private final int TYPE_BIG_PIC   = 4;//大图
-    private final int TYPE_MAIN           = 5;//正常的列表加载页面
+    private final int TYPE_MAIN      = 5;//正常的列表加载页面
     private List<BannerInfo> mLunBoDatas;  //轮播图集合
 
     private List<BaseHomeItem> mDatas;         //列表集合
@@ -70,14 +74,14 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder viewHolder = null;
         View view = null;
-        switch (viewType){
+        switch (viewType) {
             case TYPE_1:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_item_type1, null);
                 viewHolder = new MyViewHolder1(view);
                 break;
             case TYPE_2:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.new_home_type2, null);
-                viewHolder = new AdverViewHolder(mContext,view);
+                viewHolder = new AdverViewHolder(mContext, view);
                 break;
             case TYPE_SMALL_PIC:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.new_home_type_small, null);
@@ -107,6 +111,41 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
     }
 
     private void bindType2(AdverViewHolder holder, int position) {
+        //资讯
+        holder.danceViewHolder.setClickListener(R.id.new_zx, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MessageActivity.lunch(mContext);
+            }
+        });
+        //教学
+        holder.danceViewHolder.setClickListener(R.id.new_teach, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TeachActivity.lunch(mContext);
+            }
+        });
+        //视频
+        holder.danceViewHolder.setClickListener(R.id.new_video, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                VideoActivity.lunch(mContext);
+            }
+        });
+        //音乐
+        holder.danceViewHolder.setClickListener(R.id.new_music, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MusicActivity.lunch(mContext);
+            }
+        });
+        //图片
+        holder.danceViewHolder.setClickListener(R.id.new_pic, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PicActivity.lunch(mContext);
+            }
+        });
     }
 
     private void bindType1(MyViewHolder1 holder, int position) {
@@ -114,18 +153,17 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
             @Override
             public void itemClick(int position) {
                 BannerInfo bannerInfo = mLunBoDatas.get(position);
-                Log.e("sss", UserInfoManager.getSingleton().isLoading(mContext) + "");
 
                 switch (bannerInfo.getType()) {
                     case 10101://直播
-                        if (MainActivity.myBinder.binderIsPlaying()){
+                        if (MainActivity.myBinder.binderIsPlaying()) {
                             MainActivity.floatImage.setVisibility(View.GONE);
                             MainActivity.myBinder.binderPause();
                         }
                         ZhiBoDetailActivity.lunch(mContext, bannerInfo.getNumber());
                         break;
                     case 10102://点播
-                        if (MainActivity.myBinder.binderIsPlaying()){
+                        if (MainActivity.myBinder.binderIsPlaying()) {
                             MainActivity.floatImage.setVisibility(View.GONE);
                             MainActivity.myBinder.binderPause();
                         }
@@ -160,7 +198,7 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
                         }
                         break;
                     case 10108:
-                        SongActivity.lunch(mContext, bannerInfo.getNumber(),bannerInfo.getTitle());
+                        SongActivity.lunch(mContext, bannerInfo.getNumber(), bannerInfo.getTitle());
                         break;
 
                 }
@@ -180,13 +218,13 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
 
                 switch (mDatas.get(position).getType()) {
                     case 10101://直播
-                        if (MainActivity.myBinder.binderIsPlaying()){
+                        if (MainActivity.myBinder.binderIsPlaying()) {
                             MainActivity.myBinder.binderPause();
                         }
                         ZhiBoDetailActivity.lunch(mContext, mDatas.get(position).getId());
                         break;
                     case 10102://点播
-                        if (MainActivity.myBinder.binderIsPlaying()){
+                        if (MainActivity.myBinder.binderIsPlaying()) {
                             MainActivity.myBinder.binderPause();
                         }
                         VideoDetailActivity.lunch(mContext, mDatas.get(position).getId());
@@ -199,7 +237,7 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
                         AlbumActivity.lunch(mContext, mDatas.get(position).getId(), mDatas.get(position).getCompete_name());
                         break;
                     case 10105://赛事
-                        if (MainActivity.myBinder.binderIsPlaying()){
+                        if (MainActivity.myBinder.binderIsPlaying()) {
                             MainActivity.myBinder.binderPause();
                         }
                         MatchDetailActivity.lunch(mContext, mDatas.get(position).getCompete_id());
@@ -225,7 +263,7 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
                         }
                         break;
                     case 10108:
-                        SongActivity.lunch(mContext, mDatas.get(position).getId(),mDatas.get(position).getTitle());
+                        SongActivity.lunch(mContext, mDatas.get(position).getId(), mDatas.get(position).getTitle());
                         break;
 
                     default:
@@ -268,14 +306,13 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
      * @param base
      */
     public void huodong_listView(final BaseHomeItem base) {
-
-        String appId = "JK48ada5a480e37d411";
+        String appId = base.getAppid();
+       // String appId = "JK48ada5a480e37d411";
         Log.e("appId:::", appId);
-
-        String appsecret = "32dae2ac34079322325d28cfa0825w3aa1";
+        //String appsecret = "32dae2ac34079322325d28cfa0825w3aa1";
+        String appsecret = base.getAppsecret();
         Log.e("appsecret::::", appsecret);
         final String url = base.getUrl();
-
         Log.e("url:::::", url);
         String userId = UserInfoManager.getSingleton().getUserId(mContext);
         Log.e("userId", userId);
@@ -301,7 +338,6 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
     }
 
 
-
     @Override
     public int getItemCount() {
         if (MyStrUtil.isEmpty(mLunBoDatas) && MyStrUtil.isEmpty(mDatas)) {
@@ -319,21 +355,12 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
             return TYPE_2;
         } else {
             BaseHomeItem homeItem = mDatas.get(position - mExtraCount);
-            switch (homeItem.getType()) {
-                case 10101://直播
-                case 10102:
-                case 10103:
-                case 10104:
-                case 10105:
-                case 10106:
-                case 10108:
-                    return TYPE_SMALL_PIC;
-                case 10107:
-                    return TYPE_BIG_PIC;
-                default:
-                    return TYPE_MAIN;
-
+            if (homeItem.getShow_type().equals("1")) {
+                  return TYPE_SMALL_PIC;
+                } else {
+                return TYPE_BIG_PIC;
             }
+
         }
     }
 
@@ -375,20 +402,9 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
     }
 
     private class AdverViewHolder extends BaseViewHolder {
-
-        private final BottomRelativeLayout new_zx;
-        private final BottomRelativeLayout new_video;
-        private final BottomRelativeLayout new_teach;
-        private final BottomRelativeLayout new_music;
-        private final BottomRelativeLayout new_pic;
-
         public AdverViewHolder(Context context, View itemView) {
             super(context, itemView);
-            new_zx = (BottomRelativeLayout) itemView.findViewById(R.id.new_zx);
-            new_teach = (BottomRelativeLayout)itemView.findViewById(R.id.new_teach);
-            new_video = (BottomRelativeLayout) itemView.findViewById(R.id.new_video);
-            new_music = (BottomRelativeLayout)itemView.findViewById(R.id.new_music);
-            new_pic = (BottomRelativeLayout)itemView.findViewById(R.id.new_pic);
+
         }
     }
 }

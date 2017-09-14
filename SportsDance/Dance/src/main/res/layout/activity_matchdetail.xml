@@ -14,7 +14,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/home_bg_color"
+
             android:orientation="vertical">
 
 
@@ -57,6 +57,7 @@
                 android:layout_marginRight="@dimen/spacing_20"
                 android:layout_marginTop="@dimen/spacing_30"
                 android:gravity="center_vertical"
+                android:textColor="#333333"
                 android:text="" />
 
             <TextView
@@ -66,6 +67,7 @@
                 android:layout_marginRight="@dimen/spacing_20"
                 android:layout_marginTop="@dimen/spacing_35"
                 android:gravity="center_vertical"
+
                 android:text="预报赛程" />
 
             <LinearLayout
@@ -86,6 +88,7 @@
                         style="@style/text_white_style_28"
                         android:layout_width="wrap_content"
                         android:gravity="center_vertical"
+                        android:textColor="#333333"
                         android:text="比赛时间: " />
 
                     <TextView
@@ -93,6 +96,7 @@
                         style="@style/text_white_style_28"
                         android:layout_width="match_parent"
                         android:gravity="center_vertical"
+                        android:textColor="#333333"
                         android:text="" />
                 </LinearLayout>
 
@@ -105,12 +109,14 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:textColor="#333333"
                         style="@style/text_white_style_28"
                         android:layout_width="wrap_content"
                         android:gravity="center_vertical"
                         android:text="报名时间: " />
 
                     <TextView
+                        android:textColor="#333333"
                         android:id="@+id/signup_tv"
                         style="@style/text_white_style_28"
                         android:layout_width="match_parent"
@@ -127,12 +133,14 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:textColor="#333333"
                         style="@style/text_white_style_28"
                         android:layout_width="wrap_content"
                         android:gravity="center_vertical"
                         android:text="参赛地点: " />
 
                     <TextView
+                        android:textColor="#333333"
                         android:id="@+id/address_tv"
                         style="@style/text_white_style_28"
                         android:layout_width="match_parent"
@@ -143,6 +151,7 @@
             </LinearLayout>
 
             <TextView
+                android:textColor="#333333"
                 style="@style/text_white_style_34"
                 android:layout_width="match_parent"
                 android:layout_marginTop="@dimen/spacing_45"
@@ -181,6 +190,7 @@
                         android:src="@drawable/mathc_icon_001" />
 
                     <TextView
+                        android:textColor="#333333"
                         style="@style/text_white_style_28"
                         android:layout_width="wrap_content"
                         android:layout_marginTop="@dimen/spacing_18"
@@ -204,6 +214,7 @@
                         android:src="@drawable/mathc_icon_003" />
 
                     <TextView
+                        android:textColor="#333333"
                         style="@style/text_white_style_28"
                         android:layout_width="wrap_content"
                         android:layout_marginTop="@dimen/spacing_18"
@@ -222,11 +233,13 @@
                     android:orientation="vertical">
 
                     <ImageView
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/mathc_icon_004" />
 
                     <TextView
+                        android:textColor="#333333"
                         style="@style/text_white_style_28"
                         android:layout_width="wrap_content"
                         android:layout_marginTop="@dimen/spacing_18"
@@ -262,6 +275,7 @@
                         android:src="@drawable/mathc_icon_006" />
 
                     <TextView
+                        android:textColor="#333333"
                         style="@style/text_white_style_28"
                         android:layout_width="wrap_content"
                         android:layout_marginTop="@dimen/spacing_18"
@@ -285,6 +299,7 @@
                         android:src="@drawable/mathc_icon_002" />
 
                     <TextView
+                        android:textColor="#333333"
                         style="@style/text_white_style_28"
                         android:layout_width="wrap_content"
                         android:layout_marginTop="@dimen/spacing_18"
@@ -308,6 +323,7 @@
                         android:src="@drawable/mathc_icon_005" />
 
                     <TextView
+                        android:textColor="#333333"
                         style="@style/text_white_style_28"
                         android:layout_width="wrap_content"
                         android:layout_marginTop="@dimen/spacing_18"

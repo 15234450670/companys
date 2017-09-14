@@ -42,7 +42,7 @@ public class BottomRelativeLayout extends RelativeLayout {
             textTv.setTextColor(getResources().getColor(R.color.bottom_text_hover_color));
         } else {
             iconIv.setImageResource(defaultIconResId);
-            textTv.setTextColor(getResources().getColor(R.color.bottom_text_default_color));
+            textTv.setTextColor(getResources().getColor(R.color.light_black));
         }
     }
 }

@@ -3,7 +3,7 @@
     android:id="@+id/base_layout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/home_bg_color"
+
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -31,14 +31,13 @@
 
 
         <TextView
+            android:textColor="#333333"
             android:id="@+id/tv_title"
             style="@style/text_white_style_34"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:ellipsize="end"
           android:gravity="center"
-
-
             android:paddingRight="48dip"
             android:singleLine="true"
             android:layout_alignParentTop="true"
@@ -99,6 +98,6 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/home_bg_color" />
+        />
 
 </LinearLayout>

@@ -7,9 +7,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/spacing_10"
+        android:layout_marginBottom="@dimen/spacing_20"
         android:layout_marginTop="@dimen/spacing_20">
-
 
         <ImageView
             android:id="@+id/imageView"
@@ -33,11 +32,11 @@
                 android:id="@+id/name"
                 style="@style/text_white_style_28"
                 android:layout_width="match_parent"
-                android:textColor="@color/black"
+                android:textColor="#333333"
                 android:layout_marginTop="6dp"
                 android:layout_weight="1"
                 android:gravity="left|top"
-                android:text="标题" />
+                android:text="" />
                  <LinearLayout
                      android:orientation="horizontal"
                      android:layout_width="match_parent"
@@ -45,22 +44,22 @@
                      <TextView
                          android:id="@+id/from_tv"
                          style="@style/text_white_style_22"
-                         android:textColor="@color/blue"
+                         android:textColor="#9d60e1"
                          android:layout_marginBottom="@dimen/spacing_13"
                          android:layout_marginTop="@dimen/spacing_13"
-                         android:text="来源:" />
+                         android:text="sssssss" />
                      <View
-                         android:layout_marginLeft="@dimen/spacing_10"
-                                  android:layout_marginRight="@dimen/spacing_10"
+                         android:layout_marginLeft="@dimen/spacing_20"
+                                  android:layout_marginRight="@dimen/spacing_20"
                          android:layout_marginBottom="@dimen/spacing_13"
                          android:layout_marginTop="@dimen/spacing_13"
                          android:layout_width="2dp"
-                         android:background="@color/black"
+                         android:background="#e6e6e6"
                          android:layout_height="15dp" />
                      <TextView
                          android:id="@+id/from_bd"
                          style="@style/text_white_style_22"
-                         android:textColor="@color/black"
+                         android:textColor="#999999"
                          android:layout_marginBottom="@dimen/spacing_13"
                          android:layout_marginTop="@dimen/spacing_13"
                          android:text="广泛报道:" />
@@ -69,4 +68,8 @@
 
         </LinearLayout>
     </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+       android:layout_height="@dimen/spacing_20"
+        android:background="#ececec"   />
 </LinearLayout>

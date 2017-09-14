@@ -41,8 +41,6 @@ public class AccountActivity extends BaseListActivity {
     private int             start;
     private Mine_itemInfo   reponseResult;
     // private List<Mine_itemInfo.DataBean.DetailBean> detail;
-
-
     public void initViewss() {
         setTitle("账单明细");
         mRightIv.setVisibility(View.VISIBLE);
@@ -92,8 +90,6 @@ public class AccountActivity extends BaseListActivity {
         super.onHeadRightButtonClick(v);
         Delivery();
     }
-
-
     private void Delivery() {
         if (state.getData().getStart() == 1) {
             Intent intent = new Intent(this, TiXianZhongActivity.class);

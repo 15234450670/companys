@@ -30,6 +30,7 @@ public class SearchActivity extends BaseActivity implements RadioGroup.OnChecked
     SearchFragment mVideoFragment;
     SearchFragment mZiXunFragment;
     SearchFragment mPicFragment;
+    SearchFragment mMusicFragment;
     RadioGroup mTitleRg;
 
     @Override
@@ -56,17 +57,22 @@ public class SearchActivity extends BaseActivity implements RadioGroup.OnChecked
         Bundle ziXunBundle = new Bundle();
         ziXunBundle.putString("type", "article");
         mZiXunFragment.setArguments(ziXunBundle);
+
         mPicFragment = new SearchFragment();
         Bundle picBundle = new Bundle();
         picBundle.putString("type", "photo_class");
         mPicFragment.setArguments(picBundle);
+
+        mMusicFragment = new SearchFragment();
+        Bundle musicBundle = new Bundle();
+        musicBundle.putString("type", "music");
+        mPicFragment.setArguments(musicBundle);
 
         mCurrentFragment = mZhiboFragment;
     }
 
     @Override
     public void initViews() {
-
         setHeadVisibility(View.GONE);
         mTitleRg = (RadioGroup) mDanceViewHolder.getView(R.id.title_rg);
         mTitleRg.setOnCheckedChangeListener(this);
@@ -110,6 +116,13 @@ public class SearchActivity extends BaseActivity implements RadioGroup.OnChecked
                 type = "photo_class";
                 mCurrentFragment = mPicFragment;
                 break;
+            /*case R.id. music_rb:
+                if (!mMusicFragment.isAdded()) {
+                    transaction.add(R.id.content_fl, mMusicFragment);
+                }
+                type = "music";
+                mCurrentFragment = mMusicFragment;
+                break;*/
         }
         transaction.show(mCurrentFragment);
         transaction.commitAllowingStateLoss();

@@ -8,7 +8,6 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.umeng.analytics.MobclickAgent;
 import com.yolanda.nohttp.rest.Request;
 
 import java.util.ArrayList;
@@ -20,18 +19,18 @@ import mr.li.dance.https.response.AlbumDetailResponse;
 import mr.li.dance.https.response.PhotoIndexResponse;
 import mr.li.dance.https.response.StringResponse;
 import mr.li.dance.models.AlbumInfo;
-import mr.li.dance.ui.activitys.MyDanceWebActivity;
 import mr.li.dance.ui.activitys.LoginActivity;
+import mr.li.dance.ui.activitys.MyDanceWebActivity;
 import mr.li.dance.ui.activitys.base.BaseListActivity;
 import mr.li.dance.ui.activitys.mine.MyCollectActivity;
 import mr.li.dance.ui.adapters.AlbumAdapter;
 import mr.li.dance.ui.widget.SpacesItemDecoration;
 import mr.li.dance.utils.AppConfigs;
-import mr.li.dance.utils.ShareUtils;
-import mr.li.dance.utils.glide.ImageLoaderManager;
 import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.NToast;
+import mr.li.dance.utils.ShareUtils;
 import mr.li.dance.utils.UserInfoManager;
+import mr.li.dance.utils.glide.ImageLoaderManager;
 
 /**
  * 作者: Lixuewei

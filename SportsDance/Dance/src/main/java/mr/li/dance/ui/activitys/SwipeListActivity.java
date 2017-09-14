@@ -1,25 +1,13 @@
 package mr.li.dance.ui.activitys;
 
-import android.graphics.Color;
-import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.widget.Toast;
 
-import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
-import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
-import com.lcodecore.tkrefreshlayout.header.bezierlayout.BezierLayout;
-import com.yanzhenjie.recyclerview.swipe.Closeable;
 import com.yanzhenjie.recyclerview.swipe.OnSwipeMenuItemClickListener;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
-import com.yanzhenjie.recyclerview.swipe.SwipeMenuItem;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 
 import mr.li.dance.R;
-import mr.li.dance.ui.activitys.base.BaseActivity;
 import mr.li.dance.ui.activitys.base.BaseListActivity;
-import mr.li.dance.ui.adapters.ListViewItemClickListener;
 
 /**
  * 作者: Lixuewei
@@ -46,17 +34,13 @@ public abstract class SwipeListActivity<T> extends BaseListActivity<T> {
     public void initViews() {
         initRefreshLayout();
         mSwipeMenuRecyclerView = (SwipeMenuRecyclerView) findViewById(R.id.recyclerview);
-
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mSwipeMenuRecyclerView.setLayoutManager(layoutManager);
-
         mSwipeMenuRecyclerView.setSwipeMenuCreator(getSwipeMenuCreator());
         // 设置菜单Item点击监听。
         mSwipeMenuRecyclerView.setSwipeMenuItemClickListener(menuItemClickListener);
         mSwipeMenuRecyclerView.setAdapter(getAdapter());
 
     }
-
-
 
 }
