@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -103,24 +102,24 @@ public class MessageActivity extends BaseActivity {
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
-        Log.e("Xxx", response);
         if (what == AppConfigs.home_zx) {
             HomeZxResponse reponseResult = JsonMananger.getReponseResult(response, HomeZxResponse.class);
-             ArrayList<LabelInfo> mLabel= reponseResult.getData().getLabel();
+            ArrayList<LabelInfo> mLabel = reponseResult.getData().getLabel();
             if (MyStrUtil.isEmpty(mLabel)) {
                 mDanceViewHolder.setViewVisibility(R.id.wu, View.VISIBLE);
                 mDanceViewHolder.setViewVisibility(R.id.you, View.GONE);
             } else {
                 for (int i = 0; i < mLabel.size(); i++) {
-                    NewZiXunFragment newZiXunFragment = new NewZiXunFragment();
+                    NewZiXunFragment  newZiXunFragment = new NewZiXunFragment();
                     Bundle bundle = new Bundle();
                     bundle.putString("path", mLabel.get(i).getClass_id());
                     newZiXunFragment.setArguments(bundle);
                     list.add(newZiXunFragment);
                 }
-                NewViewPagerAdapter adapter = new NewViewPagerAdapter(getSupportFragmentManager(), list,mLabel);
+                final NewViewPagerAdapter adapter = new NewViewPagerAdapter(getSupportFragmentManager(), list, mLabel);
                 vp.setAdapter(adapter);
                 tabLayout.setupWithViewPager(vp);
+
             }
 
         }

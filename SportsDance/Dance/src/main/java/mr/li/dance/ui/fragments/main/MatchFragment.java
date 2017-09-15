@@ -2,6 +2,7 @@ package mr.li.dance.ui.fragments.main;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.yolanda.nohttp.rest.Request;
 
@@ -10,10 +11,13 @@ import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.MatchIndexResponse;
 import mr.li.dance.https.response.MatchResponse;
 import mr.li.dance.ui.activitys.match.SearchMatchActivity;
+import mr.li.dance.ui.activitys.music.PlayMusicActivity;
 import mr.li.dance.ui.adapters.MatchPageAdapter;
 import mr.li.dance.ui.fragments.BaseListFragment;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
+
+import static mr.li.dance.ui.activitys.MainActivity.myBinder;
 
 /**
  * 作者: Lixuewei
@@ -40,11 +44,21 @@ public class MatchFragment extends BaseListFragment {
                 SearchMatchActivity.lunch(getActivity());
             }
         });
+        danceViewHolder.setClickListener(R.id.btn_music, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (myBinder!=null&&myBinder.binderIsPlaying()) {
+                    PlayMusicActivity.lunch(getActivity());
+                } else {
+                    Toast.makeText(getActivity(), "请去播放音乐", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
     public int getContentView() {
-        return R.layout.fragment_match;
+        return R.layout.new_fragment_list_layout;
     }
 
     @Override

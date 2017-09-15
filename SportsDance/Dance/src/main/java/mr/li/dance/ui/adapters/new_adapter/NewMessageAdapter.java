@@ -99,7 +99,7 @@ public class NewMessageAdapter extends DanceBaseAdapter {
             } else {
                 holder.danceViewHolder.setText(R.id.from_tv, ziXunInfo.getWriter());
             }
-                holder.danceViewHolder.setImageByUrlOrFilePath(R.id.imageView, ziXunInfo.getPicture(), R.drawable.default_video);
+            holder.danceViewHolder.setImageByUrlOrFilePath(R.id.imageView, ziXunInfo.getPicture(), R.drawable.default_video);
 
 
 
@@ -119,14 +119,12 @@ public class NewMessageAdapter extends DanceBaseAdapter {
 
         }
 
-
     }
 
     public void refresh(HomeZxResponse response) {
         super.refresh();
         mDatas.clear();
         ArrayList<ZiXunInfo> ziXunInfos = response.getData().getZxRec();
-
         if (!MyStrUtil.isEmpty(ziXunInfos)) {
             mDatas.addAll(ziXunInfos);
         }
@@ -138,8 +136,8 @@ public class NewMessageAdapter extends DanceBaseAdapter {
     public void loadMore(ZiXunIndexResponse indexResponse) {
         ArrayList<ZiXunInfo> ziXunInfos = indexResponse.getData();
         if (!MyStrUtil.isEmpty(ziXunInfos)) {
+            Log.e("xxx",ziXunInfos.toString());
             mDatas.addAll(ziXunInfos);
-            Log.e("xxx", mDatas.toString());
             super.loadMore();
         }
         notifyDataSetChanged();

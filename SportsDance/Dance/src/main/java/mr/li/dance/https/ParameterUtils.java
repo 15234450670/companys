@@ -439,7 +439,6 @@ public class ParameterUtils {
 
     public Request<String> getHomeZxMapFromServer() {
         Request<String> request = getBaseRequestForPost("/home.zx");
-
         return request;
     }
 

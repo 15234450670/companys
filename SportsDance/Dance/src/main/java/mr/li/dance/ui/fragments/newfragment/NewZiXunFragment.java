@@ -2,6 +2,7 @@ package mr.li.dance.ui.fragments.newfragment;
 
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.yolanda.nohttp.rest.Request;
 
@@ -49,6 +50,7 @@ public class NewZiXunFragment extends BaseListFragment {
     public void initData() {
         Bundle arguments = getArguments();
         path = arguments.getString("path");
+        Log.e("xxx",path);
         if (Integer.parseInt(path)==0) {
             Request<String> request = ParameterUtils.getSingleton().getHomeZxMap();
             request(AppConfigs.home_zx, request, false);
@@ -87,14 +89,15 @@ public class NewZiXunFragment extends BaseListFragment {
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
+        Log.e("zzz",response);
         if (what == AppConfigs.home_zx) {
-            HomeZxResponse reponseResult = JsonMananger.getReponseResult(response, HomeZxResponse.class);
-            mPageAdapter.refresh(reponseResult);
+                HomeZxResponse reponseResult = JsonMananger.getReponseResult(response, HomeZxResponse.class);
+                mPageAdapter.refresh(reponseResult);
         } else{
-            ZiXunIndexResponse indexResponse = JsonMananger.getReponseResult(response, ZiXunIndexResponse.class);
-            mPageAdapter.loadMore(indexResponse);
-        }
+               ZiXunIndexResponse indexResponse = JsonMananger.getReponseResult(response, ZiXunIndexResponse.class);
+                mPageAdapter.loadMore(indexResponse);
 
+        }
     }
 
     @Override
