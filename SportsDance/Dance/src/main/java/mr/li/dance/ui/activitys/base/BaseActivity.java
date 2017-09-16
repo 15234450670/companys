@@ -109,15 +109,15 @@ public abstract class BaseActivity extends FragmentActivity implements HttpListe
 
     public void initRefreshLayout() {
         mRefreshLayout = (TwinklingRefreshLayout) mDanceViewHolder.getView(R.id.refresh);
-        if (mRefreshLayout == null) {
-            return;
-        }
-        BezierLayout headerView = new BezierLayout(this);
-        mRefreshLayout.setHeaderView(headerView);
-        mRefreshLayout.setMaxHeadHeight(140);
-        mRefreshLayout.setPureScrollModeOn();//只显示页面回弹效果
-        mRefreshLayout.setOverScrollBottomShow(false);
+    if (mRefreshLayout == null) {
+        return;
     }
+    BezierLayout headerView = new BezierLayout(this);
+    mRefreshLayout.setHeaderView(headerView);
+    mRefreshLayout.setMaxHeadHeight(140);
+    mRefreshLayout.setPureScrollModeOn();//只显示页面回弹效果
+    mRefreshLayout.setOverScrollBottomShow(false);
+}
 
     // 初始化公共头部
     private void initTitleView() {

@@ -84,7 +84,6 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
         mContext = context;
         mDatas = new ArrayList<BaseHomeItem>();
         mLunBoDatas = new ArrayList<>();
-
         mathcRecommends = new ArrayList<>();
     }
 
@@ -194,8 +193,6 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
             @Override
             public void itemClick(int position) {
                 BannerInfo bannerInfo = mLunBoDatas.get(position);
-                Log.e("sss", UserInfoManager.getSingleton().isLoading(mContext) + "");
-
                 switch (bannerInfo.getType()) {
                     case 10101://直播
                         ZhiBoDetailActivity.lunch(mContext, bannerInfo.getNumber());
