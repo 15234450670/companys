@@ -28,7 +28,7 @@
             android:layout_alignTop="@+id/img_head"
             android:layout_marginStart="@dimen/spacing_30"
             android:layout_toEndOf="@+id/img_head"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="@dimen/textsize30"
             />
 
@@ -49,7 +49,7 @@
             android:layout_alignBottom="@+id/imageView4"
             android:layout_marginStart="@dimen/spacing_10"
             android:layout_toEndOf="@+id/imageView4"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="@dimen/textsize24"/>
     </RelativeLayout>
 

@@ -30,6 +30,7 @@ import mr.li.dance.models.BaseHomeItem;
 import mr.li.dance.models.HuoDongInfo;
 import mr.li.dance.models.MathcRecommend;
 import mr.li.dance.ui.activitys.LoginActivity;
+import mr.li.dance.ui.activitys.MainActivity;
 import mr.li.dance.ui.activitys.MyDanceWebActivity;
 import mr.li.dance.ui.activitys.album.AlbumActivity;
 import mr.li.dance.ui.activitys.match.MatchDetailActivity;
@@ -74,7 +75,7 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
     private final int TYPE_SAISHI         = 8;//赛事
     private final int TYPE_WAILIAN        = 9;//外联
     private final int TYPE_MAIN           = 10;//正常的列表加载页面
-    private final int TYPE_MUSIC        = 11;//外联
+    private final int TYPE_MUSIC        = 11;//音乐
 
     /**
      * 构造器
@@ -195,9 +196,17 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
                 BannerInfo bannerInfo = mLunBoDatas.get(position);
                 switch (bannerInfo.getType()) {
                     case 10101://直播
+                        if (MainActivity.myBinder.binderIsPlaying()){
+                            MainActivity.floatImage.setVisibility(View.GONE);
+                            MainActivity.myBinder.binderPause();
+                        }
                         ZhiBoDetailActivity.lunch(mContext, bannerInfo.getNumber());
                         break;
                     case 10102://点播
+                        if (MainActivity.myBinder.binderIsPlaying()){
+                            MainActivity.floatImage.setVisibility(View.GONE);
+                            MainActivity.myBinder.binderPause();
+                        }
                         VideoDetailActivity.lunch(mContext, bannerInfo.getNumber());
                         break;
                     case 10103://z咨询
@@ -208,10 +217,10 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
                         AlbumActivity.lunch(mContext, bannerInfo.getNumber(), "");
                         break;
                     case 10105://赛事
+
                         MatchDetailActivity.lunch(mContext, bannerInfo.getNumber());
                         break;
                     case 10106://外联
-
                         if (!MyStrUtil.isEmpty(bannerInfo.getUrl())) {
 
                             MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, "", bannerInfo.getUrl(), bannerInfo.getId());
@@ -274,14 +283,11 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
      */
     public void huodong_listView(final BaseHomeItem base) {
 
-        String appId = "JK48ada5a480e37d411";
-        Log.e("appId:::", appId);
-
-        String appsecret = "32dae2ac34079322325d28cfa0825w3aa1";
-        Log.e("appsecret::::", appsecret);
+        String appId = base.getAppid();
+        Log.e("xxx",appId);
+        String appsecret = base.getAppsecret();
+        Log.e("appsecret",appsecret);
         final String url = base.getUrl();
-
-        Log.e("url:::::", url);
         String userId = UserInfoManager.getSingleton().getUserId(mContext);
         Log.e("userId", userId);
         final String title = base.getTitle();
@@ -328,6 +334,10 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
                         case R.id.third_rb:
                             id = mathcRecommends.get(2).getId();
                             break;
+                    }
+                    if (MainActivity.myBinder.binderIsPlaying()){
+                        MainActivity.floatImage.setVisibility(View.GONE);
+                        MainActivity.myBinder.binderPause();
                     }
                     MatchDetailActivity.lunch(mContext, id);
                 }
@@ -395,9 +405,15 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
 
                 switch (mDatas.get(position).getType()) {
                     case 10101://直播
+                        if (MainActivity.myBinder.binderIsPlaying()){
+                            MainActivity.myBinder.binderPause();
+                        }
                         ZhiBoDetailActivity.lunch(mContext, mDatas.get(position).getId());
                         break;
                     case 10102://点播
+                        if (MainActivity.myBinder.binderIsPlaying()){
+                            MainActivity.myBinder.binderPause();
+                        }
                         VideoDetailActivity.lunch(mContext, mDatas.get(position).getId());
                         break;
                     case 10103://赛事资讯
@@ -408,10 +424,12 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
                         AlbumActivity.lunch(mContext, mDatas.get(position).getId(), mDatas.get(position).getCompete_name());
                         break;
                     case 10105://赛事
+                        if (MainActivity.myBinder.binderIsPlaying()){
+                            MainActivity.myBinder.binderPause();
+                        }
                         MatchDetailActivity.lunch(mContext, mDatas.get(position).getCompete_id());
                         break;
                     case 10106://外联
-
                         String url = mDatas.get(position).getUrl();
                         String wailianId = mDatas.get(position).getId();
                         if (!MyStrUtil.isEmpty(url)) {

@@ -21,6 +21,7 @@ import mr.li.dance.models.BaseItemAdapterType;
 import mr.li.dance.models.ZiXunInfo;
 import mr.li.dance.ui.activitys.MyDanceWebActivity;
 import mr.li.dance.ui.activitys.album.AlbumActivity;
+import mr.li.dance.ui.activitys.music.DanceMusicActivity;
 import mr.li.dance.ui.activitys.video.VideoDetailActivity;
 import mr.li.dance.ui.activitys.video.ZhiBoDetailActivity;
 import mr.li.dance.ui.adapters.BaseItemAdapter;
@@ -71,6 +72,8 @@ public class SearchFragment extends BaseListFragment<BaseHomeItem> {
         } else if (TextUtils.equals("photo_class", mType)) {
             AlbumInfo albumInfo = (AlbumInfo) value;
             AlbumActivity.lunch(getActivity(), value.getId(), albumInfo.getClass_name());
+        } else if (TextUtils.equals("music", mType)) {
+            DanceMusicActivity.lunch(getActivity(), value.getId());
         }
     }
 
@@ -84,6 +87,8 @@ public class SearchFragment extends BaseListFragment<BaseHomeItem> {
             mBaseItemAdapter = new BaseItemAdapter(getActivity(), BaseItemAdapterType.ZIXUN);
         } else if (TextUtils.equals("photo_class", mType)) {
             mBaseItemAdapter = new BaseItemAdapter(getActivity(), BaseItemAdapterType.CommentType);
+        } else if (TextUtils.equals("music", mType)) {
+            mBaseItemAdapter = new BaseItemAdapter(getActivity(), BaseItemAdapterType.MUSIC);
         }
         mBaseItemAdapter.setItemClickListener(this);
         return mBaseItemAdapter;

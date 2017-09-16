@@ -5,7 +5,6 @@
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
     android:fitsSystemWindows="true"
-    android:background="@color/home_bg_color"
     android:orientation="vertical">
 
     <View
@@ -19,7 +18,6 @@
         android:id="@+id/main_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/home_bg_color"
         android:gravity="center_vertical"
         android:minHeight="52dp"
         android:orientation="horizontal">
@@ -82,7 +80,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="2dp"
                 android:text="@string/match"
-                android:textColor="@color/bottom_text_default_color"
+                android:textColor="@color/light_black"
                 android:textSize="12sp" />
 
         </mr.li.dance.ui.widget.BottomRelativeLayout>
@@ -105,7 +103,7 @@
         </mr.li.dance.ui.widget.BottomRelativeLayout>-->
 
 
-        <mr.li.dance.ui.widget.BottomRelativeLayout
+        <!--<mr.li.dance.ui.widget.BottomRelativeLayout
             android:id="@+id/examination_layout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -122,7 +120,7 @@
                 android:layout_centerHorizontal="true"
                 android:focusable="false"
                 android:src="@drawable/home_icon_0013" />
-            <!--android:src="@drawable/tab_contact_list"-->
+            &lt;!&ndash;android:src="@drawable/tab_contact_list"&ndash;&gt;
 
             <TextView
                 android:id="@+id/examination_tv"
@@ -134,7 +132,7 @@
                 android:text="@string/examination"
                 android:textColor="@color/bottom_text_default_color"
                 android:textSize="12sp" />
-        </mr.li.dance.ui.widget.BottomRelativeLayout>
+        </mr.li.dance.ui.widget.BottomRelativeLayout>-->
 
         <mr.li.dance.ui.widget.BottomRelativeLayout
             android:id="@+id/mine_layout"
@@ -163,7 +161,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="2dp"
                 android:text="@string/mine"
-                android:textColor="@color/bottom_text_default_color"
+                android:textColor="@color/light_black"
                 android:textSize="12sp" />
         </mr.li.dance.ui.widget.BottomRelativeLayout>
     </LinearLayout>

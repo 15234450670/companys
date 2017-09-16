@@ -42,19 +42,20 @@ import mr.li.dance.ui.activitys.music.ServiceConn;
 import mr.li.dance.ui.dialogs.UpdateApkDialog;
 import mr.li.dance.ui.fragments.BaseFragment;
 import mr.li.dance.ui.fragments.main.ExaminationFragment;
-import mr.li.dance.ui.fragments.main.HomeFragment;
 import mr.li.dance.ui.fragments.main.MatchFragment;
-import mr.li.dance.ui.fragments.main.MineFragment;
+import mr.li.dance.ui.fragments.newfragment.NewHomeFragment;
+import mr.li.dance.ui.fragments.newfragment.NewMineFragment;
 import mr.li.dance.ui.widget.BottomRelativeLayout;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.MyStrUtil;
 import mr.li.dance.utils.NToast;
-import mr.li.dance.utils.UserInfoManager;
+import mr.li.dance.utils.StatusBarUtil;
 import mr.li.dance.utils.Utils;
 import mr.li.dance.utils.updater.Updater;
 import mr.li.dance.utils.updater.UpdaterConfig;
 import mr.li.dance.utils.updater.UpdaterUtils;
+
 
 /**
  * 作者: Lixuewei
@@ -66,15 +67,15 @@ import mr.li.dance.utils.updater.UpdaterUtils;
 
 public class MainActivity extends FragmentActivity implements View.OnClickListener, HttpListener {
     FragmentManager mFragmentManager;
-    BaseFragment mCurrentFragment, mHomePageFragment, mMathcFragment, mMineFragment;
+    BaseFragment    mCurrentFragment, mHomePageFragment, mMathcFragment, mMineFragment;
     ExaminationFragment mExaminationFragment;
     private static boolean isExit = false;
     public static MusicService.MyBinder myBinder;
-    private PushAgent mPushAgent;
-    private ImageView floatImage;
-    private ObjectAnimator animator;
-    private ObjectAnimator a;
-    private ServiceConn conn;
+    private       PushAgent             mPushAgent;
+    public static ImageView             floatImage;
+    private       ObjectAnimator        animator;
+    private       ObjectAnimator        a;
+    private       ServiceConn           conn;
     // private BottomRelativeLayout fabu_layout;
 
     protected void setScreen() {
@@ -84,6 +85,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);//B
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(getResources().getColor(R.color.home_bg_color));
+            StatusBarUtil.StatusBarLightMode(this);
         }
     }
 
@@ -100,12 +102,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         MobclickAgent.onEvent(this, AppConfigs.CLICK_EVENT_17);
 
     }
-
-
     public int getContentViewId() {
         return R.layout.activity_main;
     }
-
 
     public void initDatas() {
         BroadcastManager.getInstance(this).sendBroadcast(AppConfigs.finishactivityAction);
@@ -116,10 +115,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             }
         });
         mFragmentManager = getSupportFragmentManager();
-        mHomePageFragment = new HomeFragment();
+        // mHomePageFragment = new HomeFragment();
+        mHomePageFragment = new NewHomeFragment();
         mMathcFragment = new MatchFragment();
         mExaminationFragment = new ExaminationFragment();
-        mMineFragment = new MineFragment();
+        //  mMineFragment = new MineFragment();
+        mMineFragment = new NewMineFragment();
         conn = new ServiceConn();
         conn.getMyBinder(new ServiceConn.binderCreateFinish() {
             @Override
@@ -148,19 +149,20 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
 
-    private BottomRelativeLayout home_layout, match_layout, examination_layout, mine_layout;
+    private BottomRelativeLayout home_layout, match_layout, /*examination_layout,*/
+            mine_layout;
 
 
     public void initViews() {
         home_layout = (BottomRelativeLayout) findViewById(R.id.homepage_layout);
         match_layout = (BottomRelativeLayout) findViewById(R.id.match_layout);
-        examination_layout = (BottomRelativeLayout) findViewById(R.id.examination_layout);
+        //  examination_layout = (BottomRelativeLayout) findViewById(examination_layout);
         mine_layout = (BottomRelativeLayout) findViewById(R.id.mine_layout);
         // fabu_layout = (BottomRelativeLayout) findViewById(R.id.fabu_layout);
         floatImage = (ImageView) findViewById(R.id.floatImage);
         home_layout.setOnClickListener(this);
         match_layout.setOnClickListener(this);
-        examination_layout.setOnClickListener(this);
+        //examination_layout.setOnClickListener(this);
         mine_layout.setOnClickListener(this);
         // fabu_layout.setOnClickListener(this);
         home_layout.setClicked(true);
@@ -204,7 +206,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 fabuDialog = new FabuDialog(this);
                 fabuDialog.dispaly();
                 break;*/
-            case R.id.examination_layout:
+            /*case R.id.examination_layout:
 
                 if (!UserInfoManager.getSingleton().isLoading(this)) {
                     LoginActivity.lunch(this, 0x011);
@@ -217,7 +219,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     mCurrentFragment = mExaminationFragment;
                     examination_layout.setClicked(true);
                     break;
-                }
+                }*/
 
             case R.id.mine_layout:
                 MobclickAgent.onEvent(this, AppConfigs.CLICK_EVENT_9);
@@ -239,7 +241,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private void changeTextViewColor() {
         home_layout.setClicked(false);
         match_layout.setClicked(false);
-        examination_layout.setClicked(false);
+        //examination_layout.setClicked(false);
         mine_layout.setClicked(false);
     }
 
@@ -339,7 +341,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     private void downLoad(String downUrl) {
 
-
         if (!canDownloadState()) {
             UpdaterUtils.showDownloadSetting(this);
         } else {
@@ -360,7 +361,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             return;
         }
         if (resultCode == 0x011) {
-            examination_layout.callOnClick();
+            //  examination_layout.callOnClick();
         }
 
     }

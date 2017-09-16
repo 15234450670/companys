@@ -1,6 +1,5 @@
 package mr.li.dance.models;
 
-import mr.li.dance.ui.activitys.mine.MyAlbumActivity;
 import mr.li.dance.utils.MyStrUtil;
 
 /**
@@ -27,6 +26,8 @@ public class ZiXunInfo extends BaseHomeItem {
     private String title;
     private String start_time;
     private String writer;////来源
+
+
 
     public String getName() {
         return name;
@@ -109,5 +110,20 @@ public class ZiXunInfo extends BaseHomeItem {
 
     public void setStart_time(String start_time) {
         this.start_time = start_time;
+    }
+
+    @Override
+    public String toString() {
+        return "ZiXunInfo{" +
+                "name='" + name + '\'' +
+                ", picture='" + picture + '\'' +
+                ", picture_2='" + picture_2 + '\'' +
+                ", picture_3='" + picture_3 + '\'' +
+                ", inserttime='" + inserttime + '\'' +
+                ", img_num='" + img_num + '\'' +
+                ", title='" + title + '\'' +
+                ", start_time='" + start_time + '\'' +
+                ", writer='" + writer + '\'' +
+                '}';
     }
 }

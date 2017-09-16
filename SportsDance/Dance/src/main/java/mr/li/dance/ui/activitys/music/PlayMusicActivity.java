@@ -11,12 +11,9 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-
 import com.umeng.analytics.MobclickAgent;
-
 import java.text.SimpleDateFormat;
 import java.util.List;
-
 import mr.li.dance.R;
 import mr.li.dance.models.GeDanInfo;
 import mr.li.dance.ui.activitys.base.BaseActivity;
@@ -65,7 +62,6 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
     private ObjectAnimator                    anim2;
     private RepeatState rs;
     private ServiceConn conn;
-    private String title;
 
 
     @Override
@@ -301,9 +297,10 @@ public class PlayMusicActivity extends BaseActivity implements BasePopwindow.Pop
             mShareUtils = new ShareUtils(this);
         }
 
-        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, "http://work.cdsf.org.cn/h5/share.gqfx?classid="
-                +SongActivity.mItemId+"&g"+"musicid="
-                +myBinder.mGetMusicList().get(myBinder.mGetPosition()).getId(),myBinder.mGetMusicList().get(myBinder.mGetPosition()).getTitle());
+        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, AppConfigs.SHAREMUSICS
+                +SongActivity.mItemId+"&"+"musicid="
+                +myBinder.mGetMusicList().get(myBinder.mGetPosition()).getId(),
+                myBinder.mGetMusicList().get(myBinder.mGetPosition()).getTitle());
     }
     @Override
     protected void onDestroy() {

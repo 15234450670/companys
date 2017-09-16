@@ -3,7 +3,6 @@ package mr.li.dance.ui.activitys;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
@@ -61,13 +60,11 @@ public class MyDanceWebActivity extends BaseActivity {
         mWebView = (DanceWebView) findViewById(R.id.rc_webview);
         mProgressBar = (ProgressBar) findViewById(R.id.rc_web_progressbar);
         mWebView.setVerticalScrollbarOverlay(true);
-
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setLoadWithOverviewMode(true);
         webSettings.setJavaScriptEnabled(true);
         webSettings.setUseWideViewPort(true);
         webSettings.setBuiltInZoomControls(true);
-
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
@@ -115,8 +112,6 @@ public class MyDanceWebActivity extends BaseActivity {
             case ZIXUNTYPE:
                 mCountId = AppConfigs.CLICK_EVENT_21;
                 mWebView.loadUrl(url);
-                Log.e("url:::",url);
-                Log.e("ssssurl:::",shareUrl);
                 break;
             case KAOJI:
                 mCountId = AppConfigs.CLICK_EVENT_24;
@@ -152,7 +147,7 @@ public class MyDanceWebActivity extends BaseActivity {
         super.getIntentData();
         mWebType = mIntentExtras.getInt("webtype", 0);
         titleName = mIntentExtras.getString("title");
-        shareUrl = mIntentExtras.getString("url");
+        shareUrl = mIntentExtras.getString("shareUrl");
         url = mIntentExtras.getString("url");
         wailianId = mIntentExtras.getInt("wailianid", -1);
         showShare = mIntentExtras.getBoolean("showshare", false);
@@ -239,8 +234,6 @@ public class MyDanceWebActivity extends BaseActivity {
     }
 
 
-
-
     private void showShareDialog() {
         if (MyStrUtil.isEmpty(titleName)) {
             mShareContent = mTitle.getText().toString();
@@ -250,7 +243,11 @@ public class MyDanceWebActivity extends BaseActivity {
         if (mShareUtils == null) {
             mShareUtils = new ShareUtils(this);
         }
-        mShareUtils.showShareDilaog(mCountId,shareUrl, mShareContent);
+        if (MyStrUtil.isEmpty(shareUrl)) {
+            mShareUtils.showShareDilaog(mCountId,url, mShareContent);
+        } else {
+            mShareUtils.showShareDilaog(mCountId,shareUrl, mShareContent);
+        }
 
     }
 

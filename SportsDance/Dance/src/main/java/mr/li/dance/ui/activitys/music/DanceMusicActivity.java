@@ -62,7 +62,7 @@ public class DanceMusicActivity extends BaseListActivity {
     public void initViews() {
         super.initViews();
         mRefreshLayout.setEnableLoadmore(false);
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         mRecyclerview.setLayoutManager(layoutManager);
         mRecyclerview.setAdapter(getAdapter());
     }

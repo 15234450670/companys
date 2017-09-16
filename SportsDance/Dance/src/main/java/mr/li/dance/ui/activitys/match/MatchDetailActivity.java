@@ -73,7 +73,6 @@ public class MatchDetailActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void initViews() {
         setTitle("赛事详情");
-
         mDanceViewHolder.setClickListener(R.id.score_layout, this);
         mDanceViewHolder.setClickListener(R.id.matchvideo_layout, this);
         mDanceViewHolder.setClickListener(R.id.wonderfulpic_layout, this);

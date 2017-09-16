@@ -3,8 +3,9 @@ package mr.li.dance.https.response;
 import java.util.ArrayList;
 
 import mr.li.dance.models.BannerInfo;
-import mr.li.dance.models.ZiXunInfo;
 import mr.li.dance.models.HomeTypeBtn;
+import mr.li.dance.models.LabelInfo;
+import mr.li.dance.models.ZiXunInfo;
 
 /**
  * 作者: Administrator
@@ -24,9 +25,18 @@ public class HomeZxResponse extends BaseResponse {
     }
 
     public static class Entity {
-        private ArrayList<BannerInfo> banner;
+        private ArrayList<BannerInfo>  banner;
         private ArrayList<HomeTypeBtn> zx_type;
-        private ArrayList<ZiXunInfo> zxRec;
+        private ArrayList<ZiXunInfo>   zxRec;
+        private ArrayList<LabelInfo>   label;
+
+        public ArrayList<LabelInfo> getLabel() {
+            return label;
+        }
+
+        public void setLabel(ArrayList<LabelInfo> label) {
+            this.label = label;
+        }
 
         public ArrayList<BannerInfo> getBanner() {
             return banner;

@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/home_bg_color"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -34,6 +33,7 @@
     </RelativeLayout>
 
     <TextView
+        android:textColor="#333333"
         android:id="@+id/name"
         style="@style/text_yellow_style_30"
         android:layout_below="@+id/iamge_layout"
@@ -44,6 +44,7 @@
         android:singleLine="true"/>
 
     <TextView
+        android:textColor="#333333"
         android:id="@+id/time_tv"
         style="@style/text_white_style_22"
         android:layout_width="wrap_content"
@@ -52,7 +53,7 @@
         android:gravity="right"
         android:layout_marginBottom="@dimen/spacing_10"
         android:singleLine="true"
-        android:text="2015-7-7" />
+        android:text="" />
 
     <LinearLayout
         android:id="@+id/share_layout"
@@ -97,9 +98,10 @@
             android:src="@drawable/home_icon_001" />
 
         <TextView
+            android:textColor="#333333"
             android:id="@+id/num_tv"
             style="@style/text_white_style_20"
             android:layout_width="wrap_content"
-            android:text="共25张" />
+            android:text="" />
     </LinearLayout>
 </RelativeLayout>

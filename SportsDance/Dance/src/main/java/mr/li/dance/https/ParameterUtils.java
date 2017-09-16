@@ -426,14 +426,19 @@ public class ParameterUtils {
      * @return
      */
     public Request<String> getHomeZxMap() {
-        Request<String> request = getBaseRequestCacheForPost("/home.zx");
+        Request<String> request = getBaseRequestCacheForPost("/home.zx2");
 
+        return request;
+    }
+    public Request<String> getHomeZxMapTab(String page,String class_id) {
+        Request<String> request = getBaseRequestCacheForPost("/home.zxTabel");
+        request.add("page",page);
+        request.add("class_id",class_id) ;
         return request;
     }
 
     public Request<String> getHomeZxMapFromServer() {
         Request<String> request = getBaseRequestForPost("/home.zx");
-
         return request;
     }
 

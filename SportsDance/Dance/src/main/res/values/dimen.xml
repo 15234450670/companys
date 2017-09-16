@@ -101,4 +101,5 @@
     <dimen name="item_margin">10dp</dimen>
     <dimen name="spacing_360">180dp</dimen>
     <dimen name="spacing_384">192dp</dimen>
+    <dimen name="spacing_345">172.5dp</dimen>
 </resources>

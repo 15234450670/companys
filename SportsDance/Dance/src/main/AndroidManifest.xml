@@ -209,6 +209,30 @@
         <activity android:name=".ui.activitys.music.PlayMusicActivity"
                   android:screenOrientation="portrait"
             />
+        <activity android:name=".ui.fragments.main.ExaminationFragment"
+                  android:screenOrientation="portrait"
+            />
+        <activity android:name=".ui.activitys.newTab.TabCollect"
+                  android:launchMode="singleTask"
+                  android:screenOrientation="portrait"
+            />
+        <activity android:name=".ui.activitys.newActivitys.MessageActivity"
+                  android:screenOrientation="portrait"
+            />
+        <activity android:name=".ui.activitys.newActivitys.TeachActivity"
+                  android:screenOrientation="portrait"
+            />
+        <activity android:name=".ui.activitys.newActivitys.VideoActivity"
+                  android:screenOrientation="portrait"
+            />
+        <activity android:name=".ui.activitys.newActivitys.MusicActivity"
+                  android:screenOrientation="portrait"
+            />
+        <activity android:name=".ui.activitys.newActivitys.PicActivity"
+                  android:screenOrientation="portrait"
+            />
+
+
 
         <service
             android:name="com.letvcloud.cmf.MediaService"

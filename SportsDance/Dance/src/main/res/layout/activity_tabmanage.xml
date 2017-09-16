@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <ImageView
+            android:id="@+id/btn_finish"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_30"
+            android:layout_height="@dimen/spacing_60"
+            android:src="@drawable/ic_launcher"/>
+        <LinearLayout
+            android:id="@+id/search_layout"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="@dimen/spacing_60"
+            android:layout_centerInParent="true"
+            android:background="@drawable/search_shape_corner"
+            android:gravity="center_vertical"
+            >
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_20"
+                android:text="搜索需要的内容"
+                android:textColor="#b9b9b9" />
+
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/btn_music"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/spacing_60"
+            android:src="@drawable/ic_launcher"/>
+    </LinearLayout>
+             <android.support.design.widget.TabLayout
+                 android:id="@+id/tab"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 app:tabSelectedTextColor="@color/black"
+                 app:tabIndicatorColor="@color/red_normal"
+                 app:tabTextColor="@color/black"
+                >
+
+             </android.support.design.widget.TabLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"  >
+
+    </android.support.v4.view.ViewPager>
+
+
+</LinearLayout>

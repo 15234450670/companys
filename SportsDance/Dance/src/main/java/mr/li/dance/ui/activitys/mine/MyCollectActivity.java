@@ -79,7 +79,6 @@ public class MyCollectActivity extends SwipeListActivity<BaseHomeItem> {
         if (isAlbum) {
             setTitle("收藏的相册");
             mDanceViewHolder.getImageView(R.id.nodate_icon).setImageResource(R.drawable.no_collect_videolsit);
-
             mDanceViewHolder.setText(R.id.nodate_desc, "您还没有收藏相册");
         } else {
             mDanceViewHolder.getImageView(R.id.nodate_icon).setImageResource(R.drawable.no_collect_videolsit);
@@ -89,12 +88,18 @@ public class MyCollectActivity extends SwipeListActivity<BaseHomeItem> {
 
     }
 
+
+
     public static void lunch(Activity context, boolean isAlbum) {
         Intent intent = new Intent(context, MyCollectActivity.class);
         intent.putExtra("isalbum", isAlbum);
         context.startActivity(intent);
     }
 
+    /**
+     * 删除的方法
+     * @param intent
+     */
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);

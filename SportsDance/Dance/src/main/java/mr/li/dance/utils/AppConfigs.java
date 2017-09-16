@@ -7,8 +7,13 @@ package mr.li.dance.utils;
  */
 
 public class AppConfigs {
+<<<<<<< HEAD
     //private final static String MAINurl = "http://work.cdsf.org.cn";//测试环境
     private final static String MAINurl = "http://cdsf.org.cn";//正式环境
+=======
+    private final static String MAINurl = "http://work.cdsf.org.cn";//测试环境
+ // private final static String MAINurl = "http://cdsf.org.cn";//正式环境
+>>>>>>> e27dd04fff72fe9a052ee4eeef498a20ede5beeb
 
     private final static String DomainUrl = MAINurl + "/mobileClient";
     private final static String SHAREURL  = MAINurl + "/h5";
@@ -35,6 +40,8 @@ public class AppConfigs {
     public final static String SHAREGAME      = SHAREURL + "/share.game?id=%s";
     //音乐分享
     public final static String SHAREMUSIC     = SHAREURL + "/share.gdfx?id=";
+    //播放界面分享
+    public final static String SHAREMUSICS     = SHAREURL + "/share.gqfx?classid=";
     public final static String KEY_PLAY_UUID = "7fjvplaumn";
     public final static String KEY_PLAY_PU   = "393628f9df";
 
@@ -76,6 +83,7 @@ public class AppConfigs {
     public final static int user_sendOpinion          = 0x0032;//d
     public final static int user_collection           = 0x0033;//d
     public final static int home_collectionList       = 0x0034;//d
+    public final static int user_collections           = 0x0035;//d
 
 
     public final static int getMatch_index_code     = 0x0035;
@@ -107,6 +115,7 @@ public class AppConfigs {
     public final static int home_music_page         = 0x0062;
     public final static int home_music_gedan        = 0x0063;
     public final static int home_music_wudao        = 0x0064;
+    public final static int home_tab_zx        = 0x0065;
 
     public static String getDomainUrl() {
         return DomainUrl;

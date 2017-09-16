@@ -3,6 +3,7 @@ package mr.li.dance.https.response;
 import java.util.ArrayList;
 
 import mr.li.dance.models.BannerInfo;
+import mr.li.dance.models.LabelInfo;
 import mr.li.dance.models.MusicRecAppBean;
 
 /**
@@ -26,6 +27,15 @@ public class MusicResponse extends BaseResponse {
     public static class MusicData{
         private ArrayList<BannerInfo>      banner;
         private ArrayList<MusicRecAppBean> MusicRecApp;
+        private ArrayList<LabelInfo>       label;
+
+        public ArrayList<LabelInfo> getLabel() {
+            return label;
+        }
+
+        public void setLabel(ArrayList<LabelInfo> label) {
+            this.label = label;
+        }
 
         public ArrayList<BannerInfo> getBanner() {
             return banner;

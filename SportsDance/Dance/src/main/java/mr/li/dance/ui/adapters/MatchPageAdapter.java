@@ -167,43 +167,35 @@ public class MatchPageAdapter extends DanceBaseAdapter {
         holder.slideShowView.setOnGolistener(new SlideShowView.BannerClickListener() {
             @Override
             public void itemClick(int position) {
+                if (MainActivity.myBinder.binderIsPlaying()){
+                    MainActivity.floatImage.setVisibility(View.GONE);
+                    MainActivity.myBinder.binderPause();
+                }
                 BannerInfo bannerInfo = mLunBoDatas.get(position);
                 switch (bannerInfo.getType()) {
                     case 10101://直播
-                        if (MainActivity.myBinder!=null){
-                            MainActivity.myBinder.binderPause();
-                        }
+
                         ZhiBoDetailActivity.lunch(mContext, bannerInfo.getNumber());
                         break;
                     case 10102://点播
-                        if (MainActivity.myBinder!=null){
-                            MainActivity.myBinder.binderPause();
-                        }
+
                         VideoDetailActivity.lunch(mContext, bannerInfo.getNumber());
                         break;
                     case 10103://z咨询
-                        if (MainActivity.myBinder!=null){
-                            MainActivity.myBinder.binderPause();
-                        }
+
                         String url = String.format(AppConfigs.ZixunShareUrl, bannerInfo.getNumber());
                         MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, "", url, true);
                         break;
                     case 10104://图片
-                        if (MainActivity.myBinder!=null){
-                            MainActivity.myBinder.binderPause();
-                        }
+
                         AlbumActivity.lunch(mContext, bannerInfo.getNumber(), "");
                         break;
                     case 10105://赛事
-                        if (MainActivity.myBinder!=null){
-                            MainActivity.myBinder.binderPause();
-                        }
+
                         MatchDetailActivity.lunch(mContext, bannerInfo.getNumber());
                         break;
                     case 10106://外联
-                        if (MainActivity.myBinder!=null){
-                            MainActivity.myBinder.binderPause();
-                        }
+
                         if (!MyStrUtil.isEmpty(bannerInfo.getUrl())) {
                             MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, "", bannerInfo.getUrl(), bannerInfo.getId());
                         }
@@ -220,9 +212,6 @@ public class MatchPageAdapter extends DanceBaseAdapter {
                         }
                         break;
                     case 10108:
-                        if (MainActivity.myBinder!=null){
-                            MainActivity.myBinder.binderPause();
-                        }
                         DanceMusicActivity.lunch(mContext, bannerInfo.getNumber());
                         break;
                 }
@@ -264,6 +253,9 @@ public class MatchPageAdapter extends DanceBaseAdapter {
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (MainActivity.myBinder.binderIsPlaying()){
+                    MainActivity.myBinder.binderPause();
+                }
                 int type = 10001;
                 switch (view.getId()) {
                     case R.id.type1_layout:
@@ -276,9 +268,7 @@ public class MatchPageAdapter extends DanceBaseAdapter {
                         type = 10003;
                         break;
                 }
-                if (MainActivity.myBinder!=null){
-                    MainActivity.myBinder.binderPause();
-                }
+
                 MatchTypeListActivity.lunch(mContext, type);
             }
         };
@@ -300,7 +290,7 @@ public class MatchPageAdapter extends DanceBaseAdapter {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (MainActivity.myBinder!=null){
+                if (MainActivity.myBinder.binderIsPlaying()){
                     MainActivity.myBinder.binderPause();
                 }
                 MatchDetailActivity.lunch(mContext, mDatas.get(position).getId());
@@ -341,7 +331,7 @@ public class MatchPageAdapter extends DanceBaseAdapter {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (MainActivity.myBinder!=null){
+                if (MainActivity.myBinder.binderIsPlaying()){
                     MainActivity.myBinder.binderPause();
                 }
                 MatchDetailActivity.lunch(mContext, match.getId());

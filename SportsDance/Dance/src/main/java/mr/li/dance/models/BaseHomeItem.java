@@ -27,6 +27,33 @@ public class BaseHomeItem {
     ////////////////////////////////////////////////////
     private String url;//外联的url
     private String create_time;
+    private String appsecret;
+    private String appid;
+    private String show_type;
+
+    public String getShow_type() {
+        return show_type;
+    }
+
+    public void setShow_type(String show_type) {
+        this.show_type = show_type;
+    }
+
+    public String getAppsecret() {
+        return appsecret;
+    }
+
+    public void setAppsecret(String appsecret) {
+        this.appsecret = appsecret;
+    }
+
+    public String getAppid() {
+        return appid;
+    }
+
+    public void setAppid(String appid) {
+        this.appid = appid;
+    }
 
     public String getCreate_time() {
         return create_time;

@@ -24,7 +24,7 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
     private final int viewType2 = 0x002;//视频左右模式,资讯单图模式
     private final int TYPE_ZIXUNONPIC = 5;//资讯1张图
     private final int TYPE_ZIXU_THREE_PIC = 6;//资讯3张图
-
+    private final int TYPE_MUSIC = 7;
     private BaseItemAdapterType mAdatperType;
 
     public BaseItemAdapter(Context ctx, BaseItemAdapterType adapterType) {
@@ -43,6 +43,8 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
                 return R.layout.item_consultation_type1;
             case TYPE_ZIXU_THREE_PIC:
                 return R.layout.consultation_item_type4;
+            case TYPE_MUSIC:
+                return R.layout.dance_item;
 
         }
         return R.layout.item_base;
@@ -62,6 +64,8 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
                 } else {
                     return TYPE_ZIXU_THREE_PIC;
                 }
+            case MUSIC:
+                return TYPE_MUSIC;
         }
         return super.getItemViewType(position);
     }

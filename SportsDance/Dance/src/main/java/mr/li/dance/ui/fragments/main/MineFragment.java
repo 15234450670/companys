@@ -166,8 +166,7 @@ public class MineFragment extends BaseListFragment {
             case 7:
                 SettingActivity.lunch(getActivity());
                 break;
-
-    }
+        }
     }
 
     @Override

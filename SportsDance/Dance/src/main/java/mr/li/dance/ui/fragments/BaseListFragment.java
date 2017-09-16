@@ -23,15 +23,13 @@ import mr.li.dance.ui.adapters.ListViewItemClickListener;
 public abstract class BaseListFragment<T> extends BaseFragment implements ListViewItemClickListener<T> {
     protected RecyclerView mRecyclerview;
     public TwinklingRefreshLayout mRefreshLayout;
-    protected boolean isRefresh = true;
-    RecyclerView.Adapter mAdapter;
-
+    protected boolean isRefresh ;
 
     public void initViews() {
         initRefreshLayout();
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerview.setLayoutManager(layoutManager);
-        mAdapter = getAdapter();
+        RecyclerView.Adapter  mAdapter = getAdapter();
         if (null != mAdapter) {
             mRecyclerview.setAdapter(mAdapter);
         }
@@ -68,6 +66,9 @@ public abstract class BaseListFragment<T> extends BaseFragment implements ListVi
                 }, 2000);
             }
         });
+    }
+    public void setAdapter(RecyclerView.Adapter adapter) {
+        mRecyclerview.setAdapter(adapter);
     }
 
     public abstract RecyclerView.Adapter getAdapter();

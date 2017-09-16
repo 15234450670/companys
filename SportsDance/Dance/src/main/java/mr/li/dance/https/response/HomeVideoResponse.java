@@ -3,6 +3,7 @@ package mr.li.dance.https.response;
 import java.util.ArrayList;
 
 import mr.li.dance.models.HomeTypeBtn;
+import mr.li.dance.models.LabelInfo;
 import mr.li.dance.models.QuickZhiboInfo;
 import mr.li.dance.models.Video;
 
@@ -27,6 +28,15 @@ public class HomeVideoResponse extends BaseResponse {
         private ArrayList<HomeTypeBtn> db_type;
         private ArrayList<QuickZhiboInfo> dianbo;
         private ArrayList<Video> db_rec;
+        private ArrayList<LabelInfo>label;
+
+        public ArrayList<LabelInfo> getLabel() {
+            return label;
+        }
+
+        public void setLabel(ArrayList<LabelInfo> label) {
+            this.label = label;
+        }
 
         public ArrayList<HomeTypeBtn> getDb_type() {
             return db_type;

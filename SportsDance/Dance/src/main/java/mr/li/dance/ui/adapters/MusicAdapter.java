@@ -209,7 +209,6 @@ public class MusicAdapter extends DanceBaseAdapter {
         });
 
         if (!MyStrUtil.isEmpty(musicRecAppBean.getImg())) {
-            //holder.danceViewHolder.setImageByUrlOrFilePath(R.id.item_pic, musicRecAppBean.getImg(), R.drawable.default_video);
             holder.danceViewHolder.setRoundImageByUrlOrFilePath(R.id.item_pic, musicRecAppBean.getImg(), R.drawable.default_video);
         } else {
 

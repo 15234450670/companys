@@ -3,7 +3,6 @@
     android:id="@+id/refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/home_bg_color"
     android:paddingLeft="@dimen/spacing_20"
     android:paddingRight="@dimen/spacing_20">
 
@@ -41,6 +40,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:textColor="#333333"
                     style="@style/text_white_style_24"
                     android:layout_centerVertical="true"
                     android:text="设置" />
@@ -68,6 +68,7 @@
             android:paddingRight="@dimen/spacing_20">
 
             <TextView
+                android:textColor="#333333"
                 style="@style/text_white_style_28"
                 android:layout_centerVertical="true"
                 android:text="姓名" />
@@ -81,6 +82,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:textColor="#333333"
                     android:id="@+id/name_tv"
                     style="@style/text_white_style_24"
 
@@ -108,6 +110,7 @@
             android:paddingRight="@dimen/spacing_20">
 
             <TextView
+                android:textColor="#333333"
                 style="@style/text_white_style_28"
                 android:layout_centerVertical="true"
                 android:text="性别" />
@@ -121,6 +124,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:textColor="#333333"
                     android:id="@+id/sex_tv"
                     style="@style/text_white_style_24"
                     android:layout_centerVertical="true"
@@ -149,6 +153,7 @@
             android:paddingRight="@dimen/spacing_20">
 
             <TextView
+                android:textColor="#333333"
                 style="@style/text_white_style_28"
                 android:layout_centerVertical="true"
                 android:text="身份证号" />
@@ -162,6 +167,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:textColor="#333333"
                     android:id="@+id/card_tv"
                     style="@style/text_white_style_24"
                     android:layout_centerVertical="true" />
@@ -190,6 +196,7 @@
             android:paddingRight="@dimen/spacing_20">
 
             <TextView
+                android:textColor="#333333"
                 style="@style/text_white_style_28"
                 android:layout_centerVertical="true"
                 android:text="昵称" />
@@ -203,6 +210,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:textColor="#333333"
                     android:id="@+id/nick_tv"
                     style="@style/text_white_style_24"
                     android:layout_centerVertical="true" />
@@ -230,6 +238,7 @@
             android:paddingRight="@dimen/spacing_20">
 
             <TextView
+                android:textColor="#333333"
                 style="@style/text_white_style_28"
                 android:layout_centerVertical="true"
                 android:text="绑定手机" />
@@ -243,6 +252,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:textColor="#333333"
                     android:id="@+id/mobile_tv"
                     style="@style/text_white_style_24"
                     android:layout_centerVertical="true" />

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/home_bg_color"
+
     android:orientation="vertical">
 
     <RelativeLayout
@@ -14,6 +14,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:textColor="#333333"
             android:id="@+id/name"
             style="@style/text_white_style_28"
             android:layout_marginBottom="@dimen/spacing_20"
@@ -57,22 +58,24 @@
         </LinearLayout>
 
         <TextView
+            android:textColor="#333333"
             android:id="@+id/from_tv"
             style="@style/text_white_style_22"
             android:layout_width="wrap_content"
             android:layout_below="@+id/pic_layout"
             android:layout_marginLeft="@dimen/spacing_20"
             android:layout_marginTop="@dimen/spacing_15"
-            android:text="来源:" />
+            android:text="" />
 
         <TextView
+            android:textColor="#333333"
             android:id="@+id/time_tv"
             style="@style/text_white_style_22"
             android:layout_width="wrap_content"
             android:layout_alignLeft="@+id/from_tv"
             android:layout_below="@+id/from_tv"
             android:layout_marginTop="@dimen/spacing_10"
-            android:text="2019-09-09" />
+            android:text="" />
 
         <LinearLayout
             android:id="@+id/share_layout"
@@ -90,10 +93,11 @@
                 android:src="@drawable/share_icon_001" />
 
             <TextView
+
                 style="@style/text_white_style_20"
                 android:layout_marginLeft="@dimen/spacing_10"
                 android:text="分享"
-                android:textColor="#d3d3d3" />
+                android:textColor="#333333" />
 
         </LinearLayout>
     </RelativeLayout>

@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/home_bg_color"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -36,7 +35,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/spacing_20"
                 android:background="@null"
-                android:hint="赛事名称"
+                android:hint="搜索需要的内容"
                 android:textColor="#000000"
                 android:textColorHint="#b9b9b9" />
 
@@ -45,13 +44,14 @@
         <TextView
             android:id="@+id/search_btn"
             style="@style/text_white_style_28"
+
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="@dimen/spacing_20"
             android:layout_marginRight="@dimen/spacing_40"
             android:text="搜索"
-            android:textColor="#b9b9b9" />
+            android:textColor="#333333" />
     </RelativeLayout>
 
     <include layout="@layout/split_line" />
@@ -75,6 +75,7 @@
             android:padding="2dp">
 
             <RadioButton
+               android:textColor="#333333"
                 android:id="@+id/directseeding_rb"
                 style="@style/search_titletext_style"
                 android:checked="true"
@@ -82,22 +83,31 @@
                 android:text="@string/directseeding" />
 
             <RadioButton
+                android:textColor="#333333"
                 android:id="@+id/video_rb"
                 style="@style/search_titletext_style"
                 android:gravity="center"
                 android:text="@string/vadio" />
 
             <RadioButton
+                android:textColor="#333333"
                 android:id="@+id/consultation_rb"
                 style="@style/search_titletext_style"
                 android:gravity="center"
                 android:text="@string/consultation" />
 
             <RadioButton
+                android:textColor="#333333"
                 android:id="@+id/picture_rb"
                 style="@style/search_titletext_style"
                 android:gravity="center"
                 android:text="@string/picture" />
+            <RadioButton
+                android:textColor="#333333"
+                android:id="@+id/music_rb"
+                style="@style/search_titletext_style"
+                android:gravity="center"
+                android:text="@string/music" />
         </RadioGroup>
     </LinearLayout>
 

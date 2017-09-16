@@ -31,6 +31,7 @@ public abstract class BaseListActivity<T> extends BaseActivity implements ListVi
         final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerview.setLayoutManager(layoutManager);
         mRecyclerview.setAdapter(getAdapter());
+
     }
 
     @Override
