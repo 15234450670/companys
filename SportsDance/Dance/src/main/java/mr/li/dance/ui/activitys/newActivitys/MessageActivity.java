@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -39,8 +41,8 @@ import static mr.li.dance.ui.activitys.MainActivity.myBinder;
  */
 public class MessageActivity extends BaseActivity {
 
-    private TabLayout      tabLayout;
-    private ImageView      label_pic;
+    private TabLayout tabLayout;
+    private ImageView label_pic;
     private IndexViewPager vp;
     List<Fragment> list = new ArrayList<>();
 
@@ -110,10 +112,14 @@ public class MessageActivity extends BaseActivity {
                 mDanceViewHolder.setViewVisibility(R.id.you, View.GONE);
             } else {
                 for (int i = 0; i < mLabel.size(); i++) {
-                    NewZiXunFragment  newZiXunFragment = new NewZiXunFragment();
+                    NewZiXunFragment newZiXunFragment = new NewZiXunFragment();
                     Bundle bundle = new Bundle();
-                    bundle.putString("path", mLabel.get(i).getClass_id());
-                    newZiXunFragment.setArguments(bundle);
+                    if (TextUtils.isEmpty(mLabel.get(i).getClass_id())) {
+                        Log.d("getClass_id()", "mLabel= null ");
+                    } else {
+                        bundle.putString("path", mLabel.get(i).getClass_id());
+                        newZiXunFragment.setArguments(bundle);
+                    }
                     list.add(newZiXunFragment);
                 }
                 final NewViewPagerAdapter adapter = new NewViewPagerAdapter(getSupportFragmentManager(), list, mLabel);

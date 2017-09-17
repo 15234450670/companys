@@ -7,13 +7,9 @@ package mr.li.dance.utils;
  */
 
 public class AppConfigs {
-<<<<<<< HEAD
-    //private final static String MAINurl = "http://work.cdsf.org.cn";//测试环境
-    private final static String MAINurl = "http://cdsf.org.cn";//正式环境
-=======
+
     private final static String MAINurl = "http://work.cdsf.org.cn";//测试环境
  // private final static String MAINurl = "http://cdsf.org.cn";//正式环境
->>>>>>> e27dd04fff72fe9a052ee4eeef498a20ede5beeb
 
     private final static String DomainUrl = MAINurl + "/mobileClient";
     private final static String SHAREURL  = MAINurl + "/h5";

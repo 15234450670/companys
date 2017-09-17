@@ -32,7 +32,8 @@ public class NewMessageAdapter extends DanceBaseAdapter {
     Context mContext;
     public static final int TYPE_2 = 0xff02;
     private List<ZiXunInfo> mDatas;
-
+    private final String tag = getClass().getSimpleName();
+   private see s;
     ListViewItemClickListener<ZiXunInfo> mItemClickListener;
 
     /**
@@ -124,19 +125,41 @@ public class NewMessageAdapter extends DanceBaseAdapter {
     public void refresh(HomeZxResponse response) {
         super.refresh();
         mDatas.clear();
+        if (response==null){
+            Log.d(tag, "response : "+response);
+            return;
+        }
+        if (response.getData()==null){
+            Log.d(tag, "response.getData() : "+response.getData());
+            if (s!=null){
+                s.NoSee();
+            }
+            return;
+        }
         ArrayList<ZiXunInfo> ziXunInfos = response.getData().getZxRec();
         if (!MyStrUtil.isEmpty(ziXunInfos)) {
+            if (s!=null){
+                s.Look();
+            }
             mDatas.addAll(ziXunInfos);
         }
 
         notifyDataSetChanged();
+    }
+    public interface see{
+        void NoSee();
+        void Look();
+    }
+
+    public void Nosee(see s){
+        this.s = s;
     }
 
 
     public void loadMore(ZiXunIndexResponse indexResponse) {
         ArrayList<ZiXunInfo> ziXunInfos = indexResponse.getData();
         if (!MyStrUtil.isEmpty(ziXunInfos)) {
-            Log.e("xxx",ziXunInfos.toString());
+           Log.e("xxx",ziXunInfos.toString());
             mDatas.addAll(ziXunInfos);
             super.loadMore();
         }
