@@ -2,15 +2,23 @@ package mr.li.dance.ui.activitys.newActivitys;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.umeng.analytics.MobclickAgent;
 import com.yolanda.nohttp.rest.Request;
 
@@ -21,9 +29,11 @@ import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.HomeZxResponse;
 import mr.li.dance.models.LabelInfo;
+import mr.li.dance.models.LabelSelect;
 import mr.li.dance.ui.activitys.SearchActivity;
 import mr.li.dance.ui.activitys.base.BaseActivity;
 import mr.li.dance.ui.activitys.music.PlayMusicActivity;
+import mr.li.dance.ui.adapters.new_adapter.LabelAdapter;
 import mr.li.dance.ui.fragments.newfragment.NewZiXunFragment;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
@@ -41,10 +51,13 @@ import static mr.li.dance.ui.activitys.MainActivity.myBinder;
  */
 public class MessageActivity extends BaseActivity {
 
-    private TabLayout tabLayout;
-    private ImageView label_pic;
+    private TabLayout      tabLayout;
+    private ImageView      label_pic;
     private IndexViewPager vp;
     List<Fragment> list = new ArrayList<>();
+    private PopupWindow popupWindow;
+    private String tag = this.getClass().getSimpleName();
+    private RecyclerView label_rv;
 
     @Override
     public int getContentViewId() {
@@ -76,8 +89,59 @@ public class MessageActivity extends BaseActivity {
         Request<String> request = ParameterUtils.getSingleton().getHomeZxMap();
         request(AppConfigs.home_zx, request, false);
 
+
     }
 
+    //弹出标签选择
+    private void LabelSelect(List<LabelSelect.DataBean> dataBeen) {
+        final View popipWindow_view = getLayoutInflater().inflate(R.layout.label_select, null, false);
+        label_rv = (RecyclerView) popipWindow_view.findViewById(R.id.label_rv);
+       Button  reset = (Button) popipWindow_view.findViewById(R.id.reset);
+        Button  sure = (Button) popipWindow_view.findViewById(R.id.sure);
+        WindowManager wm = this.getWindowManager();
+        int width = wm.getDefaultDisplay().getWidth() * 4 / 5;
+        popupWindow = new PopupWindow(popipWindow_view, width,
+                WindowManager.LayoutParams.MATCH_PARENT);
+        popupWindow.setFocusable(true);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        label_rv.setLayoutManager(new LinearLayoutManager(this));
+        label_rv.setAdapter(new LabelAdapter(this, dataBeen));
+        View parent = findViewById(R.id.parent);
+        popupWindow.setAnimationStyle(R.style.AnimationLeftFade);
+        popupWindow.showAtLocation(parent, Gravity.RIGHT, 0, 0);
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.alpha = 0.3f;
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        getWindow().setAttributes(lp);
+        PopDisappear();
+        //确定
+        sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopDisappear();
+            }
+        });
+        //重置
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+    }
+    //pop消失
+    private void PopDisappear(){
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                WindowManager.LayoutParams lp = getWindow().getAttributes();
+                lp.alpha = 1.0f;
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                getWindow().setAttributes(lp);
+            }
+        });
+    }
     @Override
     public void initViews() {
         setHeadVisibility(View.GONE);
@@ -86,6 +150,14 @@ public class MessageActivity extends BaseActivity {
         label_pic = (ImageView) findViewById(R.id.label_pic);
         vp = (IndexViewPager) findViewById(R.id.fl);
         finishs();
+        label_pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Request<String> request = ParameterUtils.getSingleton().getLabelSelect("10902");
+                request(AppConfigs.home_tab_zx, request, false);
+
+            }
+        });
     }
 
     /**
@@ -104,6 +176,7 @@ public class MessageActivity extends BaseActivity {
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
+        Log.e("xxx", response);
         if (what == AppConfigs.home_zx) {
             HomeZxResponse reponseResult = JsonMananger.getReponseResult(response, HomeZxResponse.class);
             ArrayList<LabelInfo> mLabel = reponseResult.getData().getLabel();
@@ -128,6 +201,24 @@ public class MessageActivity extends BaseActivity {
 
             }
 
+        } else {
+            Gson gson = new Gson();
+            LabelSelect labelSelect = gson.fromJson(response, LabelSelect.class);
+            if (MyStrUtil.isEmpty(labelSelect)) {
+                Log.d("tag", "labelSelect == null");
+                return;
+            }
+
+            if (labelSelect.getData() == null) {
+                Log.d("tag", "labelSelect.getData() == null");
+                return;
+            }
+            LabelSelect.DataBean data = labelSelect.getData();
+            List<LabelSelect.DataBean> dataBeen = new ArrayList<>();
+            dataBeen.add(data);
+            LabelSelect(dataBeen);
+
+
         }
     }
 
@@ -135,6 +226,4 @@ public class MessageActivity extends BaseActivity {
         Intent intent = new Intent(context, MessageActivity.class);
         context.startActivity(intent);
     }
-
-
 }

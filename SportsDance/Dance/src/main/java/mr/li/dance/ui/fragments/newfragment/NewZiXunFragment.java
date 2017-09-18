@@ -53,12 +53,10 @@ public class NewZiXunFragment extends BaseListFragment {
         mPageAdapter.Nosee(new NewMessageAdapter.see() {
             @Override
             public void NoSee() {
-                Log.d("xx","No走了");
                 No();
             }
             @Override
             public void Look() {
-                Log.d("xx","Loo走了");
                 Looks();
             }
         });

@@ -430,6 +430,13 @@ public class ParameterUtils {
 
         return request;
     }
+    public Request<String> getLabelSelect(String type) {
+        Request<String> request = getBaseRequestCacheForPost("/home.labelClass");
+        request.add("type",type);
+        return request;
+    }
+
+
     public Request<String> getHomeZxMapTab(String page,String class_id) {
         Request<String> request = getBaseRequestCacheForPost("/home.zxTabel");
         request.add("page",page);

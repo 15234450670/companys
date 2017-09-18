@@ -320,4 +320,8 @@
         <item name="android:windowEnterAnimation">@anim/menu_bottombar_in</item>
         <item name="android:windowExitAnimation">@anim/menu_bottombar_out</item>
     </style>
+    <style name="AnimationLeftFade">
+        <item name="android:windowEnterAnimation">@anim/pop_zuo</item>
+        <item name="android:windowExitAnimation">@anim/pop_you</item>
+    </style>
 </resources>
