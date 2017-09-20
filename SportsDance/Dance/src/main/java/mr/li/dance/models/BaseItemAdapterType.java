@@ -8,5 +8,6 @@ public enum BaseItemAdapterType {
     CommentType,//直播，视频，图片的正常模式
     VIDEOTYPE2,//左右模式
     ZIXUN,//资讯的模式 单图和多图
-    MUSIC;  //音乐
+    MUSIC,  //音乐
+    TEACHER;     //教学
 }

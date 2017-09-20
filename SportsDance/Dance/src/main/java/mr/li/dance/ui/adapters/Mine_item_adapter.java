@@ -13,7 +13,6 @@ public class Mine_item_adapter extends BaseRecyclerAdapter<Mine_itemInfo.DataBea
 
 
     public Mine_item_adapter(Context ctx) {
-
         super(ctx);
     }
 

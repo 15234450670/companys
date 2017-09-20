@@ -1,45 +1,28 @@
 package mr.li.dance.ui.activitys.video;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.lecloud.sdk.constant.PlayerEvent;
 import com.lecloud.sdk.constant.PlayerParams;
 import com.lecloud.sdk.constant.StatusCode;
 import com.lecloud.sdk.videoview.IMediaDataVideoView;
 import com.lecloud.sdk.videoview.VideoViewListener;
-import com.lecloud.sdk.videoview.base.BaseMediaDataVideoView;
-import com.lecloud.sdk.videoview.live.ActionLiveVideoView;
 import com.lecloud.skin.ui.utils.TimerUtils;
 import com.lecloud.skin.videoview.live.UIActionLiveVideoView;
 import com.umeng.analytics.MobclickAgent;
-import com.umeng.socialize.ShareAction;
-import com.umeng.socialize.UMShareListener;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.media.UMImage;
-import com.umeng.socialize.media.UMWeb;
-import com.umeng.socialize.shareboard.ShareBoardConfig;
-import com.umeng.socialize.shareboard.SnsPlatform;
-import com.umeng.socialize.utils.ShareBoardlistener;
 import com.yolanda.nohttp.rest.Request;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import mr.li.dance.R;
@@ -47,7 +30,6 @@ import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.ZhiboDetailResponse;
 import mr.li.dance.models.QuickZhiboInfo;
 import mr.li.dance.models.ZhiBoInfo;
-import mr.li.dance.ui.activitys.base.BaseActivity;
 import mr.li.dance.ui.activitys.base.BaseListActivity;
 import mr.li.dance.ui.activitys.match.MatchDetailActivity;
 import mr.li.dance.ui.adapters.DirectseedSpeedAdapter;

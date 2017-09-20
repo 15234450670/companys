@@ -9,6 +9,7 @@ import mr.li.dance.R;
 import mr.li.dance.models.AlbumInfo;
 import mr.li.dance.models.BaseHomeItem;
 import mr.li.dance.models.BaseItemAdapterType;
+import mr.li.dance.models.TeachDetailInfo;
 import mr.li.dance.models.Video;
 import mr.li.dance.models.ZhiBoInfo;
 import mr.li.dance.models.ZiXunInfo;
@@ -22,9 +23,11 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
 
     private final int viewType1 = 0x001;//正常模式
     private final int viewType2 = 0x002;//视频左右模式,资讯单图模式
+    private final int viewType3 = 0x003; //教学模式
     private final int TYPE_ZIXUNONPIC = 5;//资讯1张图
     private final int TYPE_ZIXU_THREE_PIC = 6;//资讯3张图
     private final int TYPE_MUSIC = 7;
+
     private BaseItemAdapterType mAdatperType;
 
     public BaseItemAdapter(Context ctx, BaseItemAdapterType adapterType) {
@@ -45,6 +48,10 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
                 return R.layout.consultation_item_type4;
             case TYPE_MUSIC:
                 return R.layout.dance_item;
+            case viewType3:
+                //
+
+                return R.layout.teach_item_more;
 
         }
         return R.layout.item_base;
@@ -66,6 +73,8 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
                 }
             case MUSIC:
                 return TYPE_MUSIC;
+            case TEACHER:
+                return viewType3;
         }
         return super.getItemViewType(position);
     }
@@ -80,7 +89,13 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
             bindInfomation(holder, (ZiXunInfo) item);
         } else if (item instanceof AlbumInfo) {
             bindImageInfo(holder, (AlbumInfo) item);
+        } else if (item instanceof TeachDetailInfo.DataBean.OtherListBean) {
+            bindMore(holder, (TeachDetailInfo.DataBean.OtherListBean) item);
         }
+    }
+
+    private void bindMore(RecyclerViewHolder holder, TeachDetailInfo.DataBean.OtherListBean item) {
+        holder.setImageByUrlOrFilePath(R.id.more_pic, item.getPicture(), R.drawable.default_video);
     }
 
     private void bindMatch(RecyclerViewHolder holder, ZhiBoInfo match) {

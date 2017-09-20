@@ -2,7 +2,6 @@ package mr.li.dance.ui.adapters.new_adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -22,7 +21,6 @@ import mr.li.dance.ui.adapters.viewholder.BaseViewHolder;
  */
 public class LabelAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int TYPE1 = 0;
-    private final int TYPE2 = 1;
     Context                    context;
     List<LabelSelect.DataBean> data;
 
@@ -34,29 +32,21 @@ public class LabelAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = null;
-        switch (viewType) {
-            case TYPE1:
-                view = View.inflate(context, R.layout.labelselect_type1, null);
-                return new ViewHolder1(view);
-           /* case TYPE2:
-                view = View.inflate(context, R.layout.labelselect_type1, null);
+        View view = View.inflate(context, R.layout.labelselect_type1, null);
+        return new ViewHolder1(view);
 
-                return new ViewHolder2(view);*/
-        }
-        return null;
+
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof ViewHolder1) {
-            bind((ViewHolder1) holder, position);
-        }
+        bind((ViewHolder1) holder, position);
+
     }
 
     private void bind(ViewHolder1 holder, int position) {
-        holder.name.setText(data.get(position).get_$7().getName());
-        Log.e("xxx",data.get(position).get_$7().getName()) ;
+     // data.get(position).get_$7();
+
     }
 
     @Override
@@ -66,31 +56,23 @@ public class LabelAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public int getItemViewType(int position) {
-        /*if (position == 0) {
-            return TYPE1;
-        } else {
-            return TYPE2;
-        }*/
+
         return TYPE1;
     }
 
     private class ViewHolder1 extends BaseViewHolder {
 
-        private final TextView name;
-        private final View     v;
-        private final TextView label_item;
+        private final TextView     name;
+        private final View         v;
+        private final RecyclerView label_item_rv;
 
         public ViewHolder1(View view) {
             super(context, view);
             name = (TextView) view.findViewById(R.id.name);
             v = view.findViewById(R.id.all);
-            label_item = (TextView) view.findViewById(R.id.label_item);
+            label_item_rv = (RecyclerView) view.findViewById(R.id.label_item_rv);
+
         }
     }
 
-    private class ViewHolder2 extends BaseViewHolder {
-        public ViewHolder2(View view) {
-            super(context, view);
-        }
-    }
 }

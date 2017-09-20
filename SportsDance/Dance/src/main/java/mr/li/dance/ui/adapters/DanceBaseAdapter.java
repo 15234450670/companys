@@ -24,4 +24,6 @@ public abstract class DanceBaseAdapter extends RecyclerView.Adapter {
     public void loadMore(){
         currentPage++;
     }
+
+
 }

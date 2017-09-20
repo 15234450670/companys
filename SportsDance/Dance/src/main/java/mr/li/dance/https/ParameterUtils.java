@@ -478,7 +478,33 @@ public class ParameterUtils {
         LogPage(indexPage);
         return request;
     }
-
+    /**
+     * 教学数据
+     */
+    public Request<String> getHomeTeachMap(String page) {
+        Request<String> request = getBaseRequestCacheForPost("/home.teachList");
+        request.add("page",page);
+        return request;
+    }
+    /**
+     * 教学Tab
+     */
+    public Request<String> getHomeTeacTabhMap(String id,String type,String page) {
+        Request<String> request = getBaseRequestCacheForPost("/home.labelSearch");
+        request.add("id",id);
+        request.add("type",type);
+        request.add("page",page);
+        return request;
+    }
+    /**
+     * 教学详情
+     */
+    public Request<String> getHomeTeachDetailsMap(String id,String page) {
+        Request<String> request = getBaseRequestCacheForPost("/home.teachDetail");
+        request.add("id",id);
+        request.add("page",page);
+        return request;
+    }
     /**
      * 首页获取图片
      * @return

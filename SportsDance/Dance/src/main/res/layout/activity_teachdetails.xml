@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/videoContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/spacing_396" />
+
+        <ImageView
+            android:id="@+id/pic"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_396"/>
+
+        <LinearLayout
+            android:id="@+id/stop_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/videoContainer"
+            android:layout_alignTop="@id/videoContainer"
+
+            android:gravity="center"
+            android:orientation="vertical"
+          >
+
+            <TextView
+                android:id="@+id/teach_title"
+                style="@style/text_white_style_36"
+                android:layout_marginLeft="@dimen/spacing_100"
+                android:layout_marginRight="@dimen/spacing_100"
+                android:layout_marginTop="@dimen/spacing_15"
+                android:gravity="center"
+                android:maxLines="2"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/querydetail_tv"
+                style="@style/text_white_style_32"
+                android:layout_marginTop="@dimen/spacing_30"
+                android:background="@drawable/zhibodetail_shape_bg"
+                android:paddingBottom="@dimen/spacing_10"
+                android:paddingLeft="@dimen/spacing_15"
+                android:paddingRight="@dimen/spacing_15"
+                android:paddingTop="@dimen/spacing_10"
+                android:text="开始观看" />
+
+        </LinearLayout>
+    </RelativeLayout>
+    <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
+        android:id="@+id/refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+ >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
+
+
+</LinearLayout>

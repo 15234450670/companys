@@ -1,40 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:background="@color/white"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:background="@color/white"
               android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/label_rv"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
-    </android.support.v7.widget.RecyclerView>
+        <mr.li.dance.utils.util.CustomExpandableListView
+            android:id="@+id/celv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </mr.li.dance.utils.util.CustomExpandableListView>
+
+    </ScrollView>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#e1e1e1"/>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="horizontal"
         android:layout_height="@dimen/spacing_100"
-     >
-        <Button
+        android:orientation="horizontal"
+        >
+
+        <TextView
             android:id="@+id/reset"
-            android:background="null"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="重置"
-            android:layout_height="wrap_content"/>
-        <Button
+            android:gravity="center"
+            android:text="重置"/>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="#e1e1e1"/>
+
+        <TextView
             android:id="@+id/sure"
-            android:background="null"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="确定"
-            android:layout_height="wrap_content"/>
+            android:gravity="center"
+            android:text="确定"/>
 
     </LinearLayout>
 

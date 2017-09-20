@@ -112,7 +112,9 @@ public class AppConfigs {
     public final static int home_music_gedan        = 0x0063;
     public final static int home_music_wudao        = 0x0064;
     public final static int home_tab_zx        = 0x0065;
-
+    public final static int home_tab_teach        = 0x0066;
+    public final static int home_tab_teachs        = 0x0066;
+    public final static int home_tab_teach_details       = 0x0067;
     public static String getDomainUrl() {
         return DomainUrl;
     }

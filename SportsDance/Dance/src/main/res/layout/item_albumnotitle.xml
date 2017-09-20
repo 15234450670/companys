@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
 
     <RelativeLayout
@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-            android:src="@drawable/default_video" />
+            android:src="@drawable/default_video"/>
 
         <LinearLayout
             android:id="@+id/share_layout"
@@ -28,20 +28,20 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_margin="@dimen/spacing_20"
-            android:visibility="invisible"
             android:gravity="bottom"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="invisible">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/share_icon_001" />
+                android:src="@drawable/share_icon_001"/>
 
             <TextView
                 style="@style/text_white_style_20"
                 android:layout_marginLeft="@dimen/spacing_10"
                 android:text="分享"
-                android:textColor="#d3d3d3" />
+                android:textColor="#d3d3d3"/>
 
         </LinearLayout>
 
@@ -56,7 +56,8 @@
         android:layout_marginRight="@dimen/spacing_40"
         android:layout_marginTop="@dimen/spacing_20"
         android:singleLine="true"
-        android:text="" />
+        android:text=""
+        android:textColor="#333333"/>
 
     <TextView
         android:id="@+id/time_tv"
@@ -68,10 +69,12 @@
         android:layout_marginRight="@dimen/spacing_25"
         android:gravity="center"
         android:singleLine="true"
-         />
+        android:text=""
+        android:textColor="#666666"
+        />
 
 
-    <LinearLayout
+    <!--<LinearLayout
         android:id="@+id/picnum_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -93,5 +96,12 @@
             style="@style/text_white_style_20"
             android:layout_width="wrap_content"
             android:text="" />
-    </LinearLayout>
+    </LinearLayout>-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:layout_below="@+id/time_tv"
+        android:layout_marginBottom="@dimen/spacing_20"
+        android:layout_marginTop="@dimen/spacing_20"
+        android:background="#f0f0f0"/>
 </RelativeLayout>
