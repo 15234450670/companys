@@ -49,7 +49,7 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
             case TYPE_MUSIC:
                 return R.layout.dance_item;
             case viewType3:
-                //
+                //做的
 
                 return R.layout.teach_item_more;
 
