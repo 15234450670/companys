@@ -3,8 +3,6 @@ package mr.li.dance.ui.adapters.new_adapter;
 import android.content.Context;
 import android.view.View;
 
-import java.util.List;
-
 import mr.li.dance.R;
 import mr.li.dance.models.TeachInfo;
 import mr.li.dance.ui.adapters.BaseRecyclerAdapter;
@@ -19,15 +17,13 @@ import mr.li.dance.utils.MyStrUtil;
  * 修订历史:
  */
 public class NewTeachAdapter extends BaseRecyclerAdapter<TeachInfo> {
-    Context mContext;
-    public static final int TYPE_2 = 0xff02;
-    private List<TeachInfo> mDatas;
-    private final String tag = getClass().getSimpleName();
 
+    private final String tag = getClass().getSimpleName();
 
     public NewTeachAdapter(Context ctx) {
         super(ctx);
     }
+
 
     @Override
     public int getItemLayoutId(int viewType) {
@@ -35,7 +31,7 @@ public class NewTeachAdapter extends BaseRecyclerAdapter<TeachInfo> {
     }
 
     @Override
-    public void bindData(RecyclerViewHolder holder, final int position, TeachInfo item) {
+    public void bindData(RecyclerViewHolder holder, final int position, final TeachInfo item) {
         TeachInfo ziXunInfo = mData.get(position);
         if (!MyStrUtil.isEmpty(ziXunInfo)) {
             holder.setText(R.id.name, ziXunInfo.getTitle());
@@ -49,6 +45,7 @@ public class NewTeachAdapter extends BaseRecyclerAdapter<TeachInfo> {
 
 
         }
+
 
     }
 }

@@ -26,11 +26,11 @@ import mr.li.dance.utils.JsonMananger;
  * 描述:
  * 修订历史:
  */
-public class NewTeachFragment extends BaseListFragment<TeachInfo> {
+public class NewTeachFragment extends BaseListFragment {
     NewTeachAdapter mPageAdapter;
 
     private String path;
-    private final String tag = "NewZiXunFragment";
+    private final String tag = "NewTeachFragment";
     private LinearLayout wu;
     private LinearLayout you;
     int page = 1;
@@ -126,7 +126,10 @@ public class NewTeachFragment extends BaseListFragment<TeachInfo> {
     }
 
     @Override
-    public void itemClick(int position, TeachInfo value) {
-        TeachDetailsActivity.lunch(this, value.getId(),value.getImg(),value.getTitle());
+    public void itemClick(int position, Object values) {
+        TeachInfo item = (TeachInfo) values;
+        TeachDetailsActivity.lunch(this, item.getId(),item.getImg(),item.getTitle(),item.getDescribed());
+
+
     }
 }

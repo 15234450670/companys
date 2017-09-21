@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:fitsSystemWindows="true"
+              android:orientation="vertical">
+
+
     <RelativeLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <RelativeLayout
             android:id="@+id/videoContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="@dimen/spacing_396" />
+            />
 
         <ImageView
             android:id="@+id/pic"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/spacing_396"/>
-
+            android:scaleType="fitXY"
+            android:layout_height="wrap_content"/>
         <LinearLayout
             android:id="@+id/stop_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/videoContainer"
-            android:layout_alignTop="@id/videoContainer"
+            android:layout_height="@dimen/spacing_396"
 
             android:gravity="center"
             android:orientation="vertical"
-          >
+            >
 
             <TextView
                 android:id="@+id/teach_title"
@@ -37,7 +38,7 @@
                 android:layout_marginTop="@dimen/spacing_15"
                 android:gravity="center"
                 android:maxLines="2"
-                android:text="" />
+                android:text=""/>
 
             <TextView
                 android:id="@+id/querydetail_tv"
@@ -48,21 +49,85 @@
                 android:paddingLeft="@dimen/spacing_15"
                 android:paddingRight="@dimen/spacing_15"
                 android:paddingTop="@dimen/spacing_10"
-                android:text="开始观看" />
+                android:text="开始观看"/>
 
         </LinearLayout>
+
     </RelativeLayout>
-    <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
-        android:id="@+id/refresh"
+
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/class_jieshao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_black_style_30"
+                android:layout_weight="1"
+                android:text="课程介绍"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/spacing_20"
+                android:src="@drawable/jinru_item"/>
+        </LinearLayout>
+
+        <include layout="@layout/split_lines"/>
+
+        <TextView
+            android:id="@+id/jieshao"
+            style="@style/text_black_style_28"
+            android:layout_marginBottom="@dimen/spacing_20"
+            android:layout_marginLeft="@dimen/spacing_20"
+            android:layout_marginRight="@dimen/spacing_48"
+            android:layout_marginTop="@dimen/spacing_20"
+            android:text=""
+            android:textColor="#666666"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="#e1e1e1"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/class_section"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
- >
+        android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerview"
+        <TextView
+            style="@style/text_black_style_30"
+            android:text="课程章节"
+
+            />
+
+        <include layout="@layout/split_lines"/>
+
+        <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
+            android:id="@+id/refresh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
+            android:layout_height="match_parent"
+            >
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
+    </LinearLayout>
 
 
 </LinearLayout>

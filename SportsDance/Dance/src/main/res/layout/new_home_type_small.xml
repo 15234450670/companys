@@ -25,7 +25,6 @@
             android:layout_marginLeft="@dimen/spacing_25"
             android:layout_marginRight="@dimen/spacing_30"
             android:layout_toRightOf="@+id/imageView"
-
             android:orientation="vertical">
 
             <TextView

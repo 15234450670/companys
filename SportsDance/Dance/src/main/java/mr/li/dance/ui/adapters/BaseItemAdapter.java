@@ -21,12 +21,12 @@ import mr.li.dance.utils.MyStrUtil;
 
 public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
 
-    private final int viewType1 = 0x001;//正常模式
-    private final int viewType2 = 0x002;//视频左右模式,资讯单图模式
-    private final int viewType3 = 0x003; //教学模式
-    private final int TYPE_ZIXUNONPIC = 5;//资讯1张图
+    private final int viewType1           = 0x001;//正常模式
+    private final int viewType2           = 0x002;//视频左右模式,资讯单图模式
+    private final int viewType3           = 0x003; //教学模式
+    private final int TYPE_ZIXUNONPIC     = 5;//资讯1张图
     private final int TYPE_ZIXU_THREE_PIC = 6;//资讯3张图
-    private final int TYPE_MUSIC = 7;
+    private final int TYPE_MUSIC          = 7;
 
     private BaseItemAdapterType mAdatperType;
 
@@ -49,7 +49,6 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
             case TYPE_MUSIC:
                 return R.layout.dance_item;
             case viewType3:
-                //做的
 
                 return R.layout.teach_item_more;
 
@@ -90,12 +89,15 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
         } else if (item instanceof AlbumInfo) {
             bindImageInfo(holder, (AlbumInfo) item);
         } else if (item instanceof TeachDetailInfo.DataBean.OtherListBean) {
-            bindMore(holder, (TeachDetailInfo.DataBean.OtherListBean) item);
+            bindMore(holder, (TeachDetailInfo.DataBean.OtherListBean) item, position);
         }
     }
 
-    private void bindMore(RecyclerViewHolder holder, TeachDetailInfo.DataBean.OtherListBean item) {
-        holder.setImageByUrlOrFilePath(R.id.more_pic, item.getPicture(), R.drawable.default_video);
+    private void bindMore(RecyclerViewHolder holder, TeachDetailInfo.DataBean.OtherListBean item, int position) {
+        holder.setText(R.id.sort_tv, position+1 + "");
+        holder.setImageByUrlOrFilePath(R.id.pic, item.getPicture(), R.drawable.default_video);
+        holder.setText(R.id.name, item.getName());
+
     }
 
     private void bindMatch(RecyclerViewHolder holder, ZhiBoInfo match) {
@@ -122,7 +124,7 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
         }
         holder.setText(R.id.name, title);
         holder.setText(R.id.time_tv, information.getInserttime());
-        holder.setText(R.id.from_tv, "来源: "+information.getWriter());
+        holder.setText(R.id.from_tv, "来源: " + information.getWriter());
         if ("1".equals(information.getImg_num())) {
             holder.setImageByUrlOrFilePath(R.id.imageView, information.getPicture(), R.drawable.default_video);
         } else {
