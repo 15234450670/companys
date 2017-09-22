@@ -6,7 +6,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -17,7 +16,6 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.umeng.analytics.MobclickAgent;
 import com.yolanda.nohttp.rest.Request;
 
@@ -57,7 +55,7 @@ public class MessageActivity extends BaseActivity {
     List<Fragment> list = new ArrayList<>();
     private PopupWindow popupWindow;
     private String tag = this.getClass().getSimpleName();
-    private RecyclerView             label_rv;
+    ExPandableAdapter adapter;
     private CustomExpandableListView celv;
 
     @Override
@@ -94,7 +92,7 @@ public class MessageActivity extends BaseActivity {
     }
 
     //弹出标签选择
-    private void LabelSelect(LabelSelect.DataBean data) {
+    private void LabelSelect(List<LabelSelect.DataBean> data) {
         final View popipWindow_view = getLayoutInflater().inflate(R.layout.label_select, null, false);
         //label_rv = (RecyclerView) popipWindow_view.findViewById(R.id.label_rv);
         celv = (CustomExpandableListView) popipWindow_view.findViewById(R.id.celv);
@@ -112,6 +110,13 @@ public class MessageActivity extends BaseActivity {
         label_rv.setAdapter(new LabelAdapter(this, dataBeen));*/
         celv.setGroupIndicator(null);
         celv.setAdapter(new ExPandableAdapter(this, data));
+        int count = celv.getCount();
+        for (int i = 0; i < count; i++) {
+            //展开
+            celv.expandGroup(i);
+        }
+
+
         View parent = findViewById(R.id.parent);
         popupWindow.setAnimationStyle(R.style.AnimationLeftFade);
         popupWindow.showAtLocation(parent, Gravity.RIGHT, 0, 0);
@@ -210,27 +215,8 @@ public class MessageActivity extends BaseActivity {
             }
 
         } else {
-            Gson gson = new Gson();
-            LabelSelect labelSelect = gson.fromJson(response, LabelSelect.class);
-            if (MyStrUtil.isEmpty(labelSelect)) {
-                Log.d("tag", "labelSelect == null");
-                return;
-            }
-            if (labelSelect.getData() == null) {
-                Log.d("tag", "labelSelect.getData() == null");
-                return;
-            }
-            LabelSelect.DataBean data = labelSelect.getData();
-            LabelSelect.DataBean.LabelBean label = data.getLabel();
-            List<LabelSelect.DataBean.LabelBean>  list_label = new ArrayList<>();
-            list_label.add(label);
-            for (int i = 0; i < list_label.size(); i++) {
-                String s = list_label.get(i).get_$7();
-                String s1 = list_label.get(i).get_$8();
-                String s2 = list_label.get(i).get_$9();
-                Log.e("ssssss",s+"......."+s1+"........."+s2);
-            }
-           // LabelSelect(data);
+            LabelSelect reponseResult = JsonMananger.getReponseResult(response, LabelSelect.class);
+            LabelSelect(reponseResult.getData());
 
         }
     }

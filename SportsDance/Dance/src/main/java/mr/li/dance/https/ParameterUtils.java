@@ -161,6 +161,13 @@ public class ParameterUtils {
         return request;
     }
     /**
+     * 新音乐界面
+     */
+    public Request<String> getMusicInfo2Map() {
+        Request<String> request = getBaseRequestForPost("/home.music2");
+        return request;
+    }
+    /**
      * 音乐分页
      */
     public Request<String> getMusicInfoMapIndex(String page) {
@@ -391,6 +398,15 @@ public class ParameterUtils {
         return request;
     }
 
+    /**
+     * 新  首页获取点播（视频）
+     * @return
+     */
+    public Request<String> getHomeDianbo2Map() {
+        Request<String> request = getBaseRequestCacheForPost("/home.dianbo2");
+        return request;
+    }
+
     public Request<String> getHomeDianboMapFromServer() {
         Request<String> request = getBaseRequestForPost("/home.dianbo");
         return request;
@@ -489,7 +505,7 @@ public class ParameterUtils {
     /**
      * 教学Tab
      */
-    public Request<String> getHomeTeacTabhMap(String id,String type,String page) {
+    public Request<String> getHomeTabhMap(String id,String type,String page) {
         Request<String> request = getBaseRequestCacheForPost("/home.labelSearch");
         request.add("id",id);
         request.add("type",type);
@@ -515,6 +531,20 @@ public class ParameterUtils {
         LogPage(indexPage);
         return request;
     }
+
+    /**
+     * 新首页获取图片
+     * @param indexPage
+     * @return
+     */
+    public Request<String> getHomeAlbum2Map(int indexPage) {
+        Request<String> request = getBaseRequestCacheForPost("/home.photoClass");
+        request.add("page", indexPage);
+        LogPage(indexPage);
+        return request;
+    }
+
+
 
     public Request<String> getHomeAlbumMapFromServer(int indexPage) {
         Request<String> request = getBaseRequestForPost("/home.album");

@@ -59,7 +59,7 @@ public class NewVideoAdapter extends DanceBaseAdapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.new_video_item, null);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_albumnotitle, null);
         return new ViewHolderMain(view);
 
 
@@ -95,13 +95,16 @@ public class NewVideoAdapter extends DanceBaseAdapter {
 
             }
         });
-        holder.danceViewHolder.setViewVisibility(R.id.typeicon_tv, View.VISIBLE);
-        holder.danceViewHolder.setImageResDrawable(R.id.typeicon_tv, R.drawable.home_icon_005, R.drawable.home_icon_005);
+       /* holder.danceViewHolder.setViewVisibility(R.id.typeicon_tv, View.VISIBLE);
+
         holder.danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, video.getPicture(), R.drawable.default_video);
         holder.danceViewHolder.setText(R.id.name, video.getTitle());
-     //   holder.danceViewHolder.setText(R.id.time_tv, video.getStart_time());
+        //   holder.danceViewHolder.setText(R.id.time_tv, video.getStart_time());*/
+        if (!MyStrUtil.isEmpty(video)) {
+            holder.danceViewHolder.setText(R.id.name, video.getTitle());
+            holder.danceViewHolder.setImageByUrlOrFilePath(R.id.imageView, video.getPicture(), R.drawable.default_video);
+        }
     }
-
     public void refresh(HomeVideoResponse response) {
         super.refresh();
         EXARCOUNT = 0;

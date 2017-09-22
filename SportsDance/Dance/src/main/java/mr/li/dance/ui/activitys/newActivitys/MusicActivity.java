@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -70,7 +72,7 @@ public class MusicActivity extends BaseActivity {
                 }
             }
         });
-        Request<String> musicInfoMap = ParameterUtils.getSingleton().getMusicInfoMap();
+        Request<String> musicInfoMap = ParameterUtils.getSingleton().getMusicInfo2Map();
         request(AppConfigs.home_music, musicInfoMap, false);
 
     }
@@ -88,8 +90,12 @@ public class MusicActivity extends BaseActivity {
                 for (int i = 0; i < mLabel.size(); i++) {
                     NewMusicFragment newZiXunFragment = new NewMusicFragment();
                     Bundle bundle = new Bundle();
-                    bundle.putString("path", mLabel.get(i).getClass_id());
-                    newZiXunFragment.setArguments(bundle);
+                    if (TextUtils.isEmpty(mLabel.get(i).getClass_id())) {
+                        Log.d("getClass_id()", "mLabel= null ");
+                    } else {
+                        bundle.putString("path", mLabel.get(i).getClass_id());
+                        newZiXunFragment.setArguments(bundle);
+                    }
                     list.add(newZiXunFragment);
                 }
                 NewViewPagerAdapter adapter = new NewViewPagerAdapter(getSupportFragmentManager(), list,mLabel);

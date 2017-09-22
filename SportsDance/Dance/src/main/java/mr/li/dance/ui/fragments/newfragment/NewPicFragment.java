@@ -2,6 +2,8 @@ package mr.li.dance.ui.fragments.newfragment;
 
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.util.Log;
 
 import com.yolanda.nohttp.rest.Request;
 
@@ -23,7 +25,7 @@ import mr.li.dance.utils.JsonMananger;
  * 修订历史:
  */
 public class NewPicFragment extends BaseListFragment<AlbumInfo> {
-        NewPicAdapter adapter;
+    NewPicAdapter adapter;
     int page = 1;
     private String path;
 
@@ -32,27 +34,40 @@ public class NewPicFragment extends BaseListFragment<AlbumInfo> {
         super.initViews();
 
     }
+
     @Override
     public int getContentView() {
         return R.layout.fragment_list_layout;
     }
+
     @Override
     public RecyclerView.Adapter getAdapter() {
         adapter = new NewPicAdapter(getActivity());
-        return  adapter;
+        return adapter;
     }
 
     @Override
     public void initData() {
         Bundle arguments = getArguments();
         path = arguments.getString("path");
-        if (Integer.parseInt(path)==0) {
-            refresh();
+        if (arguments == null) {
+
+            return;
+        }
+        path = arguments.getString("path");
+        Log.e("xxx", path);
+        if (TextUtils.isEmpty(path)) {
+            return;
+        }
+        if (path.equals("0")) {
+            Request<String> request = ParameterUtils.getSingleton().getHomeAlbum2Map(page);
+            request(AppConfigs.home_album, request, false);
         } else {
-
-
+            Request<String> request = ParameterUtils.getSingleton().getHomeTabhMap(path, "10905", String.valueOf(page));
+            request(AppConfigs.home_dianbo, request, false);
         }
     }
+
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
@@ -65,19 +80,32 @@ public class NewPicFragment extends BaseListFragment<AlbumInfo> {
     @Override
     public void refresh() {
         super.refresh();
-        Request<String> request = ParameterUtils.getSingleton().getHomeAlbumMap(1);
-        request(AppConfigs.home_album, request, false);
+        page = 1;
+        if (path.equals("0")) {
+            Request<String> request = ParameterUtils.getSingleton().getHomeAlbum2Map(page);
+            request(AppConfigs.home_album, request, false);
+        } else {
+            Request<String> request = ParameterUtils.getSingleton().getHomeTabhMap(path, "10905", String.valueOf(page));
+            request(AppConfigs.home_dianbo, request, false);
+        }
     }
 
     @Override
     public void loadMore() {
         super.loadMore();
-        Request<String> request = ParameterUtils.getSingleton().getHomeAlbumMapFromServer(adapter.getNextPage());
-        request(AppConfigs.home_album, request, false);
+        page++;
+        if (path.equals("0")) {
+            Request<String> request = ParameterUtils.getSingleton().getHomeAlbumMapFromServer(adapter.getNextPage());
+            request(AppConfigs.home_album, request, false);
+        } else {
+            Request<String> request = ParameterUtils.getSingleton().getHomeTabhMap(path, "10905", String.valueOf(page));
+            request(AppConfigs.home_dianbo, request, false);
+        }
+
     }
 
     @Override
     public void itemClick(int position, AlbumInfo value) {
-        AlbumActivity.lunch(this, value.getId(),value.getClass_name());
+        AlbumActivity.lunch(this, value.getId(), value.getClass_name());
     }
 }

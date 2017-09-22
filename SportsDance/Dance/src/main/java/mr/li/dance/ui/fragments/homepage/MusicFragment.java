@@ -56,7 +56,7 @@ public class MusicFragment extends BaseListFragment {
             mAdapter.refresh(reponseResult);
         } else if (what==AppConfigs.home_music_page) {
             MusicIndexPesponse reponseResultIndex = JsonMananger.getReponseResult(response, MusicIndexPesponse.class);
-            mAdapter.loadMore(reponseResultIndex);
+          mAdapter.loadMore(reponseResultIndex);
         }
     }
 

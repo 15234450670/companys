@@ -12,8 +12,8 @@ import java.util.List;
 import mr.li.dance.R;
 import mr.li.dance.https.response.MusicResponse;
 import mr.li.dance.models.MusicIndexPesponse;
-import mr.li.dance.models.MusicRecAppBean;
-import mr.li.dance.ui.activitys.music.DanceMusicActivity;
+import mr.li.dance.models.MusicInfo;
+import mr.li.dance.ui.activitys.music.SongActivity;
 import mr.li.dance.ui.adapters.DanceBaseAdapter;
 import mr.li.dance.ui.adapters.viewholder.BaseViewHolder;
 import mr.li.dance.utils.MyStrUtil;
@@ -26,7 +26,7 @@ import mr.li.dance.utils.MyStrUtil;
  * 修订历史:
  */
 public class NewMusicAdapter extends DanceBaseAdapter {
-    private List<MusicRecAppBean> mDatas;
+    private List<MusicInfo> mDatas;
     Context mContext;
     private final int TYPE_2 = 2;//列表
     public NewMusicAdapter(Context context) {
@@ -52,18 +52,18 @@ public class NewMusicAdapter extends DanceBaseAdapter {
         bindType2((MyViewHolder) holder, position);
     }
     private void bindType2(final MyViewHolder holder, final int position) {
-        final MusicRecAppBean musicRecAppBean = mDatas.get(position);
+        final MusicInfo musicRecAppBean = mDatas.get(position);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DanceMusicActivity.lunch(mContext,musicRecAppBean.getId(),musicRecAppBean.getName());
+                SongActivity.lunch(mContext,musicRecAppBean.getId(),musicRecAppBean.getTitle());
 
             }
         });
 
-        if (!MyStrUtil.isEmpty(musicRecAppBean.getImg())) {
-            holder.danceViewHolder.setRoundImageByUrlOrFilePath(R.id.item_pic, musicRecAppBean.getImg(), R.drawable.default_video);
-            holder.danceViewHolder.setText(R.id.title,musicRecAppBean.getName());
+        if (!MyStrUtil.isEmpty(musicRecAppBean.getImg_fm())) {
+            holder.danceViewHolder.setRoundImageByUrlOrFilePath(R.id.item_pic, musicRecAppBean.getImg_fm(), R.drawable.default_video);
+            holder.danceViewHolder.setText(R.id.title,musicRecAppBean.getTitle());
         }
 
     }
@@ -75,16 +75,17 @@ public class NewMusicAdapter extends DanceBaseAdapter {
     public void refresh(MusicResponse homeResponse) {
         super.refresh();
         mDatas.clear();
-        ArrayList<MusicRecAppBean> music_item = homeResponse.getData().getMusicRecApp();
-        if (!MyStrUtil.isEmpty(music_item)) {
-            mDatas.addAll(music_item);
+       // ArrayList<MusicRecAppBean> music_item = homeResponse.getData().getMusicRecApp();
+        ArrayList<MusicInfo> music_class = homeResponse.getData().getMusic_class();
+        if (!MyStrUtil.isEmpty(music_class)) {
+            mDatas.addAll(music_class);
         }
 
         notifyDataSetChanged();
     }
 
     public void loadMore(MusicIndexPesponse indexResponse) {
-        ArrayList<MusicRecAppBean> music_item = indexResponse.getData();
+        ArrayList<MusicInfo> music_item = indexResponse.getData();
         if (!MyStrUtil.isEmpty(music_item)) {
             mDatas.addAll(music_item);
             super.loadMore();

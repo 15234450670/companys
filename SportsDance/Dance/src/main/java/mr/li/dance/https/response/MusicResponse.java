@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import mr.li.dance.models.BannerInfo;
 import mr.li.dance.models.LabelInfo;
+import mr.li.dance.models.MusicInfo;
 import mr.li.dance.models.MusicRecAppBean;
 
 /**
@@ -28,6 +29,15 @@ public class MusicResponse extends BaseResponse {
         private ArrayList<BannerInfo>      banner;
         private ArrayList<MusicRecAppBean> MusicRecApp;
         private ArrayList<LabelInfo>       label;
+        private ArrayList<MusicInfo>       music_class;
+
+        public ArrayList<MusicInfo> getMusic_class() {
+            return music_class;
+        }
+
+        public void setMusic_class(ArrayList<MusicInfo> music_class) {
+            this.music_class = music_class;
+        }
 
         public ArrayList<LabelInfo> getLabel() {
             return label;

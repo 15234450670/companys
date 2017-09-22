@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -69,7 +71,7 @@ public class PicActivity extends BaseActivity {
                 }
             }
         });
-        Request<String> request = ParameterUtils.getSingleton().getHomeAlbumMap(1);
+        Request<String> request = ParameterUtils.getSingleton().getHomeAlbum2Map(1);
         request(AppConfigs.home_album, request, false);
 
 
@@ -104,11 +106,15 @@ public class PicActivity extends BaseActivity {
                 mDanceViewHolder.setViewVisibility(R.id.you, View.GONE);
             } else {
                 for (int i = 0; i < mLabel.size(); i++) {
-                    NewPicFragment newPicFragment = new NewPicFragment();
+                    NewPicFragment newZiXunFragment = new NewPicFragment();
                     Bundle bundle = new Bundle();
-                    bundle.putString("path", mLabel.get(i).getClass_id());
-                    newPicFragment.setArguments(bundle);
-                    list.add(newPicFragment);
+                    if (TextUtils.isEmpty(mLabel.get(i).getClass_id())) {
+                        Log.d("getClass_id()", "mLabel= null ");
+                    } else {
+                        bundle.putString("path", mLabel.get(i).getClass_id());
+                        newZiXunFragment.setArguments(bundle);
+                    }
+                    list.add(newZiXunFragment);
                 }
                 NewViewPagerAdapter adapter = new NewViewPagerAdapter(getSupportFragmentManager(), list,mLabel);
                 vp.setAdapter(adapter);

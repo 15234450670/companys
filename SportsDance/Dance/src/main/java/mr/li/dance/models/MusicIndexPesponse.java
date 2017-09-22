@@ -12,13 +12,13 @@ import mr.li.dance.https.response.BaseResponse;
  * 修订历史:
  */
 public class MusicIndexPesponse extends BaseResponse {
-    private ArrayList<MusicRecAppBean> data;
+    private ArrayList<MusicInfo> data;
 
-    public ArrayList<MusicRecAppBean> getData() {
+    public ArrayList<MusicInfo> getData() {
         return data;
     }
 
-    public void setData(ArrayList<MusicRecAppBean> data) {
+    public void setData(ArrayList<MusicInfo> data) {
         this.data = data;
     }
 }

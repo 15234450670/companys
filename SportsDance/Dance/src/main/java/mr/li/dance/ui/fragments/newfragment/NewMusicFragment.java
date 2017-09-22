@@ -3,6 +3,8 @@ package mr.li.dance.ui.fragments.newfragment;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.util.Log;
 
 import com.yolanda.nohttp.rest.Request;
 
@@ -26,6 +28,7 @@ public class NewMusicFragment extends BaseListFragment {
     NewMusicAdapter adapter;
     String path;
     int page = 1;
+    private String tag = "NewMusicFragment";
     @Override
     public void itemClick(int position, Object value) {
 
@@ -34,12 +37,21 @@ public class NewMusicFragment extends BaseListFragment {
     @Override
     public void initData() {
         Bundle arguments = getArguments();
+        if (arguments == null) {
+            Log.d(tag, "arguments = null");
+            return;
+        }
         path = arguments.getString("path");
-        if (Integer.parseInt(path)==0) {
-            Request<String> musicInfoMap = ParameterUtils.getSingleton().getMusicInfoMap();
+        Log.e("xxx", path);
+        if (TextUtils.isEmpty(path)) {
+            return;
+        }
+        if (path.equals("0")) {
+            Request<String> musicInfoMap = ParameterUtils.getSingleton().getMusicInfo2Map();
             request(AppConfigs.home_music, musicInfoMap, false);
         } else {
-
+            Request<String> request = ParameterUtils.getSingleton().getHomeTabhMap(path,"10904",String.valueOf(page));
+            request(AppConfigs.home_tab_teachs, request, false);
         }
     }
 
@@ -71,30 +83,31 @@ public class NewMusicFragment extends BaseListFragment {
         super.initViews();
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
         mRecyclerview.setLayoutManager(layoutManager);
-        mRecyclerview.setAdapter(getAdapter());
+        mRecyclerview.setAdapter(adapter);
     }
     @Override
     public void refresh() {
         super.refresh();
-        if (Integer.parseInt(path)==0) {
-            Request<String> musicInfoMap = ParameterUtils.getSingleton().getMusicInfoMap();
+        page = 1;
+        if (path.equals("0")) {
+            Request<String> musicInfoMap = ParameterUtils.getSingleton().getMusicInfo2Map();
             request(AppConfigs.home_music, musicInfoMap, false);
         } else {
-            page=1;
-
+            Request<String> request = ParameterUtils.getSingleton().getHomeTabhMap(path,"10904",String.valueOf(page));
+            request(AppConfigs.home_tab_teachs, request, false);
         }
     }
 
     @Override
     public void loadMore() {
         super.loadMore();
-
-        if (Integer.parseInt(path)==0) {
-      Request<String> musicInfoMapIndex = ParameterUtils.getSingleton().getMusicInfoMapIndex(String.valueOf(adapter.getNextPage()));
-        request(AppConfigs.home_music_page, musicInfoMapIndex, false);
+             page++;
+        if (path.equals("0")) {
+            Request<String> musicInfoMap = ParameterUtils.getSingleton().getMusicInfo2Map();
+            request(AppConfigs.home_music, musicInfoMap, false);
         } else {
-            page++;
-
+            Request<String> request = ParameterUtils.getSingleton().getHomeTabhMap(path,"10904",String.valueOf(page));
+            request(AppConfigs.home_tab_teachs, request, false);
         }
 
     }

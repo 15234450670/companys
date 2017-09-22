@@ -2,6 +2,7 @@ package mr.li.dance.ui.fragments.newfragment;
 
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.yolanda.nohttp.rest.Request;
@@ -26,16 +27,26 @@ public class NewVideoFragment extends BaseListFragment {
     NewVideoAdapter mVideoPageAdapter;
       private String path;
     int page = 1;
+    private final String tag = "NewVideoFragment";
     @Override
     public void initData() {
         Bundle arguments = getArguments();
+        if (arguments == null) {
+            Log.d(tag, "arguments = null");
+            return;
+        }
         path = arguments.getString("path");
-        if (Integer.parseInt(path)==0) {
-            Request<String> request = ParameterUtils.getSingleton().getHomeDianboMap();
+        Log.e("xxx", path);
+        if (TextUtils.isEmpty(path)) {
+            return;
+        }
+        if (path.equals("0")) {
+            Request<String> request = ParameterUtils.getSingleton().getHomeDianbo2Map();
             request(AppConfigs.home_dianbo, request, false);
         } else {
-          //Tab变动时的接口
 
+            Request<String> request = ParameterUtils.getSingleton().getHomeTabhMap(path,"10901",String.valueOf(page));
+            request(AppConfigs.home_dianbo, request, false);
         }
     }
 
@@ -46,7 +57,7 @@ public class NewVideoFragment extends BaseListFragment {
 
     @Override
     public int getContentView() {
-        return R.layout.list_layout;
+        return R.layout.fragment_list_layout;
     }
 
     @Override
@@ -59,25 +70,28 @@ public class NewVideoFragment extends BaseListFragment {
     @Override
     public void refresh() {
         super.refresh();
-        if (Integer.parseInt(path)==0) {
-            Request<String> request = ParameterUtils.getSingleton().getHomeDianboMap();
+        page = 1;
+        if (path.equals("0")) {
+            Request<String> request = ParameterUtils.getSingleton().getHomeDianbo2Map();
             request(AppConfigs.home_dianbo, request, false);
         } else {
-            //Tab变动时的接口
-            page = 1;
 
+            Request<String> request = ParameterUtils.getSingleton().getHomeTabhMap(path,"10901",String.valueOf(page));
+            request(AppConfigs.home_dianbo, request, false);
         }
     }
 
     @Override
     public void loadMore() {
         super.loadMore();
-        if (Integer.parseInt(path)==0) {
-            Request<String> request = ParameterUtils.getSingleton().getHomeDianboPageMap(mVideoPageAdapter.getNextPage());
-
-            request(AppConfigs.home_dianboPage, request, false);
+        page ++;
+        if (path.equals("0")) {
+            Request<String> request = ParameterUtils.getSingleton().getHomeDianbo2Map();
+            request(AppConfigs.home_dianbo, request, false);
         } else {
-             page++;
+
+            Request<String> request = ParameterUtils.getSingleton().getHomeTabhMap(path,"10901",String.valueOf(page));
+            request(AppConfigs.home_dianbo, request, false);
         }
 
     }

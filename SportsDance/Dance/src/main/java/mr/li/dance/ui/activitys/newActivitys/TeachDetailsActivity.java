@@ -260,4 +260,19 @@ public class TeachDetailsActivity extends BaseListActivity {
         String path = value1.getVideo_unique();
         setTeachDetail(path);
     }
+
+    @Override
+    public void refresh() {
+        super.refresh();
+        Request<String> request = ParameterUtils.getSingleton().getHomeTeachDetailsMap(mId, String.valueOf(page));
+        request(AppConfigs.home_tab_teach_details, request, true);
+    }
+
+    @Override
+    public void loadMore() {
+        super.loadMore();
+        page++;
+        Request<String> request = ParameterUtils.getSingleton().getHomeTeachDetailsMap(mId, String.valueOf(page));
+        request(AppConfigs.home_tab_teach_details, request, true);
+    }
 }

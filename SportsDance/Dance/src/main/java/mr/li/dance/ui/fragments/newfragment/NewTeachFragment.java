@@ -59,7 +59,7 @@ public class NewTeachFragment extends BaseListFragment {
             Request<String> request = ParameterUtils.getSingleton().getHomeTeachMap(String.valueOf(page));
             request(AppConfigs.home_tab_teach, request, false);
         } else {
-            Request<String> request = ParameterUtils.getSingleton().getHomeTeacTabhMap(path,"10903",String.valueOf(page));
+            Request<String> request = ParameterUtils.getSingleton().getHomeTabhMap(path,"10903",String.valueOf(page));
             request(AppConfigs.home_tab_teachs, request, false);
         }
         //refresh();
@@ -106,7 +106,7 @@ public class NewTeachFragment extends BaseListFragment {
             Request<String> request = ParameterUtils.getSingleton().getHomeTeachMap(String.valueOf(page));
             request(AppConfigs.home_tab_teach, request, false);
         } else {
-            Request<String> request = ParameterUtils.getSingleton().getHomeTeacTabhMap(path, "10903", String.valueOf(page));
+            Request<String> request = ParameterUtils.getSingleton().getHomeTabhMap(path, "10903", String.valueOf(page));
             request(AppConfigs.home_tab_teachs, request, false);
         }
     }
@@ -120,7 +120,7 @@ public class NewTeachFragment extends BaseListFragment {
             request(AppConfigs.home_tab_teach, request, false);
         } else {
 
-            Request<String> request = ParameterUtils.getSingleton().getHomeTeacTabhMap(path, "10903", String.valueOf(page));
+            Request<String> request = ParameterUtils.getSingleton().getHomeTabhMap(path, "10903", String.valueOf(page));
             request(AppConfigs.home_tab_teachs, request, false);
         }
     }

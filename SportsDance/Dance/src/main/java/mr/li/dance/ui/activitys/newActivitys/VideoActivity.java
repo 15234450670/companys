@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -69,7 +71,7 @@ public class VideoActivity extends BaseActivity {
                 }
             }
         });
-        Request<String> request = ParameterUtils.getSingleton().getHomeDianboMap();
+        Request<String> request = ParameterUtils.getSingleton().getHomeDianbo2Map();
         request(AppConfigs.home_dianbo, request, false);
     }
 
@@ -106,19 +108,24 @@ public class VideoActivity extends BaseActivity {
         super.onSucceed(what, response);
         if (what == AppConfigs.home_dianbo) {
             HomeVideoResponse homeResponse = JsonMananger.getReponseResult(response, HomeVideoResponse.class);
-            ArrayList<LabelInfo> label = homeResponse.getData().getLabel();
-            if (MyStrUtil.isEmpty(label)) {
+            ArrayList<LabelInfo> mLabel = homeResponse.getData().getLabel();
+            if (MyStrUtil.isEmpty(mLabel)) {
                 mDanceViewHolder.setViewVisibility(R.id.wu,View.VISIBLE);
                 mDanceViewHolder.setViewVisibility(R.id.you,View.GONE);
             } else {
-                for (int i = 0; i < label.size(); i++) {
+                for (int i = 0; i < mLabel.size(); i++) {
                     NewVideoFragment newZiXunFragment = new NewVideoFragment();
                     Bundle bundle = new Bundle();
-                    bundle.putString("path", label.get(i).getClass_id());
-                    newZiXunFragment.setArguments(bundle);
+                    if (TextUtils.isEmpty(mLabel.get(i).getClass_id())) {
+                        Log.d("getClass_id()", "mLabel= null ");
+                    } else {
+                        bundle.putString("path", mLabel.get(i).getClass_id());
+                        newZiXunFragment.setArguments(bundle);
+                    }
+
                     list.add(newZiXunFragment);
                 }
-                NewViewPagerAdapter adapter = new NewViewPagerAdapter(getSupportFragmentManager(),list,label);
+                NewViewPagerAdapter adapter = new NewViewPagerAdapter(getSupportFragmentManager(),list,mLabel);
                 vp.setAdapter(adapter);
                 tab.setupWithViewPager(vp);
                 vp.setOffscreenPageLimit(3);

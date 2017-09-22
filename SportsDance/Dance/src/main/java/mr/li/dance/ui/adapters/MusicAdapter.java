@@ -21,12 +21,11 @@ import mr.li.dance.https.response.MusicResponse;
 import mr.li.dance.models.BannerInfo;
 import mr.li.dance.models.HuoDongInfo;
 import mr.li.dance.models.MusicIndexPesponse;
-import mr.li.dance.models.MusicRecAppBean;
+import mr.li.dance.models.MusicInfo;
 import mr.li.dance.ui.activitys.LoginActivity;
 import mr.li.dance.ui.activitys.MyDanceWebActivity;
 import mr.li.dance.ui.activitys.album.AlbumActivity;
 import mr.li.dance.ui.activitys.match.MatchDetailActivity;
-import mr.li.dance.ui.activitys.music.DanceMusicActivity;
 import mr.li.dance.ui.activitys.music.SongActivity;
 import mr.li.dance.ui.activitys.video.VideoDetailActivity;
 import mr.li.dance.ui.activitys.video.ZhiBoDetailActivity;
@@ -50,8 +49,8 @@ public class MusicAdapter extends DanceBaseAdapter {
 
     Context mContext;
     private List<BannerInfo>      mLunBoDatas;
-    private List<MusicRecAppBean> mDatas;
-
+    //private List<MusicRecAppBean> mDatas;
+    private List<MusicInfo> mDatas;
     public MusicAdapter(Context context) {
         mContext = context;
         mLunBoDatas = new ArrayList<>();
@@ -67,16 +66,16 @@ public class MusicAdapter extends DanceBaseAdapter {
         if (!MyStrUtil.isEmpty(banner)) {
             mLunBoDatas.addAll(banner);
         }
-        ArrayList<MusicRecAppBean> music_item = homeResponse.getData().getMusicRecApp();
+       /* ArrayList<MusicRecAppBean> music_item = homeResponse.getData().getMusicRecApp();
         if (!MyStrUtil.isEmpty(music_item)) {
             mDatas.addAll(music_item);
-        }
+        }*/
 
         notifyDataSetChanged();
     }
 
     public void loadMore(MusicIndexPesponse indexResponse) {
-        ArrayList<MusicRecAppBean> music_item = indexResponse.getData();
+        ArrayList<MusicInfo> music_item = indexResponse.getData();
         if (!MyStrUtil.isEmpty(music_item)) {
             mDatas.addAll(music_item);
             Log.e("mDatas", mDatas.size() + "");
@@ -199,7 +198,7 @@ public class MusicAdapter extends DanceBaseAdapter {
 
 
     private void bindType2(final MyViewHolder holder, final int position) {
-        final MusicRecAppBean musicRecAppBean = mDatas.get(position);
+       /* final MusicRecAppBean musicRecAppBean = mDatas.get(position);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -212,7 +211,7 @@ public class MusicAdapter extends DanceBaseAdapter {
             holder.danceViewHolder.setRoundImageByUrlOrFilePath(R.id.item_pic, musicRecAppBean.getImg(), R.drawable.default_video);
         } else {
 
-        }
+        }*/
 
     }
 
