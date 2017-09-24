@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -22,9 +23,20 @@ import mr.li.dance.models.LabelSelect;
 public class PopGridViewAdapter extends BaseAdapter {
     List<LabelSelect.DataBean.ListBean> list;
     Context mContext;
+    public boolean isTab;
+    private SelectTab st;
+
+    public interface SelectTab{
+        void isTabSelect(boolean flag);
+    }
+
+    public void setSelcetTab(SelectTab st){
+        this.st = st;
+    }
+
     public PopGridViewAdapter(Context context, List<LabelSelect.DataBean.ListBean> list) {
         this.list = list;
-        Log.e("xxxxxx",list.size()+"");
+        Log.e("xxxxxx", list.size() + "");
         this.mContext = context;
     }
 
@@ -45,11 +57,88 @@ public class PopGridViewAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        view = View.inflate(mContext, R.layout.gv_text,null);
+    public View getView(final int i, View view, ViewGroup viewGroup) {
+        view = View.inflate(mContext, R.layout.gv_text, null);
         TextView name = (TextView) view.findViewById(R.id.name);
-         name.setText(list.get(i).getName());
-        Log.e("text",list.get(i).getName());
+        final LabelSelect.DataBean.ListBean bean = list.get(i);
+        name.setText(bean.getName());
+        name.setSelected(bean.isSelect);
+        Log.e("text", bean.getName());
+
+        name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isTab) {
+                    if (bean.isSelect) {
+                        bean.isSelect =!bean.isSelect;
+                        ExPandableAdapter.isChildCanSelect = true;
+                        if (st!=null) {
+                            st.isTabSelect(false);
+                        }
+                        notifyDataSetChanged();
+                    } else {
+                        selectOne(i);
+                        ExPandableAdapter.isChildCanSelect = false;
+                        if (st!=null) {
+                            st.isTabSelect(true);
+                        }
+                    }
+                } else {
+                    if (ExPandableAdapter.isChildCanSelect) {
+                        bean.isSelect =!bean.isSelect;
+                        notifyDataSetChanged();
+                    } else {
+                        Toast.makeText(mContext, "栏目1与其它栏目不可同时选中！", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
+
         return view;
+    }
+
+    /**
+     * 单选
+     * @param position
+     */
+    public void selectOne(int position){
+
+        for (int i = 0 ; i<list.size() ; i++) {
+            list.get(i).isSelect = i==position? true : false;
+        }
+        notifyDataSetChanged();
+    }
+
+    /**
+     * 全不选
+     */
+    public void selectNone(){
+        for (int i = 0 ; i<list.size() ; i++) {
+            list.get(i).isSelect = false;
+        }
+        notifyDataSetChanged();
+    }
+
+    /**
+     * 那个tab被选中了
+     * @return
+     */
+    public int getSelect(){
+        for (int i = 0 ; i < list.size() ; i++) {
+            if(list.get(i).isSelect){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * 选中一个标签
+     * @param position
+     */
+    public void setSelect (int position) {
+        for (int i = 0 ; i<list.size() ; i++) {
+            list.get(i).isSelect = i==position? true : false;
+        }
     }
 }

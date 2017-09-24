@@ -33,7 +33,6 @@ public class LabelSelect extends BaseResponse{
         private String class_name;
         private List<ListBean> list;
         public boolean allCheck = false;
-
         public boolean isAllCheck() {
             return allCheck;
         }
@@ -58,7 +57,7 @@ public class LabelSelect extends BaseResponse{
              * id : 10
              * name : 资讯管理栏目1标签1
              */
-
+            public boolean isSelect;
             private String id;
             private String name;
 

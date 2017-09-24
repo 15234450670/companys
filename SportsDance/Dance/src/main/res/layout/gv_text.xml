@@ -5,13 +5,14 @@
               android:layout_height="match_parent">
     <TextView
         android:id="@+id/name"
-        android:layout_marginLeft="@dimen/spacing_10"
-        android:layout_marginRight="@dimen/spacing_10"
-        android:layout_marginTop="@dimen/spacing_20"
         style="@style/text_white_style_24"
-        android:textColor="#333333"
-        android:text=""
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/corners"
         android:gravity="center"
-        android:background="@drawable/corners"/>
-
+        android:text=""
+        android:textColor="@drawable/text_color" />
 </LinearLayout>
