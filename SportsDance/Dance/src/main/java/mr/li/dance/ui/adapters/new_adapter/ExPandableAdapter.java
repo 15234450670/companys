@@ -8,6 +8,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class ExPandableAdapter extends BaseExpandableListAdapter {
     int tab = -2;
     private final String tag = getClass().getSimpleName();
     private HashMap<Integer, PopGridViewAdapter> adapterMap;
+    List<String> is_host = new ArrayList<>();
 
     public ExPandableAdapter(Context context, List<LabelSelect.DataBean> data) {
         isChildCanSelect = true;
@@ -88,6 +90,8 @@ public class ExPandableAdapter extends BaseExpandableListAdapter {
         TextView check_box = (TextView) convertView.findViewById(R.id.check_box);
         check_box.setSelected(isExpanded);
         name.setText(mData.get(groupPosition).getClass_name());
+        String is_hot = mData.get(groupPosition).is_hot;
+        is_host.add(is_hot);
         return convertView;
     }
 
@@ -96,7 +100,10 @@ public class ExPandableAdapter extends BaseExpandableListAdapter {
         convertView = View.inflate(mContext, R.layout.expand_two, null);
         GridView gv = (GridView) convertView.findViewById(R.id.gv);
         PopGridViewAdapter popGridViewAdapter = new PopGridViewAdapter(mContext, mData.get(groupPosition).getList());
-        popGridViewAdapter.isTab = groupPosition==0? true : false;
+        for (int i = 0; i < is_host.size(); i++) {
+            popGridViewAdapter.isTab = Integer.valueOf(is_host.get(i))==1? true : false;
+        }
+
 
         final PopGridViewAdapter adapter = adapterMap.get(groupPosition);
         if (adapter == null) {
@@ -104,7 +111,6 @@ public class ExPandableAdapter extends BaseExpandableListAdapter {
         }
 
         if (groupPosition == 0) {
-
             popGridViewAdapter.setSelcetTab(new PopGridViewAdapter.SelectTab() {
                 @Override
                 public void isTabSelect(boolean flag) {
@@ -120,6 +126,7 @@ public class ExPandableAdapter extends BaseExpandableListAdapter {
         }
 
         gv.setAdapter(popGridViewAdapter);
+
         return convertView;
     }
 

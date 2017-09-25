@@ -7,6 +7,7 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -267,6 +268,7 @@ public class VideoDetailActivity extends BaseListActivity {
         } else {
             String userId = UserInfoManager.getSingleton().getUserId(this);
             int operation = isCollected ? 1 : 2;
+            Log.e("operation:v:",operation+"");
             Request<String> request = ParameterUtils.getSingleton().getCollectionMap(userId, mItemId, 10602, operation);
             request(AppConfigs.user_collection, request, false);
         }

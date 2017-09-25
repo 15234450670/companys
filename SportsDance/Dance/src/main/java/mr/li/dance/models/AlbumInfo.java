@@ -37,9 +37,57 @@ public class AlbumInfo extends BaseHomeItem {
     private String picture_src;
     private String username;
 
-    private int width;
-    private int height;
+    private String width;
+    private String height;
 
+    private String id;
+    private String name;
+    private String size;
+
+    private String img;
+    private String updatetime;
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getUpdatetime() {
+        return updatetime;
+    }
+
+    public void setUpdatetime(String updatetime) {
+        this.updatetime = updatetime;
+    }
 
     public String getClass_name() {
         return class_name;
@@ -142,19 +190,19 @@ public class AlbumInfo extends BaseHomeItem {
         this.username = username;
     }
 
-    public int getWidth() {
+    public String getWidth() {
         return width;
     }
 
-    public void setWidth(int width) {
+    public void setWidth(String width) {
         this.width = width;
     }
 
-    public int getHeight() {
+    public String getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(String height) {
         this.height = height;
     }
 }

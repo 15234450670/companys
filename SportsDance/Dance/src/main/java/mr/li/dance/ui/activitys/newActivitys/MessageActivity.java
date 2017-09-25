@@ -49,13 +49,14 @@ import static mr.li.dance.ui.activitys.MainActivity.myBinder;
  */
 public class MessageActivity extends BaseActivity {
 
-    public static int tabPosition = -1;
+
     private TabLayout      tabLayout;
     private ImageView      label_pic;
     private IndexViewPager vp;
     List<Fragment> list = new ArrayList<>();
-    private PopupWindow popupWindow;
     private String tag = this.getClass().getSimpleName();
+    public static int tabPosition = -1;
+    private PopupWindow popupWindow;
     ExPandableAdapter adapter;
     private CustomExpandableListView celv;
     private ExPandableAdapter exPandableAdapter;

@@ -31,6 +31,7 @@ public class LabelSelect extends BaseResponse{
          */
 
         private String class_name;
+        public String is_hot;
         private List<ListBean> list;
         public boolean allCheck = false;
         public boolean isAllCheck() {

@@ -1,7 +1,6 @@
 package mr.li.dance.ui.adapters.new_adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -36,7 +35,6 @@ public class PopGridViewAdapter extends BaseAdapter {
 
     public PopGridViewAdapter(Context context, List<LabelSelect.DataBean.ListBean> list) {
         this.list = list;
-        Log.e("xxxxxx", list.size() + "");
         this.mContext = context;
     }
 
@@ -63,7 +61,6 @@ public class PopGridViewAdapter extends BaseAdapter {
         final LabelSelect.DataBean.ListBean bean = list.get(i);
         name.setText(bean.getName());
         name.setSelected(bean.isSelect);
-        Log.e("text", bean.getName());
 
         name.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,7 +85,7 @@ public class PopGridViewAdapter extends BaseAdapter {
                         bean.isSelect =!bean.isSelect;
                         notifyDataSetChanged();
                     } else {
-                        Toast.makeText(mContext, "栏目1与其它栏目不可同时选中！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "栏目1与其它栏目不可同时选中！", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

@@ -44,7 +44,7 @@ public class NewCollectXCFragment extends NewSwipeListFragments<BaseHomeItem> {
     @Override
     public void itemClick(int position, BaseHomeItem value) {
         AlbumInfo albumInfo = (AlbumInfo) value;
-        AlbumActivity.lunch(getActivity(), value.getId(), albumInfo.getClass_name(), true);
+        AlbumActivity.lunch(getActivity(), value.getId(), albumInfo.getName(), true);
 
     }
 
@@ -88,7 +88,6 @@ public class NewCollectXCFragment extends NewSwipeListFragments<BaseHomeItem> {
         if (AppConfigs.user_collection == what) {
             StringResponse reponseResult = JsonMananger.getReponseResult(response, StringResponse.class);
             mAdapter.removePosition(mDelItem);
-
         }
         if (AppConfigs.user_collections==what)  {
             HomeAlbumResponse reponseResult = JsonMananger.getReponseResult(response, HomeAlbumResponse.class);
@@ -150,7 +149,6 @@ public class NewCollectXCFragment extends NewSwipeListFragments<BaseHomeItem> {
         mDelItem = item;
         String userId = UserInfoManager.getSingleton().getUserId(getActivity());
         Request<String> request = ParameterUtils.getSingleton().getCollectionMap(userId, item.getId(), 10601, 2);
-
         request(AppConfigs.user_collection, request, false);
     }
 

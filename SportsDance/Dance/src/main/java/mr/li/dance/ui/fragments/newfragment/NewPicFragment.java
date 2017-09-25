@@ -9,8 +9,8 @@ import com.yolanda.nohttp.rest.Request;
 
 import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
-import mr.li.dance.https.response.HomeAlbumResponse;
-import mr.li.dance.models.AlbumInfo;
+import mr.li.dance.https.response.HomeAlbumInfo;
+import mr.li.dance.models.PhotoClassBean;
 import mr.li.dance.ui.activitys.album.AlbumActivity;
 import mr.li.dance.ui.adapters.new_adapter.NewPicAdapter;
 import mr.li.dance.ui.fragments.BaseListFragment;
@@ -24,7 +24,7 @@ import mr.li.dance.utils.JsonMananger;
  * 描述:
  * 修订历史:
  */
-public class NewPicFragment extends BaseListFragment<AlbumInfo> {
+public class NewPicFragment extends BaseListFragment<PhotoClassBean> {
     NewPicAdapter adapter;
     int page = 1;
     private String path;
@@ -43,6 +43,7 @@ public class NewPicFragment extends BaseListFragment<AlbumInfo> {
     @Override
     public RecyclerView.Adapter getAdapter() {
         adapter = new NewPicAdapter(getActivity());
+        adapter.setItemClickListener(this);
         return adapter;
     }
 
@@ -51,7 +52,6 @@ public class NewPicFragment extends BaseListFragment<AlbumInfo> {
         Bundle arguments = getArguments();
         path = arguments.getString("path");
         if (arguments == null) {
-
             return;
         }
         path = arguments.getString("path");
@@ -71,9 +71,8 @@ public class NewPicFragment extends BaseListFragment<AlbumInfo> {
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
-        HomeAlbumResponse reponseResult = JsonMananger.getReponseResult(response, HomeAlbumResponse.class);
-        adapter.addList(isRefresh, reponseResult.getData());
-
+        HomeAlbumInfo reponseResult = JsonMananger.getReponseResult(response, HomeAlbumInfo.class);
+        adapter.addList(isRefresh, reponseResult.getData().getPhotoClass());
     }
 
 
@@ -95,7 +94,7 @@ public class NewPicFragment extends BaseListFragment<AlbumInfo> {
         super.loadMore();
         page++;
         if (path.equals("0")) {
-            Request<String> request = ParameterUtils.getSingleton().getHomeAlbumMapFromServer(adapter.getNextPage());
+            Request<String> request = ParameterUtils.getSingleton().getHomeAlbum2Map(page);
             request(AppConfigs.home_album, request, false);
         } else {
             Request<String> request = ParameterUtils.getSingleton().getHomeTabhMap(path, "10905", String.valueOf(page));
@@ -105,7 +104,8 @@ public class NewPicFragment extends BaseListFragment<AlbumInfo> {
     }
 
     @Override
-    public void itemClick(int position, AlbumInfo value) {
-        AlbumActivity.lunch(this, value.getId(), value.getClass_name());
+    public void itemClick(int position, PhotoClassBean value) {
+        Log.e("value.getId() : ", value.getId());
+        AlbumActivity.lunch(this, value.getId(), value.getTitle());
     }
 }

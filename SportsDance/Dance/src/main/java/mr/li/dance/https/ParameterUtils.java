@@ -503,7 +503,7 @@ public class ParameterUtils {
         return request;
     }
     /**
-     * 教学Tab
+     * 所有的Tab
      */
     public Request<String> getHomeTabhMap(String id,String type,String page) {
         Request<String> request = getBaseRequestCacheForPost("/home.labelSearch");
@@ -573,6 +573,12 @@ public class ParameterUtils {
         Request<String> request = getBaseRequestForPost("/home.albumDetail");
         request.add("userid", userid);
         request.add("id", id);
+        return request;
+    }
+    public Request<String> getAlbumDetail2Map( String id,int page) {
+        Request<String> request = getBaseRequestForPost("/home.photoList");
+        request.add("id", id);
+        request.add("page", page);
         return request;
     }
 

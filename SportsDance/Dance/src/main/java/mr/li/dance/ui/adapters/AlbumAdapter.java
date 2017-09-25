@@ -4,13 +4,10 @@ import android.content.Context;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.bumptech.glide.util.Util;
-
 import mr.li.dance.R;
 import mr.li.dance.models.AlbumInfo;
 import mr.li.dance.utils.DensityUtil;
 import mr.li.dance.utils.MyStrUtil;
-import mr.li.dance.utils.Utils;
 import mr.li.dance.utils.glide.ImageLoaderManager;
 
 /**
@@ -51,12 +48,14 @@ public class AlbumAdapter extends BaseRecyclerAdapter<AlbumInfo> {
         return R.layout.item_picture;
     }
 
+
+
     @Override
     public void bindData(RecyclerViewHolder holder, int position, AlbumInfo item) {
         ImageView imageView = holder.getImageView(R.id.item_img);
 
-        int imageWidth = item.getWidth();
-        int imageHeight = item.getHeight();
+        int imageWidth = Integer.valueOf(item.getWidth());
+        int imageHeight = Integer.valueOf(item.getHeight());
         if (imageWidth == 0) {
             imageWidth = 1334;
             imageHeight = 2000;
@@ -67,7 +66,7 @@ public class AlbumAdapter extends BaseRecyclerAdapter<AlbumInfo> {
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(itemWidthSize, itemHeightSize);
         imageView.setLayoutParams(layoutParams);
 
-        ImageLoaderManager.getSingleton().LoadBySize(mContext, item.getPhoto(), imageView, R.drawable.default_video, itemWidthSize, itemHeightSize);
+        ImageLoaderManager.getSingleton().LoadBySize(mContext, item.getImg(), imageView, R.drawable.default_video, itemWidthSize, itemHeightSize);
     }
 
     @Override

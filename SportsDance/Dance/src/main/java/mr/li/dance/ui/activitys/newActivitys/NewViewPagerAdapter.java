@@ -25,6 +25,7 @@ public class NewViewPagerAdapter extends FragmentPagerAdapter {
 
     }
 
+
     @Override
     public Fragment getItem(int position) {
         return mList.get(position);

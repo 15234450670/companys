@@ -66,6 +66,7 @@ public class NewCollectXC extends SwipeMenuAdapter<RecyclerViewHolder> {
 
     private void bindAlbum(RecyclerViewHolder holder, int position) {
         AlbumInfo albumInfo = (AlbumInfo) mDatas.get(position);
+
         holder.setImageByUrlOrFilePath(R.id.imageView, albumInfo.getImg_fm(), R.drawable.default_video);
         holder.setText(R.id.name, albumInfo.getClass_name());
         holder.setVisibility(R.id.typeicon_tv, View.INVISIBLE);
