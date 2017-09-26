@@ -46,6 +46,7 @@ public class AlbumInfo extends BaseHomeItem {
 
     private String img;
     private String updatetime;
+    public String title;
 
     @Override
     public String getId() {

@@ -137,10 +137,6 @@ public class MyDanceWebActivity extends BaseActivity {
     }
 
 
-    @Override
-    public void onHeadRightButtonClick(View v) {
-        showShareDialog();
-    }
 
     @Override
     public void getIntentData() {
@@ -233,8 +229,13 @@ public class MyDanceWebActivity extends BaseActivity {
         super.initDatas();
     }
 
+    @Override
+    public void onHeadRightButtonClick(View v) {
+        showShareDialog();
+    }
 
     private void showShareDialog() {
+
         if (MyStrUtil.isEmpty(titleName)) {
             mShareContent = mTitle.getText().toString();
         } else {

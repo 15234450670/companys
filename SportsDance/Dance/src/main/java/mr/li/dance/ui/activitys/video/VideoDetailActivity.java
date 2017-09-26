@@ -115,7 +115,8 @@ public class VideoDetailActivity extends BaseListActivity {
     public void initDatas() {
         super.initDatas();
         String userId = UserInfoManager.getSingleton().getUserId(this);
-        Request<String> request = ParameterUtils.getSingleton().getVideoDetailMap(userId, mItemId);
+        Request<String> request = ParameterUtils.getSingleton().getVideoDetailMap(userId, mItemId,"1");
+        Log.e("mId",mItemId);
         request(AppConfigs.home_dianboDetailL, request, true);
     }
 
@@ -229,6 +230,7 @@ public class VideoDetailActivity extends BaseListActivity {
         if (AppConfigs.home_dianboDetailL == what) {
             VideoDetailResponse detailResponse = JsonMananger.getReponseResult(responseStr, VideoDetailResponse.class);
             isCollected = (0 != detailResponse.getData().getCollection_id());
+            Log.e("isCollected",isCollected+"");
             mAdapter.refresh(detailResponse.getData().getOtherList());
             setVideoDetail(detailResponse.getData().getDetail());
         } else {

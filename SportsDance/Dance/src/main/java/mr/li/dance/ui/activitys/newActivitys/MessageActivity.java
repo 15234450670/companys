@@ -26,7 +26,9 @@ import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.HomeZxResponse;
 import mr.li.dance.models.LabelInfo;
+import mr.li.dance.models.LabelSeekInfo;
 import mr.li.dance.models.LabelSelect;
+import mr.li.dance.models.TeachInfo;
 import mr.li.dance.ui.activitys.SearchActivity;
 import mr.li.dance.ui.activitys.base.BaseActivity;
 import mr.li.dance.ui.activitys.music.PlayMusicActivity;
@@ -54,12 +56,13 @@ public class MessageActivity extends BaseActivity {
     private ImageView      label_pic;
     private IndexViewPager vp;
     List<Fragment> list = new ArrayList<>();
-    private String tag = this.getClass().getSimpleName();
-    public static int tabPosition = -1;
+    int            page = 1;
+    private       String tag         = this.getClass().getSimpleName();
+    public static int    tabPosition = -1;
     private PopupWindow popupWindow;
     ExPandableAdapter adapter;
-    private CustomExpandableListView celv;
-    private ExPandableAdapter exPandableAdapter;
+    private CustomExpandableListView   celv;
+    private ExPandableAdapter          exPandableAdapter;
     private List<LabelSelect.DataBean> data;
 
     @Override
@@ -89,7 +92,7 @@ public class MessageActivity extends BaseActivity {
                 }
             }
         });
-        Request<String> request = ParameterUtils.getSingleton().getHomeZxMap();
+        Request<String> request = ParameterUtils.getSingleton().getHomeZxMap(String.valueOf(page));
         request(AppConfigs.home_zx, request, false);
 
 
@@ -107,7 +110,6 @@ public class MessageActivity extends BaseActivity {
         int width = wm.getDefaultDisplay().getWidth() * 4 / 5;
         popupWindow = new PopupWindow(popipWindow_view, width,
                 WindowManager.LayoutParams.MATCH_PARENT);
-        PopDisappear();
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(true);
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
@@ -135,15 +137,15 @@ public class MessageActivity extends BaseActivity {
         sure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ScreenPop();
                 popupWindow.dismiss();
-                //PopDisappear();
             }
         });
         //重置
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (exPandableAdapter!=null) {
+                if (exPandableAdapter != null) {
                     exPandableAdapter.itemReset();
                 }
             }
@@ -160,46 +162,51 @@ public class MessageActivity extends BaseActivity {
                 getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                 getWindow().setAttributes(lp);
 
-                if (ExPandableAdapter.isChildCanSelect) {
-                    // TODO: 2017/9/24
-                    StringBuilder sb = new StringBuilder();
-                    final String kk = "--";
-                    for (int i = 1 ; i < data.size() ; i++) {
+            }
+        });
+    }
+    //标签选择
+    private void ScreenPop(){
+        if (ExPandableAdapter.isChildCanSelect) {
+            // TODO: 2017/9/24
+            StringBuilder sb = new StringBuilder();
+            final String kk = ",";
+            for (int i = 1; i < data.size(); i++) {
+                List<LabelSelect.DataBean.ListBean> list = data.get(i).getList();
 
-                        List<LabelSelect.DataBean.ListBean> list = data.get(i).getList();
-
-                        for (int k = 0 ; k < list.size() ; k++) {
-                            LabelSelect.DataBean.ListBean bean = list.get(k);
-                            if (bean.isSelect) {
-                                sb.append(bean.getId());
-                                sb.append(kk);
-                            }
-                        }
-
-                    }
-
-                    Toast.makeText(mContext, sb.toString(), Toast.LENGTH_SHORT).show();
-                } else {
-                    int tab = exPandableAdapter.getTabPosition();
-                    if(tab<0){
-                        // TODO: 2017/9/24
-                        Toast.makeText(mContext, "未选中标签！", Toast.LENGTH_SHORT).show();
-                        return;
-                    } else {
-
-                        int position = tabLayout.getSelectedTabPosition();
-                        if (position == tab) {
-                            return;
-                        } else {
-                            vp.setCurrentItem(tab+1);
-                            //tabLayout.getTabAt(tab+1);
-                        }
-
+                for (int k = 0; k < list.size(); k++) {
+                    LabelSelect.DataBean.ListBean bean = list.get(k);
+                    if (bean.isSelect) {
+                        sb.append(bean.getId());
+                        sb.append(kk);
                     }
                 }
 
             }
-        });
+            if (!TextUtils.isEmpty(sb.toString())) {
+                sb.deleteCharAt(sb.length() - 1);
+                Request<String> homeTabhMap = ParameterUtils.getSingleton().getHomeTabhMap(sb.toString(), "10902", String.valueOf(page));
+                request(AppConfigs.home_zx_screen, homeTabhMap, false);
+                Toast.makeText(mContext, sb.toString(), Toast.LENGTH_SHORT).show();
+            }
+
+        } else {
+            int tab = exPandableAdapter.getTabPosition();
+            if (tab < 0) {
+                // TODO: 2017/9/24
+                Toast.makeText(mContext, "未选中标签！", Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+
+                int position = tabLayout.getSelectedTabPosition();
+                if (position == tab) {
+                    return;
+                } else {
+                    vp.setCurrentItem(tab + 1);
+                }
+
+            }
+        }
     }
 
     @Override
@@ -278,10 +285,18 @@ public class MessageActivity extends BaseActivity {
 
             }
 
-        } else {
+        }
+        if (what == AppConfigs.home_tab_zx) {
             LabelSelect reponseResult = JsonMananger.getReponseResult(response, LabelSelect.class);
             data = reponseResult.getData();
             LabelSelect(data);
+        }
+        if (what == AppConfigs.home_zx_screen) {
+            LabelSeekInfo reponseResult = JsonMananger.getReponseResult(response, LabelSeekInfo.class);
+            ArrayList<TeachInfo> arr = reponseResult.getData().getArr();
+
+
+
         }
     }
 

@@ -70,6 +70,7 @@
             android:layout_weight="1">
 
         </mr.li.dance.utils.util.IndexViewPager>
+
     </LinearLayout>
 
 </RelativeLayout>

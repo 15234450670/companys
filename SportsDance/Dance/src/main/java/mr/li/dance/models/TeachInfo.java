@@ -19,6 +19,17 @@ public class TeachInfo extends BaseHomeItem {
     private String title;
     private String img;
     private String described;
+    private String picture;//筛选  图片
+
+    @Override
+    public String getPicture() {
+        return picture;
+    }
+
+    @Override
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
 
     public String getId() {
         return id;

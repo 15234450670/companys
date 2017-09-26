@@ -72,7 +72,7 @@ public class NewCollectXC extends SwipeMenuAdapter<RecyclerViewHolder> {
         holder.setVisibility(R.id.typeicon_tv, View.INVISIBLE);
         holder.setImageResDrawable(R.id.typeicon_tv, R.drawable.home_icon_005);
         holder.setVisibility(R.id.picnum_tv, View.VISIBLE);
-        holder.setText(R.id.username_tv, albumInfo.getUsername());
+        holder.setText(R.id.username_tv, albumInfo.title);
         holder.setText(R.id.time_tv, albumInfo.getInserttime());
      //   ImageLoaderManager.getSingleton().LoadCircle(mContext, albumInfo.getPicture_src(), (ImageView) holder.getView(R.id.headicon), R.drawable.icon_mydefault);
 

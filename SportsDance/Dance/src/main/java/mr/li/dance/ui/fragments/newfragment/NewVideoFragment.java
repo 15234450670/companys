@@ -9,8 +9,8 @@ import com.yolanda.nohttp.rest.Request;
 
 import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
-import mr.li.dance.https.response.HomeVideoIndexResponse;
 import mr.li.dance.https.response.HomeVideoResponse;
+import mr.li.dance.models.LabelSeekInfoVideo;
 import mr.li.dance.ui.adapters.new_adapter.NewVideoAdapter;
 import mr.li.dance.ui.fragments.BaseListFragment;
 import mr.li.dance.utils.AppConfigs;
@@ -25,9 +25,10 @@ import mr.li.dance.utils.JsonMananger;
  */
 public class NewVideoFragment extends BaseListFragment {
     NewVideoAdapter mVideoPageAdapter;
-      private String path;
+    private String path;
     int page = 1;
     private final String tag = "NewVideoFragment";
+
     @Override
     public void initData() {
         Bundle arguments = getArguments();
@@ -41,11 +42,10 @@ public class NewVideoFragment extends BaseListFragment {
             return;
         }
         if (path.equals("0")) {
-            Request<String> request = ParameterUtils.getSingleton().getHomeDianbo2Map();
+            Request<String> request = ParameterUtils.getSingleton().getHomeDianbo2Map(String.valueOf(page));
             request(AppConfigs.home_dianbo, request, false);
         } else {
-
-            Request<String> request = ParameterUtils.getSingleton().getHomeTabhMap(path,"10901",String.valueOf(page));
+            Request<String> request = ParameterUtils.getSingleton().getHomeTabhMap(path, "10901", String.valueOf(page));
             request(AppConfigs.home_dianbo, request, false);
         }
     }
@@ -72,26 +72,24 @@ public class NewVideoFragment extends BaseListFragment {
         super.refresh();
         page = 1;
         if (path.equals("0")) {
-            Request<String> request = ParameterUtils.getSingleton().getHomeDianbo2Map();
+            Request<String> request = ParameterUtils.getSingleton().getHomeDianbo2Map(String.valueOf(page));
             request(AppConfigs.home_dianbo, request, false);
         } else {
-
-            Request<String> request = ParameterUtils.getSingleton().getHomeTabhMap(path,"10901",String.valueOf(page));
+            Request<String> request = ParameterUtils.getSingleton().getHomeTabhMap(path, "10901", String.valueOf(page));
             request(AppConfigs.home_dianbo, request, false);
         }
     }
 
     @Override
     public void loadMore() {
+        page++;
         super.loadMore();
-        page ++;
         if (path.equals("0")) {
-            Request<String> request = ParameterUtils.getSingleton().getHomeDianbo2Map();
-            request(AppConfigs.home_dianbo, request, false);
+            Request<String> request = ParameterUtils.getSingleton().getHomeDianbo2Map(String.valueOf(page));
+            request(AppConfigs.home_dianboPage, request, false);
         } else {
-
-            Request<String> request = ParameterUtils.getSingleton().getHomeTabhMap(path,"10901",String.valueOf(page));
-            request(AppConfigs.home_dianbo, request, false);
+            Request<String> request = ParameterUtils.getSingleton().getHomeTabhMap(path, "10901", String.valueOf(page));
+            request(AppConfigs.home_dianboPage, request, false);
         }
 
     }
@@ -103,9 +101,18 @@ public class NewVideoFragment extends BaseListFragment {
         if (what == AppConfigs.home_dianbo) {
             HomeVideoResponse homeResponse = JsonMananger.getReponseResult(response, HomeVideoResponse.class);
             mVideoPageAdapter.refresh(homeResponse);
+            if (homeResponse.getData().getDb_rec() == null) {
+                LabelSeekInfoVideo reponseResults = JsonMananger.getReponseResult(response, LabelSeekInfoVideo.class);
+                mVideoPageAdapter.refresh1(reponseResults);
+            }
+
         } else {
-            HomeVideoIndexResponse reponseResult = JsonMananger.getReponseResult(response, HomeVideoIndexResponse.class);
-            mVideoPageAdapter.loadMore(reponseResult);
+            HomeVideoResponse homeResponse = JsonMananger.getReponseResult(response, HomeVideoResponse.class);
+            mVideoPageAdapter.loadMore(homeResponse);
+            if (homeResponse.getData().getDb_rec() == null) {
+                LabelSeekInfoVideo reponseResults = JsonMananger.getReponseResult(response, LabelSeekInfoVideo.class);
+                mVideoPageAdapter.loadMore1(reponseResults);
+            }
         }
 
     }

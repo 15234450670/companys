@@ -58,6 +58,8 @@ public class MusicActivity extends BaseActivity {
     private CustomExpandableListView   celv;
     private ExPandableAdapter          exPandableAdapter;
     private List<LabelSelect.DataBean> data;
+    int page = 1;
+
     @Override
     public int getContentViewId() {
         return R.layout.new_type2_activity;
@@ -78,17 +80,18 @@ public class MusicActivity extends BaseActivity {
         mDanceViewHolder.setClickListener(R.id.btn_music, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (myBinder!=null&&myBinder.binderIsPlaying()) {
+                if (myBinder != null && myBinder.binderIsPlaying()) {
                     PlayMusicActivity.lunch(MusicActivity.this);
                 } else {
                     Toast.makeText(MusicActivity.this, "请去播放音乐", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-        Request<String> musicInfoMap = ParameterUtils.getSingleton().getMusicInfo2Map();
+        Request<String> musicInfoMap = ParameterUtils.getSingleton().getMusicInfo2Map(String.valueOf(page));
         request(AppConfigs.home_music, musicInfoMap, false);
 
     }
+
     //弹出标签选择
     private void LabelSelect(List<LabelSelect.DataBean> data) {
         final View popipWindow_view = getLayoutInflater().inflate(R.layout.label_select, null, false);
@@ -137,7 +140,7 @@ public class MusicActivity extends BaseActivity {
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (exPandableAdapter!=null) {
+                if (exPandableAdapter != null) {
                     exPandableAdapter.itemReset();
                 }
             }
@@ -158,11 +161,11 @@ public class MusicActivity extends BaseActivity {
                     // TODO: 2017/9/24
                     StringBuilder sb = new StringBuilder();
                     final String kk = "--";
-                    for (int i = 1 ; i < data.size() ; i++) {
+                    for (int i = 1; i < data.size(); i++) {
 
                         List<LabelSelect.DataBean.ListBean> list = data.get(i).getList();
 
-                        for (int k = 0 ; k < list.size() ; k++) {
+                        for (int k = 0; k < list.size(); k++) {
                             LabelSelect.DataBean.ListBean bean = list.get(k);
                             if (bean.isSelect) {
                                 sb.append(bean.getId());
@@ -175,7 +178,7 @@ public class MusicActivity extends BaseActivity {
                     Toast.makeText(mContext, sb.toString(), Toast.LENGTH_SHORT).show();
                 } else {
                     int tab = exPandableAdapter.getTabPosition();
-                    if(tab<0){
+                    if (tab < 0) {
                         // TODO: 2017/9/24
                         Toast.makeText(mContext, "未选中标签！", Toast.LENGTH_SHORT).show();
                         return;
@@ -185,7 +188,7 @@ public class MusicActivity extends BaseActivity {
                         if (position == tab) {
                             return;
                         } else {
-                            vp.setCurrentItem(tab+1);
+                            vp.setCurrentItem(tab + 1);
                             //tabLayout.getTabAt(tab+1);
                         }
 
@@ -195,12 +198,13 @@ public class MusicActivity extends BaseActivity {
             }
         });
     }
+
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
         if (what == AppConfigs.home_music) {
             MusicResponse reponseResult = JsonMananger.getReponseResult(response, MusicResponse.class);
-            ArrayList<LabelInfo> mLabel= reponseResult.getData().getLabel();
+            ArrayList<LabelInfo> mLabel = reponseResult.getData().getLabel();
             if (MyStrUtil.isEmpty(mLabel)) {
                 mDanceViewHolder.setViewVisibility(R.id.wu, View.VISIBLE);
                 mDanceViewHolder.setViewVisibility(R.id.you, View.GONE);
@@ -216,11 +220,11 @@ public class MusicActivity extends BaseActivity {
                     }
                     list.add(newZiXunFragment);
                 }
-                NewViewPagerAdapter adapter = new NewViewPagerAdapter(getSupportFragmentManager(), list,mLabel);
+                NewViewPagerAdapter adapter = new NewViewPagerAdapter(getSupportFragmentManager(), list, mLabel);
                 vp.setAdapter(adapter);
                 tabLayout.setupWithViewPager(vp);
             }
-        }else {
+        } else {
             LabelSelect reponseResult = JsonMananger.getReponseResult(response, LabelSelect.class);
             data = reponseResult.getData();
             LabelSelect(data);

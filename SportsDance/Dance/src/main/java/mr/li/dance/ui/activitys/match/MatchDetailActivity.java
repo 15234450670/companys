@@ -46,12 +46,13 @@ public class MatchDetailActivity extends BaseActivity implements View.OnClickLis
     private String mMatchName;
 
     //    private String mGuicheng;//竞赛规则
-//    private String mShexiang;//比赛设项
-//    private String mSaiCheng;//比赛赛程
-//    private String mVedioLiveId;
+    //    private String mShexiang;//比赛设项
+    //    private String mSaiCheng;//比赛赛程
+    //    private String mVedioLiveId;
     private IMediaDataVideoView videoView;
-    private long beginTime;
+    private long                beginTime;
     LinkedHashMap<String, String> rateMap = new LinkedHashMap<String, String>();
+
     @Override
     public int getContentViewId() {
         return R.layout.activity_matchdetail;
@@ -116,7 +117,7 @@ public class MatchDetailActivity extends BaseActivity implements View.OnClickLis
         if (MyStrUtil.isEmpty(vedioLiveId) || TextUtils.equals(vedioLiveId, "0")) {
 
             mDanceViewHolder.setImageByUrlOrFilePath(R.id.video_bg, match.getImg(), R.drawable.default_banner);
-        }else{
+        } else {
             mDanceViewHolder.setViewVisibility(R.id.video_bg, View.INVISIBLE);
             startPlayVideo(match);
         }
@@ -130,16 +131,21 @@ public class MatchDetailActivity extends BaseActivity implements View.OnClickLis
                 ScoreGroupActivity.lunch(this, mMatchId);
                 break;
             case R.id.guize_layout:
-                String guize_url = String.format(AppConfigs.SAISHIShareUrl, String.valueOf(mMatchId), String.valueOf(10701));
-                Log.e("xxx",guize_url);
+                //  String guize_url = String.format(AppConfigs.SAISHIShareUrl, String.valueOf(mMatchId), String.valueOf(10701));
+                String guize_url = String.format(AppConfigs.SAISHIShareUrl2 + mMatchId);
+                Log.e("guize_url:", guize_url);
                 MyDanceWebActivity.lunch(this, MyDanceWebActivity.MATCHOTHER1, "赛事规则", guize_url, true);
                 break;
             case R.id.shexiang_layout:
-                String shexiang_url = String.format(AppConfigs.SAISHIShareUrl, String.valueOf(mMatchId), String.valueOf(10702));
+                //String shexiang_url = String.format(AppConfigs.SAISHIShareUrl, String.valueOf(mMatchId), String.valueOf(10702));
+                String shexiang_url = String.format(AppConfigs.SAISHIShareUrl3 + mMatchId);
+                Log.e("shexiang_url:", shexiang_url);
                 MyDanceWebActivity.lunch(this, MyDanceWebActivity.MATCHOTHER2, "赛事设项", shexiang_url, true);
                 break;
             case R.id.saicheng_layout:
-                String saicheng_url = String.format(AppConfigs.SAISHIShareUrl, String.valueOf(mMatchId), String.valueOf(10703));
+                // String saicheng_url = String.format(AppConfigs.SAISHIShareUrl, String.valueOf(mMatchId), String.valueOf(10703));
+                String saicheng_url = String.format(AppConfigs.SAISHIShareUrl4 + mMatchId);
+                Log.e("saicheng_url:", saicheng_url);
                 MyDanceWebActivity.lunch(this, MyDanceWebActivity.MATCHOTHER3, "赛程表", saicheng_url, true);
                 break;
             case R.id.matchvideo_layout:
@@ -149,9 +155,9 @@ public class MatchDetailActivity extends BaseActivity implements View.OnClickLis
                 WonderfulActivity.lunch(this, mMatchId, mMatchName);
                 break;
             case R.id.videoContainer:
-//                if (!MyStrUtil.isEmpty(mVedioLiveId) && !TextUtils.equals(mVedioLiveId, "0")) {
-//                    ZhiBoDetailActivity.lunch(this, mVedioLiveId);
-//                }
+                //                if (!MyStrUtil.isEmpty(mVedioLiveId) && !TextUtils.equals(mVedioLiveId, "0")) {
+                //                    ZhiBoDetailActivity.lunch(this, mVedioLiveId);
+                //                }
                 break;
         }
     }
@@ -173,7 +179,7 @@ public class MatchDetailActivity extends BaseActivity implements View.OnClickLis
         mShareUtils.showShareDilaog(countId, shareUrl, mShareContent);
     }
 
-    private void startPlayVideo(Match zhiBoInfo){
+    private void startPlayVideo(Match zhiBoInfo) {
         videoView = new UIActionLiveVideoView(this);
         setActionLiveParameter(false);
         if (videoView instanceof UIActionLiveVideoView) {
@@ -226,6 +232,7 @@ public class MatchDetailActivity extends BaseActivity implements View.OnClickLis
      */
     private void handleVideoInfoEvent(int state, Bundle bundle) {
     }
+
     /**
      * 处理播放器本身事件，具体事件可以参见IPlayer类
      */
@@ -259,6 +266,7 @@ public class MatchDetailActivity extends BaseActivity implements View.OnClickLis
                 break;
         }
     }
+
     private void setActionLiveParameter(boolean hls) {
         if (hls) {
             videoView.setCacheWatermark(1000, 100);

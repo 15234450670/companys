@@ -10,6 +10,7 @@ import com.yolanda.nohttp.rest.Request;
 import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.HomeAlbumInfo;
+import mr.li.dance.models.LabelPicInfo;
 import mr.li.dance.models.PhotoClassBean;
 import mr.li.dance.ui.activitys.album.AlbumActivity;
 import mr.li.dance.ui.adapters.new_adapter.NewPicAdapter;
@@ -72,7 +73,13 @@ public class NewPicFragment extends BaseListFragment<PhotoClassBean> {
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
         HomeAlbumInfo reponseResult = JsonMananger.getReponseResult(response, HomeAlbumInfo.class);
-        adapter.addList(isRefresh, reponseResult.getData().getPhotoClass());
+        if (reponseResult.getData().getPhotoClass() != null) {
+            adapter.addList(isRefresh, reponseResult.getData().getPhotoClass());
+        } else {
+            LabelPicInfo reponseResult1 = JsonMananger.getReponseResult(response, LabelPicInfo.class);
+            adapter.addList(isRefresh, reponseResult1.getData().getArr());
+        }
+
     }
 
 
@@ -98,7 +105,7 @@ public class NewPicFragment extends BaseListFragment<PhotoClassBean> {
             request(AppConfigs.home_album, request, false);
         } else {
             Request<String> request = ParameterUtils.getSingleton().getHomeTabhMap(path, "10905", String.valueOf(page));
-            request(AppConfigs.home_dianbo, request, false);
+            request(AppConfigs.home_album, request, false);
         }
 
     }

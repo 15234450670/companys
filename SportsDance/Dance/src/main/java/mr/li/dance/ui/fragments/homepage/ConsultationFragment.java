@@ -45,7 +45,7 @@ public class ConsultationFragment extends BaseListFragment {
 
     @Override
     public void initData() {
-        Request<String> request = ParameterUtils.getSingleton().getHomeZxMap();
+        Request<String> request = ParameterUtils.getSingleton().getHomeZxMap(String.valueOf(1));
         request(AppConfigs.home_zx, request, false);
 
     }
@@ -53,7 +53,7 @@ public class ConsultationFragment extends BaseListFragment {
     @Override
     public void refresh() {
         super.refresh();
-        Request<String> request = ParameterUtils.getSingleton().getHomeZxMap();
+        Request<String> request = ParameterUtils.getSingleton().getHomeZxMap(String.valueOf(1));
         request(AppConfigs.home_zx, request, false);
     }
 

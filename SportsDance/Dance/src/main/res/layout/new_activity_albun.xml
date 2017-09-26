@@ -35,12 +35,11 @@
         android:background="#e1e1e1"/>
 
     <LinearLayout
-          android:visibility="gone"
+        android:visibility="gone"
         android:id="@+id/class_jieshao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
 
         <TextView
             style="@style/text_black_style_30"

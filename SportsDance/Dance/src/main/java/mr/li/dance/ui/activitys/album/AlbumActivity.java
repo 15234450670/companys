@@ -23,6 +23,7 @@ import mr.li.dance.models.AlbumInfo;
 import mr.li.dance.ui.activitys.LoginActivity;
 import mr.li.dance.ui.activitys.MyDanceWebActivity;
 import mr.li.dance.ui.activitys.base.BaseListActivity;
+import mr.li.dance.ui.activitys.mine.MyCollectActivity;
 import mr.li.dance.ui.adapters.AlbumAdapter;
 import mr.li.dance.ui.widget.SpacesItemDecoration;
 import mr.li.dance.utils.AppConfigs;
@@ -100,12 +101,6 @@ public class AlbumActivity extends BaseListActivity<AlbumInfo> {
     private String mId;
 
     @Override
-    public int getContentViewId() {
-        //return R.layout.activity_album;
-        return R.layout.new_activity_albun;
-    }
-
-    @Override
     public void getIntentData() {
         super.getIntentData();
         mId = mIntentExtras.getString("id");
@@ -136,11 +131,19 @@ public class AlbumActivity extends BaseListActivity<AlbumInfo> {
         context.startActivity(intent);
     }
 
+    @Override
+    public int getContentViewId() {
+        //return R.layout.activity_album;
+        return R.layout.new_activity_albun;
+    }
+
 
     @Override
     public void refresh() {
         super.refresh();
-        Request<String> request = ParameterUtils.getSingleton().getAlbumDetail2Map(mId, page);
+        String userId = UserInfoManager.getSingleton().getUserId(this);
+        Request<String> request = ParameterUtils.getSingleton().getAlbumDetail2Map(userId,mId, page);
+        Log.e("mId::", mId);
         request(AppConfigs.home_album, request, false);
     }
 
@@ -161,7 +164,7 @@ public class AlbumActivity extends BaseListActivity<AlbumInfo> {
             if (!TextUtils.isEmpty(reponseResult.getData().getClassInfo().getCompete_name())) {
                 String compete_name = reponseResult.getData().getClassInfo().getCompete_name();
                 mDanceViewHolder.getView(R.id.class_jieshao).setVisibility(View.VISIBLE);
-                mDanceViewHolder.setText(R.id.jieshao,compete_name);
+                mDanceViewHolder.setText(R.id.jieshao, compete_name);
                 mDanceViewHolder.getView(R.id.class_jieshaos).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -176,7 +179,11 @@ public class AlbumActivity extends BaseListActivity<AlbumInfo> {
             mDanceViewHolder.setImageByUrlOrFilePath(R.id.background_iv, reponseResult.getData().getClassInfo().getImg_fm(), R.drawable.default_banner);
             isCollected = (0 != reponseResult.getData().getClassInfo().getCollection_id());
             shareUrl = String.format(AppConfigs.SHAREPHOTOURL, mId);
-
+            if (isCollected) {
+                mRightIv.setImageResource(R.drawable.collect_icon_002);
+            } else {
+                mRightIv.setImageResource(R.drawable.collect_icon);
+            }
         } /*else if (AppConfigs.home_photoDetail == what) {
             PhotoIndexResponse reponseResult = JsonMananger.getReponseResult(response, PhotoIndexResponse.class);
             mAlbumAdapter.addList(false, reponseResult.getData());
@@ -184,12 +191,12 @@ public class AlbumActivity extends BaseListActivity<AlbumInfo> {
             StringResponse stringResponse = JsonMananger.getReponseResult(response, StringResponse.class);
             NToast.shortToast(this, stringResponse.getData());
             isCollected = !isCollected;
+            if (isCollected) {
+                mRightIv.setImageResource(R.drawable.collect_icon_002);
+            } else {
+                mRightIv.setImageResource(R.drawable.collect_icon);
+            }
 
-        }
-        if (isCollected) {
-            mRightIv.setImageResource(R.drawable.collect_icon_002);
-        } else {
-            mRightIv.setImageResource(R.drawable.collect_icon);
         }
 
     }
@@ -208,11 +215,10 @@ public class AlbumActivity extends BaseListActivity<AlbumInfo> {
         } else {
             String userId = UserInfoManager.getSingleton().getUserId(this);
             int operation = isCollected ? 1 : 2;
-            Log.e("operation:", operation + "");
+            Log.e("xxx",operation+"");
             Request<String> request = ParameterUtils.getSingleton().getCollectionMap(userId, mId, 10601, operation);
             request(AppConfigs.user_collection, request, false);
         }
-
     }
 
     @Override
@@ -236,20 +242,19 @@ public class AlbumActivity extends BaseListActivity<AlbumInfo> {
         if (mShareUtils == null) {
             mShareUtils = new ShareUtils(this);
         }
-        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_20, shareUrl, mShareContent);
+        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_20,shareUrl, mShareContent);
     }
 
 
     @Override
     public void onBackPressed() {
-      /*  if (isfromCollectPage && !isCollected) {
+        if (isfromCollectPage && !isCollected) {
             MyCollectActivity.lunch(this, true, mId);
             finish();
         } else {
             super.onBackPressed();
-        }*/
-        finish();
-        super.onBackPressed();
+        }
+
     }
 
 

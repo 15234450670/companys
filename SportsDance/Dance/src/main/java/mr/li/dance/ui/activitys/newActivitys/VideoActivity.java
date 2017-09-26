@@ -59,6 +59,7 @@ public class VideoActivity extends BaseActivity {
     private List<LabelSelect.DataBean> data;
     private PopupWindow                popupWindow;
     public static int tabPosition = -1;
+    int page = 1;
     @Override
     public int getContentViewId() {
         return R.layout.new_type2_activity;
@@ -86,7 +87,7 @@ public class VideoActivity extends BaseActivity {
                 }
             }
         });
-        Request<String> request = ParameterUtils.getSingleton().getHomeDianbo2Map();
+        Request<String> request = ParameterUtils.getSingleton().getHomeDianbo2Map(String.valueOf(page));
         request(AppConfigs.home_dianbo, request, false);
     }
 

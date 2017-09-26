@@ -26,4 +26,5 @@ public abstract class DanceBaseAdapter extends RecyclerView.Adapter {
     }
 
 
+
 }

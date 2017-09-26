@@ -52,7 +52,6 @@
                 android:layout_height="match_parent"
                 android:layout_above="@+id/headicon"
                 android:layout_alignParentTop="true"
-
                 android:layout_marginTop="6dp"
                 android:ellipsize="end"
                 android:gravity="left"

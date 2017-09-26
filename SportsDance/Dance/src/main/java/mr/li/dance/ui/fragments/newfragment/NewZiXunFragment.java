@@ -76,7 +76,7 @@ public class NewZiXunFragment extends BaseListFragment {
             return;
         }
         if (path.equals("0")) {
-            Request<String> request = ParameterUtils.getSingleton().getHomeZxMap();
+            Request<String> request = ParameterUtils.getSingleton().getHomeZxMap(String.valueOf(page));
             request(AppConfigs.home_zx, request, false);
         } else {
             Request<String> request = ParameterUtils.getSingleton().getHomeZxMapTab(String.valueOf(page), path);
@@ -87,7 +87,7 @@ public class NewZiXunFragment extends BaseListFragment {
     public void refresh() {
         super.refresh();
         if (path.equals("0")) {
-            Request<String> request = ParameterUtils.getSingleton().getHomeZxMap();
+            Request<String> request = ParameterUtils.getSingleton().getHomeZxMap(String.valueOf(page));
             request(AppConfigs.home_zx, request, false);
         } else {
             page = 1;
@@ -138,8 +138,8 @@ public class NewZiXunFragment extends BaseListFragment {
     @Override
     public void itemClick(int position, Object value) {
         ZiXunInfo ziXunInfo = (ZiXunInfo) value;
-        String url = String.format(AppConfigs.ZixunShareUrl, String.valueOf(ziXunInfo.getId()));
-        MyDanceWebActivity.lunch(getActivity(), MyDanceWebActivity.ZIXUNTYPE, ziXunInfo.getTitle(), url, true);
+       // String url = String.format(AppConfigs.ZixunShareUrl, String.valueOf(ziXunInfo.getId()));
+        MyDanceWebActivity.lunch(getActivity(), MyDanceWebActivity.ZIXUNTYPE, ziXunInfo.getTitle(), AppConfigs.ZixunShareUrl2+ziXunInfo.getId(), true);
 
     }
 

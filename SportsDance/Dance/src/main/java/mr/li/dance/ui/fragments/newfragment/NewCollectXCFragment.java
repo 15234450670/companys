@@ -108,7 +108,7 @@ public class NewCollectXCFragment extends NewSwipeListFragments<BaseHomeItem> {
     private void getData(int index) {
         String userId = UserInfoManager.getSingleton().getUserId(getActivity());
         Log.e("xxx",userId);
-        Request<String> request = ParameterUtils.getSingleton().getCollectionListMap(userId, 10601, index);
+        Request<String> request = ParameterUtils.getSingleton().getCollectionListMap2(userId, 10601, index);
         request(AppConfigs.user_collections, request, false);
     }
 

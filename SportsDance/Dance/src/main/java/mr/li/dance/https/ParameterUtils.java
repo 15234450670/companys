@@ -163,8 +163,9 @@ public class ParameterUtils {
     /**
      * 新音乐界面
      */
-    public Request<String> getMusicInfo2Map() {
+    public Request<String> getMusicInfo2Map(String page) {
         Request<String> request = getBaseRequestForPost("/home.music2");
+        request.add("page",page);
         return request;
     }
     /**
@@ -382,10 +383,11 @@ public class ParameterUtils {
      * @param id
      * @return
      */
-    public Request<String> getVideoDetailMap(String userId, String id) {
-        Request<String> request = getBaseRequestForPost("/home.dianboDetailL");
+    public Request<String> getVideoDetailMap(String userid, String id,String page) {
+        Request<String> request = getBaseRequestForPost("/home.dianboDetail2");
         request.add("id", id);
-        request.add("userid", userId);
+        request.add("userid", userid);
+        request.add("page", page);
         return request;
     }
 
@@ -402,8 +404,9 @@ public class ParameterUtils {
      * 新  首页获取点播（视频）
      * @return
      */
-    public Request<String> getHomeDianbo2Map() {
+    public Request<String> getHomeDianbo2Map(String page) {
         Request<String> request = getBaseRequestCacheForPost("/home.dianbo2");
+        request.add("page",page);
         return request;
     }
 
@@ -441,9 +444,9 @@ public class ParameterUtils {
      * 首页获取资讯
      * @return
      */
-    public Request<String> getHomeZxMap() {
+    public Request<String> getHomeZxMap(String page) {
         Request<String> request = getBaseRequestCacheForPost("/home.zx2");
-
+              request.add("page",page);
         return request;
     }
     public Request<String> getLabelSelect(String type) {
@@ -575,8 +578,9 @@ public class ParameterUtils {
         request.add("id", id);
         return request;
     }
-    public Request<String> getAlbumDetail2Map( String id,int page) {
+    public Request<String> getAlbumDetail2Map(String userid, String id,int page) {
         Request<String> request = getBaseRequestForPost("/home.photoList");
+        request.add("userid",userid);
         request.add("id", id);
         request.add("page", page);
         return request;
@@ -913,12 +917,20 @@ public class ParameterUtils {
      * 我的收藏
      * @param userid
      * @param xc_video
-     *         // 相册的收藏：   10601 // 视频的收藏：   10602
+     *         // 相册的收藏：   10601 // 视频的收藏：   10602    //音乐10603
      * @param page
      * @return
      */
     public Request<String> getCollectionListMap(String userid, int xc_video, int page) {
         Request<String> request = getBaseRequestForPost("/user.collectionList");
+        request.add("userid", userid);
+        request.add("xc_video", xc_video);
+        request.add("page", page);
+        LogPage(page);
+        return request;
+    }
+    public Request<String> getCollectionListMap2(String userid, int xc_video, int page) {
+        Request<String> request = getBaseRequestForPost("/revisionUser.collectionList");
         request.add("userid", userid);
         request.add("xc_video", xc_video);
         request.add("page", page);

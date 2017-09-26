@@ -11,7 +11,7 @@ import java.util.List;
 
 import mr.li.dance.R;
 import mr.li.dance.https.response.MusicResponse;
-import mr.li.dance.models.MusicIndexPesponse;
+import mr.li.dance.models.LabelSelectMusicInfo;
 import mr.li.dance.models.MusicInfo;
 import mr.li.dance.ui.activitys.music.SongActivity;
 import mr.li.dance.ui.adapters.DanceBaseAdapter;
@@ -75,7 +75,6 @@ public class NewMusicAdapter extends DanceBaseAdapter {
     public void refresh(MusicResponse homeResponse) {
         super.refresh();
         mDatas.clear();
-       // ArrayList<MusicRecAppBean> music_item = homeResponse.getData().getMusicRecApp();
         ArrayList<MusicInfo> music_class = homeResponse.getData().getMusic_class();
         if (!MyStrUtil.isEmpty(music_class)) {
             mDatas.addAll(music_class);
@@ -83,9 +82,27 @@ public class NewMusicAdapter extends DanceBaseAdapter {
 
         notifyDataSetChanged();
     }
+    public void refresh1(LabelSelectMusicInfo homeResponse) {
+        super.refresh();
+        mDatas.clear();
+        ArrayList<MusicInfo> music_class = homeResponse.getData().getArr();
+        if (!MyStrUtil.isEmpty(music_class)) {
+            mDatas.addAll(music_class);
+        }
 
-    public void loadMore(MusicIndexPesponse indexResponse) {
-        ArrayList<MusicInfo> music_item = indexResponse.getData();
+        notifyDataSetChanged();
+    }
+
+    public void loadMore(MusicResponse indexResponse) {
+        ArrayList<MusicInfo> music_item = indexResponse.getData().getMusic_class();
+        if (!MyStrUtil.isEmpty(music_item)) {
+            mDatas.addAll(music_item);
+            super.loadMore();
+        }
+        notifyDataSetChanged();
+    }
+    public void loadMore1(LabelSelectMusicInfo indexResponse) {
+        ArrayList<MusicInfo> music_item = indexResponse.getData().getArr();
         if (!MyStrUtil.isEmpty(music_item)) {
             mDatas.addAll(music_item);
             super.loadMore();

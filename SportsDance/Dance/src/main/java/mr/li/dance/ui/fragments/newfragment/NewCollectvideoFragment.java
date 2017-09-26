@@ -104,7 +104,7 @@ public class NewCollectvideoFragment extends NewSwipeListFragment<BaseHomeItem> 
 
     private void getData(int index) {
         String userId = UserInfoManager.getSingleton().getUserId(getActivity());
-        Request<String> request = ParameterUtils.getSingleton().getCollectionListMap(userId, 10602, index);
+        Request<String> request = ParameterUtils.getSingleton().getCollectionListMap2(userId, 10602, index);
 
         request(AppConfigs.home_collectionList, request, false);
     }
