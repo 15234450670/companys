@@ -36,6 +36,7 @@ public class GeDanInfo extends BaseResponse {
          */
 
         private String click_sum;
+        public int collection_id;
         private String         title;
         private String         img_fm;
         private List<ListBean> list;
@@ -72,7 +73,7 @@ public class GeDanInfo extends BaseResponse {
             this.list = list;
         }
 
-        public static class ListBean {
+        public static class ListBean extends BaseHomeItem{
             /**
              * id : 1
              * music_address :

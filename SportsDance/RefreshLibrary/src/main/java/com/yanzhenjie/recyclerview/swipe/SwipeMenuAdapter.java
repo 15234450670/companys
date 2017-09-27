@@ -157,4 +157,6 @@ public abstract class SwipeMenuAdapter<VH extends RecyclerView.ViewHolder> exten
     public void onCompatBindViewHolder(VH holder, int position, List<Object> payloads) {
         onBindViewHolder(holder, position);
     }
+
+
 }

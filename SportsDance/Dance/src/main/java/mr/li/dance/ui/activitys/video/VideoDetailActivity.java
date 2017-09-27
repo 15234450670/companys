@@ -6,10 +6,13 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.lecloud.sdk.constant.PlayerEvent;
 import com.lecloud.sdk.constant.PlayerParams;
@@ -30,7 +33,9 @@ import mr.li.dance.models.BaseItemAdapterType;
 import mr.li.dance.models.Video;
 import mr.li.dance.ui.activitys.LoginActivity;
 import mr.li.dance.ui.activitys.base.BaseListActivity;
+import mr.li.dance.ui.activitys.match.MatchDetailActivity;
 import mr.li.dance.ui.adapters.BaseItemAdapter;
+import mr.li.dance.ui.adapters.new_adapter.VideoAlbumAdapter;
 import mr.li.dance.ui.widget.VideoLayoutParams;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
@@ -50,14 +55,15 @@ import mr.li.dance.utils.UserInfoManager;
 
 public class VideoDetailActivity extends BaseListActivity {
     BaseItemAdapter mAdapter;
+
     private IMediaDataVideoView videoView;
-    private String mItemId;
+    private String              mItemId;
     boolean isCollected;
     boolean isFromCollectpage = false;
     private String shareUrl;
     private String mShareContent;
-    LinkedHashMap<String, String> rateMap = new LinkedHashMap<String, String>();
-    VideoViewListener mVideoViewListener = new VideoViewListener() {
+    LinkedHashMap<String, String> rateMap            = new LinkedHashMap<String, String>();
+    VideoViewListener             mVideoViewListener = new VideoViewListener() {
 
 
         @Override
@@ -77,6 +83,7 @@ public class VideoDetailActivity extends BaseListActivity {
             return "";
         }
     };
+    private RecyclerView rv;
 
 
     @Override
@@ -102,11 +109,18 @@ public class VideoDetailActivity extends BaseListActivity {
     public void initViews() {
         super.initViews();
         setTitle("视频详情");
-        mDanceViewHolder.setText(R.id.type_tv, "赛事相关视频");
+        mRefreshLayout.setEnableLoadmore(false);
+        mRefreshLayout.setEnableRefresh(false);
+        LinearLayoutManager manager = new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false);
+        mRecyclerview.setLayoutManager(manager);
+        mRecyclerview.setAdapter(getAdapter());
         mRefreshLayout.setEnableLoadmore(false);
         videoView = new UIVodVideoView(this);
         ((UIVodVideoView) videoView).setVideoAutoPlay(true);
         videoView.setVideoViewListener(mVideoViewListener);
+        rv = (RecyclerView) findViewById(R.id.rv);
+        LinearLayoutManager manager1 = new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false);
+        rv.setLayoutManager(manager1);
         final RelativeLayout videoContainer = (RelativeLayout) findViewById(R.id.videoContainer);
         videoContainer.addView((View) videoView, VideoLayoutParams.computeContainerSize(this, 16, 9));
     }
@@ -115,8 +129,8 @@ public class VideoDetailActivity extends BaseListActivity {
     public void initDatas() {
         super.initDatas();
         String userId = UserInfoManager.getSingleton().getUserId(this);
-        Request<String> request = ParameterUtils.getSingleton().getVideoDetailMap(userId, mItemId,"1");
-        Log.e("mId",mItemId);
+        Request<String> request = ParameterUtils.getSingleton().getVideoDetailMap(userId, mItemId, "1");
+        Log.e("mId", mItemId);
         request(AppConfigs.home_dianboDetailL, request, true);
     }
 
@@ -228,10 +242,50 @@ public class VideoDetailActivity extends BaseListActivity {
     public void onSucceed(int what, String responseStr) {
         super.onSucceed(what, responseStr);
         if (AppConfigs.home_dianboDetailL == what) {
-            VideoDetailResponse detailResponse = JsonMananger.getReponseResult(responseStr, VideoDetailResponse.class);
+            final VideoDetailResponse detailResponse = JsonMananger.getReponseResult(responseStr, VideoDetailResponse.class);
+            if (!TextUtils.isEmpty(detailResponse.getData().getDetail().getCompete_name())) {
+                mDanceViewHolder.getView(R.id.class_jieshao).setVisibility(View.VISIBLE);
+                mDanceViewHolder.setText(R.id.jieshao, detailResponse.getData().getDetail().getCompete_name());
+                View view = mDanceViewHolder.getView(R.id.tiao);
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        MatchDetailActivity.lunch(mContext, detailResponse.getData().getDetail().getCompete_id());
+                    }
+                });
+            } else {
+                mDanceViewHolder.getView(R.id.class_jieshao).setVisibility(View.GONE);
+            }
             isCollected = (0 != detailResponse.getData().getCollection_id());
-            Log.e("isCollected",isCollected+"");
-            mAdapter.refresh(detailResponse.getData().getOtherList());
+            if (!MyStrUtil.isEmpty(detailResponse.getData().getOtherList())) {
+                mAdapter.refresh(detailResponse.getData().getOtherList());
+                View view = mDanceViewHolder.getView(R.id.ll);
+                view.setVisibility(View.VISIBLE);
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(VideoDetailActivity.this, "sssss", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } else {
+                mDanceViewHolder.getView(R.id.ll).setVisibility(View.GONE);
+            }
+            if (!MyStrUtil.isEmpty(detailResponse.getData().getAlbum())) {
+                View view = mDanceViewHolder.getView(R.id.zhuanji);
+                VideoAlbumAdapter videoAlbumAdapter = new VideoAlbumAdapter(mContext);
+                videoAlbumAdapter.addList(detailResponse.getData().getAlbum());
+                videoAlbumAdapter.setItemClickListener(this);
+                rv.setAdapter(videoAlbumAdapter);
+                view.setVisibility(View.VISIBLE);
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(VideoDetailActivity.this, "xxx", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } else {
+                mDanceViewHolder.getView(R.id.zhuanji).setVisibility(View.GONE);
+            }
             setVideoDetail(detailResponse.getData().getDetail());
         } else {
             StringResponse stringResponse = JsonMananger.getReponseResult(responseStr, StringResponse.class);
@@ -270,7 +324,7 @@ public class VideoDetailActivity extends BaseListActivity {
         } else {
             String userId = UserInfoManager.getSingleton().getUserId(this);
             int operation = isCollected ? 1 : 2;
-            Log.e("operation:v:",operation+"");
+            Log.e("operation:v:", operation + "");
             Request<String> request = ParameterUtils.getSingleton().getCollectionMap(userId, mItemId, 10602, operation);
             request(AppConfigs.user_collection, request, false);
         }
@@ -284,7 +338,7 @@ public class VideoDetailActivity extends BaseListActivity {
         } else {
             super.onBackPressed();
         }*/
-             finish();
+        finish();
         super.onBackPressed();
     }
 

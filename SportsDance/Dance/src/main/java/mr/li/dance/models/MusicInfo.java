@@ -7,7 +7,7 @@ package mr.li.dance.models;
  * 描述:
  * 修订历史:
  */
-public class MusicInfo {
+public class MusicInfo extends BaseHomeItem{
 
     /**
      * id : 1
@@ -26,6 +26,15 @@ public class MusicInfo {
     private String click_sum;
     private String img_fm;
     private String sort;
+    private String inserttime;
+
+    public String getInserttime() {
+        return inserttime;
+    }
+
+    public void setInserttime(String inserttime) {
+        this.inserttime = inserttime;
+    }
 
     public String getId() {
         return id;

@@ -15,13 +15,17 @@ import java.util.List;
 
 import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
+import mr.li.dance.https.response.StringResponse;
 import mr.li.dance.models.GeDanInfo;
+import mr.li.dance.ui.activitys.LoginActivity;
 import mr.li.dance.ui.activitys.base.BaseListActivity;
 import mr.li.dance.ui.adapters.GeDanAdapter;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.MyStrUtil;
+import mr.li.dance.utils.NToast;
 import mr.li.dance.utils.ShareUtils;
+import mr.li.dance.utils.UserInfoManager;
 import mr.li.dance.utils.glide.ImageLoaderManager;
 
 /**
@@ -41,8 +45,10 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
     public static String      allTitle;
     public static String      imageUrl;
     private       ServiceConn conn;
+    boolean isCollected;
 
     @Override
+
     public RecyclerView.Adapter getAdapter() {
         mAdapter = new GeDanAdapter(this, mDanceViewHolder);
         mAdapter.setItemClickListener(this);
@@ -53,7 +59,8 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
     public void initDatas() {
         super.initDatas();
         setTitle("歌单");
-        Request<String> musicInfoGeDanMap = ParameterUtils.getSingleton().getMusicInfoGeDanMap(mItemId, String.valueOf(page));
+        String userId = UserInfoManager.getSingleton().getUserId(this);
+        Request<String> musicInfoGeDanMap = ParameterUtils.getSingleton().getMusicInfoGeDanMap(userId,mItemId, String.valueOf(page));
         request(AppConfigs.home_music_gedan, musicInfoGeDanMap, false);
         conn = new ServiceConn();
         conn.getMyBinder(new ServiceConn.binderCreateFinish() {
@@ -97,44 +104,56 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
-        GeDanInfo reponseResult = JsonMananger.getReponseResult(response, GeDanInfo.class);
-        imageUrl = reponseResult.getData().getImg_fm();
-        if (!MyStrUtil.isEmpty(reponseResult.getData().getTitle())) {
-            mDanceViewHolder.setText(R.id.text_title, reponseResult.getData().getTitle());
-            allTitle = reponseResult.getData().getTitle();
-        } else {
-            mDanceViewHolder.setText(R.id.text_title, "");
-        }
-        if (!MyStrUtil.isEmpty(reponseResult.getData().getClick_sum())) {
-            mDanceViewHolder.setText(R.id.text_count, reponseResult.getData().getClick_sum());
-        } else {
-            mDanceViewHolder.setText(R.id.text_count, 0 + "");
-        }
-        if (!MyStrUtil.isEmpty(reponseResult.getData().getImg_fm())) {
-            mDanceViewHolder.setImageByUrlOrFilePaths(R.id.img_head, reponseResult.getData().getImg_fm());
-            ImageLoaderManager.getSingleton().LoadMoHu_gedan(this, reponseResult.getData().getImg_fm(), mDanceViewHolder.getImageView(R.id.gd_bg));
-            ImageLoaderManager.getSingleton().LoadCircle(this, reponseResult.getData().getImg_fm(), mDanceViewHolder.getImageView(R.id.gd_pic), R.drawable.icon_mydefault);
-        } else {
-            mDanceViewHolder.setImageByUrlOrFilePaths1(R.id.img_head, R.drawable.default_video);
-            ImageLoaderManager.getSingleton().LoadMoHu(this, "", mDanceViewHolder.getImageView(R.id.gd_bg), R.drawable.default_video);
-        }
-        findViewById(R.id.imageView4).setVisibility(View.VISIBLE);
-        List<GeDanInfo.DataBean.ListBean> list = reponseResult.getData().getList();
-        if (!list.isEmpty()) {
-            mAdapter.addList(isRefresh, list);
-            myBinder.mSetMusicList(mAdapter.getmList(), mItemId);
-            //  myBinder.mSetList(mAdapter.getmList(), mItemId);
-            int a = myBinder.mGetPosition();
-            if (a > -1) {
-                if (myBinder.mIsSameList(mItemId)) {
-                    mAdapter.selectItem(myBinder.mGetPosition());
-                    mRecyclerview.smoothScrollToPosition(a);
-                }
+        if (what == AppConfigs.home_music_gedan) {
+            GeDanInfo reponseResult = JsonMananger.getReponseResult(response, GeDanInfo.class);
+            imageUrl = reponseResult.getData().getImg_fm();
+            isCollected = (0 != reponseResult.getData().collection_id);
+            if (!MyStrUtil.isEmpty(reponseResult.getData().getTitle())) {
+                mDanceViewHolder.setText(R.id.text_title, reponseResult.getData().getTitle());
+                allTitle = reponseResult.getData().getTitle();
+            } else {
+                mDanceViewHolder.setText(R.id.text_title, "");
             }
+            if (!MyStrUtil.isEmpty(reponseResult.getData().getClick_sum())) {
+                mDanceViewHolder.setText(R.id.text_count, reponseResult.getData().getClick_sum());
+            } else {
+                mDanceViewHolder.setText(R.id.text_count, 0 + "");
+            }
+            if (!MyStrUtil.isEmpty(reponseResult.getData().getImg_fm())) {
+                mDanceViewHolder.setImageByUrlOrFilePaths(R.id.img_head, reponseResult.getData().getImg_fm());
+                ImageLoaderManager.getSingleton().LoadMoHu_gedan(this, reponseResult.getData().getImg_fm(), mDanceViewHolder.getImageView(R.id.gd_bg));
+                ImageLoaderManager.getSingleton().LoadCircle(this, reponseResult.getData().getImg_fm(), mDanceViewHolder.getImageView(R.id.gd_pic), R.drawable.icon_mydefault);
+            } else {
+                mDanceViewHolder.setImageByUrlOrFilePaths1(R.id.img_head, R.drawable.default_video);
+                ImageLoaderManager.getSingleton().LoadMoHu(this, "", mDanceViewHolder.getImageView(R.id.gd_bg), R.drawable.default_video);
+            }
+            findViewById(R.id.imageView4).setVisibility(View.VISIBLE);
+            List<GeDanInfo.DataBean.ListBean> list = reponseResult.getData().getList();
+            if (!list.isEmpty()) {
+                mAdapter.addList(isRefresh, list);
+                myBinder.mSetMusicList(mAdapter.getmList(), mItemId);
+                //  myBinder.mSetList(mAdapter.getmList(), mItemId);
+                int a = myBinder.mGetPosition();
+                if (a > -1) {
+                    if (myBinder.mIsSameList(mItemId)) {
+                        mAdapter.selectItem(myBinder.mGetPosition());
+                        mRecyclerview.smoothScrollToPosition(a);
+                    }
+                }
 
+            } else {
+                mDanceViewHolder.setViewVisibility(R.id.gd_black, View.INVISIBLE);
+                Toast.makeText(mContext, "暂无信息", Toast.LENGTH_SHORT).show();
+            }
         } else {
-            mDanceViewHolder.setViewVisibility(R.id.gd_black, View.INVISIBLE);
-            Toast.makeText(mContext, "暂无信息", Toast.LENGTH_SHORT).show();
+            StringResponse stringResponse = JsonMananger.getReponseResult(response, StringResponse.class);
+            NToast.shortToast(this, stringResponse.getData());
+            isCollected = !isCollected;
+        }
+        if (isCollected) {
+            mRightIv.setImageResource(R.drawable.collect_icon_002);
+        } else {
+            mRightIv.setImageResource(R.drawable.collect_icon);
         }
 
     }
@@ -144,7 +163,7 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
         super.initViews();
         mRefreshLayout.setEnableLoadmore(false);
         mRefreshLayout.setEnableRefresh(false);
-        setRightImage(R.drawable.share_icon_001);
+        setRightImage(R.drawable.collect_icon, R.drawable.share_icon_001);
         iv = (ImageView) findViewById(R.id.gd_bo);
 
         /**
@@ -186,6 +205,13 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
         intent.putExtra("name", name);
         context.startActivity(intent);
     }
+    public static void lunch(Context context, String id, String shareContent, boolean isfromCollectPage) {
+        Intent intent = new Intent(context, SongActivity.class);
+        intent.putExtra("itemid", id);
+        intent.putExtra("name", shareContent);
+        intent.putExtra("isfromcollectpage", isfromCollectPage);
+        context.startActivity(intent);
+    }
 
     @Override
     public void getIntentData() {
@@ -199,16 +225,18 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
     @Override
     public void loadMore() {
         super.loadMore();
+        String userId = UserInfoManager.getSingleton().getUserId(this);
         page++;
-        Request<String> musicInfoGeDanMap = ParameterUtils.getSingleton().getMusicInfoGeDanMap(mItemId, String.valueOf(page));
+        Request<String> musicInfoGeDanMap = ParameterUtils.getSingleton().getMusicInfoGeDanMap(userId,mItemId, String.valueOf(page));
         request(AppConfigs.home_music_gedan, musicInfoGeDanMap, false);
     }
 
     @Override
     public void refresh() {
         super.refresh();
+        String userId = UserInfoManager.getSingleton().getUserId(this);
         page = 1;
-        Request<String> musicInfoGeDanMap = ParameterUtils.getSingleton().getMusicInfoGeDanMap(mItemId, String.valueOf(page));
+        Request<String> musicInfoGeDanMap = ParameterUtils.getSingleton().getMusicInfoGeDanMap(userId,mItemId, String.valueOf(page));
         request(AppConfigs.home_music_gedan, musicInfoGeDanMap, false);
     }
 
@@ -231,6 +259,17 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
     @Override
     public void onHeadRightButtonClick(View v) {
         super.onHeadRightButtonClick(v);
+        if (!UserInfoManager.getSingleton().isLoading(this)) {
+            LoginActivity.lunch(this, 0x001);
+        } else {
+            String userId = UserInfoManager.getSingleton().getUserId(this);
+            int operation = isCollected ? 1 : 2;
+            Request<String> request = ParameterUtils.getSingleton().getCollectionMap(userId, mItemId, 10603, operation);
+            request(AppConfigs.user_collection, request, false);
+        }
+    }
+
+    public void onHeadRightButtonClick2(View v) {
         showShareDialog();
     }
 

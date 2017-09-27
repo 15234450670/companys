@@ -18,13 +18,13 @@ import java.util.ArrayList;
 
 import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
-import mr.li.dance.https.response.HomeAlbumResponse;
 import mr.li.dance.https.response.StringResponse;
-import mr.li.dance.models.AlbumInfo;
 import mr.li.dance.models.BaseHomeItem;
+import mr.li.dance.models.HomeMusicScreen;
+import mr.li.dance.models.MusicInfo;
 import mr.li.dance.ui.activitys.NewSwipeListFragments;
-import mr.li.dance.ui.activitys.album.AlbumActivity;
-import mr.li.dance.ui.fragments.adapter.NewCollectXC;
+import mr.li.dance.ui.activitys.music.SongActivity;
+import mr.li.dance.ui.fragments.adapter.NewCollectMusic;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.MyStrUtil;
@@ -33,24 +33,24 @@ import mr.li.dance.utils.UserInfoManager;
 /**
  * 作者: SuiFeng
  * 版本:
- * 创建日期:2017/9/6 0006
+ * 创建日期:2017/9/27 0027
  * 描述:
  * 修订历史:
  */
-public class NewCollectXCFragment extends NewSwipeListFragments<BaseHomeItem> {
-    NewCollectXC mAdapter;
+public class NewCollectMusicFragment extends NewSwipeListFragments<BaseHomeItem> {
+    NewCollectMusic mAdapter;
     private BaseHomeItem mDelItem;
 
     @Override
     public void itemClick(int position, BaseHomeItem value) {
-        AlbumInfo albumInfo = (AlbumInfo) value;
-        AlbumActivity.lunch(getActivity(), value.getId(), albumInfo.getName(), true);
+        MusicInfo albumInfo = (MusicInfo) value;
+        SongActivity.lunch(getActivity(), value.getId(), albumInfo.getTitle(), true);
 
     }
 
     @Override
     public RecyclerView.Adapter getAdapter() {
-        mAdapter = new NewCollectXC(getActivity(), this);
+        mAdapter = new NewCollectMusic(getActivity(), this);
         return mAdapter;
     }
 
@@ -84,20 +84,20 @@ public class NewCollectXCFragment extends NewSwipeListFragments<BaseHomeItem> {
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
-        Log.e("xc",response);
+        Log.e("music_info:: ",response);
         if (AppConfigs.user_collection == what) {
             StringResponse reponseResult = JsonMananger.getReponseResult(response, StringResponse.class);
             mAdapter.removePosition(mDelItem);
         }
         if (AppConfigs.user_collections==what)  {
-            HomeAlbumResponse reponseResult = JsonMananger.getReponseResult(response, HomeAlbumResponse.class);
-            ArrayList<AlbumInfo> data = reponseResult.getData();
+            HomeMusicScreen reponseResult = JsonMananger.getReponseResult(response, HomeMusicScreen.class);
+            ArrayList<MusicInfo> data = reponseResult.getData();
             if (!MyStrUtil.isEmpty(data)) {
                 mAdapter.addList(isRefresh, data);
             }
         }
         if (mAdapter.getItemCount() == 0) {
-           danceViewHolder.setViewVisibility(R.id.nodatalayout, View.VISIBLE);
+            danceViewHolder.setViewVisibility(R.id.nodatalayout, View.VISIBLE);
         } else {
             danceViewHolder.setViewVisibility(R.id.nodatalayout, View.INVISIBLE);
         }
@@ -107,7 +107,8 @@ public class NewCollectXCFragment extends NewSwipeListFragments<BaseHomeItem> {
 
     private void getData(int index) {
         String userId = UserInfoManager.getSingleton().getUserId(getActivity());
-        Request<String> request = ParameterUtils.getSingleton().getCollectionListMap2(userId, 10601, index);
+        Log.e("xxx",userId);
+        Request<String> request = ParameterUtils.getSingleton().getCollectionListMap2(userId, 10603, index);
         request(AppConfigs.user_collections, request, false);
     }
 
@@ -146,7 +147,7 @@ public class NewCollectXCFragment extends NewSwipeListFragments<BaseHomeItem> {
     private void cancelCollect(BaseHomeItem item) {
         mDelItem = item;
         String userId = UserInfoManager.getSingleton().getUserId(getActivity());
-        Request<String> request = ParameterUtils.getSingleton().getCollectionMap(userId, item.getId(), 10601, 2);
+        Request<String> request = ParameterUtils.getSingleton().getCollectionMap(userId, item.getId(), 10603, 2);
         request(AppConfigs.user_collection, request, false);
     }
 
@@ -172,5 +173,4 @@ public class NewCollectXCFragment extends NewSwipeListFragments<BaseHomeItem> {
         };
         return swipeMenuCreator;
     }
-
 }

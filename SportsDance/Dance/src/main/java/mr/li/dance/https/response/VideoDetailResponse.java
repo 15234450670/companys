@@ -23,6 +23,15 @@ public class VideoDetailResponse extends BaseResponse {
         private Video detail;
         private int collection_id;
         private ArrayList<Video> otherList;
+        private ArrayList<Video> album;
+
+        public ArrayList<Video> getAlbum() {
+            return album;
+        }
+
+        public void setAlbum(ArrayList<Video> album) {
+            this.album = album;
+        }
 
         public Video getDetail() {
             return detail;

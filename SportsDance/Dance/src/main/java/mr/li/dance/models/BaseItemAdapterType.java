@@ -9,5 +9,6 @@ public enum BaseItemAdapterType {
     VIDEOTYPE2,//左右模式
     ZIXUN,//资讯的模式 单图和多图
     MUSIC,  //音乐
-    TEACHER;     //教学
+    TEACHER,     //教学
+    VIDEODETAIL; //视频详情
 }

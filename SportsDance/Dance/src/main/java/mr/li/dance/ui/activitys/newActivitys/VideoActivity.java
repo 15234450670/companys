@@ -60,6 +60,7 @@ public class VideoActivity extends BaseActivity {
     private PopupWindow                popupWindow;
     public static int tabPosition = -1;
     int page = 1;
+
     @Override
     public int getContentViewId() {
         return R.layout.new_type2_activity;
@@ -80,7 +81,7 @@ public class VideoActivity extends BaseActivity {
         mDanceViewHolder.setClickListener(R.id.btn_music, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (myBinder!=null&&myBinder.binderIsPlaying()) {
+                if (myBinder != null && myBinder.binderIsPlaying()) {
                     PlayMusicActivity.lunch(VideoActivity.this);
                 } else {
                     Toast.makeText(VideoActivity.this, "请去播放音乐", Toast.LENGTH_SHORT).show();
@@ -151,8 +152,8 @@ public class VideoActivity extends BaseActivity {
             HomeVideoResponse homeResponse = JsonMananger.getReponseResult(response, HomeVideoResponse.class);
             ArrayList<LabelInfo> mLabel = homeResponse.getData().getLabel();
             if (MyStrUtil.isEmpty(mLabel)) {
-                mDanceViewHolder.setViewVisibility(R.id.wu,View.VISIBLE);
-                mDanceViewHolder.setViewVisibility(R.id.you,View.GONE);
+                mDanceViewHolder.setViewVisibility(R.id.wu, View.VISIBLE);
+                mDanceViewHolder.setViewVisibility(R.id.you, View.GONE);
             } else {
                 for (int i = 0; i < mLabel.size(); i++) {
                     NewVideoFragment newZiXunFragment = new NewVideoFragment();
@@ -166,7 +167,7 @@ public class VideoActivity extends BaseActivity {
 
                     list.add(newZiXunFragment);
                 }
-                NewViewPagerAdapter adapter = new NewViewPagerAdapter(getSupportFragmentManager(),list,mLabel);
+                NewViewPagerAdapter adapter = new NewViewPagerAdapter(getSupportFragmentManager(), list, mLabel);
                 vp.setAdapter(adapter);
                 tabLayout.setupWithViewPager(vp);
                 vp.setOffscreenPageLimit(3);
@@ -226,7 +227,7 @@ public class VideoActivity extends BaseActivity {
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (exPandableAdapter!=null) {
+                if (exPandableAdapter != null) {
                     exPandableAdapter.itemReset();
                 }
             }
@@ -247,11 +248,11 @@ public class VideoActivity extends BaseActivity {
                     // TODO: 2017/9/24
                     StringBuilder sb = new StringBuilder();
                     final String kk = "--";
-                    for (int i = 1 ; i < data.size() ; i++) {
+                    for (int i = 1; i < data.size(); i++) {
 
                         List<LabelSelect.DataBean.ListBean> list = data.get(i).getList();
 
-                        for (int k = 0 ; k < list.size() ; k++) {
+                        for (int k = 0; k < list.size(); k++) {
                             LabelSelect.DataBean.ListBean bean = list.get(k);
                             if (bean.isSelect) {
                                 sb.append(bean.getId());
@@ -264,7 +265,7 @@ public class VideoActivity extends BaseActivity {
                     Toast.makeText(mContext, sb.toString(), Toast.LENGTH_SHORT).show();
                 } else {
                     int tab = exPandableAdapter.getTabPosition();
-                    if(tab<0){
+                    if (tab < 0) {
                         // TODO: 2017/9/24
                         Toast.makeText(mContext, "未选中标签！", Toast.LENGTH_SHORT).show();
                         return;
@@ -274,7 +275,7 @@ public class VideoActivity extends BaseActivity {
                         if (position == tab) {
                             return;
                         } else {
-                            vp.setCurrentItem(tab+1);
+                            vp.setCurrentItem(tab + 1);
                             //tabLayout.getTabAt(tab+1);
                         }
 

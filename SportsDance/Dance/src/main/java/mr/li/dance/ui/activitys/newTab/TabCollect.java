@@ -11,7 +11,7 @@ import com.umeng.analytics.MobclickAgent;
 
 import mr.li.dance.R;
 import mr.li.dance.ui.activitys.base.BaseActivity;
-import mr.li.dance.ui.fragments.homepage.MusicFragment;
+import mr.li.dance.ui.fragments.newfragment.NewCollectMusicFragment;
 import mr.li.dance.ui.fragments.newfragment.NewCollectXCFragment;
 import mr.li.dance.ui.fragments.newfragment.NewCollectvideoFragment;
 import mr.li.dance.utils.AppConfigs;
@@ -25,10 +25,10 @@ import mr.li.dance.utils.AppConfigs;
  */
 public class TabCollect extends BaseActivity implements View.OnClickListener {
 
-    private FragmentManager      fragmentManager;
-    private FragmentTransaction  beginTransaction;
-    private MusicFragment        MusicFragment;
-    private NewCollectXCFragment             xcFragment;
+    private FragmentManager         fragmentManager;
+    private FragmentTransaction     beginTransaction;
+    private NewCollectMusicFragment MusicFragment;
+    private NewCollectXCFragment    xcFragment;
     private NewCollectvideoFragment spFragment;
     private View                    v;
     private View                    v1;
@@ -58,7 +58,7 @@ public class TabCollect extends BaseActivity implements View.OnClickListener {
         fragmentManager = getSupportFragmentManager();
         spFragment = new NewCollectvideoFragment();
         xcFragment = new NewCollectXCFragment();
-        MusicFragment = new MusicFragment();
+        MusicFragment = new NewCollectMusicFragment();
     }
 
     //跳转

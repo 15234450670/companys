@@ -39,7 +39,7 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
     public int getItemLayoutId(int viewType) {
         switch (viewType) {
             case viewType1:
-                return R.layout.item_base;
+                return R.layout.video_detail_item;
             case viewType2:
                 return R.layout.item_base_type2;
             case TYPE_ZIXUNONPIC:
@@ -74,6 +74,7 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
                 return TYPE_MUSIC;
             case TEACHER:
                 return viewType3;
+
         }
         return super.getItemViewType(position);
     }
@@ -94,7 +95,7 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
     }
 
     private void bindMore(RecyclerViewHolder holder, TeachDetailInfo.DataBean.OtherListBean item, int position) {
-        holder.setText(R.id.sort_tv, position+1 + "");
+        holder.setText(R.id.sort_tv, position + 1 + "");
         holder.setImageByUrlOrFilePath(R.id.pic, item.getPicture(), R.drawable.default_video);
         holder.setText(R.id.name, item.getName());
 
@@ -109,11 +110,12 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
     }
 
     private void bindVideo(RecyclerViewHolder holder, Video video) {
-        holder.setRoundImageByUrlOrFilePath(R.id.imageView, video.getPicture(), R.drawable.default_video);
-        holder.setText(R.id.name, video.getName());
-        holder.setText(R.id.time_tv, video.getInserttime());
-        holder.setVisibility(R.id.typeicon_tv, View.VISIBLE);
-        holder.setImageResDrawable(R.id.typeicon_tv, R.drawable.home_icon_005);
+
+        holder.setRoundImageByUrlOrFilePath(R.id.detail_pic, video.getPicture(), R.drawable.default_video);
+        holder.setText(R.id.detail_title, video.getName());
+        //  holder.setText(R.id.time_tv, video.getInserttime());
+        // holder.setVisibility(R.id.typeicon_tv, View.VISIBLE);
+        //holder.setImageResDrawable(R.id.typeicon_tv, R.drawable.home_icon_005);
 
     }
 

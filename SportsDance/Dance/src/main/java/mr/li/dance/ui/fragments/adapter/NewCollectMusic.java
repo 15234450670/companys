@@ -14,8 +14,8 @@ import com.yanzhenjie.recyclerview.swipe.SwipeMenuAdapter;
 import java.util.ArrayList;
 
 import mr.li.dance.R;
-import mr.li.dance.models.AlbumInfo;
 import mr.li.dance.models.BaseHomeItem;
+import mr.li.dance.models.MusicInfo;
 import mr.li.dance.ui.adapters.ListViewItemClickListener;
 import mr.li.dance.ui.adapters.RecyclerViewHolder;
 import mr.li.dance.utils.MyStrUtil;
@@ -23,27 +23,25 @@ import mr.li.dance.utils.MyStrUtil;
 /**
  * 作者: SuiFeng
  * 版本:
- * 创建日期:2017/9/6 0006
+ * 创建日期:2017/9/27 0027
  * 描述:
  * 修订历史:
  */
-public class NewCollectXC extends SwipeMenuAdapter<RecyclerViewHolder> {
+public class NewCollectMusic extends SwipeMenuAdapter<RecyclerViewHolder> {
+
     Context mContext;
     private ArrayList<BaseHomeItem> mDatas;
     ListViewItemClickListener<BaseHomeItem> mItemClickListener;
 
-    public NewCollectXC(Context context, ListViewItemClickListener listener) {
+    public NewCollectMusic(Context context, ListViewItemClickListener listener) {
         mContext = context;
         mItemClickListener = listener;
         mDatas = new ArrayList<>();
-
     }
 
     @Override
     public View onCreateContentView(ViewGroup parent, int viewType) {
-
-            return LayoutInflater.from(parent.getContext()).inflate(R.layout.item_albumcollect, parent, false);
-
+        return LayoutInflater.from(parent.getContext()).inflate(R.layout.item_albumcollect, parent, false);
     }
 
     @Override
@@ -60,20 +58,17 @@ public class NewCollectXC extends SwipeMenuAdapter<RecyclerViewHolder> {
                 mItemClickListener.itemClick(position, mDatas.get(position));
             }
         });
-            bindAlbum(holder, position);
-
+        bindMusic(holder, position);
     }
 
-    private void bindAlbum(RecyclerViewHolder holder, int position) {
-        AlbumInfo albumInfo = (AlbumInfo) mDatas.get(position);
-        holder.setImageByUrlOrFilePath(R.id.imageView, albumInfo.getImg_fm(), R.drawable.default_video);
-        holder.setText(R.id.name, albumInfo.getTitle());
+    private void bindMusic(RecyclerViewHolder holder, int position) {
+        MusicInfo musicInfo = (MusicInfo) mDatas.get(position);
+        holder.setImageByUrlOrFilePath(R.id.imageView, musicInfo.getImg_fm(), R.drawable.default_video);
+        holder.setText(R.id.name, musicInfo.getTitle());
         holder.setVisibility(R.id.typeicon_tv, View.INVISIBLE);
         holder.setImageResDrawable(R.id.typeicon_tv, R.drawable.home_icon_005);
         holder.setVisibility(R.id.picnum_tv, View.VISIBLE);
-        holder.setText(R.id.time_tv, albumInfo.getInserttime());
-     //   ImageLoaderManager.getSingleton().LoadCircle(mContext, albumInfo.getPicture_src(), (ImageView) holder.getView(R.id.headicon), R.drawable.icon_mydefault);
-
+        holder.setText(R.id.time_tv, musicInfo.getInserttime());
     }
 
     @Override
@@ -81,19 +76,19 @@ public class NewCollectXC extends SwipeMenuAdapter<RecyclerViewHolder> {
         return mDatas.size();
     }
 
-    class DefaultViewHolder extends RecyclerViewHolder {
-        public DefaultViewHolder(Context context, View itemView) {
-            super(context, itemView);
-        }
+    public int currentPage = 1;
+
+    public int getNextPage() {
+        return currentPage + 1;
     }
 
-    public void addList(boolean isRefresh,   ArrayList<AlbumInfo> list ) {
+    public void addList(boolean isRefresh, ArrayList<MusicInfo> data) {
         if (isRefresh) {
             mDatas.clear();
             currentPage = 1;
         }
-        if (!MyStrUtil.isEmpty(list)) {
-            mDatas.addAll(list);
+        if (!MyStrUtil.isEmpty(data)) {
+            mDatas.addAll(data);
             currentPage++;
             notifyDataSetChanged();
         }
@@ -104,8 +99,9 @@ public class NewCollectXC extends SwipeMenuAdapter<RecyclerViewHolder> {
     }
 
     public void removePosition(BaseHomeItem homeItem) {
-       Dialogs(homeItem);
+        Dialogs(homeItem);
     }
+
     private void Dialogs(final BaseHomeItem homeItem) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setTitle("提示");
@@ -118,17 +114,15 @@ public class NewCollectXC extends SwipeMenuAdapter<RecyclerViewHolder> {
                 notifyDataSetChanged();
                 dialogInterface.dismiss();
             }
-        }) ;
+        });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
             }
-        })   ;
+        });
         builder.create().show();
     }
-
-
 
     public void removeByID(String deleteId) {
         BaseHomeItem deleteItem = null;
@@ -143,9 +137,10 @@ public class NewCollectXC extends SwipeMenuAdapter<RecyclerViewHolder> {
         }
     }
 
-    public int currentPage = 1;
 
-    public int getNextPage() {
-        return currentPage + 1;
+    class DefaultViewHolder extends RecyclerViewHolder {
+        public DefaultViewHolder(Context context, View itemView) {
+            super(context, itemView);
+        }
     }
 }

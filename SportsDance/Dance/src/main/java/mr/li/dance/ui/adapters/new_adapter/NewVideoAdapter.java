@@ -29,7 +29,7 @@ import mr.li.dance.utils.MyStrUtil;
  */
 public class NewVideoAdapter extends DanceBaseAdapter {
     Context mContext;
-    private List<Video>          mDatas;
+    private List<Video> mDatas;
 
     private int EXARCOUNT = 0;
     private boolean hasTypeList;
@@ -74,7 +74,6 @@ public class NewVideoAdapter extends DanceBaseAdapter {
     }
 
 
-
     class ViewHolderMain extends BaseViewHolder {
         public ViewHolderMain(View view) {
             super(mContext, view);
@@ -83,13 +82,17 @@ public class NewVideoAdapter extends DanceBaseAdapter {
 
     private void bindTypeMain(ViewHolderMain holder, int position) {
         final Video video = mDatas.get(position);
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (MainActivity.myBinder.binderIsPlaying()) {
                     MainActivity.myBinder.binderPause();
                 }
-                VideoDetailActivity.lunch(mContext, video.getId());
+                if (!TextUtils.isEmpty(video.getId())) {
+                    VideoDetailActivity.lunch(mContext, video.getId());
+                }
+
 
             }
         });
@@ -99,7 +102,7 @@ public class NewVideoAdapter extends DanceBaseAdapter {
         holder.danceViewHolder.setText(R.id.name, video.getTitle());
         //   holder.danceViewHolder.setText(R.id.time_tv, video.getStart_time());*/
         if (!MyStrUtil.isEmpty(video)) {
-            if (TextUtils.isEmpty( video.getTitle())) {
+            if (TextUtils.isEmpty(video.getTitle())) {
                 holder.danceViewHolder.setText(R.id.name, video.getName());
             } else {
                 holder.danceViewHolder.setText(R.id.name, video.getTitle());
@@ -108,6 +111,7 @@ public class NewVideoAdapter extends DanceBaseAdapter {
             holder.danceViewHolder.setImageByUrlOrFilePath(R.id.imageView, video.getPicture(), R.drawable.default_video);
         }
     }
+
     public void refresh(HomeVideoResponse response) {
         super.refresh();
         EXARCOUNT = 0;
@@ -121,6 +125,7 @@ public class NewVideoAdapter extends DanceBaseAdapter {
         }
         notifyDataSetChanged();
     }
+
     public void refresh1(LabelSeekInfoVideo response) {
         super.refresh();
         EXARCOUNT = 0;
@@ -143,6 +148,7 @@ public class NewVideoAdapter extends DanceBaseAdapter {
         }
         notifyDataSetChanged();
     }
+
     public void loadMore1(LabelSeekInfoVideo response) {
         ArrayList<Video> videos = response.getData().getArr();
         if (!MyStrUtil.isEmpty(videos)) {

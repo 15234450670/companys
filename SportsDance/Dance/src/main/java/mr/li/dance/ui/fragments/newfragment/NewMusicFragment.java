@@ -81,10 +81,10 @@ public class NewMusicFragment extends BaseListFragment {
         } else {
             MusicResponse reponseResult = JsonMananger.getReponseResult(response, MusicResponse.class);
             adapter.loadMore(reponseResult);
-            /*if (reponseResult.getData().getMusicRecApp() == null) {
+            if (reponseResult.getData().getMusic_class() == null) {
                 LabelSelectMusicInfo reponseResults = JsonMananger.getReponseResult(response, LabelSelectMusicInfo.class);
                 adapter.loadMore1(reponseResults);
-            }*/
+            }
         }
     }
 
@@ -122,4 +122,5 @@ public class NewMusicFragment extends BaseListFragment {
         }
 
     }
+
 }

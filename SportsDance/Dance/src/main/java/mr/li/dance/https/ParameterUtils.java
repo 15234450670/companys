@@ -179,9 +179,11 @@ public class ParameterUtils {
     /**
      * 歌单界面
      */
-    public Request<String> getMusicInfoGeDanMap(String id,String page) {
+    public Request<String> getMusicInfoGeDanMap(String userid,String id,String page) {
         Request<String> request = getBaseRequestForPost("/music.musicList");
+        request.add("userid",userid);
         request.add("page",page);
+
         request.add("id",id);
         return request;
     }
