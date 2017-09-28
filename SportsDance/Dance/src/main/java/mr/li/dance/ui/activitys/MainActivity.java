@@ -393,7 +393,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         }
         wasBackground = false;
-        if (myBinder != null) {
+       /* if (myBinder != null) {
             if (MusicService.isPlay) {
                 floatImage.setVisibility(View.VISIBLE);
                 animator.start();
@@ -403,7 +403,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 a.cancel();
                 floatImage.setVisibility(View.GONE);
             }
-        }
+        }*/
     }
 
     public void onPause() {

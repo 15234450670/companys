@@ -6,7 +6,6 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -131,21 +130,15 @@ public class MatchDetailActivity extends BaseActivity implements View.OnClickLis
                 ScoreGroupActivity.lunch(this, mMatchId);
                 break;
             case R.id.guize_layout:
-                //  String guize_url = String.format(AppConfigs.SAISHIShareUrl, String.valueOf(mMatchId), String.valueOf(10701));
-                String guize_url = String.format(AppConfigs.SAISHIShareUrl2 + mMatchId);
-                Log.e("guize_url:", guize_url);
+                  String guize_url = String.format(AppConfigs.SAISHIShareUrl, String.valueOf(mMatchId), String.valueOf(10701));
                 MyDanceWebActivity.lunch(this, MyDanceWebActivity.MATCHOTHER1, "赛事规则", guize_url, true);
                 break;
             case R.id.shexiang_layout:
-                //String shexiang_url = String.format(AppConfigs.SAISHIShareUrl, String.valueOf(mMatchId), String.valueOf(10702));
-                String shexiang_url = String.format(AppConfigs.SAISHIShareUrl3 + mMatchId);
-                Log.e("shexiang_url:", shexiang_url);
+                String shexiang_url = String.format(AppConfigs.SAISHIShareUrl, String.valueOf(mMatchId), String.valueOf(10702));
                 MyDanceWebActivity.lunch(this, MyDanceWebActivity.MATCHOTHER2, "赛事设项", shexiang_url, true);
                 break;
             case R.id.saicheng_layout:
-                // String saicheng_url = String.format(AppConfigs.SAISHIShareUrl, String.valueOf(mMatchId), String.valueOf(10703));
-                String saicheng_url = String.format(AppConfigs.SAISHIShareUrl4 + mMatchId);
-                Log.e("saicheng_url:", saicheng_url);
+                String saicheng_url = String.format(AppConfigs.SAISHIShareUrl, String.valueOf(mMatchId), String.valueOf(10703));
                 MyDanceWebActivity.lunch(this, MyDanceWebActivity.MATCHOTHER3, "赛程表", saicheng_url, true);
                 break;
             case R.id.matchvideo_layout:

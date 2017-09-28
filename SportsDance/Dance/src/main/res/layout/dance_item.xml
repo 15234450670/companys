@@ -1,44 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_marginTop="@dimen/spacing_20"
-              android:orientation="vertical">
+            >
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_weight="1"
+        <ImageView
+            android:layout_marginLeft="@dimen/spacing_20"
+            android:layout_marginRight="@dimen/spacing_20"
+            android:layout_marginTop="@dimen/spacing_10"
+            android:layout_marginBottom="@dimen/spacing_10"
+            android:id="@+id/wudao_pic"
+            android:layout_width="match_parent"
+            android:scaleType="fitXY"
+            android:layout_height="@dimen/spacing_384"/>
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <ImageView
-                android:id="@+id/wudao_pic"
-                android:layout_width="@dimen/spacing_244"
-                android:layout_height="@dimen/spacing_244"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_launcher"/>
-
-            <TextView
-                android:id="@+id/wudao_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/spacing_30"
-                android:layout_marginTop="@dimen/spacing_24"
-                android:gravity="center"
-                android:text="dasdasdasd"
-                android:textColor="@color/white"
-                android:textSize="@dimen/textsize24"/>
-        </LinearLayout>
-        <View
-
-            android:layout_width="@dimen/spacing_6"
-
-            android:layout_height="2dp"  />
-
+            android:gravity="center_horizontal"
+            android:text="ssss"
+            android:textSize="@dimen/textsize28"
+            android:textColor="#333333"
+            android:id="@+id/wudao_name"/>
     </LinearLayout>
 
 
-</LinearLayout>
+
+
+</RelativeLayout>

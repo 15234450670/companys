@@ -1,6 +1,7 @@
 package mr.li.dance.ui.adapters;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 
 import java.util.List;
@@ -9,11 +10,14 @@ import mr.li.dance.R;
 import mr.li.dance.models.AlbumInfo;
 import mr.li.dance.models.BaseHomeItem;
 import mr.li.dance.models.BaseItemAdapterType;
+import mr.li.dance.models.MusicInfo;
 import mr.li.dance.models.TeachDetailInfo;
 import mr.li.dance.models.Video;
 import mr.li.dance.models.ZhiBoInfo;
 import mr.li.dance.models.ZiXunInfo;
 import mr.li.dance.utils.MyStrUtil;
+
+import static mr.li.dance.R.layout.item_base;
 
 /**
  * Created by Lixuewei on 2017/5/29.
@@ -27,7 +31,7 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
     private final int TYPE_ZIXUNONPIC     = 5;//资讯1张图
     private final int TYPE_ZIXU_THREE_PIC = 6;//资讯3张图
     private final int TYPE_MUSIC          = 7;
-
+    private final int viewType4           = 0x004;   //图片
     private BaseItemAdapterType mAdatperType;
 
     public BaseItemAdapter(Context ctx, BaseItemAdapterType adapterType) {
@@ -49,11 +53,11 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
             case TYPE_MUSIC:
                 return R.layout.dance_item;
             case viewType3:
-
                 return R.layout.teach_item_more;
-
+            case viewType4:
+                return R.layout.item_base;
         }
-        return R.layout.item_base;
+        return item_base;
     }
 
     @Override
@@ -74,6 +78,8 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
                 return TYPE_MUSIC;
             case TEACHER:
                 return viewType3;
+            case ALBUM:
+                return viewType4;
 
         }
         return super.getItemViewType(position);
@@ -91,7 +97,14 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
             bindImageInfo(holder, (AlbumInfo) item);
         } else if (item instanceof TeachDetailInfo.DataBean.OtherListBean) {
             bindMore(holder, (TeachDetailInfo.DataBean.OtherListBean) item, position);
+        } else if (item instanceof MusicInfo) {
+            bindMusic(holder, (MusicInfo) item);
         }
+    }
+
+    private void bindMusic(RecyclerViewHolder holder, MusicInfo item) {
+        holder.setRoundImageByUrlOrFilePath(R.id.wudao_pic, item.getImg_fm(), R.drawable.default_video);
+        holder.setText(R.id.wudao_name, item.getTitle());
     }
 
     private void bindMore(RecyclerViewHolder holder, TeachDetailInfo.DataBean.OtherListBean item, int position) {
@@ -110,9 +123,10 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
     }
 
     private void bindVideo(RecyclerViewHolder holder, Video video) {
-
-        holder.setRoundImageByUrlOrFilePath(R.id.detail_pic, video.getPicture(), R.drawable.default_video);
-        holder.setText(R.id.detail_title, video.getName());
+        holder.setRoundImageByUrlOrFilePath(R.id.imageView, video.getPicture(), R.drawable.default_video);
+        holder.setVisibility(R.id.typeicon_tv, View.VISIBLE);
+        holder.setImageResDrawable(R.id.typeicon_tv, R.drawable.home_icon_008);
+        holder.setText(R.id.name, video.getName());
         //  holder.setText(R.id.time_tv, video.getInserttime());
         // holder.setVisibility(R.id.typeicon_tv, View.VISIBLE);
         //holder.setImageResDrawable(R.id.typeicon_tv, R.drawable.home_icon_005);
@@ -125,8 +139,13 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
             title = information.getTitle();
         }
         holder.setText(R.id.name, title);
-        holder.setText(R.id.time_tv, information.getInserttime());
-        holder.setText(R.id.from_tv, "来源: " + information.getWriter());
+        if (TextUtils.isEmpty(information.getWriter())) {
+            holder.getView(R.id.laiyuan).setVisibility(View.GONE);
+        } else {
+            holder.getView(R.id.laiyuan).setVisibility(View.VISIBLE);
+            holder.setText(R.id.from_tv, information.getWriter());
+        }
+
         if ("1".equals(information.getImg_num())) {
             holder.setImageByUrlOrFilePath(R.id.imageView, information.getPicture(), R.drawable.default_video);
         } else {
@@ -137,12 +156,12 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
     }
 
     private void bindImageInfo(RecyclerViewHolder holder, AlbumInfo albumInfo) {
-        holder.setImageByUrlOrFilePath(R.id.imageView, albumInfo.getPicture(), R.drawable.default_video);
-        holder.setText(R.id.name, albumInfo.getClass_name());
+        holder.setImageByUrlOrFilePath(R.id.imageView, albumInfo.getImg_fm(), R.drawable.default_video);
+        holder.setText(R.id.name, albumInfo.getTitle());
         holder.setText(R.id.time_tv, albumInfo.getInserttime());
         holder.setVisibility(R.id.typeicon_tv, View.INVISIBLE);
-        holder.setImageResDrawable(R.id.typeicon_tv, R.drawable.home_icon_005);
         holder.setVisibility(R.id.picnum_tv, View.VISIBLE);
+        holder.setText(R.id.num_tv, albumInfo.getPhotos());
     }
 
     public void refresh(List list) {

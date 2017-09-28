@@ -12,7 +12,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.lecloud.sdk.constant.PlayerEvent;
 import com.lecloud.sdk.constant.PlayerParams;
@@ -34,6 +33,8 @@ import mr.li.dance.models.Video;
 import mr.li.dance.ui.activitys.LoginActivity;
 import mr.li.dance.ui.activitys.base.BaseListActivity;
 import mr.li.dance.ui.activitys.match.MatchDetailActivity;
+import mr.li.dance.ui.activitys.match.MatchVideoActivity;
+import mr.li.dance.ui.activitys.newActivitys.SpecialActivity;
 import mr.li.dance.ui.adapters.BaseItemAdapter;
 import mr.li.dance.ui.adapters.new_adapter.VideoAlbumAdapter;
 import mr.li.dance.ui.widget.VideoLayoutParams;
@@ -256,15 +257,17 @@ public class VideoDetailActivity extends BaseListActivity {
             } else {
                 mDanceViewHolder.getView(R.id.class_jieshao).setVisibility(View.GONE);
             }
+            final String compete_id = detailResponse.getData().getDetail().getCompete_id();
             isCollected = (0 != detailResponse.getData().getCollection_id());
             if (!MyStrUtil.isEmpty(detailResponse.getData().getOtherList())) {
                 mAdapter.refresh(detailResponse.getData().getOtherList());
+
                 View view = mDanceViewHolder.getView(R.id.ll);
                 view.setVisibility(View.VISIBLE);
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(VideoDetailActivity.this, "sssss", Toast.LENGTH_SHORT).show();
+                        MatchVideoActivity.lunch(mContext, compete_id);
                     }
                 });
             } else {
@@ -280,7 +283,7 @@ public class VideoDetailActivity extends BaseListActivity {
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(VideoDetailActivity.this, "xxx", Toast.LENGTH_SHORT).show();
+                        SpecialActivity.lunch(mContext, mItemId);
                     }
                 });
             } else {

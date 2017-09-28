@@ -212,7 +212,6 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
         intent.putExtra("isfromcollectpage", isfromCollectPage);
         context.startActivity(intent);
     }
-
     @Override
     public void getIntentData() {
         super.getIntentData();

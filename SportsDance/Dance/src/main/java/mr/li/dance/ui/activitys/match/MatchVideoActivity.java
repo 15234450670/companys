@@ -3,7 +3,6 @@ package mr.li.dance.ui.activitys.match;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.umeng.analytics.MobclickAgent;
@@ -21,6 +20,7 @@ import mr.li.dance.ui.activitys.video.VideoDetailActivity;
 import mr.li.dance.ui.adapters.MatchVideoAdapter;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
+import mr.li.dance.utils.MyStrUtil;
 import mr.li.dance.utils.ShareUtils;
 
 /**
@@ -97,7 +97,6 @@ public class MatchVideoActivity extends BaseListActivity<Video> {
         super.onSucceed(what, response);
         StringResponse stringResponse = JsonMananger.getReponseResult(response, StringResponse.class);
         String dataStr = stringResponse.getData();
-        Log.e("xxx",dataStr);
         if (what == AppConfigs.match_matchVedio) {
             MatchVideoResponse videoResponse = JsonMananger.getReponseResult(dataStr, MatchVideoResponse.class);
             Match match = new Match();
@@ -105,7 +104,10 @@ public class MatchVideoActivity extends BaseListActivity<Video> {
             match.setTitle(videoResponse.getTitle());
             match.setAddress(videoResponse.getAddress());
             mMatchVideoAdapter.setmMatchInfo(match);
-            mMatchVideoAdapter.addList(isRefresh, videoResponse.getAlbum());
+            if (!MyStrUtil.isEmpty(videoResponse.getAlbum())) {
+                mMatchVideoAdapter.addList(isRefresh, videoResponse.getAlbum());
+            }
+
         } else if (what==AppConfigs.match_share_cj) {
             MatchShareInfo reponseResult = JsonMananger.getReponseResult(response, MatchShareInfo.class);
             String share = reponseResult.getData();

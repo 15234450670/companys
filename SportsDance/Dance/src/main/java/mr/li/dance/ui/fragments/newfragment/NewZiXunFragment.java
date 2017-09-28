@@ -38,7 +38,7 @@ public class NewZiXunFragment extends BaseListFragment {
     @Override
     public void initViews() {
         super.initViews();
-         wu = (LinearLayout) mView.findViewById(R.id.wu);
+        wu = (LinearLayout) mView.findViewById(R.id.wu);
         you = (LinearLayout) mView.findViewById(R.id.rec);
     }
 
@@ -55,6 +55,7 @@ public class NewZiXunFragment extends BaseListFragment {
             public void NoSee() {
                 No();
             }
+
             @Override
             public void Look() {
                 Looks();
@@ -71,7 +72,6 @@ public class NewZiXunFragment extends BaseListFragment {
             return;
         }
         path = arguments.getString("path");
-        Log.e("xxx", path);
         if (TextUtils.isEmpty(path)) {
             return;
         }
@@ -82,7 +82,9 @@ public class NewZiXunFragment extends BaseListFragment {
             Request<String> request = ParameterUtils.getSingleton().getHomeZxMapTab(String.valueOf(page), path);
             request(AppConfigs.home_zx, request, false);
         }
+
     }
+
     @Override
     public void refresh() {
         super.refresh();
@@ -129,7 +131,7 @@ public class NewZiXunFragment extends BaseListFragment {
         wu.bringToFront();
     }
 
-    private void Looks(){
+    private void Looks() {
         you.setVisibility(View.VISIBLE);
         wu.setVisibility(View.GONE);
         you.bringToFront();
@@ -138,8 +140,8 @@ public class NewZiXunFragment extends BaseListFragment {
     @Override
     public void itemClick(int position, Object value) {
         ZiXunInfo ziXunInfo = (ZiXunInfo) value;
-       // String url = String.format(AppConfigs.ZixunShareUrl, String.valueOf(ziXunInfo.getId()));
-        MyDanceWebActivity.lunch(getActivity(), MyDanceWebActivity.ZIXUNTYPE, ziXunInfo.getTitle(), AppConfigs.ZixunShareUrl2+ziXunInfo.getId(), true);
+        // String url = String.format(AppConfigs.ZixunShareUrl, String.valueOf(ziXunInfo.getId()));
+        MyDanceWebActivity.lunch(getActivity(), MyDanceWebActivity.ZIXUNTYPE, ziXunInfo.getTitle(), AppConfigs.ZixunShareUrl2 + ziXunInfo.getId(), true);
 
     }
 

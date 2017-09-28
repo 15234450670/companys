@@ -63,13 +63,24 @@
 
         <include layout="@layout/split_lines"    />
 
-        <mr.li.dance.utils.util.IndexViewPager
-            android:id="@+id/fl"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="0dp"
+           android:layout_weight="1">
+           <mr.li.dance.utils.util.IndexViewPager
+               android:id="@+id/fl"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               >
+           </mr.li.dance.utils.util.IndexViewPager>
+           <FrameLayout
+               android:id="@+id/frame"
+               android:visibility="gone"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent">
 
-        </mr.li.dance.utils.util.IndexViewPager>
+           </FrameLayout>
+       </RelativeLayout>
 
     </LinearLayout>
 

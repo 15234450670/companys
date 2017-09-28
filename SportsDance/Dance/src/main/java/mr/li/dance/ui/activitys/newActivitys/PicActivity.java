@@ -6,6 +6,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -31,6 +33,7 @@ import mr.li.dance.ui.activitys.SearchActivity;
 import mr.li.dance.ui.activitys.base.BaseActivity;
 import mr.li.dance.ui.activitys.music.PlayMusicActivity;
 import mr.li.dance.ui.adapters.new_adapter.ExPandableAdapter;
+import mr.li.dance.ui.fragments.newfragment.NewLabelFragment;
 import mr.li.dance.ui.fragments.newfragment.NewPicFragment;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
@@ -100,6 +103,7 @@ public class PicActivity extends BaseActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                mDanceViewHolder.getView(R.id.frame).setVisibility(View.GONE);
                 tabPosition = tab.getPosition() - 1;
             }
 
@@ -117,7 +121,7 @@ public class PicActivity extends BaseActivity {
         label_pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Request<String> request = ParameterUtils.getSingleton().getLabelSelect("10902");
+                Request<String> request = ParameterUtils.getSingleton().getLabelSelect("10905");
                 request(AppConfigs.home_tab_zx, request, false);
 
             }
@@ -182,7 +186,6 @@ public class PicActivity extends BaseActivity {
         int width = wm.getDefaultDisplay().getWidth() * 4 / 5;
         popupWindow = new PopupWindow(popipWindow_view, width,
                 WindowManager.LayoutParams.MATCH_PARENT);
-        PopDisappear();
         popupWindow.setFocusable(true);
         popupWindow.setOutsideTouchable(true);
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
@@ -210,6 +213,7 @@ public class PicActivity extends BaseActivity {
         sure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ScreenPop();
                 popupWindow.dismiss();
                 //PopDisappear();
             }
@@ -275,5 +279,59 @@ public class PicActivity extends BaseActivity {
 
             }
         });
+    }
+    //标签选择
+    private void ScreenPop() {
+        if (ExPandableAdapter.isChildCanSelect) {
+            // TODO: 2017/9/24
+            StringBuilder sb = new StringBuilder();
+            final String kk = ",";
+            for (int i = 1; i < data.size(); i++) {
+                List<LabelSelect.DataBean.ListBean> list = data.get(i).getList();
+
+                for (int k = 0; k < list.size(); k++) {
+                    LabelSelect.DataBean.ListBean bean = list.get(k);
+                    if (bean.isSelect) {
+                        sb.append(bean.getId());
+                        sb.append(kk);
+                    }
+                }
+
+            }
+            if (!TextUtils.isEmpty(sb.toString())) {
+                sb.deleteCharAt(sb.length() - 1);
+                vp.setCurrentItem(0);
+                View view = mDanceViewHolder.getView(R.id.frame);
+                view.setVisibility(View.VISIBLE);
+                FragmentManager supportFragmentManager = getSupportFragmentManager();
+                FragmentTransaction transaction = supportFragmentManager.beginTransaction();
+                NewLabelFragment labelFragment = new NewLabelFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("path", sb.toString());
+                bundle.putString("id","10904");
+                labelFragment.setArguments(bundle);
+                transaction.replace(R.id.frame, labelFragment);
+                transaction.commit();
+
+
+            }
+
+        } else {
+            int tab = exPandableAdapter.getTabPosition();
+            if (tab < 0) {
+                // TODO: 2017/9/24
+                Toast.makeText(mContext, "未选中标签！", Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+
+                int position = tabLayout.getSelectedTabPosition();
+                if (position == tab) {
+                    return;
+                } else {
+                    vp.setCurrentItem(tab + 1);
+                }
+
+            }
+        }
     }
 }

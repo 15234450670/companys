@@ -103,8 +103,6 @@ public class ExPandableAdapter extends BaseExpandableListAdapter {
         for (int i = 0; i < is_host.size(); i++) {
             popGridViewAdapter.isTab = Integer.valueOf(is_host.get(i))==1? true : false;
         }
-
-
         final PopGridViewAdapter adapter = adapterMap.get(groupPosition);
         if (adapter == null) {
             adapterMap.put(groupPosition, popGridViewAdapter);

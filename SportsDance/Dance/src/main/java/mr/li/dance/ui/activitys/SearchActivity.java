@@ -25,13 +25,13 @@ import mr.li.dance.utils.MyStrUtil;
 
 public class SearchActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
     FragmentManager mFragmentManager;
-    SearchFragment mCurrentFragment;
-    SearchFragment mZhiboFragment;
-    SearchFragment mVideoFragment;
-    SearchFragment mZiXunFragment;
-    SearchFragment mPicFragment;
-    SearchFragment mMusicFragment;
-    RadioGroup mTitleRg;
+    SearchFragment  mCurrentFragment;
+    SearchFragment  mZhiboFragment;
+    SearchFragment  mVideoFragment;
+    SearchFragment  mZiXunFragment;
+    SearchFragment  mPicFragment;
+    SearchFragment  mMusicFragment;
+    RadioGroup      mTitleRg;
 
     @Override
     public int getContentViewId() {
@@ -46,7 +46,6 @@ public class SearchActivity extends BaseActivity implements RadioGroup.OnChecked
         Bundle zhiBoBundle = new Bundle();
         zhiBoBundle.putString("type", "video_live");
         mZhiboFragment.setArguments(zhiBoBundle);
-
 
         mVideoFragment = new SearchFragment();
         Bundle videoBundle = new Bundle();
@@ -65,8 +64,8 @@ public class SearchActivity extends BaseActivity implements RadioGroup.OnChecked
 
         mMusicFragment = new SearchFragment();
         Bundle musicBundle = new Bundle();
-        musicBundle.putString("type", "music");
-        mPicFragment.setArguments(musicBundle);
+        musicBundle.putString("type", "music_class");
+        mMusicFragment.setArguments(musicBundle);
 
         mCurrentFragment = mZhiboFragment;
     }
@@ -116,14 +115,15 @@ public class SearchActivity extends BaseActivity implements RadioGroup.OnChecked
                 type = "photo_class";
                 mCurrentFragment = mPicFragment;
                 break;
-            /*case R.id. music_rb:
+            case R.id.music_rb:
                 if (!mMusicFragment.isAdded()) {
                     transaction.add(R.id.content_fl, mMusicFragment);
                 }
-                type = "music";
+                type = "music_class";
                 mCurrentFragment = mMusicFragment;
-                break;*/
+                break;
         }
+
         transaction.show(mCurrentFragment);
         transaction.commitAllowingStateLoss();
         String content = mDanceViewHolder.getTextValue(R.id.search_et);

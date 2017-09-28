@@ -6,6 +6,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -26,13 +28,12 @@ import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.HomeZxResponse;
 import mr.li.dance.models.LabelInfo;
-import mr.li.dance.models.LabelSeekInfo;
 import mr.li.dance.models.LabelSelect;
-import mr.li.dance.models.TeachInfo;
 import mr.li.dance.ui.activitys.SearchActivity;
 import mr.li.dance.ui.activitys.base.BaseActivity;
 import mr.li.dance.ui.activitys.music.PlayMusicActivity;
 import mr.li.dance.ui.adapters.new_adapter.ExPandableAdapter;
+import mr.li.dance.ui.fragments.newfragment.NewLabelFragment;
 import mr.li.dance.ui.fragments.newfragment.NewZiXunFragment;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
@@ -64,6 +65,7 @@ public class MessageActivity extends BaseActivity {
     private CustomExpandableListView   celv;
     private ExPandableAdapter          exPandableAdapter;
     private List<LabelSelect.DataBean> data;
+    private NewZiXunFragment           newZiXunFragment;
 
     @Override
     public int getContentViewId() {
@@ -103,7 +105,6 @@ public class MessageActivity extends BaseActivity {
         final View popipWindow_view = getLayoutInflater().inflate(R.layout.label_select, null, false);
         //label_rv = (RecyclerView) popipWindow_view.findViewById(R.id.label_rv);
         celv = (CustomExpandableListView) popipWindow_view.findViewById(R.id.celv);
-
         TextView reset = (TextView) popipWindow_view.findViewById(R.id.reset);
         TextView sure = (TextView) popipWindow_view.findViewById(R.id.sure);
         WindowManager wm = this.getWindowManager();
@@ -123,8 +124,6 @@ public class MessageActivity extends BaseActivity {
             //展开
             celv.expandGroup(i);
         }
-
-
         View parent = findViewById(R.id.parent);
         popupWindow.setAnimationStyle(R.style.AnimationLeftFade);
         popupWindow.showAtLocation(parent, Gravity.RIGHT, 0, 0);
@@ -165,8 +164,9 @@ public class MessageActivity extends BaseActivity {
             }
         });
     }
+
     //标签选择
-    private void ScreenPop(){
+    private void ScreenPop() {
         if (ExPandableAdapter.isChildCanSelect) {
             // TODO: 2017/9/24
             StringBuilder sb = new StringBuilder();
@@ -185,9 +185,20 @@ public class MessageActivity extends BaseActivity {
             }
             if (!TextUtils.isEmpty(sb.toString())) {
                 sb.deleteCharAt(sb.length() - 1);
-                Request<String> homeTabhMap = ParameterUtils.getSingleton().getHomeTabhMap(sb.toString(), "10902", String.valueOf(page));
-                request(AppConfigs.home_zx_screen, homeTabhMap, false);
-                Toast.makeText(mContext, sb.toString(), Toast.LENGTH_SHORT).show();
+                vp.setCurrentItem(0);
+                View view = mDanceViewHolder.getView(R.id.frame);
+                view.setVisibility(View.VISIBLE);
+                FragmentManager supportFragmentManager = getSupportFragmentManager();
+                FragmentTransaction transaction = supportFragmentManager.beginTransaction();
+                NewLabelFragment labelFragment = new NewLabelFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("path", sb.toString());
+                bundle.putString("id","10902");
+                labelFragment.setArguments(bundle);
+                transaction.replace(R.id.frame, labelFragment);
+                transaction.commit();
+
+
             }
 
         } else {
@@ -217,6 +228,7 @@ public class MessageActivity extends BaseActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                mDanceViewHolder.getView(R.id.frame).setVisibility(View.GONE);
                 tabPosition = tab.getPosition() - 1;
             }
 
@@ -230,8 +242,9 @@ public class MessageActivity extends BaseActivity {
 
             }
         });
-        label_pic = (ImageView) findViewById(R.id.label_pic);
         vp = (IndexViewPager) findViewById(R.id.fl);
+        label_pic = (ImageView) findViewById(R.id.label_pic);
+
 
         finishs();
         label_pic.setOnClickListener(new View.OnClickListener() {
@@ -269,7 +282,7 @@ public class MessageActivity extends BaseActivity {
                 mDanceViewHolder.setViewVisibility(R.id.you, View.GONE);
             } else {
                 for (int i = 0; i < mLabel.size(); i++) {
-                    NewZiXunFragment newZiXunFragment = new NewZiXunFragment();
+                    newZiXunFragment = new NewZiXunFragment();
                     Bundle bundle = new Bundle();
                     if (TextUtils.isEmpty(mLabel.get(i).getClass_id())) {
                         Log.d("getClass_id()", "mLabel= null ");
@@ -291,17 +304,12 @@ public class MessageActivity extends BaseActivity {
             data = reponseResult.getData();
             LabelSelect(data);
         }
-        if (what == AppConfigs.home_zx_screen) {
-            LabelSeekInfo reponseResult = JsonMananger.getReponseResult(response, LabelSeekInfo.class);
-            ArrayList<TeachInfo> arr = reponseResult.getData().getArr();
 
-
-
-        }
     }
 
     public static void lunch(Context context) {
         Intent intent = new Intent(context, MessageActivity.class);
         context.startActivity(intent);
     }
+
 }

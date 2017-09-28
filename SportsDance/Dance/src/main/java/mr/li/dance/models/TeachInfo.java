@@ -1,5 +1,7 @@
 package mr.li.dance.models;
 
+import java.io.Serializable;
+
 /**
  * 作者: SuiFeng
  * 版本:
@@ -7,7 +9,7 @@ package mr.li.dance.models;
  * 描述:
  * 修订历史:
  */
-public class TeachInfo extends BaseHomeItem {
+public class TeachInfo extends BaseHomeItem implements Serializable{
     /**
      * id : 1
      * title : 标题一

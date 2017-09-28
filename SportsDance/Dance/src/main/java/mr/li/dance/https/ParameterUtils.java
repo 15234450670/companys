@@ -412,6 +412,18 @@ public class ParameterUtils {
         return request;
     }
 
+    /**
+     * 相关专辑
+     * @param page
+     * @return
+     */
+    public Request<String> getVideoSpeial(String id,String page) {
+        Request<String> request = getBaseRequestCacheForPost("/home.albumList");
+        request.add("id",id);
+        request.add("page",page);
+        return request;
+    }
+
     public Request<String> getHomeDianboMapFromServer() {
         Request<String> request = getBaseRequestForPost("/home.dianbo");
         return request;
@@ -560,7 +572,7 @@ public class ParameterUtils {
     }
 
     public Request<String> getHomeSearchMap(String type, String content, int page) {
-        Request<String> request = getBaseRequestForPost("/home.Search");
+        Request<String> request = getBaseRequestForPost("/revisionHome.Search");
         request.add("type", type);
         request.add("content", content);
         request.add("page", page);

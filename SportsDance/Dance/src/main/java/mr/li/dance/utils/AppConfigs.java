@@ -26,10 +26,7 @@ public class AppConfigs {
     public final static String ZixunShareUrl  = DomainUrl + "/home.zxdetailf?id=%s";
     public final static String ZixunShareUrl2  = SHAREURL + "/share.zxfx?id=";
     //赛事规则，赛事设项 赛程表 分享
-    public final static String SAISHIShareUrl = DomainUrl + "/match.graphicDetailsf?compete_id=%s&w_page=%s";
-    public final static String SAISHIShareUrl2 = SHAREURL + "/share.gcfx?id=";
-    public final static String SAISHIShareUrl3 = SHAREURL + "/share.sxfx?id=";
-    public final static String SAISHIShareUrl4 = SHAREURL + "/share.scb?id=";
+    public final static String SAISHIShareUrl = SHAREURL + "/share.gc?id=%s&w_page=%s";
     //相册分享
     public final static String SHAREPHOTOURL  = SHAREURL + "/share.photo?id=%s";
     //直播分享
@@ -120,6 +117,7 @@ public class AppConfigs {
     public final static int home_tab_teach        = 0x0066;
     public final static int home_tab_teachs        = 0x0066;
     public final static int home_tab_teach_details       = 0x0067;
+    public final static int video_special       = 0x0068;
     public static String getDomainUrl() {
         return DomainUrl;
     }

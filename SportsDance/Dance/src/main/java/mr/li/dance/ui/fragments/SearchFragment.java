@@ -2,8 +2,10 @@ package mr.li.dance.ui.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.yolanda.nohttp.rest.Request;
 
@@ -18,10 +20,11 @@ import mr.li.dance.https.response.ZiXunIndexResponse;
 import mr.li.dance.models.AlbumInfo;
 import mr.li.dance.models.BaseHomeItem;
 import mr.li.dance.models.BaseItemAdapterType;
+import mr.li.dance.models.HomeMusicScreen;
 import mr.li.dance.models.ZiXunInfo;
 import mr.li.dance.ui.activitys.MyDanceWebActivity;
 import mr.li.dance.ui.activitys.album.AlbumActivity;
-import mr.li.dance.ui.activitys.music.DanceMusicActivity;
+import mr.li.dance.ui.activitys.music.SongActivity;
 import mr.li.dance.ui.activitys.video.VideoDetailActivity;
 import mr.li.dance.ui.activitys.video.ZhiBoDetailActivity;
 import mr.li.dance.ui.adapters.BaseItemAdapter;
@@ -68,26 +71,28 @@ public class SearchFragment extends BaseListFragment<BaseHomeItem> {
                 title = xunInfo.getTitle();
             }
             String url = String.format(AppConfigs.ZixunShareUrl, String.valueOf(value.getId()));
-            MyDanceWebActivity.lunch(getActivity(), MyDanceWebActivity.ZIXUNTYPE, title,url, true);
+            MyDanceWebActivity.lunch(getActivity(), MyDanceWebActivity.ZIXUNTYPE, title, url, true);
         } else if (TextUtils.equals("photo_class", mType)) {
             AlbumInfo albumInfo = (AlbumInfo) value;
             AlbumActivity.lunch(getActivity(), value.getId(), albumInfo.getClass_name());
-        } else if (TextUtils.equals("music", mType)) {
-            DanceMusicActivity.lunch(getActivity(), value.getId());
+        } else if (TextUtils.equals("music_class", mType)) {
+            SongActivity.lunch(getActivity(), value.getId(),value.getTitle());
         }
     }
 
     @Override
     public RecyclerView.Adapter getAdapter() {
         if (TextUtils.equals("video_live", mType)) {
-            mBaseItemAdapter = new BaseItemAdapter(getActivity(), BaseItemAdapterType.CommentType);
+            mBaseItemAdapter = new BaseItemAdapter(getActivity(), BaseItemAdapterType.ALBUM);
         } else if (TextUtils.equals("video", mType)) {
-            mBaseItemAdapter = new BaseItemAdapter(getActivity(), BaseItemAdapterType.CommentType);
+            mBaseItemAdapter = new BaseItemAdapter(getActivity(), BaseItemAdapterType.ALBUM);
         } else if (TextUtils.equals("article", mType)) {
             mBaseItemAdapter = new BaseItemAdapter(getActivity(), BaseItemAdapterType.ZIXUN);
         } else if (TextUtils.equals("photo_class", mType)) {
-            mBaseItemAdapter = new BaseItemAdapter(getActivity(), BaseItemAdapterType.CommentType);
-        } else if (TextUtils.equals("music", mType)) {
+            mBaseItemAdapter = new BaseItemAdapter(getActivity(), BaseItemAdapterType.ALBUM);
+        } else if (TextUtils.equals("music_class", mType)) {
+            GridLayoutManager manager = new GridLayoutManager(getActivity(),2);
+            mRecyclerview.setLayoutManager(manager);
             mBaseItemAdapter = new BaseItemAdapter(getActivity(), BaseItemAdapterType.MUSIC);
         }
         mBaseItemAdapter.setItemClickListener(this);
@@ -123,18 +128,28 @@ public class SearchFragment extends BaseListFragment<BaseHomeItem> {
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
+        Log.e("re",response);
+        if (response == null) {
+            return;
+        }
         List list = null;
         if (TextUtils.equals("video_live", mType)) {
             HomeZhiBoIndexResponse indexResponse = JsonMananger.getReponseResult(response, HomeZhiBoIndexResponse.class);
+
             list = indexResponse.getData();
         } else if (TextUtils.equals("video", mType)) {
             HomeVideoIndexResponse indexResponse = JsonMananger.getReponseResult(response, HomeVideoIndexResponse.class);
+
             list = indexResponse.getData();
         } else if (TextUtils.equals("article", mType)) {
             ZiXunIndexResponse indexResponse = JsonMananger.getReponseResult(response, ZiXunIndexResponse.class);
+
             list = indexResponse.getData();
         } else if (TextUtils.equals("photo_class", mType)) {
             HomeAlbumResponse indexResponse = JsonMananger.getReponseResult(response, HomeAlbumResponse.class);
+            list = indexResponse.getData();
+        } else if (TextUtils.equals("music_class", mType)) {
+            HomeMusicScreen indexResponse = JsonMananger.getReponseResult(response, HomeMusicScreen.class);
             list = indexResponse.getData();
         }
         mBaseItemAdapter.addList(isRefresh, list);
