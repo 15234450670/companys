@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -38,7 +39,6 @@ import mr.li.dance.ui.fragments.newfragment.NewPicFragment;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.MyStrUtil;
-import mr.li.dance.utils.util.CustomExpandableListView;
 import mr.li.dance.utils.util.IndexViewPager;
 
 import static mr.li.dance.ui.activitys.MainActivity.myBinder;
@@ -51,17 +51,16 @@ import static mr.li.dance.ui.activitys.MainActivity.myBinder;
  * 修订历史:
  */
 public class PicActivity extends BaseActivity {
-    private TabLayout      tabLayout;
-    private ImageView      label_pic;
+    private TabLayout tabLayout;
+    private ImageView label_pic;
     private IndexViewPager vp;
     List<Fragment> list = new ArrayList<>();
     int page = 1;
-    public static int tabPosition = -1;
     private PopupWindow popupWindow;
-    ExPandableAdapter adapter;
-    private CustomExpandableListView   celv;
-    private ExPandableAdapter          exPandableAdapter;
+    private ExpandableListView celv;
+    private ExPandableAdapter exPandableAdapter;
     private List<LabelSelect.DataBean> data;
+
     @Override
     public int getContentViewId() {
         return R.layout.new_type2_activity;
@@ -82,7 +81,7 @@ public class PicActivity extends BaseActivity {
         mDanceViewHolder.setClickListener(R.id.btn_music, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (myBinder!=null&&myBinder.binderIsPlaying()) {
+                if (myBinder != null && myBinder.binderIsPlaying()) {
                     PlayMusicActivity.lunch(PicActivity.this);
                 } else {
                     Toast.makeText(PicActivity.this, "请去播放音乐", Toast.LENGTH_SHORT).show();
@@ -104,7 +103,6 @@ public class PicActivity extends BaseActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 mDanceViewHolder.getView(R.id.frame).setVisibility(View.GONE);
-                tabPosition = tab.getPosition() - 1;
             }
 
             @Override
@@ -129,6 +127,7 @@ public class PicActivity extends BaseActivity {
         vp = (IndexViewPager) findViewById(R.id.fl);
         finishs();
     }
+
     public void finishs() {
         mDanceViewHolder.setClickListener(R.id.btn_back, new View.OnClickListener() {
             @Override
@@ -141,7 +140,7 @@ public class PicActivity extends BaseActivity {
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
-        if (what==AppConfigs.home_album) {
+        if (what == AppConfigs.home_album) {
             HomeAlbumInfo reponseResult = JsonMananger.getReponseResult(response, HomeAlbumInfo.class);
             List<LabelInfo> mLabel = reponseResult.getData().getLabel();
             if (MyStrUtil.isEmpty(mLabel)) {
@@ -159,7 +158,7 @@ public class PicActivity extends BaseActivity {
                     }
                     list.add(newZiXunFragment);
                 }
-                NewViewPagerAdapter adapter = new NewViewPagerAdapter(getSupportFragmentManager(), list,mLabel);
+                NewViewPagerAdapter adapter = new NewViewPagerAdapter(getSupportFragmentManager(), list, mLabel);
                 vp.setAdapter(adapter);
                 tabLayout.setupWithViewPager(vp);
             }
@@ -174,11 +173,12 @@ public class PicActivity extends BaseActivity {
         Intent intent = new Intent(context, PicActivity.class);
         context.startActivity(intent);
     }
+
     //弹出标签选择
     private void LabelSelect(List<LabelSelect.DataBean> data) {
         final View popipWindow_view = getLayoutInflater().inflate(R.layout.label_select, null, false);
         //label_rv = (RecyclerView) popipWindow_view.findViewById(R.id.label_rv);
-        celv = (CustomExpandableListView) popipWindow_view.findViewById(R.id.celv);
+        celv = (ExpandableListView) popipWindow_view.findViewById(R.id.celv);
 
         TextView reset = (TextView) popipWindow_view.findViewById(R.id.reset);
         TextView sure = (TextView) popipWindow_view.findViewById(R.id.sure);
@@ -222,7 +222,7 @@ public class PicActivity extends BaseActivity {
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (exPandableAdapter!=null) {
+                if (exPandableAdapter != null) {
                     exPandableAdapter.itemReset();
                 }
             }
@@ -239,99 +239,42 @@ public class PicActivity extends BaseActivity {
                 getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                 getWindow().setAttributes(lp);
 
-                if (ExPandableAdapter.isChildCanSelect) {
-                    // TODO: 2017/9/24
-                    StringBuilder sb = new StringBuilder();
-                    final String kk = "--";
-                    for (int i = 1 ; i < data.size() ; i++) {
-
-                        List<LabelSelect.DataBean.ListBean> list = data.get(i).getList();
-
-                        for (int k = 0 ; k < list.size() ; k++) {
-                            LabelSelect.DataBean.ListBean bean = list.get(k);
-                            if (bean.isSelect) {
-                                sb.append(bean.getId());
-                                sb.append(kk);
-                            }
-                        }
-
-                    }
-
-                    Toast.makeText(mContext, sb.toString(), Toast.LENGTH_SHORT).show();
-                } else {
-                    int tab = exPandableAdapter.getTabPosition();
-                    if(tab<0){
-                        // TODO: 2017/9/24
-                        Toast.makeText(mContext, "未选中标签！", Toast.LENGTH_SHORT).show();
-                        return;
-                    } else {
-
-                        int position = tabLayout.getSelectedTabPosition();
-                        if (position == tab) {
-                            return;
-                        } else {
-                            vp.setCurrentItem(tab+1);
-                            //tabLayout.getTabAt(tab+1);
-                        }
-
-                    }
-                }
-
             }
         });
     }
+
     //标签选择
     private void ScreenPop() {
-        if (ExPandableAdapter.isChildCanSelect) {
-            // TODO: 2017/9/24
-            StringBuilder sb = new StringBuilder();
-            final String kk = ",";
-            for (int i = 1; i < data.size(); i++) {
-                List<LabelSelect.DataBean.ListBean> list = data.get(i).getList();
+        StringBuilder sb = new StringBuilder();
+        final String kk = ",";
+        for (int i = 0; i < data.size(); i++) {
+            List<LabelSelect.DataBean.ListBean> list = data.get(i).getList();
 
-                for (int k = 0; k < list.size(); k++) {
-                    LabelSelect.DataBean.ListBean bean = list.get(k);
-                    if (bean.isSelect) {
-                        sb.append(bean.getId());
-                        sb.append(kk);
-                    }
+            for (int k = 0; k < list.size(); k++) {
+                LabelSelect.DataBean.ListBean bean = list.get(k);
+                if (bean.isSelect) {
+                    sb.append(bean.getId());
+                    sb.append(kk);
                 }
-
-            }
-            if (!TextUtils.isEmpty(sb.toString())) {
-                sb.deleteCharAt(sb.length() - 1);
-                vp.setCurrentItem(0);
-                View view = mDanceViewHolder.getView(R.id.frame);
-                view.setVisibility(View.VISIBLE);
-                FragmentManager supportFragmentManager = getSupportFragmentManager();
-                FragmentTransaction transaction = supportFragmentManager.beginTransaction();
-                NewLabelFragment labelFragment = new NewLabelFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString("path", sb.toString());
-                bundle.putString("id","10904");
-                labelFragment.setArguments(bundle);
-                transaction.replace(R.id.frame, labelFragment);
-                transaction.commit();
-
-
             }
 
-        } else {
-            int tab = exPandableAdapter.getTabPosition();
-            if (tab < 0) {
-                // TODO: 2017/9/24
-                Toast.makeText(mContext, "未选中标签！", Toast.LENGTH_SHORT).show();
-                return;
-            } else {
-
-                int position = tabLayout.getSelectedTabPosition();
-                if (position == tab) {
-                    return;
-                } else {
-                    vp.setCurrentItem(tab + 1);
-                }
-
-            }
         }
+        if (!TextUtils.isEmpty(sb.toString())) {
+            sb.deleteCharAt(sb.length() - 1);
+            vp.setCurrentItem(0);
+            View view = mDanceViewHolder.getView(R.id.frame);
+            view.setVisibility(View.VISIBLE);
+            FragmentManager supportFragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = supportFragmentManager.beginTransaction();
+            NewLabelFragment labelFragment = new NewLabelFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("path", sb.toString());
+            bundle.putString("id", "10905");
+            labelFragment.setArguments(bundle);
+            transaction.replace(R.id.frame, labelFragment);
+            transaction.commit();
+        }
+
+
     }
 }

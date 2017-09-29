@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -23,15 +22,6 @@ public class PopGridViewAdapter extends BaseAdapter {
     List<LabelSelect.DataBean.ListBean> list;
     Context mContext;
     public boolean isTab;
-    private SelectTab st;
-
-    public interface SelectTab{
-        void isTabSelect(boolean flag);
-    }
-
-    public void setSelcetTab(SelectTab st){
-        this.st = st;
-    }
 
     public PopGridViewAdapter(Context context, List<LabelSelect.DataBean.ListBean> list) {
         this.list = list;
@@ -65,28 +55,11 @@ public class PopGridViewAdapter extends BaseAdapter {
         name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isTab) {
-                    if (bean.isSelect) {
-                        bean.isSelect =!bean.isSelect;
-                        ExPandableAdapter.isChildCanSelect = true;
-                        if (st!=null) {
-                            st.isTabSelect(false);
-                        }
-                        notifyDataSetChanged();
-                    } else {
-                        selectOne(i);
-                        ExPandableAdapter.isChildCanSelect = false;
-                        if (st!=null) {
-                            st.isTabSelect(true);
-                        }
-                    }
+                if(isTab){
+                    selectOne(i);
                 } else {
-                    if (ExPandableAdapter.isChildCanSelect) {
-                        bean.isSelect =!bean.isSelect;
-                        notifyDataSetChanged();
-                    } else {
-                    Toast.makeText(mContext, "此栏目只能单选", Toast.LENGTH_SHORT).show();
-                    }
+                    bean.isSelect =!bean.isSelect;
+                    notifyDataSetChanged();
                 }
             }
         });
@@ -101,7 +74,11 @@ public class PopGridViewAdapter extends BaseAdapter {
     public void selectOne(int position){
 
         for (int i = 0 ; i<list.size() ; i++) {
-            list.get(i).isSelect = i==position? true : false;
+            if(i==position){
+                list.get(i).isSelect = ! list.get(i).isSelect;
+            } else {
+                list.get(i).isSelect = false;
+            }
         }
         notifyDataSetChanged();
     }

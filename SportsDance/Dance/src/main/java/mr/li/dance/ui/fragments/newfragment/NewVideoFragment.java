@@ -53,6 +53,8 @@ public class NewVideoFragment extends BaseListFragment {
     @Override
     public void initViews() {
         super.initViews();
+
+
     }
 
     @Override

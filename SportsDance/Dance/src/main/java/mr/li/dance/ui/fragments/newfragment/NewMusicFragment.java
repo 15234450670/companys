@@ -30,6 +30,7 @@ public class NewMusicFragment extends BaseListFragment {
     int page = 1;
     private String tag = "NewMusicFragment";
 
+
     @Override
     public void itemClick(int position, Object value) {
 
@@ -71,6 +72,7 @@ public class NewMusicFragment extends BaseListFragment {
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
         Log.e("music",response);
+
         if (what == AppConfigs.home_music) {
             MusicResponse reponseResult = JsonMananger.getReponseResult(response, MusicResponse.class);
             adapter.refresh(reponseResult);

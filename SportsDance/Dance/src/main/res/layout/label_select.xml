@@ -5,20 +5,18 @@
               android:background="@color/white"
               android:orientation="vertical">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
 
-        <mr.li.dance.utils.util.CustomExpandableListView
+
+        <ExpandableListView
             android:id="@+id/celv"
             android:layout_marginTop="@dimen/spacing_86"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-        </mr.li.dance.utils.util.CustomExpandableListView>
+        </ExpandableListView>
 
-    </ScrollView>
+
 
     <View
         android:layout_width="match_parent"

@@ -2,7 +2,6 @@ package mr.li.dance.ui.fragments.newfragment;
 
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
@@ -33,7 +32,7 @@ public class NewLabelFragment extends BaseListFragment<TeachInfo> {
     NewLabeiAdapter adapter;
     String          path;
     private String id;
-
+private final String tag = getClass().getSimpleName();
     @Override
     public void initViews() {
         super.initViews();
@@ -48,13 +47,7 @@ public class NewLabelFragment extends BaseListFragment<TeachInfo> {
         }
         path = arguments.getString("path");
         id = arguments.getString("id");
-        Log.e("path :: ", path);
-        if (TextUtils.isEmpty(path)&&TextUtils.isEmpty(id)) {
-           danceViewHolder.getView(R.id.wu).setVisibility(View.VISIBLE);
-            return;
-        } else {
-            danceViewHolder.getView(R.id.wu).setVisibility(View.GONE);
-        }
+        Log.d(tag,path);
         Request<String> homeTabhMap = ParameterUtils.getSingleton().getHomeTabhMap(path, id, String.valueOf(page));
         request(AppConfigs.home_zx_screen, homeTabhMap, false);
     }
@@ -67,6 +60,7 @@ public class NewLabelFragment extends BaseListFragment<TeachInfo> {
     @Override
     public RecyclerView.Adapter getAdapter() {
         adapter = new NewLabeiAdapter(getActivity());
+        adapter.setItemClickListener(this);
         return adapter;
     }
 
@@ -92,9 +86,13 @@ public class NewLabelFragment extends BaseListFragment<TeachInfo> {
         LabelSeekInfo reponseResult = JsonMananger.getReponseResult(response, LabelSeekInfo.class);
         ArrayList<TeachInfo> arr = reponseResult.getData().getArr();
         if (MyStrUtil.isEmpty(arr)) {
+            danceViewHolder.getView(R.id.wu).setVisibility(View.VISIBLE);
             return;
+        } else {
+            danceViewHolder.getView(R.id.wu).setVisibility(View.GONE);
+            adapter.addList(isRefresh, arr);
         }
-        adapter.addList(isRefresh, arr);
+
     }
 
     @Override

@@ -1,11 +1,9 @@
 package mr.li.dance.ui.adapters.new_adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.GridView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -14,6 +12,7 @@ import java.util.List;
 
 import mr.li.dance.R;
 import mr.li.dance.models.LabelSelect;
+import mr.li.dance.utils.util.GridUtils;
 
 /**
  * 作者: SuiFeng
@@ -23,17 +22,14 @@ import mr.li.dance.models.LabelSelect;
  * 修订历史:
  */
 public class ExPandableAdapter extends BaseExpandableListAdapter {
-    public static boolean isChildCanSelect;
 
     Context mContext;
     List<LabelSelect.DataBean> mData;
-    int tab = -2;
     private final String tag = getClass().getSimpleName();
     private HashMap<Integer, PopGridViewAdapter> adapterMap;
-    List<String> is_radio ;
+    List<String> is_radio;
 
     public ExPandableAdapter(Context context, List<LabelSelect.DataBean> data) {
-        isChildCanSelect = true;
         this.mData = data;
         this.mContext = context;
         adapterMap = new HashMap<>();
@@ -42,9 +38,10 @@ public class ExPandableAdapter extends BaseExpandableListAdapter {
 
     /**
      * 那个tab被选中了
+     *
      * @return
      */
-    public int getTabPosition(){
+    public int getTabPosition() {
         PopGridViewAdapter popGridViewAdapter = adapterMap.get(0);
         return popGridViewAdapter.getSelect();
     }
@@ -92,36 +89,21 @@ public class ExPandableAdapter extends BaseExpandableListAdapter {
         check_box.setSelected(isExpanded);
         name.setText(mData.get(groupPosition).getClass_name());
         String is = mData.get(groupPosition).is_radio;
-        is_radio.add(is)  ;
+        is_radio.add(is);
         return convertView;
     }
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         convertView = View.inflate(mContext, R.layout.expand_two, null);
-        GridView gv = (GridView) convertView.findViewById(R.id.gv);
+        GridUtils gv = (GridUtils) convertView.findViewById(R.id.gv);
         PopGridViewAdapter popGridViewAdapter = new PopGridViewAdapter(mContext, mData.get(groupPosition).getList());
         for (int i = 0; i < is_radio.size(); i++) {
-            popGridViewAdapter.isTab = Integer.valueOf(is_radio.get(i))==1? true : false;
+            popGridViewAdapter.isTab = Integer.valueOf(is_radio.get(i)) == 1 ? true : false;
         }
         final PopGridViewAdapter adapter = adapterMap.get(groupPosition);
         if (adapter == null) {
             adapterMap.put(groupPosition, popGridViewAdapter);
-        }
-
-        if (groupPosition == 0) {
-            popGridViewAdapter.setSelcetTab(new PopGridViewAdapter.SelectTab() {
-                @Override
-                public void isTabSelect(boolean flag) {
-                    Log.d(tag, "flag = " + flag);
-                    if (flag) {
-                        for (int i = 1 ; i<mData.size() ; i++ ) {
-                            adapterMap.get(i).selectNone();
-                        }
-                    }
-                    notifyDataSetChanged();
-                }
-            });
         }
 
         gv.setAdapter(popGridViewAdapter);
@@ -137,8 +119,8 @@ public class ExPandableAdapter extends BaseExpandableListAdapter {
     /**
      * 重置
      */
-    public void itemReset(){
-        for (int i = 0 ; i<mData.size() ; i++ ) {
+    public void itemReset() {
+        for (int i = 0; i < mData.size(); i++) {
             adapterMap.get(i).selectNone();
         }
         notifyDataSetChanged();
