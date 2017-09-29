@@ -267,8 +267,8 @@ public class MessageActivity extends BaseActivity {
                 finish();
             }
         });
-    }
 
+    }
 
     @Override
     public void onSucceed(int what, String response) {

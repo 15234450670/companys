@@ -28,6 +28,7 @@ import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.models.BaseItemAdapterType;
 import mr.li.dance.models.TeachDetailInfo;
+import mr.li.dance.ui.activitys.MyDanceWebActivity;
 import mr.li.dance.ui.activitys.base.BaseListActivity;
 import mr.li.dance.ui.adapters.BaseItemAdapter;
 import mr.li.dance.ui.widget.VideoLayoutParams;
@@ -99,6 +100,12 @@ public class TeachDetailsActivity extends BaseListActivity {
         if (!TextUtils.isEmpty(content)) {
             class_jieshao.setVisibility(View.VISIBLE);
             mDanceViewHolder.setText(R.id.jieshao, content);
+            class_jieshao.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    MyDanceWebActivity.lunch(TeachDetailsActivity.this, MyDanceWebActivity.TEACHERCLASS, mTitle, AppConfigs.TEACHERCLASS + mId,true);
+                }
+            });
         }
         class_section = (LinearLayout) mDanceViewHolder.getView(R.id.class_section);  //课程章节
         querydetail_tv = mDanceViewHolder.getTextView(R.id.querydetail_tv);

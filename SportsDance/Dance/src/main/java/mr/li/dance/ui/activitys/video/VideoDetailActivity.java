@@ -28,14 +28,12 @@ import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.StringResponse;
 import mr.li.dance.https.response.VideoDetailResponse;
-import mr.li.dance.models.BaseItemAdapterType;
 import mr.li.dance.models.Video;
 import mr.li.dance.ui.activitys.LoginActivity;
 import mr.li.dance.ui.activitys.base.BaseListActivity;
 import mr.li.dance.ui.activitys.match.MatchDetailActivity;
 import mr.li.dance.ui.activitys.match.MatchVideoActivity;
 import mr.li.dance.ui.activitys.newActivitys.SpecialActivity;
-import mr.li.dance.ui.adapters.BaseItemAdapter;
 import mr.li.dance.ui.adapters.new_adapter.VideoAlbumAdapter;
 import mr.li.dance.ui.widget.VideoLayoutParams;
 import mr.li.dance.utils.AppConfigs;
@@ -55,8 +53,8 @@ import mr.li.dance.utils.UserInfoManager;
  */
 
 public class VideoDetailActivity extends BaseListActivity {
-    BaseItemAdapter mAdapter;
-
+   // BaseItemAdapter mAdapter;
+    VideoAlbumAdapter videoAlbumAdapter;
     private IMediaDataVideoView videoView;
     private String              mItemId;
     boolean isCollected;
@@ -96,9 +94,11 @@ public class VideoDetailActivity extends BaseListActivity {
 
     @Override
     public RecyclerView.Adapter getAdapter() {
-        mAdapter = new BaseItemAdapter(mContext, BaseItemAdapterType.CommentType);
-        mAdapter.setItemClickListener(this);
-        return mAdapter;
+     //   mAdapter = new BaseItemAdapter(mContext, BaseItemAdapterType.CommentType);
+       // mAdapter.setItemClickListener(this);
+        videoAlbumAdapter = new VideoAlbumAdapter(mContext);
+        videoAlbumAdapter.setItemClickListener(this);
+        return videoAlbumAdapter;
     }
 
     @Override
@@ -259,8 +259,9 @@ public class VideoDetailActivity extends BaseListActivity {
             }
             final String compete_id = detailResponse.getData().getDetail().getCompete_id();
             isCollected = (0 != detailResponse.getData().getCollection_id());
+
             if (!MyStrUtil.isEmpty(detailResponse.getData().getOtherList())) {
-                mAdapter.refresh(detailResponse.getData().getOtherList());
+                videoAlbumAdapter.addList(detailResponse.getData().getOtherList());
 
                 View view = mDanceViewHolder.getView(R.id.ll);
                 view.setVisibility(View.VISIBLE);
@@ -275,7 +276,6 @@ public class VideoDetailActivity extends BaseListActivity {
             }
             if (!MyStrUtil.isEmpty(detailResponse.getData().getAlbum())) {
                 View view = mDanceViewHolder.getView(R.id.zhuanji);
-                VideoAlbumAdapter videoAlbumAdapter = new VideoAlbumAdapter(mContext);
                 videoAlbumAdapter.addList(detailResponse.getData().getAlbum());
                 videoAlbumAdapter.setItemClickListener(this);
                 rv.setAdapter(videoAlbumAdapter);
@@ -332,7 +332,6 @@ public class VideoDetailActivity extends BaseListActivity {
             request(AppConfigs.user_collection, request, false);
         }
     }
-
     @Override
     public void onBackPressed() {
        /* if (isFromCollectpage && !isCollected) {

@@ -91,6 +91,7 @@
             android:layout_marginLeft="@dimen/spacing_20"
             android:layout_marginRight="@dimen/spacing_48"
             android:layout_marginTop="@dimen/spacing_20"
+            android:maxLength="4"
             android:text=""
             android:textColor="#666666"
             />

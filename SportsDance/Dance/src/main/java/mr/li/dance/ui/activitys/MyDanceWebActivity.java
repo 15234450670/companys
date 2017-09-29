@@ -40,7 +40,7 @@ public class MyDanceWebActivity extends BaseActivity {
     public static final int MATCHOTHER3 = 33;//赛事的 赛程表
     public static final int KAOJI = 4;//考级
     public static final int OTHERTYPE = 5;//外联
-
+    public static final int TEACHERCLASS = 6;//课程介绍
 
     private String titleName;
     private int mWebType;
@@ -127,6 +127,10 @@ public class MyDanceWebActivity extends BaseActivity {
                 break;
             case MATCHOTHER3:
                 mCountId = AppConfigs.CLICK_EVENT_27;
+                mWebView.loadUrl(url);
+                break;
+            case TEACHERCLASS:
+                mCountId = AppConfigs.CLICK_EVENT_31;
                 mWebView.loadUrl(url);
                 break;
             default:

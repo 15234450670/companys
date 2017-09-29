@@ -30,13 +30,14 @@ public class ExPandableAdapter extends BaseExpandableListAdapter {
     int tab = -2;
     private final String tag = getClass().getSimpleName();
     private HashMap<Integer, PopGridViewAdapter> adapterMap;
-    List<String> is_host = new ArrayList<>();
+    List<String> is_radio ;
 
     public ExPandableAdapter(Context context, List<LabelSelect.DataBean> data) {
         isChildCanSelect = true;
         this.mData = data;
         this.mContext = context;
         adapterMap = new HashMap<>();
+        is_radio = new ArrayList<>();
     }
 
     /**
@@ -90,8 +91,8 @@ public class ExPandableAdapter extends BaseExpandableListAdapter {
         TextView check_box = (TextView) convertView.findViewById(R.id.check_box);
         check_box.setSelected(isExpanded);
         name.setText(mData.get(groupPosition).getClass_name());
-        String is_hot = mData.get(groupPosition).is_hot;
-        is_host.add(is_hot);
+        String is = mData.get(groupPosition).is_radio;
+        is_radio.add(is)  ;
         return convertView;
     }
 
@@ -100,8 +101,8 @@ public class ExPandableAdapter extends BaseExpandableListAdapter {
         convertView = View.inflate(mContext, R.layout.expand_two, null);
         GridView gv = (GridView) convertView.findViewById(R.id.gv);
         PopGridViewAdapter popGridViewAdapter = new PopGridViewAdapter(mContext, mData.get(groupPosition).getList());
-        for (int i = 0; i < is_host.size(); i++) {
-            popGridViewAdapter.isTab = Integer.valueOf(is_host.get(i))==1? true : false;
+        for (int i = 0; i < is_radio.size(); i++) {
+            popGridViewAdapter.isTab = Integer.valueOf(is_radio.get(i))==1? true : false;
         }
         final PopGridViewAdapter adapter = adapterMap.get(groupPosition);
         if (adapter == null) {

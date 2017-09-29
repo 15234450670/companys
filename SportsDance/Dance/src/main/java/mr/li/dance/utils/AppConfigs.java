@@ -21,7 +21,8 @@ public class AppConfigs {
 
 
     public final static String KAOJIEXPLAIN = DomainUrl + "/kaoji.explain";
-
+    //课程介绍
+    public final static String TEACHERCLASS  = SHAREURL + "/share.Course?id=";
     //资讯分享
     public final static String ZixunShareUrl  = DomainUrl + "/home.zxdetailf?id=%s";
     public final static String ZixunShareUrl2  = SHAREURL + "/share.zxfx?id=";
@@ -154,5 +155,6 @@ public class AppConfigs {
     public final static String CLICK_EVENT_28 = "28";//加号
     public final static String CLICK_EVENT_29 = "29";//成绩查询
     public final static String CLICK_EVENT_30 = "30";//音乐
+    public final static String CLICK_EVENT_31 = "31";//音乐
 
 }

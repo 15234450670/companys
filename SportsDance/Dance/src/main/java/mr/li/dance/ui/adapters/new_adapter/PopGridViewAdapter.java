@@ -85,7 +85,7 @@ public class PopGridViewAdapter extends BaseAdapter {
                         bean.isSelect =!bean.isSelect;
                         notifyDataSetChanged();
                     } else {
-                    Toast.makeText(mContext, "栏目1与其它栏目不可同时选中！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "此栏目只能单选", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

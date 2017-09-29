@@ -6,6 +6,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 
 import com.yolanda.nohttp.rest.Request;
 
@@ -130,7 +131,9 @@ public class SearchFragment extends BaseListFragment<BaseHomeItem> {
         super.onSucceed(what, response);
         Log.e("re",response);
         if (response == null) {
-            return;
+            danceViewHolder.getView(R.id.wu).setVisibility(View.GONE);
+        } else {
+            danceViewHolder.getView(R.id.wu).setVisibility(View.VISIBLE);
         }
         List list = null;
         if (TextUtils.equals("video_live", mType)) {
