@@ -34,7 +34,7 @@ import mr.li.dance.utils.UserInfoManager;
  * 作者: SuiFeng
  * 版本:
  * 创建日期:2017/9/27 0027
- * 描述:
+ * 描述:收藏音乐
  * 修订历史:
  */
 public class NewCollectMusicFragment extends NewSwipeListFragments<BaseHomeItem> {

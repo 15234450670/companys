@@ -13,7 +13,7 @@ import mr.li.dance.utils.MyStrUtil;
  * 作者: SuiFeng
  * 版本:
  * 创建日期:2017/9/20 0020
- * 描述:
+ * 描述:教学适配
  * 修订历史:
  */
 public class NewTeachAdapter extends BaseRecyclerAdapter<TeachInfo> {

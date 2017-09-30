@@ -1,6 +1,7 @@
 package mr.li.dance.ui.fragments.newfragment;
 
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -13,9 +14,9 @@ import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.models.LabelSeekInfo;
 import mr.li.dance.models.TeachInfo;
-import mr.li.dance.ui.activitys.MyDanceWebActivity;
+import mr.li.dance.ui.activitys.album.AlbumActivity;
 import mr.li.dance.ui.fragments.BaseListFragment;
-import mr.li.dance.ui.fragments.adapter.NewLabeiAdapter;
+import mr.li.dance.ui.fragments.adapter.NewLabeiPicAdapter;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.MyStrUtil;
@@ -23,19 +24,23 @@ import mr.li.dance.utils.MyStrUtil;
 /**
  * 作者: SuiFeng
  * 版本:
- * 创建日期:2017/9/28 0028
- * 描述:
+ * 创建日期:2017/9/30 0030
+ * 描述:       图片标签选中页
  * 修订历史:
  */
-public class NewLabelFragment extends BaseListFragment<TeachInfo> {
+public class NewLabelPicFragment extends BaseListFragment<TeachInfo> {
     int page = 1;
-    NewLabeiAdapter adapter;
-    String          path;
-    private String id;
-private final String tag = getClass().getSimpleName();
+    NewLabeiPicAdapter adapter;
+    String             path;
+
+    private final String tag = getClass().getSimpleName();
+
     @Override
     public void initViews() {
         super.initViews();
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
+        mRecyclerview.setLayoutManager(layoutManager);
+        mRecyclerview.setAdapter(adapter);
     }
 
 
@@ -46,9 +51,8 @@ private final String tag = getClass().getSimpleName();
             return;
         }
         path = arguments.getString("path");
-        id = arguments.getString("id");
-        Log.d(tag,path);
-        Request<String> homeTabhMap = ParameterUtils.getSingleton().getHomeTabhMap(path, id, String.valueOf(page));
+        Log.d(tag, path);
+        Request<String> homeTabhMap = ParameterUtils.getSingleton().getHomeTabhMap(path, "10905", String.valueOf(page));
         request(AppConfigs.home_zx_screen, homeTabhMap, false);
     }
 
@@ -59,7 +63,7 @@ private final String tag = getClass().getSimpleName();
 
     @Override
     public RecyclerView.Adapter getAdapter() {
-        adapter = new NewLabeiAdapter(getActivity());
+        adapter = new NewLabeiPicAdapter(getActivity());
         adapter.setItemClickListener(this);
         return adapter;
     }
@@ -68,7 +72,7 @@ private final String tag = getClass().getSimpleName();
     public void loadMore() {
         super.loadMore();
         page++;
-        Request<String> homeTabhMap = ParameterUtils.getSingleton().getHomeTabhMap(path, "10902", String.valueOf(page));
+        Request<String> homeTabhMap = ParameterUtils.getSingleton().getHomeTabhMap(path, "10905", String.valueOf(page));
         request(AppConfigs.home_zx_screen, homeTabhMap, false);
     }
 
@@ -76,13 +80,14 @@ private final String tag = getClass().getSimpleName();
     public void refresh() {
         super.refresh();
         page = 1;
-        Request<String> homeTabhMap = ParameterUtils.getSingleton().getHomeTabhMap(path, "10902", String.valueOf(page));
+        Request<String> homeTabhMap = ParameterUtils.getSingleton().getHomeTabhMap(path, "10905", String.valueOf(page));
         request(AppConfigs.home_zx_screen, homeTabhMap, false);
     }
 
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
+        Log.e("re::",response);
         LabelSeekInfo reponseResult = JsonMananger.getReponseResult(response, LabelSeekInfo.class);
         ArrayList<TeachInfo> arr = reponseResult.getData().getArr();
         if (MyStrUtil.isEmpty(arr)) {
@@ -96,7 +101,7 @@ private final String tag = getClass().getSimpleName();
     }
 
     @Override
-    public void itemClick(int position, TeachInfo ziXunInfo) {
-        MyDanceWebActivity.lunch(getActivity(), MyDanceWebActivity.ZIXUNTYPE, ziXunInfo.getTitle(), AppConfigs.ZixunShareUrl2 + ziXunInfo.getId(), true);
+    public void itemClick(int position, TeachInfo value) {
+        AlbumActivity.lunch(this, value.getId(), value.getTitle());
     }
 }

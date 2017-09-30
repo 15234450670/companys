@@ -34,7 +34,7 @@ import mr.li.dance.ui.activitys.SearchActivity;
 import mr.li.dance.ui.activitys.base.BaseActivity;
 import mr.li.dance.ui.activitys.music.PlayMusicActivity;
 import mr.li.dance.ui.adapters.new_adapter.ExPandableAdapter;
-import mr.li.dance.ui.fragments.newfragment.NewLabelFragment;
+import mr.li.dance.ui.fragments.newfragment.NewLabelTeachFragment;
 import mr.li.dance.ui.fragments.newfragment.NewTeachFragment;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
@@ -272,10 +272,12 @@ public class TeachActivity extends BaseActivity {
             view.setVisibility(View.VISIBLE);
             FragmentManager supportFragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = supportFragmentManager.beginTransaction();
-            NewLabelFragment labelFragment = new NewLabelFragment();
+            /**
+             * 教学标签选中
+             */
+            NewLabelTeachFragment labelFragment = new NewLabelTeachFragment();
             Bundle bundle = new Bundle();
             bundle.putString("path", sb.toString());
-            bundle.putString("id", "10903");
             labelFragment.setArguments(bundle);
             transaction.replace(R.id.frame, labelFragment);
             transaction.commit();

@@ -10,24 +10,24 @@ import mr.li.dance.ui.adapters.RecyclerViewHolder;
 /**
  * 作者: SuiFeng
  * 版本:
- * 创建日期:2017/9/28 0028
- * 描述:   资讯选中标签适配器
+ * 创建日期:2017/9/30 0030
+ * 描述:    音乐标签选中适配器
  * 修订历史:
  */
-public class NewLabeiAdapter extends BaseRecyclerAdapter<TeachInfo> {
-    public NewLabeiAdapter(Context ctx) {
+public class NewLabelMusicAdapter extends BaseRecyclerAdapter<TeachInfo> {
+    public NewLabelMusicAdapter(Context ctx) {
         super(ctx);
     }
 
 
     @Override
     public int getItemLayoutId(int viewType) {
-        return R.layout.item_consultation_type1;
+        return R.layout.music_rec_type_2;
     }
 
     @Override
     public void bindData(RecyclerViewHolder holder, int position, TeachInfo item) {
-        holder.setText(R.id.name, item.getTitle());
-        holder.setImageByUrlOrFilePath(R.id.imageView, item.getPicture(), R.drawable.default_banner);
+        holder.setText(R.id.title, item.getTitle());
+        holder.setImageByUrlOrFilePath(R.id.item_pic, item.img_fm, R.drawable.default_banner);
     }
 }

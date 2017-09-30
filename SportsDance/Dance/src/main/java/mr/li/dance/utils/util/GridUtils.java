@@ -5,9 +5,7 @@ import android.util.AttributeSet;
 import android.widget.GridView;
 
 /**
- * 类的用途：
- * Created by ：杨珺达
- * date：2017/9/29
+ * 自定义GridView
  */
 
 public class GridUtils extends GridView {

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-               >
+          >
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -20,7 +20,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="ssss"
+                    android:text=""
                     android:textSize="@dimen/textsize28"
                     android:textColor="#333333"
                     android:id="@+id/title"/>

@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 /**
- *  VP禁止左右滑动
+ *  自定义ViewPager禁止左右滑动
  */
 
 public class IndexViewPager extends ViewPager {

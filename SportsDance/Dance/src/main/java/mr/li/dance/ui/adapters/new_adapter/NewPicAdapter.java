@@ -12,7 +12,7 @@ import mr.li.dance.ui.adapters.RecyclerViewHolder;
  * 作者: SuiFeng
  * 版本:
  * 创建日期:2017/9/14 0014
- * 描述:
+ * 描述:图片适配器
  * 修订历史:
  */
 public class NewPicAdapter extends BaseRecyclerAdapter<PhotoClassBean> {

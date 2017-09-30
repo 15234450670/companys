@@ -20,7 +20,7 @@ import mr.li.dance.utils.AppConfigs;
  * 作者: SuiFeng
  * 版本:
  * 创建日期:2017/9/5 0005
- * 描述:
+ * 描述:   我的收藏  选择页
  * 修订历史:
  */
 public class TabCollect extends BaseActivity implements View.OnClickListener {

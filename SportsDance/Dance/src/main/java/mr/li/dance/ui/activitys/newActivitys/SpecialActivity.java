@@ -22,7 +22,7 @@ import mr.li.dance.utils.JsonMananger;
  * 作者: SuiFeng
  * 版本:
  * 创建日期:2017/9/28 0028
- * 描述:
+ * 描述:    视频相关专辑页
  * 修订历史:
  */
 public class SpecialActivity extends BaseListActivity{

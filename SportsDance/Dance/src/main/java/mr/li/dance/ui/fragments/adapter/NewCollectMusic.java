@@ -24,7 +24,7 @@ import mr.li.dance.utils.MyStrUtil;
  * 作者: SuiFeng
  * 版本:
  * 创建日期:2017/9/27 0027
- * 描述:
+ * 描述:    收藏音乐适配器
  * 修订历史:
  */
 public class NewCollectMusic extends SwipeMenuAdapter<RecyclerViewHolder> {

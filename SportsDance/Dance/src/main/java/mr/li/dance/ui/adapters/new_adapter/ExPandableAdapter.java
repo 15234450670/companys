@@ -18,7 +18,7 @@ import mr.li.dance.utils.util.GridUtils;
  * 作者: SuiFeng
  * 版本:
  * 创建日期:2017/9/19
- * 描述:      二级列表
+ * 描述:     所有的 二级列表
  * 修订历史:
  */
 public class ExPandableAdapter extends BaseExpandableListAdapter {

@@ -15,8 +15,8 @@ import mr.li.dance.models.LabelSelect;
  * 作者: SuiFeng
  * 版本:
  * 创建日期:2017/9/22 0022
- * 描述:
- * 修订历史:
+ * 描述: 二级列表二级条目
+ * * 修订历史:
  */
 public class PopGridViewAdapter extends BaseAdapter {
     List<LabelSelect.DataBean.ListBean> list;

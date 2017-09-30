@@ -34,7 +34,7 @@ import mr.li.dance.ui.activitys.SearchActivity;
 import mr.li.dance.ui.activitys.base.BaseActivity;
 import mr.li.dance.ui.activitys.music.PlayMusicActivity;
 import mr.li.dance.ui.adapters.new_adapter.ExPandableAdapter;
-import mr.li.dance.ui.fragments.newfragment.NewLabelFragment;
+import mr.li.dance.ui.fragments.newfragment.NewLabelZiXunFragment;
 import mr.li.dance.ui.fragments.newfragment.NewZiXunFragment;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
@@ -175,7 +175,6 @@ public class MessageActivity extends BaseActivity {
                     sb.append(kk);
                 }
             }
-
         }
         if (!TextUtils.isEmpty(sb.toString())) {
             sb.deleteCharAt(sb.length() - 1);
@@ -184,10 +183,12 @@ public class MessageActivity extends BaseActivity {
             view.setVisibility(View.VISIBLE);
             FragmentManager supportFragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = supportFragmentManager.beginTransaction();
-            NewLabelFragment labelFragment = new NewLabelFragment();
+            /**
+             * 选中的标签
+             */
+            NewLabelZiXunFragment labelFragment = new NewLabelZiXunFragment();
             Bundle bundle = new Bundle();
             bundle.putString("path", sb.toString());
-            bundle.putString("id", "10902");
             labelFragment.setArguments(bundle);
             transaction.replace(R.id.frame, labelFragment);
             transaction.commit();
@@ -222,6 +223,7 @@ public class MessageActivity extends BaseActivity {
 
 
         finishs();
+        //点击弹出pop
         label_pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -249,6 +251,9 @@ public class MessageActivity extends BaseActivity {
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
         Log.e("xxx", response);
+        /**
+         * 数据
+         */
         if (what == AppConfigs.home_zx) {
             HomeZxResponse reponseResult = JsonMananger.getReponseResult(response, HomeZxResponse.class);
             ArrayList<LabelInfo> mLabel = reponseResult.getData().getLabel();
@@ -274,6 +279,9 @@ public class MessageActivity extends BaseActivity {
             }
 
         }
+        /**
+         * pop数据
+         */
         if (what == AppConfigs.home_tab_zx) {
             LabelSelect reponseResult = JsonMananger.getReponseResult(response, LabelSelect.class);
             data = reponseResult.getData();

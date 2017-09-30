@@ -112,7 +112,6 @@ public class NewPicFragment extends BaseListFragment<PhotoClassBean> {
 
     @Override
     public void itemClick(int position, PhotoClassBean value) {
-        Log.e("value.getId() : ", value.getId());
         AlbumActivity.lunch(this, value.getId(), value.getTitle());
     }
 }

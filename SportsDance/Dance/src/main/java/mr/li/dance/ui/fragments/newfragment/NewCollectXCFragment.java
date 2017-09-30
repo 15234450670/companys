@@ -34,7 +34,7 @@ import mr.li.dance.utils.UserInfoManager;
  * 作者: SuiFeng
  * 版本:
  * 创建日期:2017/9/6 0006
- * 描述:
+ * 描述:     收藏相册
  * 修订历史:
  */
 public class NewCollectXCFragment extends NewSwipeListFragments<BaseHomeItem> {

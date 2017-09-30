@@ -48,7 +48,7 @@ import mr.li.dance.utils.UserInfoManager;
  * 作者: SuiFeng
  * 版本:
  * 创建日期:2017/9/1 0001
- * 描述:
+ * 描述:    首页适配器
  * 修订历史:
  */
 public class New_HomeRecyclerAdapter extends DanceBaseAdapter {

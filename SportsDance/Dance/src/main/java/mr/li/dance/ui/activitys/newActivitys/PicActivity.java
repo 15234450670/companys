@@ -34,7 +34,7 @@ import mr.li.dance.ui.activitys.SearchActivity;
 import mr.li.dance.ui.activitys.base.BaseActivity;
 import mr.li.dance.ui.activitys.music.PlayMusicActivity;
 import mr.li.dance.ui.adapters.new_adapter.ExPandableAdapter;
-import mr.li.dance.ui.fragments.newfragment.NewLabelFragment;
+import mr.li.dance.ui.fragments.newfragment.NewLabelPicFragment;
 import mr.li.dance.ui.fragments.newfragment.NewPicFragment;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
@@ -266,15 +266,14 @@ public class PicActivity extends BaseActivity {
             view.setVisibility(View.VISIBLE);
             FragmentManager supportFragmentManager = getSupportFragmentManager();
             FragmentTransaction transaction = supportFragmentManager.beginTransaction();
-            NewLabelFragment labelFragment = new NewLabelFragment();
+            //图片标签选中
+            NewLabelPicFragment labelFragment = new NewLabelPicFragment();
             Bundle bundle = new Bundle();
             bundle.putString("path", sb.toString());
-            bundle.putString("id", "10905");
             labelFragment.setArguments(bundle);
             transaction.replace(R.id.frame, labelFragment);
             transaction.commit();
         }
-
 
     }
 }

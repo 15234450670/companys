@@ -22,6 +22,8 @@ public class TeachInfo extends BaseHomeItem implements Serializable{
     private String img;
     private String described;
     private String picture;//筛选  图片
+    public String name;
+    public String img_fm;
 
     @Override
     public String getPicture() {
