@@ -3,6 +3,7 @@ package mr.li.dance.ui.fragments.adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +26,6 @@ import mr.li.dance.utils.MyStrUtil;
  * 版本:
  * 创建日期:2017/9/6 0006
  * 描述:   收藏_视频适配器
-
  * 修订历史:
  */
 public class NewCollectSP extends SwipeMenuAdapter<RecyclerViewHolder> {
@@ -61,7 +61,7 @@ public class NewCollectSP extends SwipeMenuAdapter<RecyclerViewHolder> {
             }
         });
 
-            bindVideo(holder, position);
+        bindVideo(holder, position);
 
     }
 
@@ -85,7 +85,7 @@ public class NewCollectSP extends SwipeMenuAdapter<RecyclerViewHolder> {
         }
     }
 
-    public void addList(boolean isRefresh,  ArrayList<Video> data) {
+    public void addList(boolean isRefresh, ArrayList<Video> data) {
         if (isRefresh) {
             mDatas.clear();
             currentPage = 1;
@@ -102,30 +102,35 @@ public class NewCollectSP extends SwipeMenuAdapter<RecyclerViewHolder> {
     }
 
     public void removePosition(BaseHomeItem homeItem) {
-        Dialogs( homeItem);
+        Dialogs(homeItem);
     }
 
     private void Dialogs(final BaseHomeItem homeItem) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-      builder.setTitle("提示");
-        builder.setMessage("是否取消收藏?");
 
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                mDatas.remove(homeItem);
-                Toast.makeText(mContext, "已取消收藏", Toast.LENGTH_SHORT).show();
-                notifyDataSetChanged();
-                dialogInterface.dismiss();
-            }
-        }) ;
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        })   ;
-        builder.create().show();
+        AlertDialog dialog = new AlertDialog.Builder(mContext)
+                .setTitle("提示")
+                .setMessage("是否取消收藏?")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        mDatas.remove(homeItem);
+                        Toast.makeText(mContext, "已取消收藏", Toast.LENGTH_SHORT).show();
+                        notifyDataSetChanged();
+                        dialogInterface.dismiss();
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .create();
+        dialog.show();
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
+        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+        dialog.setCanceledOnTouchOutside(false);
+
     }
 
 

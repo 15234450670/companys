@@ -3,6 +3,7 @@ package mr.li.dance.ui.activitys.mine;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.yolanda.nohttp.rest.Request;
 
@@ -16,6 +17,7 @@ import mr.li.dance.ui.activitys.base.BaseListActivity;
 import mr.li.dance.ui.adapters.MyMessageAdapter;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
+import mr.li.dance.utils.MyStrUtil;
 import mr.li.dance.utils.UserInfoManager;
 
 /**
@@ -28,7 +30,7 @@ import mr.li.dance.utils.UserInfoManager;
 
 public class MyMessageActivity extends BaseListActivity<MyMessageInfo> {
     MyMessageAdapter mMyMessageAdapter;
-
+    private View view;
 
     @Override
     public void initDatas() {
@@ -42,6 +44,7 @@ public class MyMessageActivity extends BaseListActivity<MyMessageInfo> {
     public void initViews() {
         super.initViews();
         setTitle("我的消息");
+        view = findViewById(R.id.wu);
     }
 
     @Override
@@ -91,6 +94,11 @@ public class MyMessageActivity extends BaseListActivity<MyMessageInfo> {
         super.onSucceed(what, response);
         StringResponse stringResponse = JsonMananger.getReponseResult(response, StringResponse.class);
         List<MyMessageInfo> list = JsonMananger.jsonToList(stringResponse.getData(), MyMessageInfo.class);
-        mMyMessageAdapter.addList(isRefresh, list);
+        if (!MyStrUtil.isEmpty(list)) {
+            mMyMessageAdapter.addList(isRefresh, list);
+        } else {
+            view.setVisibility(View.VISIBLE);
+        }
+
     }
 }

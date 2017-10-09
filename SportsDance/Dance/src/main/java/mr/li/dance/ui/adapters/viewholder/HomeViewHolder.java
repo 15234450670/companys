@@ -3,6 +3,7 @@ package mr.li.dance.ui.adapters.viewholder;
 import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 
 import mr.li.dance.R;
@@ -22,8 +23,8 @@ import mr.li.dance.utils.ShareUtils;
 
 public class HomeViewHolder extends RecyclerView.ViewHolder {
     DanceViewHolder danceViewHolder;
-    Context mContext;
-    ShareUtils shareUtils;
+    Context         mContext;
+    ShareUtils      shareUtils;
 
     public HomeViewHolder(Context context, View view) {
         super(view);
@@ -60,14 +61,31 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
             case 10107:
                 bindOther(homeListItemInfo);
                 break;
-            case 10108:
+            case 10108:   //音乐
                 bindMusic(homeListItemInfo);
+            case 10109:  //教学
+                bindTeach(homeListItemInfo);
+                break;
             default:
                 break;
         }
 
     }
 
+    private void bindTeach(BaseHomeItem teach) {
+        danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, teach.getPicture_app(), R.drawable.default_video);
+        danceViewHolder.setText(R.id.name, teach.getTitle());
+        if (teach.getType() == 10109) {
+            danceViewHolder.setText(R.id.from_tv, "教学");
+
+        }
+        if (!TextUtils.isEmpty(teach.getSource())) {
+            danceViewHolder.getView(R.id.source).setVisibility(View.VISIBLE);
+            danceViewHolder.setText(R.id.from_bd, teach.getSource());
+        } else {
+            danceViewHolder.getView(R.id.source).setVisibility(View.GONE);
+        }
+    }
 
 
     private void toShre(BaseHomeItem homeListItemInfo) {
@@ -110,7 +128,7 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
                 mShareContent = homeListItemInfo.getTitle();
                 countID = AppConfigs.CLICK_EVENT_23;
                 break;
-            case 10108:
+            case 10108:  //音乐
                 shareUrl = String.format(AppConfigs.SHAREMUSIC, homeListItemInfo.getId());
                 mShareContent = homeListItemInfo.getTitle();
                 break;
@@ -124,6 +142,16 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
         danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, music.getPicture_app(), R.drawable.default_video);
         danceViewHolder.setText(R.id.name, music.getTitle());
         danceViewHolder.setText(R.id.time_tv, music.getCreate_time());
+        if (music.getType() == 10108) {
+            danceViewHolder.setText(R.id.from_tv, "音乐");
+
+        }
+        if (!TextUtils.isEmpty(music.getSource())) {
+            danceViewHolder.getView(R.id.source).setVisibility(View.VISIBLE);
+            danceViewHolder.setText(R.id.from_bd, music.getSource());
+        } else {
+            danceViewHolder.getView(R.id.source).setVisibility(View.GONE);
+        }
     }
 
     private void bindZhibo(BaseHomeItem zhibo) {
@@ -132,8 +160,18 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
         danceViewHolder.setText(R.id.time_tv, zhibo.getStart_time());
         danceViewHolder.setViewVisibility(R.id.typeicon_tv, View.VISIBLE);
         danceViewHolder.setImageResDrawable(R.id.typeicon_tv, R.drawable.home_icon_008, R.drawable.home_icon_008);
-
         danceViewHolder.setViewVisibility(R.id.picnum_tv, View.INVISIBLE);
+        if (zhibo.getType() == 10101) {
+            danceViewHolder.setText(R.id.from_tv, "直播");
+
+        }
+        if (!TextUtils.isEmpty(zhibo.getSource())) {
+            danceViewHolder.getView(R.id.source).setVisibility(View.VISIBLE);
+            danceViewHolder.setText(R.id.from_bd, zhibo.getSource());
+        } else {
+            danceViewHolder.getView(R.id.source).setVisibility(View.GONE);
+        }
+
     }
 
     private void bindVideo(BaseHomeItem video) {
@@ -144,13 +182,23 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
         danceViewHolder.setImageResDrawable(R.id.typeicon_tv, R.drawable.home_icon_005, R.drawable.home_icon_005);
 
         danceViewHolder.setViewVisibility(R.id.picnum_tv, View.INVISIBLE);
+        if (video.getType() == 10102) {
+            danceViewHolder.setText(R.id.from_tv, "点播");
+
+        }
+        if (!TextUtils.isEmpty(video.getSource())) {
+            danceViewHolder.getView(R.id.source).setVisibility(View.VISIBLE);
+            danceViewHolder.setText(R.id.from_bd, video.getSource());
+        } else {
+            danceViewHolder.getView(R.id.source).setVisibility(View.GONE);
+        }
     }
 
     private void bindInfomation(BaseHomeItem baseHomeItem) {
         danceViewHolder.setText(R.id.name, baseHomeItem.getTitle());
         danceViewHolder.setText(R.id.time_tv, baseHomeItem.getStart_time());
         danceViewHolder.setViewVisibility(R.id.typeicon_tv, View.INVISIBLE);
-        danceViewHolder.setText(R.id.from_tv,  baseHomeItem.getWriter());
+        danceViewHolder.setText(R.id.from_tv, baseHomeItem.getWriter());
         danceViewHolder.setViewVisibility(R.id.picnum_tv, View.INVISIBLE);
         danceViewHolder.setViewVisibility(R.id.top_layout, View.GONE);
        /* if ("1".equals(baseHomeItem.getImg_num())) {
@@ -162,6 +210,16 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
             danceViewHolder.setRoundImageByUrlOrFilePath(R.id.pic2_iv, baseHomeItem.getPicture_2(), R.drawable.default_video);
             danceViewHolder.setRoundImageByUrlOrFilePath(R.id.pic3_iv, baseHomeItem.getPicture_3(), R.drawable.default_video);
         }*/
+        if (baseHomeItem.getType() == 10103) {
+            danceViewHolder.setText(R.id.from_tv, "赛事资讯");
+
+        }
+        if (!TextUtils.isEmpty(baseHomeItem.getSource())) {
+            danceViewHolder.getView(R.id.source).setVisibility(View.VISIBLE);
+            danceViewHolder.setText(R.id.from_bd, baseHomeItem.getSource());
+        } else {
+            danceViewHolder.getView(R.id.source).setVisibility(View.GONE);
+        }
     }
 
     private void bindImageInfo(BaseHomeItem albumInfo) {
@@ -173,6 +231,16 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
         danceViewHolder.setText(R.id.type_tv, "精彩瞬间");
         danceViewHolder.setText(R.id.num_tv, "共" + albumInfo.getPhotos());
         danceViewHolder.setViewVisibility(R.id.picnum_tv, View.VISIBLE);
+        if (albumInfo.getType() == 10104) {
+            danceViewHolder.setText(R.id.from_tv, "赛事相册");
+
+        }
+        if (!TextUtils.isEmpty(albumInfo.getSource())) {
+            danceViewHolder.getView(R.id.source).setVisibility(View.VISIBLE);
+            danceViewHolder.setText(R.id.from_bd, albumInfo.getSource());
+        } else {
+            danceViewHolder.getView(R.id.source).setVisibility(View.GONE);
+        }
     }
 
 
@@ -192,6 +260,16 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
                 danceViewHolder.setText(R.id.level_tv, "地方赛事");
                 break;
         }
+        if (baseHomeItem.getType() == 10105) {
+            danceViewHolder.setText(R.id.from_tv, "赛事");
+
+        }
+        if (!TextUtils.isEmpty(baseHomeItem.getSource())) {
+            danceViewHolder.getView(R.id.source).setVisibility(View.VISIBLE);
+            danceViewHolder.setText(R.id.from_bd, baseHomeItem.getSource());
+        } else {
+            danceViewHolder.getView(R.id.source).setVisibility(View.GONE);
+        }
 
     }
 
@@ -201,12 +279,22 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
         danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, albumInfo.getPicture_app(), R.drawable.default_video);
         danceViewHolder.setText(R.id.name, albumInfo.getTitle());
         danceViewHolder.setText(R.id.time_tv, albumInfo.getStart_time());
+        if (albumInfo.getType() == 10106 || albumInfo.getType() == 10107) {
+            danceViewHolder.setText(R.id.from_tv, "外联");
+        }
+        if (!TextUtils.isEmpty(albumInfo.getSource())) {
+            danceViewHolder.getView(R.id.source).setVisibility(View.VISIBLE);
+            danceViewHolder.setText(R.id.from_bd, albumInfo.getSource());
+        } else {
+            danceViewHolder.getView(R.id.source).setVisibility(View.GONE);
+        }
         String shareUrl = albumInfo.getUrl();
         if (MyStrUtil.isEmpty(shareUrl)) {
             danceViewHolder.setViewVisibility(R.id.share_layout, View.INVISIBLE);
         } else {
             danceViewHolder.setViewVisibility(R.id.share_layout, View.VISIBLE);
         }
+
 
     }
 }

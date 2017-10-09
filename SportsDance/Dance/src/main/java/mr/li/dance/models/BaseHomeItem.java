@@ -30,6 +30,15 @@ public class BaseHomeItem {
     private String appsecret;
     private String appid;
     private String show_type;
+    private String source;//来源
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
 
     public String getShow_type() {
         return show_type;

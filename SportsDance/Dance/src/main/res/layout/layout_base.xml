@@ -3,7 +3,6 @@
     android:id="@+id/base_layout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -89,7 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/home_spilitline_width"
             android:layout_alignParentBottom="true"
-            android:background="@color/home_line_color" />
+            android:background="@color/edit_hint_color" />
     </RelativeLayout>
 
 

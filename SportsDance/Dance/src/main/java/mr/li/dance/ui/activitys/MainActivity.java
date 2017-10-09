@@ -102,6 +102,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         MobclickAgent.onEvent(this, AppConfigs.CLICK_EVENT_17);
 
     }
+
     public int getContentViewId() {
         return R.layout.activity_main;
     }
@@ -119,7 +120,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         mHomePageFragment = new NewHomeFragment();
         mMathcFragment = new MatchFragment();
         mExaminationFragment = new ExaminationFragment();
-        //  mMineFragment = new MineFragment();
+         // mMineFragment = new MineFragment();
         mMineFragment = new NewMineFragment();
         conn = new ServiceConn();
         conn.getMyBinder(new ServiceConn.binderCreateFinish() {

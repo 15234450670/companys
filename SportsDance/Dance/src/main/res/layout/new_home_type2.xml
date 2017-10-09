@@ -18,7 +18,7 @@
             >
             <ImageView
                 android:id="@+id/mine_icon"
-                style="@style/bottom_icon_style"
+                style="@style/bottom_icon_styles"
                 android:layout_centerHorizontal="true"
                 android:focusable="false"
                 android:src="@drawable/mine_icon" />
@@ -44,7 +44,7 @@
             >
             <ImageView
                 android:id="@+id/teach_icon"
-                style="@style/bottom_icon_style"
+                style="@style/bottom_icon_styles"
                 android:layout_centerHorizontal="true"
                 android:focusable="false"
 
@@ -74,7 +74,7 @@
 
             <ImageView
                 android:id="@+id/video_icon"
-                style="@style/bottom_icon_style"
+                style="@style/bottom_icon_styles"
                 android:layout_centerHorizontal="true"
                 android:focusable="false"
 
@@ -103,7 +103,7 @@
             >
             <ImageView
                 android:id="@+id/music_icon"
-                style="@style/bottom_icon_style"
+                style="@style/bottom_icon_styles"
                 android:layout_centerHorizontal="true"
                 android:focusable="false"
 
@@ -131,7 +131,7 @@
             >
             <ImageView
                 android:id="@+id/pic_icon"
-                style="@style/bottom_icon_style"
+                style="@style/bottom_icon_styles"
                 android:layout_centerHorizontal="true"
                 android:focusable="false"
 

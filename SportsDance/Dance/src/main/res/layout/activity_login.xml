@@ -115,7 +115,7 @@
             android:layout_marginLeft="@dimen/spacing_30"
             android:layout_marginRight="@dimen/spacing_30"
             android:layout_marginTop="@dimen/spacing_60"
-            android:background="@drawable/mine_shape_bg"
+            android:background="@drawable/resgest_back"
             android:clickable="true"
             android:gravity="center"
             android:onClick="toRegist"

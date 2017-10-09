@@ -20,7 +20,9 @@
         <TextView
             android:id="@+id/mines_money"
             style="@style/mine_text_money"
-            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/spacing_80"
             android:text="0.0"
             />
 

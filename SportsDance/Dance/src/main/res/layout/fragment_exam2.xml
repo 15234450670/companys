@@ -98,7 +98,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:textColor="#333333"
+                android:textColor="#4674c8"
                 android:id="@+id/bulu_btn"
                 style="@style/text_white_style_36"
                 android:layout_width="match_parent"

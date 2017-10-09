@@ -110,6 +110,7 @@
             <TextView
                 style="@style/text_yellow_style_36"
                 android:layout_marginLeft="@dimen/spacing_15"
+                android:textColor="#4674c8"
                 android:text="考级说明" />
         </LinearLayout>
     </LinearLayout>

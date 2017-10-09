@@ -39,6 +39,7 @@ import mr.li.dance.ui.fragments.newfragment.NewZiXunFragment;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.MyStrUtil;
+import mr.li.dance.utils.TimeOut;
 import mr.li.dance.utils.util.IndexViewPager;
 
 import static mr.li.dance.ui.activitys.MainActivity.myBinder;
@@ -51,17 +52,17 @@ import static mr.li.dance.ui.activitys.MainActivity.myBinder;
  * 修订历史:
  */
 public class MessageActivity extends BaseActivity {
-    private TabLayout tabLayout;
-    private ImageView label_pic;
+    private TabLayout      tabLayout;
+    private ImageView      label_pic;
     private IndexViewPager vp;
     List<Fragment> list = new ArrayList<>();
-    int page = 1;
+    int            page = 1;
     private String tag = this.getClass().getSimpleName();
-    private PopupWindow popupWindow;
-    private ExpandableListView celv;
-    private ExPandableAdapter exPandableAdapter;
+    private PopupWindow                popupWindow;
+    private ExpandableListView         celv;
+    private ExPandableAdapter          exPandableAdapter;
     private List<LabelSelect.DataBean> data;
-    private NewZiXunFragment newZiXunFragment;
+    private NewZiXunFragment           newZiXunFragment;
 
     @Override
     public int getContentViewId() {
@@ -75,19 +76,25 @@ public class MessageActivity extends BaseActivity {
         mDanceViewHolder.setClickListener(R.id.search_layout, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MobclickAgent.onEvent(MessageActivity.this, AppConfigs.CLICK_EVENT_6);
-                SearchActivity.lunch(MessageActivity.this);
+                if (TimeOut.isFastClick()) {
+                    MobclickAgent.onEvent(MessageActivity.this, AppConfigs.CLICK_EVENT_6);
+                    SearchActivity.lunch(MessageActivity.this);
+                }
+
             }
         });
         //音乐按钮
         mDanceViewHolder.setClickListener(R.id.btn_music, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (myBinder != null && myBinder.binderIsPlaying()) {
-                    PlayMusicActivity.lunch(MessageActivity.this);
-                } else {
-                    Toast.makeText(MessageActivity.this, "请去播放音乐", Toast.LENGTH_SHORT).show();
+                if (TimeOut.isFastClick()) {
+                    if (myBinder != null && myBinder.binderIsPlaying()) {
+                        PlayMusicActivity.lunch(MessageActivity.this);
+                    } else {
+                        Toast.makeText(MessageActivity.this, "请去播放音乐", Toast.LENGTH_SHORT).show();
+                    }
                 }
+
             }
         });
         Request<String> request = ParameterUtils.getSingleton().getHomeZxMap(String.valueOf(page));
@@ -227,8 +234,11 @@ public class MessageActivity extends BaseActivity {
         label_pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Request<String> request = ParameterUtils.getSingleton().getLabelSelect("10902");
-                request(AppConfigs.home_tab_zx, request, false);
+                if (TimeOut.isFastClick()) {
+                    Request<String> request = ParameterUtils.getSingleton().getLabelSelect("10902");
+                    request(AppConfigs.home_tab_zx, request, false);
+                }
+
 
             }
         });

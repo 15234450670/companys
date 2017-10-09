@@ -32,6 +32,7 @@ import mr.li.dance.ui.activitys.newActivitys.MessageActivity;
 import mr.li.dance.ui.activitys.newActivitys.MusicActivity;
 import mr.li.dance.ui.activitys.newActivitys.PicActivity;
 import mr.li.dance.ui.activitys.newActivitys.TeachActivity;
+import mr.li.dance.ui.activitys.newActivitys.TeachDetailsActivity;
 import mr.li.dance.ui.activitys.newActivitys.VideoActivity;
 import mr.li.dance.ui.activitys.video.VideoDetailActivity;
 import mr.li.dance.ui.activitys.video.ZhiBoDetailActivity;
@@ -200,7 +201,9 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
                     case 10108:
                         SongActivity.lunch(mContext, bannerInfo.getNumber(), bannerInfo.getTitle());
                         break;
-
+                    case 10109:
+                        TeachDetailsActivity.lunch(mContext, bannerInfo.getNumber(),bannerInfo.getImg(),bannerInfo.getTitle());
+                        break;
                 }
             }
         });
@@ -264,6 +267,9 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
                         break;
                     case 10108:
                         SongActivity.lunch(mContext, mDatas.get(position).getId(), mDatas.get(position).getTitle());
+                        break;
+                    case 10109:
+                        TeachDetailsActivity.lunch(mContext, mDatas.get(position).getId(),mDatas.get(position).getPhotos(),mDatas.get(position).getTitle());
                         break;
 
                     default:

@@ -2,23 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-              android:orientation="vertical"
+     android:orientation="vertical"
  >
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_marginTop="@dimen/spacing_10"
-        android:layout_marginBottom="@dimen/spacing_10"
-        android:layout_marginLeft="@dimen/spacing_10"
+        android:layout_margin="@dimen/spacing_26"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/bottom_icon_style"
             android:src="@drawable/mine_icon_006" />
 
         <TextView
-            android:layout_marginLeft="@dimen/spacing_15"
+            android:layout_marginLeft="@dimen/spacing_20"
             android:id="@+id/name"
             style="@style/text_style"
             android:layout_gravity="center"

@@ -26,6 +26,7 @@ public class AppConfigs {
     //资讯分享
     public final static String ZixunShareUrl  = DomainUrl + "/home.zxdetailf?id=%s";
     public final static String ZixunShareUrl2  = SHAREURL + "/share.zxfx?id=";
+    public final static String USER  = SHAREURL + "/share.Ament";
     //赛事规则，赛事设项 赛程表 分享
     public final static String SAISHIShareUrl = SHAREURL + "/share.gc?id=%s&w_page=%s";
     //相册分享
@@ -156,5 +157,6 @@ public class AppConfigs {
     public final static String CLICK_EVENT_29 = "29";//成绩查询
     public final static String CLICK_EVENT_30 = "30";//音乐
     public final static String CLICK_EVENT_31 = "31";//音乐
+    public final static String CLICK_EVENT_32 = "32";//音乐
 
 }

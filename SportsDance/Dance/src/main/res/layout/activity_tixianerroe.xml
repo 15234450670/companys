@@ -12,10 +12,18 @@
         android:layout_marginRight="@dimen/spacing_20"
         android:src="@drawable/tixian_back"
         android:id="@+id/imageView3"/>
+    <ImageView
+        android:id="@+id/i"
+        android:layout_width="@dimen/spacing_100"
+        android:layout_height="@dimen/spacing_100"
+       android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/spacing_396"
+        android:src="@drawable/exam_icon_002"/>
     <TextView
+      android:layout_below="@+id/i"
         style="@style/tixian_zhong"
         android:text="您的账户余额小于10元暂不支持提现"
-        android:layout_centerInParent="true"
+          android:layout_marginTop="@dimen/spacing_20"
         />
 
 </RelativeLayout>

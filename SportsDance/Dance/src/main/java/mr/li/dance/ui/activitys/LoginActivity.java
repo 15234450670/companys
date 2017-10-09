@@ -70,7 +70,6 @@ public class LoginActivity extends LoginAuthActivity implements View.OnClickList
 
     @Override
     public void initViews() {
-
         setTitle("中国体育舞蹈");
         String loginName = UserInfoManager.getSingleton().getLoginName(this);
         mDanceViewHolder.setText(R.id.login_name, loginName);

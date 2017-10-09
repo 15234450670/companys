@@ -1,5 +1,6 @@
 package mr.li.dance.ui.activitys.newActivitys;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -179,11 +181,19 @@ public class TeachDetailsActivity extends BaseListActivity {
         intent.putExtra("content", content);
         fragment.startActivity(intent);
     }
+    public static void lunch(Context context, String id, String pic, String title) {
+        Intent intent = new Intent(context, TeachDetailsActivity.class);
+        intent.putExtra("id", id);
+        intent.putExtra("pic", pic);
+        intent.putExtra("title", title);
+        context.startActivity(intent);
+    }
 
 
     @Override
     public void onSucceed(int what, String responseStr) {
         super.onSucceed(what, responseStr);
+        Log.e("xxxxxx",responseStr);
         if (what == AppConfigs.home_tab_teach_details) {
             final TeachDetailInfo reponseResult = JsonMananger.getReponseResult(responseStr, TeachDetailInfo.class);
             if (reponseResult == null) {

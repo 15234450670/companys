@@ -39,6 +39,7 @@ import mr.li.dance.ui.fragments.newfragment.NewMusicFragment;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.MyStrUtil;
+import mr.li.dance.utils.TimeOut;
 import mr.li.dance.utils.util.IndexViewPager;
 
 import static mr.li.dance.ui.activitys.MainActivity.myBinder;
@@ -73,8 +74,11 @@ public class MusicActivity extends BaseActivity {
         mDanceViewHolder.setClickListener(R.id.search_layout, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MobclickAgent.onEvent(MusicActivity.this, AppConfigs.CLICK_EVENT_6);
-                SearchActivity.lunch(MusicActivity.this);
+                if (TimeOut.isFastClick()) {
+                    MobclickAgent.onEvent(MusicActivity.this, AppConfigs.CLICK_EVENT_6);
+                    SearchActivity.lunch(MusicActivity.this);
+                }
+
             }
         });
         //音乐按钮
@@ -222,8 +226,11 @@ public class MusicActivity extends BaseActivity {
         label_pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Request<String> request = ParameterUtils.getSingleton().getLabelSelect("10904");
-                request(AppConfigs.home_tab_zx, request, false);
+                if (TimeOut.isFastClick()) {
+                    Request<String> request = ParameterUtils.getSingleton().getLabelSelect("10904");
+                    request(AppConfigs.home_tab_zx, request, false);
+                }
+
 
             }
         });

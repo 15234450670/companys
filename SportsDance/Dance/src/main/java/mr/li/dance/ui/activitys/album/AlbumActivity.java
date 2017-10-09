@@ -8,7 +8,6 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.yolanda.nohttp.rest.Request;
 
@@ -23,6 +22,7 @@ import mr.li.dance.models.AlbumInfo;
 import mr.li.dance.ui.activitys.LoginActivity;
 import mr.li.dance.ui.activitys.MyDanceWebActivity;
 import mr.li.dance.ui.activitys.base.BaseListActivity;
+import mr.li.dance.ui.activitys.match.MatchDetailActivity;
 import mr.li.dance.ui.activitys.mine.MyCollectActivity;
 import mr.li.dance.ui.adapters.AlbumAdapter;
 import mr.li.dance.ui.widget.SpacesItemDecoration;
@@ -142,7 +142,7 @@ public class AlbumActivity extends BaseListActivity<AlbumInfo> {
     public void refresh() {
         super.refresh();
         String userId = UserInfoManager.getSingleton().getUserId(this);
-        Request<String> request = ParameterUtils.getSingleton().getAlbumDetail2Map(userId,mId, page);
+        Request<String> request = ParameterUtils.getSingleton().getAlbumDetail2Map(userId, mId, page);
         Log.e("mId::", mId);
         request(AppConfigs.home_album, request, false);
     }
@@ -159,7 +159,7 @@ public class AlbumActivity extends BaseListActivity<AlbumInfo> {
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
         if (what == AppConfigs.home_album) {
-            AlbumDetailInfo reponseResult = JsonMananger.getReponseResult(response, AlbumDetailInfo.class);
+            final AlbumDetailInfo reponseResult = JsonMananger.getReponseResult(response, AlbumDetailInfo.class);
             mAlbumUserId = reponseResult.getData().getClassInfo().getId();
             if (!TextUtils.isEmpty(reponseResult.getData().getClassInfo().getCompete_name())) {
                 String compete_name = reponseResult.getData().getClassInfo().getCompete_name();
@@ -168,7 +168,7 @@ public class AlbumActivity extends BaseListActivity<AlbumInfo> {
                 mDanceViewHolder.getView(R.id.class_jieshaos).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(mContext, "H5", Toast.LENGTH_SHORT).show();
+                        MatchDetailActivity.lunch(mContext, reponseResult.getData().getClassInfo().getCompete_id());
                     }
                 });
             } else {
@@ -215,7 +215,7 @@ public class AlbumActivity extends BaseListActivity<AlbumInfo> {
         } else {
             String userId = UserInfoManager.getSingleton().getUserId(this);
             int operation = isCollected ? 1 : 2;
-            Log.e("xxx",operation+"");
+            Log.e("xxx", operation + "");
             Request<String> request = ParameterUtils.getSingleton().getCollectionMap(userId, mId, 10601, operation);
             request(AppConfigs.user_collection, request, false);
         }
@@ -242,7 +242,7 @@ public class AlbumActivity extends BaseListActivity<AlbumInfo> {
         if (mShareUtils == null) {
             mShareUtils = new ShareUtils(this);
         }
-        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_20,shareUrl, mShareContent);
+        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_20, shareUrl, mShareContent);
     }
 
 

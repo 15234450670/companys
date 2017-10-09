@@ -6,7 +6,7 @@
     android:orientation="vertical">
     <LinearLayout
         android:id="@+id/wu"
-                      android:visibility="gone"
+         android:visibility="gone"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:gravity="center"

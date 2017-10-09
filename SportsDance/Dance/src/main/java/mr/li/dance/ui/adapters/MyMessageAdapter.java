@@ -23,6 +23,7 @@ public class MyMessageAdapter extends BaseRecyclerAdapter<MyMessageInfo> {
 
     @Override
     public void bindData(RecyclerViewHolder holder, int position, MyMessageInfo item) {
+        holder.setImageResDrawable(R.id.icon,R.drawable.my_message);
         holder.setText(R.id.title_tv,item.getTitle());
         holder.setText(R.id.content_tv,item.getCreate_time());
     }

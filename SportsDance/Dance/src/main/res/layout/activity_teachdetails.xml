@@ -10,6 +10,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <RelativeLayout
             android:id="@+id/videoContainer"
             android:layout_width="match_parent"
@@ -19,8 +20,9 @@
         <ImageView
             android:id="@+id/pic"
             android:layout_width="match_parent"
-            android:scaleType="fitXY"
-            android:layout_height="@dimen/spacing_396"/>
+            android:layout_height="@dimen/spacing_396"
+            android:scaleType="fitXY"/>
+
         <LinearLayout
             android:id="@+id/stop_layout"
             android:layout_width="match_parent"
@@ -57,7 +59,7 @@
 
 
     <LinearLayout
-        android:visibility="gone"
+
         android:id="@+id/class_jieshao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -91,7 +93,7 @@
             android:layout_marginLeft="@dimen/spacing_20"
             android:layout_marginRight="@dimen/spacing_48"
             android:layout_marginTop="@dimen/spacing_20"
-            android:maxLength="4"
+            android:maxLines="4"
             android:text=""
             android:textColor="#666666"
             />
@@ -104,10 +106,10 @@
 
     <LinearLayout
         android:id="@+id/class_section"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <TextView
             style="@style/text_black_style_30"

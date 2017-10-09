@@ -18,8 +18,8 @@ public class MineAdapter extends BaseRecyclerAdapter {
             R.string.mine_album,R.string.mine_money, R.string.mine_suggest, R.string.mine_about, R.string.mine_setting};
 */
 
-    int[] iconResIds = new int[]{R.drawable.mine_icon_005,  R.drawable.mine_account, R.drawable.mine_icon_003, R.drawable.mine_icon_008,
-          R.drawable.mine_icon_001, R.drawable.mine_icon_002, R.drawable.mine_icon_007};
+    int[] iconResIds = new int[]{R.drawable.icon_message,  R.drawable.icon_money, R.drawable.icon_collect, R.drawable.icon_card,
+          R.drawable.icon_my, R.drawable.icon_suggest, R.drawable.icon_setting};
 
     int[] nameStr = new int[]{R.string.mine_information,R.string.mine_money,R.string.mine_collect,R.string.mine_certificate,
     R.string.mine_about,R.string.mine_suggest,R.string.mine_setting};

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/refresh"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+                                                      android:id="@+id/refresh"
+                                                      android:layout_width="match_parent"
+                                                      android:layout_height="match_parent"
 
-    android:paddingLeft="@dimen/spacing_20"
-    android:paddingRight="@dimen/spacing_20">
+                                                      android:paddingLeft="@dimen/spacing_20"
+                                                      android:paddingRight="@dimen/spacing_20">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,10 +26,10 @@
             android:paddingRight="@dimen/spacing_20">
 
             <TextView
-                android:textColor="#333333"
                 style="@style/text_white_style_28"
                 android:layout_centerVertical="true"
-                android:text="清理缓存" />
+                android:text="清理缓存"
+                android:textColor="#333333"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -44,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/spacing_40"
 
-                    android:src="@drawable/mine_icon_0010" />
+                    android:src="@drawable/mine_icon_0010"/>
             </LinearLayout>
         </RelativeLayout>
 
@@ -60,10 +60,10 @@
             android:paddingRight="@dimen/spacing_20">
 
             <TextView
-                android:textColor="#333333"
                 style="@style/text_white_style_28"
                 android:layout_centerVertical="true"
-                android:text="修改密码" />
+                android:text="修改密码"
+                android:textColor="#333333"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -78,7 +78,43 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/spacing_40"
 
-                    android:src="@drawable/mine_icon_0010" />
+                    android:src="@drawable/mine_icon_0010"/>
+
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/user_agreement"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_100"
+            android:layout_marginBottom="@dimen/spacing_20"
+            android:background="@drawable/mine_shape_bg"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:paddingLeft="@dimen/spacing_20"
+            android:paddingRight="@dimen/spacing_20">
+
+            <TextView
+                style="@style/text_white_style_28"
+                android:layout_centerVertical="true"
+                android:text="用户协议"
+                android:textColor="#333333"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/mine_shape_bg"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_40"
+
+                    android:src="@drawable/mine_icon_0010"/>
 
 
             </LinearLayout>
@@ -87,29 +123,29 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"/>
 
         <TextView
-            android:textColor="#333333"
             android:id="@+id/vername_tv"
             style="@style/text_white_style_24"
             android:layout_width="match_parent"
             android:gravity="center"
-            android:text="V1.0.0" />
+            android:text="V1.0.0"
+            android:textColor="#333333"/>
 
         <TextView
-            android:textColor="#333333"
             style="@style/text_white_style_36"
             android:layout_width="match_parent"
             android:layout_height="@dimen/spacing_80"
             android:layout_marginBottom="@dimen/spacing_50"
             android:layout_marginLeft="@dimen/spacing_50"
             android:layout_marginRight="@dimen/spacing_50"
-            android:clickable="true"
-            android:onClick="toQuit"
             android:layout_marginTop="@dimen/spacing_30"
             android:background="@drawable/mine_shape_bg"
+            android:clickable="true"
             android:gravity="center"
-            android:text="退出" />
+            android:onClick="toQuit"
+            android:text="退出"
+            android:textColor="#333333"/>
     </LinearLayout>
 </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>

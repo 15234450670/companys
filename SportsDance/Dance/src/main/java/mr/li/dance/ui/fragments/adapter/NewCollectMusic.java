@@ -3,6 +3,7 @@ package mr.li.dance.ui.fragments.adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -103,25 +104,31 @@ public class NewCollectMusic extends SwipeMenuAdapter<RecyclerViewHolder> {
     }
 
     private void Dialogs(final BaseHomeItem homeItem) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-        builder.setTitle("提示");
-        builder.setMessage("是否取消收藏?");
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(mContext, "已取消收藏", Toast.LENGTH_SHORT).show();
-                mDatas.remove(homeItem);
-                notifyDataSetChanged();
-                dialogInterface.dismiss();
-            }
-        });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-        builder.create().show();
+        AlertDialog dialog = new AlertDialog.Builder(mContext)
+                .setTitle("提示")
+                .setMessage("是否取消收藏?")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(mContext, "已取消收藏", Toast.LENGTH_SHORT).show();
+                        mDatas.remove(homeItem);
+                        notifyDataSetChanged();
+                        dialogInterface.dismiss();
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .create();
+        dialog.show();
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
+        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+        dialog.setCanceledOnTouchOutside(false);
+
+
     }
 
     public void removeByID(String deleteId) {
