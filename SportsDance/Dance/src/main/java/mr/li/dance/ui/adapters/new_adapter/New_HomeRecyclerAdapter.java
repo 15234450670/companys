@@ -3,6 +3,7 @@ package mr.li.dance.ui.adapters.new_adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,7 +69,6 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
         mContext = context;
         mDatas = new ArrayList<BaseHomeItem>();
         mLunBoDatas = new ArrayList<>();
-
     }
 
     @Override
@@ -202,7 +202,7 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
                         SongActivity.lunch(mContext, bannerInfo.getNumber(), bannerInfo.getTitle());
                         break;
                     case 10109:
-                        TeachDetailsActivity.lunch(mContext, bannerInfo.getNumber(),bannerInfo.getImg(),bannerInfo.getTitle());
+                        TeachDetailsActivity.lunch(mContext, bannerInfo.getNumber(), bannerInfo.getImg(), bannerInfo.getTitle());
                         break;
                 }
             }
@@ -234,7 +234,12 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
                         break;
                     case 10103://赛事资讯
                         String saiShiurl = String.format(AppConfigs.ZixunShareUrl, String.valueOf(mDatas.get(position).getId()));
-                        MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, mDatas.get(position).getCompete_name(), saiShiurl, true);
+                        if (!TextUtils.isEmpty(mDatas.get(position).getCompete_name())) {
+                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, mDatas.get(position).getCompete_name(), saiShiurl, true);
+                        } else {
+                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, mDatas.get(position).getTitle(), saiShiurl, true);
+                        }
+
                         break;
                     case 10104://赛事相册
                         AlbumActivity.lunch(mContext, mDatas.get(position).getId(), mDatas.get(position).getCompete_name());
@@ -246,7 +251,9 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
                         MatchDetailActivity.lunch(mContext, mDatas.get(position).getCompete_id());
                         break;
                     case 10106://外联
+
                         String url = mDatas.get(position).getUrl();
+                        Log.e("url>>>>>>", url);
                         String wailianId = mDatas.get(position).getId();
                         if (!MyStrUtil.isEmpty(url)) {
                             MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, mDatas.get(position).getTitle(), url, wailianId);
@@ -269,7 +276,7 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
                         SongActivity.lunch(mContext, mDatas.get(position).getId(), mDatas.get(position).getTitle());
                         break;
                     case 10109:
-                        TeachDetailsActivity.lunch(mContext, mDatas.get(position).getId(),mDatas.get(position).getPhotos(),mDatas.get(position).getTitle());
+                        TeachDetailsActivity.lunch(mContext, mDatas.get(position).getId(), mDatas.get(position).getPicture_app(), mDatas.get(position).getTitle());
                         break;
 
                     default:
@@ -313,7 +320,7 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
      */
     public void huodong_listView(final BaseHomeItem base) {
         String appId = base.getAppid();
-       // String appId = "JK48ada5a480e37d411";
+        // String appId = "JK48ada5a480e37d411";
         Log.e("appId:::", appId);
         //String appsecret = "32dae2ac34079322325d28cfa0825w3aa1";
         String appsecret = base.getAppsecret();
@@ -362,8 +369,8 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
         } else {
             BaseHomeItem homeItem = mDatas.get(position - mExtraCount);
             if (homeItem.getShow_type().equals("1")) {
-                  return TYPE_SMALL_PIC;
-                } else {
+                return TYPE_SMALL_PIC;
+            } else {
                 return TYPE_BIG_PIC;
             }
 

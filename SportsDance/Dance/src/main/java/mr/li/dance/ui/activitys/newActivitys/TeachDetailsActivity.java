@@ -42,7 +42,7 @@ import mr.li.dance.utils.MyStrUtil;
  * 作者: SuiFeng
  * 版本:
  * 创建日期:2017/9/20 0020
- * 描述:
+ * 描述:       教学详情
  * 修订历史:
  */
 public class TeachDetailsActivity extends BaseListActivity {
@@ -105,7 +105,7 @@ public class TeachDetailsActivity extends BaseListActivity {
             class_jieshao.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    MyDanceWebActivity.lunch(TeachDetailsActivity.this, MyDanceWebActivity.TEACHERCLASS, mTitle, AppConfigs.TEACHERCLASS + mId,true);
+                    MyDanceWebActivity.lunch(TeachDetailsActivity.this, MyDanceWebActivity.TEACHERCLASS, mTitle, AppConfigs.TEACHERCLASS + mId, true);
                 }
             });
         }
@@ -156,10 +156,16 @@ public class TeachDetailsActivity extends BaseListActivity {
         super.onConfigurationChanged(newConfig);
         if (newConfig.orientation == ActivityInfo.SCREEN_ORIENTATION_USER) {
             setHeadVisibility(View.GONE);
-              mDanceViewHolder.getImageView(R.id.pic).setVisibility(View.GONE);
+            mDanceViewHolder.getImageView(R.id.pic).setVisibility(View.GONE);
         } else {
             setHeadVisibility(View.GONE);
             mDanceViewHolder.getImageView(R.id.pic).setVisibility(View.GONE);
+            /*if (videoView.isPlaying()) {
+                mDanceViewHolder.getImageView(R.id.pic).setVisibility(View.GONE);
+            } else {
+                mDanceViewHolder.getImageView(R.id.pic).setVisibility(View.VISIBLE);
+            }*/
+
         }
         if (videoView != null) {
             videoView.onConfigurationChanged(newConfig);
@@ -181,6 +187,7 @@ public class TeachDetailsActivity extends BaseListActivity {
         intent.putExtra("content", content);
         fragment.startActivity(intent);
     }
+
     public static void lunch(Context context, String id, String pic, String title) {
         Intent intent = new Intent(context, TeachDetailsActivity.class);
         intent.putExtra("id", id);
@@ -193,7 +200,7 @@ public class TeachDetailsActivity extends BaseListActivity {
     @Override
     public void onSucceed(int what, String responseStr) {
         super.onSucceed(what, responseStr);
-        Log.e("xxxxxx",responseStr);
+        Log.e("xxxxxx", responseStr);
         if (what == AppConfigs.home_tab_teach_details) {
             final TeachDetailInfo reponseResult = JsonMananger.getReponseResult(responseStr, TeachDetailInfo.class);
             if (reponseResult == null) {
@@ -210,7 +217,6 @@ public class TeachDetailsActivity extends BaseListActivity {
                 querydetail_tv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
                         List<TeachDetailInfo.DataBean.OtherListBean> otherList = reponseResult.getData().getOtherList();
                         setTeachDetail(otherList.get(0).getVideo_unique());
 

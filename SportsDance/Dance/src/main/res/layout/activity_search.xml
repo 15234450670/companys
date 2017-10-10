@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -11,14 +11,21 @@
         android:clipToPadding="true"
         android:fitsSystemWindows="true"
         android:gravity="center">
+        <ImageView
+            android:id="@+id/back_icon"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:src="@drawable/back_icon"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/spacing_10"
 
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/spacing_60"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/spacing_35"
+            android:layout_marginLeft="@dimen/spacing_76"
             android:layout_toLeftOf="@+id/search_btn"
-
             android:background="@drawable/search_shape_corner"
             android:gravity="center_vertical">
 
@@ -26,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/spacing_30"
-                android:src="@drawable/icon_marchsearch" />
+                android:src="@drawable/icon_marchsearch"/>
 
             <EditText
                 android:id="@+id/search_et"
@@ -37,24 +44,24 @@
                 android:background="@null"
                 android:hint="搜索需要的内容"
                 android:textColor="#000000"
-                android:textColorHint="#b9b9b9" />
-
+                android:textColorHint="#b9b9b9"/>
         </LinearLayout>
 
         <TextView
             android:id="@+id/search_btn"
             style="@style/text_white_style_28"
-
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="@dimen/spacing_20"
-            android:layout_marginRight="@dimen/spacing_40"
+            android:layout_marginRight="@dimen/spacing_20"
             android:text="搜索"
-            android:textColor="#333333" />
+            android:textColor="#333333"/>
+
+
     </RelativeLayout>
 
-    <include layout="@layout/split_line" />
+    <include layout="@layout/split_line"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -75,39 +82,40 @@
             android:padding="2dp">
 
             <RadioButton
-               android:textColor="#333333"
                 android:id="@+id/directseeding_rb"
                 style="@style/search_titletext_style"
                 android:checked="true"
                 android:gravity="center"
-                android:text="@string/directseeding" />
+                android:text="@string/consultation"
+                android:textColor="#333333"/>
 
             <RadioButton
-                android:textColor="#333333"
                 android:id="@+id/video_rb"
                 style="@style/search_titletext_style"
                 android:gravity="center"
-                android:text="@string/vadio" />
+                android:text="@string/teach"
+                android:textColor="#333333"/>
 
             <RadioButton
-                android:textColor="#333333"
                 android:id="@+id/consultation_rb"
                 style="@style/search_titletext_style"
                 android:gravity="center"
-                android:text="@string/consultation" />
+                android:text="@string/vadio"
+                android:textColor="#333333"/>
 
             <RadioButton
-                android:textColor="#333333"
                 android:id="@+id/picture_rb"
                 style="@style/search_titletext_style"
                 android:gravity="center"
-                android:text="@string/picture" />
+                android:text="@string/music"
+                android:textColor="#333333"/>
+
             <RadioButton
-                android:textColor="#333333"
                 android:id="@+id/music_rb"
                 style="@style/search_titletext_style"
                 android:gravity="center"
-                android:text="@string/music" />
+                android:text="@string/picture"
+                android:textColor="#333333"/>
         </RadioGroup>
     </LinearLayout>
 
@@ -115,5 +123,5 @@
         android:id="@+id/content_fl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/spacing_20" />
+        android:layout_marginTop="@dimen/spacing_20"/>
 </LinearLayout>

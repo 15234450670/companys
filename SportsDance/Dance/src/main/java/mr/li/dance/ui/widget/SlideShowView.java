@@ -252,7 +252,7 @@ public class SlideShowView extends FrameLayout {
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             ImageView imageView = imageViewsList.get(position);
-
+            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
             if (!MyStrUtil.isEmpty(mLunBoDatas)) {
                 String url = "";
                 if(position < mLunBoDatas.size()){

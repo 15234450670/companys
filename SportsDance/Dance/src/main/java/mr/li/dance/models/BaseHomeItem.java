@@ -31,6 +31,33 @@ public class BaseHomeItem {
     private String appid;
     private String show_type;
     private String source;//来源
+    private String img;
+    private String described;
+    public String img_fm;
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getDescribed() {
+        return described;
+    }
+
+    public void setDescribed(String described) {
+        this.described = described;
+    }
+
+    public String getImg_fm() {
+        return img_fm;
+    }
+
+    public void setImg_fm(String img_fm) {
+        this.img_fm = img_fm;
+    }
 
     public String getSource() {
         return source;

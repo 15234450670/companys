@@ -27,7 +27,7 @@ public class NewTeachAdapter extends BaseRecyclerAdapter<TeachInfo> {
 
     @Override
     public int getItemLayoutId(int viewType) {
-        return R.layout.item_albumnotitle;
+        return R.layout.home_teach_fragment;
     }
 
     @Override

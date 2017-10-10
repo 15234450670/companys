@@ -10,7 +10,6 @@
         android:layout_height="@dimen/spacing_410"
         android:background="@drawable/default_banner"
         android:fitsSystemWindows="true"
-        android:scaleType="centerCrop"
         android:src="@drawable/bk_defalt" />
 
 </LinearLayout>

@@ -39,7 +39,7 @@ public class BottomRelativeLayout extends RelativeLayout {
         TextView textTv = (TextView) getChildAt(1);
         if (clicked) {
             iconIv.setImageResource(hoverIconResId);
-            textTv.setTextColor(getResources().getColor(R.color.bottom_text_hover_color));
+            textTv.setTextColor(getResources().getColor(R.color.bottom_navigation));
         } else {
             iconIv.setImageResource(defaultIconResId);
             textTv.setTextColor(getResources().getColor(R.color.light_black));

@@ -78,6 +78,8 @@
     <dimen name="spacing_234">117dp</dimen>
     <dimen name="spacing_260">130dp</dimen>
     <dimen name="spacing_270">136dp</dimen>
+    <dimen name="spacing_280">140dp</dimen>
+
     <dimen name="spacing_300">150dp</dimen>
     <dimen name="spacing_308">154dp</dimen>
     <dimen name="spacing_350">175dp</dimen>
@@ -85,6 +87,7 @@
     <dimen name="spacing_410">210dp</dimen>
     <dimen name="spacing_244">123dp</dimen>
     <dimen name="spacing_230">115dp</dimen>
+    <dimen name="spacing_220">110dp</dimen>
     <dimen name="spacing_170">86dp</dimen>
     <dimen name="spacing_160">80dp</dimen>
     <dimen name="spacing_180">90dp</dimen>
@@ -94,6 +97,7 @@
     <dimen name="spacing_334">167dp</dimen>
     <dimen name="spacing_355">177dp</dimen>
     <dimen name="spacing_396">198dp</dimen>
+    <dimen name="spacing_400">200dp</dimen>
     <dimen name="spacing_490">245dp</dimen>
     <dimen name="spacing_562">281dp</dimen>
     <dimen name="spacing_600">300dp</dimen>

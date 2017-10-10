@@ -6,8 +6,9 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,14 +23,15 @@ import com.lecloud.skin.videoview.live.UIActionLiveVideoView;
 import com.umeng.analytics.MobclickAgent;
 import com.yolanda.nohttp.rest.Request;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
-import mr.li.dance.https.response.ZhiboDetailResponse;
 import mr.li.dance.models.QuickZhiboInfo;
-import mr.li.dance.models.ZhiBoInfo;
+import mr.li.dance.models.ZhiBo;
 import mr.li.dance.ui.activitys.base.BaseListActivity;
 import mr.li.dance.ui.activitys.match.MatchDetailActivity;
 import mr.li.dance.ui.adapters.DirectseedSpeedAdapter;
@@ -49,14 +51,14 @@ import mr.li.dance.utils.ShareUtils;
 
 public class ZhiBoDetailActivity extends BaseListActivity {
     private TextView timeText;
-    private long beginTime;
+    private long     beginTime;
     DirectseedSpeedAdapter mAdapter;
     private IMediaDataVideoView videoView;
-    private String mItemId;
-    private String mMatchId;
+    private String              mItemId;
+    private String              mMatchId;
 
-    LinkedHashMap<String, String> rateMap = new LinkedHashMap<String, String>();
-    VideoViewListener mVideoViewListener = new VideoViewListener() {
+    LinkedHashMap<String, String> rateMap            = new LinkedHashMap<String, String>();
+    VideoViewListener             mVideoViewListener = new VideoViewListener() {
         @Override
         public void onStateResult(int event, Bundle bundle) {
             handleVideoInfoEvent(event, bundle);// 处理视频信息事件
@@ -87,7 +89,6 @@ public class ZhiBoDetailActivity extends BaseListActivity {
     @Override
     public RecyclerView.Adapter getAdapter() {
         mAdapter = new DirectseedSpeedAdapter(mContext);
-        mAdapter.setItemClickListener(this);
         return mAdapter;
     }
 
@@ -99,12 +100,6 @@ public class ZhiBoDetailActivity extends BaseListActivity {
     @Override
     public void initViews() {
         setTitle("直播");
-        mRecyclerview = (RecyclerView) findViewById(R.id.recyclerview);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        mRecyclerview.setLayoutManager(layoutManager);
-        mRecyclerview.setAdapter(getAdapter());
-
         videoView = new UIActionLiveVideoView(this);
         setActionLiveParameter(false);
         if (videoView instanceof UIActionLiveVideoView) {
@@ -129,18 +124,32 @@ public class ZhiBoDetailActivity extends BaseListActivity {
         request(AppConfigs.home_zhiboDetailL, request, true);
     }
 
-    private void setZhiboDetail(ZhiBoInfo zhiBoInfo) {
-        mMatchId = zhiBoInfo.getCompete_id();
+    private void setZhiboDetail(List<ZhiBo.DataBean.CompeteBean> zhiBoInfo) {
+        mMatchId = zhiBoInfo.get(0).getCompete_id();
         setRightImage(R.drawable.share_icon_001);
-        mShareContent = zhiBoInfo.getName();
-        mDanceViewHolder.setText(R.id.matchname_tv, zhiBoInfo.getName());
+        mShareContent = zhiBoInfo.get(0).getName();
+        if (!TextUtils.isEmpty(mShareContent)) {
+            View view = mDanceViewHolder.getView(R.id.class_jieshao);
+            view.setVisibility(View.VISIBLE);
+            mDanceViewHolder.setText(R.id.matchname_tv, zhiBoInfo.get(0).getName());
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+
+        } else {
+            mDanceViewHolder.getView(R.id.class_jieshao).setVisibility(View.GONE);
+        }
+       /*
         mDanceViewHolder.setText(R.id.brief_tv, zhiBoInfo.getBrief());
-        mDanceViewHolder.setText(R.id.compete_trailer, zhiBoInfo.getCompete_trailer());
+        mDanceViewHolder.setText(R.id.compete_trailer, zhiBoInfo.getCompete_trailer());*/
 
         shareUrl = String.format(AppConfigs.SHARELIVE, mItemId);
         int playStatus = -1;
-        if (!MyStrUtil.isEmpty(zhiBoInfo.getBegin_time()) && !MyStrUtil.isEmpty(zhiBoInfo.getEnd_time())) {
-            playStatus = TimerUtils.isPlaying(zhiBoInfo.getBegin_time(), zhiBoInfo.getEnd_time());
+        if (!MyStrUtil.isEmpty(zhiBoInfo.get(0).getBegin_time()) && !MyStrUtil.isEmpty(zhiBoInfo.get(0).getEnd_time())) {
+            playStatus = TimerUtils.isPlaying(zhiBoInfo.get(0).getBegin_time(), zhiBoInfo.get(0).getEnd_time());
         } else {
             playStatus = -1;
         }
@@ -150,8 +159,8 @@ public class ZhiBoDetailActivity extends BaseListActivity {
                 mDanceViewHolder.setViewVisibility(R.id.videoContainer, View.INVISIBLE);
                 mDanceViewHolder.setViewVisibility(R.id.playstatus_layout, View.VISIBLE);
                 mDanceViewHolder.setViewVisibility(R.id.stop_layout, View.INVISIBLE);
-                mDanceViewHolder.setText(R.id.starttime, "开始时间:" + zhiBoInfo.getBegin_time());
-                mDanceViewHolder.setText(R.id.endtime, "结束时间:" + zhiBoInfo.getEnd_time());
+                mDanceViewHolder.setText(R.id.starttime, "开始时间:" + zhiBoInfo.get(0).getBegin_time());
+                mDanceViewHolder.setText(R.id.endtime, "结束时间:" + zhiBoInfo.get(0).getEnd_time());
                 break;
             case 0:
                 mDanceViewHolder.setViewVisibility(R.id.stop_layout, View.INVISIBLE);
@@ -171,7 +180,7 @@ public class ZhiBoDetailActivity extends BaseListActivity {
         }
         Bundle mBundle = new Bundle();
         mBundle.putInt(PlayerParams.KEY_PLAY_MODE, PlayerParams.VALUE_PLAYER_ACTION_LIVE);
-        mBundle.putString(PlayerParams.KEY_PLAY_ACTIONID, zhiBoInfo.getActivity_id());
+        mBundle.putString(PlayerParams.KEY_PLAY_ACTIONID, zhiBoInfo.get(0).getActivity_id());
         mBundle.putBoolean(PlayerParams.KEY_PLAY_USEHLS, false);
         mBundle.putString(PlayerParams.KEY_CUID, "");
         mBundle.putString(PlayerParams.KEY_UTOKEN, "");
@@ -188,6 +197,8 @@ public class ZhiBoDetailActivity extends BaseListActivity {
     public void getIntentData() {
         super.getIntentData();
         mItemId = mIntentExtras.getString("itemid");
+        Log.e("itemidssss",mItemId);
+
     }
 
     @Override
@@ -295,10 +306,19 @@ public class ZhiBoDetailActivity extends BaseListActivity {
 
     @Override
     public void onSucceed(int what, String responseStr) {
-//        super.onSucceed(what, responseStr);
-        ZhiboDetailResponse detailResponse = JsonMananger.getReponseResult(responseStr, ZhiboDetailResponse.class);
-        mAdapter.addList(true, detailResponse.getData().getOtherList());
-        setZhiboDetail(detailResponse.getData().getDetail());
+        //        super.onSucceed(what, responseStr);
+        // ZhiboDetailResponse detailResponse = JsonMananger.getReponseResult(responseStr, ZhiboDetailResponse.class);
+        // mAdapter.addList(true, detailResponse.getData().getOtherList());
+        ZhiBo reponseResult = JsonMananger.getReponseResult(responseStr, ZhiBo.class);
+        ArrayList<ZhiBo.DataBean.CompeteBean> compete = reponseResult.getData().getCompete();
+        setZhiboDetail(compete);
+        ArrayList<String> menu = reponseResult.getData().getMenu();
+        Log.d("menuuu",menu.toString());
+        if (!MyStrUtil.isEmpty(menu)) {
+            mDanceViewHolder.getView(R.id.program).setVisibility(View.VISIBLE);
+            mAdapter.addList(isRefresh,menu);
+        }
+
     }
 
     public static void lunch(Context context, String id) {

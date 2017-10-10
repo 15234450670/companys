@@ -105,6 +105,15 @@ public class TeachDetailInfo extends BaseResponse {
             private String name;
             private String picture;
             private String video_unique;
+            private String video_duration;
+
+            public String getVideo_duration() {
+                return video_duration;
+            }
+
+            public void setVideo_duration(String video_duration) {
+                this.video_duration = video_duration;
+            }
 
             public String getId() {
                 return id;

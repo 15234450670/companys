@@ -10,7 +10,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/home_spilitline_width"
-        android:background="@color/home_line_color" />
+        android:background="@color/cc_dot_dark" />
 
     <!-- 底部导航 -->
 
@@ -48,7 +48,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="2dp"
                 android:text="@string/homepage"
-                android:textColor="@color/bottom_text_hover_color"
+                android:textColor="@color/bottom_navigation"
                 android:textSize="12sp" />
         </mr.li.dance.ui.widget.BottomRelativeLayout>
 

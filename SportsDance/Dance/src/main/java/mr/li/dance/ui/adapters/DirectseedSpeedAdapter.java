@@ -1,10 +1,8 @@
 package mr.li.dance.ui.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 
 import mr.li.dance.R;
-import mr.li.dance.models.QuickZhiboInfo;
 
 /**
  * 作者: Lixuewei
@@ -14,18 +12,19 @@ import mr.li.dance.models.QuickZhiboInfo;
  * 修订历史:
  */
 
-public class DirectseedSpeedAdapter extends BaseRecyclerAdapter<QuickZhiboInfo> {
+public class DirectseedSpeedAdapter extends BaseRecyclerAdapter<String> {
     public DirectseedSpeedAdapter(Context ctx) {
         super(ctx);
     }
 
     @Override
     public int getItemLayoutId(int viewType) {
-        return R.layout.item_directseedspeed;
+        return R.layout.zhibo_item;
     }
 
     @Override
-    public void bindData(RecyclerViewHolder holder, int position, QuickZhiboInfo item) {
-        holder.setImageByUrlOrFilePath(R.id.picture_tv, item.getPicture(), R.drawable.default_video);
+    public void bindData(RecyclerViewHolder holder, int position, String item) {
+        holder.setText(R.id.num, position + "1" + ". ");
+        holder.setText(R.id.name, item);
     }
 }

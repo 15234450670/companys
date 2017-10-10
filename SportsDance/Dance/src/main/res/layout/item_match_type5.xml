@@ -78,7 +78,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/spitline_width"
-        android:background="#3b2788" />
+        android:layout_height="@dimen/home_spilitline_width"
+        android:background="#e1e1e1" />
 </LinearLayout>
 

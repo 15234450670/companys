@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/home_bg_color"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+
+              android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#000000"
-            android:minHeight="@dimen/spacing_396" />
+            android:minHeight="@dimen/spacing_396"/>
 
         <LinearLayout
             android:id="@+id/playstatus_layout"
@@ -29,11 +29,11 @@
 
             <TextView
                 android:id="@+id/starttime"
-                style="@style/text_white_style_36" />
+                style="@style/text_white_style_36"/>
 
             <TextView
                 android:id="@+id/endtime"
-                style="@style/text_white_style_36" />
+                style="@style/text_white_style_36"/>
         </LinearLayout>
 
         <LinearLayout
@@ -49,7 +49,7 @@
 
             <TextView
                 style="@style/text_white_style_36"
-                android:text="直播已结束" />
+                android:text="直播已结束"/>
 
             <TextView
                 android:id="@+id/compete_trailer"
@@ -59,7 +59,7 @@
                 android:layout_marginTop="@dimen/spacing_15"
                 android:gravity="center"
                 android:maxLines="2"
-                android:text="" />
+                android:text=""/>
 
             <TextView
                 android:id="@+id/querydetail_tv"
@@ -70,60 +70,133 @@
                 android:paddingLeft="@dimen/spacing_15"
                 android:paddingRight="@dimen/spacing_15"
                 android:paddingTop="@dimen/spacing_10"
-                android:text="查看赛事详清" />
+                android:text="查看赛事详清"/>
 
         </LinearLayout>
     </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:scrollbars="none"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
+        <!--  <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_alignParentStart="true"
+              android:layout_alignParentTop="true"
+              android:orientation="vertical">
+
+              <android.support.v7.widget.RecyclerView
+                  android:id="@+id/recyclerview"
+                  android:layout_width="match_parent"
+                  android:layout_height="100dp"
+                  android:background="@color/yeelow_color" />
+
+              <TextView
+                  android:id="@+id/matchname_tv"
+                  style="@style/text_yellow_style_32"
+                  android:layout_width="match_parent"
+                  android:layout_below="@id/recyclerview"
+                  android:layout_margin="10dp"
+                  android:layout_marginLeft="@dimen/spacing_50"
+                  android:layout_marginRight="@dimen/spacing_50"
+                  android:gravity="center"
+                  android:text="" />
+
+              <LinearLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_below="@id/matchname_tv"
+                  android:layout_marginLeft="50dp"
+                  android:layout_marginRight="50dp"
+                  android:gravity="center_horizontal">
+
+                  <TextView
+                      android:id="@+id/brief_tv"
+                      style="@style/text_white_style_30"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+
+                      android:gravity="left"
+                      android:lineSpacingExtra="8dp"
+                      android:paddingBottom="10dp"
+
+                      android:text="" />
+              </LinearLayout>
+          </LinearLayout>-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@color/yeelow_color" />
-
-            <TextView
-                android:id="@+id/matchname_tv"
-                style="@style/text_yellow_style_32"
-                android:layout_width="match_parent"
-                android:layout_below="@id/recyclerview"
-                android:layout_margin="10dp"
-                android:layout_marginLeft="@dimen/spacing_50"
-                android:layout_marginRight="@dimen/spacing_50"
-                android:gravity="center"
-                android:text="" />
-
             <LinearLayout
+                android:id="@+id/class_jieshao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/matchname_tv"
-                android:layout_marginLeft="50dp"
-                android:layout_marginRight="50dp"
-                android:gravity="center_horizontal">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
-                    android:id="@+id/brief_tv"
-                    style="@style/text_white_style_30"
-                    android:layout_width="wrap_content"
+                    style="@style/text_black_style_30"
+                    android:text="相关赛事"
+                    />
+
+
+                <include layout="@layout/split_lines"/>
+
+                <LinearLayout
+                    android:id="@+id/class_jieshaos"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                    android:gravity="left"
-                    android:lineSpacingExtra="8dp"
-                    android:paddingBottom="10dp"
+                    <TextView
+                        android:id="@+id/matchname_tv"
+                        style="@style/text_black_style_28"
+                        android:layout_marginBottom="@dimen/spacing_20"
+                        android:layout_marginLeft="@dimen/spacing_20"
+                        android:layout_marginRight="@dimen/spacing_48"
+                        android:layout_marginTop="@dimen/spacing_20"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textColor="#666666"
+                        />
 
-                    android:text="" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/spacing_20"
+                        android:src="@drawable/jinru_item"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spacing_20"
+                    android:background="#e1e1e1"/>
+
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/program"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/text_black_style_30"
+                    android:layout_margin="@dimen/spacing_20"
+                    android:text="节目单"/>
+
+                <include layout="@layout/split_lines"/>
+
+                <include layout="@layout/list_layout"/>
+            </LinearLayout>
+
         </LinearLayout>
+
+
     </ScrollView>
 </LinearLayout>

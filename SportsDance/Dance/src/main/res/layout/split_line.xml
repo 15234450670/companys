@@ -4,4 +4,4 @@
     android:id="@+id/spit_line"
     android:layout_width="match_parent"
     android:layout_height="@dimen/home_spilitline_width"
-    android:background="@color/home_line_color" />
+    android:background="@color/line" />

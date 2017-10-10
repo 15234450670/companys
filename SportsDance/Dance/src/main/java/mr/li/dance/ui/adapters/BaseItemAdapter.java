@@ -12,8 +12,8 @@ import mr.li.dance.models.BaseHomeItem;
 import mr.li.dance.models.BaseItemAdapterType;
 import mr.li.dance.models.MusicInfo;
 import mr.li.dance.models.TeachDetailInfo;
+import mr.li.dance.models.TeachInfo;
 import mr.li.dance.models.Video;
-import mr.li.dance.models.ZhiBoInfo;
 import mr.li.dance.models.ZiXunInfo;
 import mr.li.dance.utils.MyStrUtil;
 
@@ -87,8 +87,8 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
 
     @Override
     public void bindData(RecyclerViewHolder holder, int position, BaseHomeItem item) {
-        if (item instanceof ZhiBoInfo) {
-            bindMatch(holder, (ZhiBoInfo) item);
+        if (item instanceof TeachInfo) {
+            bindMatch(holder, (TeachInfo) item);
         } else if (item instanceof Video) {
             bindVideo(holder, (Video) item);
         } else if (item instanceof ZiXunInfo) {
@@ -111,14 +111,16 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
         holder.setText(R.id.sort_tv, position + 1 + "");
         holder.setImageByUrlOrFilePath(R.id.pic, item.getPicture(), R.drawable.default_video);
         holder.setText(R.id.name, item.getName());
+        if (!TextUtils.isEmpty(item.getVideo_duration())) {
+            holder.setText(R.id.time_tv, "时长： " + item.getVideo_duration());
+        }
 
     }
 
-    private void bindMatch(RecyclerViewHolder holder, ZhiBoInfo match) {
+    private void bindMatch(RecyclerViewHolder holder, TeachInfo match) {
         holder.setImageByUrlOrFilePath(R.id.imageView, match.getPicture(), R.drawable.default_video);
-        holder.setText(R.id.name, match.getName());
-        holder.setText(R.id.time_tv, match.getStarttime());
-        holder.setVisibility(R.id.typeicon_tv, View.VISIBLE);
+        holder.setText(R.id.name, match.getTitle());
+        holder.setText(R.id.time_tv, match.getDescribed());
         holder.setImageResDrawable(R.id.typeicon_tv, R.drawable.home_icon_008);
     }
 

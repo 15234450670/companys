@@ -1,11 +1,13 @@
 package mr.li.dance.ui.fragments.adapter;
 
 import android.content.Context;
+import android.view.View;
 
 import mr.li.dance.R;
 import mr.li.dance.models.TeachInfo;
 import mr.li.dance.ui.adapters.BaseRecyclerAdapter;
 import mr.li.dance.ui.adapters.RecyclerViewHolder;
+import mr.li.dance.utils.MyStrUtil;
 
 /**
  * 作者: SuiFeng
@@ -29,5 +31,10 @@ public class NewLabeiAdapter extends BaseRecyclerAdapter<TeachInfo> {
     public void bindData(RecyclerViewHolder holder, int position, TeachInfo item) {
         holder.setText(R.id.name, item.getTitle());
         holder.setImageByUrlOrFilePath(R.id.imageView, item.getPicture(), R.drawable.default_banner);
+        if (MyStrUtil.isEmpty(item.getWriter())) {
+            holder.getView(R.id.laiyuan).setVisibility(View.GONE);
+        } else {
+            holder.setText(R.id.from_tv, item.getWriter());
+        }
     }
 }

@@ -52,9 +52,9 @@
                 style="@style/text_white_style_22"
                 android:layout_marginBottom="@dimen/spacing_13"
                 android:layout_marginTop="@dimen/spacing_38"
-                android:text="时长："
+                android:text=""
                 android:textColor="#666666"
-                android:visibility="gone"/>
+              />
 
             <TextView
                 android:id="@+id/start_item"

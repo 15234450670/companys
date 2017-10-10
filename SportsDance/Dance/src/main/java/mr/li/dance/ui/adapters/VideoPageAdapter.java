@@ -189,7 +189,7 @@ public class VideoPageAdapter extends DanceBaseAdapter {
             });
 
             holder.mRecyclerView.setAdapter(speedAdapter);
-            speedAdapter.addList(true, mQuickList);
+         //   speedAdapter.addList(true, mQuickList);
             if (MyStrUtil.isEmpty(mQuickList)) {
                 holder.mRecyclerView.setVisibility(View.GONE);
             } else {

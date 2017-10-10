@@ -58,8 +58,10 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
                 bindMatch(homeListItemInfo);
                 break;
             case 10106://外联
-            case 10107:
                 bindOther(homeListItemInfo);
+                break;
+            case 10107:
+                bindOthers(homeListItemInfo);
                 break;
             case 10108:   //音乐
                 bindMusic(homeListItemInfo);
@@ -72,19 +74,56 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    private void bindTeach(BaseHomeItem teach) {
-        danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, teach.getPicture_app(), R.drawable.default_video);
-        danceViewHolder.setText(R.id.name, teach.getTitle());
-        if (teach.getType() == 10109) {
-            danceViewHolder.setText(R.id.from_tv, "教学");
-
-        }
-        if (!TextUtils.isEmpty(teach.getSource())) {
-            danceViewHolder.getView(R.id.source).setVisibility(View.VISIBLE);
-            danceViewHolder.setText(R.id.from_bd, teach.getSource());
+    private void bindOthers(BaseHomeItem albumInfo) {
+        if (albumInfo.getShow_type().equals("2")) {
+            danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, albumInfo.getPicture_app(), R.drawable.default_video);
+            danceViewHolder.getView(R.id.share_layout).setVisibility(View.GONE);
+            danceViewHolder.getView(R.id.name_time).setVisibility(View.GONE);
         } else {
-            danceViewHolder.getView(R.id.source).setVisibility(View.GONE);
+            danceViewHolder.setViewVisibility(R.id.typeicon_tv, View.INVISIBLE);
+            danceViewHolder.setViewVisibility(R.id.picnum_tv, View.INVISIBLE);
+            danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, albumInfo.getPicture_app(), R.drawable.default_video);
+            danceViewHolder.setText(R.id.name, albumInfo.getTitle());
+            danceViewHolder.setText(R.id.time_tv, albumInfo.getStart_time());
+            if (albumInfo.getType() == 10106 || albumInfo.getType() == 10107) {
+                danceViewHolder.setText(R.id.from_tv, "活动");
+            }
+            if (!TextUtils.isEmpty(albumInfo.getSource())) {
+                danceViewHolder.getView(R.id.source).setVisibility(View.VISIBLE);
+                danceViewHolder.setText(R.id.from_bd, albumInfo.getSource());
+            } else {
+                danceViewHolder.getView(R.id.source).setVisibility(View.GONE);
+            }
+            String shareUrl = albumInfo.getUrl();
+            if (MyStrUtil.isEmpty(shareUrl)) {
+                danceViewHolder.setViewVisibility(R.id.share_layout, View.INVISIBLE);
+            } else {
+                danceViewHolder.setViewVisibility(R.id.share_layout, View.VISIBLE);
+            }
         }
+    }
+
+    private void bindTeach(BaseHomeItem teach) {
+
+        if (teach.getShow_type().equals("2")) {
+            danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, teach.getPicture_app(), R.drawable.default_video);
+            danceViewHolder.getView(R.id.share_layout).setVisibility(View.GONE);
+            danceViewHolder.getView(R.id.name_time).setVisibility(View.GONE);
+
+        } else {
+            danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, teach.getPicture_app(), R.drawable.default_video);
+            danceViewHolder.setText(R.id.name, teach.getTitle());
+            if (teach.getType() == 10109) {
+                danceViewHolder.setText(R.id.from_tv, "教学");
+            }
+            if (!TextUtils.isEmpty(teach.getSource())) {
+                danceViewHolder.getView(R.id.source).setVisibility(View.VISIBLE);
+                danceViewHolder.setText(R.id.from_bd, teach.getSource());
+            } else {
+                danceViewHolder.getView(R.id.source).setVisibility(View.GONE);
+            }
+        }
+
     }
 
 
@@ -139,68 +178,108 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
     }
 
     private void bindMusic(BaseHomeItem music) {
-        danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, music.getPicture_app(), R.drawable.default_video);
-        danceViewHolder.setText(R.id.name, music.getTitle());
-        danceViewHolder.setText(R.id.time_tv, music.getCreate_time());
-        if (music.getType() == 10108) {
-            danceViewHolder.setText(R.id.from_tv, "音乐");
-
-        }
-        if (!TextUtils.isEmpty(music.getSource())) {
-            danceViewHolder.getView(R.id.source).setVisibility(View.VISIBLE);
-            danceViewHolder.setText(R.id.from_bd, music.getSource());
+        if (music.getShow_type().equals("2")) {
+            danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, music.getPicture_app(), R.drawable.default_video);
+            danceViewHolder.getView(R.id.share_layout).setVisibility(View.GONE);
+            danceViewHolder.getView(R.id.name_time).setVisibility(View.GONE);
         } else {
-            danceViewHolder.getView(R.id.source).setVisibility(View.GONE);
+            danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, music.getPicture_app(), R.drawable.default_video);
+            danceViewHolder.setText(R.id.name, music.getTitle());
+            danceViewHolder.setText(R.id.time_tv, music.getCreate_time());
+            if (music.getType() == 10108) {
+                danceViewHolder.setText(R.id.from_tv, "音乐");
+
+            }
+            if (!TextUtils.isEmpty(music.getSource())) {
+                danceViewHolder.getView(R.id.source).setVisibility(View.VISIBLE);
+                danceViewHolder.setText(R.id.from_bd, music.getSource());
+            } else {
+                danceViewHolder.getView(R.id.source).setVisibility(View.GONE);
+            }
         }
+
     }
 
     private void bindZhibo(BaseHomeItem zhibo) {
-        danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, zhibo.getPicture_app(), R.drawable.default_video);
-        danceViewHolder.setText(R.id.name, zhibo.getCompete_name());
-        danceViewHolder.setText(R.id.time_tv, zhibo.getStart_time());
-        danceViewHolder.setViewVisibility(R.id.typeicon_tv, View.VISIBLE);
-        danceViewHolder.setImageResDrawable(R.id.typeicon_tv, R.drawable.home_icon_008, R.drawable.home_icon_008);
-        danceViewHolder.setViewVisibility(R.id.picnum_tv, View.INVISIBLE);
-        if (zhibo.getType() == 10101) {
-            danceViewHolder.setText(R.id.from_tv, "直播");
-
-        }
-        if (!TextUtils.isEmpty(zhibo.getSource())) {
-            danceViewHolder.getView(R.id.source).setVisibility(View.VISIBLE);
-            danceViewHolder.setText(R.id.from_bd, zhibo.getSource());
+        if (zhibo.getShow_type().equals("2")) {
+            danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, zhibo.getPicture_app(), R.drawable.default_video);
+            danceViewHolder.getView(R.id.share_layout).setVisibility(View.GONE);
+            danceViewHolder.getView(R.id.name_time).setVisibility(View.GONE);
         } else {
-            danceViewHolder.getView(R.id.source).setVisibility(View.GONE);
+            danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, zhibo.getPicture_app(), R.drawable.default_video);
+            danceViewHolder.setText(R.id.name, zhibo.getCompete_name());
+            danceViewHolder.setText(R.id.time_tv, zhibo.getStart_time());
+            danceViewHolder.setViewVisibility(R.id.typeicon_tv, View.VISIBLE);
+            danceViewHolder.setImageResDrawable(R.id.typeicon_tv, R.drawable.home_icon_008, R.drawable.home_icon_008);
+            danceViewHolder.setViewVisibility(R.id.picnum_tv, View.INVISIBLE);
+            if (zhibo.getType() == 10101) {
+                danceViewHolder.setText(R.id.from_tv, "直播");
+
+            }
+            if (!TextUtils.isEmpty(zhibo.getSource())) {
+                danceViewHolder.getView(R.id.source).setVisibility(View.VISIBLE);
+                danceViewHolder.setText(R.id.from_bd, zhibo.getSource());
+            } else {
+                danceViewHolder.getView(R.id.source).setVisibility(View.GONE);
+            }
         }
+
 
     }
 
     private void bindVideo(BaseHomeItem video) {
-        danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, video.getPicture_app(), R.drawable.default_video);
-        danceViewHolder.setText(R.id.name, video.getCompete_name());
-        danceViewHolder.setText(R.id.time_tv, video.getStart_time());
-        danceViewHolder.setViewVisibility(R.id.typeicon_tv, View.VISIBLE);
-        danceViewHolder.setImageResDrawable(R.id.typeicon_tv, R.drawable.home_icon_005, R.drawable.home_icon_005);
-
-        danceViewHolder.setViewVisibility(R.id.picnum_tv, View.INVISIBLE);
-        if (video.getType() == 10102) {
-            danceViewHolder.setText(R.id.from_tv, "点播");
-
-        }
-        if (!TextUtils.isEmpty(video.getSource())) {
-            danceViewHolder.getView(R.id.source).setVisibility(View.VISIBLE);
-            danceViewHolder.setText(R.id.from_bd, video.getSource());
+        if (video.getShow_type().equals("2")) {
+            danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, video.getPicture_app(), R.drawable.default_video);
+            danceViewHolder.getView(R.id.share_layout).setVisibility(View.GONE);
+            danceViewHolder.getView(R.id.name_time).setVisibility(View.GONE);
         } else {
-            danceViewHolder.getView(R.id.source).setVisibility(View.GONE);
+            danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, video.getPicture_app(), R.drawable.default_video);
+            danceViewHolder.setText(R.id.name, video.getCompete_name());
+            danceViewHolder.setText(R.id.time_tv, video.getStart_time());
+            danceViewHolder.setViewVisibility(R.id.typeicon_tv, View.VISIBLE);
+            danceViewHolder.setImageResDrawable(R.id.typeicon_tv, R.drawable.home_icon_005, R.drawable.home_icon_005);
+
+            danceViewHolder.setViewVisibility(R.id.picnum_tv, View.INVISIBLE);
+            if (video.getType() == 10102) {
+                danceViewHolder.setText(R.id.from_tv, "点播");
+
+
+            }
+            if (!TextUtils.isEmpty(video.getSource())) {
+                danceViewHolder.getView(R.id.source).setVisibility(View.VISIBLE);
+                danceViewHolder.setText(R.id.from_bd, video.getSource());
+            } else {
+                danceViewHolder.getView(R.id.source).setVisibility(View.GONE);
+            }
         }
+
     }
 
     private void bindInfomation(BaseHomeItem baseHomeItem) {
-        danceViewHolder.setText(R.id.name, baseHomeItem.getTitle());
-        danceViewHolder.setText(R.id.time_tv, baseHomeItem.getStart_time());
-        danceViewHolder.setViewVisibility(R.id.typeicon_tv, View.INVISIBLE);
-        danceViewHolder.setText(R.id.from_tv, baseHomeItem.getWriter());
-        danceViewHolder.setViewVisibility(R.id.picnum_tv, View.INVISIBLE);
-        danceViewHolder.setViewVisibility(R.id.top_layout, View.GONE);
+        if (baseHomeItem.getShow_type().equals("2")) {
+            danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, baseHomeItem.getPicture(), R.drawable.default_video);
+            danceViewHolder.getView(R.id.share_layout).setVisibility(View.GONE);
+            danceViewHolder.getView(R.id.name_time).setVisibility(View.GONE);
+        } else {
+            danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, baseHomeItem.getPicture(), R.drawable.default_video);
+            danceViewHolder.setText(R.id.name, baseHomeItem.getTitle());
+            danceViewHolder.setText(R.id.time_tv, baseHomeItem.getStart_time());
+            danceViewHolder.setViewVisibility(R.id.typeicon_tv, View.INVISIBLE);
+            danceViewHolder.setText(R.id.from_tv, baseHomeItem.getWriter());
+            danceViewHolder.setViewVisibility(R.id.picnum_tv, View.INVISIBLE);
+            danceViewHolder.setViewVisibility(R.id.top_layout, View.GONE);
+            if (baseHomeItem.getType() == 10103) {
+                danceViewHolder.setText(R.id.from_tv, "资讯");
+
+            }
+            if (!TextUtils.isEmpty(baseHomeItem.getSource())) {
+                danceViewHolder.getView(R.id.source).setVisibility(View.VISIBLE);
+                danceViewHolder.setText(R.id.from_bd, baseHomeItem.getSource());
+            } else {
+                danceViewHolder.getView(R.id.source).setVisibility(View.GONE);
+            }
+        }
+
        /* if ("1".equals(baseHomeItem.getImg_num())) {
 
             danceViewHolder.getTextView(R.id.name).setTextColor(mContext.getResources().getColor(R.color.yeelow_color));
@@ -210,89 +289,100 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
             danceViewHolder.setRoundImageByUrlOrFilePath(R.id.pic2_iv, baseHomeItem.getPicture_2(), R.drawable.default_video);
             danceViewHolder.setRoundImageByUrlOrFilePath(R.id.pic3_iv, baseHomeItem.getPicture_3(), R.drawable.default_video);
         }*/
-        if (baseHomeItem.getType() == 10103) {
-            danceViewHolder.setText(R.id.from_tv, "赛事资讯");
 
-        }
-        if (!TextUtils.isEmpty(baseHomeItem.getSource())) {
-            danceViewHolder.getView(R.id.source).setVisibility(View.VISIBLE);
-            danceViewHolder.setText(R.id.from_bd, baseHomeItem.getSource());
-        } else {
-            danceViewHolder.getView(R.id.source).setVisibility(View.GONE);
-        }
     }
 
     private void bindImageInfo(BaseHomeItem albumInfo) {
-        danceViewHolder.setViewVisibility(R.id.typeicon_tv, View.INVISIBLE);
-        danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, albumInfo.getPicture_app(), R.drawable.default_video);
-        danceViewHolder.setText(R.id.name, albumInfo.getCompete_name());
-        danceViewHolder.setText(R.id.time_tv, albumInfo.getStart_time());
-        danceViewHolder.setImageResDrawable(R.id.typeicon_tv, R.drawable.home_icon_005, R.drawable.home_icon_005);
-        danceViewHolder.setText(R.id.type_tv, "精彩瞬间");
-        danceViewHolder.setText(R.id.num_tv, "共" + albumInfo.getPhotos());
-        danceViewHolder.setViewVisibility(R.id.picnum_tv, View.VISIBLE);
-        if (albumInfo.getType() == 10104) {
-            danceViewHolder.setText(R.id.from_tv, "赛事相册");
-
-        }
-        if (!TextUtils.isEmpty(albumInfo.getSource())) {
-            danceViewHolder.getView(R.id.source).setVisibility(View.VISIBLE);
-            danceViewHolder.setText(R.id.from_bd, albumInfo.getSource());
+        if (albumInfo.getShow_type().equals("2")) {
+            danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, albumInfo.getPicture_app(), R.drawable.default_video);
+            danceViewHolder.getView(R.id.share_layout).setVisibility(View.GONE);
+            danceViewHolder.getView(R.id.name_time).setVisibility(View.GONE);
         } else {
-            danceViewHolder.getView(R.id.source).setVisibility(View.GONE);
+            danceViewHolder.setViewVisibility(R.id.typeicon_tv, View.INVISIBLE);
+            danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, albumInfo.getPicture_app(), R.drawable.default_video);
+            danceViewHolder.setText(R.id.name, albumInfo.getCompete_name());
+            danceViewHolder.setText(R.id.time_tv, albumInfo.getStart_time());
+            danceViewHolder.setImageResDrawable(R.id.typeicon_tv, R.drawable.home_icon_005, R.drawable.home_icon_005);
+            danceViewHolder.setText(R.id.type_tv, "精彩瞬间");
+            danceViewHolder.setText(R.id.num_tv, "共" + albumInfo.getPhotos());
+            danceViewHolder.setViewVisibility(R.id.picnum_tv, View.VISIBLE);
+            if (albumInfo.getType() == 10104) {
+                danceViewHolder.setText(R.id.from_tv, "赛事相册");
+
+            }
+            if (!TextUtils.isEmpty(albumInfo.getSource())) {
+                danceViewHolder.getView(R.id.source).setVisibility(View.VISIBLE);
+                danceViewHolder.setText(R.id.from_bd, albumInfo.getSource());
+            } else {
+                danceViewHolder.getView(R.id.source).setVisibility(View.GONE);
+            }
         }
+
     }
 
 
     private void bindMatch(BaseHomeItem baseHomeItem) {
-        danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, baseHomeItem.getPicture_app(), R.drawable.default_video);
-        danceViewHolder.setText(R.id.name, baseHomeItem.getCompete_name());
-        danceViewHolder.setText(R.id.starttime, "结束时间: " + baseHomeItem.getStart_time());
-        danceViewHolder.setText(R.id.endtime, "结束时间: " + baseHomeItem.getEnd_time());
-        switch (baseHomeItem.getCompete_type()) {
-            case 10001:
-                danceViewHolder.setText(R.id.level_tv, "WDSF");
-                break;
-            case 10002:
-                danceViewHolder.setText(R.id.level_tv, "CDSF");
-                break;
-            case 10003:
-                danceViewHolder.setText(R.id.level_tv, "地方赛事");
-                break;
-        }
-        if (baseHomeItem.getType() == 10105) {
-            danceViewHolder.setText(R.id.from_tv, "赛事");
-
-        }
-        if (!TextUtils.isEmpty(baseHomeItem.getSource())) {
-            danceViewHolder.getView(R.id.source).setVisibility(View.VISIBLE);
-            danceViewHolder.setText(R.id.from_bd, baseHomeItem.getSource());
+        if (baseHomeItem.getShow_type().equals("2")) {
+            danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, baseHomeItem.getPicture_app(), R.drawable.default_video);
+            danceViewHolder.getView(R.id.share_layout).setVisibility(View.GONE);
+            danceViewHolder.getView(R.id.name_time).setVisibility(View.GONE);
         } else {
-            danceViewHolder.getView(R.id.source).setVisibility(View.GONE);
+            danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, baseHomeItem.getPicture_app(), R.drawable.default_video);
+            danceViewHolder.setText(R.id.name, baseHomeItem.getCompete_name());
+            danceViewHolder.setText(R.id.starttime, "结束时间: " + baseHomeItem.getStart_time());
+            danceViewHolder.setText(R.id.endtime, "结束时间: " + baseHomeItem.getEnd_time());
+            switch (baseHomeItem.getCompete_type()) {
+                case 10001:
+                    danceViewHolder.setText(R.id.level_tv, "WDSF");
+                    break;
+                case 10002:
+                    danceViewHolder.setText(R.id.level_tv, "CDSF");
+                    break;
+                case 10003:
+                    danceViewHolder.setText(R.id.level_tv, "地方赛事");
+                    break;
+            }
+            if (baseHomeItem.getType() == 10105) {
+                danceViewHolder.setText(R.id.from_tv, "赛事");
+
+            }
+            if (!TextUtils.isEmpty(baseHomeItem.getSource())) {
+                danceViewHolder.getView(R.id.source).setVisibility(View.VISIBLE);
+                danceViewHolder.setText(R.id.from_bd, baseHomeItem.getSource());
+            } else {
+                danceViewHolder.getView(R.id.source).setVisibility(View.GONE);
+            }
         }
+
 
     }
 
     private void bindOther(BaseHomeItem albumInfo) {
-        danceViewHolder.setViewVisibility(R.id.typeicon_tv, View.INVISIBLE);
-        danceViewHolder.setViewVisibility(R.id.picnum_tv, View.INVISIBLE);
-        danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, albumInfo.getPicture_app(), R.drawable.default_video);
-        danceViewHolder.setText(R.id.name, albumInfo.getTitle());
-        danceViewHolder.setText(R.id.time_tv, albumInfo.getStart_time());
-        if (albumInfo.getType() == 10106 || albumInfo.getType() == 10107) {
-            danceViewHolder.setText(R.id.from_tv, "外联");
-        }
-        if (!TextUtils.isEmpty(albumInfo.getSource())) {
-            danceViewHolder.getView(R.id.source).setVisibility(View.VISIBLE);
-            danceViewHolder.setText(R.id.from_bd, albumInfo.getSource());
+        if (albumInfo.getShow_type().equals("2")) {
+            danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, albumInfo.getPicture_app(), R.drawable.default_video);
+            danceViewHolder.getView(R.id.share_layout).setVisibility(View.GONE);
+            danceViewHolder.getView(R.id.name_time).setVisibility(View.GONE);
         } else {
-            danceViewHolder.getView(R.id.source).setVisibility(View.GONE);
-        }
-        String shareUrl = albumInfo.getUrl();
-        if (MyStrUtil.isEmpty(shareUrl)) {
-            danceViewHolder.setViewVisibility(R.id.share_layout, View.INVISIBLE);
-        } else {
-            danceViewHolder.setViewVisibility(R.id.share_layout, View.VISIBLE);
+            danceViewHolder.setViewVisibility(R.id.typeicon_tv, View.INVISIBLE);
+            danceViewHolder.setViewVisibility(R.id.picnum_tv, View.INVISIBLE);
+            danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, albumInfo.getPicture_app(), R.drawable.default_video);
+            danceViewHolder.setText(R.id.name, albumInfo.getTitle());
+            danceViewHolder.setText(R.id.time_tv, albumInfo.getStart_time());
+            if (albumInfo.getType() == 10106 || albumInfo.getType() == 10107) {
+                danceViewHolder.setText(R.id.from_tv, "外链");
+            }
+            if (!TextUtils.isEmpty(albumInfo.getSource())) {
+                danceViewHolder.getView(R.id.source).setVisibility(View.VISIBLE);
+                danceViewHolder.setText(R.id.from_bd, albumInfo.getSource());
+            } else {
+                danceViewHolder.getView(R.id.source).setVisibility(View.GONE);
+            }
+            String shareUrl = albumInfo.getUrl();
+            if (MyStrUtil.isEmpty(shareUrl)) {
+                danceViewHolder.setViewVisibility(R.id.share_layout, View.INVISIBLE);
+            } else {
+                danceViewHolder.setViewVisibility(R.id.share_layout, View.VISIBLE);
+            }
         }
 
 
