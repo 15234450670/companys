@@ -119,10 +119,7 @@
         <activity
             android:name=".ui.activitys.video.VideoListActivity"
             android:screenOrientation="portrait"/>
-        <activity
-            android:name=".ui.activitys.video.VideoDetailActivity"
-            android:configChanges="keyboard|screenSize|orientation|layoutDirection"
-            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".ui.activitys.zixun.ZiXunListActivity"
             android:screenOrientation="portrait"/>
@@ -231,6 +228,11 @@
         <activity android:name=".ui.activitys.newActivitys.PicActivity"
                   android:screenOrientation="portrait"
             />
+        <activity
+            android:name=".ui.activitys.video.VideoDetailActivity"
+            android:configChanges="keyboard|screenSize|orientation|layoutDirection"
+            android:screenOrientation="portrait"/>
+
         <activity android:name=".ui.activitys.newActivitys.TeachDetailsActivity"
                   android:screenOrientation="portrait"
                   android:configChanges="keyboard|screenSize|orientation|layoutDirection"

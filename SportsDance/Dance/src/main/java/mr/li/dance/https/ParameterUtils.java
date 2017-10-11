@@ -373,9 +373,10 @@ public class ParameterUtils {
      * @param id
      * @return
      */
-    public Request<String> getHZhiboDetailMap(String id) {
+    public Request<String> getHZhiboDetailMap(String id,String page) {
         Request<String> request = getBaseRequestForPost("/home.zhiboDetail2");
         request.add("id", id);
+        request.add("page",page);
         return request;
     }
 

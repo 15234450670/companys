@@ -42,7 +42,9 @@ public class NewCollectMusic extends SwipeMenuAdapter<RecyclerViewHolder> {
 
     @Override
     public View onCreateContentView(ViewGroup parent, int viewType) {
-        return LayoutInflater.from(parent.getContext()).inflate(R.layout.item_albumcollect, parent, false);
+      return LayoutInflater.from(parent.getContext()).inflate(R.layout.item_albumcollect, parent, false);
+        //return LayoutInflater.from(parent.getContext()).inflate( R.layout.music_rec_type_2, parent, false);
+
     }
 
     @Override

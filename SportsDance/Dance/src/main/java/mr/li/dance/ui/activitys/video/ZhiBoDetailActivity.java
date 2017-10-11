@@ -30,7 +30,7 @@ import java.util.Map;
 
 import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
-import mr.li.dance.models.QuickZhiboInfo;
+import mr.li.dance.models.MenuBean;
 import mr.li.dance.models.ZhiBo;
 import mr.li.dance.ui.activitys.base.BaseListActivity;
 import mr.li.dance.ui.activitys.match.MatchDetailActivity;
@@ -56,7 +56,7 @@ public class ZhiBoDetailActivity extends BaseListActivity {
     private IMediaDataVideoView videoView;
     private String              mItemId;
     private String              mMatchId;
-
+          int page = 1;
     LinkedHashMap<String, String> rateMap            = new LinkedHashMap<String, String>();
     VideoViewListener             mVideoViewListener = new VideoViewListener() {
         @Override
@@ -81,9 +81,9 @@ public class ZhiBoDetailActivity extends BaseListActivity {
 
     @Override
     public void itemClick(int position, Object value) {
-        QuickZhiboInfo currentInfo = (QuickZhiboInfo) value;
+       /* QuickZhiboInfo currentInfo = (QuickZhiboInfo) value;
         mItemId = currentInfo.getId();
-        initDatas();
+        initDatas();*/
     }
 
     @Override
@@ -99,6 +99,7 @@ public class ZhiBoDetailActivity extends BaseListActivity {
 
     @Override
     public void initViews() {
+        super.initViews();
         setTitle("直播");
         videoView = new UIActionLiveVideoView(this);
         setActionLiveParameter(false);
@@ -120,11 +121,11 @@ public class ZhiBoDetailActivity extends BaseListActivity {
     @Override
     public void initDatas() {
         super.initDatas();
-        Request<String> request = ParameterUtils.getSingleton().getHZhiboDetailMap(mItemId);
+        Request<String> request = ParameterUtils.getSingleton().getHZhiboDetailMap(mItemId,String.valueOf(page));
         request(AppConfigs.home_zhiboDetailL, request, true);
     }
 
-    private void setZhiboDetail(List<ZhiBo.DataBean.CompeteBean> zhiBoInfo) {
+    private void setZhiboDetail(final List<ZhiBo.DataBean.CompeteBean> zhiBoInfo) {
         mMatchId = zhiBoInfo.get(0).getCompete_id();
         setRightImage(R.drawable.share_icon_001);
         mShareContent = zhiBoInfo.get(0).getName();
@@ -135,7 +136,7 @@ public class ZhiBoDetailActivity extends BaseListActivity {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    MatchDetailActivity.lunch(mContext, zhiBoInfo.get(0).getCompete_id());
                 }
             });
 
@@ -306,19 +307,39 @@ public class ZhiBoDetailActivity extends BaseListActivity {
 
     @Override
     public void onSucceed(int what, String responseStr) {
-        //        super.onSucceed(what, responseStr);
-        // ZhiboDetailResponse detailResponse = JsonMananger.getReponseResult(responseStr, ZhiboDetailResponse.class);
-        // mAdapter.addList(true, detailResponse.getData().getOtherList());
+        super.onSucceed(what, responseStr);
+
         ZhiBo reponseResult = JsonMananger.getReponseResult(responseStr, ZhiBo.class);
         ArrayList<ZhiBo.DataBean.CompeteBean> compete = reponseResult.getData().getCompete();
         setZhiboDetail(compete);
-        ArrayList<String> menu = reponseResult.getData().getMenu();
-        Log.d("menuuu",menu.toString());
+        ArrayList<MenuBean> menu = reponseResult.getData().getMenu();
         if (!MyStrUtil.isEmpty(menu)) {
             mDanceViewHolder.getView(R.id.program).setVisibility(View.VISIBLE);
             mAdapter.addList(isRefresh,menu);
         }
+    }
+   /* @Override
+    public void onSucceed(int what, String responseStr) {
+        //        super.onSucceed(what, responseStr);
+        // ZhiboDetailResponse detailResponse = JsonMananger.getReponseResult(responseStr, ZhiboDetailResponse.class);
+        //mAdapter.addList(true, detailResponse.getData().getOtherList());
 
+
+    }*/
+    @Override
+    public void refresh() {
+        super.refresh();
+        page = 1;
+        Request<String> request = ParameterUtils.getSingleton().getHZhiboDetailMap(mItemId,String.valueOf(page));
+        request(AppConfigs.home_zhiboDetailL, request, true);
+    }
+
+    @Override
+    public void loadMore() {
+        super.loadMore();
+        page++;
+        Request<String> request = ParameterUtils.getSingleton().getHZhiboDetailMap(mItemId,String.valueOf(page));
+        request(AppConfigs.home_zhiboDetailL, request, true);
     }
 
     public static void lunch(Context context, String id) {
@@ -329,8 +350,6 @@ public class ZhiBoDetailActivity extends BaseListActivity {
 
     String shareUrl;
     private String mShareContent;
-
-
     ShareUtils mShareUtils;
 
     private void showShareDialog() {

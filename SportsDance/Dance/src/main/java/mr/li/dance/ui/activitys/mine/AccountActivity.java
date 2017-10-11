@@ -42,7 +42,7 @@ public class AccountActivity extends BaseListActivity {
     private Mine_itemInfo   reponseResult;
     // private List<Mine_itemInfo.DataBean.DetailBean> detail;
     public void initViewss() {
-        setTitle("账单明细");
+        setTitle("我的账户");
         mRightIv.setVisibility(View.VISIBLE);
         mRightIv.setBackgroundResource(R.drawable.mine_tixian_btn);
     }

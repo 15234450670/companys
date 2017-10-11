@@ -117,10 +117,15 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
 
     }
 
+
     private void bindMatch(RecyclerViewHolder holder, TeachInfo match) {
-        holder.setImageByUrlOrFilePath(R.id.imageView, match.getPicture(), R.drawable.default_video);
+        holder.setImageByUrlOrFilePath(R.id.imageView, match.getImg_fm(), R.drawable.default_video);
         holder.setText(R.id.name, match.getTitle());
-        holder.setText(R.id.time_tv, match.getDescribed());
+        if (!MyStrUtil.isEmpty(match.getDescribed())) {
+            holder.getView(R.id.time_tv).setVisibility(View.VISIBLE);
+            holder.setText(R.id.time_tv, match.getDescribed());
+        }
+
         holder.setImageResDrawable(R.id.typeicon_tv, R.drawable.home_icon_008);
     }
 
@@ -160,7 +165,7 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
     private void bindImageInfo(RecyclerViewHolder holder, AlbumInfo albumInfo) {
         holder.setImageByUrlOrFilePath(R.id.imageView, albumInfo.getImg_fm(), R.drawable.default_video);
         holder.setText(R.id.name, albumInfo.getTitle());
-        holder.setText(R.id.time_tv, albumInfo.getInserttime());
+        // holder.setText(R.id.time_tv, albumInfo.getInserttime());
         holder.setVisibility(R.id.typeicon_tv, View.INVISIBLE);
         holder.setVisibility(R.id.picnum_tv, View.VISIBLE);
         holder.setText(R.id.num_tv, albumInfo.getPhotos());

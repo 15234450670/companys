@@ -28,7 +28,7 @@
             android:layout_width="@dimen/spacing_300"
             android:layout_height="@dimen/spacing_230"
             android:scaleType="fitXY"
-            android:src="@drawable/ic_launcher"/>
+       />
 
         <LinearLayout
             android:layout_width="match_parent"

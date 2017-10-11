@@ -53,7 +53,7 @@ import mr.li.dance.utils.UserInfoManager;
  */
 
 public class VideoDetailActivity extends BaseListActivity {
-   // BaseItemAdapter mAdapter;
+    // BaseItemAdapter mAdapter;
     VideoAlbumAdapter videoAlbumAdapter;
     private IMediaDataVideoView videoView;
     private String              mItemId;
@@ -84,7 +84,6 @@ public class VideoDetailActivity extends BaseListActivity {
     };
     private RecyclerView rv;
 
-
     @Override
     public void itemClick(int position, Object value) {
         Video currentInfo = (Video) value;
@@ -94,8 +93,8 @@ public class VideoDetailActivity extends BaseListActivity {
 
     @Override
     public RecyclerView.Adapter getAdapter() {
-     //   mAdapter = new BaseItemAdapter(mContext, BaseItemAdapterType.CommentType);
-       // mAdapter.setItemClickListener(this);
+        //   mAdapter = new BaseItemAdapter(mContext, BaseItemAdapterType.CommentType);
+        // mAdapter.setItemClickListener(this);
         videoAlbumAdapter = new VideoAlbumAdapter(mContext);
         videoAlbumAdapter.setItemClickListener(this);
         return videoAlbumAdapter;
@@ -108,8 +107,10 @@ public class VideoDetailActivity extends BaseListActivity {
 
     @Override
     public void initViews() {
+
         super.initViews();
         setTitle("视频详情");
+        setRightImage(R.drawable.collect_icon, R.drawable.share_icon_001);
         mRefreshLayout.setEnableLoadmore(false);
         mRefreshLayout.setEnableRefresh(false);
         LinearLayoutManager manager = new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false);
@@ -136,16 +137,16 @@ public class VideoDetailActivity extends BaseListActivity {
     }
 
     private void setVideoDetail(Video video) {
-        setRightImage(R.drawable.collect_icon, R.drawable.share_icon_001);
+
         videoView.resetPlayer();
         mDanceViewHolder.setText(R.id.matchname_tv, video.getName());
         String Compete_name = video.getCompete_name();
         mShareContent = video.getName();
-        if (MyStrUtil.isEmpty(Compete_name)) {
+        /*if (MyStrUtil.isEmpty(Compete_name)) {
             mDanceViewHolder.setViewVisibility(R.id.brief_tv, View.GONE);
         } else {
             mDanceViewHolder.setText(R.id.brief_tv, video.getCompete_name());
-        }
+        }*/
         mDanceViewHolder.setText(R.id.type_tv, "赛事相关视频");
         Bundle mBundle = new Bundle();
         mBundle.putString(PlayerParams.KEY_PLAY_UUID, AppConfigs.KEY_PLAY_UUID);
@@ -170,6 +171,7 @@ public class VideoDetailActivity extends BaseListActivity {
         if (videoView != null) {
             videoView.onResume();
         }
+        initDatas();
     }
 
     @Override
@@ -332,6 +334,7 @@ public class VideoDetailActivity extends BaseListActivity {
             request(AppConfigs.user_collection, request, false);
         }
     }
+
     @Override
     public void onBackPressed() {
        /* if (isFromCollectpage && !isCollected) {

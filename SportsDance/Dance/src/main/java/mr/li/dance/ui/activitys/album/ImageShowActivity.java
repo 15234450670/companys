@@ -2,16 +2,12 @@ package mr.li.dance.ui.activitys.album;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.yolanda.nohttp.Headers;
@@ -21,13 +17,10 @@ import com.yolanda.nohttp.download.DownloadRequest;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import mr.li.dance.R;
 import mr.li.dance.https.DownLoadCallServer;
-import mr.li.dance.ui.activitys.DownLoadApkActivity;
 import mr.li.dance.ui.activitys.base.BaseActivity;
 import mr.li.dance.ui.adapters.ShowImageAdapter;
 import mr.li.dance.utils.NToast;

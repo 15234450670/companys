@@ -58,12 +58,14 @@ public class NewCollectMusicFragment extends NewSwipeListFragments<BaseHomeItem>
     @Override
     public void initViews() {
         super.initViews();
-
+       /* GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
+        mRecyclerview.setLayoutManager(layoutManager);
+        mRecyclerview.setAdapter(mAdapter);*/
     }
     @Override
     public void init() {
         danceViewHolder.getImageView(R.id.nodate_icon).setImageResource(R.drawable.no_collect_videolsit);
-        danceViewHolder.setText(R.id.nodate_desc, "您还没有收藏相册");
+        danceViewHolder.setText(R.id.nodate_desc, "您还没有收藏音乐");
         super.init();
 
     }
@@ -101,8 +103,6 @@ public class NewCollectMusicFragment extends NewSwipeListFragments<BaseHomeItem>
         } else {
             danceViewHolder.setViewVisibility(R.id.nodatalayout, View.INVISIBLE);
         }
-
-
     }
 
     private void getData(int index) {
@@ -163,7 +163,7 @@ public class NewCollectMusicFragment extends NewSwipeListFragments<BaseHomeItem>
                     SwipeMenuItem deleteItem = new SwipeMenuItem(getActivity())
                             .setBackgroundDrawable(R.drawable.selector_red)
                             .setText("删除") // 文字，还可以设置文字颜色，大小等。。
-                            .setTextColor(Color.BLACK)
+                            .setTextColor(Color.WHITE)
                             .setTextSize(textsize)
                             .setWidth(width)
                             .setHeight(height);

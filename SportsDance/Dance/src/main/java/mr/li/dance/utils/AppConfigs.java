@@ -27,8 +27,9 @@ public class AppConfigs {
     public final static String ZixunShareUrl  = DomainUrl + "/home.zxdetailf?id=%s";
     public final static String ZixunShareUrl2  = SHAREURL + "/share.zxfx?id=";
     public final static String USER  = SHAREURL + "/share.Ament";
+    public final static String tach_detial  = SHAREURL + "/share.spjx?id=";
     //赛事规则，赛事设项 赛程表 分享
-    public final static String SAISHIShareUrl = SHAREURL + "/share.gc?id=%s&w_page=%s";
+    public final static String SAISHIShareUrl = SHAREURL + "/share.gcfx?id=%s&page=%s";
     //相册分享
     public final static String SHAREPHOTOURL  = SHAREURL + "/share.photo?id=%s";
     //直播分享
@@ -37,6 +38,9 @@ public class AppConfigs {
     public final static String SHAREMOV       = SHAREURL + "/share.mov?id=%s";
     //赛事分享
     public final static String SHAREGAME      = SHAREURL + "/share.game?id=%s";
+    public final static String SHAREGAME1      = SHAREURL + "/share.spfx?id=";
+    public final static String SHAREPIC      = SHAREURL + "/share.tpfx?id=";
+    public final static String SHARESOURE      = SHAREURL + "/share.cjfx?id=";
     //音乐分享
     public final static String SHAREMUSIC     = SHAREURL + "/share.gdfx?id=";
     //播放界面分享

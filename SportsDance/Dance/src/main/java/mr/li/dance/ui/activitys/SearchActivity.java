@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.RadioGroup;
 
 import mr.li.dance.R;
@@ -151,6 +152,7 @@ public class SearchActivity extends BaseActivity implements RadioGroup.OnChecked
 
         switch (v.getId()) {
             case R.id.back_icon:
+                hintKbTwo();
                 finish();
                 break;
             case R.id.search_btn:
@@ -158,6 +160,7 @@ public class SearchActivity extends BaseActivity implements RadioGroup.OnChecked
                 if (!MyStrUtil.isEmpty(content)) {
                     mCurrentFragment.refresh(content, type);
                 }
+                hintKbTwo();
                 break;
         }
 
@@ -165,5 +168,17 @@ public class SearchActivity extends BaseActivity implements RadioGroup.OnChecked
 
     public static void lunch(Context context) {
         context.startActivity(new Intent(context, SearchActivity.class));
+    }
+
+    /**
+     * 关闭软键盘
+     */
+    private void hintKbTwo() {
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        if(imm.isActive()&&getCurrentFocus()!=null){
+            if (getCurrentFocus().getWindowToken()!=null) {
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        }
     }
 }

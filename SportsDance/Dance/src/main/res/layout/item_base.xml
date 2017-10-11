@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/iamge_layout"
@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-            android:src="@drawable/default_video" />
+            android:src="@drawable/default_video"/>
 
         <ImageView
             android:id="@+id/typeicon_tv"
@@ -28,12 +28,11 @@
             android:layout_margin="10dp"
             android:scaleType="fitXY"
             android:src="@drawable/home_icon_008"
-            android:visibility="invisible" />
+            android:visibility="invisible"/>
 
     </RelativeLayout>
 
     <TextView
-        android:textColor="#333333"
         android:id="@+id/name"
         style="@style/text_yellow_style_30"
         android:layout_below="@+id/iamge_layout"
@@ -41,19 +40,21 @@
         android:layout_marginLeft="@dimen/spacing_40"
         android:layout_marginRight="@dimen/spacing_40"
         android:layout_marginTop="@dimen/spacing_20"
-        android:singleLine="true"/>
+        android:singleLine="true"
+        android:textColor="#333333"/>
 
     <TextView
-        android:textColor="#333333"
         android:id="@+id/time_tv"
+        android:visibility="gone"
         style="@style/text_white_style_22"
         android:layout_width="wrap_content"
         android:layout_alignLeft="@id/name"
         android:layout_below="@id/name"
-        android:gravity="right"
         android:layout_marginBottom="@dimen/spacing_10"
+        android:gravity="right"
         android:singleLine="true"
-        android:text="" />
+        android:text=""
+        android:textColor="#333333"/>
 
     <LinearLayout
         android:id="@+id/share_layout"
@@ -63,19 +64,19 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/spacing_20"
         android:gravity="bottom"
-        android:visibility="invisible"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="invisible">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/share_icon_001" />
+            android:src="@drawable/share_icon_001"/>
 
         <TextView
             style="@style/text_white_style_20"
             android:layout_marginLeft="@dimen/spacing_10"
-            android:textColor="#d3d3d3"
-            android:text="分享" />
+            android:text="分享"
+            android:textColor="#d3d3d3"/>
 
     </LinearLayout>
 
@@ -95,13 +96,18 @@
             android:id="@+id/icon_mark"
             android:layout_width="28dp"
             android:layout_height="24dp"
-            android:src="@drawable/home_icon_001" />
+            android:src="@drawable/home_icon_001"/>
 
         <TextView
-            android:textColor="#333333"
             android:id="@+id/num_tv"
             style="@style/text_white_style_20"
             android:layout_width="wrap_content"
-            android:text="" />
+            android:text=""/>
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_20"
+        android:layout_below="@+id/time_tv"
+        android:background="#e1e1e1"/>
 </RelativeLayout>

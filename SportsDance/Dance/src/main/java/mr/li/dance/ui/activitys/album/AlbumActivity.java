@@ -52,7 +52,7 @@ public class AlbumActivity extends BaseListActivity<AlbumInfo> {
 
     @Override
     public void initViews() {
-        setTitle("相册");
+        setTitle("相册详情");
         initRefreshLayout();
         mRefreshLayout.setEnableLoadmore(false);
         mRecyclerview = (RecyclerView) findViewById(R.id.recyclerview);
@@ -257,5 +257,9 @@ public class AlbumActivity extends BaseListActivity<AlbumInfo> {
 
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        refresh();
+    }
 }

@@ -20,7 +20,7 @@ import mr.li.dance.models.LabelSelect;
  */
 public class PopGridViewAdapter extends BaseAdapter {
     List<LabelSelect.DataBean.ListBean> list;
-    Context mContext;
+    Context                             mContext;
     public boolean isTab;
 
     public PopGridViewAdapter(Context context, List<LabelSelect.DataBean.ListBean> list) {
@@ -51,14 +51,13 @@ public class PopGridViewAdapter extends BaseAdapter {
         final LabelSelect.DataBean.ListBean bean = list.get(i);
         name.setText(bean.getName());
         name.setSelected(bean.isSelect);
-
         name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isTab){
+                if (isTab) {
                     selectOne(i);
                 } else {
-                    bean.isSelect =!bean.isSelect;
+                    bean.isSelect = !bean.isSelect;
                     notifyDataSetChanged();
                 }
             }
@@ -71,11 +70,11 @@ public class PopGridViewAdapter extends BaseAdapter {
      * 单选
      * @param position
      */
-    public void selectOne(int position){
+    public void selectOne(int position) {
 
-        for (int i = 0 ; i<list.size() ; i++) {
-            if(i==position){
-                list.get(i).isSelect = ! list.get(i).isSelect;
+        for (int i = 0; i < list.size(); i++) {
+            if (i == position) {
+                list.get(i).isSelect = !list.get(i).isSelect;
             } else {
                 list.get(i).isSelect = false;
             }
@@ -86,8 +85,8 @@ public class PopGridViewAdapter extends BaseAdapter {
     /**
      * 全不选
      */
-    public void selectNone(){
-        for (int i = 0 ; i<list.size() ; i++) {
+    public void selectNone() {
+        for (int i = 0; i < list.size(); i++) {
             list.get(i).isSelect = false;
         }
         notifyDataSetChanged();
@@ -97,9 +96,9 @@ public class PopGridViewAdapter extends BaseAdapter {
      * 那个tab被选中了
      * @return
      */
-    public int getSelect(){
-        for (int i = 0 ; i < list.size() ; i++) {
-            if(list.get(i).isSelect){
+    public int getSelect() {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).isSelect) {
                 return i;
             }
         }
@@ -110,9 +109,9 @@ public class PopGridViewAdapter extends BaseAdapter {
      * 选中一个标签
      * @param position
      */
-    public void setSelect (int position) {
-        for (int i = 0 ; i<list.size() ; i++) {
-            list.get(i).isSelect = i==position? true : false;
+    public void setSelect(int position) {
+        for (int i = 0; i < list.size(); i++) {
+            list.get(i).isSelect = i == position ? true : false;
         }
     }
 }

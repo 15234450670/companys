@@ -131,6 +131,6 @@ public class ScoreGroupActivity extends BaseListActivity<ScoreGroupInfo> {
             mShareUtils = new ShareUtils(this);
         }
 
-        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, "http://work.cdsf.org.cn/h5/share.cjfx?id="+mMatchId,"成绩单");
+        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, AppConfigs.SHARESOURE+mMatchId,"成绩单");
     }
 }

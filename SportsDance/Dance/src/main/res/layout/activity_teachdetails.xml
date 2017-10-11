@@ -46,7 +46,7 @@
                 android:id="@+id/querydetail_tv"
                 style="@style/text_white_style_32"
                 android:layout_marginTop="@dimen/spacing_30"
-                android:background="@drawable/zhibodetail_shape_bg"
+                android:background="@drawable/lucency_rec"
                 android:paddingBottom="@dimen/spacing_10"
                 android:paddingLeft="@dimen/spacing_15"
                 android:paddingRight="@dimen/spacing_15"

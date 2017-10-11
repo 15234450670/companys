@@ -148,6 +148,6 @@ public class MatchVideoActivity extends BaseListActivity<Video> {
             mShareUtils = new ShareUtils(this);
         }
 
-        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, "http://work.cdsf.org.cn/h5/share.spfx?id="+mMatchId, "赛事视频");
+        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, AppConfigs.SHAREGAME1+mMatchId, "赛事视频");
     }
 }

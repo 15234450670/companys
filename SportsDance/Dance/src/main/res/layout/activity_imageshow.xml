@@ -43,7 +43,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:gravity="center_vertical"
-                android:src="@drawable/back_icon" />
+                android:src="@drawable/back_icon_01" />
         </LinearLayout>
 
 

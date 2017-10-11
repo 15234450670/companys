@@ -55,13 +55,17 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
         return mAdapter;
     }
 
+    public void Info() {
+        String userId = UserInfoManager.getSingleton().getUserId(this);
+        Request<String> musicInfoGeDanMap = ParameterUtils.getSingleton().getMusicInfoGeDanMap(userId, mItemId, String.valueOf(page));
+        request(AppConfigs.home_music_gedan, musicInfoGeDanMap, false);
+    }
+
     @Override
     public void initDatas() {
         super.initDatas();
         setTitle("歌单");
-        String userId = UserInfoManager.getSingleton().getUserId(this);
-        Request<String> musicInfoGeDanMap = ParameterUtils.getSingleton().getMusicInfoGeDanMap(userId,mItemId, String.valueOf(page));
-        request(AppConfigs.home_music_gedan, musicInfoGeDanMap, false);
+        Info();
         conn = new ServiceConn();
         conn.getMyBinder(new ServiceConn.binderCreateFinish() {
             @Override
@@ -99,6 +103,7 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
             iv.setSelected(myBinder.binderIsPlaying());
 
         }
+        Info();
     }
 
     @Override
@@ -121,11 +126,11 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
             }
             if (!MyStrUtil.isEmpty(reponseResult.getData().getImg_fm())) {
                 mDanceViewHolder.setImageByUrlOrFilePaths(R.id.img_head, reponseResult.getData().getImg_fm());
-                ImageLoaderManager.getSingleton().LoadMoHu_gedan(this, reponseResult.getData().getImg_fm(), mDanceViewHolder.getImageView(R.id.gd_bg));
+                // ImageLoaderManager.getSingleton().LoadMoHu_gedan(this, reponseResult.getData().getImg_fm(), mDanceViewHolder.getImageView(R.id.gd_bg));
                 ImageLoaderManager.getSingleton().LoadCircle(this, reponseResult.getData().getImg_fm(), mDanceViewHolder.getImageView(R.id.gd_pic), R.drawable.icon_mydefault);
             } else {
                 mDanceViewHolder.setImageByUrlOrFilePaths1(R.id.img_head, R.drawable.default_video);
-                ImageLoaderManager.getSingleton().LoadMoHu(this, "", mDanceViewHolder.getImageView(R.id.gd_bg), R.drawable.default_video);
+                // ImageLoaderManager.getSingleton().LoadMoHu(this, "", mDanceViewHolder.getImageView(R.id.gd_bg), R.drawable.default_video);
             }
             findViewById(R.id.imageView4).setVisibility(View.VISIBLE);
             List<GeDanInfo.DataBean.ListBean> list = reponseResult.getData().getList();
@@ -205,6 +210,7 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
         intent.putExtra("name", name);
         context.startActivity(intent);
     }
+
     public static void lunch(Context context, String id, String shareContent, boolean isfromCollectPage) {
         Intent intent = new Intent(context, SongActivity.class);
         intent.putExtra("itemid", id);
@@ -212,6 +218,7 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
         intent.putExtra("isfromcollectpage", isfromCollectPage);
         context.startActivity(intent);
     }
+
     @Override
     public void getIntentData() {
         super.getIntentData();
@@ -226,7 +233,7 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
         super.loadMore();
         String userId = UserInfoManager.getSingleton().getUserId(this);
         page++;
-        Request<String> musicInfoGeDanMap = ParameterUtils.getSingleton().getMusicInfoGeDanMap(userId,mItemId, String.valueOf(page));
+        Request<String> musicInfoGeDanMap = ParameterUtils.getSingleton().getMusicInfoGeDanMap(userId, mItemId, String.valueOf(page));
         request(AppConfigs.home_music_gedan, musicInfoGeDanMap, false);
     }
 
@@ -235,7 +242,7 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
         super.refresh();
         String userId = UserInfoManager.getSingleton().getUserId(this);
         page = 1;
-        Request<String> musicInfoGeDanMap = ParameterUtils.getSingleton().getMusicInfoGeDanMap(userId,mItemId, String.valueOf(page));
+        Request<String> musicInfoGeDanMap = ParameterUtils.getSingleton().getMusicInfoGeDanMap(userId, mItemId, String.valueOf(page));
         request(AppConfigs.home_music_gedan, musicInfoGeDanMap, false);
     }
 

@@ -47,7 +47,7 @@
                        style="@style/text_white_style_22"
                        android:layout_marginBottom="@dimen/spacing_13"
                        android:layout_marginTop="@dimen/spacing_13"
-                       android:text="来源：" />
+                       android:text="" />
                    <TextView
                        android:textColor="#333333"
                        android:id="@+id/from_tv"

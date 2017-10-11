@@ -130,7 +130,7 @@ public class MatchDetailActivity extends BaseActivity implements View.OnClickLis
                 ScoreGroupActivity.lunch(this, mMatchId);
                 break;
             case R.id.guize_layout:
-                  String guize_url = String.format(AppConfigs.SAISHIShareUrl, String.valueOf(mMatchId), String.valueOf(10701));
+                String guize_url = String.format(AppConfigs.SAISHIShareUrl, String.valueOf(mMatchId), String.valueOf(10701));
                 MyDanceWebActivity.lunch(this, MyDanceWebActivity.MATCHOTHER1, "赛事规则", guize_url, true);
                 break;
             case R.id.shexiang_layout:

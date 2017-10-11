@@ -273,6 +273,12 @@ public abstract class BaseActivity extends FragmentActivity implements HttpListe
         mHeadRightText.setVisibility(View.VISIBLE);
         mHeadRightText.setText(btnName);
     }
+    public void setTitleAndRightBtn1(String title, String btnName,int color) {
+        setTitle(title, false);
+        mHeadRightText.setVisibility(View.VISIBLE);
+        mHeadRightText.setText(btnName);
+        mHeadRightText.setTextColor(color);
+    }
 
     /**
      * 设置标题

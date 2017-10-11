@@ -7,7 +7,7 @@
     <RelativeLayout
         android:id="@+id/iamge_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/spacing_398"
+        android:layout_height="@dimen/spacing_340"
         android:layout_below="@+id/top_layout"
         android:layout_marginLeft="@dimen/spacing_20"
         android:layout_marginRight="@dimen/spacing_20"
@@ -19,7 +19,6 @@
             android:layout_height="match_parent"
             android:scaleType="fitXY"
             android:src="@drawable/default_video"/>
-
 
     </RelativeLayout>
 
@@ -39,7 +38,6 @@
         android:id="@+id/picnum_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/iamge_layout"
         android:layout_alignParentRight="true"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
@@ -57,8 +55,7 @@
             android:id="@+id/num_tv"
             style="@style/text_white_style_20"
             android:layout_width="wrap_content"
-            android:text=""
-            android:textColor="#333333"/>
+           />
 
     </LinearLayout>
 

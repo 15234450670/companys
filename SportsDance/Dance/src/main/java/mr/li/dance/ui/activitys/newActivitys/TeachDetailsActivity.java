@@ -20,6 +20,7 @@ import com.lecloud.sdk.constant.StatusCode;
 import com.lecloud.sdk.videoview.IMediaDataVideoView;
 import com.lecloud.sdk.videoview.VideoViewListener;
 import com.lecloud.skin.videoview.vod.UIVodVideoView;
+import com.umeng.analytics.MobclickAgent;
 import com.yolanda.nohttp.rest.Request;
 
 import java.util.LinkedHashMap;
@@ -37,6 +38,9 @@ import mr.li.dance.ui.widget.VideoLayoutParams;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.MyStrUtil;
+import mr.li.dance.utils.ShareUtils;
+
+import static mr.li.dance.ui.activitys.music.SongActivity.mItemId;
 
 /**
  * 作者: SuiFeng
@@ -95,20 +99,11 @@ public class TeachDetailsActivity extends BaseListActivity {
     @Override
     public void initViews() {
         super.initViews();
-        setHeadVisibility(View.GONE);
+        setTitle("教学详情");
+        setRightImage(R.drawable.share_icon_001);
         mDanceViewHolder.setImageByUrlOrFilePath(R.id.pic, mPic, R.drawable.default_video);   //图片
         mDanceViewHolder.setText(R.id.teach_title, mTitle);   //标题
         class_jieshao = (LinearLayout) mDanceViewHolder.getView(R.id.class_jieshao);   //课程介绍
-        if (!TextUtils.isEmpty(content)) {
-            class_jieshao.setVisibility(View.VISIBLE);
-            mDanceViewHolder.setText(R.id.jieshao, content);
-            class_jieshao.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    MyDanceWebActivity.lunch(TeachDetailsActivity.this, MyDanceWebActivity.TEACHERCLASS, mTitle, AppConfigs.TEACHERCLASS + mId, true);
-                }
-            });
-        }
         class_section = (LinearLayout) mDanceViewHolder.getView(R.id.class_section);  //课程章节
         querydetail_tv = mDanceViewHolder.getTextView(R.id.querydetail_tv);
         videoView = new UIVodVideoView(this);
@@ -116,7 +111,6 @@ public class TeachDetailsActivity extends BaseListActivity {
         videoView.setVideoViewListener(mVideoViewListener);
         final RelativeLayout videoContainer = (RelativeLayout) findViewById(R.id.videoContainer);
         videoContainer.addView((View) videoView, VideoLayoutParams.computeContainerSize(this, 16, 9));
-
     }
 
     @Override
@@ -158,8 +152,7 @@ public class TeachDetailsActivity extends BaseListActivity {
             setHeadVisibility(View.GONE);
             mDanceViewHolder.getImageView(R.id.pic).setVisibility(View.GONE);
         } else {
-            setHeadVisibility(View.GONE);
-            mDanceViewHolder.getImageView(R.id.pic).setVisibility(View.GONE);
+            setHeadVisibility(View.VISIBLE);
             /*if (videoView.isPlaying()) {
                 mDanceViewHolder.getImageView(R.id.pic).setVisibility(View.GONE);
             } else {
@@ -208,6 +201,20 @@ public class TeachDetailsActivity extends BaseListActivity {
             }
             if (reponseResult.getData() == null) {
                 return;
+            }
+            List<TeachDetailInfo.DataBean.DetailBean> detail = reponseResult.getData().getDetail();
+            if (!MyStrUtil.isEmpty(detail)) {
+                String described = detail.get(0).getDescribed();
+                if (!TextUtils.isEmpty(described)) {
+                    class_jieshao.setVisibility(View.VISIBLE);
+                    mDanceViewHolder.setText(R.id.jieshao, described);
+                    class_jieshao.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            MyDanceWebActivity.lunch(TeachDetailsActivity.this, MyDanceWebActivity.TEACHERCLASS, mTitle, AppConfigs.TEACHERCLASS + mId, true);
+                        }
+                    });
+                }
             }
             if (!MyStrUtil.isEmpty(reponseResult.getData().getOtherList())) {
 
@@ -297,5 +304,20 @@ public class TeachDetailsActivity extends BaseListActivity {
         page++;
         Request<String> request = ParameterUtils.getSingleton().getHomeTeachDetailsMap(mId, String.valueOf(page));
         request(AppConfigs.home_tab_teach_details, request, true);
+    }
+
+    @Override
+    public void onHeadRightButtonClick(View v) {
+        super.onHeadRightButtonClick(v);
+        showShareDialog();
+    }
+    ShareUtils mShareUtils;
+    private void showShareDialog() {
+        MobclickAgent.onEvent(this, AppConfigs.CLICK_EVENT_29);
+        if (mShareUtils == null) {
+            mShareUtils = new ShareUtils(this);
+        }
+
+        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, AppConfigs.tach_detial + mItemId, mTitle);
     }
 }

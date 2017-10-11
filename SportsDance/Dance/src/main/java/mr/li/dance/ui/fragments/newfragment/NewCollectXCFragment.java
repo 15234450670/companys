@@ -162,7 +162,7 @@ public class NewCollectXCFragment extends NewSwipeListFragments<BaseHomeItem> {
                     SwipeMenuItem deleteItem = new SwipeMenuItem(getActivity())
                             .setBackgroundDrawable(R.drawable.selector_red)
                             .setText("删除") // 文字，还可以设置文字颜色，大小等。。
-                            .setTextColor(Color.BLACK)
+                            .setTextColor(Color.WHITE)
                             .setTextSize(textsize)
                             .setWidth(width)
                             .setHeight(height);

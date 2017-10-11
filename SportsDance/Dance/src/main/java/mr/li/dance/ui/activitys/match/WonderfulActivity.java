@@ -57,8 +57,8 @@ public class WonderfulActivity extends BaseListActivity<AlbumInfo> {
     public void initViews() {
         super.initViews();
         mRefreshLayout.setEnableLoadmore(false);
-        setTitle("赛事图片");
-        setRightImage(R.drawable.home_icon_007,R.drawable.share_icon_001);
+        setTitle("精彩图片");
+        setRightImage(/*R.drawable.icon_marchsearch,*/R.drawable.share_icon_001);
     }
 
     @Override
@@ -115,13 +115,13 @@ public class WonderfulActivity extends BaseListActivity<AlbumInfo> {
         context.startActivity(intent);
     }
 
-    @Override
+  /*  @Override
     public void onHeadRightButtonClick(View v) {
         super.onHeadRightButtonClick(v);
         SearchMatchPicActivity.lunch(this, mMatchId);
 
-    }
-    public void onHeadRightButtonClick2(View v) {
+    }*/
+    public void onHeadRightButtonClick(View v) {
        // SharePicture();
         showShareDialog();
     }
@@ -136,6 +136,6 @@ public class WonderfulActivity extends BaseListActivity<AlbumInfo> {
         if (mShareUtils == null) {
             mShareUtils = new ShareUtils(this);
         }
-        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, "http://work.cdsf.org.cn/h5/share.tpfx?id="+mMatchId, "精彩图片");
+        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, AppConfigs.SHAREPIC+mMatchId, "精彩图片");
     }
 }

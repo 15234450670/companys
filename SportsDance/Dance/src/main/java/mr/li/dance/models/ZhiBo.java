@@ -13,8 +13,9 @@ import mr.li.dance.https.response.BaseResponse;
  */
 public class ZhiBo extends BaseResponse {
 
+
     /**
-     * data : {"compete":[{"match_id":"51","name":"2017年中国.镇江体育舞蹈全国公开赛\u200b10.3","activity_id":"A20170928000003p","begin_time":"2017-10-03 08:00:00","end_time":"2017-10-03 23:00:00","brief":"      2017年中国.镇江体育舞蹈全国公开赛将于2017年10月2日至3日在镇江市大港体育馆召开。作为中国体育舞蹈联合会三级赛事，参加相关规范组别选手将列入《中国体育舞蹈联合会竞赛积分系统》获得年度积分，规范组别：职业组、A组、青年组、壮年I组、少年II组、少年I组标准舞和拉丁舞，准入条件按照CDSF标准。","compete_name":"2017年中国-镇江体育舞蹈全国公开赛","compete_id":"239","picture_app":"/464/0/0/afb34445c2532db94521c1d414e27f84.png","compete_trailer":"","dot_num":"14","picture":"http://store.cdsf.org.cn/picture//464/0/0/afb34445c2532db94521c1d414e27f84.png"}],"menu":["开幕式","H组决赛","G组决赛","F组决赛","E组决赛","D组决赛","C组决赛","B组决赛","A组决赛","I组决赛"]}
+     * data : {"compete":[{"match_id":"51","name":"2017年中国.镇江体育舞蹈全国公开赛\u200b10.3","activity_id":"A20170928000003p","begin_time":"2017-10-03 08:00:00","end_time":"2017-10-03 23:00:00","brief":"      2017年中国.镇江体育舞蹈全国公开赛将于2017年10月2日至3日在镇江市大港体育馆召开。作为中国体育舞蹈联合会三级赛事，参加相关规范组别选手将列入《中国体育舞蹈联合会竞赛积分系统》获得年度积分，规范组别：职业组、A组、青年组、壮年I组、少年II组、少年I组标准舞和拉丁舞，准入条件按照CDSF标准。","compete_name":"2017年中国-镇江体育舞蹈全国公开赛","compete_id":"239","picture_app":"/464/0/0/afb34445c2532db94521c1d414e27f84.png","compete_trailer":"","dot_num":"23","picture":"http://store.cdsf.org.cn/picture//464/0/0/afb34445c2532db94521c1d414e27f84.png"}],"menu":[{"title":"赛事预告1"},{"title":"赛事预告3"},{"title":"赛事预告2"},{"title":"赛事预告1"},{"title":"I组决赛"},{"title":"H组决赛"},{"title":"G组决赛"},{"title":"F组决赛"},{"title":"E组决赛"},{"title":"D组决赛"},{"title":"C组决赛"},{"title":"B组决赛"},{"title":"A组决赛"},{"title":"开幕式"}]}
      */
 
     private DataBean data;
@@ -29,7 +30,7 @@ public class ZhiBo extends BaseResponse {
 
     public static class DataBean {
         private ArrayList<CompeteBean> compete;
-        private ArrayList<String>      menu;
+        private ArrayList<MenuBean>    menu;
 
         public ArrayList<CompeteBean> getCompete() {
             return compete;
@@ -39,11 +40,11 @@ public class ZhiBo extends BaseResponse {
             this.compete = compete;
         }
 
-        public ArrayList<String> getMenu() {
+        public ArrayList<MenuBean> getMenu() {
             return menu;
         }
 
-        public void setMenu(ArrayList<String> menu) {
+        public void setMenu(ArrayList<MenuBean> menu) {
             this.menu = menu;
         }
 
@@ -59,7 +60,7 @@ public class ZhiBo extends BaseResponse {
              * compete_id : 239
              * picture_app : /464/0/0/afb34445c2532db94521c1d414e27f84.png
              * compete_trailer :
-             * dot_num : 14
+             * dot_num : 23
              * picture : http://store.cdsf.org.cn/picture//464/0/0/afb34445c2532db94521c1d414e27f84.png
              */
 
@@ -172,5 +173,7 @@ public class ZhiBo extends BaseResponse {
                 this.picture = picture;
             }
         }
+
+
     }
 }

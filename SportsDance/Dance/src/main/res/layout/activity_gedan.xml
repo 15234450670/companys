@@ -6,41 +6,36 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/spacing_410">
+        android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/gd_bg"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"/>
-
-        <ImageView
+            android:layout_margin="@dimen/spacing_20"
             android:id="@+id/img_head"
-            android:layout_width="@dimen/spacing_244"
-            android:layout_height="@dimen/spacing_244"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/spacing_30"
-            android:layout_marginLeft="@dimen/spacing_30"/>
+
+            android:layout_width="@dimen/spacing_210"
+            android:layout_height="@dimen/spacing_210"
+            />
 
         <TextView
             android:id="@+id/text_title"
             style="@style/play_muisc"
             android:layout_alignTop="@+id/img_head"
-            android:layout_marginStart="@dimen/spacing_30"
+             android:layout_margin="@dimen/spacing_30"
             android:layout_toEndOf="@+id/img_head"
             android:textColor="@color/black"
             android:textSize="@dimen/textsize30"
+            android:text=""
             />
 
         <ImageView
             android:id="@+id/imageView4"
             style="@style/play_muisc"
             android:layout_alignBottom="@+id/img_head"
-            android:layout_marginBottom="@dimen/spacing_20"
+            android:layout_marginBottom="@dimen/spacing_30"
             android:layout_marginStart="@dimen/spacing_30"
             android:layout_toEndOf="@+id/img_head"
             android:src="@drawable/ej"
-            android:visibility="gone"
+
             />
 
         <TextView
@@ -50,6 +45,7 @@
             android:layout_marginStart="@dimen/spacing_10"
             android:layout_toEndOf="@+id/imageView4"
             android:textColor="@color/black"
+            android:text=""
             android:textSize="@dimen/textsize24"/>
     </RelativeLayout>
 

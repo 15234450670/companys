@@ -3,6 +3,7 @@ package mr.li.dance.ui.adapters;
 import android.content.Context;
 
 import mr.li.dance.R;
+import mr.li.dance.models.MenuBean;
 
 /**
  * 作者: Lixuewei
@@ -12,7 +13,7 @@ import mr.li.dance.R;
  * 修订历史:
  */
 
-public class DirectseedSpeedAdapter extends BaseRecyclerAdapter<String> {
+public class DirectseedSpeedAdapter extends BaseRecyclerAdapter<MenuBean> {
     public DirectseedSpeedAdapter(Context ctx) {
         super(ctx);
     }
@@ -23,8 +24,8 @@ public class DirectseedSpeedAdapter extends BaseRecyclerAdapter<String> {
     }
 
     @Override
-    public void bindData(RecyclerViewHolder holder, int position, String item) {
-        holder.setText(R.id.num, position + "1" + ". ");
-        holder.setText(R.id.name, item);
+    public void bindData(RecyclerViewHolder holder, int position, MenuBean item) {
+        holder.setText(R.id.num, position + 1 + ". ");
+        holder.setText(R.id.name, item.getTitle());
     }
 }

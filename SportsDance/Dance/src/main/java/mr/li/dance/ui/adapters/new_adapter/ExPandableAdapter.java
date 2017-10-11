@@ -98,6 +98,7 @@ public class ExPandableAdapter extends BaseExpandableListAdapter {
         convertView = View.inflate(mContext, R.layout.expand_two, null);
         GridUtils gv = (GridUtils) convertView.findViewById(R.id.gv);
         PopGridViewAdapter popGridViewAdapter = new PopGridViewAdapter(mContext, mData.get(groupPosition).getList());
+
         for (int i = 0; i < is_radio.size(); i++) {
             popGridViewAdapter.isTab = Integer.valueOf(is_radio.get(i)) == 1 ? true : false;
         }
@@ -105,7 +106,6 @@ public class ExPandableAdapter extends BaseExpandableListAdapter {
         if (adapter == null) {
             adapterMap.put(groupPosition, popGridViewAdapter);
         }
-
         gv.setAdapter(popGridViewAdapter);
 
         return convertView;

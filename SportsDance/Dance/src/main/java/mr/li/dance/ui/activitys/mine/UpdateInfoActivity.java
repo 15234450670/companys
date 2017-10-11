@@ -1,14 +1,12 @@
 package mr.li.dance.ui.activitys.mine;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
 import com.yolanda.nohttp.rest.Request;
 
 import mr.li.dance.R;
-import mr.li.dance.broadcast.BroadcastManager;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.StringResponse;
 import mr.li.dance.models.UserInfo;
@@ -61,7 +59,7 @@ public class UpdateInfoActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        setTitleAndRightBtn(mTitle, "保存");
+        setTitleAndRightBtn1(mTitle, "保存",R.color.black);
         mDanceViewHolder.setText(R.id.update_et, oldContent);
     }
 
