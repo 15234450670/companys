@@ -40,7 +40,6 @@ import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.MyStrUtil;
 import mr.li.dance.utils.ShareUtils;
 
-import static mr.li.dance.ui.activitys.music.SongActivity.mItemId;
 
 /**
  * 作者: SuiFeng
@@ -80,6 +79,7 @@ public class TeachDetailsActivity extends BaseListActivity {
             return "";
         }
     };
+    private List<TeachDetailInfo.DataBean.OtherListBean> otherList;
 
     @Override
     public int getContentViewId() {
@@ -112,7 +112,6 @@ public class TeachDetailsActivity extends BaseListActivity {
         final RelativeLayout videoContainer = (RelativeLayout) findViewById(R.id.videoContainer);
         videoContainer.addView((View) videoView, VideoLayoutParams.computeContainerSize(this, 16, 9));
     }
-
     @Override
     public void initDatas() {
         super.initDatas();
@@ -216,7 +215,8 @@ public class TeachDetailsActivity extends BaseListActivity {
                     });
                 }
             }
-            if (!MyStrUtil.isEmpty(reponseResult.getData().getOtherList())) {
+            otherList = reponseResult.getData().getOtherList();
+            if (!MyStrUtil.isEmpty(otherList)) {
 
                 class_section.setVisibility(View.VISIBLE);
                 mAdapter.refresh(reponseResult.getData().getOtherList());
@@ -245,6 +245,7 @@ public class TeachDetailsActivity extends BaseListActivity {
         mBundle.putString(PlayerParams.KEY_PLAY_PU, AppConfigs.KEY_PLAY_PU);
         videoView.setPanorama(true);
         videoView.setDataSource(mBundle);
+
     }
 
     /**
@@ -289,6 +290,17 @@ public class TeachDetailsActivity extends BaseListActivity {
         TeachDetailInfo.DataBean.OtherListBean value1 = (TeachDetailInfo.DataBean.OtherListBean) value;
         String path = value1.getVideo_unique();
         setTeachDetail(path);
+        for (int i = 0; i < otherList.size(); i++) {
+            if (i==position){
+                otherList.get(i).isClick = true;
+
+            }else {
+                otherList.get(i).isClick = false;
+
+            }
+        }
+        mAdapter.notifyDataSetChanged();
+
     }
 
     @Override
@@ -317,7 +329,6 @@ public class TeachDetailsActivity extends BaseListActivity {
         if (mShareUtils == null) {
             mShareUtils = new ShareUtils(this);
         }
-
-        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, AppConfigs.tach_detial + mItemId, mTitle);
+        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, AppConfigs.tach_detial + mId, mTitle);
     }
 }

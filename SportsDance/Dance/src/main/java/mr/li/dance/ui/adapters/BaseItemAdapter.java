@@ -107,15 +107,25 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
         holder.setText(R.id.wudao_name, item.getTitle());
     }
 
-    private void bindMore(RecyclerViewHolder holder, TeachDetailInfo.DataBean.OtherListBean item, int position) {
+    private void bindMore(final RecyclerViewHolder holder, TeachDetailInfo.DataBean.OtherListBean item, final int position) {
         holder.setText(R.id.sort_tv, position + 1 + "");
         holder.setImageByUrlOrFilePath(R.id.pic, item.getPicture(), R.drawable.default_video);
         holder.setText(R.id.name, item.getName());
-        if (!TextUtils.isEmpty(item.getVideo_duration())) {
-            holder.setText(R.id.time_tv, "时长： " + item.getVideo_duration());
+        if (item.isClick){
+            holder.getView(R.id.start_item).setVisibility(View.VISIBLE);
+            holder.getView(R.id.time_tv).setVisibility(View.GONE);
+        }else {
+            holder.getView(R.id.start_item).setVisibility(View.GONE);
+            holder.getView(R.id.time_tv).setVisibility(View.VISIBLE);
+            if (!TextUtils.isEmpty(item.getVideo_duration())) {
+
+                holder.setText(R.id.time_tv, "时长： " + item.getVideo_duration());
+            }
         }
 
+
     }
+
 
 
     private void bindMatch(RecyclerViewHolder holder, TeachInfo match) {

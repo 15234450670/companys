@@ -106,6 +106,7 @@ public class TeachDetailInfo extends BaseResponse {
             private String picture;
             private String video_unique;
             private String video_duration;
+            public boolean isClick =false;
 
             public String getVideo_duration() {
                 return video_duration;

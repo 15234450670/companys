@@ -35,6 +35,7 @@ public class NewTeachFragment extends BaseListFragment {
     private LinearLayout you;
     int page = 1;
 
+
     @Override
     public void initViews() {
         super.initViews();
