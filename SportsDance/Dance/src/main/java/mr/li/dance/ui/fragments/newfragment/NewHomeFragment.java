@@ -52,7 +52,7 @@ public class NewHomeFragment extends BaseListFragment {
         danceViewHolder.setClickListener(R.id.btn_music, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (myBinder!=null&&myBinder.binderIsPlaying()) {
+                if (myBinder != null && myBinder.binderIsPlaying()) {
                     PlayMusicActivity.lunch(getActivity());
                 } else {
                     Toast.makeText(getActivity(), "请去播放音乐", Toast.LENGTH_SHORT).show();

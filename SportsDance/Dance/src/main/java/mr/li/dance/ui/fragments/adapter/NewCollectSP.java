@@ -30,6 +30,7 @@ import mr.li.dance.utils.MyStrUtil;
  */
 public class NewCollectSP extends SwipeMenuAdapter<RecyclerViewHolder> {
     Context mContext;
+    private see                     s;
     private ArrayList<BaseHomeItem> mDatas;
     ListViewItemClickListener<BaseHomeItem> mItemClickListener;
 
@@ -115,6 +116,13 @@ public class NewCollectSP extends SwipeMenuAdapter<RecyclerViewHolder> {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         mDatas.remove(homeItem);
                         Toast.makeText(mContext, "已取消收藏", Toast.LENGTH_SHORT).show();
+                        if (MyStrUtil.isEmpty(mDatas)) {
+                            if (s != null) {
+                                s.NoSee();
+                            } else {
+                                s.Look();
+                            }
+                        }
                         notifyDataSetChanged();
                         dialogInterface.dismiss();
                     }
@@ -152,4 +160,15 @@ public class NewCollectSP extends SwipeMenuAdapter<RecyclerViewHolder> {
     public int getNextPage() {
         return currentPage + 1;
     }
+
+    public interface see {
+        void NoSee();
+
+        void Look();
+    }
+
+    public void Nosee(see s) {
+        this.s = s;
+    }
+
 }

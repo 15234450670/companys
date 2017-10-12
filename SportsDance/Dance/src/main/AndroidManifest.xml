@@ -230,11 +230,13 @@
             />
         <activity
             android:name=".ui.activitys.video.VideoDetailActivity"
+            android:fitsSystemWindows="true"
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".ui.activitys.newActivitys.TeachDetailsActivity"
                   android:screenOrientation="portrait"
+                  android:fitsSystemWindows="true"
                   android:configChanges="keyboard|screenSize|orientation|layoutDirection"
                   />
         <activity android:name=".ui.activitys.newActivitys.SpecialActivity"

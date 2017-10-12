@@ -40,25 +40,45 @@ import mr.li.dance.utils.UserInfoManager;
 public class NewCollectXCFragment extends NewSwipeListFragments<BaseHomeItem> {
     NewCollectXC mAdapter;
     private BaseHomeItem mDelItem;
+    private View viewById;
 
     @Override
     public void itemClick(int position, BaseHomeItem value) {
         AlbumInfo albumInfo = (AlbumInfo) value;
         AlbumActivity.lunch(getActivity(), value.getId(), albumInfo.getName(), true);
-
+        getActivity().finish();
     }
 
     @Override
     public RecyclerView.Adapter getAdapter() {
         mAdapter = new NewCollectXC(getActivity(), this);
+        mAdapter.Nosee(new NewCollectXC.see() {
+            @Override
+            public void NoSee() {
+                No();
+            }
+
+            @Override
+            public void Look() {
+                Looks();
+            }
+        });
         return mAdapter;
     }
+    private void No() {
 
+        viewById.setVisibility(View.VISIBLE);
+        viewById.bringToFront();
+    }
+
+    private void Looks() {
+        viewById.setVisibility(View.GONE);
+    }
 
     @Override
     public void initViews() {
         super.initViews();
-
+        viewById = mView.findViewById(R.id.nodatalayout);
     }
     @Override
     public void init() {

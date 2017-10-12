@@ -28,6 +28,6 @@ public class NewLabelMusicAdapter extends BaseRecyclerAdapter<TeachInfo> {
     @Override
     public void bindData(RecyclerViewHolder holder, int position, TeachInfo item) {
         holder.setText(R.id.title, item.getTitle());
-        holder.setImageByUrlOrFilePath(R.id.item_pic, item.img_fm, R.drawable.default_banner);
+        holder.setImageByUrlOrFilePath(R.id.item_pic, item.getImg_fm(), R.drawable.default_banner);
     }
 }

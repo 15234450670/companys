@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.yolanda.nohttp.rest.Request;
 
@@ -33,12 +34,13 @@ public class SearchMatchActivity extends BaseListActivity<Match> {
 
 
     private ArrayList<String> groups;
-    MatchAdatper mMatchAdatper;
+    MatchAdatper     mMatchAdatper;
     YearSelectDialog mYearSelectDialog;
+    private View view1;
 
     @Override
     public void itemClick(int position, Match value) {
-        MatchDetailActivity.lunch(this,value.getId());
+        MatchDetailActivity.lunch(this, value.getId());
     }
 
     @Override
@@ -55,13 +57,15 @@ public class SearchMatchActivity extends BaseListActivity<Match> {
     @Override
     public void initViews() {
         super.initViews();
+        View view = mDanceViewHolder.getView(R.id.back);
+        view1 = mDanceViewHolder.getView(R.id.wu);
         mDanceViewHolder.setText(R.id.year_tv, groups.get(0));
         mYearSelectDialog = new YearSelectDialog(this, new ListViewItemClickListener<String>() {
             @Override
             public void itemClick(int position, String value) {
                 mDanceViewHolder.setText(R.id.year_tv, value);
                 String searchContent = mDanceViewHolder.getTextValue(R.id.search_et);
-                if(MyStrUtil.isEmpty(searchContent)){
+                if (MyStrUtil.isEmpty(searchContent)) {
                     refresh();
                 }
             }
@@ -71,7 +75,7 @@ public class SearchMatchActivity extends BaseListActivity<Match> {
             @Override
             public void onClick(View view) {
                 String currentYear = mDanceViewHolder.getTextValue(R.id.year_tv);
-                mYearSelectDialog.showWindow(mDanceViewHolder.getView(R.id.yearselect_layout), currentYear, groups, false,0);
+                mYearSelectDialog.showWindow(mDanceViewHolder.getView(R.id.yearselect_layout), currentYear, groups, false, 0);
             }
         });
         mDanceViewHolder.setClickListener(R.id.search_btn, new View.OnClickListener() {
@@ -79,6 +83,14 @@ public class SearchMatchActivity extends BaseListActivity<Match> {
             public void onClick(View view) {
                 closeKeyboard();
                 refresh();
+            }
+        });
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hintKbTwo();
+                finish();
+
             }
         });
     }
@@ -99,7 +111,14 @@ public class SearchMatchActivity extends BaseListActivity<Match> {
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
         MatchIndexResponse reponseResult = JsonMananger.getReponseResult(response, MatchIndexResponse.class);
-        mMatchAdatper.addList(isRefresh, reponseResult.getData());
+        ArrayList<Match> data = reponseResult.getData();
+        if (MyStrUtil.isEmpty(data)) {
+            view1.setVisibility(View.VISIBLE);
+        } else {
+            view1.setVisibility(View.GONE);
+            mMatchAdatper.addList(isRefresh, data);
+        }
+
     }
 
     public static void lunch(Context context) {
@@ -126,5 +145,15 @@ public class SearchMatchActivity extends BaseListActivity<Match> {
         super.loadMore();
         getData(mMatchAdatper.getNextPage());
     }
+
+    private void hintKbTwo() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm.isActive() && getCurrentFocus() != null) {
+            if (getCurrentFocus().getWindowToken() != null) {
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        }
+    }
+
 
 }

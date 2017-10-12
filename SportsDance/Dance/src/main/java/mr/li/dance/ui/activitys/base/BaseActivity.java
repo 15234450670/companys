@@ -63,24 +63,24 @@ import mr.li.dance.utils.updater.UpdaterUtils;
  */
 public abstract class BaseActivity extends FragmentActivity implements HttpListener {
 
-    protected Context mContext;
-    private ViewFlipper mContentView;
-    protected RelativeLayout mHeadLayout;
-    protected ImageView mLeftIv;
-    protected ImageView mRightIv;
-    protected ImageView mRightIv2;
-    protected TextView mTitle;
-    protected TextView mHeadRightText;
-    private Drawable mBtnBackDrawable;
-    protected View mLeftLayout;
-    protected View mRightLayout;
-    protected CallServer mCallServer;
-    protected SharedPreferences mSp;
+    protected Context                  mContext;
+    private   ViewFlipper              mContentView;
+    protected RelativeLayout           mHeadLayout;
+    protected ImageView                mLeftIv;
+    protected ImageView                mRightIv;
+    protected ImageView                mRightIv2;
+    protected TextView                 mTitle;
+    protected TextView                 mHeadRightText;
+    private   Drawable                 mBtnBackDrawable;
+    protected View                     mLeftLayout;
+    protected View                     mRightLayout;
+    protected CallServer               mCallServer;
+    protected SharedPreferences        mSp;
     protected SharedPreferences.Editor mEditor;
-    protected LoadDialog mWaitDialog;
-    protected DanceViewHolder mDanceViewHolder;
-    public TwinklingRefreshLayout mRefreshLayout;
-    public Bundle mIntentExtras;
+    protected LoadDialog               mWaitDialog;
+    protected DanceViewHolder          mDanceViewHolder;
+    public    TwinklingRefreshLayout   mRefreshLayout;
+    public    Bundle                   mIntentExtras;
 
     protected void setScreen() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -112,15 +112,15 @@ public abstract class BaseActivity extends FragmentActivity implements HttpListe
 
     public void initRefreshLayout() {
         mRefreshLayout = (TwinklingRefreshLayout) mDanceViewHolder.getView(R.id.refresh);
-    if (mRefreshLayout == null) {
-        return;
+        if (mRefreshLayout == null) {
+            return;
+        }
+        BezierLayout headerView = new BezierLayout(this);
+        mRefreshLayout.setHeaderView(headerView);
+        mRefreshLayout.setMaxHeadHeight(140);
+        mRefreshLayout.setPureScrollModeOn();//只显示页面回弹效果
+        mRefreshLayout.setOverScrollBottomShow(false);
     }
-    BezierLayout headerView = new BezierLayout(this);
-    mRefreshLayout.setHeaderView(headerView);
-    mRefreshLayout.setMaxHeadHeight(140);
-    mRefreshLayout.setPureScrollModeOn();//只显示页面回弹效果
-    mRefreshLayout.setOverScrollBottomShow(false);
-}
 
     // 初始化公共头部
     private void initTitleView() {
@@ -209,10 +209,8 @@ public abstract class BaseActivity extends FragmentActivity implements HttpListe
             mRightIv2.setImageResource(iamgeResId2);
         }
     }
-
     /**
      * 设置头部是否可见
-     *
      * @param visibility
      */
     public void setHeadVisibility(int visibility) {
@@ -221,7 +219,6 @@ public abstract class BaseActivity extends FragmentActivity implements HttpListe
 
     /**
      * 设置左边是否可见
-     *
      * @param visibility
      */
     public void setHeadLeftButtonVisibility(int visibility) {
@@ -230,7 +227,6 @@ public abstract class BaseActivity extends FragmentActivity implements HttpListe
 
     /**
      * 设置右边是否可见
-     *
      * @param visibility
      */
     public void setHeadRightButtonVisibility(int visibility) {
@@ -273,7 +269,8 @@ public abstract class BaseActivity extends FragmentActivity implements HttpListe
         mHeadRightText.setVisibility(View.VISIBLE);
         mHeadRightText.setText(btnName);
     }
-    public void setTitleAndRightBtn1(String title, String btnName,int color) {
+
+    public void setTitleAndRightBtn1(String title, String btnName, int color) {
         setTitle(title, false);
         mHeadRightText.setVisibility(View.VISIBLE);
         mHeadRightText.setText(btnName);
@@ -282,7 +279,6 @@ public abstract class BaseActivity extends FragmentActivity implements HttpListe
 
     /**
      * 设置标题
-     *
      * @param title
      */
     public void setTitle(String title, boolean flag) {
@@ -305,13 +301,13 @@ public abstract class BaseActivity extends FragmentActivity implements HttpListe
 
     /**
      * 发送请求（需要检查网络）
-     *
-     * @param requestCode 请求码
+     * @param requestCode
+     *         请求码
      */
     public void request(int requestCode, Request request) {
         request.setCancelSign(this);
         request(requestCode, request, false);
-}
+    }
 
     public void request(int requestCode, Request request, boolean showLoading) {
         request.setCancelSign(this);
@@ -394,8 +390,8 @@ public abstract class BaseActivity extends FragmentActivity implements HttpListe
     public void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
-        if (wasBackground ) {
-            if(updateApkDialog == null || !updateApkDialog.isShowing()){
+        if (wasBackground) {
+            if (updateApkDialog == null || !updateApkDialog.isShowing()) {
                 checkVersion();
             }
         }

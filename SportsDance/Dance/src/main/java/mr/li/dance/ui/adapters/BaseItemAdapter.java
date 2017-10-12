@@ -122,11 +122,7 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
                 holder.setText(R.id.time_tv, "时长： " + item.getVideo_duration());
             }
         }
-
-
     }
-
-
 
     private void bindMatch(RecyclerViewHolder holder, TeachInfo match) {
         holder.setImageByUrlOrFilePath(R.id.imageView, match.getImg_fm(), R.drawable.default_video);

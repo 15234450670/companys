@@ -314,6 +314,7 @@ public class VideoDetailActivity extends BaseListActivity {
         intent.putExtra("itemid", id);
         intent.putExtra("isfromcollectpage", isfromCollectPage);
         context.startActivity(intent);
+
     }
 
     @Override

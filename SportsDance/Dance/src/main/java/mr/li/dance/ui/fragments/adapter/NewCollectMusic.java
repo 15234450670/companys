@@ -33,7 +33,7 @@ public class NewCollectMusic extends SwipeMenuAdapter<RecyclerViewHolder> {
     Context mContext;
     private ArrayList<BaseHomeItem> mDatas;
     ListViewItemClickListener<BaseHomeItem> mItemClickListener;
-
+          private see s;
     public NewCollectMusic(Context context, ListViewItemClickListener listener) {
         mContext = context;
         mItemClickListener = listener;
@@ -114,6 +114,13 @@ public class NewCollectMusic extends SwipeMenuAdapter<RecyclerViewHolder> {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         Toast.makeText(mContext, "已取消收藏", Toast.LENGTH_SHORT).show();
                         mDatas.remove(homeItem);
+                        if (MyStrUtil.isEmpty(mDatas)) {
+                            if (s != null) {
+                                s.NoSee();
+                            } else {
+                                s.Look();
+                            }
+                        }
                         notifyDataSetChanged();
                         dialogInterface.dismiss();
                     }
@@ -146,7 +153,15 @@ public class NewCollectMusic extends SwipeMenuAdapter<RecyclerViewHolder> {
         }
     }
 
+    public interface see {
+        void NoSee();
 
+        void Look();
+    }
+
+    public void Nosee(see s) {
+        this.s = s;
+    }
     class DefaultViewHolder extends RecyclerViewHolder {
         public DefaultViewHolder(Context context, View itemView) {
             super(context, itemView);

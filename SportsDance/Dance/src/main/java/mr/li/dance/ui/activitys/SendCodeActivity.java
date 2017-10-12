@@ -235,7 +235,6 @@ public class SendCodeActivity extends BaseActivity implements View.OnClickListen
         request(AppConfigs.passport_edMobile, request);
     }
 
-
     @Override
     public void onFailed(int what, int responseCode, String response) {
         if (MyStrUtil.isEmpty(response)) {

@@ -67,7 +67,6 @@ public class TeachDetailsActivity extends BaseListActivity {
             handleVideoInfoEvent(event, bundle);// 处理视频信息事件
             handlePlayerEvent(event, bundle);// 处理播放器事件
         }
-
         @Override
         public String onGetVideoRateList(LinkedHashMap<String, String> map) {
             rateMap = map;
@@ -111,6 +110,7 @@ public class TeachDetailsActivity extends BaseListActivity {
         videoView.setVideoViewListener(mVideoViewListener);
         final RelativeLayout videoContainer = (RelativeLayout) findViewById(R.id.videoContainer);
         videoContainer.addView((View) videoView, VideoLayoutParams.computeContainerSize(this, 16, 9));
+
     }
     @Override
     public void initDatas() {
@@ -226,7 +226,9 @@ public class TeachDetailsActivity extends BaseListActivity {
                     public void onClick(View view) {
                         List<TeachDetailInfo.DataBean.OtherListBean> otherList = reponseResult.getData().getOtherList();
                         setTeachDetail(otherList.get(0).getVideo_unique());
+                        otherList.get(0).isClick = true;
 
+                        mAdapter.notifyDataSetChanged();
                     }
                 });
 

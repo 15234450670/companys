@@ -3,6 +3,7 @@ package mr.li.dance.ui.fragments.newfragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.yanzhenjie.recyclerview.swipe.Closeable;
@@ -39,20 +40,41 @@ import mr.li.dance.utils.UserInfoManager;
 public class NewCollectvideoFragment extends NewSwipeListFragment<BaseHomeItem> {
     NewCollectSP mAdapter;
     private BaseHomeItem mDelItem;
+    private View viewById;
 
     @Override
     public void itemClick(int position, BaseHomeItem value) {
      VideoDetailActivity.lunch(getActivity(), value.getId(), true);
+           getActivity().finish();
 
     }
 
     @Override
     public RecyclerView.Adapter getAdapter() {
         mAdapter = new NewCollectSP(getActivity(), this);
+        mAdapter.Nosee(new NewCollectSP.see() {
+            @Override
+            public void NoSee() {
+                No();
+            }
+
+            @Override
+            public void Look() {
+                Looks();
+            }
+        });
         return mAdapter;
     }
 
+    private void No() {
 
+        viewById.setVisibility(View.VISIBLE);
+        viewById.bringToFront();
+    }
+
+    private void Looks() {
+        viewById.setVisibility(View.GONE);
+    }
     @Override
     public int getContentView() {
         return R.layout.swipelist_layout;
@@ -61,8 +83,10 @@ public class NewCollectvideoFragment extends NewSwipeListFragment<BaseHomeItem> 
     @Override
     public void initViews() {
         super.initViews();
-
+        viewById = mView.findViewById(R.id.nodatalayout);
     }
+
+
 
     @Override
     public void init() {
@@ -80,9 +104,11 @@ public class NewCollectvideoFragment extends NewSwipeListFragment<BaseHomeItem> 
     }
 
 
+
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
+        Log.e("what",response);
         if (AppConfigs.user_collection == what) {
             StringResponse reponseResult = JsonMananger.getReponseResult(response, StringResponse.class);
             mAdapter.removePosition(mDelItem);
@@ -99,6 +125,7 @@ public class NewCollectvideoFragment extends NewSwipeListFragment<BaseHomeItem> 
         } else {
             danceViewHolder.setViewVisibility(R.id.nodatalayout, View.INVISIBLE);
         }
+
 
     }
 

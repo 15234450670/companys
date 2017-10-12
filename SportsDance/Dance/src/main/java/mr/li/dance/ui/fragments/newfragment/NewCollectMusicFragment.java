@@ -40,17 +40,29 @@ import mr.li.dance.utils.UserInfoManager;
 public class NewCollectMusicFragment extends NewSwipeListFragments<BaseHomeItem> {
     NewCollectMusic mAdapter;
     private BaseHomeItem mDelItem;
+    private View         viewById;
 
     @Override
     public void itemClick(int position, BaseHomeItem value) {
         MusicInfo albumInfo = (MusicInfo) value;
         SongActivity.lunch(getActivity(), value.getId(), albumInfo.getTitle(), true);
-
+        getActivity().finish();
     }
 
     @Override
     public RecyclerView.Adapter getAdapter() {
         mAdapter = new NewCollectMusic(getActivity(), this);
+        mAdapter.Nosee(new NewCollectMusic.see() {
+            @Override
+            public void NoSee() {
+                No();
+            }
+
+            @Override
+            public void Look() {
+                Looks();
+            }
+        });
         return mAdapter;
     }
 
@@ -61,7 +73,19 @@ public class NewCollectMusicFragment extends NewSwipeListFragments<BaseHomeItem>
        /* GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
         mRecyclerview.setLayoutManager(layoutManager);
         mRecyclerview.setAdapter(mAdapter);*/
+        viewById = mView.findViewById(R.id.nodatalayout);
     }
+
+    private void No() {
+
+        viewById.setVisibility(View.VISIBLE);
+        viewById.bringToFront();
+    }
+
+    private void Looks() {
+        viewById.setVisibility(View.GONE);
+    }
+
     @Override
     public void init() {
         danceViewHolder.getImageView(R.id.nodate_icon).setImageResource(R.drawable.no_collect_videolsit);
@@ -86,12 +110,12 @@ public class NewCollectMusicFragment extends NewSwipeListFragments<BaseHomeItem>
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
-        Log.e("music_info:: ",response);
+        Log.e("music_info:: ", response);
         if (AppConfigs.user_collection == what) {
             StringResponse reponseResult = JsonMananger.getReponseResult(response, StringResponse.class);
             mAdapter.removePosition(mDelItem);
         }
-        if (AppConfigs.user_collections==what)  {
+        if (AppConfigs.user_collections == what) {
             HomeMusicScreen reponseResult = JsonMananger.getReponseResult(response, HomeMusicScreen.class);
             ArrayList<MusicInfo> data = reponseResult.getData();
             if (!MyStrUtil.isEmpty(data)) {
@@ -107,7 +131,7 @@ public class NewCollectMusicFragment extends NewSwipeListFragments<BaseHomeItem>
 
     private void getData(int index) {
         String userId = UserInfoManager.getSingleton().getUserId(getActivity());
-        Log.e("xxx",userId);
+        Log.e("xxx", userId);
         Request<String> request = ParameterUtils.getSingleton().getCollectionListMap2(userId, 10603, index);
         request(AppConfigs.user_collections, request, false);
     }
@@ -117,6 +141,7 @@ public class NewCollectMusicFragment extends NewSwipeListFragments<BaseHomeItem>
         super.refresh();
         getData(1);
     }
+
     @Override
     public void loadMore() {
         super.loadMore();

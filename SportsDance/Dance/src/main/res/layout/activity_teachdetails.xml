@@ -45,11 +45,14 @@
             <TextView
                 android:id="@+id/querydetail_tv"
                 style="@style/text_white_style_32"
+                android:layout_width="@dimen/spacing_316"
+                android:layout_height="@dimen/spacing_60"
                 android:layout_marginTop="@dimen/spacing_30"
                 android:background="@drawable/lucency_rec"
                 android:paddingBottom="@dimen/spacing_10"
                 android:paddingLeft="@dimen/spacing_15"
                 android:paddingRight="@dimen/spacing_15"
+                android:gravity="center_horizontal"
                 android:paddingTop="@dimen/spacing_10"
                 android:text="开始观看"/>
 

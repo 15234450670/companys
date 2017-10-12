@@ -32,13 +32,16 @@
         <TextView
             android:id="@+id/daibiaodui_tv"
             style="@style/text_white_style_28"
+            android:textColor="#333333"
             android:text="" />
 
         <TextView
+            android:textColor="#333333"
             android:id="@+id/beihao_tv"
             style="@style/text_white_style_28" />
 
         <TextView
+            android:textColor="#333333"
             android:id="@+id/member_tv"
             style="@style/text_white_style_28" />
     </LinearLayout>

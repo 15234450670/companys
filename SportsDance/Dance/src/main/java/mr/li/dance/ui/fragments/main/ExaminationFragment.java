@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.yolanda.nohttp.rest.Request;
 
@@ -185,6 +186,20 @@ public class ExaminationFragment extends BaseListActivity implements View.OnClic
     }
 
     @Override
+    public void onHeadLeftButtonClick(View v) {
+        super.onHeadLeftButtonClick(v);
+        hintKbTwo();
+    }
+    private void hintKbTwo() {
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        if(imm.isActive()&&getCurrentFocus()!=null){
+            if (getCurrentFocus().getWindowToken()!=null) {
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        }
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != Activity.RESULT_OK) {
@@ -193,6 +208,7 @@ public class ExaminationFragment extends BaseListActivity implements View.OnClic
         if (requestCode == 0x002) {
             refresh();
         }
-
     }
+
+
 }

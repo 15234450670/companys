@@ -1,7 +1,6 @@
 package mr.li.dance.ui.fragments.newfragment;
 
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -38,9 +37,6 @@ public class NewLabelPicFragment extends BaseListFragment<TeachInfo> {
     @Override
     public void initViews() {
         super.initViews();
-        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
-        mRecyclerview.setLayoutManager(layoutManager);
-        mRecyclerview.setAdapter(adapter);
     }
 
 
