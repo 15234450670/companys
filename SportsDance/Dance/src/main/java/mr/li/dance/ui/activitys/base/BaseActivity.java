@@ -99,6 +99,7 @@ public abstract class BaseActivity extends FragmentActivity implements HttpListe
         super.onCreate(savedInstanceState);
         setScreen();
         super.setContentView(R.layout.layout_base);
+       // AndroidBug54971Workaround.assistActivity(findViewById(getContentViewId()));
         initTitleView();
         setContentView(getContentViewId());
         setVolumeControlStream(AudioManager.STREAM_MUSIC);// 使得音量键控制媒体声音

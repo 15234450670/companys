@@ -152,12 +152,6 @@ public class TeachDetailsActivity extends BaseListActivity {
             mDanceViewHolder.getImageView(R.id.pic).setVisibility(View.GONE);
         } else {
             setHeadVisibility(View.VISIBLE);
-            /*if (videoView.isPlaying()) {
-                mDanceViewHolder.getImageView(R.id.pic).setVisibility(View.GONE);
-            } else {
-                mDanceViewHolder.getImageView(R.id.pic).setVisibility(View.VISIBLE);
-            }*/
-
         }
         if (videoView != null) {
             videoView.onConfigurationChanged(newConfig);

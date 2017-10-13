@@ -33,6 +33,7 @@
 
             <EditText
                 android:id="@+id/pwd_tv"
+                android:textColor="#333333"
                 style="@style/text_white_style_28"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -41,6 +42,7 @@
                 android:background="@null"
                 android:inputType="textPassword"
                 android:hint="请输入密码"
+
                 android:textColorHint="#7e7064" />
 
 
@@ -77,6 +79,7 @@
                 android:hint="请再输入一次"
                 android:inputType="textPassword"
                 android:text=""
+                android:textColor="#333333"
                 android:textColorHint="#7e7064" />
 
 

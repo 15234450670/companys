@@ -154,7 +154,6 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
             @Override
             public void itemClick(int position) {
                 BannerInfo bannerInfo = mLunBoDatas.get(position);
-
                 switch (bannerInfo.getType()) {
                     case 10101://直播
                         if (MainActivity.myBinder.binderIsPlaying()) {

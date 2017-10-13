@@ -9,7 +9,7 @@ import java.io.Serializable;
  * 描述:
  * 修订历史:
  */
-public class TeachInfo extends BaseHomeItem implements Serializable{
+public class TeachInfo extends BaseHomeItem implements Serializable {
     /**
      * id : 1
      * title : 标题一
@@ -22,8 +22,9 @@ public class TeachInfo extends BaseHomeItem implements Serializable{
     private String img;
     private String described;
     private String picture;//筛选  图片
-    public String name;
-   private String img_fm;
+    public  String name;
+    private String img_fm;
+
 
     @Override
     public String getImg_fm() {

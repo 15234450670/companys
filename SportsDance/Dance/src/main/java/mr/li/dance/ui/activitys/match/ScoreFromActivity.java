@@ -3,6 +3,7 @@ package mr.li.dance.ui.activitys.match;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.yolanda.nohttp.rest.Request;
 
@@ -11,7 +12,6 @@ import java.util.List;
 import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.StringResponse;
-import mr.li.dance.models.ScoreGroupInfo;
 import mr.li.dance.models.ScoreInfo;
 import mr.li.dance.ui.activitys.base.BaseListActivity;
 import mr.li.dance.ui.adapters.ScoreFromAdapter;
@@ -85,6 +85,7 @@ public class ScoreFromActivity extends BaseListActivity<ScoreInfo> {
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
+        Log.e("response", response);
         StringResponse stringResponse = JsonMananger.getReponseResult(response, StringResponse.class);
         String dataStr = stringResponse.getData();
         List<ScoreInfo> list = JsonMananger.jsonToList(dataStr, ScoreInfo.class);

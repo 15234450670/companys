@@ -50,6 +50,7 @@ import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.MyStrUtil;
 import mr.li.dance.utils.NToast;
+import mr.li.dance.utils.StatusBarUtil;
 import mr.li.dance.utils.Utils;
 import mr.li.dance.utils.updater.Updater;
 import mr.li.dance.utils.updater.UpdaterConfig;
@@ -84,7 +85,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);//B
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(getResources().getColor(R.color.home_bg_color));
-            // StatusBarUtil.StatusBarLightMode(this);
+            StatusBarUtil.StatusBarLightMode(this);
         }
     }
 
@@ -93,13 +94,13 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setScreen();
         setContentView(getContentViewId());
+        // AndroidBug54971Workaround.assistActivity(findViewById(getContentViewId()));
         initDatas();
         initViews();
         Scale();
         mPushAgent = PushAgent.getInstance(getApplicationContext());
         mPushAgent.onAppStart();
         MobclickAgent.onEvent(this, AppConfigs.CLICK_EVENT_17);
-
     }
 
     public int getContentViewId() {

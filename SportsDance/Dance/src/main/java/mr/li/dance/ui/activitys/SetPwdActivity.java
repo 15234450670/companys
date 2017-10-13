@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.yolanda.nohttp.rest.Request;
 
@@ -34,7 +35,7 @@ import mr.li.dance.utils.Utils;
 public class SetPwdActivity extends BaseActivity implements View.OnClickListener {
 
     private String mMobile;
-    private int setType;//-1 设置登录密码 1 忘记密码后设置密码
+    private int    setType;//-1 设置登录密码 1 忘记密码后设置密码
 
     @Override
     public int getContentViewId() {
@@ -52,7 +53,7 @@ public class SetPwdActivity extends BaseActivity implements View.OnClickListener
         setTitle("设置登录密码");
     }
 
-       public static void lunch(Context context, String mobile, int setType) {
+    public static void lunch(Context context, String mobile, int setType) {
         Intent intent = new Intent(context, SetPwdActivity.class);
         intent.putExtra("mobile", mobile);
         intent.putExtra("settype", setType);
@@ -80,24 +81,24 @@ public class SetPwdActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void onClick(View view) {
         String pwd = mDanceViewHolder.getTextValue(R.id.pwd_tv);
-            String repeatpwd = mDanceViewHolder.getTextValue(R.id.repeatpwd_tv);
-            if (MyStrUtil.isEmpty(pwd)) {
-                NToast.shortToast(this, "请输入密码");
-                return;
-            }
-            if (MyStrUtil.isEmpty(repeatpwd)) {
-                NToast.shortToast(this, "请再次输入密码");
-                return;
-            }
-            if (!TextUtils.equals(pwd, repeatpwd)) {
-                NToast.shortToast(this, "俩次密码输入不一致");
-            } else {
+        String repeatpwd = mDanceViewHolder.getTextValue(R.id.repeatpwd_tv);
+        if (MyStrUtil.isEmpty(pwd)) {
+            NToast.shortToast(this, "请输入密码");
+            return;
+        }
+        if (MyStrUtil.isEmpty(repeatpwd)) {
+            NToast.shortToast(this, "请再次输入密码");
+            return;
+        }
+        if (!TextUtils.equals(pwd, repeatpwd)) {
+            NToast.shortToast(this, "俩次密码输入不一致");
+        } else {
             if (setType == 0) {
-                Log.e("setType:",setType+"");
+                Log.e("setType:", setType + "");
                 setThirdPwd();
             } else if (setType == -1) {
-                   Register();
-                Log.e("setType",setType+"");
+                Register();
+                Log.e("setType", setType + "");
                 //  SetHeadNickActivity.lunch(this, mMobile, pwd);
             } else {
                 setPwd(pwd);
@@ -111,13 +112,13 @@ public class SetPwdActivity extends BaseActivity implements View.OnClickListener
      */
     private void Register() {
         String deviceToken = DanceApplication.getInstance().getDeviceToken();
-        Log.e("deviceToken:",deviceToken);
+        Log.e("deviceToken:", deviceToken);
         String version = Utils.getVersionName(this);
-        Log.e("version:",version);
+        Log.e("version:", version);
         String phone_xh = Utils.getSystemModel();
-        Log.e("phone_xh:",phone_xh);
+        Log.e("phone_xh:", phone_xh);
         String pwd = mDanceViewHolder.getTextValue(R.id.pwd_tv);
-        Log.e("pwd:",pwd);
+        Log.e("pwd:", pwd);
         Request<String> request = ParameterUtils.getSingleton().getRegisterMap(version, mMobile, pwd, deviceToken, "1", phone_xh);
         request(AppConfigs.passport_register, request, true);
     }
@@ -137,16 +138,17 @@ public class SetPwdActivity extends BaseActivity implements View.OnClickListener
         String pwd = mDanceViewHolder.getTextValue(R.id.pwd_tv);
         String repeatpwd = mDanceViewHolder.getTextValue(R.id.repeatpwd_tv);
         String deviceToken = DanceApplication.getInstance().getDeviceToken();
-        Request<String> request = ParameterUtils.getSingleton().getPassportPassword(deviceToken,openid, mobile, source, username, picture, pwd, repeatpwd);
+        Request<String> request = ParameterUtils.getSingleton().getPassportPassword(deviceToken, openid, mobile, source, username, picture, pwd, repeatpwd);
         request(AppConfigs.passport_password, request, true);
     }
 
     @Override
     public void onSucceed(int what, String response) {
         if (what == AppConfigs.login_retrieve) {
-            Log.e("response",response);
+            Log.e("response", response);
             StringResponse reponseResult = JsonMananger.getReponseResult(response, StringResponse.class);
             NToast.shortToast(this, reponseResult.getData());
+            hintKbTwo();
             finish();
 
         }
@@ -158,6 +160,7 @@ public class SetPwdActivity extends BaseActivity implements View.OnClickListener
             UserInfoResponse infoResponse = JsonMananger.getReponseResult(response, UserInfoResponse.class);
             UserInfo userInfo = infoResponse.getData();
             UserInfoManager.getSingleton().saveLoginInfo(this, userInfo);
+            hintKbTwo();
             finish();
             // PerfectInfoActivity.lunch(this, userInfo.getUserid());
 
@@ -169,20 +172,27 @@ public class SetPwdActivity extends BaseActivity implements View.OnClickListener
             UserInfoResponse infoResponse = JsonMananger.getReponseResult(response, UserInfoResponse.class);
             UserInfo userInfo = infoResponse.getData();
 
-                String nickname = infoResponse.getData().getNickname();
-                Log.e("nickname:",nickname);
-                if (!MyStrUtil.isEmpty(nickname)) {
-                    userInfo.setUsername(nickname);
+            String nickname = infoResponse.getData().getNickname();
+            Log.e("nickname:", nickname);
+            if (!MyStrUtil.isEmpty(nickname)) {
+                userInfo.setUsername(nickname);
 
             }
             UserInfoManager.getSingleton().saveLoginInfo(this, userInfo);
 
             // PerfectInfoActivity.lunch(this, userInfo.getUserid());
         }
-
+        hintKbTwo();
         startActivity(new Intent(this, MainActivity.class));
 
     }
 
-
+    private void hintKbTwo() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm.isActive() && getCurrentFocus() != null) {
+            if (getCurrentFocus().getWindowToken() != null) {
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        }
+    }
 }

@@ -252,12 +252,13 @@ public class SlideShowView extends FrameLayout {
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             ImageView imageView = imageViewsList.get(position);
-            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            //
             if (!MyStrUtil.isEmpty(mLunBoDatas)) {
                 String url = "";
                 if(position < mLunBoDatas.size()){
                     url = mLunBoDatas.get(position).getImg();
                 }
+                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
                 ImageLoaderManager.getSingleton().Load(context, url, imageView, R.drawable.default_banner);
             }
             imageView.setBackgroundResource(R.drawable.default_banner);
