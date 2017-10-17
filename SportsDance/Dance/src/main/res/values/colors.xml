@@ -11,7 +11,7 @@
 
     <color name="home_text_default_color">#949493</color>
     <color name="home_text_hover_color">#FF4081</color>
-
+    <color name="whh">#FFB6B4B4</color>
     <color name="mine_back_many">#f3f2f7</color>
     <color name="mine_item_add">#cd9a41</color>      、
     <color name="mine_item_fu">#27a235</color>

@@ -207,15 +207,12 @@ public class WithdrawdepositActivity extends BaseActivity {
 
     private void TiXian() {
         if (!MyStrUtil.isEmpty(back_money)) {
-            Log.e("money", back_money);
             double v = Double.parseDouble(back_money);
             DecimalFormat df = new DecimalFormat("#.00");
             df.format(v);
-            Log.e("v", v + "");
-            if (v >= 10.0) {
-
+            if (v >= 5.0) {
                 getTimes();
-            } else if (v >= 0.0 && v < 10.0) {
+            } else if (v >= 0.0 && v < 5.0) {
                 startActivity(new Intent(WithdrawdepositActivity.this, TiXianError.class));
             }
         }

@@ -3,6 +3,7 @@ package mr.li.dance.ui.activitys.music;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -46,6 +47,7 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
     public static String      imageUrl;
     private       ServiceConn conn;
     boolean isCollected;
+    private static String TAG = "SongActivity" ;
 
     @Override
 
@@ -56,6 +58,7 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
     }
 
     public void Info() {
+        Log.e(TAG,mItemId);
         String userId = UserInfoManager.getSingleton().getUserId(this);
         Request<String> musicInfoGeDanMap = ParameterUtils.getSingleton().getMusicInfoGeDanMap(userId, mItemId, String.valueOf(page));
         request(AppConfigs.home_music_gedan, musicInfoGeDanMap, false);
@@ -75,9 +78,7 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
                 if (a > -1) {
                     iv.setSelected(myBinder.binderIsPlaying());
                     gd_txt.setText(myBinder.mGetTitle());
-                    //mAdapter.selectItem(myBinder.mGetPosition());
                 }
-                //myBinder.mSetMusicList(mAdapter.getmList());
                 myBinder.setMs(new MusicService.MpStarted() {
                     @Override
                     public void onStart(int totalT) {
@@ -103,7 +104,7 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
             iv.setSelected(myBinder.binderIsPlaying());
 
         }
-        Info();
+
     }
 
     @Override
@@ -136,8 +137,8 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
             List<GeDanInfo.DataBean.ListBean> list = reponseResult.getData().getList();
             if (!list.isEmpty()) {
                 mAdapter.addList(isRefresh, list);
+                Log.e("Tag_list",list.toString());
                 myBinder.mSetMusicList(mAdapter.getmList(), mItemId);
-                //  myBinder.mSetList(mAdapter.getmList(), mItemId);
                 int a = myBinder.mGetPosition();
                 if (a > -1) {
                     if (myBinder.mIsSameList(mItemId)) {

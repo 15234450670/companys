@@ -190,7 +190,7 @@ public class PicActivity extends BaseActivity {
         TextView reset = (TextView) popipWindow_view.findViewById(R.id.reset);
         TextView sure = (TextView) popipWindow_view.findViewById(R.id.sure);
         WindowManager wm = this.getWindowManager();
-        int width = wm.getDefaultDisplay().getWidth() * 4 / 5;
+        int width = wm.getDefaultDisplay().getWidth() * 4 / 5 + 80;
         popupWindow = new PopupWindow(popipWindow_view, width,
                 WindowManager.LayoutParams.MATCH_PARENT);
         popupWindow.setFocusable(true);

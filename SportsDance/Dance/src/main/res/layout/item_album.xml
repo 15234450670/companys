@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
 
-    <ImageView
+   <!-- <ImageView
         android:id="@+id/headicon"
         android:layout_width="@dimen/spacing_100"
         android:layout_height="@dimen/spacing_100"
@@ -20,9 +20,10 @@
         android:layout_width="match_parent"
         android:layout_alignBottom="@+id/headicon"
         android:layout_alignTop="@+id/headicon"
-        android:layout_toRightOf="@+id/headicon" />
+        android:layout_toRightOf="@+id/headicon" />-->
 
     <RelativeLayout
+        android:layout_marginTop="@dimen/spacing_10"
         android:id="@+id/iamge_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/spacing_398"
@@ -45,6 +46,7 @@
             android:layout_alignParentRight="true"
             android:layout_margin="@dimen/spacing_20"
             android:gravity="bottom"
+            android:visibility="gone"
             android:orientation="horizontal">
 
             <ImageView
@@ -108,7 +110,7 @@
             android:src="@drawable/home_icon_001" />
 
         <TextView
-            android:textColor="#333333"
+
             android:id="@+id/num_tv"
             style="@style/text_white_style_20"
             android:layout_width="wrap_content"

@@ -85,7 +85,6 @@ public class TeachDetailsActivity extends BaseListActivity {
         return R.layout.activity_teachdetails;
     }
 
-
     @Override
     public void getIntentData() {
         super.getIntentData();
@@ -232,6 +231,7 @@ public class TeachDetailsActivity extends BaseListActivity {
     }
 
     private void setTeachDetail(String path) {
+
         mDanceViewHolder.getImageView(R.id.pic).setVisibility(View.GONE);
         mDanceViewHolder.getView(R.id.stop_layout).setVisibility(View.GONE);
         videoView.resetPlayer();
@@ -241,7 +241,6 @@ public class TeachDetailsActivity extends BaseListActivity {
         mBundle.putString(PlayerParams.KEY_PLAY_PU, AppConfigs.KEY_PLAY_PU);
         videoView.setPanorama(true);
         videoView.setDataSource(mBundle);
-
     }
 
     /**

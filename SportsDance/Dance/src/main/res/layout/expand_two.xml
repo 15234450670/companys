@@ -3,12 +3,13 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="horizontal">
-     <mr.li.dance.utils.util.GridUtils
-         android:id="@+id/gv"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:numColumns="3">
 
-     </mr.li.dance.utils.util.GridUtils>
+    <mr.li.dance.utils.util.GridUtils
+        android:id="@+id/gv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="3">
+
+    </mr.li.dance.utils.util.GridUtils>
 
 </LinearLayout>

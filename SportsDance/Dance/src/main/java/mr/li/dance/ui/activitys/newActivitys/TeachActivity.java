@@ -53,13 +53,13 @@ import static mr.li.dance.ui.activitys.MainActivity.myBinder;
  */
 public class TeachActivity extends BaseActivity {
     int page = 1;
-    private TabLayout tabLayout;
-    private ImageView label_pic;
+    private TabLayout      tabLayout;
+    private ImageView      label_pic;
     private IndexViewPager vp;
     List<Fragment> mList = new ArrayList<>();
-    private PopupWindow popupWindow;
-    private ExpandableListView celv;
-    private ExPandableAdapter exPandableAdapter;
+    private PopupWindow                popupWindow;
+    private ExpandableListView         celv;
+    private ExPandableAdapter          exPandableAdapter;
     private List<LabelSelect.DataBean> data;
 
     @Override
@@ -194,7 +194,7 @@ public class TeachActivity extends BaseActivity {
         TextView reset = (TextView) popipWindow_view.findViewById(R.id.reset);
         TextView sure = (TextView) popipWindow_view.findViewById(R.id.sure);
         WindowManager wm = this.getWindowManager();
-        int width = wm.getDefaultDisplay().getWidth() * 4 / 5;
+        int width = wm.getDefaultDisplay().getWidth() * 4 / 5 + 80;
         popupWindow = new PopupWindow(popipWindow_view, width,
                 WindowManager.LayoutParams.MATCH_PARENT);
         popupWindow.setFocusable(true);

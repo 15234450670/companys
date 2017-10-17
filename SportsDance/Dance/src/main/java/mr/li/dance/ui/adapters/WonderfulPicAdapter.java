@@ -2,14 +2,11 @@ package mr.li.dance.ui.adapters;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.ImageView;
 
 import mr.li.dance.R;
 import mr.li.dance.models.AlbumInfo;
 import mr.li.dance.models.Match;
-import mr.li.dance.models.Video;
 import mr.li.dance.utils.MyStrUtil;
-import mr.li.dance.utils.glide.ImageLoaderManager;
 
 /**
  * Created by Lixuewei on 2017/6/3.
@@ -92,8 +89,8 @@ public class WonderfulPicAdapter extends BaseRecyclerAdapter<AlbumInfo> {
         holder.setText(R.id.time_tv, albumInfo.getInserttime());
         holder.setText(R.id.num_tv, "共"+albumInfo.getPhotos()+"张");
         holder.getView(R.id.picnum_tv).setVisibility(View.VISIBLE);
-        holder.setText(R.id.username_tv, albumInfo.getUsername());
-        ImageLoaderManager.getSingleton().LoadCircle(mContext, albumInfo.getPicture_src(), (ImageView) holder.getView(R.id.headicon), R.drawable.icon_mydefault);
+      //  holder.setText(R.id.username_tv, albumInfo.getUsername());
+      //  ImageLoaderManager.getSingleton().LoadCircle(mContext, albumInfo.getPicture_src(), (ImageView) holder.getView(R.id.headicon), R.drawable.icon_mydefault);
 
 
     }

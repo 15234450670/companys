@@ -241,7 +241,7 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
 
             danceViewHolder.setViewVisibility(R.id.picnum_tv, View.INVISIBLE);
             if (video.getType() == 10102) {
-                danceViewHolder.setText(R.id.from_tv, "点播");
+                danceViewHolder.setText(R.id.from_tv, "视频");
 
 
             }

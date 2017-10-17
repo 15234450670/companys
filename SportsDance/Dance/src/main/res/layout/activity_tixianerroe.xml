@@ -22,7 +22,7 @@
     <TextView
       android:layout_below="@+id/i"
         style="@style/tixian_zhong"
-        android:text="您的账户余额小于10元暂不支持提现"
+        android:text="您的账户余额小于5元暂不支持提现"
           android:layout_marginTop="@dimen/spacing_20"
         />
 

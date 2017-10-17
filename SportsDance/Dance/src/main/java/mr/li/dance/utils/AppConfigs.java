@@ -8,8 +8,8 @@ package mr.li.dance.utils;
 
 public class AppConfigs {
 
-    private final static String MAINurl = "http://work.cdsf.org.cn";//测试环境
- // private final static String MAINurl = "http://cdsf.org.cn";//正式环境
+    //   private final static String MAINurl = "http://work.cdsf.org.cn";//测试环境
+    private final static String MAINurl = "http://cdsf.org.cn";//正式环境
 
     private final static String DomainUrl = MAINurl + "/mobileClient";
     private final static String SHAREURL  = MAINurl + "/h5";
@@ -20,14 +20,14 @@ public class AppConfigs {
     public final static String USERID          = "USERID";
 
 
-    public final static String KAOJIEXPLAIN = DomainUrl + "/kaoji.explain";
+    public final static String KAOJIEXPLAIN   = DomainUrl + "/kaoji.explain";
     //课程介绍
-    public final static String TEACHERCLASS  = SHAREURL + "/share.Course?id=";
+    public final static String TEACHERCLASS   = SHAREURL + "/share.Course?id=";
     //资讯分享
     public final static String ZixunShareUrl  = DomainUrl + "/home.zxdetailf?id=%s";
-    public final static String ZixunShareUrl2  = SHAREURL + "/share.zxfx?id=";
-    public final static String USER  = SHAREURL + "/share.Ament";
-    public final static String tach_detial  = SHAREURL + "/share.spjx?id=";
+    public final static String ZixunShareUrl2 = SHAREURL + "/share.zxfx?id=";
+    public final static String USER           = SHAREURL + "/share.Ament";
+    public final static String tach_detial    = SHAREURL + "/share.spjx?id=";
     //赛事规则，赛事设项 赛程表 分享
     public final static String SAISHIShareUrl = SHAREURL + "/share.gcfx?id=%s&page=%s";
     //相册分享
@@ -38,15 +38,15 @@ public class AppConfigs {
     public final static String SHAREMOV       = SHAREURL + "/share.mov?id=%s";
     //赛事分享
     public final static String SHAREGAME      = SHAREURL + "/share.game?id=%s";
-    public final static String SHAREGAME1      = SHAREURL + "/share.spfx?id=";
-    public final static String SHAREPIC      = SHAREURL + "/share.tpfx?id=";
-    public final static String SHARESOURE      = SHAREURL + "/share.cjfx?id=";
+    public final static String SHAREGAME1     = SHAREURL + "/share.spfx?id=";
+    public final static String SHAREPIC       = SHAREURL + "/share.tpfx?id=";
+    public final static String SHARESOURE     = SHAREURL + "/share.cjfx?id=";
     //音乐分享
     public final static String SHAREMUSIC     = SHAREURL + "/share.gdfx?id=";
     //播放界面分享
-    public final static String SHAREMUSICS     = SHAREURL + "/share.gqfx?classid=";
-    public final static String KEY_PLAY_UUID = "7fjvplaumn";
-    public final static String KEY_PLAY_PU   = "393628f9df";
+    public final static String SHAREMUSICS    = SHAREURL + "/share.gqfx?classid=";
+    public final static String KEY_PLAY_UUID  = "7fjvplaumn";
+    public final static String KEY_PLAY_PU    = "393628f9df";
 
     public final static String finishactivityAction = "finish.activity.action";
     public final static String updateinfoAction     = "update.userinfo.action";
@@ -87,7 +87,7 @@ public class AppConfigs {
     public final static int user_sendOpinion          = 0x0032;//d
     public final static int user_collection           = 0x0033;//d
     public final static int home_collectionList       = 0x0034;//d
-    public final static int user_collections           = 0x0035;//d
+    public final static int user_collections          = 0x0035;//d
 
 
     public final static int getMatch_index_code     = 0x0035;
@@ -119,11 +119,12 @@ public class AppConfigs {
     public final static int home_music_page         = 0x0062;
     public final static int home_music_gedan        = 0x0063;
     public final static int home_music_wudao        = 0x0064;
-    public final static int home_tab_zx        = 0x0065;
-    public final static int home_tab_teach        = 0x0066;
-    public final static int home_tab_teachs        = 0x0066;
-    public final static int home_tab_teach_details       = 0x0067;
-    public final static int video_special       = 0x0068;
+    public final static int home_tab_zx             = 0x0065;
+    public final static int home_tab_teach          = 0x0066;
+    public final static int home_tab_teachs         = 0x0066;
+    public final static int home_tab_teach_details  = 0x0067;
+    public final static int video_special           = 0x0068;
+
     public static String getDomainUrl() {
         return DomainUrl;
     }

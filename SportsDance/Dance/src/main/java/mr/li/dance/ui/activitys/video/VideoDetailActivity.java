@@ -107,7 +107,6 @@ public class VideoDetailActivity extends BaseListActivity {
 
     @Override
     public void initViews() {
-
         super.initViews();
         setTitle("视频详情");
         setRightImage(R.drawable.collect_icon, R.drawable.share_icon_001);
@@ -124,6 +123,7 @@ public class VideoDetailActivity extends BaseListActivity {
         LinearLayoutManager manager1 = new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false);
         rv.setLayoutManager(manager1);
         final RelativeLayout videoContainer = (RelativeLayout) findViewById(R.id.videoContainer);
+
         videoContainer.addView((View) videoView, VideoLayoutParams.computeContainerSize(this, 16, 9));
     }
 

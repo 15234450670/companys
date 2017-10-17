@@ -231,10 +231,12 @@
         <activity
             android:name=".ui.activitys.video.VideoDetailActivity"
             android:fitsSystemWindows="true"
+            android:clipToPadding="true"
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".ui.activitys.newActivitys.TeachDetailsActivity"
+                  android:clipToPadding="true"
                   android:screenOrientation="portrait"
                   android:fitsSystemWindows="true"
                   android:configChanges="keyboard|screenSize|orientation|layoutDirection"
