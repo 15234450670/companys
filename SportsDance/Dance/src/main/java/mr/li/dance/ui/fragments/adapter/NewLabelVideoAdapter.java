@@ -28,9 +28,10 @@ public class NewLabelVideoAdapter extends BaseRecyclerAdapter<TeachInfo> {
 
     @Override
     public void bindData(RecyclerViewHolder holder, int position, TeachInfo item) {
-        holder.setText(R.id.name, item.name);
+        holder.setText(R.id.name, item.getTitle());
         holder.setImageByUrlOrFilePath(R.id.imageView, item.getPicture(), R.drawable.default_banner);
-        holder.setText(R.id.time_tv,item.getDescribed());
         holder.getView(R.id.time_tv).setVisibility(View.GONE);
+
+
     }
 }

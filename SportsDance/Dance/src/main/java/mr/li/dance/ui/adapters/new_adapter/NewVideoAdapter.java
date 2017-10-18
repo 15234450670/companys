@@ -30,7 +30,7 @@ import mr.li.dance.utils.MyStrUtil;
 public class NewVideoAdapter extends DanceBaseAdapter {
     Context mContext;
     private List<Video> mDatas;
-
+    private see s;
     private int EXARCOUNT = 0;
     private boolean hasTypeList;
     private boolean hasQuickList;
@@ -124,6 +124,13 @@ public class NewVideoAdapter extends DanceBaseAdapter {
         ArrayList<Video> videos = response.getData().getDb_rec();
         if (!MyStrUtil.isEmpty(videos)) {
             mDatas.addAll(videos);
+            if (s != null) {
+                s.Look();
+            }
+        } else {
+            if (s != null) {
+                s.NoSee();
+            }
         }
         notifyDataSetChanged();
     }
@@ -137,6 +144,13 @@ public class NewVideoAdapter extends DanceBaseAdapter {
         ArrayList<Video> videos = response.getData().getArr();
         if (!MyStrUtil.isEmpty(videos)) {
             mDatas.addAll(videos);
+            if (s != null) {
+                s.Look();
+            }
+        } else {
+            if (s != null) {
+                s.NoSee();
+            }
         }
         notifyDataSetChanged();
     }
@@ -147,6 +161,13 @@ public class NewVideoAdapter extends DanceBaseAdapter {
         if (!MyStrUtil.isEmpty(videos)) {
             mDatas.addAll(videos);
             super.loadMore();
+            if (s != null) {
+                s.Look();
+            }
+        } else {
+            if (s != null) {
+                s.NoSee();
+            }
         }
         notifyDataSetChanged();
     }
@@ -156,8 +177,23 @@ public class NewVideoAdapter extends DanceBaseAdapter {
         if (!MyStrUtil.isEmpty(videos)) {
             mDatas.addAll(videos);
             super.loadMore();
+            if (s != null) {
+                s.Look();
+            }
+        } else {
+            if (s != null) {
+                s.NoSee();
+            }
         }
         notifyDataSetChanged();
     }
+    public interface see {
+        void NoSee();
 
+        void Look();
+    }
+
+    public void Nosee(see s) {
+        this.s = s;
+    }
 }

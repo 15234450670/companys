@@ -5,6 +5,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.yolanda.nohttp.rest.Request;
 
@@ -28,6 +30,8 @@ public class NewMusicFragment extends BaseListFragment {
     NewMusicAdapter adapter;
     String          path;
     int page = 1;
+    private LinearLayout wu;
+    private LinearLayout you;
     private String tag = "NewMusicFragment";
 
 
@@ -65,13 +69,36 @@ public class NewMusicFragment extends BaseListFragment {
     @Override
     public RecyclerView.Adapter getAdapter() {
         adapter = new NewMusicAdapter(getActivity());
+        adapter.Nosee(new NewMusicAdapter.see() {
+            @Override
+            public void NoSee() {
+                No();
+            }
+
+            @Override
+            public void Look() {
+                Looks();
+            }
+        });
         return adapter;
+    }
+
+    private void No() {
+        you.setVisibility(View.GONE);
+        wu.setVisibility(View.VISIBLE);
+        wu.bringToFront();
+    }
+
+    private void Looks() {
+        you.setVisibility(View.VISIBLE);
+        wu.setVisibility(View.GONE);
+        you.bringToFront();
     }
 
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
-        Log.e("music",response);
+        Log.e("music", response);
 
         if (what == AppConfigs.home_music) {
             MusicResponse reponseResult = JsonMananger.getReponseResult(response, MusicResponse.class);
@@ -93,6 +120,8 @@ public class NewMusicFragment extends BaseListFragment {
     @Override
     public void initViews() {
         super.initViews();
+        wu = (LinearLayout) mView.findViewById(R.id.wu);
+        you = (LinearLayout) mView.findViewById(R.id.rec);
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
         mRecyclerview.setLayoutManager(layoutManager);
         mRecyclerview.setAdapter(adapter);

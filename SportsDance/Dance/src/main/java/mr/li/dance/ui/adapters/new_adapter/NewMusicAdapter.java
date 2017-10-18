@@ -29,6 +29,8 @@ public class NewMusicAdapter extends DanceBaseAdapter {
     private List<MusicInfo> mDatas;
     Context mContext;
     private final int TYPE_2 = 2;//列表
+    private see s;
+
     public NewMusicAdapter(Context context) {
         this.mContext = context;
         mDatas = new ArrayList<>();
@@ -51,25 +53,27 @@ public class NewMusicAdapter extends DanceBaseAdapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         bindType2((MyViewHolder) holder, position);
     }
+
     private void bindType2(final MyViewHolder holder, final int position) {
         final MusicInfo musicRecAppBean = mDatas.get(position);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SongActivity.lunch(mContext,musicRecAppBean.getId(),musicRecAppBean.getTitle());
+                SongActivity.lunch(mContext, musicRecAppBean.getId(), musicRecAppBean.getTitle());
 
             }
         });
 
         if (!MyStrUtil.isEmpty(musicRecAppBean.getImg_fm())) {
             holder.danceViewHolder.setRoundImageByUrlOrFilePath(R.id.item_pic, musicRecAppBean.getImg_fm(), R.drawable.default_video);
-            holder.danceViewHolder.setText(R.id.title,musicRecAppBean.getTitle());
+            holder.danceViewHolder.setText(R.id.title, musicRecAppBean.getTitle());
         }
 
     }
+
     @Override
     public int getItemCount() {
-        return mDatas ==null?0:mDatas.size();
+        return mDatas == null ? 0 : mDatas.size();
     }
 
     public void refresh(MusicResponse homeResponse) {
@@ -78,16 +82,31 @@ public class NewMusicAdapter extends DanceBaseAdapter {
         ArrayList<MusicInfo> music_class = homeResponse.getData().getMusic_class();
         if (!MyStrUtil.isEmpty(music_class)) {
             mDatas.addAll(music_class);
+            if (s != null) {
+                s.Look();
+            }
+        } else {
+            if (s != null) {
+                s.NoSee();
+            }
         }
 
         notifyDataSetChanged();
     }
+
     public void refresh1(LabelSelectMusicInfo homeResponse) {
         super.refresh();
         mDatas.clear();
         ArrayList<MusicInfo> music_class = homeResponse.getData().getArr();
         if (!MyStrUtil.isEmpty(music_class)) {
             mDatas.addAll(music_class);
+            if (s != null) {
+                s.Look();
+            }
+        } else {
+            if (s != null) {
+                s.NoSee();
+            }
         }
 
         notifyDataSetChanged();
@@ -97,15 +116,30 @@ public class NewMusicAdapter extends DanceBaseAdapter {
         ArrayList<MusicInfo> music_item = indexResponse.getData().getMusic_class();
         if (!MyStrUtil.isEmpty(music_item)) {
             mDatas.addAll(music_item);
+            if (s != null) {
+                s.Look();
+            }
             super.loadMore();
+        } else {
+            if (s != null) {
+                s.NoSee();
+            }
         }
         notifyDataSetChanged();
     }
+
     public void loadMore1(LabelSelectMusicInfo indexResponse) {
         ArrayList<MusicInfo> music_item = indexResponse.getData().getArr();
         if (!MyStrUtil.isEmpty(music_item)) {
             mDatas.addAll(music_item);
+            if (s != null) {
+                s.Look();
+            }
             super.loadMore();
+        } else {
+            if (s != null) {
+                s.NoSee();
+            }
         }
         notifyDataSetChanged();
     }
@@ -117,6 +151,7 @@ public class NewMusicAdapter extends DanceBaseAdapter {
 
         }
     }
+
     @Override
     public int getItemViewType(int position) {
 
@@ -124,4 +159,15 @@ public class NewMusicAdapter extends DanceBaseAdapter {
 
 
     }
+
+    public interface see {
+        void NoSee();
+
+        void Look();
+    }
+
+    public void Nosee(see s) {
+        this.s = s;
+    }
+
 }

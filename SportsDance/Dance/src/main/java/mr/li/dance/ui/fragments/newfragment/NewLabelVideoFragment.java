@@ -22,8 +22,6 @@ import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.MyStrUtil;
 
-import static com.taobao.accs.ACCSManager.mContext;
-
 /**
  * 作者: SuiFeng
  * 版本:
@@ -103,7 +101,7 @@ public class NewLabelVideoFragment  extends BaseListFragment<TeachInfo> {
     @Override
     public void itemClick(int position, TeachInfo ziXunInfo) {
         if (!TextUtils.isEmpty(ziXunInfo.getId())) {
-            VideoDetailActivity.lunch(mContext, ziXunInfo.getId());
+            VideoDetailActivity.lunch(getActivity(), ziXunInfo.getId());
         } else {
             Toast.makeText(getActivity(), "暂时没有信息..", Toast.LENGTH_SHORT).show();
         }

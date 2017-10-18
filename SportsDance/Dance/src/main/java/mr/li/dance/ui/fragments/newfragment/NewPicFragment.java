@@ -4,8 +4,12 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.yolanda.nohttp.rest.Request;
+
+import java.util.ArrayList;
 
 import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
@@ -17,6 +21,7 @@ import mr.li.dance.ui.adapters.new_adapter.NewPicAdapter;
 import mr.li.dance.ui.fragments.BaseListFragment;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
+import mr.li.dance.utils.MyStrUtil;
 
 /**
  * 作者: SuiFeng
@@ -28,12 +33,15 @@ import mr.li.dance.utils.JsonMananger;
 public class NewPicFragment extends BaseListFragment<PhotoClassBean> {
     NewPicAdapter adapter;
     int page = 1;
-    private String path;
+    private String       path;
+    private LinearLayout wu;
+    private LinearLayout you;
 
     @Override
     public void initViews() {
         super.initViews();
-
+        wu = (LinearLayout) mView.findViewById(R.id.wu);
+        you = (LinearLayout) mView.findViewById(R.id.rec);
     }
 
     @Override
@@ -77,8 +85,20 @@ public class NewPicFragment extends BaseListFragment<PhotoClassBean> {
             adapter.addList(isRefresh, reponseResult.getData().getPhotoClass());
         } else {
             LabelPicInfo reponseResult1 = JsonMananger.getReponseResult(response, LabelPicInfo.class);
-            adapter.addList(isRefresh, reponseResult1.getData().getArr());
+            ArrayList<PhotoClassBean> arr = reponseResult1.getData().getArr();
+            if (MyStrUtil.isEmpty(arr)) {
+                wu.setVisibility(View.VISIBLE);
+                you.setVisibility(View.GONE);
+                wu.bringToFront();
+            } else {
+                wu.setVisibility(View.GONE);
+                you.setVisibility(View.VISIBLE);
+                you.bringToFront();
+                adapter.addList(isRefresh, arr);
+            }
+
         }
+        adapter.notifyDataSetChanged();
 
     }
 
