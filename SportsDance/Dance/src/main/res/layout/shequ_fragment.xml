@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:minHeight="48dip"
+        android:orientation="horizontal">
+
+        <RadioGroup
+            android:id="@+id/shequ_title_rg"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/spacing_80"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:minHeight="30dp"
+            android:orientation="horizontal"
+            android:padding="2dp">
+
+            <RadioButton
+                android:id="@+id/news_rb"
+                style="@style/shequ_titletext_style"
+                android:layout_height="match_parent"
+                android:layout_marginRight="30dp"
+                android:checked="true"
+                android:text="最新"
+
+                />
+
+            <RadioButton
+                android:id="@+id/hot_rb"
+                style="@style/shequ_titletext_style"
+                android:text="最热"/>
+        </RadioGroup>
+
+        <ImageView
+            android:id="@+id/btn_music"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/spacing_80"
+            android:layout_marginRight="@dimen/spacing_20"
+            android:src="@drawable/btn_music"/>
+    </LinearLayout>
+
+    <include layout="@layout/split_lines"/>
+
+    <android.support.v4.view.ViewPager
+
+        android:id="@+id/shequ_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+</LinearLayout>

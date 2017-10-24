@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:fitsSystemWindows="true"
+              android:orientation="vertical">
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/home_spilitline_width"
-        android:background="@color/cc_dot_dark" />
+        android:background="@color/cc_dot_dark"/>
 
     <!-- 底部导航 -->
 
@@ -37,7 +37,7 @@
                 style="@style/bottom_icon_style"
                 android:layout_centerHorizontal="true"
                 android:focusable="false"
-                android:src="@drawable/home_icon_0011" />
+                android:src="@drawable/home_icon_0011"/>
             <!--android:src="@drawable/tab_contact_list"-->
 
             <TextView
@@ -49,7 +49,69 @@
                 android:layout_marginTop="2dp"
                 android:text="@string/homepage"
                 android:textColor="@color/bottom_navigation"
-                android:textSize="12sp" />
+                android:textSize="12sp"/>
+        </mr.li.dance.ui.widget.BottomRelativeLayout>
+
+        <mr.li.dance.ui.widget.BottomRelativeLayout
+            android:id="@+id/shequ_layout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="3dp"
+            app:default_icon="@drawable/shequ2"
+            app:hover_icon="@drawable/shequ1">
+
+
+            <ImageView
+                android:id="@+id/examination_icon"
+                style="@style/bottom_icon_style"
+                android:layout_centerHorizontal="true"
+                android:focusable="false"
+                android:src="@drawable/shequ2"/>
+            <!--android:src="@drawable/tab_contact_list"-->
+
+            <TextView
+                android:id="@+id/examination_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/examination_icon"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:text="@string/shequ"
+                android:textColor="@color/light_black"
+                android:textSize="12sp"/>
+        </mr.li.dance.ui.widget.BottomRelativeLayout>
+
+        <mr.li.dance.ui.widget.BottomRelativeLayout
+            android:id="@+id/fabu_layout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="3dp"
+            app:default_icon="@drawable/home_icon_0013"
+            app:hover_icon="@drawable/home_icon_009">
+
+
+            <ImageView
+                android:id="@+id/examination_icon1"
+                style="@style/bottom_icon_style"
+                android:layout_centerHorizontal="true"
+                android:focusable="false"
+                android:src="@drawable/fabu_icon"/>
+            <!--android:src="@drawable/tab_contact_list"-->
+
+            <TextView
+                android:id="@+id/examination_tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/examination_icon1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="2dp"
+                android:text="@string/release"
+                android:textColor="@color/light_black"
+                android:textSize="12sp"/>
         </mr.li.dance.ui.widget.BottomRelativeLayout>
 
         <mr.li.dance.ui.widget.BottomRelativeLayout
@@ -70,7 +132,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:focusable="false"
-                android:src="@drawable/home_icon_0014" />
+                android:src="@drawable/home_icon_0014"/>
 
             <TextView
                 android:id="@+id/match_tv"
@@ -81,7 +143,7 @@
                 android:layout_marginTop="2dp"
                 android:text="@string/match"
                 android:textColor="@color/light_black"
-                android:textSize="12sp" />
+                android:textSize="12sp"/>
 
         </mr.li.dance.ui.widget.BottomRelativeLayout>
 
@@ -103,36 +165,36 @@
         </mr.li.dance.ui.widget.BottomRelativeLayout>-->
 
 
-        <!--<mr.li.dance.ui.widget.BottomRelativeLayout
-            android:id="@+id/examination_layout"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:padding="3dp"
-            app:default_icon="@drawable/home_icon_0013"
-            app:hover_icon="@drawable/home_icon_009">
+        <!--   <mr.li.dance.ui.widget.BottomRelativeLayout
+               android:id="@+id/examination_layout"
+               android:layout_width="0dp"
+               android:layout_height="match_parent"
+               android:layout_weight="1"
+               android:gravity="center"
+               android:padding="3dp"
+               app:default_icon="@drawable/home_icon_0013"
+               app:hover_icon="@drawable/home_icon_009">
 
 
-            <ImageView
-                android:id="@+id/examination_icon"
-                style="@style/bottom_icon_style"
-                android:layout_centerHorizontal="true"
-                android:focusable="false"
-                android:src="@drawable/home_icon_0013" />
-            &lt;!&ndash;android:src="@drawable/tab_contact_list"&ndash;&gt;
+               <ImageView
+                   android:id="@+id/examination_icon"
+                   style="@style/bottom_icon_style"
+                   android:layout_centerHorizontal="true"
+                   android:focusable="false"
+                   android:src="@drawable/home_icon_0013" />
+               &lt;!&ndash;android:src="@drawable/tab_contact_list"&ndash;&gt;
 
-            <TextView
-                android:id="@+id/examination_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/examination_icon"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="2dp"
-                android:text="@string/examination"
-                android:textColor="@color/bottom_text_default_color"
-                android:textSize="12sp" />
-        </mr.li.dance.ui.widget.BottomRelativeLayout>-->
+               <TextView
+                   android:id="@+id/examination_tv"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_below="@id/examination_icon"
+                   android:layout_centerHorizontal="true"
+                   android:layout_marginTop="2dp"
+                   android:text="@string/examination"
+                   android:textColor="@color/bottom_text_default_color"
+                   android:textSize="12sp" />
+           </mr.li.dance.ui.widget.BottomRelativeLayout>-->
 
         <mr.li.dance.ui.widget.BottomRelativeLayout
             android:id="@+id/mine_layout"
@@ -150,7 +212,7 @@
                 style="@style/bottom_icon_style"
                 android:layout_centerHorizontal="true"
                 android:focusable="false"
-                android:src="@drawable/home_icon_0012" />
+                android:src="@drawable/home_icon_0012"/>
             <!--android:src="@drawable/tab_contact_list"-->
 
             <TextView
@@ -162,7 +224,7 @@
                 android:layout_marginTop="2dp"
                 android:text="@string/mine"
                 android:textColor="@color/light_black"
-                android:textSize="12sp" />
+                android:textSize="12sp"/>
         </mr.li.dance.ui.widget.BottomRelativeLayout>
     </LinearLayout>
 </LinearLayout>

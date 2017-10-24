@@ -8,8 +8,8 @@ package mr.li.dance.utils;
 
 public class AppConfigs {
 
-    //   private final static String MAINurl = "http://work.cdsf.org.cn";//测试环境
-    private final static String MAINurl = "http://cdsf.org.cn";//正式环境
+     private final static String MAINurl = "http://work.cdsf.org.cn";//测试环境
+    // private final static String MAINurl = "http://cdsf.org.cn";//正式环境
 
     private final static String DomainUrl = MAINurl + "/mobileClient";
     private final static String SHAREURL  = MAINurl + "/h5";
@@ -18,7 +18,6 @@ public class AppConfigs {
     public final static String LOGING_PASSWORD = "loging_password";
     public final static String USERINFOJSON    = "USERINFOJSON";
     public final static String USERID          = "USERID";
-
 
     public final static String KAOJIEXPLAIN   = DomainUrl + "/kaoji.explain";
     //课程介绍
@@ -50,7 +49,6 @@ public class AppConfigs {
 
     public final static String finishactivityAction = "finish.activity.action";
     public final static String updateinfoAction     = "update.userinfo.action";
-
 
     public final static int SENDMSG_REQUEST_CODE      = 0x001;
     public final static int home_index                = 0x0002;
@@ -124,11 +122,15 @@ public class AppConfigs {
     public final static int home_tab_teachs         = 0x0066;
     public final static int home_tab_teach_details  = 0x0067;
     public final static int video_special           = 0x0068;
+    public final static int shequ_news_fragment           = 0x0069;
+    public final static int shequ_news_fragments           = 0x0070;
+    public final static int person = 0x0071;//个人主页
+    public final static int person_item = 0x0071;//个人列表
+    public final static int person_items = 0x0072;//个人列表
 
     public static String getDomainUrl() {
         return DomainUrl;
     }
-
 
     public final static String CLICK_EVENT_1  = "1";//首页推荐
     public final static String CLICK_EVENT_2  = "2";//首页点播
@@ -138,6 +140,7 @@ public class AppConfigs {
     public final static String CLICK_EVENT_6  = "6";//首页搜索
     public final static String CLICK_EVENT_7  = "7";//赛事首页
     public final static String CLICK_EVENT_8  = "8";//考级模块
+    public final static String CLICK_EVENT_33  = "33";//社区
     public final static String CLICK_EVENT_9  = "9";//我的
     public final static String CLICK_EVENT_10 = "10";//我的消息
     public final static String CLICK_EVENT_11 = "11";//我的关注

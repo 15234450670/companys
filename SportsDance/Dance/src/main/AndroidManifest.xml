@@ -206,6 +206,16 @@
         <activity android:name=".ui.activitys.music.PlayMusicActivity"
                   android:screenOrientation="portrait"
             />
+        <activity android:name=".ui.activitys.newActivitys.PersonageActivity"
+                  android:screenOrientation="portrait"
+            />
+        <activity android:name=".ui.activitys.newActivitys.Shequ_fans"
+                  android:screenOrientation="portrait"
+            />
+        <activity android:name=".ui.activitys.newActivitys.Shequ_look"
+                  android:screenOrientation="portrait"
+            />
+
         <activity android:name=".ui.fragments.main.ExaminationFragment"
                   android:screenOrientation="portrait"
             />

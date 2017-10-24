@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+    >
+
+    <include
+        android:id="@+id/head"
+        layout="@layout/shequ_head"/>
+
+    <RelativeLayout
+
+        android:id="@+id/iamge_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_300"
+        android:layout_below="@+id/head"
+        android:layout_marginLeft="@dimen/spacing_20"
+        android:layout_marginRight="@dimen/spacing_20"
+        android:layout_marginTop="@dimen/spacing_20">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/default_video"/>
+
+        <ImageView
+            android:id="@+id/sq_ship_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/home_icon_008"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/iamge_layout_two"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_300"
+        android:layout_below="@+id/head"
+        android:layout_marginLeft="@dimen/spacing_20"
+        android:layout_marginRight="@dimen/spacing_20"
+        android:layout_marginTop="@dimen/spacing_20"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/imageView_two_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+            android:src="@drawable/default_video"/>
+
+        <ImageView
+            android:id="@+id/imageView_two_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/spacing_20"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+            android:src="@drawable/default_video"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/iamge_layout_three"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_300"
+        android:layout_below="@+id/head"
+        android:layout_marginLeft="@dimen/spacing_20"
+        android:layout_marginRight="@dimen/spacing_20"
+        android:layout_marginTop="@dimen/spacing_20"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView_three_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+            android:src="@drawable/default_video"/>
+
+        <ImageView
+            android:id="@+id/imageView_three_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/spacing_20"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+            android:src="@drawable/default_video"
+            />
+
+        <ImageView
+            android:id="@+id/imageView_three_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_20"
+            android:layout_weight="1"
+            android:scaleType="fitXY"
+            android:src="@drawable/default_video"/>
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <include layout="@layout/shequ_end"/>
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_10"
+        android:background="#e1e1e1"/>
+
+
+</LinearLayout>

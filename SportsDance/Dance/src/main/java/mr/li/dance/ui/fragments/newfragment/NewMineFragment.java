@@ -23,6 +23,7 @@ import mr.li.dance.ui.activitys.mine.MyMessageActivity;
 import mr.li.dance.ui.activitys.mine.SettingActivity;
 import mr.li.dance.ui.activitys.mine.SuggestActivity;
 import mr.li.dance.ui.activitys.mine.UserInfoActivity;
+import mr.li.dance.ui.activitys.newActivitys.PersonageActivity;
 import mr.li.dance.ui.activitys.newTab.TabCollect;
 import mr.li.dance.ui.adapters.MineAdapter;
 import mr.li.dance.ui.fragments.BaseListFragment;
@@ -40,6 +41,7 @@ import mr.li.dance.utils.glide.ImageLoaderManager;
  */
 public class NewMineFragment extends BaseListFragment {
     MineAdapter mMineAdapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
@@ -56,6 +58,7 @@ public class NewMineFragment extends BaseListFragment {
             }
         });
     }
+
     @Override
     public void itemClick(int position, Object value) {
         if (!UserInfoManager.getSingleton().isLoading(getActivity())) {
@@ -86,12 +89,12 @@ public class NewMineFragment extends BaseListFragment {
             case 3:
                 /*MobclickAgent.onEvent(getActivity(), AppConfigs.CLICK_EVENT_12);
                 MyAlbumActivity.lunch(getActivity(), 0x005);*/
-                 ExaminationFragment.lunch(getActivity());
+                ExaminationFragment.lunch(getActivity());
                 break;
             //关于我们
             case 4:
                 MyDanceWebActivity.lunch(getActivity(), MyDanceWebActivity.ABOUTTYPE, "关于我们");
-              //  AccountActivity.lunch(getActivity());
+                //  AccountActivity.lunch(getActivity());
                 break;
             //意见反馈
             case 5:
@@ -99,7 +102,7 @@ public class NewMineFragment extends BaseListFragment {
                 break;
             //设置
             case 6:
-              //  MyDanceWebActivity.lunch(getActivity(), MyDanceWebActivity.ABOUTTYPE, "关于我们");
+                //  MyDanceWebActivity.lunch(getActivity(), MyDanceWebActivity.ABOUTTYPE, "关于我们");
                 SettingActivity.lunch(getActivity());
                 break;
 
@@ -120,6 +123,17 @@ public class NewMineFragment extends BaseListFragment {
                     LoginActivity.lunch(NewMineFragment.this, 0x001);
                 }
 
+            }
+        });
+        danceViewHolder.setClickListener(R.id.enter, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (UserInfoManager.getSingleton().isLoading(getActivity())) {
+                    PersonageActivity.lunch(NewMineFragment.this);
+                } else {
+                    MobclickAgent.onEvent(getActivity(), AppConfigs.CLICK_EVENT_15);
+                    LoginActivity.lunch(NewMineFragment.this, 0x005);
+                }
             }
         });
         refreshInfo();
@@ -157,6 +171,7 @@ public class NewMineFragment extends BaseListFragment {
             ImageLoaderManager.getSingleton().LoadMoHu(getActivity(), "", danceViewHolder.getImageView(R.id.background_iv), R.drawable.icon_mydefault);
         }
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

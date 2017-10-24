@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/spacing_50"
+    android:padding="@dimen/spacing_10">
+
+    <RelativeLayout
+        android:layout_centerVertical="true"
+        android:id="@+id/shequ_dianz_rl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginRight="@dimen/spacing_45">
+
+        <ImageView
+            android:id="@+id/shequ_dianz_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dianzan1"/>
+
+        <TextView
+            android:id="@+id/shequ_dianz_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/spacing_10"
+            android:layout_toRightOf="@id/shequ_dianz_iv"
+            android:text="0"
+            android:textColor="#d3d3d3"
+            android:textSize="@dimen/textsize28"/>
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_centerVertical="true"
+        android:id="@+id/shequ_pinl_tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_45"
+        android:layout_marginRight="@dimen/spacing_45"
+        android:layout_toRightOf="@id/shequ_dianz_rl">
+
+        <ImageView
+            android:id="@+id/shequ_pinl_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/comment"/>
+
+        <TextView
+            android:id="@+id/shequ_pinl_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/spacing_10"
+            android:layout_toRightOf="@id/shequ_pinl_iv"
+            android:drawablePadding="@dimen/spacing_10"
+            android:text="0"
+            android:textColor="#d3d3d3"
+            android:textSize="@dimen/textsize28"/>
+    </RelativeLayout>
+
+
+    <ImageView
+        android:layout_centerVertical="true"
+        android:id="@+id/shequ_iv_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/shequ_more"
+        />
+</RelativeLayout>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+    <include
+        android:id="@+id/head"
+        layout="@layout/shequ_head"/>
+
+    <LinearLayout
+        android:id="@+id/iamge_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_300"
+        android:layout_below="@+id/head"
+        android:layout_marginLeft="@dimen/spacing_20"
+        android:layout_marginRight="@dimen/spacing_20"
+        android:layout_marginTop="@dimen/spacing_20"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:scaleType="fitXY"
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/default_video"/>
+        <ImageView
+            android:scaleType="fitXY"
+            android:layout_marginLeft="@dimen/spacing_20"
+            android:id="@+id/imageView2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_weight="1"
+            android:src="@drawable/default_video"
+            />
+        <ImageView
+            android:id="@+id/imageView3"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="@dimen/spacing_20"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/default_video"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iamge_layout">
+
+        <include layout="@layout/shequ_end"/>
+    </RelativeLayout>
+
+
+    <view
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_20"
+        android:layout_below="@+id/end"
+        android:background="#e1e1e1"/>
+
+
+</RelativeLayout>

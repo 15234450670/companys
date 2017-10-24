@@ -30,7 +30,7 @@
     <dimen name="textsize72">36sp</dimen>
     <dimen name="textsize120">60sp</dimen>
     <dimen name="textsize56">28sp</dimen>
-
+    <dimen name="textsize26">13sp</dimen>
 
     <dimen name="spacing_2">1dp</dimen>
     <dimen name="spacing_6">3dp</dimen>
@@ -53,6 +53,8 @@
     <dimen name="spacing_44">22dp</dimen>
     <dimen name="spacing_46">23dp</dimen>
     <dimen name="spacing_45">22.5dp</dimen>
+    <dimen name="spacing_90">45dp</dimen>
+    <dimen name="spacing_99">49.5dp</dimen>
     <dimen name="spacing_48">24dp</dimen>
     <dimen name="spacing_60">30dp</dimen>
     <dimen name="spacing_70">35dp</dimen>

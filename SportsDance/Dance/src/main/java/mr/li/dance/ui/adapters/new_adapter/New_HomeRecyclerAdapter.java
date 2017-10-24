@@ -232,11 +232,11 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
                         VideoDetailActivity.lunch(mContext, mDatas.get(position).getId());
                         break;
                     case 10103://赛事资讯
-                        String saiShiurl = String.format(AppConfigs.ZixunShareUrl, String.valueOf(mDatas.get(position).getId()));
+                        String saiShiurl = String.format(AppConfigs.ZixunShareUrl2, String.valueOf(mDatas.get(position).getId()));
                         if (!TextUtils.isEmpty(mDatas.get(position).getCompete_name())) {
-                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, mDatas.get(position).getCompete_name(), saiShiurl, true);
+                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, mDatas.get(position).getCompete_name(), AppConfigs.ZixunShareUrl2+mDatas.get(position).getId(), true);
                         } else {
-                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, mDatas.get(position).getTitle(), saiShiurl, true);
+                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, mDatas.get(position).getTitle(), AppConfigs.ZixunShareUrl2+mDatas.get(position).getId(), true);
                         }
 
                         break;

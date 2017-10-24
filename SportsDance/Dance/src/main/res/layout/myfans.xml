@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/spacing_99"
+              android:layout_margin="@dimen/spacing_20"
+              android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/fans_head"
+        android:scaleType="fitXY"
+        android:layout_width="@dimen/spacing_99"
+        android:layout_height="@dimen/spacing_99"
+        />
+
+    <TextView
+        android:id="@+id/fans_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/spacing_20"
+        android:text=""/>
+
+</LinearLayout>

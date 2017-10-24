@@ -153,6 +153,7 @@ public class ParameterUtils {
         request.add("appid", appid);
         return request;
     }
+
     /**
      * 音乐界面
      */
@@ -160,14 +161,16 @@ public class ParameterUtils {
         Request<String> request = getBaseRequestForPost("/home.music");
         return request;
     }
+
     /**
      * 新音乐界面
      */
     public Request<String> getMusicInfo2Map(String page) {
         Request<String> request = getBaseRequestForPost("/home.music2");
-        request.add("page",page);
+        request.add("page", page);
         return request;
     }
+
     /**
      * 音乐分页
      */
@@ -176,19 +179,21 @@ public class ParameterUtils {
         request.add("page", page);
         return request;
     }
+
     /**
      * 歌单界面
      */
-    public Request<String> getMusicInfoGeDanMap(String userid,String id,String page) {
+    public Request<String> getMusicInfoGeDanMap(String userid, String id, String page) {
         Request<String> request = getBaseRequestForPost("/music.musicList");
-        request.add("userid",userid);
-        request.add("page",page);
+        request.add("userid", userid);
+        request.add("page", page);
 
-        request.add("id",id);
+        request.add("id", id);
         return request;
     }
+
     /**
-     *  舞蹈界面
+     * 舞蹈界面
      */
     public Request<String> getMusicInfoMapWuDao(String id) {
         Request<String> request = getBaseRequestForPost("/music.musicClass");
@@ -221,6 +226,7 @@ public class ParameterUtils {
         request.add("device_token", device_token);
         return request;
     }
+
     /**
      * 绑定状态判断
      */
@@ -229,6 +235,7 @@ public class ParameterUtils {
         request.add("userid", userid);
         return request;
     }
+
     /**
      * 绑定状态判断
      */
@@ -237,10 +244,11 @@ public class ParameterUtils {
         request.add("userid", userid);
         return request;
     }
+
     /**
      * 提现操作
      */
-    public Request<String> getTiXian(String userid,String money,int times,int result,String sign) {
+    public Request<String> getTiXian(String userid, String money, int times, int result, String sign) {
         Request<String> request = getBaseRequestForPost("/redpacket.getMoney");
         request.add("userid", userid);
         request.add("money", money);
@@ -249,6 +257,7 @@ public class ParameterUtils {
         request.add("sign", sign);
         return request;
     }
+
     /**
      * 绑定支付宝
      */
@@ -258,6 +267,7 @@ public class ParameterUtils {
         request.add("alipay", alipay);
         return request;
     }
+
     /**
      * 获取服务器时间
      */
@@ -373,10 +383,10 @@ public class ParameterUtils {
      * @param id
      * @return
      */
-    public Request<String> getHZhiboDetailMap(String id,String page) {
+    public Request<String> getHZhiboDetailMap(String id, String page) {
         Request<String> request = getBaseRequestForPost("/home.zhiboDetail2");
         request.add("id", id);
-        request.add("page",page);
+        request.add("page", page);
         return request;
     }
 
@@ -385,7 +395,7 @@ public class ParameterUtils {
      * @param id
      * @return
      */
-    public Request<String> getVideoDetailMap(String userid, String id,String page) {
+    public Request<String> getVideoDetailMap(String userid, String id, String page) {
         Request<String> request = getBaseRequestForPost("/home.dianboDetail2");
         request.add("id", id);
         request.add("userid", userid);
@@ -408,7 +418,7 @@ public class ParameterUtils {
      */
     public Request<String> getHomeDianbo2Map(String page) {
         Request<String> request = getBaseRequestCacheForPost("/home.dianbo2");
-        request.add("page",page);
+        request.add("page", page);
         return request;
     }
 
@@ -417,10 +427,10 @@ public class ParameterUtils {
      * @param page
      * @return
      */
-    public Request<String> getVideoSpeial(String id,String page) {
+    public Request<String> getVideoSpeial(String id, String page) {
         Request<String> request = getBaseRequestCacheForPost("/home.albumList");
-        request.add("id",id);
-        request.add("page",page);
+        request.add("id", id);
+        request.add("page", page);
         return request;
     }
 
@@ -460,20 +470,21 @@ public class ParameterUtils {
      */
     public Request<String> getHomeZxMap(String page) {
         Request<String> request = getBaseRequestCacheForPost("/home.zx2");
-              request.add("page",page);
+        request.add("page", page);
         return request;
     }
+
     public Request<String> getLabelSelect(String type) {
         Request<String> request = getBaseRequestCacheForPost("/home.labelClass");
-        request.add("type",type);
+        request.add("type", type);
         return request;
     }
 
 
-    public Request<String> getHomeZxMapTab(String page,String class_id) {
+    public Request<String> getHomeZxMapTab(String page, String class_id) {
         Request<String> request = getBaseRequestCacheForPost("/home.zxTabel");
-        request.add("page",page);
-        request.add("class_id",class_id) ;
+        request.add("page", page);
+        request.add("class_id", class_id);
         return request;
     }
 
@@ -511,33 +522,37 @@ public class ParameterUtils {
         LogPage(indexPage);
         return request;
     }
+
     /**
      * 教学数据
      */
     public Request<String> getHomeTeachMap(String page) {
         Request<String> request = getBaseRequestCacheForPost("/home.teachList");
-        request.add("page",page);
+        request.add("page", page);
         return request;
     }
+
     /**
      * 所有的Tab
      */
-    public Request<String> getHomeTabhMap(String id,String type,String page) {
+    public Request<String> getHomeTabhMap(String id, String type, String page) {
         Request<String> request = getBaseRequestCacheForPost("/home.labelSearch");
-        request.add("id",id);
-        request.add("type",type);
-        request.add("page",page);
+        request.add("id", id);
+        request.add("type", type);
+        request.add("page", page);
         return request;
     }
+
     /**
      * 教学详情
      */
-    public Request<String> getHomeTeachDetailsMap(String id,String page) {
+    public Request<String> getHomeTeachDetailsMap(String id, String page) {
         Request<String> request = getBaseRequestCacheForPost("/home.teachDetail");
-        request.add("id",id);
-        request.add("page",page);
+        request.add("id", id);
+        request.add("page", page);
         return request;
     }
+
     /**
      * 首页获取图片
      * @return
@@ -560,7 +575,6 @@ public class ParameterUtils {
         LogPage(indexPage);
         return request;
     }
-
 
 
     public Request<String> getHomeAlbumMapFromServer(int indexPage) {
@@ -592,9 +606,10 @@ public class ParameterUtils {
         request.add("id", id);
         return request;
     }
-    public Request<String> getAlbumDetail2Map(String userid, String id,int page) {
+
+    public Request<String> getAlbumDetail2Map(String userid, String id, int page) {
         Request<String> request = getBaseRequestForPost("/home.photoList");
-        request.add("userid",userid);
+        request.add("userid", userid);
         request.add("id", id);
         request.add("page", page);
         return request;
@@ -759,6 +774,7 @@ public class ParameterUtils {
         LogPage(indexPage);
         return request;
     }
+
     /**
      * 成绩分享
      */
@@ -793,6 +809,7 @@ public class ParameterUtils {
         request.add("id", id);
         return request;
     }
+
     /*
     分享视频
      */
@@ -801,6 +818,7 @@ public class ParameterUtils {
         request.add("id", id);
         return request;
     }
+
     /**
      * 赛事视频列表的接口
      * @param id
@@ -826,6 +844,7 @@ public class ParameterUtils {
         request.add("title", title);
         return request;
     }
+
     /**
      * 图片分享
      */
@@ -834,6 +853,7 @@ public class ParameterUtils {
         request.add("id", id);
         return request;
     }
+
     /**
      * 直播视频详情的接口
      * @param title
@@ -943,6 +963,7 @@ public class ParameterUtils {
         LogPage(page);
         return request;
     }
+
     public Request<String> getCollectionListMap2(String userid, int xc_video, int page) {
         Request<String> request = getBaseRequestForPost("/revisionUser.collectionList");
         request.add("userid", userid);
@@ -1056,6 +1077,7 @@ public class ParameterUtils {
         return request;
     }
 
+
     public Request<String> getMyMessageDetail(int mes_id) {
         Request<String> request = getBaseRequestForPost("/user.myInfoDetail");
         request.add("mes_id", mes_id);
@@ -1115,6 +1137,34 @@ public class ParameterUtils {
     public Request<String> getHomeWlinkClickMap(int id) {
         Request<String> request = getBaseRequestForPost("/home.WlinkClick");
         request.add("id", id);
+        return request;
+    }
+
+    public Request<String> getNewsFragment(String is_type, String page, String userid) {
+        Request<String> request = getBaseRequestForPost("/community.index");
+        request.add("is_type", is_type);
+        request.add("page", page);
+        request.add("userid", userid);
+        return request;
+    }
+
+    public Request<String> getPerson(String userid) {
+        Request<String> request = getBaseRequestForPost("/community.heads");
+        request.add("userid", userid);
+        return request;
+    }
+
+    public Request<String> getPersonItem(String is_type, String page, String userid) {
+        Request<String> request = getBaseRequestForPost("/community.personage");
+        request.add("is_type", is_type);
+        request.add("page", page);
+        request.add("userid", userid);
+        return request;
+    }
+
+    public Request<String> getPersonFans(String userid) {
+        Request<String> request = getBaseRequestForPost("/community.fans");
+        request.add("userid", userid);
         return request;
     }
 }
