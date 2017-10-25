@@ -162,6 +162,7 @@ public class NewCollectMusic extends SwipeMenuAdapter<RecyclerViewHolder> {
     public void Nosee(see s) {
         this.s = s;
     }
+
     class DefaultViewHolder extends RecyclerViewHolder {
         public DefaultViewHolder(Context context, View itemView) {
             super(context, itemView);

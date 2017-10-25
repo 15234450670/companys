@@ -37,7 +37,7 @@ public class NewsFragment extends BaseListFragment {
     public void initData() {
         String userid = UserInfoManager.getSingleton().getUserId(getActivity());
         Log.e(TAG, userid);
-        Request<String> request = ParameterUtils.getSingleton().getNewsFragment( "1",String.valueOf(page), userid);
+        Request<String> request = ParameterUtils.getSingleton().getNewsFragment("1", String.valueOf(page), userid);
         request(AppConfigs.shequ_news_fragment, request, false);
     }
 
@@ -74,7 +74,7 @@ public class NewsFragment extends BaseListFragment {
         String userId = UserInfoManager.getSingleton().getUserId(getActivity());
         Log.e(TAG + "++", userId);
         page = 1;
-        Request<String> request = ParameterUtils.getSingleton().getNewsFragment("1",String.valueOf(page),  userId);
+        Request<String> request = ParameterUtils.getSingleton().getNewsFragment("1", String.valueOf(page), userId);
         request(AppConfigs.shequ_news_fragment, request, false);
     }
 
@@ -84,7 +84,7 @@ public class NewsFragment extends BaseListFragment {
         String userId = UserInfoManager.getSingleton().getUserId(getActivity());
         Log.e(TAG + "--", userId);
         page++;
-        Request<String> request = ParameterUtils.getSingleton().getNewsFragment( "1", String.valueOf(page),userId);
+        Request<String> request = ParameterUtils.getSingleton().getNewsFragment("1", String.valueOf(page), userId);
         Log.e("page", page + "");
         request(AppConfigs.shequ_news_fragments, request, false);
     }

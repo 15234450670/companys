@@ -122,14 +122,17 @@ public class NewMineFragment extends BaseListFragment {
                     MobclickAgent.onEvent(getActivity(), AppConfigs.CLICK_EVENT_15);
                     LoginActivity.lunch(NewMineFragment.this, 0x001);
                 }
-
             }
         });
         danceViewHolder.setClickListener(R.id.enter, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (UserInfoManager.getSingleton().isLoading(getActivity())) {
-                    PersonageActivity.lunch(NewMineFragment.this);
+                    String userId = UserInfoManager.getSingleton().getUserId(getActivity());
+                    UserInfo userInfo = UserInfoManager.getSingleton().getUserInfo(getActivity());
+                    String picture = userInfo.getPicture();
+                    String nickname = userInfo.getUsername();
+                    PersonageActivity.lunch(NewMineFragment.this, userId, nickname, picture);
                 } else {
                     MobclickAgent.onEvent(getActivity(), AppConfigs.CLICK_EVENT_15);
                     LoginActivity.lunch(NewMineFragment.this, 0x005);

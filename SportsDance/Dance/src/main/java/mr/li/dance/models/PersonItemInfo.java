@@ -24,7 +24,6 @@ public class PersonItemInfo {
      * picture_arr : ["http://store.cdsf.org.cn/picture//130/0/0/f90bdbe424b0aaeb440d11f2d3174744.png","http://store.cdsf.org.cn/picture//49/0/0/a3fac6e339f79121f75540ee85a908c9.png","http://store.cdsf.org.cn/picture//558/1/0/dde0a7101b933cb89840f62dbaaa0642.png","http://store.cdsf.org.cn/picture//317/0/0/587aba0d4c3aeedde60a601db3651975.png","http://store.cdsf.org.cn/picture//58/0/0/d4d1baf22a8c36022da34c5f5186d1a0.png"]
      * user : {"picture_src":"http://store.cdsf.org.cn/picture/./touxiang11.","username":"9629"}
      */
-
     private String       id;
     private String       uid;
     private String       title;

@@ -1140,6 +1140,7 @@ public class ParameterUtils {
         return request;
     }
 
+    //社区——最新最热
     public Request<String> getNewsFragment(String is_type, String page, String userid) {
         Request<String> request = getBaseRequestForPost("/community.index");
         request.add("is_type", is_type);
@@ -1148,12 +1149,15 @@ public class ParameterUtils {
         return request;
     }
 
-    public Request<String> getPerson(String userid) {
+    //个人中心头部
+    public Request<String> getPerson(String attention_userid,String userid) {
         Request<String> request = getBaseRequestForPost("/community.heads");
+        request.add("attention_userid", attention_userid);
         request.add("userid", userid);
         return request;
     }
 
+    //个人中心Item
     public Request<String> getPersonItem(String is_type, String page, String userid) {
         Request<String> request = getBaseRequestForPost("/community.personage");
         request.add("is_type", is_type);
@@ -1162,9 +1166,36 @@ public class ParameterUtils {
         return request;
     }
 
+    //我的粉丝
     public Request<String> getPersonFans(String userid) {
         Request<String> request = getBaseRequestForPost("/community.fans");
         request.add("userid", userid);
         return request;
     }
+
+    //我的关注
+    public Request<String> getPersonLook(String userid) {
+        Request<String> request = getBaseRequestForPost("/user.attention");
+        request.add("userid", userid);
+        return request;
+    }
+
+    //举报
+    public Request<String> getPersonReport(String userid, String type, String id) {
+        Request<String> request = getBaseRequestForPost("/community.report");
+        request.add("userid", userid);
+        request.add("type", type);
+        request.add("id", id);
+        return request;
+    }
+
+    //关注操作
+    public Request<String> getPersonCancelLook(String userid, String attention_userid, int attention) {
+        Request<String> request = getBaseRequestForPost("/user.attentionOperation");
+        request.add("userid", userid);
+        request.add("attention_userid", attention_userid);
+        request.add("attention", attention);
+        return request;
+    }
+
 }

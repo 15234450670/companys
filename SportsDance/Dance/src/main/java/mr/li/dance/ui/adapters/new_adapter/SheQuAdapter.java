@@ -2,7 +2,6 @@ package mr.li.dance.ui.adapters.new_adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,7 @@ import java.util.List;
 import mr.li.dance.R;
 import mr.li.dance.https.response.ShequResponse;
 import mr.li.dance.models.ShequInfo;
+import mr.li.dance.ui.activitys.newActivitys.PersonageActivity;
 import mr.li.dance.ui.adapters.DanceBaseAdapter;
 import mr.li.dance.ui.adapters.viewholder.BaseViewHolder;
 import mr.li.dance.utils.MyStrUtil;
@@ -47,8 +47,8 @@ public class SheQuAdapter extends DanceBaseAdapter {
         bindType((MyViewHolder1) holder, position);
     }
 
-    private void bindType(MyViewHolder1 holder, int position) {
-        ShequInfo.UserBean user = mDatas.get(position).getUser();
+    private void bindType(MyViewHolder1 holder, final int position) {
+        final ShequInfo.UserBean user = mDatas.get(position).getUser();
         holder.danceViewHolder.setText(R.id.shequ_name, user.getUsername());
         holder.danceViewHolder.setText(R.id.shequ_time, mDatas.get(position).getDynamic_time());
         ImageLoaderManager.getSingleton().LoadCircle(mContext, user.getPicture_src(), holder.danceViewHolder.getImageView(R.id.shequ_head), R.drawable.default_icon);
@@ -69,11 +69,11 @@ public class SheQuAdapter extends DanceBaseAdapter {
         } else {
             holder.danceViewHolder.setText(R.id.shequ_pinl_tv, mDatas.get(position).getComment_count());
         }
+
         String type = mDatas.get(position).getType();
         if (type.equals("1")) {
             //图片
             List<String> picture_arr = mDatas.get(position).getPicture_arr();
-            Log.d("size", picture_arr.size() + "");
             if (MyStrUtil.isEmpty(picture_arr)) {
                 holder.danceViewHolder.setViewVisibility(R.id.iamge_layout, View.GONE);
                 holder.danceViewHolder.setViewVisibility(R.id.iamge_layout_three, View.GONE);
@@ -100,6 +100,7 @@ public class SheQuAdapter extends DanceBaseAdapter {
             holder.danceViewHolder.setImageResDrawable(R.id.imageView, R.drawable.default_banner, R.drawable.default_video);
 
         }
+        onClickListen(holder, position, mDatas);
     }
 
     @Override
@@ -151,6 +152,28 @@ public class SheQuAdapter extends DanceBaseAdapter {
         public MyViewHolder1(Context context, View itemView) {
             super(context, itemView);
         }
+    }
+
+    public void onClickListen(MyViewHolder1 holder, final int position, final List<ShequInfo> mDatas) {
+        //个人信息
+        final ShequInfo.UserBean user = mDatas.get(position).getUser();
+        //点击头像去个人主页
+        View view = holder.danceViewHolder.getView(R.id.shequ_ll_min);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PersonageActivity.lunch(mContext, mDatas.get(position).getUid(), user.getUsername(), user.getPicture_src());
+            }
+        });
+        //点赞
+
+
+        //点击更多
+
+
+        //点击标题正文图片视频
+
+
     }
 
 }

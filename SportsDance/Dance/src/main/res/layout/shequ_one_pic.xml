@@ -10,7 +10,6 @@
         layout="@layout/shequ_head"/>
 
     <RelativeLayout
-
         android:id="@+id/iamge_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/spacing_300"

@@ -26,7 +26,7 @@ import mr.li.dance.utils.glide.ImageLoaderManager;
  * 作者: SuiFeng
  * 版本:
  * 创建日期:2017/10/24 0024
- * 描述:
+ * 描述:     我的粉丝
  * 修订历史:
  */
 public class Shequ_fans extends BaseActivity {

@@ -25,7 +25,7 @@ import static mr.li.dance.ui.activitys.MainActivity.myBinder;
  * 作者: SuiFeng
  * 版本:
  * 创建日期:2017/10/23 0023
- * 描述:
+ * 描述:   社区控制
  * 修订历史:
  */
 public class SheQuFragment extends BaseFragment implements ViewPager.OnPageChangeListener, View.OnClickListener, RadioGroup.OnCheckedChangeListener {

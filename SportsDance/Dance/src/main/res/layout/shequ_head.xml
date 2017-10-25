@@ -31,7 +31,7 @@
                 style="@style/text_white_style_30"
                 android:layout_marginBottom="@dimen/spacing_20"
                 android:maxLines="1"
-                android:text="肉包子大狗一去不回"
+                android:text=""
                 android:textColor="@color/black"/>
 
             <LinearLayout
@@ -61,7 +61,7 @@
                 android:id="@+id/shequ_time"
                 style="@style/text_white_style_30"
                 android:layout_below="@+id/shequ_name"
-                android:text="时间："
+                android:text=""
                 android:textColor="@color/black"/>
         </RelativeLayout>
     </LinearLayout>
@@ -72,7 +72,7 @@
         android:layout_marginLeft="@dimen/spacing_20"
         android:layout_marginRight="@dimen/spacing_20"
         android:maxLines="2"
-        android:text="ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
+        android:text=""
         android:textColor="#333333"/>
 
     <TextView
@@ -80,7 +80,7 @@
         style="@style/text_white_style_24"
         android:layout_marginLeft="@dimen/spacing_20"
         android:layout_marginRight="@dimen/spacing_20"
-        android:text="ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
+        android:text=""
         android:textColor="#666666"/>
 
     <View

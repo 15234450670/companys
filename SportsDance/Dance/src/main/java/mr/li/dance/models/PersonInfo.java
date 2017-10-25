@@ -15,7 +15,7 @@ public class PersonInfo  {
          * photoClass_num : 0
          * dynamic_num : 0
          */
-
+        public int is_attention;
         private int user_num;
         private int attention_num;
         private int photoClass_num;

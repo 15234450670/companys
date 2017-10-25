@@ -12,7 +12,6 @@
         android:id="@+id/shequ_dianz_rl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_marginRight="@dimen/spacing_45">
 
         <ImageView
@@ -70,6 +69,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:src="@drawable/shequ_more"
+        android:src="@drawable/more"
+        android:layout_marginRight="@dimen/spacing_45"
         />
 </RelativeLayout>
