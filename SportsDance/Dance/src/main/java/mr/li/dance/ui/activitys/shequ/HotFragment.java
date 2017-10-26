@@ -27,7 +27,7 @@ public class HotFragment extends BaseListFragment {
 
     private String TAG = getClass().getSimpleName();
     private SheQuAdapter adapter;
-
+        int i;
     @Override
     public void itemClick(int position, Object value) {
 
@@ -48,7 +48,7 @@ public class HotFragment extends BaseListFragment {
 
     @Override
     public RecyclerView.Adapter getAdapter() {
-        adapter = new SheQuAdapter(getActivity());
+        adapter = new SheQuAdapter(getActivity(),this, i);
         return adapter;
     }
 

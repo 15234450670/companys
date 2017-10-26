@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="bottom"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/shanchu"
+            style="@style/text_white_style_30"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_98"
+            android:gravity="center"
+            android:background="#ffffff"
+            android:text="删除"
+            android:textColor="#333333" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_2" />
+
+        <TextView
+            android:id="@+id/fenxaing"
+            style="@style/text_white_style_30"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_98"
+            android:background="#ffffff"
+            android:gravity="center"
+            android:text="分享"
+            android:textColor="#333333" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_2" />
+
+        <TextView
+            android:id="@+id/juban"
+            style="@style/text_white_style_30"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_98"
+            android:background="#ffffff"
+            android:gravity="center"
+            android:text="举报"
+            android:textColor="#333333" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_10" />
+
+    <TextView
+        android:id="@+id/cancelbtn"
+        style="@style/text_white_style_30"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_98"
+        android:background="#ffffff"
+        android:gravity="center"
+        android:text="取消"
+        android:textColor="#333333" />
+
+</LinearLayout>

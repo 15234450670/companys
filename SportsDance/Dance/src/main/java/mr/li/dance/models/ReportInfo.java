@@ -16,6 +16,7 @@ public class ReportInfo extends BaseResponse {
      */
 
     private String data;
+    public boolean is;
 
     public String getData() {
         return data;

@@ -255,7 +255,12 @@
                   android:screenOrientation="portrait"
             />
 
-
+        <activity android:name=".ui.activitys.shequ.SheQuPicDetails"
+                  android:screenOrientation="portrait"
+            />
+        <activity android:name=".ui.activitys.shequ.SheQuVideoDetails"
+                  android:screenOrientation="portrait"
+            />
 
         <service
             android:name="com.letvcloud.cmf.MediaService"

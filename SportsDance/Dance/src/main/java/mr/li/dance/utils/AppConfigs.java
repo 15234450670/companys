@@ -49,6 +49,8 @@ public class AppConfigs {
 
     public final static String finishactivityAction = "finish.activity.action";
     public final static String updateinfoAction     = "update.userinfo.action";
+    //动态分享
+    public final static String DOINGTAI = SHAREURL + "/share.shequ?id=%s";
 
     public final static int SENDMSG_REQUEST_CODE      = 0x001;
     public final static int home_index                = 0x0002;
@@ -166,5 +168,6 @@ public class AppConfigs {
     public final static String CLICK_EVENT_30 = "30";//音乐
     public final static String CLICK_EVENT_31 = "31";//音乐
     public final static String CLICK_EVENT_32 = "32";//音乐
+
 
 }

@@ -1150,7 +1150,7 @@ public class ParameterUtils {
     }
 
     //个人中心头部
-    public Request<String> getPerson(String attention_userid,String userid) {
+    public Request<String> getPerson(String attention_userid, String userid) {
         Request<String> request = getBaseRequestForPost("/community.heads");
         request.add("attention_userid", attention_userid);
         request.add("userid", userid);
@@ -1185,6 +1185,23 @@ public class ParameterUtils {
         Request<String> request = getBaseRequestForPost("/community.report");
         request.add("userid", userid);
         request.add("type", type);
+        request.add("id", id);
+        return request;
+    }
+
+    //删除动态 评论
+    public Request<String> getPersonDelete(String is_type, String id) {
+        Request<String> request = getBaseRequestForPost("/community.dynamicDel");
+        request.add("is_type", is_type);
+        request.add("id", id);
+        return request;
+    }
+
+    //点赞
+    public Request<String> getPersonLike(String userid, int is_type, String id) {
+        Request<String> request = getBaseRequestForPost("/community.upvote");
+        request.add("userid", userid);
+        request.add("is_type", is_type);
         request.add("id", id);
         return request;
     }

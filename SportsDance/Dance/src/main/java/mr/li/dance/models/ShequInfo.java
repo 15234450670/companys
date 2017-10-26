@@ -1,5 +1,6 @@
 package mr.li.dance.models;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  * 描述:
  * 修订历史:
  */
-public class ShequInfo  {
+public class ShequInfo  implements Serializable{
 
         /**
          * id : 79
@@ -40,6 +41,7 @@ public class ShequInfo  {
         private UserBean        user;
         private List<String>    picture_arr;
         private List<VideoBean> video;
+    public boolean isItem;
 
         public String getId() {
             return id;
