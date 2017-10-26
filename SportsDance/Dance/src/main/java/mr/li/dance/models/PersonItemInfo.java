@@ -36,7 +36,9 @@ public class PersonItemInfo {
     private int          is_upvote;
     private UserBean     user;
     private List<String> picture_arr;
-
+    public boolean isDianZan() {
+        return is_upvote == 1;
+    }
     public String getId() {
         return id;
     }
@@ -115,6 +117,9 @@ public class PersonItemInfo {
 
     public void setIs_upvote(int is_upvote) {
         this.is_upvote = is_upvote;
+    }
+    public void setIs_upvote() {
+        is_upvote = is_upvote == 1 ? 2 : 1;
     }
 
     public UserBean getUser() {

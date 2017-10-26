@@ -5,8 +5,6 @@ import android.util.Log;
 
 import com.yolanda.nohttp.rest.Request;
 
-import java.util.ArrayList;
-
 import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.ShequResponse;
@@ -30,12 +28,10 @@ public class NewsFragment extends BaseListFragment {
 
     private String TAG = getClass().getSimpleName();
     private SheQuAdapter adapter;
-    private int is_upvote;
 
     @Override
     public void itemClick(int position, Object value) {
         ShequInfo shequInfo = (ShequInfo) value;
-
         String type = shequInfo.getType();
         if (type.equals("1")) {
             //图片
@@ -61,7 +57,7 @@ public class NewsFragment extends BaseListFragment {
 
     @Override
     public RecyclerView.Adapter getAdapter() {
-        adapter = new SheQuAdapter(getActivity(), this,is_upvote);
+        adapter = new SheQuAdapter(getActivity(), this);
         return adapter;
     }
 
@@ -70,11 +66,6 @@ public class NewsFragment extends BaseListFragment {
         super.onSucceed(what, response);
         Log.d(TAG, response);
         ShequResponse reponseResult = JsonMananger.getReponseResult(response, ShequResponse.class);
-        ArrayList<ShequInfo> data = reponseResult.getData();
-        for (int i = 0; i < data.size(); i++) {
-            is_upvote = data.get(i).getIs_upvote();
-        }
-
         if (what == AppConfigs.shequ_news_fragment) {
 
             if (!MyStrUtil.isEmpty(reponseResult.getData())) {

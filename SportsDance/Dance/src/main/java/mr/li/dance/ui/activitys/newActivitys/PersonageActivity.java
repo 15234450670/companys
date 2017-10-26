@@ -148,6 +148,7 @@ public class PersonageActivity extends BaseListActivity {
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
+        Log.e(TAG, response);
         PersonResponse reponseResult = JsonMananger.getReponseResult(response, PersonResponse.class);
         if (what == AppConfigs.person_item) {
             adapter.refresh(reponseResult);

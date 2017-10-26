@@ -8,6 +8,7 @@ import com.yolanda.nohttp.rest.Request;
 import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.ShequResponse;
+import mr.li.dance.models.ShequInfo;
 import mr.li.dance.ui.adapters.new_adapter.SheQuAdapter;
 import mr.li.dance.ui.fragments.BaseListFragment;
 import mr.li.dance.utils.AppConfigs;
@@ -27,10 +28,18 @@ public class HotFragment extends BaseListFragment {
 
     private String TAG = getClass().getSimpleName();
     private SheQuAdapter adapter;
-        int i;
+
     @Override
     public void itemClick(int position, Object value) {
-
+        ShequInfo shequInfo = (ShequInfo) value;
+        String type = shequInfo.getType();
+        if (type.equals("1")) {
+            //图片
+            SheQuPicDetails.lunch(getActivity(), shequInfo.getId(), shequInfo.getUid());
+        } else {
+            //视频
+            SheQuVideoDetails.lunch(getActivity(), shequInfo.getId(), shequInfo.getUid());
+        }
     }
 
     @Override
@@ -48,7 +57,7 @@ public class HotFragment extends BaseListFragment {
 
     @Override
     public RecyclerView.Adapter getAdapter() {
-        adapter = new SheQuAdapter(getActivity(),this, i);
+        adapter = new SheQuAdapter(getActivity(),this);
         return adapter;
     }
 

@@ -41,7 +41,10 @@ public class ShequInfo  implements Serializable{
         private UserBean        user;
         private List<String>    picture_arr;
         private List<VideoBean> video;
-    public boolean isItem;
+
+        public boolean isDianZan() {
+            return is_upvote == 1;
+        }
 
         public String getId() {
             return id;
@@ -117,6 +120,10 @@ public class ShequInfo  implements Serializable{
 
         public int getIs_upvote() {
             return is_upvote;
+        }
+
+        public void setIs_upvote() {
+            is_upvote = is_upvote == 1 ? 2 : 1;
         }
 
         public void setIs_upvote(int is_upvote) {

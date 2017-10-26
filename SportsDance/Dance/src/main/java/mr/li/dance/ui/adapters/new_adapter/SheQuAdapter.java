@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.yolanda.nohttp.rest.Request;
 
@@ -46,16 +45,13 @@ import mr.li.dance.utils.glide.ImageLoaderManager;
  */
 public class SheQuAdapter extends DanceBaseAdapter {
     private List<ShequInfo> mDatas;
-    private boolean         isCollected;
-    Context                              mContext;
+    Context mContext;
     ListViewItemClickListener<ShequInfo> mItemClickListener;
-    int                                  is_upvote;
 
-    public SheQuAdapter(Context context, ListViewItemClickListener clickListener, int i) {
+    public SheQuAdapter(Context context, ListViewItemClickListener clickListener) {
         mContext = context;
         mDatas = new ArrayList<>();
         mItemClickListener = clickListener;
-        is_upvote = i;
     }
 
 
@@ -125,16 +121,15 @@ public class SheQuAdapter extends DanceBaseAdapter {
             holder.danceViewHolder.setImageResDrawable(R.id.imageView, R.drawable.default_banner, R.drawable.default_video);
 
         }
-        //点赞
         ImageView imageView = holder.danceViewHolder.getImageView(R.id.shequ_dianz_iv);
-        //改变 状态
+        int is_upvote = mDatas.get(position).getIs_upvote();
         if (is_upvote == 1) {
             imageView.setImageResource(R.drawable.dianzan2);
         } else {
             imageView.setImageResource(R.drawable.dianzan1);
         }
 
-        onClickListen(holder, position, mDatas);
+        onClickListen(holder, position);
         //整体的点击事件
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -196,7 +191,7 @@ public class SheQuAdapter extends DanceBaseAdapter {
     }
 
 
-    public void onClickListen(final MyViewHolder1 holder, final int position, final List<ShequInfo> mDatas) {
+    public void onClickListen(final MyViewHolder1 holder, final int position) {
         //个人信息
         final ShequInfo.UserBean user = mDatas.get(position).getUser();
         final String userId = UserInfoManager.getSingleton().getUserId(mContext);//自己的ID
@@ -214,26 +209,24 @@ public class SheQuAdapter extends DanceBaseAdapter {
         view1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int operation = isCollected ? 1 : 2;
+                int operation = mDatas.get(position).getIs_upvote() == 1 ? 2 : 1;
                 Request<String> personLike = ParameterUtils.getSingleton().getPersonLike(userId, operation, mDatas.get(position).getId());
                 CallServer.getRequestInstance().add(mContext, 0, personLike, new HttpListener() {
                     @Override
                     public void onSucceed(int what, String response) {
                         ReportInfo like = JsonMananger.getReponseResult(response, ReportInfo.class);
                         String data = like.getData();
-                        TextView textValue = holder.danceViewHolder.getTextView(R.id.shequ_dianz_tv);
-                        textValue.setText(data);
-                        isCollected = !isCollected;
-
+                        mDatas.get(position).setUpvote(data);
+                        mDatas.get(position).setIs_upvote();
+                        notifyDataSetChanged();
                     }
-
                     @Override
                     public void onFailed(int what, int responseCode, String response) {
 
                     }
                 }, false, false);
                 ImageView imageView = holder.danceViewHolder.getImageView(R.id.shequ_dianz_iv);
-                if (isCollected) {
+                if (mDatas.get(position).isDianZan()) {
                     imageView.setImageResource(R.drawable.dianzan2);
                 } else {
                     imageView.setImageResource(R.drawable.dianzan1);
@@ -254,7 +247,7 @@ public class SheQuAdapter extends DanceBaseAdapter {
                     public void selectItem(View view, String value) {
                         switch (value) {
                             case "删除":
-                                PersonDelete(mDatas.get(position).getId());
+                                PersonDelete(mDatas.get(position).getId(), position);
                                 break;
                             case "分享":
                                 ShareUtils shareUtils = new ShareUtils((Activity) mContext);
@@ -286,7 +279,7 @@ public class SheQuAdapter extends DanceBaseAdapter {
     }
 
     //删除动态
-    private void PersonDelete(final String id) {
+    private void PersonDelete(final String id, final int position) {
 
         AlertDialog dialog = new AlertDialog.Builder(mContext)
                 .setTitle("提示")
@@ -300,6 +293,7 @@ public class SheQuAdapter extends DanceBaseAdapter {
                             public void onSucceed(int what, String response) {
                                 ReportInfo report = JsonMananger.getReponseResult(response, ReportInfo.class);
                                 NToast.longToast(mContext, report.getData());
+                                notifyItemRemoved(position);
                             }
 
                             @Override

@@ -8,15 +8,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.yolanda.nohttp.rest.Request;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import mr.li.dance.R;
+import mr.li.dance.https.CallServer;
+import mr.li.dance.https.HttpListener;
+import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.PersonResponse;
 import mr.li.dance.models.PersonItemInfo;
+import mr.li.dance.models.ReportInfo;
 import mr.li.dance.ui.adapters.DanceBaseAdapter;
 import mr.li.dance.ui.adapters.viewholder.BaseViewHolder;
+import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.MyStrUtil;
+import mr.li.dance.utils.UserInfoManager;
 
 /**
  * 作者: SuiFeng
@@ -95,6 +103,50 @@ public class PersonItemAdapter extends DanceBaseAdapter {
             holder.danceViewHolder.setImageResDrawable(R.id.imageView, R.drawable.default_banner, R.drawable.default_video);
 
         }
+        ImageView imageView = holder.danceViewHolder.getImageView(R.id.shequ_dianz_iv);
+        int is_upvote = mDatas.get(position).getIs_upvote();
+        if (is_upvote == 1) {
+            imageView.setImageResource(R.drawable.dianzan2);
+        } else {
+            imageView.setImageResource(R.drawable.dianzan1);
+        }
+        onClickListen(holder, position);
+    }
+
+    private void onClickListen(final MyViewHolder holder, final int position) {
+        final String userId = UserInfoManager.getSingleton().getUserId(mContext);//自己的ID
+        //点赞
+        View view1 = holder.danceViewHolder.getView(R.id.shequ_dianz_rl);
+        view1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int operation = mDatas.get(position).getIs_upvote() == 1 ? 2 : 1;
+                Log.e("operation",operation+"");
+                Request<String> personLike = ParameterUtils.getSingleton().getPersonLike(userId, operation, mDatas.get(position).getId());
+                CallServer.getRequestInstance().add(mContext, 0, personLike, new HttpListener() {
+                    @Override
+                    public void onSucceed(int what, String response) {
+                        ReportInfo like = JsonMananger.getReponseResult(response, ReportInfo.class);
+                        String data = like.getData();
+                        mDatas.get(position).setUpvote(data);
+                        mDatas.get(position).setIs_upvote();
+                        notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onFailed(int what, int responseCode, String response) {
+
+                    }
+                }, false, false);
+                ImageView imageView = holder.danceViewHolder.getImageView(R.id.shequ_dianz_iv);
+                if (mDatas.get(position).isDianZan()) {
+                    imageView.setImageResource(R.drawable.dianzan2);
+                } else {
+                    imageView.setImageResource(R.drawable.dianzan1);
+                }
+
+            }
+        });
     }
 
     @Override

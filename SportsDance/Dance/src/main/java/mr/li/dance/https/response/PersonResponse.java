@@ -15,7 +15,6 @@ public class PersonResponse extends BaseResponse {
 
 
     private List<PersonItemInfo> data;
-    public int collection_id;
     public List<PersonItemInfo> getData() {
         return data;
     }
