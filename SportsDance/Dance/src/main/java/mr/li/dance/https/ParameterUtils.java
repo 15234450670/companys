@@ -1214,5 +1214,12 @@ public class ParameterUtils {
         request.add("attention", attention);
         return request;
     }
+    //社区详情
+    public Request<String> getPersonDetails(String dynamic_id, String userid) {
+        Request<String> request = getBaseRequestForPost("/community.details");
+        request.add("dynamic_id", dynamic_id);
+        request.add("userid", userid);
+        return request;
+    }
 
 }

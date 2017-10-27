@@ -45,7 +45,6 @@ public class HotFragment extends BaseListFragment {
     @Override
     public void initData() {
         String userid = UserInfoManager.getSingleton().getUserId(getActivity());
-        Log.e(TAG, userid);
         Request<String> request = ParameterUtils.getSingleton().getNewsFragment("2", String.valueOf(page), userid);
         request(AppConfigs.shequ_news_fragment, request, false);
     }
@@ -57,7 +56,7 @@ public class HotFragment extends BaseListFragment {
 
     @Override
     public RecyclerView.Adapter getAdapter() {
-        adapter = new SheQuAdapter(getActivity(),this);
+        adapter = new SheQuAdapter(getActivity(), this);
         return adapter;
     }
 
@@ -65,13 +64,13 @@ public class HotFragment extends BaseListFragment {
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
         Log.d(TAG, response);
+        ShequResponse reponseResult = JsonMananger.getReponseResult(response, ShequResponse.class);
         if (what == AppConfigs.shequ_news_fragment) {
-            ShequResponse reponseResult = JsonMananger.getReponseResult(response, ShequResponse.class);
+
             if (!MyStrUtil.isEmpty(reponseResult.getData())) {
                 adapter.refresh(reponseResult);
             }
         } else {
-            ShequResponse reponseResult = JsonMananger.getReponseResult(response, ShequResponse.class);
             adapter.loadMore(reponseResult);
         }
     }
@@ -80,7 +79,6 @@ public class HotFragment extends BaseListFragment {
     public void refresh() {
         super.refresh();
         String userId = UserInfoManager.getSingleton().getUserId(getActivity());
-        Log.e(TAG + "++", userId);
         page = 1;
         Request<String> request = ParameterUtils.getSingleton().getNewsFragment("2", String.valueOf(page), userId);
         request(AppConfigs.shequ_news_fragment, request, false);
@@ -90,10 +88,8 @@ public class HotFragment extends BaseListFragment {
     public void loadMore() {
         super.loadMore();
         String userId = UserInfoManager.getSingleton().getUserId(getActivity());
-        Log.e(TAG + "--", userId);
         page++;
         Request<String> request = ParameterUtils.getSingleton().getNewsFragment("2", String.valueOf(page), userId);
-        Log.e("page", page + "");
         request(AppConfigs.shequ_news_fragments, request, false);
     }
 }

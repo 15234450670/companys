@@ -45,7 +45,6 @@ public class NewsFragment extends BaseListFragment {
     @Override
     public void initData() {
         String userid = UserInfoManager.getSingleton().getUserId(getActivity());
-        Log.e(TAG, userid);
         Request<String> request = ParameterUtils.getSingleton().getNewsFragment("1", String.valueOf(page), userid);
         request(AppConfigs.shequ_news_fragment, request, false);
     }
@@ -67,7 +66,6 @@ public class NewsFragment extends BaseListFragment {
         Log.d(TAG, response);
         ShequResponse reponseResult = JsonMananger.getReponseResult(response, ShequResponse.class);
         if (what == AppConfigs.shequ_news_fragment) {
-
             if (!MyStrUtil.isEmpty(reponseResult.getData())) {
                 adapter.refresh(reponseResult);
             }
@@ -76,7 +74,6 @@ public class NewsFragment extends BaseListFragment {
         }
 
     }
-
 
     @Override
     public void refresh() {

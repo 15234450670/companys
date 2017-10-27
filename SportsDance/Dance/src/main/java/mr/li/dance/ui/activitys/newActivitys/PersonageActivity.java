@@ -21,8 +21,11 @@ import mr.li.dance.https.response.PersonLookAndFansResponse;
 import mr.li.dance.https.response.PersonResponse;
 import mr.li.dance.models.LookCacnelInfo;
 import mr.li.dance.models.PersonInfo;
+import mr.li.dance.models.PersonItemInfo;
 import mr.li.dance.models.ReportInfo;
 import mr.li.dance.ui.activitys.base.BaseListActivity;
+import mr.li.dance.ui.activitys.shequ.SheQuPicDetails;
+import mr.li.dance.ui.activitys.shequ.SheQuVideoDetails;
 import mr.li.dance.ui.adapters.new_adapter.PersonItemAdapter;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
@@ -52,7 +55,15 @@ public class PersonageActivity extends BaseListActivity {
 
     @Override
     public void itemClick(int position, Object value) {
-
+        PersonItemInfo shequInfo = (PersonItemInfo) value;
+        String type = shequInfo.getType();
+        if (type.equals("1")) {
+            //图片
+            SheQuPicDetails.lunch(this, shequInfo.getId(), shequInfo.getUid());
+        } else {
+            //视频
+            SheQuVideoDetails.lunch(this, shequInfo.getId(), shequInfo.getUid());
+        }
     }
 
     @Override
@@ -136,7 +147,7 @@ public class PersonageActivity extends BaseListActivity {
 
     @Override
     public RecyclerView.Adapter getAdapter() {
-        adapter = new PersonItemAdapter(this);
+        adapter = new PersonItemAdapter(this, this);
         return adapter;
     }
 

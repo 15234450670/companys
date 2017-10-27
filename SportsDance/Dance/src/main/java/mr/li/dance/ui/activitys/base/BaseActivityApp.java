@@ -11,7 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -55,14 +55,13 @@ import mr.li.dance.utils.updater.UpdaterConfig;
 import mr.li.dance.utils.updater.UpdaterUtils;
 
 /**
- * 作者: Lixuewei
- * 版本: 1.0
- * 创建日期: 2017/5/22
- * 描述: 所有activity 的基类
+ * 作者: SuiFeng
+ * 版本:
+ * 创建日期:2017/10/27 0027
+ * 描述:
  * 修订历史:
  */
-public abstract class BaseActivity extends FragmentActivity implements HttpListener {
-
+public abstract class BaseActivityApp extends AppCompatActivity implements HttpListener {
     protected Context                  mContext;
     private   ViewFlipper              mContentView;
     protected RelativeLayout           mHeadLayout;
@@ -98,8 +97,9 @@ public abstract class BaseActivity extends FragmentActivity implements HttpListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setScreen();
+
         super.setContentView(R.layout.layout_base);
-       // AndroidBug54971Workaround.assistActivity(findViewById(getContentViewId()));
+        // AndroidBug54971Workaround.assistActivity(findViewById(getContentViewId()));
         initTitleView();
         setContentView(getContentViewId());
         setVolumeControlStream(AudioManager.STREAM_MUSIC);// 使得音量键控制媒体声音
@@ -462,12 +462,12 @@ public abstract class BaseActivity extends FragmentActivity implements HttpListe
             public void toConfirm() {
                 if (downUrl.startsWith("http://") || downUrl.startsWith("HTTP://") || downUrl.startsWith("http://") || downUrl.startsWith("HTTPS://")) {
                     if (isForce) {
-                        DownLoadApkActivity.lunch(BaseActivity.this, downUrl, isForce);
+                        DownLoadApkActivity.lunch(BaseActivityApp.this, downUrl, isForce);
                     } else {
                         downLoad(downUrl);
                     }
                 } else {
-                    NToast.shortToast(BaseActivity.this, "下载地址错误");
+                    NToast.shortToast(BaseActivityApp.this, "下载地址错误");
                 }
 
 

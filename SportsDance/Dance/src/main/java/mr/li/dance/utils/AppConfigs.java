@@ -130,6 +130,8 @@ public class AppConfigs {
     public final static int person_item = 0x0071;//个人列表
     public final static int person_items = 0x0072;//个人列表
     public final static int person_look = 0x0073;//关注
+    public final static int person_details = 0x0074;//社区详情
+
     public static String getDomainUrl() {
         return DomainUrl;
     }

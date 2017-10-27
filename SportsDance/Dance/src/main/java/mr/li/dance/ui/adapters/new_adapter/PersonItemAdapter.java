@@ -1,6 +1,10 @@
 package mr.li.dance.ui.adapters.new_adapter;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,9 +25,14 @@ import mr.li.dance.https.response.PersonResponse;
 import mr.li.dance.models.PersonItemInfo;
 import mr.li.dance.models.ReportInfo;
 import mr.li.dance.ui.adapters.DanceBaseAdapter;
+import mr.li.dance.ui.adapters.ListViewItemClickListener;
 import mr.li.dance.ui.adapters.viewholder.BaseViewHolder;
+import mr.li.dance.ui.dialogs.GengduoDialog;
+import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.MyStrUtil;
+import mr.li.dance.utils.NToast;
+import mr.li.dance.utils.ShareUtils;
 import mr.li.dance.utils.UserInfoManager;
 
 /**
@@ -36,10 +45,11 @@ import mr.li.dance.utils.UserInfoManager;
 public class PersonItemAdapter extends DanceBaseAdapter {
     Context mContext;
     private List<PersonItemInfo> mDatas;
-
-    public PersonItemAdapter(Context context) {
+    ListViewItemClickListener<PersonItemInfo> mItemClickListener;
+    public PersonItemAdapter(Context context, ListViewItemClickListener clickListener) {
         mContext = context;
         mDatas = new ArrayList<>();
+        mItemClickListener = clickListener;
     }
 
     @Override
@@ -53,7 +63,7 @@ public class PersonItemAdapter extends DanceBaseAdapter {
         bindType((MyViewHolder) holder, position);
     }
 
-    private void bindType(MyViewHolder holder, int position) {
+    private void bindType(MyViewHolder holder, final int position) {
         holder.danceViewHolder.setViewVisibility(R.id.shequ_ll_min, View.GONE);
         holder.danceViewHolder.setText(R.id.title, mDatas.get(position).getTitle());
         if (MyStrUtil.isEmpty(mDatas.get(position).getContent())) {
@@ -111,10 +121,18 @@ public class PersonItemAdapter extends DanceBaseAdapter {
             imageView.setImageResource(R.drawable.dianzan1);
         }
         onClickListen(holder, position);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mItemClickListener.itemClick(position, mDatas.get(position));
+            }
+        });
+
     }
 
     private void onClickListen(final MyViewHolder holder, final int position) {
         final String userId = UserInfoManager.getSingleton().getUserId(mContext);//自己的ID
+        final String uid = mDatas.get(position).getUid();//别人的ID
         //点赞
         View view1 = holder.danceViewHolder.getView(R.id.shequ_dianz_rl);
         view1.setOnClickListener(new View.OnClickListener() {
@@ -147,6 +165,124 @@ public class PersonItemAdapter extends DanceBaseAdapter {
 
             }
         });
+
+        //点击更多
+        View view2 = holder.danceViewHolder.getView(R.id.shequ_iv_more);
+        view2.setOnClickListener(new View.OnClickListener() {
+            GengduoDialog dialog;
+
+            @Override
+            public void onClick(View view) {
+                dialog = new GengduoDialog(mContext, new GengduoDialog.DialogClickListener() {
+                    @Override
+                    public void selectItem(View view, String value) {
+                        switch (value) {
+                            case "删除":
+                                PersonDelete(position);
+                                break;
+                            case "分享":
+                                ShareUtils shareUtils = new ShareUtils((Activity) mContext);
+                                String shareUrl = String.format(AppConfigs.DOINGTAI, mDatas.get(position).getId());
+                                String mShareContent = mDatas.get(position).getTitle();
+                                shareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_21, shareUrl, mShareContent);
+                                break;
+                            case "举报":
+                                Dialogs(userId, uid);
+                                break;
+                            case "取消":
+                                dialog.dismin();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                });
+
+                if (userId.equals(uid)) {
+                    dialog.dispalyMy(); //自己的动态
+                } else {
+                    dialog.dispalyOther();//别人的动态
+                }
+            }
+        });
+
+    }
+
+    //删除动态
+    private void PersonDelete( final int position) {
+
+        AlertDialog dialog = new AlertDialog.Builder(mContext)
+                .setTitle("提示")
+                .setMessage("是否删除动态?")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Request<String> personDelete = ParameterUtils.getSingleton().getPersonDelete("1", mDatas.get(position).getId());
+                        CallServer.getRequestInstance().add(mContext, 0, personDelete, new HttpListener() {
+                            @Override
+                            public void onSucceed(int what, String response) {
+                                ReportInfo report = JsonMananger.getReponseResult(response, ReportInfo.class);
+                                NToast.longToast(mContext, report.getData());
+                                notifyItemRemoved(position);
+                                notifyDataSetChanged();
+                            }
+                            @Override
+                            public void onFailed(int what, int responseCode, String response) {
+
+                            }
+                        }, false, false);
+                        dialogInterface.dismiss();
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .create();
+        dialog.show();
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
+        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+        dialog.setCanceledOnTouchOutside(false);
+    }
+
+    //举报
+    private void Dialogs(final String userId, final String uid) {
+        AlertDialog dialog = new AlertDialog.Builder(mContext)
+                .setTitle("提示")
+                .setMessage("是否举报?")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Request<String> personReport = ParameterUtils.getSingleton().getPersonReport(userId, "3", uid);
+                        CallServer.getRequestInstance().add(mContext, 0, personReport, new HttpListener() {
+                            @Override
+                            public void onSucceed(int what, String response) {
+                                ReportInfo report = JsonMananger.getReponseResult(response, ReportInfo.class);
+                                NToast.longToast(mContext, report.getData());
+                            }
+
+                            @Override
+                            public void onFailed(int what, int responseCode, String response) {
+
+                            }
+                        }, false, false);
+                        dialogInterface.dismiss();
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .create();
+        dialog.show();
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
+        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+        dialog.setCanceledOnTouchOutside(false);
+
     }
 
     @Override
