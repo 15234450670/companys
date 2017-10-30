@@ -111,4 +111,6 @@
     <dimen name="spacing_384">192dp</dimen>
     <dimen name="spacing_345">172.5dp</dimen>
     <dimen name="spacing_316">158dp</dimen>
+    <dimen name="spacing_378">189dp</dimen>
+    <dimen name="spacing_395">197.5dp</dimen>
 </resources>

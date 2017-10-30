@@ -61,11 +61,11 @@ public class FabuDialog extends Dialog implements View.OnClickListener {
                 this.dismin();
                 break;
             case R.id.fabu_sp:
-                System.out.println("点击2");
+             //视频
                 mcontext.startActivity(new Intent(mcontext, PostVideoActivity.class));
                 break;
             case R.id.fabu_tw:
-                System.out.println("点击1");
+               //图文
                mcontext.startActivity(new Intent(mcontext, PictureActivity.class));
                 break;
 

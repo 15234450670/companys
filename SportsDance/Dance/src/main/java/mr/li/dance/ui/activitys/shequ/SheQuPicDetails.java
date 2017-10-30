@@ -100,7 +100,8 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
                 titleData = reponseResult.getData();
                 int is_attention = titleData.is_attention;
                 Log.e(TAG, is_attention + "");
-                if (is_attention == 1) {
+                isCollected = (2 != is_attention);
+                if (isCollected) {
                     imageView.setImageResource(R.drawable.my_look_no);
                 } else {
                     imageView.setImageResource(R.drawable.my_look_yes);
@@ -108,6 +109,9 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
 
                 imageView.setOnClickListener(SheQuPicDetails.this);
             }
+
+
+
 
             @Override
             public void onFailed(int what, int responseCode, String response) {

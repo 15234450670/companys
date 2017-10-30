@@ -50,7 +50,6 @@ public class PersonageActivity extends BaseListActivity {
     private String itemid;
     private String name;
     private String pic;
-    private String userId;
     boolean isCollected;
 
     @Override
@@ -78,7 +77,7 @@ public class PersonageActivity extends BaseListActivity {
     public void initViews() {
         super.initViews();
         setTitle("个人名片");
-        userId = UserInfoManager.getSingleton().getUserId(this);
+        String  userId = UserInfoManager.getSingleton().getUserId(this);
         if (!itemid.equals(userId)) {
             setRightImage(R.drawable.my_look_yes, R.drawable.shequ_report);
         } else {
@@ -93,9 +92,12 @@ public class PersonageActivity extends BaseListActivity {
     @Override
     public void initDatas() {
         super.initDatas();
+        String  userId = UserInfoManager.getSingleton().getUserId(this);
         ImageLoaderManager.getSingleton().LoadCircle(this, pic, mDanceViewHolder.getImageView(R.id.shequ_head), R.drawable.icon_mydefault);
         mDanceViewHolder.setText(R.id.shequ_name, name);
-        Request<String> personItem = ParameterUtils.getSingleton().getPersonItem("1", String.valueOf(page), itemid);
+        Request<String> personItem = ParameterUtils.getSingleton().getPersonItem("1", String.valueOf(page), itemid,userId);
+        Log.e(TAG,itemid);
+        Log.e(TAG,userId+"---");
         request(AppConfigs.person_item, personItem, false);
     }
 
@@ -189,16 +191,18 @@ public class PersonageActivity extends BaseListActivity {
     @Override
     public void refresh() {
         super.refresh();
+        String  userId = UserInfoManager.getSingleton().getUserId(this);
         page = 1;
-        Request<String> personItem = ParameterUtils.getSingleton().getPersonItem("1", String.valueOf(page), itemid);
+        Request<String> personItem = ParameterUtils.getSingleton().getPersonItem("1", String.valueOf(page), itemid,userId);
         request(AppConfigs.person_item, personItem, false);
     }
 
     @Override
     public void loadMore() {
         super.loadMore();
+        String  userId = UserInfoManager.getSingleton().getUserId(this);
         page++;
-        Request<String> personItem = ParameterUtils.getSingleton().getPersonItem("1", String.valueOf(page), itemid);
+        Request<String> personItem = ParameterUtils.getSingleton().getPersonItem("1", String.valueOf(page), itemid,userId);
         request(AppConfigs.person_items, personItem, false);
     }
 
@@ -222,6 +226,7 @@ public class PersonageActivity extends BaseListActivity {
     @Override
     public void onHeadRightButtonClick(View v) {
         super.onHeadRightButtonClick(v);
+        String  userId = UserInfoManager.getSingleton().getUserId(this);
         int operation = isCollected ? 1 : 2;
         Request<String> personCancelLook = ParameterUtils.getSingleton().getPersonCancelLook(userId, itemid, operation);
         request(AppConfigs.user_collection, personCancelLook, false);
@@ -233,6 +238,7 @@ public class PersonageActivity extends BaseListActivity {
     }
 
     private void Dialogs() {
+        final String  userId = UserInfoManager.getSingleton().getUserId(this);
         AlertDialog dialog = new AlertDialog.Builder(mContext)
                 .setTitle("提示")
                 .setMessage("是否举报?")

@@ -115,6 +115,7 @@ public class PersonItemAdapter extends DanceBaseAdapter {
         }
         ImageView imageView = holder.danceViewHolder.getImageView(R.id.shequ_dianz_iv);
         int is_upvote = mDatas.get(position).getIs_upvote();
+        Log.e("is_upvote",is_upvote+"");
         if (is_upvote == 1) {
             imageView.setImageResource(R.drawable.dianzan2);
         } else {

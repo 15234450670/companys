@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_378"
+        android:layout_marginLeft="@dimen/spacing_40"
+        android:layout_marginRight="@dimen/spacing_40"
+        android:layout_marginTop="@dimen/spacing_30"
+        android:layout_weight="1">
+
+        <SurfaceView
+            android:id="@+id/surfaceview"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_378"/>
+
+        <RelativeLayout
+            android:id="@+id/fabushiping_rl_sp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_378"
+            android:background="#e7e7e7">
+
+            <ImageView
+                android:id="@+id/iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/spacing_150"
+                android:src="@drawable/shipin"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/spacing_15"
+                android:gravity="center"
+                android:text="拍视屏"
+                android:textColor="#999999"
+                android:textSize="@dimen/textsize24"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_200">
+
+        <Button
+            android:id="@+id/pai_btn"
+            android:layout_width="@dimen/textsize120"
+            android:layout_height="@dimen/textsize120"
+            android:layout_centerInParent="true"
+            android:background="@drawable/yuan_zi"
+            android:text="按住拍"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/nect_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/spacing_20"
+            android:layout_toEndOf="@+id/button"
+            android:background="@drawable/bulu_shape_bg"
+            android:text="下一步"
+            android:textColor="@color/bottom_navigation"/>
+    </RelativeLayout>
+
+</LinearLayout>

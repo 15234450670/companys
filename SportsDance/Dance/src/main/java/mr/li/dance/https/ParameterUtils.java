@@ -1158,11 +1158,12 @@ public class ParameterUtils {
     }
 
     //个人中心Item
-    public Request<String> getPersonItem(String is_type, String page, String userid) {
+    public Request<String> getPersonItem(String is_type, String page, String userid,String self_id) {
         Request<String> request = getBaseRequestForPost("/community.personage");
         request.add("is_type", is_type);
         request.add("page", page);
         request.add("userid", userid);
+        request.add("self_id",self_id);
         return request;
     }
 
