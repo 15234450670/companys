@@ -1222,5 +1222,12 @@ public class ParameterUtils {
         request.add("userid", userid);
         return request;
     }
-
+    // 图文上传
+    public Request<String> getPersonUpPIC(String dynamic_id,String is_type,File file) {
+        Request<String> request = getBaseRequestForPost("/community.mUpload");
+        request.add("dynamic_id", dynamic_id);
+        request.add("is_type", is_type);
+        request.add("file[]",file);
+        return request;
+    }
 }

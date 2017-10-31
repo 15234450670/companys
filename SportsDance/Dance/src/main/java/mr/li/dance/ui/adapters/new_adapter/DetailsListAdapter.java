@@ -1,16 +1,11 @@
 package mr.li.dance.ui.adapters.new_adapter;
 
 import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-
-import java.util.List;
+import android.util.Log;
 
 import mr.li.dance.R;
-import mr.li.dance.utils.glide.ImageLoaderManager;
+import mr.li.dance.ui.adapters.BaseRecyclerAdapter;
+import mr.li.dance.ui.adapters.RecyclerViewHolder;
 
 /**
  * 作者: SuiFeng
@@ -19,35 +14,24 @@ import mr.li.dance.utils.glide.ImageLoaderManager;
  * 描述:    社区详情图文适配器
  * 修订历史:
  */
-public class DetailsListAdapter extends BaseAdapter {
+public class DetailsListAdapter extends BaseRecyclerAdapter<String> {
 
-    Context context;
-    List<String> address;
-    public DetailsListAdapter(Context context, List<String> address) {
-                this.context = context;
-        this.address = address;
+
+    public DetailsListAdapter(Context ctx) {
+        super(ctx);
+
     }
 
     @Override
-    public int getCount() {
-        return address.size();
+    public int getItemLayoutId(int viewType) {
+        return R.layout.shequ_details_pic_item;
     }
 
     @Override
-    public Object getItem(int i) {
-        return address.get(i);
+    public void bindData(RecyclerViewHolder holder, int position, String item) {
+        Log.e("item", item);
+        holder.setImageByUrlOrFilePath(R.id.pic_item, item, R.drawable.default_banner);
     }
 
-    @Override
-    public long getItemId(int i) {
-        return i;
-    }
 
-    @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        View inflate = LayoutInflater.from(context).inflate(R.layout.shequ_details_pic_item, null);
-        ImageView pic = (ImageView) inflate.findViewById(R.id.pic_item);
-        ImageLoaderManager.getSingleton().Load(context,address.get(i),pic,R.drawable.default_banner);
-        return inflate;
-    }
 }

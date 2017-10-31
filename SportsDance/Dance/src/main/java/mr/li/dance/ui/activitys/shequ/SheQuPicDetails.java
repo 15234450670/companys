@@ -5,11 +5,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.yolanda.nohttp.rest.Request;
+
+import java.util.List;
 
 import mr.li.dance.R;
 import mr.li.dance.https.CallServer;
@@ -31,7 +35,6 @@ import mr.li.dance.utils.NToast;
 import mr.li.dance.utils.ShareUtils;
 import mr.li.dance.utils.UserInfoManager;
 import mr.li.dance.utils.glide.ImageLoaderManager;
-import mr.li.dance.utils.util.ListViewUtils;
 
 /**
  * 作者: SuiFeng
@@ -42,12 +45,12 @@ import mr.li.dance.utils.util.ListViewUtils;
  */
 public class SheQuPicDetails extends BaseActivity implements View.OnClickListener {
     private String TAG = getClass().getSimpleName();
-    private String        itemId;
-    private ListViewUtils listViewUtils;
-    private DetailsInfo   data;
-    private String        uid;
-    private ImageView     imageView;
-    private PersonInfo    titleData;
+    private String       itemId;
+    private RecyclerView listViewUtils;
+    private DetailsInfo  data;
+    private String       uid;
+    private ImageView    imageView;
+    private PersonInfo   titleData;
     boolean       isCollected;
     GengduoDialog dialog;
 
@@ -59,7 +62,7 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
     @Override
     public void initViews() {
         setTitle("详情");
-        listViewUtils = (ListViewUtils) mDanceViewHolder.getView(R.id.list_view);
+        listViewUtils = (RecyclerView) mDanceViewHolder.getView(R.id.list_view);
         setRightImage(R.drawable.more);
         imageView = mDanceViewHolder.getImageView(R.id.details_look);
     }
@@ -85,8 +88,8 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
         Request<String> personDetails = ParameterUtils.getSingleton().getPersonDetails(itemId, userId);
         request(AppConfigs.person_details, personDetails, false);
 
-
     }
+
     //关注状态
     @Override
     public void onResume() {
@@ -111,8 +114,6 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
             }
 
 
-
-
             @Override
             public void onFailed(int what, int responseCode, String response) {
 
@@ -123,6 +124,7 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
+        Log.e(TAG, response);
         if (what == AppConfigs.person_details) {
             SheQuDetailsResponse reponseResult = JsonMananger.getReponseResult(response, SheQuDetailsResponse.class);
             data = reponseResult.getData();
@@ -139,9 +141,12 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
                 }
             }
             //图片列表适配器
-            if (!MyStrUtil.isEmpty(data.getAddress())) {
+            List<String> address = data.getAddress();
+            if (!MyStrUtil.isEmpty(address)) {
                 listViewUtils.setVisibility(View.VISIBLE);
-                DetailsListAdapter adapter = new DetailsListAdapter(this, data.getAddress());
+                DetailsListAdapter adapter = new DetailsListAdapter(this);
+                listViewUtils.setLayoutManager(new LinearLayoutManager(this));
+                adapter.addList(address);
                 listViewUtils.setAdapter(adapter);
             } else {
                 listViewUtils.setVisibility(View.GONE);

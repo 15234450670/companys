@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import mr.li.dance.R;
+import mr.li.dance.ui.activitys.shequ.TranscribeVideo;
 
 /**
  * 作者: SuiFeng
@@ -62,7 +63,7 @@ public class FabuDialog extends Dialog implements View.OnClickListener {
                 break;
             case R.id.fabu_sp:
              //视频
-                mcontext.startActivity(new Intent(mcontext, PostVideoActivity.class));
+                mcontext.startActivity(new Intent(mcontext, TranscribeVideo.class));
                 break;
             case R.id.fabu_tw:
                //图文

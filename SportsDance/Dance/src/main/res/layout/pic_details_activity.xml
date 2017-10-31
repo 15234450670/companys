@@ -71,14 +71,14 @@
             android:visibility="gone"
             />
 
-        <mr.li.dance.utils.util.ListViewUtils
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/list_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
             >
 
-        </mr.li.dance.utils.util.ListViewUtils>
+        </android.support.v7.widget.RecyclerView>
 
         <View
                  android:layout_marginTop="@dimen/spacing_10"

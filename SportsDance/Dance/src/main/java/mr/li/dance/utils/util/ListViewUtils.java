@@ -21,16 +21,17 @@ public class ListViewUtils extends ListView {
         super(context, attrs);
     }
 
-    public ListViewUtils(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+    public ListViewUtils(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
     }
 
     @Override
+    /**
+     * 重写该方法，达到使ListView适应ScrollView的效果
+     */
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        // TODO Auto-generated method stub
         int expandSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2,
                 MeasureSpec.AT_MOST);
         super.onMeasure(widthMeasureSpec, expandSpec);
-
-    }
+}
 }

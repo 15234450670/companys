@@ -22,7 +22,6 @@
     <uses-permission android:name="android.permission.VIBRATE"/>
 
 
-
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
@@ -195,72 +194,97 @@
         <activity
             android:name=".ui.TXT.PictureActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.TXT.PostVideoActivity"
-                  android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activitys.music.DanceMusicActivity"
-                  android:screenOrientation="portrait"
+        <activity
+            android:name=".ui.TXT.PostVideoActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activitys.music.DanceMusicActivity"
+            android:screenOrientation="portrait"
             />
-        <activity android:name=".ui.activitys.music.SongActivity"
-                  android:screenOrientation="portrait"
+        <activity
+            android:name=".ui.activitys.music.SongActivity"
+            android:screenOrientation="portrait"
             />
-        <activity android:name=".ui.activitys.music.PlayMusicActivity"
-                  android:screenOrientation="portrait"
+        <activity
+            android:name=".ui.activitys.music.PlayMusicActivity"
+            android:screenOrientation="portrait"
             />
-        <activity android:name=".ui.activitys.newActivitys.PersonageActivity"
-                  android:screenOrientation="portrait"
+        <activity
+            android:name=".ui.activitys.newActivitys.PersonageActivity"
+            android:screenOrientation="portrait"
             />
-        <activity android:name=".ui.activitys.newActivitys.Shequ_fans"
-                  android:screenOrientation="portrait"
+        <activity
+            android:name=".ui.activitys.newActivitys.Shequ_fans"
+            android:screenOrientation="portrait"
             />
-        <activity android:name=".ui.activitys.newActivitys.Shequ_look"
-                  android:screenOrientation="portrait"
+        <activity
+            android:name=".ui.activitys.newActivitys.Shequ_look"
+            android:screenOrientation="portrait"
             />
 
-        <activity android:name=".ui.fragments.main.ExaminationFragment"
-                  android:screenOrientation="portrait"
+        <activity
+            android:name=".ui.fragments.main.ExaminationFragment"
+            android:screenOrientation="portrait"
             />
-        <activity android:name=".ui.activitys.newTab.TabCollect"
-                  android:launchMode="singleTask"
-                  android:screenOrientation="portrait"
+        <activity
+            android:name=".ui.activitys.newTab.TabCollect"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             />
-        <activity android:name=".ui.activitys.newActivitys.MessageActivity"
-                  android:screenOrientation="portrait"
+        <activity
+            android:name=".ui.activitys.newActivitys.MessageActivity"
+            android:screenOrientation="portrait"
             />
-        <activity android:name=".ui.activitys.newActivitys.TeachActivity"
-                  android:screenOrientation="portrait"
+        <activity
+            android:name=".ui.activitys.newActivitys.TeachActivity"
+            android:screenOrientation="portrait"
             />
-        <activity android:name=".ui.activitys.newActivitys.VideoActivity"
-                  android:screenOrientation="portrait"
+        <activity
+            android:name=".ui.activitys.newActivitys.VideoActivity"
+            android:screenOrientation="portrait"
             />
-        <activity android:name=".ui.activitys.newActivitys.MusicActivity"
-                  android:screenOrientation="portrait"
+        <activity
+            android:name=".ui.activitys.newActivitys.MusicActivity"
+            android:screenOrientation="portrait"
             />
-        <activity android:name=".ui.activitys.newActivitys.PicActivity"
-                  android:screenOrientation="portrait"
+        <activity
+            android:name=".ui.activitys.newActivitys.PicActivity"
+            android:screenOrientation="portrait"
             />
         <activity
             android:name=".ui.activitys.video.VideoDetailActivity"
-            android:fitsSystemWindows="true"
             android:clipToPadding="true"
             android:configChanges="keyboard|screenSize|orientation|layoutDirection"
+            android:fitsSystemWindows="true"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.activitys.newActivitys.TeachDetailsActivity"
-                  android:clipToPadding="true"
-                  android:screenOrientation="portrait"
-                  android:fitsSystemWindows="true"
-                  android:configChanges="keyboard|screenSize|orientation|layoutDirection"
-                  />
-        <activity android:name=".ui.activitys.newActivitys.SpecialActivity"
-                  android:screenOrientation="portrait"
+        <activity
+            android:name=".ui.activitys.newActivitys.TeachDetailsActivity"
+            android:clipToPadding="true"
+            android:configChanges="keyboard|screenSize|orientation|layoutDirection"
+            android:fitsSystemWindows="true"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".ui.activitys.newActivitys.SpecialActivity"
+            android:screenOrientation="portrait"
             />
 
-        <activity android:name=".ui.activitys.shequ.SheQuPicDetails"
-                  android:screenOrientation="portrait"
+        <activity
+            android:name=".ui.activitys.shequ.SheQuPicDetails"
+            android:screenOrientation="portrait"
             />
-        <activity android:name=".ui.activitys.shequ.SheQuVideoDetails"
-                  android:screenOrientation="portrait"
+        <activity
+            android:name=".ui.activitys.shequ.SheQuVideoDetails"
+            android:screenOrientation="portrait"
             />
+        <activity
+            android:name=".ui.activitys.shequ.TranscribeVideo"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activitys.shequ.SelectPictureActivity"
+            android:screenOrientation="portrait"/>
+
 
         <service
             android:name="com.letvcloud.cmf.MediaService"

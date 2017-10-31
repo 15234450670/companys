@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginLeft="@dimen/spacing_20"
-            android:layout_toEndOf="@+id/button"
+            android:layout_toEndOf="@+id/pai_btn"
             android:background="@drawable/bulu_shape_bg"
             android:text="下一步"
             android:textColor="@color/bottom_navigation"/>

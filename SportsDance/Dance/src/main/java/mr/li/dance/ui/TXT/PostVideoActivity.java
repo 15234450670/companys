@@ -1,10 +1,13 @@
 package mr.li.dance.ui.TXT;
 
+import android.content.Context;
+import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import mr.li.dance.R;
 import mr.li.dance.ui.activitys.base.BaseActivity;
@@ -24,6 +27,7 @@ public class PostVideoActivity extends BaseActivity implements View.OnClickListe
     private EditText mBt;
     private TextView mzs;
     private int num = 25;
+
     @Override
     public int getContentViewId() {
         return R.layout.fabu_sp_activity;
@@ -31,8 +35,15 @@ public class PostVideoActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void initViews() {
-        setTitleAndRightBtn("视频", "发布");
+        setHeadRightButtonVisibility(View.VISIBLE);  //显示右标题
+        setTitleAndRightBtn1("视频", "发布", R.color.black);//设置头部 内容
 
+    }
+    //点击右按钮
+    @Override
+    public void onHeadRightButtonClick(View v) {
+        super.onHeadRightButtonClick(v);
+        Toast.makeText(mContext, "发布了视频", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -40,6 +51,7 @@ public class PostVideoActivity extends BaseActivity implements View.OnClickListe
         super.initDatas();
         mBt = (EditText) mDanceViewHolder.getView(input_bt);
         mzs = mDanceViewHolder.getTextView(R.id.sp_zs);
+        mDanceViewHolder.getView(R.id.fabushiping_rl_sp).setOnClickListener(this);
         LimitTitle();
     }
 
@@ -63,7 +75,7 @@ public class PostVideoActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void afterTextChanged(Editable s) {
                 //TextView显示剩余字数
-                mzs.setText(s.length()+"/"+num);
+                mzs.setText(s.length() + "/" + num);
                 selectionStart = mBt.getSelectionStart();
                 selectionEnd = mBt.getSelectionEnd();
                 if (wordNum.length() > num) {
@@ -84,5 +96,10 @@ public class PostVideoActivity extends BaseActivity implements View.OnClickListe
                 TranscribeVideo.lunch(this);
                 break;
         }
+    }
+
+    public static void lunch(Context context) {
+        Intent intent = new Intent(context, PostVideoActivity.class);
+        context.startActivity(intent);
     }
 }
