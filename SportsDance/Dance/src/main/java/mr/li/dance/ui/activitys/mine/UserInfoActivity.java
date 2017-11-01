@@ -159,6 +159,7 @@ public class UserInfoActivity extends BaseActivity implements View.OnClickListen
                 } else {
                     photoUtils.selectPicture(UserInfoActivity.this);
                 }
+
             }
         });
         bottomSingleDialog.dispaly("拍照", "相册");

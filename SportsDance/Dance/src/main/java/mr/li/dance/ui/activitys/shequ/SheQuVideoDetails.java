@@ -175,7 +175,16 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
                             @Override
                             public void onSucceed(int what, String response) {
                                 ReportInfo report = JsonMananger.getReponseResult(response, ReportInfo.class);
-                                NToast.longToast(SheQuVideoDetails.this, report.getData());
+                                View view = mDanceViewHolder.getView(R.id.lin);
+                                View view1 = mDanceViewHolder.getView(R.id.v);
+                                if (!MyStrUtil.isEmpty(report.getData())) {
+                                    view.setVisibility(View.GONE);
+                                    view1.setVisibility(View.VISIBLE);
+                                    NToast.longToast(SheQuVideoDetails.this, report.getData());
+                                } else {
+                                    view.setVisibility(View.VISIBLE);
+                                    view1.setVisibility(View.GONE);
+                                }
                             }
 
                             @Override

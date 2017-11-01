@@ -281,9 +281,6 @@
         <activity
             android:name=".ui.activitys.shequ.TranscribeVideo"
             android:screenOrientation="portrait"/>
-        <activity
-            android:name=".ui.activitys.shequ.SelectPictureActivity"
-            android:screenOrientation="portrait"/>
 
 
         <service

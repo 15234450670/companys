@@ -34,6 +34,7 @@ public class BaseHomeItem {
     private String img;
     private String described;
     public String img_fm;
+    public String activityid;
 
     public String getImg() {
         return img;

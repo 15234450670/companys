@@ -31,6 +31,8 @@ public class TranscribeVideo extends BaseActivity implements View.OnClickListene
         super.initDatas();
         mDanceViewHolder.getButton(R.id.nect_btn).setOnClickListener(this);
 
+
+
     }
 
     public static void lunch(Context context) {
@@ -38,12 +40,13 @@ public class TranscribeVideo extends BaseActivity implements View.OnClickListene
         context.startActivity(intent);
     }
 
-    @Override
+     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.nect_btn:
                 PostVideoActivity.lunch(this);
                 break;
+
         }
     }
 }

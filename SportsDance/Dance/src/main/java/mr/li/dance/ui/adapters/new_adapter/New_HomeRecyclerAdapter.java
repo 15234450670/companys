@@ -302,7 +302,7 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
 
                 HuoDongInfo reponseResult = JsonMananger.getReponseResult(response, HuoDongInfo.class);
                 Log.e("sdfsdf", "请求了:" + reponseResult.getData());
-                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, "", reponseResult.getData(), url, bannerInfo.getId());
+                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, "", reponseResult.getData(), url+bannerInfo.activityid, bannerInfo.getId());
             }
 
             @Override
@@ -337,7 +337,7 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
 
                 HuoDongInfo reponseResult = JsonMananger.getReponseResult(response, HuoDongInfo.class);
                 Log.e("sdfsdf", "请求了:" + reponseResult.getData());
-                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, title, reponseResult.getData(), url, base.getId());
+                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, title, reponseResult.getData(), url+base.activityid, base.getId());
 
             }
 

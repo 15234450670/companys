@@ -45,7 +45,7 @@ import mr.li.dance.utils.glide.ImageLoaderManager;
  */
 public class SheQuAdapter extends DanceBaseAdapter {
     private List<ShequInfo> mDatas;
-    Context mContext;
+    Context                              mContext;
     ListViewItemClickListener<ShequInfo> mItemClickListener;
 
     public SheQuAdapter(Context context, ListViewItemClickListener clickListener) {
@@ -119,7 +119,6 @@ public class SheQuAdapter extends DanceBaseAdapter {
             ImageView imageView = holder.danceViewHolder.getImageView(R.id.sq_ship_iv);
             imageView.setVisibility(View.VISIBLE);
             holder.danceViewHolder.setImageResDrawable(R.id.imageView, R.drawable.default_banner, R.drawable.default_video);
-
         }
         ImageView imageView = holder.danceViewHolder.getImageView(R.id.shequ_dianz_iv);
         int is_upvote = mDatas.get(position).getIs_upvote();
@@ -220,6 +219,7 @@ public class SheQuAdapter extends DanceBaseAdapter {
                         mDatas.get(position).setIs_upvote();
                         notifyDataSetChanged();
                     }
+
                     @Override
                     public void onFailed(int what, int responseCode, String response) {
 
@@ -257,7 +257,7 @@ public class SheQuAdapter extends DanceBaseAdapter {
                                 break;
                             case "举报":
                                 Dialogs(userId, uid);
-                                break;
+                            break;
                             case "取消":
                                 dialog.dismin();
                                 break;

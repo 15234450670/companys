@@ -19,6 +19,7 @@ public class BannerInfo {
     private String number;
     private String appsecret;
     private String appid;
+    public String activityid;
     /**
      * img :
      * type :

@@ -1158,12 +1158,12 @@ public class ParameterUtils {
     }
 
     //个人中心Item
-    public Request<String> getPersonItem(String is_type, String page, String userid,String self_id) {
+    public Request<String> getPersonItem(String is_type, String page, String userid, String self_id) {
         Request<String> request = getBaseRequestForPost("/community.personage");
         request.add("is_type", is_type);
         request.add("page", page);
         request.add("userid", userid);
-        request.add("self_id",self_id);
+        request.add("self_id", self_id);
         return request;
     }
 
@@ -1215,6 +1215,7 @@ public class ParameterUtils {
         request.add("attention", attention);
         return request;
     }
+
     //社区详情
     public Request<String> getPersonDetails(String dynamic_id, String userid) {
         Request<String> request = getBaseRequestForPost("/community.details");
@@ -1222,12 +1223,16 @@ public class ParameterUtils {
         request.add("userid", userid);
         return request;
     }
-    // 图文上传
-    public Request<String> getPersonUpPIC(String dynamic_id,String is_type,File file) {
-        Request<String> request = getBaseRequestForPost("/community.mUpload");
-        request.add("dynamic_id", dynamic_id);
+
+    //增加动态
+    public Request<String> getPersonAddDongTai(String userid, String is_type, String title, String content) {
+        Request<String> request = getBaseRequestForPost("/community.dynamicAdd");
+        request.add("userid", userid);
         request.add("is_type", is_type);
-        request.add("file[]",file);
+        request.add("title", title);
+        request.add("content", content);
         return request;
     }
+
+
 }
