@@ -281,7 +281,8 @@
         <activity
             android:name=".ui.activitys.shequ.TranscribeVideo"
             android:screenOrientation="portrait"/>
-
+        <activity android:name=".ui.TXT.SelectPictureActivity"
+                  android:screenOrientation="portrait"/>
 
         <service
             android:name="com.letvcloud.cmf.MediaService"

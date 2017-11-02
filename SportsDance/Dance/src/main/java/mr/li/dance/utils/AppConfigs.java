@@ -131,7 +131,7 @@ public class AppConfigs {
     public final static int person_items = 0x0072;//个人列表
     public final static int person_look = 0x0073;//关注
     public final static int person_details = 0x0074;//社区详情
-
+    public final static int FA_DONGTAI = 0x0075;//发布动态
     public static String getDomainUrl() {
         return DomainUrl;
     }

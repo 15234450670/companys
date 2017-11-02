@@ -1225,12 +1225,20 @@ public class ParameterUtils {
     }
 
     //增加动态
-    public Request<String> getPersonAddDongTai(String userid, String is_type, String title, String content) {
+    public Request<String> getPersonAddDongTai(String userid, int is_type, String title, String content) {
         Request<String> request = getBaseRequestForPost("/community.dynamicAdd");
         request.add("userid", userid);
         request.add("is_type", is_type);
         request.add("title", title);
         request.add("content", content);
+        return request;
+    }
+    //发布图片
+    public Request<String> getfabutupian(int is_type, int dynamic_id, File file) {
+        Request<String> request = getBaseRequestForPost("/community.mUpload");
+        request.add("dynamic_id", dynamic_id);
+        request.add("is_type", is_type);
+        request.add("file[]", file);
         return request;
     }
 
