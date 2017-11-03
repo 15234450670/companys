@@ -39,6 +39,7 @@ public class PostVideoActivity extends BaseActivity implements View.OnClickListe
         setTitleAndRightBtn1("视频", "发布", R.color.black);//设置头部 内容
 
     }
+
     //点击右按钮
     @Override
     public void onHeadRightButtonClick(View v) {
