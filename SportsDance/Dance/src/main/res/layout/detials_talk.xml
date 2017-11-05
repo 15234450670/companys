@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/shequ_ll_min"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <ImageView
+                android:id="@+id/shequ_head"
+                android:layout_width="@dimen/spacing_99"
+                android:layout_height="@dimen/spacing_99"
+                android:layout_margin="@dimen/spacing_20"
+                android:background="@drawable/icon_mydefault"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                >
+
+                <TextView
+                    android:id="@+id/shequ_name"
+                    style="@style/text_white_style_30"
+                    android:layout_marginBottom="@dimen/spacing_20"
+                    android:maxLines="1"
+                    android:text=""
+                    android:textColor="@color/black"/>
+
+                <LinearLayout
+                    android:id="@+id/shequ_lin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/shequ_name"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/shequ_look"
+                        style="@style/text_white_style_24"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/shequ_fans"
+                        style="@style/text_white_style_24"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textColor="@color/black"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/shequ_time"
+                    style="@style/text_white_style_30"
+                    android:layout_below="@+id/shequ_name"
+                    android:text=""
+                    android:textColor="@color/black"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <ImageView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/text_white_style_30"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="@dimen/spacing_20"
+            android:maxLines="2"
+            android:text=""
+            android:textColor="#333333"/>
+
+        <TextView
+            android:id="@+id/content"
+            style="@style/text_white_style_24"
+            android:layout_marginLeft="@dimen/spacing_20"
+            android:layout_marginRight="@dimen/spacing_20"
+            android:text=""
+            android:textColor="#666666"/>
+
+        <View
+            android:id="@+id/spline"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_20"
+            android:background="#e1e1e1"
+            android:visibility="gone"/>
+
+    <mr.li.dance.ui.widget.CommentListView
+        android:id="@+id/commentList"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="20dp"
+        app:item_color="@color/praise_item"
+        />
+
+</LinearLayout>

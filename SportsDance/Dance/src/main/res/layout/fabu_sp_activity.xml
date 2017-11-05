@@ -4,7 +4,7 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <RelativeLayout
+    <!--<RelativeLayout
         android:id="@+id/fabushiping_rl_sp"
         android:layout_width="match_parent"
         android:layout_height="@dimen/spacing_378"
@@ -31,8 +31,13 @@
             android:text="拍视屏"
             android:textColor="#999999"
             android:textSize="@dimen/textsize24"/>
-    </RelativeLayout>
-
+    </RelativeLayout>-->
+    <ViewStub
+        android:id="@+id/stub"
+        android:inflatedId="@+id/subTree"
+        android:layout="@layout/video_stubview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
@@ -47,7 +52,7 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/input_bt"
+            android:id="@+id/fb_title"
             android:layout_width="match_parent"
             android:layout_height="@dimen/spacing_80"
             android:layout_marginLeft="@dimen/spacing_45"
@@ -59,7 +64,7 @@
             android:textSize="@dimen/textsize24"/>
 
         <TextView
-            android:id="@+id/sp_zs"
+            android:id="@+id/mzs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -79,7 +84,7 @@
         android:background="#e1e1e1"/>
 
     <EditText
-        android:id="@+id/sp_zw"
+        android:id="@+id/fb_content"
         style="@style/text_white_style_30"
         android:layout_margin="@dimen/spacing_40"
         android:background="@null"

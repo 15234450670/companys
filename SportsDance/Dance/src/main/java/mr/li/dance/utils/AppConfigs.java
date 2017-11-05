@@ -132,6 +132,9 @@ public class AppConfigs {
     public final static int person_look = 0x0073;//关注
     public final static int person_details = 0x0074;//社区详情
     public final static int FA_DONGTAI = 0x0075;//发布动态
+    public final static int GET_TAKEVIDEO= 0X0076; //视频上传
+    public final static int GET_PUBLISH= 0X0079; //发布评论
+    public final static int GET_DYNSMICDEL= 0X0080; //删除评论
     public static String getDomainUrl() {
         return DomainUrl;
     }

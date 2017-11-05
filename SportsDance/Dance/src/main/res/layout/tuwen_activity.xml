@@ -16,7 +16,7 @@
             android:layout_marginLeft="@dimen/spacing_45"
             android:background="@null"
             android:gravity="center_vertical"
-            android:hint="视屏标题..."
+            android:hint="图文标题..."
             android:textColor="#bbbbbb"
             android:textColorHint="#bbbbbb"
             android:textSize="@dimen/textsize24"/>

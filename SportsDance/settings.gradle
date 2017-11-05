@@ -1,1 +1,1 @@
-include ':Dance', ':RefreshLibrary', ':LePlayerSkin', ':LePlayerSdk', ':Pushlib'
+include ':Dance', ':RefreshLibrary', ':LePlayerSkin', ':LePlayerSdk', ':Pushlib', ':SmallVideoLib'

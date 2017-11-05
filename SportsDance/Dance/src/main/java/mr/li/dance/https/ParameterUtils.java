@@ -1241,6 +1241,31 @@ public class ParameterUtils {
         request.add("file[]", file);
         return request;
     }
+    //获取视频token
+    public Request<String> getTakeVideoToken(String userid, String videoName) {
+        Request<String> request = getBaseRequestForPost("/community.frontUpload");
+        request.add("userid", userid);
+        request.add("video_name", videoName);
+        return request;
+    }
+    //上传视频
+    public Request<String> getVideo(String dynamic_id, String video_name) {
+        Request<String> request = getBaseRequestForPost("/community.vUpload");
+        request.add("dynamic_id", dynamic_id);
+        request.add("video_name", video_name);
+        return request;
+    }
+
+    //发表评论
+    public Request<String> publishingDynamics(String userid, int is_type, String content, String correlation_id) {
+        Request<String> request = getBaseRequestForPost("/community.comment");
+        request.add("userid", userid);
+        request.add("is_type", is_type);
+        request.add("content", content);
+        request.add("correlation_id", correlation_id);
+        request.add("picture", "");
+        return request;
+    }
 
 
 }

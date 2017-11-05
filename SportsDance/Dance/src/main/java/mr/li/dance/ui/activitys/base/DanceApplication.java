@@ -49,15 +49,15 @@ public class DanceApplication extends Application {
 
     public static boolean cdeInitSuccess;
 
-    static DanceApplication instance;
+    public static DanceApplication instances;
     private String mDeviceToken;
 
 
     public static DanceApplication getInstance() {
-        if (instance == null) {
-            instance = new DanceApplication();
+        if (instances == null) {
+            instances = new DanceApplication();
         }
-        return instance;
+        return instances;
     }
 
     public static String getProcessName(Context cxt, int pid) {
@@ -77,7 +77,7 @@ public class DanceApplication extends Application {
     public void onCreate() {
         super.onCreate();
         MultiDex.install(this);
-        instance = this;
+        instances = this;
         initLeShi();
         NoHttp.initialize(this); // NoHttp默认初始化。
         CrashReport.initCrashReport(getApplicationContext(), "1f85dd65d8", false);

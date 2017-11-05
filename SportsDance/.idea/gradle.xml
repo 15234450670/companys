@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/LePlayerSkin" />
             <option value="$PROJECT_DIR$/Pushlib" />
             <option value="$PROJECT_DIR$/RefreshLibrary" />
+            <option value="$PROJECT_DIR$/SmallVideoLib" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

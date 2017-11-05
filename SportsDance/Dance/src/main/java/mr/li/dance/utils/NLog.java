@@ -11,7 +11,7 @@ import android.util.Log;
 public class NLog {
 
     private static final String LOG_FORMAT = "%1$s\n%2$s";
-    private static boolean isDebug = false;
+    private static boolean isDebug = true;
 
     public static void d(String tag, Object... args) {
         log(Log.DEBUG, null, tag, args);

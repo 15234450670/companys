@@ -3,12 +3,8 @@ package mr.li.dance.https;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.text.Html;
-import android.text.Spanned;
 import android.text.TextUtils;
-import android.util.Log;
 
-import com.yolanda.nohttp.error.ServerError;
 import com.yolanda.nohttp.rest.OnResponseListener;
 import com.yolanda.nohttp.rest.Request;
 import com.yolanda.nohttp.rest.Response;
@@ -119,10 +115,12 @@ public class HttpResponseListener<T> implements OnResponseListener<T> {
                         callback.onFailed(what, baseResponse.getErrorCode(), responseResult);
                     }
                 } else {
-                    callback.onFailed(what, -1001, "服务器数据错误");
+                   // callback.onFailed(what, -1001, "服务器数据错误");
+                    callback.onFailed(what, -1001, responseResult);
                 }
             } else {
-                callback.onFailed(what, -1001, "服务器数据错误");
+               // callback.onFailed(what, -1001, "服务器数据错误");
+                callback.onFailed(what, -1001, responseResult);
             }
 
         }
