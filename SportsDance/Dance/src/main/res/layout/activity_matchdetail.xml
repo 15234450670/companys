@@ -60,7 +60,7 @@
                 android:textColor="#333333"
                 android:text="" />
 
-            <TextView
+          <!--  <TextView
                 style="@style/text_yellow_style_28"
                 android:layout_width="match_parent"
                 android:layout_marginLeft="@dimen/spacing_20"
@@ -68,7 +68,7 @@
                 android:layout_marginTop="@dimen/spacing_35"
                 android:gravity="center_vertical"
 
-                android:text="预报赛程" />
+                android:text="预报赛程" />-->
 
             <LinearLayout
                 android:layout_width="match_parent"

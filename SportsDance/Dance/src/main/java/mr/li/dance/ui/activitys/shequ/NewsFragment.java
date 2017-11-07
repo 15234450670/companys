@@ -43,6 +43,12 @@ public class NewsFragment extends BaseListFragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        initData();
+    }
+
+    @Override
     public void initData() {
         String userid = UserInfoManager.getSingleton().getUserId(getActivity());
         Request<String> request = ParameterUtils.getSingleton().getNewsFragment("1", String.valueOf(page), userid);

@@ -70,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/home_spilitline_width"
             android:layout_alignParentBottom="true"
-            android:background="@color/home_line_color" />
+            android:background="#e1e1e1" />
     </RelativeLayout>
 
     <include layout="@layout/split_line" />

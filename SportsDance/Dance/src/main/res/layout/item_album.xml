@@ -69,23 +69,22 @@
         android:id="@+id/name"
         style="@style/text_yellow_style_30"
         android:layout_below="@+id/iamge_layout"
-        android:layout_marginBottom="@dimen/spacing_22"
         android:layout_marginLeft="@dimen/spacing_40"
         android:layout_marginRight="@dimen/spacing_40"
         android:layout_marginTop="@dimen/spacing_20"
         android:singleLine="true"
-        android:text="" />
+        android:text="ssss" />
 
     <TextView
         android:textColor="#333333"
         android:id="@+id/time_tv"
         style="@style/text_white_style_22"
+        android:layout_below="@+id/name"
         android:layout_width="wrap_content"
         android:layout_alignBottom="@+id/headicon"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/headicon"
         android:layout_marginLeft="@dimen/spacing_30"
-
         android:layout_marginRight="@dimen/spacing_25"
         android:gravity="center"
         android:singleLine="true"

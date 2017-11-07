@@ -158,6 +158,7 @@ public class AlbumActivity extends BaseListActivity<AlbumInfo> {
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
+        Log.e("response", response);
         if (what == AppConfigs.home_album) {
             final AlbumDetailInfo reponseResult = JsonMananger.getReponseResult(response, AlbumDetailInfo.class);
             mAlbumUserId = reponseResult.getData().getClassInfo().getId();
@@ -175,7 +176,8 @@ public class AlbumActivity extends BaseListActivity<AlbumInfo> {
                 mDanceViewHolder.getView(R.id.class_jieshao).setVisibility(View.GONE);
             }
             mAlbumAdapter.addList(isRefresh, reponseResult.getData().getPhotoInfo());
-            mDanceViewHolder.setText(R.id.name_tv, mShareContent);
+            mDanceViewHolder.setText(R.id.name_tv, reponseResult.getData().getClassInfo().getCompete_name());
+            mDanceViewHolder.setText(R.id.num_tv, reponseResult.getData().getClassInfo().getPhotos());
             mDanceViewHolder.setImageByUrlOrFilePath(R.id.background_iv, reponseResult.getData().getClassInfo().getImg_fm(), R.drawable.default_banner);
             isCollected = (0 != reponseResult.getData().getClassInfo().getCollection_id());
             shareUrl = String.format(AppConfigs.SHAREPHOTOURL, mId);

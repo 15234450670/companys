@@ -33,7 +33,7 @@ public class NewMessageAdapter extends DanceBaseAdapter {
     public static final int TYPE_2 = 0xff02;
     private List<ZiXunInfo> mDatas;
     private final String tag = getClass().getSimpleName();
-   private see s;
+    private see s;
     ListViewItemClickListener<ZiXunInfo> mItemClickListener;
 
     /**
@@ -98,7 +98,7 @@ public class NewMessageAdapter extends DanceBaseAdapter {
             if (MyStrUtil.isEmpty(ziXunInfo.getWriter())) {
                 holder.danceViewHolder.setViewVisibility(R.id.laiyuan, View.GONE);
             } else {
-                holder.danceViewHolder.setText(R.id.from_tv, ziXunInfo.getWriter());
+                holder.danceViewHolder.setText(R.id.from_tv, "来源：" + ziXunInfo.getWriter());
             }
             holder.danceViewHolder.setImageByUrlOrFilePath(R.id.imageView, ziXunInfo.getPicture(), R.drawable.default_video);
 
@@ -125,20 +125,20 @@ public class NewMessageAdapter extends DanceBaseAdapter {
     public void refresh(HomeZxResponse response) {
         super.refresh();
         mDatas.clear();
-        if (response==null){
-            Log.d(tag, "response : "+response);
+        if (response == null) {
+            Log.d(tag, "response : " + response);
             return;
         }
-        if (response.getData()==null){
-            Log.d(tag, "response.getData() : "+response.getData());
-            if (s!=null){
+        if (response.getData() == null) {
+            Log.d(tag, "response.getData() : " + response.getData());
+            if (s != null) {
                 s.NoSee();
             }
             return;
         }
         ArrayList<ZiXunInfo> ziXunInfos = response.getData().getZxRec();
         if (!MyStrUtil.isEmpty(ziXunInfos)) {
-            if (s!=null){
+            if (s != null) {
                 s.Look();
             }
             mDatas.addAll(ziXunInfos);
@@ -146,12 +146,14 @@ public class NewMessageAdapter extends DanceBaseAdapter {
 
         notifyDataSetChanged();
     }
-    public interface see{
+
+    public interface see {
         void NoSee();
+
         void Look();
     }
 
-    public void Nosee(see s){
+    public void Nosee(see s) {
         this.s = s;
     }
 
@@ -159,7 +161,7 @@ public class NewMessageAdapter extends DanceBaseAdapter {
     public void loadMore(ZiXunIndexResponse indexResponse) {
         ArrayList<ZiXunInfo> ziXunInfos = indexResponse.getData();
         if (!MyStrUtil.isEmpty(ziXunInfos)) {
-           Log.e("xxx",ziXunInfos.toString());
+            Log.e("xxx", ziXunInfos.toString());
             mDatas.addAll(ziXunInfos);
             super.loadMore();
         }

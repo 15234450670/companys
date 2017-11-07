@@ -40,7 +40,7 @@ public class ShequInfo  implements Serializable{
         private int             is_upvote;
         private UserBean        user;
         private List<String>    picture_arr;
-        private List<VideoBean> video;
+        private VideoBean video;
 
         public boolean isDianZan() {
             return is_upvote == 1;
@@ -146,11 +146,11 @@ public class ShequInfo  implements Serializable{
             this.picture_arr = picture_arr;
         }
 
-        public List<VideoBean> getVideo() {
+        public VideoBean getVideo() {
             return video;
         }
 
-        public void setVideo(List<VideoBean> video) {
+        public void setVideo(VideoBean video) {
             this.video = video;
         }
 
@@ -184,8 +184,9 @@ public class ShequInfo  implements Serializable{
             /**
              * address : http://jkvedioout.oss-cn-beijing.aliyuncs.com/99c464d876988db48830e871ea450f82.mp4
              */
-
             private String address;
+            public String picture;
+
 
             public String getAddress() {
                 return address;

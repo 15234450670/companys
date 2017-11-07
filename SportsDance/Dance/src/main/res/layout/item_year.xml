@@ -7,14 +7,15 @@
     <TextView
         android:id="@+id/year_tv"
         style="@style/text_white_style_30"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="@dimen/spacing_86"
         android:gravity="center"
-        android:text="12345" />
+        android:text="" />
 
     <View
         android:id="@+id/spit_line"
         android:layout_width="match_parent"
         android:layout_height="@dimen/spitline_width"
-        android:background="#ffffff" />
+        android:background="#e1e1e1" />
 </LinearLayout>

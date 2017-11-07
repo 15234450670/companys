@@ -34,7 +34,7 @@ public class NewLabeiAdapter extends BaseRecyclerAdapter<TeachInfo> {
         if (MyStrUtil.isEmpty(item.getWriter())) {
             holder.getView(R.id.laiyuan).setVisibility(View.GONE);
         } else {
-            holder.setText(R.id.from_tv, item.getWriter());
+            holder.setText(R.id.from_tv, "来源 ：" + item.getWriter());
         }
     }
 }

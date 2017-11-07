@@ -48,8 +48,8 @@ public class ScoreGroupActivity extends BaseListActivity<ScoreGroupInfo> {
     @Override
     public void initViews() {
         super.initViews();
-        setTitle("成绩单");
-        setRightImage(R.drawable.share_icon_001);
+        setTitle("成绩查询");
+      //  setRightImage(R.drawable.share_icon_001);
         Request<String> request = ParameterUtils.getSingleton().getmScoreQueryMap(mMatchId, 1);
         request(AppConfigs.match_scoreQuery, request, true);
     }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -13,6 +13,7 @@
 
 
         <LinearLayout
+            android:id="@+id/lin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -22,7 +23,7 @@
                 style="@style/text_white_style_30"
                 android:layout_margin="@dimen/spacing_20"
                 android:text=""
-                android:textColor="#333333" />
+                android:textColor="#333333"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -34,7 +35,7 @@
                 <ImageView
                     android:id="@+id/details_icon"
                     android:layout_width="@dimen/spacing_99"
-                    android:layout_height="@dimen/spacing_99" />
+                    android:layout_height="@dimen/spacing_99"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -48,13 +49,13 @@
                         style="@style/text_white_style_30"
                         android:maxLines="1"
                         android:text=""
-                        android:textColor="#333333" />
+                        android:textColor="#333333"/>
 
                     <TextView
                         android:id="@+id/details_time"
                         style="@style/text_white_style_24"
                         android:text=""
-                        android:textColor="@color/textcolor_gruy" />
+                        android:textColor="@color/textcolor_gruy"/>
                 </LinearLayout>
 
                 <ImageView
@@ -72,8 +73,7 @@
                 android:layout_margin="@dimen/spacing_20"
                 android:text=""
                 android:textColor="#333333"
-                android:visibility="gone" />
-
+                android:visibility="gone"/>
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/list_view"
                 android:layout_width="match_parent"
@@ -81,12 +81,13 @@
                 android:visibility="gone">
 
             </android.support.v7.widget.RecyclerView>
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/spacing_20"
                 android:layout_marginTop="@dimen/spacing_10"
-                android:background="#e1e1e1" />
+                android:background="#e1e1e1"/>
+
+
         </LinearLayout>
 
 
@@ -96,18 +97,21 @@
     <include
         layout="@layout/layout_editview"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        />
+
     <LinearLayout
         android:id="@+id/v"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="gone">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="该动态不存在了,去看看其他人的把"
-            android:textSize="@dimen/textsize30" />
+            android:textSize="@dimen/textsize30"/>
     </LinearLayout>
 </RelativeLayout>

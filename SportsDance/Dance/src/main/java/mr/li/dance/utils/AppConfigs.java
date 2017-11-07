@@ -7,8 +7,8 @@ package mr.li.dance.utils;
  */
 
 public class AppConfigs {
-
-     private final static String MAINurl = "http://work.cdsf.org.cn";//测试环境
+    //  private final static String MAINurl = "http://work.cdsf.org.cn";//测试环境
+     private final static String MAINurl = "http://kf.cdsf.org.cn";//测试环境
     // private final static String MAINurl = "http://cdsf.org.cn";//正式环境
 
     private final static String DomainUrl = MAINurl + "/mobileClient";
@@ -27,6 +27,8 @@ public class AppConfigs {
     public final static String ZixunShareUrl2 = SHAREURL + "/share.zxfx?id=";
     public final static String USER           = SHAREURL + "/share.Ament";
     public final static String tach_detial    = SHAREURL + "/share.spjx?id=";
+    //社区分享
+    public final static String shequ_detial    = SHAREURL + "/share.shequ?id=";
     //赛事规则，赛事设项 赛程表 分享
     public final static String SAISHIShareUrl = SHAREURL + "/share.gcfx?id=%s&page=%s";
     //相册分享
@@ -49,8 +51,7 @@ public class AppConfigs {
 
     public final static String finishactivityAction = "finish.activity.action";
     public final static String updateinfoAction     = "update.userinfo.action";
-    //动态分享
-    public final static String DOINGTAI = SHAREURL + "/share.shequ?id=%s";
+
 
     public final static int SENDMSG_REQUEST_CODE      = 0x001;
     public final static int home_index                = 0x0002;

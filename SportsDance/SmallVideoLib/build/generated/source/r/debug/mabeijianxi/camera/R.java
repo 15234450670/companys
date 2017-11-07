@@ -11,51 +11,60 @@ public final class R {
     public static final class attr {
     }
     public static final class color {
-        public static int camera_bg=0x7f040000;
-        public static int camera_progress_delete=0x7f040001;
-        public static int camera_progress_overflow=0x7f040002;
-        public static int camera_progress_split=0x7f040003;
-        public static int camera_progress_three=0x7f040004;
-        public static int color_381902=0x7f040005;
-        public static int transparent2=0x7f040006;
+        public static int bai=0x7f040000;
+        public static int camera_bg=0x7f040001;
+        public static int camera_progress_delete=0x7f040002;
+        public static int camera_progress_overflow=0x7f040003;
+        public static int camera_progress_split=0x7f040004;
+        public static int camera_progress_three=0x7f040005;
+        public static int color_381902=0x7f040006;
+        public static int transparent2=0x7f040007;
     }
     public static final class drawable {
-        public static int back_icon=0x7f020000;
-        public static int record_camera_flash_led_off_disable=0x7f020001;
-        public static int record_camera_flash_led_off_normal=0x7f020002;
-        public static int record_camera_flash_led_off_pressed=0x7f020003;
-        public static int record_camera_flash_led_on_disable=0x7f020004;
-        public static int record_camera_flash_led_on_normal=0x7f020005;
-        public static int record_camera_flash_led_on_pressed=0x7f020006;
-        public static int record_camera_flash_led_selector=0x7f020007;
-        public static int record_camera_switch_disable=0x7f020008;
-        public static int record_camera_switch_normal=0x7f020009;
-        public static int record_camera_switch_pressed=0x7f02000a;
-        public static int record_camera_switch_selector=0x7f02000b;
-        public static int record_cancel_normal=0x7f02000c;
-        public static int record_cancel_press=0x7f02000d;
-        public static int record_delete_check_normal=0x7f02000e;
-        public static int record_delete_check_press=0x7f02000f;
-        public static int record_delete_normal=0x7f020010;
-        public static int record_delete_press=0x7f020011;
-        public static int record_delete_selector=0x7f020012;
-        public static int record_next_normal=0x7f020013;
-        public static int record_next_press=0x7f020014;
-        public static int record_next_seletor=0x7f020015;
-        public static int small_video_shoot=0x7f020016;
-        public static int video_text=0x7f020017;
+        public static int anzhupai=0x7f020000;
+        public static int anzhupai2=0x7f020001;
+        public static int back_icon=0x7f020002;
+        public static int fanzhuan=0x7f020003;
+        public static int record_camera_flash_led_off_disable=0x7f020004;
+        public static int record_camera_flash_led_off_normal=0x7f020005;
+        public static int record_camera_flash_led_off_pressed=0x7f020006;
+        public static int record_camera_flash_led_on_disable=0x7f020007;
+        public static int record_camera_flash_led_on_normal=0x7f020008;
+        public static int record_camera_flash_led_on_pressed=0x7f020009;
+        public static int record_camera_flash_led_selector=0x7f02000a;
+        public static int record_camera_switch_disable=0x7f02000b;
+        public static int record_camera_switch_normal=0x7f02000c;
+        public static int record_camera_switch_pressed=0x7f02000d;
+        public static int record_camera_switch_selector=0x7f02000e;
+        public static int record_cancel_normal=0x7f02000f;
+        public static int record_cancel_press=0x7f020010;
+        public static int record_delete_check_normal=0x7f020011;
+        public static int record_delete_check_press=0x7f020012;
+        public static int record_delete_normal=0x7f020013;
+        public static int record_delete_press=0x7f020014;
+        public static int record_delete_selector=0x7f020015;
+        public static int record_next_normal=0x7f020016;
+        public static int record_next_press=0x7f020017;
+        public static int record_next_seletor=0x7f020018;
+        public static int shan_off=0x7f020019;
+        public static int shan_on=0x7f02001a;
+        public static int small_video_shoot=0x7f02001b;
+        public static int video_text=0x7f02001c;
+        public static int x_guan=0x7f02001d;
     }
     public static final class id {
-        public static int bottom_layout=0x7f060006;
-        public static int media_recorder_surfaceview=0x7f060003;
-        public static int media_recorder_text=0x7f060009;
-        public static int record_camera_switcher=0x7f060002;
-        public static int record_controller=0x7f060008;
-        public static int record_preview=0x7f060004;
-        public static int record_progress=0x7f060005;
+        public static int bottom_layout=0x7f060008;
+        public static int media_recorder_surfaceview=0x7f060005;
+        public static int media_recorder_text=0x7f06000b;
+        public static int record_controller=0x7f06000a;
+        public static int record_preview=0x7f060006;
+        public static int record_progress=0x7f060007;
+        public static int reversal=0x7f060003;
+        public static int shan=0x7f060002;
+        public static int successful=0x7f060004;
         public static int title_back=0x7f060001;
         public static int title_layout=0x7f060000;
-        public static int title_next=0x7f060007;
+        public static int title_next=0x7f060009;
     }
     public static final class layout {
         public static int recorder=0x7f030000;

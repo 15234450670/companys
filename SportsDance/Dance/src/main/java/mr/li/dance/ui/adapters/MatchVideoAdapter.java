@@ -90,7 +90,7 @@ public class MatchVideoAdapter extends BaseRecyclerAdapter<Video> {
         holder.setText(R.id.name, video.getAlbum_name());
         holder.setText(R.id.time_tv, video.getInserttime());
         holder.setVisibility(R.id.typeicon_tv, View.VISIBLE);
-        holder.setImageResDrawable(R.id.typeicon_tv, R.drawable.home_icon_005);
+      //  holder.setImageResDrawable(R.id.typeicon_tv, R.drawable.home_icon_005);
     }
 
     @Override

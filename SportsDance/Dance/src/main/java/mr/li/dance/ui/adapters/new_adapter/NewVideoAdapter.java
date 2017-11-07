@@ -30,7 +30,7 @@ import mr.li.dance.utils.MyStrUtil;
 public class NewVideoAdapter extends DanceBaseAdapter {
     Context mContext;
     private List<Video> mDatas;
-    private see s;
+    private see         s;
     private int EXARCOUNT = 0;
     private boolean hasTypeList;
     private boolean hasQuickList;
@@ -81,6 +81,7 @@ public class NewVideoAdapter extends DanceBaseAdapter {
     }
 
     private void bindTypeMain(ViewHolderMain holder, int position) {
+        holder.danceViewHolder.getImageView(R.id.tubiao).setVisibility(View.VISIBLE);
         final Video video = mDatas.get(position);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -187,6 +188,7 @@ public class NewVideoAdapter extends DanceBaseAdapter {
         }
         notifyDataSetChanged();
     }
+
     public interface see {
         void NoSee();
 

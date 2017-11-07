@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="bai">#FFFAF8F6</color>
     <color name="camera_bg">#2c2c2c</color>
     <color name="camera_progress_delete">#f68b2b</color>
     <color name="camera_progress_overflow">#1b5d89</color>

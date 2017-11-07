@@ -51,14 +51,14 @@ public class PostVideoActivity extends BaseActivity implements View.OnClickListe
     private TextView mzs;
     private int num = 25;
     //播放路径
-    private String mPath;
-    private EditText fb_title;
-    private EditText fb_content;
+    private String                mPath;
+    private EditText              fb_title;
+    private EditText              fb_content;
     private JCVideoPlayerStandard player;
-    private ImageView fistImage;
-    private int dynamic_id;
-    private String video_name;
-    private AlertDialog.Builder myDialog;
+    private ImageView             fistImage;
+    private int                   dynamic_id;
+    private String                video_name;
+    private AlertDialog.Builder   myDialog;
     ProgressBar pb;
     private AlertDialog alertDialog;
 
@@ -96,7 +96,6 @@ public class PostVideoActivity extends BaseActivity implements View.OnClickListe
 
         mDanceViewHolder.getImageView(R.id.fullscreen).setVisibility(View.GONE);
         fistImage = mDanceViewHolder.getImageView(R.id.play_first);
-
         //封面的点击播放录制视频
         findViewById(R.id.root).setOnClickListener(this);
         LimitTitle();
@@ -228,8 +227,6 @@ public class PostVideoActivity extends BaseActivity implements View.OnClickListe
     public void takeVideoUp() {
         alertDialog.dismiss();
         Request<String> video = ParameterUtils.getSingleton().getVideo(String.valueOf(dynamic_id), video_name);
-        Log.e(TAG, "address--->1231321321313213213");
-       // Toast.makeText(mContext, "视频上传成功", Toast.LENGTH_SHORT).show();
         CallServer.getRequestInstance().add(this, 0, video, new HttpListener() {
             @Override
             public void onSucceed(int what, String response) {
@@ -240,7 +237,10 @@ public class PostVideoActivity extends BaseActivity implements View.OnClickListe
                 if (MyStrUtil.isEmpty(address)) {
                     Toast.makeText(mContext, "上传视频失败", Toast.LENGTH_SHORT).show();
                 } else {
+                    fb_title.setText("");
+                    fb_content.setText("");
                     Toast.makeText(mContext, "视频上传成功", Toast.LENGTH_SHORT).show();
+
                 }
                 Log.e(TAG, "address--->" + address + "---id" + dynamic_id);
             }
@@ -248,7 +248,6 @@ public class PostVideoActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void onFailed(int what, int responseCode, String response) {
                 Log.e(TAG, "responseCode--->" + responseCode + "---response" + response);
-                Toast.makeText(mContext, response + "--->" + responseCode, Toast.LENGTH_SHORT).show();
             }
         }, false, false);
 
@@ -259,11 +258,11 @@ public class PostVideoActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void progress(long currentSize, long totalSize) {
         // TODO: 2017/11/5
-        int temp = (int)totalSize;
+        int temp = (int) totalSize;
         if (size != temp) {
             size = temp;
             pb.setMax(size);
         }
-        pb.setProgress((int)currentSize);
+        pb.setProgress((int) currentSize);
     }
 }

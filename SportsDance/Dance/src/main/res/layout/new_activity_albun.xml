@@ -4,129 +4,157 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <RelativeLayout
-            android:id="@+id/rr"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/spacing_300">
-
-            <ImageView
-                android:id="@+id/background_iv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitXY"/>
-
-
-            <TextView
-                android:id="@+id/name_tv"
-                style="@style/text_white_style_30"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_marginTop="@dimen/spacing_12"
-                android:text=""/>
-
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/spacing_10"
-            android:layout_marginTop="@dimen/spacing_20"
-            android:background="#e1e1e1"/>
-
         <LinearLayout
-            android:visibility="gone"
-            android:id="@+id/class_jieshao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                style="@style/text_black_style_30"
-                android:text="相关赛事"
-                />
-
-
-            <include layout="@layout/split_lines"/>
-
-            <LinearLayout
-                android:id="@+id/class_jieshaos"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/jieshao"
-                    style="@style/text_black_style_28"
-                    android:layout_marginBottom="@dimen/spacing_20"
-                    android:layout_marginLeft="@dimen/spacing_20"
-                    android:layout_marginRight="@dimen/spacing_48"
-                    android:layout_marginTop="@dimen/spacing_20"
-                    android:layout_weight="1"
-                    android:text=""
-                    android:textColor="#666666"
-                    />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="@dimen/spacing_20"
-                    android:src="@drawable/jinru_item"/>
-            </LinearLayout>
-
-            <include layout="@layout/split_lines"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_135"
-                android:src="@drawable/wuneirong_yk"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/spacing_30"
-                android:gravity="center_horizontal"
-                android:text="对不起,您搜索的关键词没有数据请您换个试试"
-                android:textSize="@dimen/textsize44"
-                />
-
-
-        </LinearLayout>
-
-        <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
-            android:id="@+id/refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingRight="@dimen/spacing_20"
-            android:paddingTop="@dimen/spacing_20">
+            android:orientation="vertical">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerview"
+            <RelativeLayout
+                android:id="@+id/rr"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/spacing_300">
+
+                <ImageView
+                    android:id="@+id/background_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"/>
+
+
+                <TextView
+                    android:id="@+id/name_tv"
+                    style="@style/text_white_style_30"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="@dimen/spacing_12"
+                    android:text=""/>
+
+                <LinearLayout
+                    android:id="@+id/picnum_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    >
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="24dp"
+                        android:layout_marginRight="@dimen/spacing_20"
+                        android:src="@drawable/home_icon_001"/>
+
+                    <TextView
+                       android:layout_marginRight="@dimen/spacing_20"
+                        android:id="@+id/num_tv"
+                        android:text=""
+                        style="@style/text_white_style_20"
+                        android:layout_width="wrap_content"
+                        />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_10"
+                android:layout_marginTop="@dimen/spacing_20"
+                android:background="#e1e1e1"/>
+
+            <LinearLayout
+                android:id="@+id/class_jieshao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/text_black_style_30"
+                    android:text="相关赛事"
+                    />
+
+
+                <include layout="@layout/split_lines"/>
+
+                <LinearLayout
+                    android:id="@+id/class_jieshaos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/jieshao"
+                        style="@style/text_black_style_28"
+                        android:layout_marginBottom="@dimen/spacing_20"
+                        android:layout_marginLeft="@dimen/spacing_20"
+                        android:layout_marginRight="@dimen/spacing_48"
+                        android:layout_marginTop="@dimen/spacing_20"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:textColor="#666666"
+                        />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/spacing_20"
+                        android:src="@drawable/jinru_item"/>
+                </LinearLayout>
+
+                <include layout="@layout/split_lines"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_135"
+                    android:src="@drawable/wuneirong_yk"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/spacing_30"
+                    android:gravity="center_horizontal"
+                    android:text="对不起,您搜索的关键词没有数据请您换个试试"
+                    android:textSize="@dimen/textsize44"
+                    />
+
+
+            </LinearLayout>
+
+            <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
+                android:id="@+id/refresh"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:paddingRight="@dimen/spacing_20"
+                android:paddingTop="@dimen/spacing_20">
 
-                android:overScrollMode="never"/>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
 
-        </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
-    </LinearLayout>
+                    android:overScrollMode="never"/>
+
+            </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
+        </LinearLayout>
 
 
     </ScrollView>

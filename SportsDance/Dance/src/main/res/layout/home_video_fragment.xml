@@ -20,6 +20,13 @@
             android:layout_height="match_parent"
             android:scaleType="fitXY"
             android:src="@drawable/default_video"/>
+        <ImageView
+            android:id="@+id/tubiao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:src="@mipmap/home_icon_008"/>
     </RelativeLayout>
 
     <LinearLayout

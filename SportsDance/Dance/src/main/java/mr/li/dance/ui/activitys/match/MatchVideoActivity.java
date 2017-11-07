@@ -55,7 +55,7 @@ public class MatchVideoActivity extends BaseListActivity<Video> {
     @Override
     public void initViews() {
         super.initViews();
-        setTitle("赛事视频");
+        setTitle("比赛视频");
         setRightImage(R.drawable.share_icon_001);
     }
 

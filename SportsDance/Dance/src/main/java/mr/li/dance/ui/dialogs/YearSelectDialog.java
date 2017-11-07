@@ -107,8 +107,8 @@ public class YearSelectDialog {
                 } else {
                     holder.setVisibility(R.id.spit_line, View.VISIBLE);
                 }
-                holder.itemView.setBackgroundResource(R.color.transparent);
-                holder.getTextView(R.id.year_tv).setTextColor(mContext.getResources().getColor(R.color.white));
+                holder.itemView.setBackgroundResource(R.color.white);
+                holder.getTextView(R.id.year_tv).setTextColor(mContext.getResources().getColor(R.color.black));
             }
             holder.setText(R.id.year_tv, item);
         }

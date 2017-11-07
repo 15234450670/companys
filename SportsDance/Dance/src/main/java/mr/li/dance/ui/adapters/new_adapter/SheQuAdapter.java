@@ -36,6 +36,8 @@ import mr.li.dance.utils.ShareUtils;
 import mr.li.dance.utils.UserInfoManager;
 import mr.li.dance.utils.glide.ImageLoaderManager;
 
+import static mr.li.dance.R.string.picture;
+
 /**
  * 作者: SuiFeng
  * 版本:
@@ -53,7 +55,6 @@ public class SheQuAdapter extends DanceBaseAdapter {
         mDatas = new ArrayList<>();
         mItemClickListener = clickListener;
     }
-
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -118,7 +119,14 @@ public class SheQuAdapter extends DanceBaseAdapter {
             OnePic(holder);
             ImageView imageView = holder.danceViewHolder.getImageView(R.id.sq_ship_iv);
             imageView.setVisibility(View.VISIBLE);
-            holder.danceViewHolder.setImageResDrawable(R.id.imageView, R.drawable.default_banner, R.drawable.default_video);
+
+            if (MyStrUtil.isEmpty(picture)) {
+                holder.danceViewHolder.setImageResDrawable(R.id.imageView, R.drawable.default_banner, R.drawable.default_video);
+            } else {
+                holder.danceViewHolder.setImageByUrlOrFilePath(R.id.imageView, mDatas.get(position).getVideo().picture, R.drawable.default_banner);
+
+            }
+
         }
         ImageView imageView = holder.danceViewHolder.getImageView(R.id.shequ_dianz_iv);
         int is_upvote = mDatas.get(position).getIs_upvote();
@@ -251,13 +259,12 @@ public class SheQuAdapter extends DanceBaseAdapter {
                                 break;
                             case "分享":
                                 ShareUtils shareUtils = new ShareUtils((Activity) mContext);
-                                String shareUrl = String.format(AppConfigs.DOINGTAI, mDatas.get(position).getId());
                                 String mShareContent = mDatas.get(position).getTitle();
-                                shareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_21, shareUrl, mShareContent);
+                                shareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_21, AppConfigs.shequ_detial + mDatas.get(position).getId(), mShareContent);
                                 break;
                             case "举报":
                                 Dialogs(userId, uid);
-                            break;
+                                break;
                             case "取消":
                                 dialog.dismin();
                                 break;

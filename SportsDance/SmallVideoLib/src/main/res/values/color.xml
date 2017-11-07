@@ -7,5 +7,6 @@
     <color name="camera_progress_split">#005084</color>
     <color name="camera_progress_delete">#f68b2b</color>
     <color name="camera_progress_overflow">#1b5d89</color>
+    <color name="bai">#FFFAF8F6</color>
 
 </resources>

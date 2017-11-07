@@ -29,7 +29,7 @@
                 android:layout_width="@dimen/spacing_88"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:src="@drawable/login_icon_002" />
+                android:src="@drawable/mine_icon_0011" />
 
             <EditText
                 android:id="@+id/pwd_tv"

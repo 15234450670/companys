@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/title_layout"
@@ -16,31 +16,36 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:padding="10dp"
-            android:src="@drawable/back_icon" />
+            android:src="@drawable/x_guan"/>
 
 
-
-
-        <TextView
+        <ImageView
+            android:id="@+id/shan"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textSize="20dp"
-            android:text="视频"/>
+            android:background="@drawable/shan_on"
+            />
+
+        <ImageView
+            android:id="@+id/reversal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/shan"
+            android:background="@drawable/fanzhuan"
+            />
 
         <TextView
-            android:id="@+id/record_camera_switcher"
+            android:id="@+id/successful"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
-            android:text="反转"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:padding="5dp"
-            android:background="@drawable/video_text"
             android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:text="完成"
+            android:textSize="15dp"
             />
     </RelativeLayout>
 
@@ -50,17 +55,18 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_marginTop="56dp">
+
         <SurfaceView
             android:id="@+id/record_preview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"/>
     </FrameLayout>
 
     <mabeijianxi.camera.views.ProgressView
         android:id="@+id/record_progress"
         android:layout_width="match_parent"
         android:layout_height="5dp"
-        android:layout_below="@+id/media_recorder_surfaceview" />
+        android:layout_below="@+id/media_recorder_surfaceview"/>
     <!-- camera_bottom_bg -->
     <RelativeLayout
         android:id="@+id/bottom_layout"
@@ -73,38 +79,38 @@
             android:id="@+id/title_next"
             android:layout_width="80dp"
             android:layout_height="30dp"
-            android:layout_centerHorizontal="true"
-            android:layout_toRightOf="@+id/record_controller"
             android:layout_alignBottom="@+id/record_controller"
+            android:layout_centerHorizontal="true"
             android:layout_marginBottom="39dp"
             android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/record_controller"
             android:gravity="center"
-            android:textSize="20dp"
-            android:text="下一步"/>
+            android:text=""
+            android:textSize="20dp"/>
 
-        <TextView
+        <Button
             android:id="@+id/record_controller"
             android:layout_width="108dp"
             android:layout_height="108dp"
-            android:layout_centerHorizontal="true"
             android:layout_above="@+id/media_recorder_text"
-            android:background="@drawable/small_video_shoot"
+            android:layout_centerHorizontal="true"
             android:layout_marginBottom="20dp"
-            android:gravity="center"
+            android:background="@drawable/anzhupai"
             android:text="按住拍"
-            android:textSize="16sp" />
+            android:textColor="@color/bai"
+            />
 
         <TextView
             android:id="@+id/media_recorder_text"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
-            android:text=""
-            android:textSize="20dp"
+            android:layout_centerHorizontal="true"
             android:gravity="center"
+            android:paddingLeft="50dp"
             android:paddingRight="50dp"
-            android:paddingLeft="50dp"/>
+            android:text=""
+            />
 
     </RelativeLayout>
 

@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.yolanda.nohttp.rest.Request;
 
+import java.util.List;
+
 import mr.li.dance.R;
 import mr.li.dance.https.CallServer;
 import mr.li.dance.https.HttpListener;
@@ -163,6 +165,7 @@ public class PersonageActivity extends BaseListActivity {
         super.onSucceed(what, response);
         Log.e(TAG, response);
         PersonResponse reponseResult = JsonMananger.getReponseResult(response, PersonResponse.class);
+        List<PersonItemInfo> data1 = reponseResult.getData();
         if (what == AppConfigs.person_item) {
             adapter.refresh(reponseResult);
         } else if (what == AppConfigs.person_items) {

@@ -32,3 +32,7 @@ android {
         website = 'https://github.com/mabeijianxi/small-video-record'//网站，不重要
     }
 }
+
+dependencies {
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+}

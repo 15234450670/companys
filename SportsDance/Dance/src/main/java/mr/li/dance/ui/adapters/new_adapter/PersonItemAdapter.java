@@ -24,6 +24,7 @@ import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.PersonResponse;
 import mr.li.dance.models.PersonItemInfo;
 import mr.li.dance.models.ReportInfo;
+import mr.li.dance.models.VideoBeans;
 import mr.li.dance.ui.adapters.DanceBaseAdapter;
 import mr.li.dance.ui.adapters.ListViewItemClickListener;
 import mr.li.dance.ui.adapters.viewholder.BaseViewHolder;
@@ -46,6 +47,7 @@ public class PersonItemAdapter extends DanceBaseAdapter {
     Context mContext;
     private List<PersonItemInfo> mDatas;
     ListViewItemClickListener<PersonItemInfo> mItemClickListener;
+
     public PersonItemAdapter(Context context, ListViewItemClickListener clickListener) {
         mContext = context;
         mDatas = new ArrayList<>();
@@ -93,6 +95,8 @@ public class PersonItemAdapter extends DanceBaseAdapter {
                 holder.danceViewHolder.setViewVisibility(R.id.iamge_layout_two, View.GONE);
             } else if (picture_arr.size() == 1) {
                 OnePic(holder);
+                ImageView imageView = holder.danceViewHolder.getImageView(R.id.sq_ship_iv);
+                imageView.setVisibility(View.GONE);
                 holder.danceViewHolder.setImageByUrlOrFilePath(R.id.imageView, mDatas.get(position).getPicture_arr().get(0), R.drawable.default_banner);
             } else if (picture_arr.size() == 2) {
                 TwoPic(holder);
@@ -110,12 +114,19 @@ public class PersonItemAdapter extends DanceBaseAdapter {
             OnePic(holder);
             ImageView imageView = holder.danceViewHolder.getImageView(R.id.sq_ship_iv);
             imageView.setVisibility(View.VISIBLE);
-            holder.danceViewHolder.setImageResDrawable(R.id.imageView, R.drawable.default_banner, R.drawable.default_video);
+            List<VideoBeans> video = mDatas.get(position).video;
+            String picture = video.get(0).picture;
+            if (MyStrUtil.isEmpty(picture)) {
+                holder.danceViewHolder.setImageResDrawable(R.id.imageView, R.drawable.default_banner, R.drawable.default_video);
+            } else {
+                holder.danceViewHolder.setImageByUrlOrFilePath(R.id.imageView, picture, R.drawable.default_banner);
+
+            }
 
         }
         ImageView imageView = holder.danceViewHolder.getImageView(R.id.shequ_dianz_iv);
         int is_upvote = mDatas.get(position).getIs_upvote();
-        Log.e("is_upvote",is_upvote+"");
+        Log.e("is_upvote", is_upvote + "");
         if (is_upvote == 1) {
             imageView.setImageResource(R.drawable.dianzan2);
         } else {
@@ -140,7 +151,7 @@ public class PersonItemAdapter extends DanceBaseAdapter {
             @Override
             public void onClick(View view) {
                 int operation = mDatas.get(position).getIs_upvote() == 1 ? 2 : 1;
-                Log.e("operation",operation+"");
+                Log.e("operation", operation + "");
                 Request<String> personLike = ParameterUtils.getSingleton().getPersonLike(userId, operation, mDatas.get(position).getId());
                 CallServer.getRequestInstance().add(mContext, 0, personLike, new HttpListener() {
                     @Override
@@ -183,9 +194,8 @@ public class PersonItemAdapter extends DanceBaseAdapter {
                                 break;
                             case "分享":
                                 ShareUtils shareUtils = new ShareUtils((Activity) mContext);
-                                String shareUrl = String.format(AppConfigs.DOINGTAI, mDatas.get(position).getId());
                                 String mShareContent = mDatas.get(position).getTitle();
-                                shareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_21, shareUrl, mShareContent);
+                                shareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_21, AppConfigs.shequ_detial + mDatas.get(position).getId(), mShareContent);
                                 break;
                             case "举报":
                                 Dialogs(userId, uid);
@@ -210,7 +220,7 @@ public class PersonItemAdapter extends DanceBaseAdapter {
     }
 
     //删除动态
-    private void PersonDelete( final int position) {
+    private void PersonDelete(final int position) {
 
         AlertDialog dialog = new AlertDialog.Builder(mContext)
                 .setTitle("提示")
@@ -227,6 +237,7 @@ public class PersonItemAdapter extends DanceBaseAdapter {
                                 notifyItemRemoved(position);
                                 notifyDataSetChanged();
                             }
+
                             @Override
                             public void onFailed(int what, int responseCode, String response) {
 

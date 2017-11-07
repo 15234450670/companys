@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.hardware.Camera;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,7 +16,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,11 +47,11 @@ public class MediaRecorderActivity extends Activity implements
     /**
      * 录制最长时间
      */
-    private static int RECORD_TIME_MAX = 6 * 1000;
+    private static       int RECORD_TIME_MAX            = 6 * 1000;
     /**
      * 录制最小时间
      */
-    private static int RECORD_TIME_MIN = (int) (1.5f * 1000);
+    private static       int RECORD_TIME_MIN            = (int) (1.5f * 1000);
     /**
      * 刷新进度条
      */
@@ -55,21 +59,13 @@ public class MediaRecorderActivity extends Activity implements
     /**
      * 延迟拍摄停止
      */
-    private static final int HANDLE_STOP_RECORD = 1;
+    private static final int HANDLE_STOP_RECORD         = 1;
 
-    /**
-     * 下一步
-     */
-    private TextView mTitleNext;
-    /**
-     * 前后摄像头切换
-     */
-    private TextView mCameraSwitch;
 
     /**
      * 拍摄按钮
      */
-    private TextView mRecordController;
+    private Button mRecordController;
 
     /**
      * 底部条
@@ -78,11 +74,11 @@ public class MediaRecorderActivity extends Activity implements
     /**
      * 摄像头数据显示画布
      */
-    private SurfaceView mSurfaceView;
+    private SurfaceView    mSurfaceView;
     /**
      * 录制进度
      */
-    private ProgressView mProgressView;
+    private ProgressView   mProgressView;
 
     /**
      * SDK视频录制对象
@@ -91,7 +87,7 @@ public class MediaRecorderActivity extends Activity implements
     /**
      * 视频信息
      */
-    private MediaObject mMediaObject;
+    private MediaObject       mMediaObject;
 
     /**
      * 是否是点击状态
@@ -104,19 +100,19 @@ public class MediaRecorderActivity extends Activity implements
     /**
      * 视屏地址
      */
-    public final static String VIDEO_URI = "video_uri";
+    public final static String VIDEO_URI                   = "video_uri";
     /**
      * 本次视频保存的文件夹地址
      */
-    public final static String OUTPUT_DIRECTORY = "output_directory";
+    public final static String OUTPUT_DIRECTORY            = "output_directory";
     /**
      * 视屏截图地址
      */
-    public final static String VIDEO_SCREENSHOT = "video_screenshot";
+    public final static String VIDEO_SCREENSHOT            = "video_screenshot";
     /**
      * 录制完成后需要跳转的activity
      */
-    public final static String OVER_ACTIVITY_NAME = "over_activity_name";
+    public final static String OVER_ACTIVITY_NAME          = "over_activity_name";
     /**
      * 最大录制时间的key
      */
@@ -128,21 +124,49 @@ public class MediaRecorderActivity extends Activity implements
     /**
      * 录制配置key
      */
-    public final static String MEDIA_RECORDER_CONFIG_KEY = "media_recorder_config_key";
+    public final static String MEDIA_RECORDER_CONFIG_KEY   = "media_recorder_config_key";
 
-    private boolean GO_HOME;
+    private boolean   GO_HOME;
+    /**
+     * 闪光灯
+     */
+    private ImageView shan;
+    private boolean status = false;
+    private Camera            camera;
+    private Camera.Parameters parameters;
+    /**
+     * 前后摄像头切换
+     */
+    private ImageView         reversal;
+    /**
+     * 完成或者下一步
+     */
+    private TextView          successful;
 
     /**
      * @param context
-     * @param overGOActivityName 录制结束后需要跳转的Activity全类名
+     * @param overGOActivityName
+     *         录制结束后需要跳转的Activity全类名
      */
     public static void goSmallVideoRecorder(Activity context, String overGOActivityName, MediaRecorderConfig mediaRecorderConfig) {
         context.startActivity(new Intent(context, MediaRecorderActivity.class).putExtra(OVER_ACTIVITY_NAME, overGOActivityName).putExtra(MEDIA_RECORDER_CONFIG_KEY, mediaRecorderConfig));
     }
 
+    protected void setScreen() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);//A
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);//B
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(R.color.camera_progress_overflow));
+
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+      //  setScreen();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); // 防止锁屏
         initData();
         loadViews();
@@ -175,17 +199,19 @@ public class MediaRecorderActivity extends Activity implements
         setContentView(R.layout.recorder);
         // ~~~ 绑定控件
         mSurfaceView = (SurfaceView) findViewById(R.id.record_preview);
-        mCameraSwitch = (TextView) findViewById(R.id.record_camera_switcher);
-        mTitleNext = (TextView) findViewById(R.id.title_next);
         mProgressView = (ProgressView) findViewById(R.id.record_progress);
-        mRecordController = (TextView) findViewById(R.id.record_controller);
+        mRecordController = (Button) findViewById(R.id.record_controller);
         mBottomLayout = (RelativeLayout) findViewById(R.id.bottom_layout);
+        shan = (ImageView) findViewById(R.id.shan);
+        reversal = (ImageView) findViewById(R.id.reversal);
+        successful = (TextView) findViewById(R.id.successful);
+        //  mCameraSwitch = (TextView) findViewById(R.id.record_camera_switcher);
 
         // ~~~ 绑定事件
         /*if (DeviceUtils.hasICS())
             mSurfaceView.setOnTouchListener(mOnSurfaveViewTouchListener);*/
-
-        mTitleNext.setOnClickListener(this);
+        successful.setOnClickListener(this);
+        shan.setOnClickListener(this);
         findViewById(R.id.title_back).setOnClickListener(this);
         mRecordController.setOnTouchListener(mOnVideoControllerTouchListener);
 
@@ -193,9 +219,9 @@ public class MediaRecorderActivity extends Activity implements
 
         // 是否支持前置摄像头
         if (MediaRecorderBase.isSupportFrontCamera()) {
-            mCameraSwitch.setOnClickListener(this);
+            reversal.setOnClickListener(this);
         } else {
-            mCameraSwitch.setVisibility(View.GONE);
+            reversal.setVisibility(View.GONE);
         }
         mProgressView.setMaxDuration(RECORD_TIME_MAX);
         mProgressView.setMinTime(RECORD_TIME_MIN);
@@ -270,9 +296,10 @@ public class MediaRecorderActivity extends Activity implements
                     // 暂停
                     if (mPressedStatus) {
                         stopRecord();
+
                         // 检测是否已经完成
                         if (mMediaObject.getDuration() >= RECORD_TIME_MAX) {
-                            mTitleNext.performClick();
+                            successful.performClick();
                         }
                     }
                     break;
@@ -306,6 +333,10 @@ public class MediaRecorderActivity extends Activity implements
                 mMediaRecorder.release();
         }
         mReleased = false;
+        if (isFlashlightOn(false)) {
+            Closeshoudian();
+            camera = null;
+        }
     }
 
 
@@ -314,6 +345,7 @@ public class MediaRecorderActivity extends Activity implements
      */
     private void startRecord() {
         if (mMediaRecorder != null) {
+
             MediaObject.MediaPart part = mMediaRecorder.startRecord();
             if (part == null) {
                 return;
@@ -321,13 +353,14 @@ public class MediaRecorderActivity extends Activity implements
 
             // 如果使用MediaRecorderSystem，不能在中途切换前后摄像头，否则有问题
             if (mMediaRecorder instanceof MediaRecorderSystem) {
-                mCameraSwitch.setVisibility(View.GONE);
+                reversal.setVisibility(View.GONE);
             }
             mProgressView.setData(mMediaObject);
         }
 
         mPressedStatus = true;
-//		TODO 开始录制的图标
+        mRecordController.setBackgroundResource(R.drawable.anzhupai2);
+        //		TODO 开始录制的图标
         mRecordController.animate().scaleX(0.8f).scaleY(0.8f).setDuration(500).start();
 
 
@@ -340,7 +373,7 @@ public class MediaRecorderActivity extends Activity implements
                     RECORD_TIME_MAX - mMediaObject.getDuration());
         }
 
-        mCameraSwitch.setEnabled(false);
+        reversal.setEnabled(false);
     }
 
     @Override
@@ -379,13 +412,14 @@ public class MediaRecorderActivity extends Activity implements
      */
     private void stopRecord() {
         mPressedStatus = false;
+        mRecordController.setBackgroundResource(R.drawable.anzhupai);
         mRecordController.animate().scaleX(1).scaleY(1).setDuration(500).start();
 
         if (mMediaRecorder != null) {
             mMediaRecorder.stopRecord();
         }
 
-        mCameraSwitch.setEnabled(true);
+        reversal.setEnabled(true);
 
         mHandler.removeMessages(HANDLE_STOP_RECORD);
         checkStatus();
@@ -397,25 +431,113 @@ public class MediaRecorderActivity extends Activity implements
         if (mHandler.hasMessages(HANDLE_STOP_RECORD)) {
             mHandler.removeMessages(HANDLE_STOP_RECORD);
         }
-
-
         if (id == R.id.title_back) {
             onBackPressed();
-        } else if (id == R.id.record_camera_switcher) {// 前后摄像头切换
+        } else if (id == R.id.reversal) {// 前后摄像头切换
 
 
             if (mMediaRecorder != null) {
                 mMediaRecorder.switchCamera();
             }
 
-        } else if (id == R.id.title_next) {// 停止录制
+        } else if (id == R.id.successful) {// 停止录制
+
             mMediaRecorder.startEncoding();
             /*finish();
             overridePendingTransition(R.anim.push_bottom_in,
 					R.anim.push_bottom_out);*/
+        } else if (id == R.id.shan) {
+            /*if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
+                Toast.makeText(MediaRecorderActivity.this, "你的手机没有闪光灯!", Toast.LENGTH_LONG).show();
+            } else {
+                if (!status) {
+                    shan.setImageResource(R.drawable.shan_on);
+                    camera = Camera.open();
+                    parameters = camera.getParameters();
+                    parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);//开启
+                    camera.setParameters(parameters);
+                    Toast.makeText(MediaRecorderActivity.this, "开启", Toast.LENGTH_LONG).show();
+                    status = true;
+                }else {
+                    status = false;
+                    shan.setImageResource(R.drawable.shan_off);
+                    parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);//关闭
+                    camera.setParameters(parameters);
+                    camera.release();
+                    Toast.makeText(MediaRecorderActivity.this, "关闭", Toast.LENGTH_LONG).show();
+                }
+            }*/
+
+            flashlightUtils();
         }
     }
 
+    /**
+     * 是否开启了闪光灯
+     */
+    public boolean isFlashlightOn(boolean flag) {
+        try {
+            Camera.Parameters parameters = camera.getParameters();
+            String flashMode = parameters.getFlashMode();
+            if (flashMode.equals(android.hardware.Camera.Parameters.FLASH_MODE_TORCH)) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    /**
+     * 闪光灯开关
+     */
+    public void flashlightUtils() {
+
+        if (isFlashlightOn(false)) {
+            Closeshoudian();
+            camera = null;
+        } else {
+            Openshoudian();
+        }
+    }
+
+    /**
+     * 开启方法
+     */
+    public void Openshoudian() {
+        //异常处理一定要加，否则Camera打开失败的话程序会崩溃
+        try {
+            camera = Camera.open();
+        } catch (Exception e) {
+            Toast.makeText(this, "Camera被占用，请先关闭", Toast.LENGTH_SHORT).show();
+        }
+
+        if (camera != null) {
+            shan.setImageResource(R.drawable.shan_on);
+            //打开闪光灯
+            camera.startPreview();
+            Camera.Parameters parameter = camera.getParameters();
+            parameter.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+
+        }
+    }
+
+    /**
+     * 关闭方法
+     */
+    public void Closeshoudian() {
+        if (camera != null) {
+            shan.setImageResource(R.drawable.shan_off);
+            camera.getParameters().setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+            camera.setParameters(camera.getParameters());
+            camera.stopPreview();
+            camera.release();
+            camera = null;
+
+
+        }
+    }
 
     /**
      * 取消回删
@@ -444,16 +566,16 @@ public class MediaRecorderActivity extends Activity implements
             duration = mMediaObject.getDuration();
             if (duration < RECORD_TIME_MIN) {
                 if (duration == 0) {
-                    mCameraSwitch.setVisibility(View.VISIBLE);
+                    reversal.setVisibility(View.VISIBLE);
                 }
                 // 视频必须大于3秒
-                if (mTitleNext.getVisibility() != View.INVISIBLE)
-                    mTitleNext.setVisibility(View.INVISIBLE);
-                Toast.makeText(this, "视频拍摄最少需要3秒", Toast.LENGTH_SHORT).show();
+                if (successful.getVisibility() != View.INVISIBLE)
+                    successful.setVisibility(View.INVISIBLE);
+                Toast.makeText(this, "视频录制时间必须大于3秒", Toast.LENGTH_SHORT).show();
             } else {
-                // 下一步
-                if (mTitleNext.getVisibility() != View.VISIBLE) {
-                    mTitleNext.setVisibility(View.VISIBLE);
+                if (successful.getVisibility() != View.VISIBLE) {
+                    successful.setVisibility(View.VISIBLE);
+
                 }
             }
         }
@@ -468,7 +590,7 @@ public class MediaRecorderActivity extends Activity implements
                     if (mMediaRecorder != null && !isFinishing()) {
                         if (mMediaObject != null && mMediaObject.getMedaParts() != null && mMediaObject.getDuration() >= RECORD_TIME_MAX) {
                             stopRecord();
-                            mTitleNext.performClick();
+                            successful.performClick();
                             return;
                         }
                         if (mProgressView != null)

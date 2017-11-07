@@ -1142,7 +1142,7 @@ public class ParameterUtils {
 
     //社区——最新最热
     public Request<String> getNewsFragment(String is_type, String page, String userid) {
-        Request<String> request = getBaseRequestForPost("/community.index");
+        Request<String> request = getBaseRequestForPost("/revisionCommunity.index");
         request.add("is_type", is_type);
         request.add("page", page);
         request.add("userid", userid);
@@ -1151,7 +1151,7 @@ public class ParameterUtils {
 
     //个人中心头部
     public Request<String> getPerson(String attention_userid, String userid) {
-        Request<String> request = getBaseRequestForPost("/community.heads");
+        Request<String> request = getBaseRequestForPost("/revisionCommunity.heads");
         request.add("attention_userid", attention_userid);
         request.add("userid", userid);
         return request;
@@ -1159,7 +1159,7 @@ public class ParameterUtils {
 
     //个人中心Item
     public Request<String> getPersonItem(String is_type, String page, String userid, String self_id) {
-        Request<String> request = getBaseRequestForPost("/community.personage");
+        Request<String> request = getBaseRequestForPost("/revisionCommunity.personage");
         request.add("is_type", is_type);
         request.add("page", page);
         request.add("userid", userid);
@@ -1217,10 +1217,11 @@ public class ParameterUtils {
     }
 
     //社区详情
-    public Request<String> getPersonDetails(String dynamic_id, String userid) {
-        Request<String> request = getBaseRequestForPost("/community.details");
+    public Request<String> getPersonDetails(String dynamic_id, String userid,String attention_userid  ) {
+        Request<String> request = getBaseRequestForPost("/revisionCommunity.details");
         request.add("dynamic_id", dynamic_id);
         request.add("userid", userid);
+        request.add("attention_userid", attention_userid);
         return request;
     }
 

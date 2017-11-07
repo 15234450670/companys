@@ -5,11 +5,21 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.Toast;
 
+import com.umeng.analytics.MobclickAgent;
 import com.yolanda.nohttp.rest.Request;
+
+import java.util.ArrayList;
 
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
@@ -24,6 +34,7 @@ import mr.li.dance.models.LookCacnelInfo;
 import mr.li.dance.models.PersonInfo;
 import mr.li.dance.models.ReportInfo;
 import mr.li.dance.ui.activitys.base.BaseActivityApp;
+import mr.li.dance.ui.adapters.new_adapter.DetailsListAdapter;
 import mr.li.dance.ui.dialogs.GengduoDialog;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
@@ -32,6 +43,10 @@ import mr.li.dance.utils.NToast;
 import mr.li.dance.utils.ShareUtils;
 import mr.li.dance.utils.UserInfoManager;
 import mr.li.dance.utils.glide.ImageLoaderManager;
+import mr.li.dance.utils.util.SoftInputUtils;
+
+import static mr.li.dance.ui.adapters.new_adapter.DetailsListAdapter.TYPE_ADD;
+import static mr.li.dance.ui.adapters.new_adapter.DetailsListAdapter.TYPE_ITEM;
 
 /**
  * 作者: SuiFeng
@@ -40,7 +55,7 @@ import mr.li.dance.utils.glide.ImageLoaderManager;
  * 描述:          社区视频详情
  * 修订历史:
  */
-public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickListener {
+public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickListener, View.OnLayoutChangeListener, DetailsListAdapter.ReplyInfo {
     private String TAG = getClass().getSimpleName();
     private String     itemId;
     private String     uid;
@@ -48,8 +63,19 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
     private PersonInfo titleData;
     boolean       isCollected;
     GengduoDialog dialog;
-    private DetailsInfo           data;
-    private JCVideoPlayerStandard player;
+    private DetailsInfo            data;
+    private JCVideoPlayerStandard  player;
+    private RecyclerView           listViewUtils;
+    private ArrayList<DetailsInfo> detailsInfo;
+    private DetailsListAdapter     adapter;
+    private RelativeLayout         editTextBodyLl;
+    private ImageView              sendIv;
+    private EditText               circleEt;
+    private ScrollView             mScrollView;
+    private int                    keyHeight;
+    private String                 id;
+    private boolean type = true;
+    private String dataId;
 
     @Override
     public int getContentViewId() {
@@ -58,13 +84,22 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
 
     @Override
     public void initViews() {
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         setTitle("视频详情");
+        listViewUtils = (RecyclerView) mDanceViewHolder.getView(R.id.list_view);
+        editTextBodyLl = ((RelativeLayout) mDanceViewHolder.getView(R.id.editTextBodyLl));
+        sendIv = mDanceViewHolder.getImageView(R.id.sendIv);
+        circleEt = mDanceViewHolder.getEditText(R.id.circleEt);
+        mScrollView = ((ScrollView) findViewById(R.id.scrollView));
+        editTextBodyLl.addOnLayoutChangeListener(this);
+        keyHeight = this.getWindowManager().getDefaultDisplay().getHeight() / 3;
 
         imageView = mDanceViewHolder.getImageView(R.id.details_look);
         setRightImage(R.drawable.more);
         player = (JCVideoPlayerStandard) mDanceViewHolder.getView(R.id.player_list_video);
-
-
+        // TODO: 11/1/17 展示
+        sendIv.setOnClickListener(this);
+        editTextBodyLl.setVisibility(View.VISIBLE);
     }
 
     public static void lunch(Context context, String id, String uid) {
@@ -86,7 +121,7 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
     public void initDatas() {
         super.initDatas();
         String userId = UserInfoManager.getSingleton().getUserId(this);
-        Request<String> personDetails = ParameterUtils.getSingleton().getPersonDetails(itemId, userId);
+        Request<String> personDetails = ParameterUtils.getSingleton().getPersonDetails(itemId, userId, uid);
         request(AppConfigs.person_details, personDetails, false);
     }
 
@@ -97,6 +132,8 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
         if (what == AppConfigs.person_details) {
             SheQuDetailsResponse reponseResult = JsonMananger.getReponseResult(response, SheQuDetailsResponse.class);
             data = reponseResult.getData();
+            id = data.getId();
+            dataId = data.getId();
             if (!MyStrUtil.isEmpty(data)) {
                 mDanceViewHolder.setText(R.id.shequ_title, data.getTitle());
                 ImageLoaderManager.getSingleton().LoadCircle(this, data.getUser().get(0).getPicture_src(), mDanceViewHolder.getImageView(R.id.details_icon), R.drawable.default_icon);
@@ -116,6 +153,23 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
                 // Glide.with(this).load("http://a4.att.hudong.com/05/71/01300000057455120185716259013.jpg").into(player.thumbImageView);
             }
         }
+        int commCount = 0;
+        detailsInfo = new ArrayList<>();
+        if (!MyStrUtil.isEmpty(data.getComm())) {
+            listViewUtils.setVisibility(View.VISIBLE);
+            commCount = data.getComm().size();
+            for (int i = 0; i < commCount; i++) {
+                detailsInfo.add(data);
+            }
+            adapter = new DetailsListAdapter(this, detailsInfo, getCurrentFocus());
+            listViewUtils.setLayoutManager(new LinearLayoutManager(this));
+            adapter.addList(detailsInfo);
+            listViewUtils.setAdapter(adapter);
+
+        } else {
+            listViewUtils.setVisibility(View.GONE);
+        }
+
 
         //关注操作
         if (what == AppConfigs.user_collection) {
@@ -129,6 +183,12 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
         } else {
             imageView.setImageResource(R.drawable.my_look_yes);
         }
+        if (what == AppConfigs.GET_PUBLISH) {
+            initDatas();
+            Toast.makeText(mContext, "发布成功", Toast.LENGTH_SHORT).show();
+
+        }
+        type = true;
     }
 
 
@@ -179,6 +239,7 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
                                 View view1 = mDanceViewHolder.getView(R.id.v);
                                 if (!MyStrUtil.isEmpty(report.getData())) {
                                     view.setVisibility(View.GONE);
+
                                     view1.setVisibility(View.VISIBLE);
                                     NToast.longToast(SheQuVideoDetails.this, report.getData());
                                 } else {
@@ -256,6 +317,23 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
                 Request<String> personCancelLook = ParameterUtils.getSingleton().getPersonCancelLook(userId, uid, operation);
                 request(AppConfigs.user_collection, personCancelLook, false);
                 break;
+            case R.id.sendIv:
+                reuqestNet(id, type);
+                SoftInputUtils.closeInput(this, getCurrentFocus());
+                circleEt.getText().clear();
+                break;
+        }
+    }
+
+    private void reuqestNet(String id, boolean type) {
+        String userId = UserInfoManager.getSingleton().getUserId(this);
+        if (type) {
+            Request<String> publishingDynamics = ParameterUtils.getSingleton().publishingDynamics(userId, id.equals(dataId) ? 1 : 2, circleEt.getText().toString(), id);
+            request(AppConfigs.GET_PUBLISH, publishingDynamics, false);
+
+        } else {
+            Request<String> publishingDynamics = ParameterUtils.getSingleton().publishingDynamics(userId, 2, circleEt.getText().toString(), id);
+            request(AppConfigs.GET_PUBLISH, publishingDynamics, false);
         }
     }
 
@@ -272,7 +350,7 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
                         break;
                     case "分享":
                         ShareUtils shareUtils = new ShareUtils(SheQuVideoDetails.this);
-                        String shareUrl = String.format(AppConfigs.DOINGTAI, data.getId());
+                        String shareUrl = String.format(AppConfigs.shequ_detial, data.getId());
                         String mShareContent = data.getTitle();
                         shareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_21, shareUrl, mShareContent);
                         break;
@@ -307,5 +385,64 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
     public void onPause() {
         super.onPause();
         JCVideoPlayer.releaseAllVideos();
+    }
+
+    private void recylcerViewBottom() {
+        mScrollView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mScrollView.fullScroll(ScrollView.FOCUS_DOWN);
+                circleEt.setFocusable(true);
+                circleEt.setFocusableInTouchMode(true);
+                circleEt.requestFocus();
+            }
+        }, 100);
+
+    }
+
+    @Override
+    public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+        if (oldBottom != 0 && bottom != 0 && (oldBottom - bottom) >= keyHeight) {
+            recylcerViewBottom();
+
+        } else if (oldBottom != 0 && bottom != 0 && (bottom - oldBottom) >= keyHeight) {
+            circleEt.setHint("说点什么..");
+        }
+    }
+
+    @Override
+    public void getReply(String id, String name, int itemType) {
+        if (itemType == TYPE_ADD) {
+            circleEt.setHint("回复：" + name);
+            SoftInputUtils.showInput(this, getCurrentFocus());
+            this.id = id;
+            type = false;
+        } /*else if(itemType == TYPE_DEL){
+            deleteItemRequest(id, 2);
+        } */ else if (itemType == TYPE_ITEM) {
+            this.id = id;
+            circleEt.setHint("回复：" + name);
+            SoftInputUtils.showInput(this, getCurrentFocus());
+        }
+    }
+
+    @Override
+    public void getDatasItem() {
+        initDatas();
+    }
+
+    @Override
+    public void share(String id, String title) {
+        showShareDialog(id, title);
+    }
+
+    ShareUtils mShareUtils;
+
+    private void showShareDialog(String id, String title) {
+        MobclickAgent.onEvent(this, AppConfigs.CLICK_EVENT_29);
+        if (mShareUtils == null) {
+            mShareUtils = new ShareUtils(this);
+        }
+        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, AppConfigs.shequ_detial + id, title);
     }
 }

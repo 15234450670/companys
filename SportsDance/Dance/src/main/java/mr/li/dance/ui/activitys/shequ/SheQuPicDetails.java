@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.umeng.analytics.MobclickAgent;
 import com.yolanda.nohttp.rest.Request;
 
 import java.util.ArrayList;
@@ -54,24 +55,24 @@ import static mr.li.dance.ui.adapters.new_adapter.DetailsListAdapter.TYPE_ITEM;
  */
 public class SheQuPicDetails extends BaseActivity implements View.OnClickListener, DetailsListAdapter.ReplyInfo, View.OnLayoutChangeListener {
     private String TAG = getClass().getSimpleName();
-    private String       itemId;
-    private RecyclerView listViewUtils;
-    private DetailsInfo  data;
-    private String       uid;
-    private ImageView    imageView;
-    private PersonInfo   titleData;
+    private String         itemId;
+    private RecyclerView   listViewUtils;
+    private DetailsInfo    data;
+    private String         uid;
+    private ImageView      imageView;
+    private PersonInfo     titleData;
     private RelativeLayout editTextBodyLl;
-    private ImageView sendIv;
-    private EditText circleEt;
-    boolean       isCollected;
+    private ImageView      sendIv;
+    private EditText       circleEt;
+    boolean isCollected;
     private String id;
     private String dataId;
     GengduoDialog dialog;
     private ArrayList<DetailsInfo> detailsInfo;
     private boolean type = true;
     private DetailsListAdapter adapter;
-    private ScrollView mScrollView;
-    private int keyHeight;
+    private ScrollView         mScrollView;
+    private int                keyHeight;
 
     @Override
     public int getContentViewId() {
@@ -80,7 +81,7 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
 
     @Override
     public void initViews() {
-        getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         setTitle("详情");
         listViewUtils = (RecyclerView) mDanceViewHolder.getView(R.id.list_view);
         setRightImage(R.drawable.more);
@@ -89,10 +90,8 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
         sendIv = mDanceViewHolder.getImageView(R.id.sendIv);
         circleEt = mDanceViewHolder.getEditText(R.id.circleEt);
         mScrollView = ((ScrollView) findViewById(R.id.scrollView));
-
         editTextBodyLl.addOnLayoutChangeListener(this);
         keyHeight = this.getWindowManager().getDefaultDisplay().getHeight() / 3;
-
 
         // TODO: 11/1/17 展示
         sendIv.setOnClickListener(this);
@@ -123,36 +122,44 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
     @Override
     public void onResume() {
         super.onResume();
+
         String userId = UserInfoManager.getSingleton().getUserId(this);
-        Request<String> person = ParameterUtils.getSingleton().getPerson(userId, uid);
-        CallServer.getRequestInstance().add(this, 0, person, new HttpListener() {
-            @Override
-            public void onSucceed(int what, String response) {
-                PersonLookAndFansResponse reponseResult = JsonMananger.getReponseResult(response, PersonLookAndFansResponse.class);
-                titleData = reponseResult.getData();
-                int is_attention = titleData.is_attention;
-                Log.e(TAG, is_attention + "");
-                isCollected = (2 != is_attention);
-                if (isCollected) {
-                    imageView.setImageResource(R.drawable.my_look_no);
-                } else {
-                    imageView.setImageResource(R.drawable.my_look_yes);
+        if (userId.equals(uid)) {
+            imageView.setVisibility(View.GONE);
+        } else {
+            imageView.setVisibility(View.VISIBLE);
+            Request<String> person = ParameterUtils.getSingleton().getPerson(userId, uid);
+            CallServer.getRequestInstance().add(this, 0, person, new HttpListener() {
+                @Override
+                public void onSucceed(int what, String response) {
+                    PersonLookAndFansResponse reponseResult = JsonMananger.getReponseResult(response, PersonLookAndFansResponse.class);
+                    titleData = reponseResult.getData();
+                    int is_attention = titleData.is_attention;
+                    Log.e(TAG, is_attention + "");
+                    isCollected = (2 != is_attention);
+                    if (isCollected) {
+                        imageView.setImageResource(R.drawable.my_look_no);
+                    } else {
+                        imageView.setImageResource(R.drawable.my_look_yes);
+                    }
+
+                    imageView.setOnClickListener(SheQuPicDetails.this);
                 }
 
-                imageView.setOnClickListener(SheQuPicDetails.this);
-            }
 
+                @Override
+                public void onFailed(int what, int responseCode, String response) {
 
-            @Override
-            public void onFailed(int what, int responseCode, String response) {
+                }
+            }, false, false);
+        }
 
-            }
-        }, false, false);
     }
 
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
+        Log.e("response", response);
         if (what == AppConfigs.person_details) {
             SheQuDetailsResponse reponseResult = JsonMananger.getReponseResult(response, SheQuDetailsResponse.class);
             data = reponseResult.getData();
@@ -189,7 +196,7 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
             adapter.addList(detailsInfo);
             listViewUtils.setAdapter(adapter);
         } else {
-//                listViewUtils.setVisibility(View.GONE);
+            //                listViewUtils.setVisibility(View.GONE);
         }
         if (what == AppConfigs.user_collection) {
             LookCacnelInfo reponseResult1 = JsonMananger.getReponseResult(response, LookCacnelInfo.class);
@@ -228,7 +235,7 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
                         break;
                     case "分享":
                         ShareUtils shareUtils = new ShareUtils(SheQuPicDetails.this);
-                        String shareUrl = String.format(AppConfigs.DOINGTAI, data.getId());
+                        String shareUrl = String.format(AppConfigs.shequ_detial, data.getId());
                         String mShareContent = data.getTitle();
                         shareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_21, shareUrl, mShareContent);
                         break;
@@ -266,7 +273,17 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
                             @Override
                             public void onSucceed(int what, String response) {
                                 ReportInfo report = JsonMananger.getReponseResult(response, ReportInfo.class);
-                                NToast.longToast(SheQuPicDetails.this, report.getData());
+                                View view = mDanceViewHolder.getView(R.id.lin);
+                                View view1 = mDanceViewHolder.getView(R.id.v);
+                                if (!MyStrUtil.isEmpty(report.getData())) {
+                                    view.setVisibility(View.GONE);
+
+                                    view1.setVisibility(View.VISIBLE);
+                                    NToast.longToast(SheQuPicDetails.this, report.getData());
+                                } else {
+                                    view.setVisibility(View.VISIBLE);
+                                    view1.setVisibility(View.GONE);
+                                }
                             }
 
                             @Override
@@ -369,12 +386,32 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
             type = false;
         } /*else if(itemType == TYPE_DEL){
             deleteItemRequest(id, 2);
-        } */else if (itemType == TYPE_ITEM) {
+        } */ else if (itemType == TYPE_ITEM) {
             this.id = id;
             circleEt.setHint("回复：" + name);
             SoftInputUtils.showInput(this, getCurrentFocus());
         }
 
+    }
+
+    @Override
+    public void getDatasItem() {
+        initRequest();
+    }
+
+    @Override
+    public void share(String id, String title) {
+        showShareDialog(id, title);
+    }
+
+    ShareUtils mShareUtils;
+
+    private void showShareDialog(String id, String title) {
+        MobclickAgent.onEvent(this, AppConfigs.CLICK_EVENT_29);
+        if (mShareUtils == null) {
+            mShareUtils = new ShareUtils(this);
+        }
+        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, AppConfigs.shequ_detial + id, title);
     }
 
     @Override
@@ -384,19 +421,19 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
     }
 
     private void initRequest() {
-//        String loginName = UserInfoManager.getSingleton().getLoginName(DanceApplication.instance);
-//        DetailsInfo.CommBean.Revert revert = new DetailsInfo.CommBean.Revert();
-//        revert.setContent(circleEt.getText().toString());
-//        DetailsInfo.CommBean.UserBeanX userBeanX = new DetailsInfo.CommBean.UserBeanX();
-//        userBeanX.setUsername(loginName);
-//        ArrayList<DetailsInfo.CommBean.UserBeanX> userBeanXes = new ArrayList<>();
-//        userBeanXes.add(userBeanX);
-//        revert.setUser(userBeanXes);
-//        detailsInfo.get(0).getComm().get(postion).getComd().add(curPostion + 1, revert);
-//        adapter.notifyDataSetChanged();
+        //        String loginName = UserInfoManager.getSingleton().getLoginName(DanceApplication.instance);
+        //        DetailsInfo.CommBean.Revert revert = new DetailsInfo.CommBean.Revert();
+        //        revert.setContent(circleEt.getText().toString());
+        //        DetailsInfo.CommBean.UserBeanX userBeanX = new DetailsInfo.CommBean.UserBeanX();
+        //        userBeanX.setUsername(loginName);
+        //        ArrayList<DetailsInfo.CommBean.UserBeanX> userBeanXes = new ArrayList<>();
+        //        userBeanXes.add(userBeanX);
+        //        revert.setUser(userBeanXes);
+        //        detailsInfo.get(0).getComm().get(postion).getComd().add(curPostion + 1, revert);
+        //        adapter.notifyDataSetChanged();
 
         String userId = UserInfoManager.getSingleton().getUserId(this);
-        Request<String> personDetails = ParameterUtils.getSingleton().getPersonDetails(itemId, userId);
+        Request<String> personDetails = ParameterUtils.getSingleton().getPersonDetails(itemId, userId, uid);
         request(AppConfigs.person_details, personDetails, false);
     }
 

@@ -2,6 +2,7 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
+        android:background="#e1e1e1"
         android:id="@+id/top_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@drawable/home_icon_002" />
+            android:src="@drawable/zi_ref" />
 
         <TextView
             android:id="@+id/type_tv"

@@ -4,40 +4,32 @@
         "source": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_delete_normal.png"
     },
     {
-        "merged": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_camera_flash_led_on_pressed.png",
-        "source": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_camera_flash_led_on_pressed.png"
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\anzhupai.png",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\anzhupai.png"
     },
     {
-        "merged": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_camera_flash_led_off_pressed.png",
-        "source": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_camera_flash_led_off_pressed.png"
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_next_press.png",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_next_press.png"
+    },
+    {
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_camera_flash_led_off_normal.png",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_camera_flash_led_off_normal.png"
     },
     {
         "merged": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_camera_flash_led_on_disable.png",
         "source": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_camera_flash_led_on_disable.png"
     },
     {
-        "merged": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_camera_switch_pressed.png",
-        "source": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_camera_switch_pressed.png"
-    },
-    {
-        "merged": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_camera_switch_normal.png",
-        "source": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_camera_switch_normal.png"
-    },
-    {
         "merged": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_cancel_normal.png",
         "source": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_cancel_normal.png"
     },
     {
-        "merged": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\back_icon.png",
-        "source": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\back_icon.png"
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_delete_press.png",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_delete_press.png"
     },
     {
         "merged": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_delete_check_normal.png",
         "source": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_delete_check_normal.png"
-    },
-    {
-        "merged": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_camera_flash_led_on_normal.png",
-        "source": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_camera_flash_led_on_normal.png"
     },
     {
         "merged": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_delete_press.png",
@@ -48,12 +40,104 @@
         "source": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_next_normal.png"
     },
     {
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_delete_check_normal.png",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_delete_check_normal.png"
+    },
+    {
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_next_normal.png",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_next_normal.png"
+    },
+    {
         "merged": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_next_press.png",
         "source": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_next_press.png"
     },
     {
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_camera_flash_led_off_pressed.png",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_camera_flash_led_off_pressed.png"
+    },
+    {
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\fanzhuan.png",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\fanzhuan.png"
+    },
+    {
         "merged": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_cancel_press.png",
         "source": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_cancel_press.png"
+    },
+    {
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_delete_check_press.png",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_delete_check_press.png"
+    },
+    {
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_camera_switch_pressed.png",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_camera_switch_pressed.png"
+    },
+    {
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_camera_flash_led_on_disable.png",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_camera_flash_led_on_disable.png"
+    },
+    {
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\shan_off.png",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\shan_off.png"
+    },
+    {
+        "merged": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_camera_flash_led_off_normal.png",
+        "source": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_camera_flash_led_off_normal.png"
+    },
+    {
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_camera_switch_disable.png",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_camera_switch_disable.png"
+    },
+    {
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\back_icon.png",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\back_icon.png"
+    },
+    {
+        "merged": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_camera_flash_led_on_pressed.png",
+        "source": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_camera_flash_led_on_pressed.png"
+    },
+    {
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_cancel_press.png",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_cancel_press.png"
+    },
+    {
+        "merged": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_camera_flash_led_off_pressed.png",
+        "source": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_camera_flash_led_off_pressed.png"
+    },
+    {
+        "merged": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_camera_switch_normal.png",
+        "source": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_camera_switch_normal.png"
+    },
+    {
+        "merged": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_camera_switch_pressed.png",
+        "source": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_camera_switch_pressed.png"
+    },
+    {
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_camera_switch_normal.png",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_camera_switch_normal.png"
+    },
+    {
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_cancel_normal.png",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_cancel_normal.png"
+    },
+    {
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\shan_on.png",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\shan_on.png"
+    },
+    {
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_camera_flash_led_off_disable.png",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_camera_flash_led_off_disable.png"
+    },
+    {
+        "merged": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\back_icon.png",
+        "source": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\back_icon.png"
+    },
+    {
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_camera_flash_led_on_normal.png",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_camera_flash_led_on_normal.png"
+    },
+    {
+        "merged": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_camera_flash_led_on_normal.png",
+        "source": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_camera_flash_led_on_normal.png"
     },
     {
         "merged": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_delete_check_press.png",
@@ -64,11 +148,23 @@
         "source": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_camera_switch_disable.png"
     },
     {
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\x_guan.png",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\x_guan.png"
+    },
+    {
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\anzhupai2.png",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\anzhupai2.png"
+    },
+    {
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_camera_flash_led_on_pressed.png",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_camera_flash_led_on_pressed.png"
+    },
+    {
         "merged": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_camera_flash_led_off_disable.png",
         "source": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_camera_flash_led_off_disable.png"
     },
     {
-        "merged": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_camera_flash_led_off_normal.png",
-        "source": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_camera_flash_led_off_normal.png"
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxhdpi-v4\\record_delete_normal.png",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable-xxhdpi-v4\\record_delete_normal.png"
     }
 ]

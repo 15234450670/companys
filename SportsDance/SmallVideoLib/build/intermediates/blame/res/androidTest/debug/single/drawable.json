@@ -1,15 +1,35 @@
 [
     {
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\record_delete_selector.xml",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable\\record_delete_selector.xml"
+    },
+    {
         "merged": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\record_camera_switch_selector.xml",
         "source": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable\\record_camera_switch_selector.xml"
+    },
+    {
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\record_camera_switch_selector.xml",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable\\record_camera_switch_selector.xml"
     },
     {
         "merged": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\record_camera_flash_led_selector.xml",
         "source": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable\\record_camera_flash_led_selector.xml"
     },
     {
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\record_camera_flash_led_selector.xml",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable\\record_camera_flash_led_selector.xml"
+    },
+    {
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\record_next_seletor.xml",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable\\record_next_seletor.xml"
+    },
+    {
         "merged": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\record_delete_selector.xml",
         "source": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable\\record_delete_selector.xml"
+    },
+    {
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\video_text.xml",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable\\video_text.xml"
     },
     {
         "merged": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\video_text.xml",
@@ -22,5 +42,9 @@
     {
         "merged": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\small_video_shoot.xml",
         "source": "F:\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable\\small_video_shoot.xml"
+    },
+    {
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\small_video_shoot.xml",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable\\small_video_shoot.xml"
     }
 ]
