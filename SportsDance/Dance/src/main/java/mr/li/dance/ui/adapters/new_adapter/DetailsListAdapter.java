@@ -95,7 +95,7 @@ public class DetailsListAdapter extends BaseRecyclerAdapter<DetailsInfo> {
             return;
         }
         if (position < countAddress) {
-            holder.setImageByUrlOrFilePath(R.id.pic_item, item.getAddress().get(position), R.drawable.default_banner);
+            holder.setImageByUrlOrFilePath(R.id.pic_item, item.getAddress().get(position).getAddress(), R.drawable.default_banner);
         } else {
             holder.setText(R.id.shequ_time, item.getComm().get(position - countAddress).getComment_time());
             holder.setText(R.id.shequ_name, item.getComm().get(position - countAddress).getUser().get(0).getUsername());

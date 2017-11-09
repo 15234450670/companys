@@ -196,6 +196,7 @@ public class MediaRecorderActivity extends Activity implements
      * 加载视图
      */
     private void loadViews() {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.recorder);
         // ~~~ 绑定控件
         mSurfaceView = (SurfaceView) findViewById(R.id.record_preview);

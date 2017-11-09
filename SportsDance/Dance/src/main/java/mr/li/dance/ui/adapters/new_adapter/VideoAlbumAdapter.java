@@ -28,5 +28,7 @@ public class VideoAlbumAdapter extends BaseRecyclerAdapter<Video> {
     public void bindData(RecyclerViewHolder holder, int position, Video item) {
         holder.setImageByUrlOrFilePath(R.id.detail_pic, item.getPicture(), R.drawable.default_banner);
         holder.setText(R.id.detail_title, item.getName());
+        holder.setText(R.id.detail_time,item.getStart_time());
+
     }
 }

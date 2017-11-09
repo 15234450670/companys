@@ -146,12 +146,17 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
                     mDanceViewHolder.getView(R.id.details_content).setVisibility(View.GONE);
                 }
             }
+            String path = data.getVideo().get(0);
             //视频播放
-            boolean setUp = player.setUp(data.getVideo().get(0), JCVideoPlayer.SCREEN_LAYOUT_LIST, "");
-            if (setUp) {
-                //后台返回的图片
-                // Glide.with(this).load("http://a4.att.hudong.com/05/71/01300000057455120185716259013.jpg").into(player.thumbImageView);
+            if (!MyStrUtil.isEmpty(path)) {
+                boolean setUp = player.setUp(path, JCVideoPlayer.SCREEN_LAYOUT_LIST, "");
+                if (setUp) {
+                    //后台返回的图片
+                    // Glide.with(this).load("http://a4.att.hudong.com/05/71/01300000057455120185716259013.jpg").into(player.thumbImageView);
+                }
             }
+
+
         }
         int commCount = 0;
         detailsInfo = new ArrayList<>();
@@ -445,4 +450,5 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
         }
         mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, AppConfigs.shequ_detial + id, title);
     }
+
 }

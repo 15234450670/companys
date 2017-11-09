@@ -171,7 +171,10 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
                         break;
                     case 10103://z咨询
                         String url = String.format(AppConfigs.ZixunShareUrl, bannerInfo.getNumber());
-                        MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, "", url, true);
+                      //  MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, "", url, true);
+                        if (!TextUtils.isEmpty(bannerInfo.getTitle())) {
+                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, bannerInfo.getTitle(), AppConfigs.ZixunShareUrl2 + bannerInfo.getNumber(), true);
+                        }
                         break;
                     case 10104://图片
                         AlbumActivity.lunch(mContext, bannerInfo.getNumber(), "");
@@ -234,9 +237,10 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
                     case 10103://赛事资讯
                         String saiShiurl = String.format(AppConfigs.ZixunShareUrl2, String.valueOf(mDatas.get(position).getId()));
                         if (!TextUtils.isEmpty(mDatas.get(position).getCompete_name())) {
-                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, mDatas.get(position).getCompete_name(), AppConfigs.ZixunShareUrl2+mDatas.get(position).getId(), true);
+                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, mDatas.get(position).getCompete_name(), AppConfigs.ZixunShareUrl2 + mDatas.get(position).getId(), true);
+
                         } else {
-                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, mDatas.get(position).getTitle(), AppConfigs.ZixunShareUrl2+mDatas.get(position).getId(), true);
+                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, mDatas.get(position).getTitle(), AppConfigs.ZixunShareUrl2 + mDatas.get(position).getId(), true);
                         }
 
                         break;
@@ -294,6 +298,7 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
         String appId = bannerInfo.getAppid();
         String appsecret = bannerInfo.getAppsecret();
         final String url = bannerInfo.getUrl();
+        String title = bannerInfo.getTitle();
         String userId = UserInfoManager.getSingleton().getUserId(mContext);
         Request<String> huoDongInfoMap = ParameterUtils.getSingleton().getHuoDongInfoMap(appId, appsecret, url, userId);
         CallServer.getRequestInstance().add(mContext, 0, huoDongInfoMap, new HttpListener() {
@@ -302,7 +307,8 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
 
                 HuoDongInfo reponseResult = JsonMananger.getReponseResult(response, HuoDongInfo.class);
                 Log.e("sdfsdf", "请求了:" + reponseResult.getData());
-                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, "", reponseResult.getData(), url+bannerInfo.activityid, bannerInfo.getId());
+                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, "", reponseResult.getData() + bannerInfo.getNumber(), url, bannerInfo.getId());
+                Log.e("sdfsdf2222", "请求了:" + reponseResult.getData()+ bannerInfo.getNumber());
             }
 
             @Override
@@ -337,8 +343,8 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
 
                 HuoDongInfo reponseResult = JsonMananger.getReponseResult(response, HuoDongInfo.class);
                 Log.e("sdfsdf", "请求了:" + reponseResult.getData());
-                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, title, reponseResult.getData(), url+base.activityid, base.getId());
-
+                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, title, reponseResult.getData()+ base.number, url , base.getId());
+                Log.e("sdfsdf", "请求了2-->:" + reponseResult.getData()+ base.number);
             }
 
             @Override

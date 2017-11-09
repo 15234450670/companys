@@ -12,7 +12,7 @@
     <RelativeLayout
         android:id="@+id/iamge_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/spacing_300"
+        android:layout_height="@dimen/spacing_378"
         android:layout_below="@+id/head"
         android:layout_marginLeft="@dimen/spacing_20"
         android:layout_marginRight="@dimen/spacing_20"
@@ -21,7 +21,7 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/spacing_300"
+            android:layout_height="@dimen/spacing_378"
             android:scaleType="fitXY"
             android:src="@drawable/default_video"/>
 
@@ -38,7 +38,7 @@
     <LinearLayout
         android:id="@+id/iamge_layout_two"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/spacing_300"
+        android:layout_height="@dimen/spacing_330"
         android:layout_below="@+id/head"
         android:layout_marginLeft="@dimen/spacing_20"
         android:layout_marginRight="@dimen/spacing_20"
@@ -49,19 +49,17 @@
         <ImageView
             android:id="@+id/imageView_two_1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/spacing_330"
             android:layout_weight="1"
-            android:scaleType="fitXY"
             android:src="@drawable/default_video"/>
 
         <ImageView
             android:id="@+id/imageView_two_2"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/spacing_330"
             android:layout_centerInParent="true"
             android:layout_marginLeft="@dimen/spacing_20"
             android:layout_weight="1"
-            android:scaleType="fitXY"
             android:src="@drawable/default_video"
             />
     </LinearLayout>
@@ -69,7 +67,7 @@
     <LinearLayout
         android:id="@+id/iamge_layout_three"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/spacing_300"
+        android:layout_height="@dimen/spacing_218"
         android:layout_below="@+id/head"
         android:layout_marginLeft="@dimen/spacing_20"
         android:layout_marginRight="@dimen/spacing_20"
@@ -80,7 +78,7 @@
         <ImageView
             android:id="@+id/imageView_three_1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/spacing_218"
             android:layout_weight="1"
             android:scaleType="fitXY"
             android:src="@drawable/default_video"/>
@@ -88,7 +86,7 @@
         <ImageView
             android:id="@+id/imageView_three_2"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/spacing_218"
             android:layout_centerInParent="true"
             android:layout_marginLeft="@dimen/spacing_20"
             android:layout_weight="1"
@@ -99,7 +97,7 @@
         <ImageView
             android:id="@+id/imageView_three_3"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/spacing_218"
             android:layout_marginLeft="@dimen/spacing_20"
             android:layout_weight="1"
             android:scaleType="fitXY"

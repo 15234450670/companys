@@ -77,12 +77,14 @@
     <dimen name="spacing_92">46dp</dimen>
 
     <dimen name="spacing_200">100dp</dimen>
+    <dimen name="spacing_218">109dp</dimen>
     <dimen name="spacing_234">117dp</dimen>
     <dimen name="spacing_260">130dp</dimen>
     <dimen name="spacing_270">136dp</dimen>
     <dimen name="spacing_280">140dp</dimen>
 
     <dimen name="spacing_300">150dp</dimen>
+    <dimen name="spacing_330">165dp</dimen>
     <dimen name="spacing_308">154dp</dimen>
     <dimen name="spacing_350">175dp</dimen>
     <dimen name="spacing_398">200dp</dimen>

@@ -14,16 +14,38 @@
             android:id="@+id/detail_pic"
             android:layout_width="@dimen/spacing_260"
             android:layout_height="@dimen/spacing_160"
-            android:layout_margin="@dimen/spacing_20"/>
+            android:layout_marginTop="@dimen/spacing_20"
+            android:layout_marginLeft="@dimen/spacing_20"
+            android:layout_marginBottom="@dimen/spacing_20"/>
         <TextView
+            android:layout_marginLeft="@dimen/spacing_20"
             android:id="@+id/detail_title"
             android:textSize="@dimen/textsize24"
             android:layout_width="@dimen/spacing_260"
             android:maxLines="2"
-            android:gravity="center"
             android:textColor="#666666"
             android:layout_height="wrap_content"
             android:text=""/>
+        <TextView
+            android:layout_marginTop="@dimen/spacing_20"
+            android:layout_marginBottom="@dimen/spacing_20"
+            android:id="@+id/detail_time"
+            android:textSize="@dimen/textsize24"
+            android:layout_width="wrap_content"
+            android:maxLines="1"
+            android:textColor="#666666"
+            android:layout_gravity="right"
+            android:layout_height="wrap_content"
+            android:text=""/>
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/start_item"
+            style="@style/text_white_style_22"
+            android:background="@drawable/start_jk"
+             android:gravity="center"
+            android:layout_gravity="center"
+            android:text="正在播放"
+       />
     </LinearLayout>
 
 

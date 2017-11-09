@@ -21,6 +21,7 @@ import com.lecloud.sdk.videoview.VideoViewListener;
 import com.lecloud.skin.videoview.vod.UIVodVideoView;
 import com.yolanda.nohttp.rest.Request;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -34,6 +35,7 @@ import mr.li.dance.ui.activitys.base.BaseListActivity;
 import mr.li.dance.ui.activitys.match.MatchDetailActivity;
 import mr.li.dance.ui.activitys.match.MatchVideoActivity;
 import mr.li.dance.ui.activitys.newActivitys.SpecialActivity;
+import mr.li.dance.ui.adapters.new_adapter.SpecialItemAdapter;
 import mr.li.dance.ui.adapters.new_adapter.VideoAlbumAdapter;
 import mr.li.dance.ui.widget.VideoLayoutParams;
 import mr.li.dance.utils.AppConfigs;
@@ -61,6 +63,7 @@ public class VideoDetailActivity extends BaseListActivity {
     boolean isFromCollectpage = false;
     private String shareUrl;
     private String mShareContent;
+    private String TAG = getClass().getSimpleName();
     LinkedHashMap<String, String> rateMap            = new LinkedHashMap<String, String>();
     VideoViewListener             mVideoViewListener = new VideoViewListener() {
 
@@ -83,12 +86,16 @@ public class VideoDetailActivity extends BaseListActivity {
         }
     };
     private RecyclerView rv;
+    private ArrayList<Video> otherList;
+    private ArrayList<Video> album;
 
     @Override
     public void itemClick(int position, Object value) {
         Video currentInfo = (Video) value;
         mItemId = currentInfo.getId();
         initDatas();
+
+
     }
 
     @Override
@@ -244,6 +251,7 @@ public class VideoDetailActivity extends BaseListActivity {
     @Override
     public void onSucceed(int what, String responseStr) {
         super.onSucceed(what, responseStr);
+        Log.e(TAG,responseStr);
         if (AppConfigs.home_dianboDetailL == what) {
             final VideoDetailResponse detailResponse = JsonMananger.getReponseResult(responseStr, VideoDetailResponse.class);
             if (!TextUtils.isEmpty(detailResponse.getData().getDetail().getCompete_name())) {
@@ -261,10 +269,9 @@ public class VideoDetailActivity extends BaseListActivity {
             }
             final String compete_id = detailResponse.getData().getDetail().getCompete_id();
             isCollected = (0 != detailResponse.getData().getCollection_id());
-
-            if (!MyStrUtil.isEmpty(detailResponse.getData().getOtherList())) {
-                videoAlbumAdapter.addList(detailResponse.getData().getOtherList());
-
+            otherList = detailResponse.getData().getOtherList();
+            if (!MyStrUtil.isEmpty(otherList)) {
+                videoAlbumAdapter.addList(otherList);
                 View view = mDanceViewHolder.getView(R.id.ll);
                 view.setVisibility(View.VISIBLE);
                 view.setOnClickListener(new View.OnClickListener() {
@@ -276,12 +283,14 @@ public class VideoDetailActivity extends BaseListActivity {
             } else {
                 mDanceViewHolder.getView(R.id.ll).setVisibility(View.GONE);
             }
-            if (!MyStrUtil.isEmpty(detailResponse.getData().getAlbum())) {
+            album = detailResponse.getData().getAlbum();
+            if (!MyStrUtil.isEmpty(album)) {
                 View view = mDanceViewHolder.getView(R.id.zhuanji);
-                videoAlbumAdapter.addList(detailResponse.getData().getAlbum());
-                videoAlbumAdapter.setItemClickListener(this);
-                rv.setAdapter(videoAlbumAdapter);
                 view.setVisibility(View.VISIBLE);
+                SpecialItemAdapter itemAdapter =new SpecialItemAdapter(this);
+                itemAdapter.addList(album);
+                itemAdapter.setItemClickListener(this);
+                rv.setAdapter(itemAdapter);
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -291,6 +300,9 @@ public class VideoDetailActivity extends BaseListActivity {
             } else {
                 mDanceViewHolder.getView(R.id.zhuanji).setVisibility(View.GONE);
             }
+
+
+
             setVideoDetail(detailResponse.getData().getDetail());
         } else {
             StringResponse stringResponse = JsonMananger.getReponseResult(responseStr, StringResponse.class);

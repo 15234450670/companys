@@ -37,7 +37,7 @@ public class DetailsInfo {
     private String         comment_count;
     private int            is_upvote;
     private List<UserBean> user;
-    private List<String>   address;
+    private List<AddressBean>   address;
     private List<String> video;
 
     public List<String> getVideo() {
@@ -146,11 +146,11 @@ public class DetailsInfo {
         this.user = user;
     }
 
-    public List<String> getAddress() {
+    public List<AddressBean> getAddress() {
         return address;
     }
 
-    public void setAddress(List<String> address) {
+    public void setAddress(List<AddressBean> address) {
         this.address = address;
     }
 
@@ -335,6 +335,37 @@ public class DetailsInfo {
             public void setUser(List<UserBeanX> user) {
                 this.user = user;
             }
+        }
+    }
+
+    public class AddressBean {
+
+        private String address;
+        private String width;
+        private String hight;
+
+        public String getAddress() {
+            return address;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
+        }
+
+        public String getWidth() {
+            return width;
+        }
+
+        public void setWidth(String width) {
+            this.width = width;
+        }
+
+        public String getHight() {
+            return hight;
+        }
+
+        public void setHight(String hight) {
+            this.hight = hight;
         }
     }
 }

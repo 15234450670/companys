@@ -1,7 +1,6 @@
 package mr.li.dance.ui.adapters;
 
 import android.content.Context;
-import android.view.View;
 
 import mr.li.dance.R;
 import mr.li.dance.models.Match;
@@ -89,7 +88,7 @@ public class MatchVideoAdapter extends BaseRecyclerAdapter<Video> {
         holder.setRoundImageByUrlOrFilePath(R.id.imageView, video.getAlbum_img(), R.drawable.default_video);
         holder.setText(R.id.name, video.getAlbum_name());
         holder.setText(R.id.time_tv, video.getInserttime());
-        holder.setVisibility(R.id.typeicon_tv, View.VISIBLE);
+       // holder.setVisibility(R.id.typeicon_tv, View.VISIBLE);
       //  holder.setImageResDrawable(R.id.typeicon_tv, R.drawable.home_icon_005);
     }
 

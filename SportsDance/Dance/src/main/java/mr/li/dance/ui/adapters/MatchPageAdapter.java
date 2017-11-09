@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -182,9 +183,12 @@ public class MatchPageAdapter extends DanceBaseAdapter {
                         VideoDetailActivity.lunch(mContext, bannerInfo.getNumber());
                         break;
                     case 10103://z咨询
-
                         String url = String.format(AppConfigs.ZixunShareUrl, bannerInfo.getNumber());
-                        MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, "", url, true);
+                   //     MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, "", url, true);
+
+                        if (!TextUtils.isEmpty(bannerInfo.getTitle())) {
+                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, bannerInfo.getTitle(), AppConfigs.ZixunShareUrl2 + bannerInfo.getNumber(), true);
+                        }
                         break;
                     case 10104://图片
 
@@ -226,7 +230,7 @@ public class MatchPageAdapter extends DanceBaseAdapter {
         String appsecret = bannerInfo.getAppsecret();
         String url = bannerInfo.getUrl();
         String userId = UserInfoManager.getSingleton().getUserId(mContext);
-
+        final String activityid = bannerInfo.getNumber();
         Request<String> huoDongInfoMap = ParameterUtils.getSingleton().getHuoDongInfoMap(appId, appsecret, url, userId);
 
         CallServer.getRequestInstance().add(mContext, 0, huoDongInfoMap, new HttpListener() {
@@ -235,10 +239,9 @@ public class MatchPageAdapter extends DanceBaseAdapter {
 
                 HuoDongInfo reponseResult = JsonMananger.getReponseResult(response, HuoDongInfo.class);
                 Log.e("sdfsdf", "请求了:" + reponseResult.getData());
-                if (MainActivity.myBinder!=null){
-                    MainActivity.myBinder.binderPause();
-                }
-                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, "", reponseResult.getData(), bannerInfo.getId());
+
+                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, "", reponseResult.getData()+activityid, bannerInfo.getId());
+                Log.e("sdfsdf", "请求了2:" + reponseResult.getData()+activityid);
             }
 
             @Override

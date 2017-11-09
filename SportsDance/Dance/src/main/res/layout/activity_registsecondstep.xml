@@ -66,7 +66,7 @@
                 android:layout_width="@dimen/spacing_88"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:src="@drawable/mine_icon_0012" />
+                android:src="@drawable/mine_icon_009" />
 
             <EditText
                 android:id="@+id/repeatpwd_tv"
