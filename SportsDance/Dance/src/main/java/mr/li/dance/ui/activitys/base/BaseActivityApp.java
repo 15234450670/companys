@@ -97,7 +97,7 @@ public abstract class BaseActivityApp extends AppCompatActivity implements HttpL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setScreen();
-
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.setContentView(R.layout.layout_base);
         // AndroidBug54971Workaround.assistActivity(findViewById(getContentViewId()));
         initTitleView();

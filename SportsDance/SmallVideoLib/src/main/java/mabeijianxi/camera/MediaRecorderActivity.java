@@ -166,7 +166,7 @@ public class MediaRecorderActivity extends Activity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-      //  setScreen();
+        //  setScreen();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); // 防止锁屏
         initData();
         loadViews();
@@ -334,10 +334,7 @@ public class MediaRecorderActivity extends Activity implements
                 mMediaRecorder.release();
         }
         mReleased = false;
-        if (isFlashlightOn(false)) {
-            Closeshoudian();
-            camera = null;
-        }
+       
     }
 
 
@@ -435,8 +432,7 @@ public class MediaRecorderActivity extends Activity implements
         if (id == R.id.title_back) {
             onBackPressed();
         } else if (id == R.id.reversal) {// 前后摄像头切换
-
-
+            
             if (mMediaRecorder != null) {
                 mMediaRecorder.switchCamera();
             }
@@ -448,6 +444,7 @@ public class MediaRecorderActivity extends Activity implements
             overridePendingTransition(R.anim.push_bottom_in,
 					R.anim.push_bottom_out);*/
         } else if (id == R.id.shan) {
+            Toast.makeText(this, "闪光灯", Toast.LENGTH_SHORT).show();
             /*if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
                 Toast.makeText(MediaRecorderActivity.this, "你的手机没有闪光灯!", Toast.LENGTH_LONG).show();
             } else {
@@ -468,77 +465,11 @@ public class MediaRecorderActivity extends Activity implements
                     Toast.makeText(MediaRecorderActivity.this, "关闭", Toast.LENGTH_LONG).show();
                 }
             }*/
-
-            flashlightUtils();
+           
         }
     }
 
-    /**
-     * 是否开启了闪光灯
-     */
-    public boolean isFlashlightOn(boolean flag) {
-        try {
-            Camera.Parameters parameters = camera.getParameters();
-            String flashMode = parameters.getFlashMode();
-            if (flashMode.equals(android.hardware.Camera.Parameters.FLASH_MODE_TORCH)) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    /**
-     * 闪光灯开关
-     */
-    public void flashlightUtils() {
-
-        if (isFlashlightOn(false)) {
-            Closeshoudian();
-            camera = null;
-        } else {
-            Openshoudian();
-        }
-    }
-
-    /**
-     * 开启方法
-     */
-    public void Openshoudian() {
-        //异常处理一定要加，否则Camera打开失败的话程序会崩溃
-        try {
-            camera = Camera.open();
-        } catch (Exception e) {
-            Toast.makeText(this, "Camera被占用，请先关闭", Toast.LENGTH_SHORT).show();
-        }
-
-        if (camera != null) {
-            shan.setImageResource(R.drawable.shan_on);
-            //打开闪光灯
-            camera.startPreview();
-            Camera.Parameters parameter = camera.getParameters();
-            parameter.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-
-        }
-    }
-
-    /**
-     * 关闭方法
-     */
-    public void Closeshoudian() {
-        if (camera != null) {
-            shan.setImageResource(R.drawable.shan_off);
-            camera.getParameters().setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-            camera.setParameters(camera.getParameters());
-            camera.stopPreview();
-            camera.release();
-            camera = null;
-
-
-        }
-    }
+    
 
     /**
      * 取消回删

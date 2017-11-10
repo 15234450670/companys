@@ -52,7 +52,7 @@
                 android:textSize="12sp"/>
         </mr.li.dance.ui.widget.BottomRelativeLayout>
 
-        <!--<mr.li.dance.ui.widget.BottomRelativeLayout
+         <mr.li.dance.ui.widget.BottomRelativeLayout
             android:id="@+id/shequ_layout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -69,7 +69,6 @@
                 android:layout_centerHorizontal="true"
                 android:focusable="false"
                 android:src="@drawable/shequ2"/>
-            &lt;!&ndash;android:src="@drawable/tab_contact_list"&ndash;&gt;
 
             <TextView
                 android:id="@+id/examination_tv"
@@ -83,7 +82,7 @@
                 android:textSize="12sp"/>
         </mr.li.dance.ui.widget.BottomRelativeLayout>
 
-        <mr.li.dance.ui.widget.BottomRelativeLayout
+       <mr.li.dance.ui.widget.BottomRelativeLayout
             android:id="@+id/fabu_layout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -100,7 +99,7 @@
                 android:layout_centerHorizontal="true"
                 android:focusable="false"
                 android:src="@drawable/fabu_icon"/>
-            &lt;!&ndash;android:src="@drawable/tab_contact_list"&ndash;&gt;
+            <!--android:src="@drawable/tab_contact_list"-->
 
             <TextView
                 android:id="@+id/examination_tv1"
@@ -112,7 +111,7 @@
                 android:text="@string/release"
                 android:textColor="@color/light_black"
                 android:textSize="12sp"/>
-        </mr.li.dance.ui.widget.BottomRelativeLayout>-->
+        </mr.li.dance.ui.widget.BottomRelativeLayout>
 
         <mr.li.dance.ui.widget.BottomRelativeLayout
             android:id="@+id/match_layout"

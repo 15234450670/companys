@@ -40,6 +40,8 @@ public class AccountActivity extends BaseListActivity {
     private TiXianStateInfo state;
     private int             start;
     private Mine_itemInfo   reponseResult;
+    private boolean isFlag = false;
+
     // private List<Mine_itemInfo.DataBean.DetailBean> detail;
     public void initViewss() {
         setTitle("我的账户");
@@ -54,7 +56,6 @@ public class AccountActivity extends BaseListActivity {
         MineInfo();
         Bound();
         TiXianState();
-
 
     }
 
@@ -90,23 +91,32 @@ public class AccountActivity extends BaseListActivity {
         super.onHeadRightButtonClick(v);
         Delivery();
     }
-    private void Delivery() {
-        if (state.getData().getStart() == 1) {
-            Intent intent = new Intent(this, TiXianZhongActivity.class);
-            intent.putExtra("money", state.getData().getMoney());
-            intent.putExtra("time", state.getData().getTime());
-            startActivity(intent);
 
+    private void Delivery() {
+        if (!isFlag) {
+            Toast.makeText(mContext, "数据错误", Toast.LENGTH_SHORT).show();
+            return;
         } else {
-            String remaining_sum = reponseResult.getData().getRemaining_sum();
-            if (!MyStrUtil.isEmpty(remaining_sum)) {
-                Intent intent = new Intent(this, WithdrawdepositActivity.class);
-                intent.putExtra("back_money", reponseResult.getData().getRemaining_sum());
-                intent.putExtra("start", start);
-                startActivity(intent);
+            if (!MyStrUtil.isEmpty(state.getData())) {
+                if (state.getData().getStart() == 1) {
+                    Intent intent = new Intent(this, TiXianZhongActivity.class);
+                    intent.putExtra("money", state.getData().getMoney());
+                    intent.putExtra("time", state.getData().getTime());
+                    startActivity(intent);
+                } else {
+                    String remaining_sum = reponseResult.getData().getRemaining_sum();
+                    if (!MyStrUtil.isEmpty(remaining_sum)) {
+                        Intent intent = new Intent(this, WithdrawdepositActivity.class);
+                        intent.putExtra("back_money", remaining_sum);
+                        intent.putExtra("start", start);
+                        startActivity(intent);
                         finish();
+                    }
+                }
             }
         }
+
+
     }
 
     public static void lunch(Context context) {
@@ -131,11 +141,10 @@ public class AccountActivity extends BaseListActivity {
         Log.e("明细+++++++:", response);
         switch (what) {
             case AppConfigs.item_tx:
+                isFlag = true;
                 reponseResult = JsonMananger.getReponseResult(response, Mine_itemInfo.class);
-                Log.e("ErrorCode", reponseResult.getErrorCode() + "");
                 mDanceViewHolder.setText(R.id.mines_money, reponseResult.getData().getRemaining_sum());
                 List<Mine_itemInfo.DataBean.DetailBean> detail = reponseResult.getData().getDetail();
-
                 if (!detail.isEmpty()) {
                     adapters.addList(isRefresh, detail);
                 } else {
@@ -144,7 +153,6 @@ public class AccountActivity extends BaseListActivity {
 
                 break;
             case AppConfigs.Bound_state:
-
                 Bound_ZFB_state reponseResults = JsonMananger.getReponseResult(response, Bound_ZFB_state.class);
                 start = reponseResults.getData().getStart();
                 break;
@@ -161,7 +169,6 @@ public class AccountActivity extends BaseListActivity {
         CallServer.getRequestInstance().add(this, 0, tiXian_state, new HttpListener() {
             @Override
             public void onSucceed(int what, String response) {
-
                 state = JsonMananger.getReponseResult(response, TiXianStateInfo.class);
             }
 

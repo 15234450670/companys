@@ -99,7 +99,6 @@ public class DetailsListAdapter extends BaseRecyclerAdapter<DetailsInfo> {
         } else {
             holder.setText(R.id.shequ_time, item.getComm().get(position - countAddress).getComment_time());
             holder.setText(R.id.shequ_name, item.getComm().get(position - countAddress).getUser().get(0).getUsername());
-
             ImageLoaderManager.getSingleton().LoadCircle(mContext, item.getComm().get(position - countAddress).getUser().get(0).getPicture_src(),
                     holder.getImageView(R.id.shequ_head), R.drawable.default_icon);
             holder.getView(R.id.content).setVisibility(View.GONE);
