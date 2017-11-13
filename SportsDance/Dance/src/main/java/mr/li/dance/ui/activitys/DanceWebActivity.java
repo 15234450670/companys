@@ -1,40 +1,22 @@
 package mr.li.dance.ui.activitys;
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.ShareAction;
-import com.umeng.socialize.UMShareListener;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
-import com.umeng.socialize.shareboard.ShareBoardConfig;
-import com.umeng.socialize.shareboard.SnsPlatform;
-import com.umeng.socialize.utils.ShareBoardlistener;
 import com.yolanda.nohttp.rest.Request;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 
 import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.WebResponse;
 import mr.li.dance.ui.activitys.base.BaseActivity;
-
 import mr.li.dance.ui.widget.DanceWebView;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
@@ -129,7 +111,6 @@ public class DanceWebActivity extends BaseActivity {
         detailId = mIntentExtras.getString("detailid");
         url = mIntentExtras.getString("url");
         wailianId = mIntentExtras.getInt("wailianid", -1);
-
         compete_id = mIntentExtras.getString("compete_id");
         w_page = mIntentExtras.getString("w_page");
 
@@ -253,6 +234,7 @@ public class DanceWebActivity extends BaseActivity {
         MobclickAgent.onEvent(this, AppConfigs.CLICK_EVENT_19);
         if (mShareUtils == null) {
             mShareUtils = new ShareUtils(this);
+
         }
     }
 

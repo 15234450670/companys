@@ -118,12 +118,7 @@ public class SheQuAdapter extends DanceBaseAdapter {
             OnePic(holder);
             ImageView imageView = holder.danceViewHolder.getImageView(R.id.sq_ship_iv);
             imageView.setVisibility(View.VISIBLE);
-            if (MyStrUtil.isEmpty(mDatas.get(position).getVideo().picture)) {
-                holder.danceViewHolder.setImageResDrawable(R.id.imageView, R.drawable.default_banner, R.drawable.default_video);
-            } else {
-                //Log.e("xxx",mDatas.get(position).getVideo().picture)  ;
-                holder.danceViewHolder.setImageByUrlOrFilePath(R.id.imageView, mDatas.get(position).getVideo().picture, R.drawable.default_banner);
-            }
+            holder.danceViewHolder.setImageByUrlOrFilePath(R.id.imageView, mDatas.get(position).getVideo().picture, R.drawable.default_banner);
         }
         ImageView imageView = holder.danceViewHolder.getImageView(R.id.shequ_dianz_iv);
         int is_upvote = mDatas.get(position).getIs_upvote();
@@ -221,7 +216,7 @@ public class SheQuAdapter extends DanceBaseAdapter {
                         ReportInfo like = JsonMananger.getReponseResult(response, ReportInfo.class);
                         String data = like.getData();
                         mDatas.get(position).setUpvote(data);
-                        // mDatas.get(position).setIs_upvote();
+                        mDatas.get(position).setIs_upvote();
                         notifyDataSetChanged();
                     }
 
@@ -231,11 +226,11 @@ public class SheQuAdapter extends DanceBaseAdapter {
                     }
                 }, false, false);
                 ImageView imageView = holder.danceViewHolder.getImageView(R.id.shequ_dianz_iv);
-               /* if (mDatas.get(position).isDianZan()) {
+                if (mDatas.get(position).isDianZan()) {
                     imageView.setImageResource(R.drawable.dianzan2);
                 } else {
                     imageView.setImageResource(R.drawable.dianzan1);
-                }*/
+                }
 
             }
         });

@@ -20,6 +20,10 @@
         "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable\\video_text.xml"
     },
     {
+        "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\check_off_on.xml",
+        "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable\\check_off_on.xml"
+    },
+    {
         "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\small_video_shoot.xml",
         "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\SmallVideoLib\\build\\intermediates\\bundles\\debug\\res\\drawable\\small_video_shoot.xml"
     }

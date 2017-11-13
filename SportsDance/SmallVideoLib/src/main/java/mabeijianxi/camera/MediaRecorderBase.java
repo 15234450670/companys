@@ -286,7 +286,6 @@ public abstract class MediaRecorderBase implements Callback, PreviewCallback, IM
             switchCamera(Camera.CameraInfo.CAMERA_FACING_BACK);
         }
     }
-
     /**
      * 自动对焦
      *

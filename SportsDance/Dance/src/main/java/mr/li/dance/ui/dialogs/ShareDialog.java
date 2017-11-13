@@ -3,13 +3,10 @@ package mr.li.dance.ui.dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.shareboard.SnsPlatform;
@@ -80,4 +77,5 @@ public class ShareDialog extends Dialog implements View.OnClickListener {
     public interface ShareClickListener {
         public void selectItem(SnsPlatform snsPlatform);
     }
+
 }

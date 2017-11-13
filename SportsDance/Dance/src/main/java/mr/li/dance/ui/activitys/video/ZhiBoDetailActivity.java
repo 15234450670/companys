@@ -50,6 +50,7 @@ import mr.li.dance.utils.ShareUtils;
  */
 
 public class ZhiBoDetailActivity extends BaseListActivity {
+    private String TAG = getClass().getSimpleName();
     private TextView timeText;
     private long     beginTime;
     DirectseedSpeedAdapter mAdapter;
@@ -132,7 +133,7 @@ public class ZhiBoDetailActivity extends BaseListActivity {
         if (!TextUtils.isEmpty(mShareContent)) {
             View view = mDanceViewHolder.getView(R.id.class_jieshao);
             view.setVisibility(View.VISIBLE);
-            mDanceViewHolder.setText(R.id.matchname_tv, zhiBoInfo.get(0).getName());
+            mDanceViewHolder.setText(R.id.matchname_tv, zhiBoInfo.get(0).getCompete_name());
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -308,7 +309,7 @@ public class ZhiBoDetailActivity extends BaseListActivity {
     @Override
     public void onSucceed(int what, String responseStr) {
         super.onSucceed(what, responseStr);
-
+        Log.e(TAG,responseStr);
         ZhiBo reponseResult = JsonMananger.getReponseResult(responseStr, ZhiBo.class);
         ArrayList<ZhiBo.DataBean.CompeteBean> compete = reponseResult.getData().getCompete();
         setZhiboDetail(compete);

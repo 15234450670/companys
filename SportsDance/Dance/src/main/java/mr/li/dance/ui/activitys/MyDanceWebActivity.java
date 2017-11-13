@@ -17,6 +17,7 @@ import com.yolanda.nohttp.rest.Request;
 import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.WebResponse;
+import mr.li.dance.ui.activitys.album.MyObject;
 import mr.li.dance.ui.activitys.base.BaseActivity;
 import mr.li.dance.ui.widget.DanceWebView;
 import mr.li.dance.utils.AppConfigs;
@@ -67,6 +68,7 @@ public class MyDanceWebActivity extends BaseActivity {
         webSettings.setJavaScriptEnabled(true);
         webSettings.setUseWideViewPort(true);
         webSettings.setBuiltInZoomControls(true);
+        mWebView.addJavascriptInterface(new MyObject(MyDanceWebActivity.this), "myObj");
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
@@ -259,6 +261,7 @@ public class MyDanceWebActivity extends BaseActivity {
             mShareUtils.showShareDilaog(mCountId,url, mShareContent);
         } else {
             mShareUtils.showShareDilaog(mCountId,shareUrl, mShareContent);
+
         }
 
     }

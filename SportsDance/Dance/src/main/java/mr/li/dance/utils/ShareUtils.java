@@ -2,8 +2,6 @@ package mr.li.dance.utils;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import com.umeng.analytics.MobclickAgent;
@@ -13,12 +11,9 @@ import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
-import com.umeng.socialize.shareboard.ShareBoardConfig;
 import com.umeng.socialize.shareboard.SnsPlatform;
-import com.umeng.socialize.utils.ShareBoardlistener;
 
 import mr.li.dance.R;
-import mr.li.dance.ui.activitys.album.AlbumActivity;
 import mr.li.dance.ui.dialogs.ShareDialog;
 
 /**
@@ -29,10 +24,11 @@ public class ShareUtils {
     //    ShareAction mShareAction;
     private Activity mActivity;
     UMShareListener umShareListener;
-    String shareUrl;
-    String mShareContent;
+    String          shareUrl;
+    String          mShareContent;
     String desc = "赛事直播，精彩瞬间，体舞资讯，官方查询尽在中国体育舞蹈";
     ShareDialog mShareDialog;
+    Context     context;
 
     public ShareUtils(Activity mActivity) {
         this.mActivity = mActivity;
@@ -40,8 +36,15 @@ public class ShareUtils {
         initShareDialog();
     }
 
+    public ShareUtils(Context context) {
+        this.context = context;
+        initShareListener();
+        initShareDialog();
+    }
+
     /**
-     * @param countId       统计id
+     * @param countId
+     *         统计id
      * @param shareUrl
      * @param mShareContent
      */
@@ -52,6 +55,20 @@ public class ShareUtils {
         this.shareUrl = shareUrl;
         this.mShareContent = mShareContent;
         mShareDialog.dispaly();
+    }
+
+    /**
+     *专门分享到微信朋友圈
+     */
+    public void wxFriendShare(String countId, String shareUrl, String mShareContent, UMShareListener umShareListener) {
+
+        if (!MyStrUtil.isEmpty(countId)) {
+            MobclickAgent.onEvent(mActivity, countId);
+        }
+        this.umShareListener = umShareListener;
+        this.shareUrl = shareUrl;
+        this.mShareContent = mShareContent;
+        toShares(SHARE_MEDIA.WEIXIN_CIRCLE.toSnsPlatform().mPlatform, umShareListener);
     }
 
 
@@ -74,6 +91,7 @@ public class ShareUtils {
 
             @Override
             public void onCancel(SHARE_MEDIA platform) {
+                Toast.makeText(mActivity, "分享取消啦", Toast.LENGTH_SHORT).show();
             }
         };
     }
@@ -87,6 +105,20 @@ public class ShareUtils {
         shareAction.setPlatform(share_media).withMedia(web);
         UMShareAPI.get(mActivity).doShare(mActivity, shareAction, umShareListener);
     }
+
+    /**
+     *针对微信朋友圈添加回调
+     */
+    private void toShares(SHARE_MEDIA share_media, UMShareListener umShareListener) {
+        UMWeb web = new UMWeb(shareUrl);
+        web.setTitle(mShareContent);
+        web.setThumb(new UMImage(mActivity, R.mipmap.dancelogo_icon));
+        web.setDescription(desc);
+        ShareAction shareAction = new ShareAction(mActivity);
+        shareAction.setPlatform(share_media).withMedia(web);
+        UMShareAPI.get(mActivity).doShare(mActivity, shareAction, umShareListener);
+    }
+
 
     private void initShareDialog() {
         mShareDialog = new ShareDialog(mActivity, new ShareDialog.ShareClickListener() {

@@ -29,6 +29,8 @@ public class AppConfigs {
     public final static String tach_detial    = SHAREURL + "/share.spjx?id=";
     //社区分享
     public final static String shequ_detial    = SHAREURL + "/share.shequ?id=";
+    //红包抽奖
+    public final static String money_chou    = SHAREURL + "/share.choujiang";
     //赛事规则，赛事设项 赛程表 分享
     public final static String SAISHIShareUrl = SHAREURL + "/share.gcfx?id=%s&page=%s";
     //相册分享

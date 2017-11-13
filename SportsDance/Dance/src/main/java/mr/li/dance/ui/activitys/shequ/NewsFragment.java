@@ -76,7 +76,7 @@ public class NewsFragment extends BaseListFragment {
                 adapter.refresh(reponseResult);
             }
         } else {
-            adapter.loadMore(reponseResult);
+           adapter.loadMore(reponseResult);
         }
 
     }

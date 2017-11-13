@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +16,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -130,18 +130,16 @@ public class MediaRecorderActivity extends Activity implements
     /**
      * 闪光灯
      */
-    private ImageView shan;
+    private CheckBox shan;
     private boolean status = false;
-    private Camera            camera;
-    private Camera.Parameters parameters;
     /**
      * 前后摄像头切换
      */
-    private ImageView         reversal;
+    private ImageView reversal;
     /**
      * 完成或者下一步
      */
-    private TextView          successful;
+    private TextView  successful;
 
     /**
      * @param context
@@ -203,7 +201,7 @@ public class MediaRecorderActivity extends Activity implements
         mProgressView = (ProgressView) findViewById(R.id.record_progress);
         mRecordController = (Button) findViewById(R.id.record_controller);
         mBottomLayout = (RelativeLayout) findViewById(R.id.bottom_layout);
-        shan = (ImageView) findViewById(R.id.shan);
+        shan = (CheckBox) findViewById(R.id.shan);
         reversal = (ImageView) findViewById(R.id.reversal);
         successful = (TextView) findViewById(R.id.successful);
         //  mCameraSwitch = (TextView) findViewById(R.id.record_camera_switcher);
@@ -212,7 +210,6 @@ public class MediaRecorderActivity extends Activity implements
         /*if (DeviceUtils.hasICS())
             mSurfaceView.setOnTouchListener(mOnSurfaveViewTouchListener);*/
         successful.setOnClickListener(this);
-        shan.setOnClickListener(this);
         findViewById(R.id.title_back).setOnClickListener(this);
         mRecordController.setOnTouchListener(mOnVideoControllerTouchListener);
 
@@ -224,6 +221,13 @@ public class MediaRecorderActivity extends Activity implements
         } else {
             reversal.setVisibility(View.GONE);
         }
+
+        if (DeviceUtils.isSupportCameraLedFlash(getPackageManager())) {
+            shan.setOnClickListener(this);
+        } else {
+            shan.setVisibility(View.GONE);
+        }
+
         mProgressView.setMaxDuration(RECORD_TIME_MAX);
         mProgressView.setMinTime(RECORD_TIME_MIN);
     }
@@ -319,6 +323,7 @@ public class MediaRecorderActivity extends Activity implements
         if (mMediaRecorder == null) {
             initMediaRecorder();
         } else {
+            shan.setChecked(false);
             mMediaRecorder.prepare();
             mProgressView.setData(mMediaObject);
         }
@@ -334,7 +339,7 @@ public class MediaRecorderActivity extends Activity implements
                 mMediaRecorder.release();
         }
         mReleased = false;
-       
+
     }
 
 
@@ -372,6 +377,7 @@ public class MediaRecorderActivity extends Activity implements
         }
 
         reversal.setEnabled(false);
+        shan.setEnabled(false);
     }
 
     @Override
@@ -418,6 +424,7 @@ public class MediaRecorderActivity extends Activity implements
         }
 
         reversal.setEnabled(true);
+        shan.setEnabled(true);
 
         mHandler.removeMessages(HANDLE_STOP_RECORD);
         checkStatus();
@@ -432,9 +439,22 @@ public class MediaRecorderActivity extends Activity implements
         if (id == R.id.title_back) {
             onBackPressed();
         } else if (id == R.id.reversal) {// 前后摄像头切换
-            
+
+            if (shan.isChecked()) {
+                if (mMediaRecorder != null) {
+                    mMediaRecorder.toggleFlashMode();
+                }
+                shan.setChecked(false);
+            }
+
             if (mMediaRecorder != null) {
                 mMediaRecorder.switchCamera();
+            }
+
+            if (mMediaRecorder.isFrontCamera()) {
+                shan.setEnabled(false);
+            } else {
+                shan.setEnabled(true);
             }
 
         } else if (id == R.id.successful) {// 停止录制
@@ -444,32 +464,22 @@ public class MediaRecorderActivity extends Activity implements
             overridePendingTransition(R.anim.push_bottom_in,
 					R.anim.push_bottom_out);*/
         } else if (id == R.id.shan) {
-            Toast.makeText(this, "闪光灯", Toast.LENGTH_SHORT).show();
-            /*if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
-                Toast.makeText(MediaRecorderActivity.this, "你的手机没有闪光灯!", Toast.LENGTH_LONG).show();
-            } else {
-                if (!status) {
-                    shan.setImageResource(R.drawable.shan_on);
-                    camera = Camera.open();
-                    parameters = camera.getParameters();
-                    parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);//开启
-                    camera.setParameters(parameters);
-                    Toast.makeText(MediaRecorderActivity.this, "开启", Toast.LENGTH_LONG).show();
-                    status = true;
-                }else {
-                    status = false;
-                    shan.setImageResource(R.drawable.shan_off);
-                    parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);//关闭
-                    camera.setParameters(parameters);
-                    camera.release();
-                    Toast.makeText(MediaRecorderActivity.this, "关闭", Toast.LENGTH_LONG).show();
+
+            // 开启前置摄像头以后不支持开启闪光灯
+            if (mMediaRecorder != null) {
+                if (mMediaRecorder.isFrontCamera()) {
+                    return;
                 }
-            }*/
-           
+            }
+
+            if (mMediaRecorder != null) {
+                mMediaRecorder.toggleFlashMode();
+
+            }
+
         }
     }
 
-    
 
     /**
      * 取消回删
