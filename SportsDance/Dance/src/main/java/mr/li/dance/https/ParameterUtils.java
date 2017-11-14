@@ -1268,5 +1268,13 @@ public class ParameterUtils {
         return request;
     }
 
+    //红包活动
+    public Request<String> getMoneyEvent(String userid, String sign) {
+        Request<String> request = getBaseRequestForPost("/activity.addNum");
+        request.add("userid", userid);
+        request.add("sign", sign);
+        return request;
+    }
+
 
 }

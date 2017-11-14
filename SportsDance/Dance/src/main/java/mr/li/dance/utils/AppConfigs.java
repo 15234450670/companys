@@ -30,7 +30,7 @@ public class AppConfigs {
     //社区分享
     public final static String shequ_detial    = SHAREURL + "/share.shequ?id=";
     //红包抽奖
-    public final static String money_chou    = SHAREURL + "/share.choujiang";
+    public final static String money_chou    = SHAREURL ;
     //赛事规则，赛事设项 赛程表 分享
     public final static String SAISHIShareUrl = SHAREURL + "/share.gcfx?id=%s&page=%s";
     //相册分享

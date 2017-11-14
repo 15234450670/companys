@@ -67,13 +67,14 @@ public class PersonItemAdapter extends DanceBaseAdapter {
 
     private void bindType(MyViewHolder holder, final int position) {
         holder.danceViewHolder.setViewVisibility(R.id.shequ_ll_min, View.GONE);
-        holder.danceViewHolder.setText(R.id.title, mDatas.get(position).getTitle());
-        if (MyStrUtil.isEmpty(mDatas.get(position).getContent())) {
+        holder.danceViewHolder.setText(R.id.title, mDatas.get(position).getDynamic_time());
+        holder.danceViewHolder.setViewVisibility(R.id.content, View.GONE);
+       /* if (MyStrUtil.isEmpty(mDatas.get(position).getContent())) {
             holder.danceViewHolder.setViewVisibility(R.id.content, View.GONE);
         } else {
             holder.danceViewHolder.setViewVisibility(R.id.content, View.VISIBLE);
             holder.danceViewHolder.setText(R.id.content, mDatas.get(position).getContent());
-        }
+        }*/
         if (MyStrUtil.isEmpty(mDatas.get(position).getUpvote())) {
             holder.danceViewHolder.setText(R.id.shequ_dianz_tv, "0");
         } else {

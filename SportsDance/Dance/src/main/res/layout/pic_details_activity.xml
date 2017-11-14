@@ -74,6 +74,12 @@
                 android:text=""
                 android:textColor="#333333"
                 android:visibility="gone"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_20"
+                android:layout_marginTop="@dimen/spacing_10"
+                android:background="#e1e1e1"/>
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/list_view"
                 android:layout_width="match_parent"
@@ -81,12 +87,6 @@
                 android:visibility="gone">
 
             </android.support.v7.widget.RecyclerView>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/spacing_20"
-                android:layout_marginTop="@dimen/spacing_10"
-                android:background="#e1e1e1"/>
-
 
         </LinearLayout>
 
@@ -106,7 +106,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:visibility="gone">
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -29,6 +29,7 @@
             <TextView
                 android:id="@+id/shequ_name"
                 style="@style/text_white_style_30"
+                android:textSize="@dimen/spacing_26"
                 android:layout_marginBottom="@dimen/spacing_20"
                 android:maxLines="1"
                 android:text=""
@@ -62,6 +63,7 @@
                 style="@style/text_white_style_30"
                 android:layout_below="@+id/shequ_name"
                 android:text=""
+                android:textSize="@dimen/spacing_20"
                 android:textColor="@color/black"/>
         </RelativeLayout>
     </LinearLayout>
@@ -71,6 +73,7 @@
         style="@style/text_white_style_30"
         android:layout_marginLeft="@dimen/spacing_20"
         android:layout_marginRight="@dimen/spacing_20"
+        android:textSize="@dimen/spacing_32"
         android:maxLines="2"
         android:text=""
         android:textColor="#333333"/>

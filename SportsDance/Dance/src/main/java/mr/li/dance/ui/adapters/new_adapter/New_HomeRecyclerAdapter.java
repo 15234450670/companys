@@ -325,9 +325,7 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
      */
     public void huodong_listView(final BaseHomeItem base) {
         String appId = base.getAppid();
-        // String appId = "JK48ada5a480e37d411";
         Log.e("appId:::", appId);
-        //String appsecret = "32dae2ac34079322325d28cfa0825w3aa1";
         String appsecret = base.getAppsecret();
         Log.e("appsecret::::", appsecret);
         final String url = base.getUrl();

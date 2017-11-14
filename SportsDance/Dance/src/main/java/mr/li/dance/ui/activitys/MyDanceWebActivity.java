@@ -15,9 +15,9 @@ import android.widget.ProgressBar;
 import com.yolanda.nohttp.rest.Request;
 
 import mr.li.dance.R;
+import mr.li.dance.h5.MyObject;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.WebResponse;
-import mr.li.dance.ui.activitys.album.MyObject;
 import mr.li.dance.ui.activitys.base.BaseActivity;
 import mr.li.dance.ui.widget.DanceWebView;
 import mr.li.dance.utils.AppConfigs;
@@ -34,24 +34,26 @@ import mr.li.dance.utils.ShareUtils;
  */
 
 public class MyDanceWebActivity extends BaseActivity {
-    public static final int ZIXUNTYPE = 0;//0 资讯
-    public static final int ABOUTTYPE = 1;//1关于我们
-    public static final int UPLOADPIC = 2;//我也想出现这里
-    public static final int MATCHOTHER1 = 31;//赛事的 赛事章程
-    public static final int MATCHOTHER2 = 32;//赛事的 赛事设项目
-    public static final int MATCHOTHER3 = 33;//赛事的 赛程表
-    public static final int KAOJI = 4;//考级
-    public static final int OTHERTYPE = 5;//外联
+    public static final int ZIXUNTYPE    = 0;//0 资讯
+    public static final int ABOUTTYPE    = 1;//1关于我们
+    public static final int UPLOADPIC    = 2;//我也想出现这里
+    public static final int MATCHOTHER1  = 31;//赛事的 赛事章程
+    public static final int MATCHOTHER2  = 32;//赛事的 赛事设项目
+    public static final int MATCHOTHER3  = 33;//赛事的 赛程表
+    public static final int KAOJI        = 4;//考级
+    public static final int OTHERTYPE    = 5;//外联
     public static final int TEACHERCLASS = 6;//课程介绍
-    public static final int USER = 7;//课程介绍
+    public static final int USER         = 7;//课程介绍
 
-    private String titleName;
-    private int mWebType;
-    private int wailianId;
+    private String  titleName;
+    private int     mWebType;
+    private int     wailianId;
     private boolean showShare;
-    private String mCountId;//分享统计Id
-    private String url;
-    private String shareUrl;
+    private String  mCountId;//分享统计Id
+    private String  url;
+    private String  shareUrl;
+    private int     biaozhi;
+
     @Override
     public int getContentViewId() {
         return R.layout.activity_webview;
@@ -68,16 +70,19 @@ public class MyDanceWebActivity extends BaseActivity {
         webSettings.setJavaScriptEnabled(true);
         webSettings.setUseWideViewPort(true);
         webSettings.setBuiltInZoomControls(true);
+        //关闭缓存
+        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
         mWebView.addJavascriptInterface(new MyObject(MyDanceWebActivity.this), "myObj");
+
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
 
 
         //        if (dm.densityDpi > 240 ) {
-//            webSettings.setDefaultFontSize(20); //可以取1-72之间的任意值，默认16
-//        }
-       // webSettings.setTextSize(WebSettings.TextSize.LARGEST); //可
+        //            webSettings.setDefaultFontSize(20); //可以取1-72之间的任意值，默认16
+        //        }
+        // webSettings.setTextSize(WebSettings.TextSize.LARGEST); //可
 
 
         if (Build.VERSION.SDK_INT > 11) {
@@ -85,7 +90,6 @@ public class MyDanceWebActivity extends BaseActivity {
         }
         webSettings.setDefaultTextEncodingName("UTF -8");//设置默认为utf-8
         webSettings.setSupportZoom(true);
-        webSettings.setUseWideViewPort(true);
         mWebView.setWebViewClient(new WebViewClient());
         mWebView.setWebChromeClient(new RongWebChromeClient());
 
@@ -107,12 +111,14 @@ public class MyDanceWebActivity extends BaseActivity {
                 request(AppConfigs.webcode, stringRequest);
                 break;
             case OTHERTYPE:
+
                 if (wailianId != -1) {
                     updateWaiLian();
                 }
                 mCountId = AppConfigs.CLICK_EVENT_23;
                 mWebView.loadUrl(url);
-                Log.e("xx>>>>",url);
+                Log.e("xx>>>>", url);
+
                 break;
             case ZIXUNTYPE:
                 mCountId = AppConfigs.CLICK_EVENT_21;
@@ -150,7 +156,6 @@ public class MyDanceWebActivity extends BaseActivity {
     }
 
 
-
     @Override
     public void getIntentData() {
         super.getIntentData();
@@ -160,10 +165,11 @@ public class MyDanceWebActivity extends BaseActivity {
         url = mIntentExtras.getString("url");
         wailianId = mIntentExtras.getInt("wailianid", -1);
         showShare = mIntentExtras.getBoolean("showshare", false);
+        biaozhi = mIntentExtras.getInt("biaozhi", 0);
     }
 
     private DanceWebView mWebView;
-    private ProgressBar mProgressBar;
+    private ProgressBar  mProgressBar;
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == 4 && mWebView.canGoBack()) {
@@ -237,6 +243,7 @@ public class MyDanceWebActivity extends BaseActivity {
         lunch(context, type, title, "", false);
     }
 
+
     @Override
     public void initDatas() {
         super.initDatas();
@@ -258,16 +265,16 @@ public class MyDanceWebActivity extends BaseActivity {
             mShareUtils = new ShareUtils(this);
         }
         if (MyStrUtil.isEmpty(shareUrl)) {
-            mShareUtils.showShareDilaog(mCountId,url, mShareContent);
+            mShareUtils.showShareDilaog(mCountId, url, mShareContent);
         } else {
-            mShareUtils.showShareDilaog(mCountId,shareUrl, mShareContent);
+            mShareUtils.showShareDilaog(mCountId, shareUrl, mShareContent);
 
         }
 
     }
 
     ShareUtils mShareUtils;
-    String mShareContent;
+    String     mShareContent;
 
     private void updateWaiLian() {
         Request<String> stringRequest = ParameterUtils.getSingleton().getHomeWlinkClickMap(wailianId);

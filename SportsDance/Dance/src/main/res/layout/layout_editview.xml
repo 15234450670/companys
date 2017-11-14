@@ -1,34 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/editTextBodyLl"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+                android:id="@+id/editTextBodyLl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
 
     <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="8dp"
-    android:gravity="center_vertical"
-    android:background="#f6f6f6"
-    android:orientation="horizontal"
-    android:visibility="visible"
-    android:layout_alignParentBottom="true"
-    >
-    <EditText
-        android:id="@+id/circleEt"
-        android:layout_width="wrap_content"
+        android:id="@+id/lin"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@null"
-        android:layout_weight="1"
-        android:hint="说点什么..."
-        />
-    <ImageView
-        android:id="@+id/sendIv"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="4dp"
-        android:contentDescription="@null"
-        android:src="@drawable/selector_send" />
-</LinearLayout>
+        android:layout_alignParentBottom="true"
+        android:background="#f6f6f6"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:visibility="visible"
+        >
 
+        <EditText
+            android:id="@+id/circleEt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="说点什么..."
+            />
+
+        <ImageView
+            android:id="@+id/sendIv"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="4dp"
+            android:contentDescription="@null"
+            android:src="@drawable/selector_send"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="@dimen/spacing_6"
+        android:layout_alignTop="@+id/lin"
+        android:background="#e1e1e1"
+        />
 </RelativeLayout>
