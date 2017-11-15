@@ -1269,10 +1269,12 @@ public class ParameterUtils {
     }
 
     //红包活动
-    public Request<String> getMoneyEvent(String userid, String sign) {
+    public Request<String> getMoneyEvent(String userid, String sign,String activityid,String ymd) {
         Request<String> request = getBaseRequestForPost("/activity.addNum");
         request.add("userid", userid);
         request.add("sign", sign);
+        request.add("activityid", activityid);
+        request.add("ymd", ymd);
         return request;
     }
 

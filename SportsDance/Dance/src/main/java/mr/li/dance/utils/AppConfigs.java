@@ -8,8 +8,8 @@ package mr.li.dance.utils;
 
 public class AppConfigs {
     //  private final static String MAINurl = "http://work.cdsf.org.cn";//测试环境
-     private final static String MAINurl = "http://kf.cdsf.org.cn";//测试环境
- //  private final static String MAINurl = "http://cdsf.org.cn";//正式环境
+    // private final static String MAINurl = "http://kf.cdsf.org.cn";//测试环境
+    private final static String MAINurl = "http://cdsf.org.cn";//正式环境
 
     private final static String DomainUrl = MAINurl + "/mobileClient";
     private final static String SHAREURL  = MAINurl + "/h5";
@@ -28,9 +28,9 @@ public class AppConfigs {
     public final static String USER           = SHAREURL + "/share.Ament";
     public final static String tach_detial    = SHAREURL + "/share.spjx?id=";
     //社区分享
-    public final static String shequ_detial    = SHAREURL + "/share.shequ?id=";
-    //红包抽奖
-    public final static String money_chou    = SHAREURL ;
+    public final static String shequ_detial   = SHAREURL + "/share.shequ?id=";
+    //红包活动
+    public final static String money_chou     = SHAREURL;
     //赛事规则，赛事设项 赛程表 分享
     public final static String SAISHIShareUrl = SHAREURL + "/share.gcfx?id=%s&page=%s";
     //相册分享
@@ -127,17 +127,18 @@ public class AppConfigs {
     public final static int home_tab_teachs         = 0x0066;
     public final static int home_tab_teach_details  = 0x0067;
     public final static int video_special           = 0x0068;
-    public final static int shequ_news_fragment           = 0x0069;
-    public final static int shequ_news_fragments           = 0x0070;
-    public final static int person = 0x0071;//个人主页
-    public final static int person_item = 0x0071;//个人列表
-    public final static int person_items = 0x0072;//个人列表
-    public final static int person_look = 0x0073;//关注
-    public final static int person_details = 0x0074;//社区详情
-    public final static int FA_DONGTAI = 0x0075;//发布动态
-    public final static int GET_TAKEVIDEO= 0X0076; //视频上传
-    public final static int GET_PUBLISH= 0X0079; //发布评论
-    public final static int GET_DYNSMICDEL= 0X0080; //删除评论
+    public final static int shequ_news_fragment     = 0x0069;
+    public final static int shequ_news_fragments    = 0x0070;
+    public final static int person                  = 0x0071;//个人主页
+    public final static int person_item             = 0x0071;//个人列表
+    public final static int person_items            = 0x0072;//个人列表
+    public final static int person_look             = 0x0073;//关注
+    public final static int person_details          = 0x0074;//社区详情
+    public final static int FA_DONGTAI              = 0x0075;//发布动态
+    public final static int GET_TAKEVIDEO           = 0X0076; //视频上传
+    public final static int GET_PUBLISH             = 0X0079; //发布评论
+    public final static int GET_DYNSMICDEL          = 0X0080; //删除评论
+
     public static String getDomainUrl() {
         return DomainUrl;
     }
@@ -150,7 +151,7 @@ public class AppConfigs {
     public final static String CLICK_EVENT_6  = "6";//首页搜索
     public final static String CLICK_EVENT_7  = "7";//赛事首页
     public final static String CLICK_EVENT_8  = "8";//考级模块
-    public final static String CLICK_EVENT_33  = "33";//社区
+    public final static String CLICK_EVENT_33 = "33";//社区
     public final static String CLICK_EVENT_9  = "9";//我的
     public final static String CLICK_EVENT_10 = "10";//我的消息
     public final static String CLICK_EVENT_11 = "11";//我的关注

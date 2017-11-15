@@ -36,11 +36,9 @@ import mr.li.dance.https.HttpListener;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.StringResponse;
 import mr.li.dance.models.UpdateVersion;
-import mr.li.dance.ui.TXT.FabuDialog;
 import mr.li.dance.ui.activitys.music.MusicService;
 import mr.li.dance.ui.activitys.music.PlayMusicActivity;
 import mr.li.dance.ui.activitys.music.ServiceConn;
-import mr.li.dance.ui.activitys.shequ.SheQuFragment;
 import mr.li.dance.ui.dialogs.UpdateApkDialog;
 import mr.li.dance.ui.fragments.BaseFragment;
 import mr.li.dance.ui.fragments.main.ExaminationFragment;
@@ -53,7 +51,6 @@ import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.MyStrUtil;
 import mr.li.dance.utils.NToast;
 import mr.li.dance.utils.StatusBarUtil;
-import mr.li.dance.utils.UserInfoManager;
 import mr.li.dance.utils.Utils;
 import mr.li.dance.utils.updater.Updater;
 import mr.li.dance.utils.updater.UpdaterConfig;
@@ -70,7 +67,7 @@ import mr.li.dance.utils.updater.UpdaterUtils;
 
 public class MainActivity extends FragmentActivity implements View.OnClickListener, HttpListener {
     FragmentManager mFragmentManager;
-    BaseFragment    mCurrentFragment, mHomePageFragment, mMathcFragment, mMineFragment, mShequFragment;
+    BaseFragment    mCurrentFragment, mHomePageFragment, mMathcFragment, mMineFragment/*, mShequFragment*/;
     ExaminationFragment mExaminationFragment;
     private static boolean isExit = false;
     public static MusicService.MyBinder myBinder;
@@ -124,7 +121,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         mExaminationFragment = new ExaminationFragment();
         // mMineFragment = new MineFragment();
         mMineFragment = new NewMineFragment();
-        mShequFragment = new SheQuFragment();
+      //  mShequFragment = new SheQuFragment();
         conn = new ServiceConn();
         conn.getMyBinder(new ServiceConn.binderCreateFinish() {
             @Override
@@ -153,7 +150,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
 
     private BottomRelativeLayout home_layout, match_layout, /*examination_layout,*/
-            mine_layout, fabu_layout, shequ_layout;
+            mine_layout/*, fabu_layout, shequ_layout*/;
 
 
     public void initViews() {
@@ -161,16 +158,16 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         match_layout = (BottomRelativeLayout) findViewById(R.id.match_layout);
         //  examination_layout = (BottomRelativeLayout) findViewById(examination_layout);
         mine_layout = (BottomRelativeLayout) findViewById(R.id.mine_layout);
-        fabu_layout = (BottomRelativeLayout) findViewById(R.id.fabu_layout);
-        shequ_layout = (BottomRelativeLayout) findViewById(R.id.shequ_layout);
+       // fabu_layout = (BottomRelativeLayout) findViewById(fabu_layout);
+      //  shequ_layout = (BottomRelativeLayout) findViewById(shequ_layout);
         floatImage = (ImageView) findViewById(R.id.floatImage);
 
         home_layout.setOnClickListener(this);
         match_layout.setOnClickListener(this);
         //examination_layout.setOnClickListener(this);
         mine_layout.setOnClickListener(this);
-        fabu_layout.setOnClickListener(this);
-        shequ_layout.setOnClickListener(this);
+       // fabu_layout.setOnClickListener(this);
+      //  shequ_layout.setOnClickListener(this);
 
         home_layout.setClicked(true);
         floatImage.setOnClickListener(this);
@@ -206,7 +203,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 match_layout.setClicked(true);
                 break;
             //社区
-            case R.id.shequ_layout:
+           /* case shequ_layout:
                 if (!UserInfoManager.getSingleton().isLoading(this)) {
                     LoginActivity.lunch(this, 0x001);
                     return;
@@ -220,7 +217,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 break;
             // 发布
 
-            case R.id.fabu_layout:
+            case fabu_layout:
                 if (!UserInfoManager.getSingleton().isLoading(this)) {
                     LoginActivity.lunch(this, 0x001);
                     return;
@@ -228,7 +225,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 FabuDialog fabuDialog;
                 fabuDialog = new FabuDialog(this);
                 fabuDialog.dispaly();
-                break;
+                break;*/
             /*case R.id.examination_layout:
 
                 if (!UserInfoManager.getSingleton().isLoading(this)) {
@@ -264,7 +261,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     private void changeTextViewColor() {
         home_layout.setClicked(false);
-         shequ_layout.setClicked(false);
+       //  shequ_layout.setClicked(false);
         match_layout.setClicked(false);
         //examination_layout.setClicked(false);
         mine_layout.setClicked(false);

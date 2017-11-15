@@ -231,6 +231,7 @@ public class MatchPageAdapter extends DanceBaseAdapter {
         String url = bannerInfo.getUrl();
         String userId = UserInfoManager.getSingleton().getUserId(mContext);
         final String activityid = bannerInfo.getNumber();
+        final String title = bannerInfo.getTitle();
         Request<String> huoDongInfoMap = ParameterUtils.getSingleton().getHuoDongInfoMap(appId, appsecret, url, userId);
 
         CallServer.getRequestInstance().add(mContext, 0, huoDongInfoMap, new HttpListener() {
@@ -240,7 +241,7 @@ public class MatchPageAdapter extends DanceBaseAdapter {
                 HuoDongInfo reponseResult = JsonMananger.getReponseResult(response, HuoDongInfo.class);
                 Log.e("sdfsdf", "请求了:" + reponseResult.getData());
 
-                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, "", reponseResult.getData()+activityid, bannerInfo.getId());
+                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, title, reponseResult.getData()+activityid, bannerInfo.getId());
                 Log.e("sdfsdf", "请求了2:" + reponseResult.getData()+activityid);
             }
 

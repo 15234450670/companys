@@ -24,6 +24,7 @@ import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.MyStrUtil;
 import mr.li.dance.utils.ShareUtils;
+import mr.li.dance.utils.updater.SpUtils;
 
 /**
  * 作者: Lixuewei
@@ -52,7 +53,6 @@ public class MyDanceWebActivity extends BaseActivity {
     private String  mCountId;//分享统计Id
     private String  url;
     private String  shareUrl;
-    private int     biaozhi;
 
     @Override
     public int getContentViewId() {
@@ -117,6 +117,8 @@ public class MyDanceWebActivity extends BaseActivity {
                 }
                 mCountId = AppConfigs.CLICK_EVENT_23;
                 mWebView.loadUrl(url);
+                SpUtils sp = SpUtils.getInstance(this);
+                sp.putString("huodong_url", url);
                 Log.e("xx>>>>", url);
 
                 break;
@@ -165,7 +167,6 @@ public class MyDanceWebActivity extends BaseActivity {
         url = mIntentExtras.getString("url");
         wailianId = mIntentExtras.getInt("wailianid", -1);
         showShare = mIntentExtras.getBoolean("showshare", false);
-        biaozhi = mIntentExtras.getInt("biaozhi", 0);
     }
 
     private DanceWebView mWebView;
@@ -200,6 +201,7 @@ public class MyDanceWebActivity extends BaseActivity {
 
         public void onReceivedTitle(WebView view, String title) {
             if (MyStrUtil.isEmpty(titleName)) {
+                //如果没有标题则采取H5默认名字
                 setTitle(title);
             }
         }
@@ -268,9 +270,7 @@ public class MyDanceWebActivity extends BaseActivity {
             mShareUtils.showShareDilaog(mCountId, url, mShareContent);
         } else {
             mShareUtils.showShareDilaog(mCountId, shareUrl, mShareContent);
-
         }
-
     }
 
     ShareUtils mShareUtils;

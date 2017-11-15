@@ -298,7 +298,7 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
         String appId = bannerInfo.getAppid();
         String appsecret = bannerInfo.getAppsecret();
         final String url = bannerInfo.getUrl();
-        String title = bannerInfo.getTitle();
+        final String title = bannerInfo.getTitle();
         String userId = UserInfoManager.getSingleton().getUserId(mContext);
         Request<String> huoDongInfoMap = ParameterUtils.getSingleton().getHuoDongInfoMap(appId, appsecret, url, userId);
         CallServer.getRequestInstance().add(mContext, 0, huoDongInfoMap, new HttpListener() {
@@ -307,8 +307,7 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
 
                 HuoDongInfo reponseResult = JsonMananger.getReponseResult(response, HuoDongInfo.class);
                 Log.e("sdfsdf", "请求了:" + reponseResult.getData());
-                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, "", reponseResult.getData() + bannerInfo.getNumber(), url, bannerInfo.getId());
-                Log.e("sdfsdf2222", "请求了:" + reponseResult.getData()+ bannerInfo.getNumber());
+                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, title, reponseResult.getData() + bannerInfo.getNumber(), url, bannerInfo.getId());
             }
 
             @Override
