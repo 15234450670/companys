@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -455,6 +456,17 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
             }
         }, 100);
 
+    }
+
+    @Override
+    public void onHeadLeftButtonClick(View v) {
+        super.onHeadLeftButtonClick(v);
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm.isActive() && getCurrentFocus() != null) {
+                if (getCurrentFocus().getWindowToken() != null) {
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                }
+            }
     }
 
     @Override

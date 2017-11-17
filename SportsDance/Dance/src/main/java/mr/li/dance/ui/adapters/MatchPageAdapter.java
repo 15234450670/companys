@@ -254,6 +254,7 @@ public class MatchPageAdapter extends DanceBaseAdapter {
     }
 
     private void bindType2(VideoViewholder2 holder, int position) {
+
         View.OnClickListener onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {

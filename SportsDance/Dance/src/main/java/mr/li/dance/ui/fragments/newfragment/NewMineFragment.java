@@ -23,6 +23,7 @@ import mr.li.dance.ui.activitys.mine.MyMessageActivity;
 import mr.li.dance.ui.activitys.mine.SettingActivity;
 import mr.li.dance.ui.activitys.mine.SuggestActivity;
 import mr.li.dance.ui.activitys.mine.UserInfoActivity;
+import mr.li.dance.ui.activitys.newActivitys.PersonageActivity;
 import mr.li.dance.ui.activitys.newTab.TabCollect;
 import mr.li.dance.ui.adapters.MineAdapter;
 import mr.li.dance.ui.fragments.BaseListFragment;
@@ -123,7 +124,7 @@ public class NewMineFragment extends BaseListFragment {
                 }
             }
         });
-       /* danceViewHolder.setClickListener(R.id.enter, new View.OnClickListener() {
+        danceViewHolder.setClickListener(R.id.enter, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (UserInfoManager.getSingleton().isLoading(getActivity())) {
@@ -137,7 +138,7 @@ public class NewMineFragment extends BaseListFragment {
                     LoginActivity.lunch(NewMineFragment.this, 0x005);
                 }
             }
-        });*/
+        });
         refreshInfo();
     }
 

@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -449,6 +450,16 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
             mShareUtils = new ShareUtils(this);
         }
         mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, AppConfigs.shequ_detial + id, title);
+    }
+    @Override
+    public void onHeadLeftButtonClick(View v) {
+        super.onHeadLeftButtonClick(v);
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm.isActive() && getCurrentFocus() != null) {
+            if (getCurrentFocus().getWindowToken() != null) {
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        }
     }
 
 }
