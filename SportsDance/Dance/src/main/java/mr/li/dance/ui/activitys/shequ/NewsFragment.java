@@ -38,7 +38,7 @@ public class NewsFragment extends BaseListFragment {
             SheQuPicDetails.lunch(getActivity(), shequInfo.getId(), shequInfo.getUid());
         } else {
             //视频
-            SheQuVideoDetails.lunch(getActivity(), shequInfo.getId(), shequInfo.getUid());
+            SheQuVideoDetails.lunch(getActivity(), shequInfo.getId(), shequInfo.getUid(),shequInfo.getVideo().picture);
         }
     }
 

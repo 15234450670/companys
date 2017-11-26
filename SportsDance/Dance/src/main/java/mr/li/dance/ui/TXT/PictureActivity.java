@@ -1,8 +1,10 @@
 package mr.li.dance.ui.TXT;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -26,6 +28,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import id.zelory.compressor.Compressor;
 import mr.li.dance.R;
 import mr.li.dance.https.CallServer;
 import mr.li.dance.https.HttpListener;
@@ -145,15 +148,16 @@ public class PictureActivity extends BaseActivity {
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
-
         if (what == AppConfigs.FA_DONGTAI) {
             PersonTuWen reponseResult = JsonMananger.getReponseResult(response, PersonTuWen.class);
             dynamic_id = reponseResult.getDynamic_id();
             if (allSelectedPicture.size() != 0) {
                 for (int i = 0; i < allSelectedPicture.size(); i++) {
+                    Log.e("allSelectedPicture",allSelectedPicture.get(i)) ;
                     z++;
                     File file = new File(allSelectedPicture.get(i));
-                    Request<String> getfabutupian = ParameterUtils.getSingleton().getfabutupian(1, dynamic_id, file);
+                    File file1 = picCompressor(file);
+                    Request<String> getfabutupian = ParameterUtils.getSingleton().getfabutupian(1, dynamic_id, file1);
                     CallServer.getRequestInstance().add(PictureActivity.this, 0, getfabutupian, new HttpListener() {
                         @Override
                         public void onSucceed(int what, String response) {
@@ -185,6 +189,7 @@ public class PictureActivity extends BaseActivity {
         }
     }
 
+
     /**
      * 展示图片的GridView的适配器
      */
@@ -209,12 +214,10 @@ public class PictureActivity extends BaseActivity {
 
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
-
             ViewHolder holder = null;
             if (convertView == null) {
                 holder = new ViewHolder();
                 convertView = layoutInflater.inflate(R.layout.list_item_image, null);
-
                 holder.image = (ImageView) convertView.findViewById(R.id.iv_img);
                 holder.btn = (ImageView) convertView.findViewById(R.id.iv_quxiao);
 
@@ -233,7 +236,6 @@ public class PictureActivity extends BaseActivity {
                 holder.image.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        System.out.println("dianjia");
                         selectClick();
                     }
                 });
@@ -243,18 +245,15 @@ public class PictureActivity extends BaseActivity {
             } else {
                 ImageLoader.getInstance().displayImage("file://" + allSelectedPicture.get(position),
                         holder.image);
-
                 holder.btn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         //点击后移除图片
                         allSelectedPicture.remove(position);
-
                         //更新UI
                         gv_tjtp.setAdapter(gridAdapter);
                     }
                 });
-
             }
             return convertView;
         }
@@ -272,13 +271,10 @@ public class PictureActivity extends BaseActivity {
         Bundle bundle = new Bundle();
         bundle.putStringArrayList("allSelectedPicture", allSelectedPicture);
         intent.putExtras(bundle);
-        System.out.println("dianjia1");
         if (allSelectedPicture.size() < 9) {
-            System.out.println("dianjia2");
             startActivityForResult(intent, REQUEST_PICK);
         }
     }
-
     @SuppressWarnings("unchecked")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -292,5 +288,17 @@ public class PictureActivity extends BaseActivity {
                 }
             }
         }
+    }
+    private File picCompressor(File file) {
+        File compressedImage = new Compressor.Builder(this)
+                .setMaxWidth(640)
+                .setMaxHeight(480)
+                .setQuality(75)
+                .setCompressFormat(Bitmap.CompressFormat.WEBP)
+                .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
+                        Environment.DIRECTORY_PICTURES).getAbsolutePath())
+                .build()
+                .compressToFile(file);
+        return compressedImage;
     }
 }

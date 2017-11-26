@@ -70,4 +70,4 @@
         android:scrollbars="none"
         >
     </GridView>
-</LinearLayout>
+    </LinearLayout>

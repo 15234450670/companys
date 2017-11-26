@@ -36,7 +36,6 @@ import mr.li.dance.R;
 public class FabuDialog extends Dialog implements View.OnClickListener {
     Context mcontext;
     DialogClickListener dialogClickListener;
-
     private final int PERMISSION_REQUEST_CODE = 0x001;
     private static final String[] permissionManifest = {
             Manifest.permission.CAMERA,
@@ -49,12 +48,14 @@ public class FabuDialog extends Dialog implements View.OnClickListener {
     public FabuDialog(@NonNull Context context) {
         super(context, R.style.fabuDialog);
         mcontext = context;
+
     }
 
     public FabuDialog(Context context, DialogClickListener clickListener) {
         super(context, R.style.fabuDialog);
         mcontext = context;
         dialogClickListener = clickListener;
+
     }
 
     @Override

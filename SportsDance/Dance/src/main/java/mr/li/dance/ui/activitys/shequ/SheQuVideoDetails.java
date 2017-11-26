@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -17,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.umeng.analytics.MobclickAgent;
 import com.yolanda.nohttp.rest.Request;
 
@@ -77,6 +79,7 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
     private String                 id;
     private boolean type = true;
     private String dataId;
+    private String pic;
 
     @Override
     public int getContentViewId() {
@@ -103,10 +106,11 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
         editTextBodyLl.setVisibility(View.VISIBLE);
     }
 
-    public static void lunch(Context context, String id, String uid) {
+    public static void lunch(Context context, String id, String uid, String pic) {
         Intent intent = new Intent(context, SheQuVideoDetails.class);
         intent.putExtra("itemId", id);
         intent.putExtra("uid", uid);
+        intent.putExtra("pic", pic);
         context.startActivity(intent);
 
     }
@@ -116,6 +120,7 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
         super.getIntentData();
         itemId = mIntentExtras.getString("itemId");
         uid = mIntentExtras.getString("uid");
+        pic = mIntentExtras.getString("pic");
     }
 
     @Override
@@ -148,12 +153,20 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
                 }
             }
             String path = data.getVideo().get(0);
+
             //视频播放
             if (!MyStrUtil.isEmpty(path)) {
                 boolean setUp = player.setUp(path, JCVideoPlayer.SCREEN_LAYOUT_LIST, "");
                 if (setUp) {
                     //后台返回的图片
-                    // Glide.with(this).load("http://a4.att.hudong.com/05/71/01300000057455120185716259013.jpg").into(player.thumbImageView);
+                    if (TextUtils.isEmpty(pic)) {
+                        player.thumbImageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                        Glide.with(this).load(R.drawable.default_banner).into(player.thumbImageView);
+                    } else {
+                        player.thumbImageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                        Glide.with(this).load(pic).into(player.thumbImageView);
+                    }
+
                 }
             }
 
@@ -451,6 +464,7 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
         }
         mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, AppConfigs.shequ_detial + id, title);
     }
+
     @Override
     public void onHeadLeftButtonClick(View v) {
         super.onHeadLeftButtonClick(v);

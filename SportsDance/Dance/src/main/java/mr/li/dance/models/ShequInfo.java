@@ -45,7 +45,12 @@ public class ShequInfo  implements Serializable{
     public boolean isDianZan() {
         return is_upvote == 1;
     }
-
+    public void setIs_upvote() {
+        is_upvote = is_upvote == 1 ? 2 : 1;
+    }
+    public void setIs_upvote(int is_upvote) {
+        this.is_upvote = is_upvote;
+    }
     public String getId() {
         return id;
     }
@@ -122,13 +127,9 @@ public class ShequInfo  implements Serializable{
         return is_upvote;
     }
 
-    public void setIs_upvote() {
-        is_upvote = is_upvote == 1 ? 2 : 1;
-    }
 
-    public void setIs_upvote(int is_upvote) {
-        this.is_upvote = is_upvote;
-    }
+
+
 
     public UserBean getUser() {
         return user;

@@ -168,10 +168,10 @@ public class MatchPageAdapter extends DanceBaseAdapter {
         holder.slideShowView.setOnGolistener(new SlideShowView.BannerClickListener() {
             @Override
             public void itemClick(int position) {
-                if (MainActivity.myBinder.binderIsPlaying()){
+               /* if (MainActivity.myBinder.binderIsPlaying()){
                     MainActivity.floatImage.setVisibility(View.GONE);
                     MainActivity.myBinder.binderPause();
-                }
+                }*/
                 BannerInfo bannerInfo = mLunBoDatas.get(position);
                 switch (bannerInfo.getType()) {
                     case 10101://直播
@@ -207,7 +207,7 @@ public class MatchPageAdapter extends DanceBaseAdapter {
 
                         if (mContext != null && UserInfoManager.getSingleton().isLoading(mContext)) {
                             if (!MyStrUtil.isEmpty(bannerInfo.getUrl())) {
-                                huodong(bannerInfo);
+                                huodongs(bannerInfo);
                             }
                         } else {
                             if (mContext != null) {
@@ -225,24 +225,22 @@ public class MatchPageAdapter extends DanceBaseAdapter {
         holder.slideShowView.startPlay();
     }
 
-    public void huodong(final BannerInfo bannerInfo) {
+   /* public void huodong(final BannerInfo bannerInfo) {
         String appId = bannerInfo.getId();
         String appsecret = bannerInfo.getAppsecret();
-        String url = bannerInfo.getUrl();
+        final String url = bannerInfo.getUrl();
         String userId = UserInfoManager.getSingleton().getUserId(mContext);
-        final String activityid = bannerInfo.getNumber();
         final String title = bannerInfo.getTitle();
         Request<String> huoDongInfoMap = ParameterUtils.getSingleton().getHuoDongInfoMap(appId, appsecret, url, userId);
 
         CallServer.getRequestInstance().add(mContext, 0, huoDongInfoMap, new HttpListener() {
             @Override
             public void onSucceed(int what, String response) {
-
                 HuoDongInfo reponseResult = JsonMananger.getReponseResult(response, HuoDongInfo.class);
                 Log.e("sdfsdf", "请求了:" + reponseResult.getData());
-
-                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, title, reponseResult.getData()+activityid, bannerInfo.getId());
-                Log.e("sdfsdf", "请求了2:" + reponseResult.getData()+activityid);
+              //  MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, title, reponseResult.getData()+activityid, bannerInfo.getId());
+                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, title, reponseResult.getData() + bannerInfo.getNumber(), url, bannerInfo.getId());
+                Log.e("sdfsdf", "请求了2:" + reponseResult.getData()+ bannerInfo.getNumber());
             }
 
             @Override
@@ -251,7 +249,30 @@ public class MatchPageAdapter extends DanceBaseAdapter {
             }
         }, true, true);
 
-    }
+    }*/
+   public void huodongs(final BannerInfo bannerInfo) {
+       String appId = bannerInfo.getAppid();
+       String appsecret = bannerInfo.getAppsecret();
+       final String url = bannerInfo.getUrl();
+       final String title = bannerInfo.getTitle();
+       String userId = UserInfoManager.getSingleton().getUserId(mContext);
+       Request<String> huoDongInfoMap = ParameterUtils.getSingleton().getHuoDongInfoMap(appId, appsecret, url, userId);
+       CallServer.getRequestInstance().add(mContext, 0, huoDongInfoMap, new HttpListener() {
+           @Override
+           public void onSucceed(int what, String response) {
+
+               HuoDongInfo reponseResult = JsonMananger.getReponseResult(response, HuoDongInfo.class);
+               Log.e("sdfsdf", "请求了:" + reponseResult.getData());
+               MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, title, reponseResult.getData() + bannerInfo.getNumber(), url, bannerInfo.getId());
+           }
+
+           @Override
+           public void onFailed(int what, int responseCode, String response) {
+               Log.e("sdfsdf", "失败了" + responseCode);
+           }
+       }, true, true);
+
+   }
 
     private void bindType2(VideoViewholder2 holder, int position) {
 

@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.yolanda.nohttp.rest.Request;
 
@@ -117,14 +116,12 @@ public class DetailsListAdapter extends BaseRecyclerAdapter<DetailsInfo> {
                 @Override
                 public void onClick(View view) {
                     final String userId = UserInfoManager.getSingleton().getUserId(context);
-                    Toast.makeText(context, "genduo", Toast.LENGTH_SHORT).show();
                     gengduoDialog = new GengduoDialog(context, new GengduoDialog.DialogClickListener() {
                         @Override
                         public void selectItem(View view, String value) {
                             switch (value) {
                                 case "删除":
                                     CommentDelete(item.getComm().get(position - countAddress).getId());
-
                                     break;
                                 case "分享":
                                     mReplyInfo.share(item.getId(), item.getTitle());

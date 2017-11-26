@@ -346,7 +346,6 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
 
     }
 
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -366,11 +365,9 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
 
     private void reuqestNet(String id, boolean type) {
         String userId = UserInfoManager.getSingleton().getUserId(this);
-
         if (type) {
             Request<String> publishingDynamics = ParameterUtils.getSingleton().publishingDynamics(userId, id.equals(dataId) ? 1 : 2, circleEt.getText().toString(), id);
             request(AppConfigs.GET_PUBLISH, publishingDynamics, false);
-
         } else {
             Request<String> publishingDynamics = ParameterUtils.getSingleton().publishingDynamics(userId, 2, circleEt.getText().toString(), id);
             request(AppConfigs.GET_PUBLISH, publishingDynamics, false);
@@ -445,6 +442,7 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
     }
 */
 
+
     private void recylcerViewBottom() {
         mScrollView.postDelayed(new Runnable() {
             @Override
@@ -458,15 +456,16 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
 
     }
 
+
     @Override
     public void onHeadLeftButtonClick(View v) {
         super.onHeadLeftButtonClick(v);
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            if (imm.isActive() && getCurrentFocus() != null) {
-                if (getCurrentFocus().getWindowToken() != null) {
-                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                }
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm.isActive() && getCurrentFocus() != null) {
+            if (getCurrentFocus().getWindowToken() != null) {
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
+        }
     }
 
     @Override

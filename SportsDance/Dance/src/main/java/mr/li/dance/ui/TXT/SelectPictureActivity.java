@@ -269,10 +269,8 @@ public class SelectPictureActivity extends Activity {
         if (resultCode == RESULT_OK && cameraPath != null) {
 
             selectedPicture.add(cameraPath);
-
             Intent data2 = new Intent();
             data2.putExtra(INTENT_SELECTED_PICTURE, selectedPicture);
-
             setResult(RESULT_OK, data2);
             this.finish();
         }
@@ -303,7 +301,6 @@ public class SelectPictureActivity extends Activity {
 
             //自定义的一个类用来缓存convertview
             ViewHolder holder = null;
-
             if (convertView == null) {
                 convertView = View.inflate(context, R.layout.grid_item_picture, null);
                 holder = new ViewHolder();

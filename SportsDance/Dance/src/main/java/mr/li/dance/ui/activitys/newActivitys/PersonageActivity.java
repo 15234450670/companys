@@ -63,7 +63,7 @@ public class PersonageActivity extends BaseListActivity {
             SheQuPicDetails.lunch(this, shequInfo.getId(), shequInfo.getUid());
         } else {
             //视频
-            SheQuVideoDetails.lunch(this, shequInfo.getId(), shequInfo.getUid());
+            SheQuVideoDetails.lunch(this, shequInfo.getId(), shequInfo.getUid(),shequInfo.video.get(0).picture);
         }
     }
 

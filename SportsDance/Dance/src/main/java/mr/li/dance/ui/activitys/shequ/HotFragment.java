@@ -38,7 +38,7 @@ public class HotFragment extends BaseListFragment {
             SheQuPicDetails.lunch(getActivity(), shequInfo.getId(), shequInfo.getUid());
         } else {
             //视频
-            SheQuVideoDetails.lunch(getActivity(), shequInfo.getId(), shequInfo.getUid());
+            SheQuVideoDetails.lunch(getActivity(), shequInfo.getId(), shequInfo.getUid(),shequInfo.getVideo().picture);
         }
     }
 
@@ -46,7 +46,7 @@ public class HotFragment extends BaseListFragment {
     public void onResume() {
         super.onResume();
         initData();
-    }
+}
 
     @Override
     public void initData() {
@@ -64,7 +64,9 @@ public class HotFragment extends BaseListFragment {
     public RecyclerView.Adapter getAdapter() {
         adapter = new SheQuAdapter(getActivity(), this);
         return adapter;
+
     }
+
 
     @Override
     public void onSucceed(int what, String response) {
@@ -72,12 +74,11 @@ public class HotFragment extends BaseListFragment {
         Log.d(TAG, response);
         ShequResponse reponseResult = JsonMananger.getReponseResult(response, ShequResponse.class);
         if (what == AppConfigs.shequ_news_fragment) {
-
             if (!MyStrUtil.isEmpty(reponseResult.getData())) {
                 adapter.refresh(reponseResult);
             }
         } else {
-          adapter.loadMore(reponseResult);
+            adapter.loadMore(reponseResult);
         }
     }
 

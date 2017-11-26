@@ -220,7 +220,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 shequ_layout.setClicked(true);
                 break;
             // 发布
-
             case R.id.fabu_layout:
                 if (!UserInfoManager.getSingleton().isLoading(this)) {
                     LoginActivity.lunch(this, 0x001);

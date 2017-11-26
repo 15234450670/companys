@@ -1,9 +1,11 @@
 package mr.li.dance.ui.TXT;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -11,9 +13,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewStub;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +27,7 @@ import com.yolanda.nohttp.rest.Request;
 
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 import mabeijianxi.camera.MediaRecorderActivity;
+import mabeijianxi.camera.util.StringUtils;
 import mr.li.dance.R;
 import mr.li.dance.https.CallServer;
 import mr.li.dance.https.HttpListener;
@@ -60,7 +65,8 @@ public class PostVideoActivity extends BaseActivity implements View.OnClickListe
     private String                video_name;
     private AlertDialog.Builder   myDialog;
     ProgressBar pb;
-    private AlertDialog alertDialog;
+    private PopupWindow popupWindow;
+    // private AlertDialog alertDialog;
 
     @Override
     public int getContentViewId() {
@@ -102,9 +108,14 @@ public class PostVideoActivity extends BaseActivity implements View.OnClickListe
         LayoutInflater inflater = LayoutInflater.from(this);
         View view = inflater.inflate(R.layout.mydialog, null);
         pb = (ProgressBar) view.findViewById(R.id.pb);
-        myDialog = new AlertDialog.Builder(this);
+       /* myDialog = new AlertDialog.Builder(this);
         myDialog.setView(view);
-        alertDialog = myDialog.create();
+        alertDialog = myDialog.create();*/
+        popupWindow = new PopupWindow(view,
+                WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, true);
+        popupWindow.setFocusable(true);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
     }
 
     //点击右按钮
@@ -115,7 +126,14 @@ public class PostVideoActivity extends BaseActivity implements View.OnClickListe
             Toast.makeText(mContext, "标题与内容不能为空", Toast.LENGTH_SHORT).show();
             return;
         } else {
-            alertDialog.show();
+            View rootview = LayoutInflater.from(this).inflate(R.layout.fabu_sp_activity, null);
+           /* popupWindow.showAtLocation(rootview, Gravity.CENTER, 0, 0);
+            WindowManager.LayoutParams lp = getWindow().getAttributes();
+            lp.alpha = 0.3f;
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            getWindow().setAttributes(lp);*/
+            showProgress("", getString(R.string.record_camera_progress_message));
+            // alertDialog.show();
             String userId = UserInfoManager.getSingleton().getUserId(this);
             Request<String> takeDynamicId = ParameterUtils.getSingleton().getPersonAddDongTai(userId, 2, fb_title.getText().toString(), fb_content.getText().toString());
             request(AppConfigs.FA_DONGTAI, takeDynamicId, false);
@@ -225,21 +243,24 @@ public class PostVideoActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void takeVideoUp() {
-        alertDialog.dismiss();
+        //  alertDialog.dismiss();
         Request<String> video = ParameterUtils.getSingleton().getVideo(String.valueOf(dynamic_id), video_name);
         CallServer.getRequestInstance().add(this, 0, video, new HttpListener() {
             @Override
             public void onSucceed(int what, String response) {
-                Toast.makeText(mContext, "dasdsadasdas", Toast.LENGTH_SHORT).show();
                 VideoUpSuccess reponseResult = JsonMananger.getReponseResult(response, VideoUpSuccess.class);
                 String address = reponseResult.getData().getAddress();
                 String dynamic_id = reponseResult.getData().getDynamic_id();
                 if (MyStrUtil.isEmpty(address)) {
                     Toast.makeText(mContext, "上传视频失败", Toast.LENGTH_SHORT).show();
                 } else {
-                    fb_title.setText("");
-                    fb_content.setText("");
+                   /* fb_title.setText("");
+                    fb_content.setText("");*/
+
                     Toast.makeText(mContext, "视频上传成功", Toast.LENGTH_SHORT).show();
+                   // popupWindow.dismiss();
+                    hideProgress();
+                    finish();
 
                 }
                 Log.e(TAG, "address--->" + address + "---id" + dynamic_id);
@@ -265,4 +286,35 @@ public class PostVideoActivity extends BaseActivity implements View.OnClickListe
         }
         pb.setProgress((int) currentSize);
     }
+
+    public ProgressDialog showProgress(String title, String message) {
+        return showProgress(title, message, -1);
+    }
+    protected ProgressDialog mProgressDialog;
+    public ProgressDialog showProgress(String title, String message, int theme) {
+        if (mProgressDialog == null) {
+            if (theme > 0)
+                mProgressDialog = new ProgressDialog(this, theme);
+            else
+                mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            mProgressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            mProgressDialog.setCanceledOnTouchOutside(false);// 不能取消
+            mProgressDialog.setCancelable(false);
+            mProgressDialog.setIndeterminate(true);// 设置进度条是否不明确
+        }
+
+        if (!StringUtils.isEmpty(title))
+            mProgressDialog.setTitle(title);
+        mProgressDialog.setMessage(message);
+        mProgressDialog.show();
+        return mProgressDialog;
+    }
+
+    public void hideProgress() {
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
+        }
+    }
+
 }

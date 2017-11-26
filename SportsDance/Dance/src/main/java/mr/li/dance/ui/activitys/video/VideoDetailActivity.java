@@ -85,7 +85,7 @@ public class VideoDetailActivity extends BaseListActivity {
             return "";
         }
     };
-    private RecyclerView rv;
+    private RecyclerView     rv;
     private ArrayList<Video> otherList;
     private ArrayList<Video> album;
 
@@ -251,7 +251,7 @@ public class VideoDetailActivity extends BaseListActivity {
     @Override
     public void onSucceed(int what, String responseStr) {
         super.onSucceed(what, responseStr);
-        Log.e(TAG,responseStr);
+        Log.e(TAG, responseStr);
         if (AppConfigs.home_dianboDetailL == what) {
             final VideoDetailResponse detailResponse = JsonMananger.getReponseResult(responseStr, VideoDetailResponse.class);
             if (!TextUtils.isEmpty(detailResponse.getData().getDetail().getCompete_name())) {
@@ -287,7 +287,7 @@ public class VideoDetailActivity extends BaseListActivity {
             if (!MyStrUtil.isEmpty(album)) {
                 View view = mDanceViewHolder.getView(R.id.zhuanji);
                 view.setVisibility(View.VISIBLE);
-                SpecialItemAdapter itemAdapter =new SpecialItemAdapter(this);
+                SpecialItemAdapter itemAdapter = new SpecialItemAdapter(this);
                 itemAdapter.addList(album);
                 itemAdapter.setItemClickListener(this);
                 rv.setAdapter(itemAdapter);
@@ -300,7 +300,6 @@ public class VideoDetailActivity extends BaseListActivity {
             } else {
                 mDanceViewHolder.getView(R.id.zhuanji).setVisibility(View.GONE);
             }
-
 
 
             setVideoDetail(detailResponse.getData().getDetail());

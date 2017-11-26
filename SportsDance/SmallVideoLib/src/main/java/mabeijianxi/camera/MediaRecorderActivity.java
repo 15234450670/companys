@@ -126,7 +126,7 @@ public class MediaRecorderActivity extends Activity implements
      */
     public final static String MEDIA_RECORDER_CONFIG_KEY   = "media_recorder_config_key";
 
-    private boolean   GO_HOME;
+    private boolean  GO_HOME;
     /**
      * 闪光灯
      */
@@ -647,7 +647,6 @@ public class MediaRecorderActivity extends Activity implements
     @Override
     protected void onStop() {
         super.onStop();
-
         hideProgress();
         mProgressDialog = null;
     }
