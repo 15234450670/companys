@@ -6,11 +6,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.yolanda.nohttp.rest.Request;
 
@@ -67,14 +69,23 @@ public class PersonItemAdapter extends DanceBaseAdapter {
 
     private void bindType(MyViewHolder holder, final int position) {
         holder.danceViewHolder.setViewVisibility(R.id.shequ_ll_min, View.GONE);
-        holder.danceViewHolder.setText(R.id.title, mDatas.get(position).getDynamic_time());
+        if (!TextUtils.isEmpty(mDatas.get(position).getDynamic_time())) {
+            holder.danceViewHolder.getView(R.id.time).setVisibility(View.VISIBLE);
+            holder.danceViewHolder.setText(R.id.time, mDatas.get(position).getDynamic_time());
+        }
+
+        holder.danceViewHolder.setText(R.id.title, mDatas.get(position).getTitle());
         holder.danceViewHolder.setViewVisibility(R.id.content, View.GONE);
-       /* if (MyStrUtil.isEmpty(mDatas.get(position).getContent())) {
-            holder.danceViewHolder.setViewVisibility(R.id.content, View.GONE);
+        TextView textView = holder.danceViewHolder.getTextView(R.id.content);
+        if (MyStrUtil.isEmpty(mDatas.get(position).getContent())) {
+            //holder.danceViewHolder.setViewVisibility(R.id.content, View.GONE);
+            textView.setVisibility(View.GONE);
         } else {
-            holder.danceViewHolder.setViewVisibility(R.id.content, View.VISIBLE);
-            holder.danceViewHolder.setText(R.id.content, mDatas.get(position).getContent());
-        }*/
+            textView.setVisibility(View.VISIBLE);
+           // holder.danceViewHolder.setViewVisibility(R.id.content, View.VISIBLE);
+            textView.setMaxLines(2);
+            textView.setText(mDatas.get(position).getContent());
+        }
         if (MyStrUtil.isEmpty(mDatas.get(position).getUpvote())) {
             holder.danceViewHolder.setText(R.id.shequ_dianz_tv, "0");
         } else {

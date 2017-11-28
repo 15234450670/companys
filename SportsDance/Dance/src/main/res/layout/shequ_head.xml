@@ -67,7 +67,17 @@
                 android:textColor="@color/black"/>
         </RelativeLayout>
     </LinearLayout>
+    <TextView
+        android:id="@+id/time"
+        style="@style/text_white_style_30"
+        android:layout_marginLeft="@dimen/spacing_20"
+        android:layout_marginRight="@dimen/spacing_20"
+        android:textSize="@dimen/spacing_20"
+        android:maxLines="2"
+        android:text=""
 
+        android:visibility="gone"
+        android:textColor="#666666"/>
     <TextView
         android:id="@+id/title"
         style="@style/text_white_style_30"
@@ -84,6 +94,7 @@
         android:layout_marginLeft="@dimen/spacing_20"
         android:layout_marginRight="@dimen/spacing_20"
         android:text=""
+
         android:textColor="#666666"/>
 
     <View

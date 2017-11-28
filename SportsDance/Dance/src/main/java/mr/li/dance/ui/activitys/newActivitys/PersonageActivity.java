@@ -81,7 +81,7 @@ public class PersonageActivity extends BaseListActivity {
         setTitle("个人名片");
         String  userId = UserInfoManager.getSingleton().getUserId(this);
         if (!itemid.equals(userId)) {
-            setRightImage(R.drawable.my_look_yes, R.drawable.shequ_report);
+            setRightImage(R.drawable.collect_icon, R.drawable.shequ_report);
         } else {
 
         }
@@ -120,9 +120,9 @@ public class PersonageActivity extends BaseListActivity {
                 isCollected = (2 != data.is_attention);
 
                 if (isCollected) {
-                    mRightIv.setImageResource(R.drawable.my_look_no);
+                    mRightIv.setImageResource(R.drawable.collect_icon_002);
                 } else {
-                    mRightIv.setImageResource(R.drawable.my_look_yes);
+                    mRightIv.setImageResource(R.drawable.collect_icon);
                 }
                 Log.e("xxx", data.toString());
                 shequ_look.setText("关注 ： " + data.getUser_num());
@@ -179,9 +179,9 @@ public class PersonageActivity extends BaseListActivity {
         }
 
         if (isCollected) {
-            mRightIv.setImageResource(R.drawable.my_look_no);
+            mRightIv.setImageResource(R.drawable.collect_icon_002);
         } else {
-            mRightIv.setImageResource(R.drawable.my_look_yes);
+            mRightIv.setImageResource(R.drawable.collect_icon);
         }
 
         //举报

@@ -1,10 +1,13 @@
 package mr.li.dance.utils.glide;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
 import mr.li.dance.utils.BlurTransformation;
 import mr.li.dance.utils.NLog;
@@ -29,7 +32,32 @@ public class ImageLoaderManager {
     public void Load(Context context, String imgUrl, ImageView imageView, int defaultDrawable) {
         NLog.d("ImageLoaderManager", "imgUrl = " + imgUrl);
         try {
-            Glide.with(context).load(imgUrl).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(defaultDrawable).into(imageView);
+            Glide.with(context).load(imgUrl).dontTransform().diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(defaultDrawable).into(imageView);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void Load1(Context context, String imgUrl, final ImageView imageView, int defaultDrawable) {
+        NLog.d("ImageLoaderManager", "imgUrl = " + imgUrl);
+        try {
+            Glide.with(context).load(imgUrl).asBitmap().dontTransform().dontAnimate().diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(defaultDrawable).into(new BitmapImageViewTarget(imageView) {
+                @Override
+                protected void setResource(Bitmap resource) {
+                    super.setResource(resource);
+                    int width = resource.getWidth();
+                    int height = resource.getHeight();
+                    //获取imageView的宽
+                    int imageViewWidth= imageView.getWidth();
+                    //计算缩放比例
+                    float sy= (float) (imageViewWidth* 0.1)/(float) (width * 0.1);
+                    //计算图片等比例放大后的高
+                    int imageViewHeight= (int) (height * sy);
+                    ViewGroup.LayoutParams params = imageView.getLayoutParams();
+                    params.height = imageViewHeight;
+                    imageView.setLayoutParams(params);
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }

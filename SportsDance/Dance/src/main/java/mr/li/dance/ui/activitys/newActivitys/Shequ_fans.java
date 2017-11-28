@@ -2,10 +2,12 @@ package mr.li.dance.ui.activitys.newActivitys;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -62,6 +64,7 @@ public class Shequ_fans extends BaseActivity {
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
+        Log.e("Shequ_fans", response);
         MyFansInfo reponseResult = JsonMananger.getReponseResult(response, MyFansInfo.class);
         final List<MyFansInfo.DataBean> data = reponseResult.getData();
         if (MyStrUtil.isEmpty(data)) {
@@ -90,11 +93,9 @@ public class Shequ_fans extends BaseActivity {
                 public View getView(int i, View view, ViewGroup viewGroup) {
                     View v = LayoutInflater.from(Shequ_fans.this).inflate(R.layout.myfans, null);
                     TextView fans_name = (TextView) v.findViewById(R.id.fans_name);
+                    ImageView fans_head = (ImageView) v.findViewById(R.id.fans_head);
                     fans_name.setText(data.get(i).getUsername());
-                    if (MyStrUtil.isEmpty(data.get(i).getUsername())) {
-                        ImageLoaderManager.getSingleton().LoadCircle(Shequ_fans.this, data.get(i).getPicture_src(), mDanceViewHolder.getImageView(R.id.fans_head), R.drawable.default_icon);
-
-                    }
+                    ImageLoaderManager.getSingleton().LoadCircle(Shequ_fans.this, data.get(i).getPicture_src(), fans_head, R.drawable.default_icon);
                     return v;
                 }
             });

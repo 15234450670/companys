@@ -59,6 +59,8 @@ public class PersonLookAdapter extends SwipeMenuAdapter<RecyclerViewHolder> {
     private void bindLook(RecyclerViewHolder holder, int position) {
         ImageLoaderManager.getSingleton().LoadCircle(mContext, mDatas.get(position).getPicture_src(), holder.getImageView(R.id.fans_head), R.drawable.default_icon);
         holder.setText(R.id.fans_name, mDatas.get(position).getUsername());
+        holder.getView(R.id.vv).setVisibility(View.VISIBLE);
+
     }
 
     @Override
@@ -93,29 +95,29 @@ public class PersonLookAdapter extends SwipeMenuAdapter<RecyclerViewHolder> {
     }
 
     private void Dialogs(final MyFansInfo.DataBean homeItem) {
-            AlertDialog dialog = new AlertDialog.Builder(mContext)
-                    .setTitle("提示")
-                    .setMessage("是否取消关注?")
-                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            Toast.makeText(mContext, "已取消关注", Toast.LENGTH_SHORT).show();
-                            mDatas.remove(homeItem);
-                            notifyDataSetChanged();
-                            dialogInterface.dismiss();
-                        }
-                    })
-                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.dismiss();
-                        }
-                    })
-                    .create();
-            dialog.show();
-            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
-            dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
-            dialog.setCanceledOnTouchOutside(false);
+        AlertDialog dialog = new AlertDialog.Builder(mContext)
+                .setTitle("提示")
+                .setMessage("是否取消关注?")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(mContext, "已取消关注", Toast.LENGTH_SHORT).show();
+                        mDatas.remove(homeItem);
+                        notifyDataSetChanged();
+                        dialogInterface.dismiss();
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .create();
+        dialog.show();
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
+        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+        dialog.setCanceledOnTouchOutside(false);
 
     }
 

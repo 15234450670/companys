@@ -150,8 +150,8 @@ public class Shequ_look extends SwipeListActivity {
             public void onCreateMenu(SwipeMenu swipeLeftMenu, SwipeMenu swipeRightMenu, int viewType) {
                 String userId = UserInfoManager.getSingleton().getUserId(Shequ_look.this);
                 if (userid.equals(userId)) {
-                    int width = getResources().getDimensionPixelSize(R.dimen.spacing_160);
-                    int height = getResources().getDimensionPixelSize(R.dimen.spacing_199);
+                    int width = getResources().getDimensionPixelSize(R.dimen.spacing_99);
+                    int height = getResources().getDimensionPixelSize(R.dimen.spacing_99);
                     int textsize = getResources().getDimensionPixelSize(R.dimen.textsize12);
                     // 添加右侧的，如果不添加，则右侧不会出现菜单。
                     {

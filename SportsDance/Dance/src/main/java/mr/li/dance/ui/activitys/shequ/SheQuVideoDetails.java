@@ -37,6 +37,7 @@ import mr.li.dance.models.LookCacnelInfo;
 import mr.li.dance.models.PersonInfo;
 import mr.li.dance.models.ReportInfo;
 import mr.li.dance.ui.activitys.base.BaseActivityApp;
+import mr.li.dance.ui.activitys.newActivitys.PersonageActivity;
 import mr.li.dance.ui.adapters.new_adapter.DetailsListAdapter;
 import mr.li.dance.ui.dialogs.GengduoDialog;
 import mr.li.dance.utils.AppConfigs;
@@ -80,6 +81,7 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
     private boolean type = true;
     private String dataId;
     private String pic;
+    boolean isDianZan;
 
     @Override
     public int getContentViewId() {
@@ -99,7 +101,7 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
         keyHeight = this.getWindowManager().getDefaultDisplay().getHeight() / 3;
 
         imageView = mDanceViewHolder.getImageView(R.id.details_look);
-        setRightImage(R.drawable.more);
+        setRightImage(R.drawable.more, R.drawable.dianzan1);
         player = (JCVideoPlayerStandard) mDanceViewHolder.getView(R.id.player_list_video);
         // TODO: 11/1/17 展示
         sendIv.setOnClickListener(this);
@@ -151,6 +153,14 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
                 } else {
                     mDanceViewHolder.getView(R.id.details_content).setVisibility(View.GONE);
                 }
+                mDanceViewHolder.getView(R.id.lin_head).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        PersonageActivity.lunch(mContext, uid, data.getUser().get(0).getUsername(), data.getUser().get(0).getPicture_src());
+                    }
+                });
+                int is_upvote = data.getIs_upvote();
+                isDianZan = (1!= is_upvote);
             }
             String path = data.getVideo().get(0);
 
@@ -205,6 +215,15 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
         if (what == AppConfigs.GET_PUBLISH) {
             initDatas();
             Toast.makeText(mContext, "发布成功", Toast.LENGTH_SHORT).show();
+
+        }
+        if (what == AppConfigs.person) {
+            isDianZan = !isDianZan;
+        }
+        if (isDianZan) {
+            mRightIv2.setImageResource(R.drawable.dianzan1);
+        } else {
+            mRightIv2.setImageResource(R.drawable.dianzan2);
 
         }
         type = true;
@@ -390,6 +409,13 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
         } else {
             dialog.dispalyOther();//别人的动态
         }
+    }
+    //点赞
+    public void onHeadRightButtonClick2(View v) {
+        int operation = isDianZan ? 1 : 2;
+        String userId = UserInfoManager.getSingleton().getUserId(this);
+        Request<String> personLike = ParameterUtils.getSingleton().getPersonLike(userId, operation, data.getId());
+        request(AppConfigs.person, personLike, false);
     }
 
     @Override

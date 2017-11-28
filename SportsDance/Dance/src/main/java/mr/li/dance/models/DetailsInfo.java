@@ -342,7 +342,7 @@ public class DetailsInfo {
 
         private String address;
         private String width;
-        private String hight;
+        private int hight;
 
         public String getAddress() {
             return address;
@@ -360,11 +360,11 @@ public class DetailsInfo {
             this.width = width;
         }
 
-        public String getHight() {
+        public int getHight() {
             return hight;
         }
 
-        public void setHight(String hight) {
+        public void setHight(int hight) {
             this.hight = hight;
         }
     }

@@ -113,6 +113,11 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
             ImageLoaderManager.getSingleton().LoadRound(mContext, urlOrFilePath, view, defaultId);
         }
     }
+    public void setImageByUrlOrFilePath1(ImageView view , String urlOrFilePath, int defaultId) {
+        if(view != null){
+            ImageLoaderManager.getSingleton().Load1(mContext, urlOrFilePath, view, defaultId);
+        }
+    }
     public RecyclerViewHolder setClickListener(int viewId, View.OnClickListener listener) {
         View view = findViewById(viewId);
         if (null == view) {

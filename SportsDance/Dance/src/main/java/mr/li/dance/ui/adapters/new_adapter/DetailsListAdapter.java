@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import mr.li.dance.https.HttpListener;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.models.DetailsInfo;
 import mr.li.dance.models.ReportInfo;
+import mr.li.dance.ui.activitys.newActivitys.PersonageActivity;
 import mr.li.dance.ui.adapters.BaseRecyclerAdapter;
 import mr.li.dance.ui.adapters.RecyclerViewHolder;
 import mr.li.dance.ui.dialogs.GengduoDialog;
@@ -94,12 +96,41 @@ public class DetailsListAdapter extends BaseRecyclerAdapter<DetailsInfo> {
             return;
         }
         if (position < countAddress) {
-            holder.setImageByUrlOrFilePath(R.id.pic_item, item.getAddress().get(position).getAddress(), R.drawable.default_banner);
+            ImageView image = holder.getImageView(R.id.pic_item);
+            int hight = item.getAddress().get(position).getHight();
+            Log.e("hight",hight+"");
+            /*if (hight!=0) {
+                ViewGroup.MarginLayoutParams margin9 = new ViewGroup.MarginLayoutParams(
+                        image.getLayoutParams());
+                margin9.setMargins(20,20,20,0);
+                RelativeLayout.LayoutParams layoutParams9 = new RelativeLayout.LayoutParams(margin9);
+                WindowManager wm = (WindowManager)context
+                        .getSystemService(Context.WINDOW_SERVICE);
+                int width = wm.getDefaultDisplay().getWidth();
+                layoutParams9.height = hight;//设置图片的高度
+                layoutParams9.width = width; //设置图片的宽度
+                image.setScaleType(ImageView.ScaleType.FIT_XY);
+                image.setLayoutParams(layoutParams9);
+                holder.setImageByUrlOrFilePath1(image, item.getAddress().get(position).getAddress(), R.drawable.default_banner);
+            } else {
+                holder.setImageByUrlOrFilePath(R.id.pic_item, item.getAddress().get(position).getAddress(), R.drawable.default_banner);
+
+            }*/
+            holder.setImageByUrlOrFilePath1(image, item.getAddress().get(position).getAddress(), R.drawable.default_banner);
+
+
         } else {
             holder.setText(R.id.shequ_time, item.getComm().get(position - countAddress).getComment_time());
             holder.setText(R.id.shequ_name, item.getComm().get(position - countAddress).getUser().get(0).getUsername());
+            ImageView shequ_head = holder.getImageView(R.id.shequ_head);
             ImageLoaderManager.getSingleton().LoadCircle(mContext, item.getComm().get(position - countAddress).getUser().get(0).getPicture_src(),
-                    holder.getImageView(R.id.shequ_head), R.drawable.default_icon);
+                    shequ_head, R.drawable.default_icon);
+            shequ_head.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    PersonageActivity.lunch(mContext, item.getComm().get(position - countAddress).getUserid(), item.getComm().get(position - countAddress).getUser().get(0).getUsername(), item.getComm().get(position - countAddress).getUser().get(0).getPicture_src());
+                }
+            });
             holder.getView(R.id.content).setVisibility(View.GONE);
             ImageView item_more = (ImageView) holder.getView(R.id.item_more);
             TextView textView = holder.getTextView(R.id.title);

@@ -112,6 +112,7 @@
         android:layout_marginLeft="60dp"
         android:layout_marginRight="20dp"
         app:item_color="@color/praise_item"
+        android:background="#f0f0f0"
         />
-
+<!--    @color/praise_item-->
 </LinearLayout>

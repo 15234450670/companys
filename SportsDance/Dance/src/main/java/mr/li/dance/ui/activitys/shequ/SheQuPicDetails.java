@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -33,8 +32,10 @@ import mr.li.dance.models.LookCacnelInfo;
 import mr.li.dance.models.PersonInfo;
 import mr.li.dance.models.ReportInfo;
 import mr.li.dance.ui.activitys.base.BaseActivity;
+import mr.li.dance.ui.activitys.newActivitys.PersonageActivity;
 import mr.li.dance.ui.adapters.new_adapter.DetailsListAdapter;
 import mr.li.dance.ui.dialogs.GengduoDialog;
+import mr.li.dance.ui.widget.FullyLinearLayoutManager;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.MyStrUtil;
@@ -74,6 +75,7 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
     private DetailsListAdapter adapter;
     private ScrollView         mScrollView;
     private int                keyHeight;
+    boolean isDianZan;
 
     @Override
     public int getContentViewId() {
@@ -84,8 +86,8 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
     public void initViews() {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         setTitle("详情");
+        setRightImage(R.drawable.more, R.drawable.dianzan1);
         listViewUtils = (RecyclerView) mDanceViewHolder.getView(R.id.list_view);
-        setRightImage(R.drawable.more);
         imageView = mDanceViewHolder.getImageView(R.id.details_look);
         editTextBodyLl = ((RelativeLayout) mDanceViewHolder.getView(R.id.editTextBodyLl));
         sendIv = mDanceViewHolder.getImageView(R.id.sendIv);
@@ -164,6 +166,7 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
         if (what == AppConfigs.person_details) {
             SheQuDetailsResponse reponseResult = JsonMananger.getReponseResult(response, SheQuDetailsResponse.class);
             data = reponseResult.getData();
+
             if (!MyStrUtil.isEmpty(data)) {
                 id = data.getId();
                 dataId = data.getId();
@@ -177,6 +180,16 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
                 } else {
                     mDanceViewHolder.getView(R.id.details_content).setVisibility(View.GONE);
                 }
+                mDanceViewHolder.getView(R.id.lin_head).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        PersonageActivity.lunch(mContext, uid, data.getUser().get(0).getUsername(), data.getUser().get(0).getPicture_src());
+                    }
+                });
+                int is_upvote = data.getIs_upvote();
+                Log.e("is_upvotess",is_upvote+"");
+                isDianZan = (1!= is_upvote);
+
             }
             //图片列表适配器
             detailsInfo = new ArrayList<>();
@@ -193,9 +206,12 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
                 detailsInfo.add(data);
             }
             adapter = new DetailsListAdapter(this, detailsInfo, getCurrentFocus());
-            listViewUtils.setLayoutManager(new LinearLayoutManager(this));
+            FullyLinearLayoutManager linearLayoutManager = new FullyLinearLayoutManager(this);
+            listViewUtils.setNestedScrollingEnabled(false);
+            listViewUtils.setLayoutManager(linearLayoutManager);
             adapter.addList(detailsInfo);
             listViewUtils.setAdapter(adapter);
+
         } else {
             //                listViewUtils.setVisibility(View.GONE);
         }
@@ -206,7 +222,7 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
             isCollected = !isCollected;
         } /*else if (what == AppConfigs.GET_DYNSMICDEL) {
             initRequest();
-            Log.d("miaoshuai", "onSucceed: ...................." + response);
+
         }*/
         if (isCollected) {
             imageView.setImageResource(R.drawable.my_look_no);
@@ -218,8 +234,17 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
             Toast.makeText(mContext, "发布成功", Toast.LENGTH_SHORT).show();
 
         }
-        Log.d("miaoshuai", "onSucceed: " + response);
+        if (what == AppConfigs.person) {
+            isDianZan = !isDianZan;
+        }
+        if (isDianZan) {
+            mRightIv2.setImageResource(R.drawable.dianzan1);
+        } else {
+            mRightIv2.setImageResource(R.drawable.dianzan2);
+
+        }
         type = true;
+
 
     }
 
@@ -257,6 +282,14 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
         } else {
             dialog.dispalyOther();//别人的动态
         }
+    }
+
+    //点赞
+    public void onHeadRightButtonClick2(View v) {
+        int operation = isDianZan ? 1 : 2;
+        String userId = UserInfoManager.getSingleton().getUserId(this);
+        Request<String> personLike = ParameterUtils.getSingleton().getPersonLike(userId, operation, data.getId());
+        request(AppConfigs.person, personLike, false);
     }
 
 

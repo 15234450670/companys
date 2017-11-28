@@ -174,11 +174,12 @@ public class PictureActivity extends BaseActivity {
                     }, false, false);
                 }
                 if (z == allSelectedPicture.size()) {
-                    input_tw.setText("");
+                  /*  input_tw.setText("");
                     input_content.setText("");
                     allSelectedPicture.clear();
-                    gridAdapter.notifyDataSetChanged();
+                    gridAdapter.notifyDataSetChanged();*/
                     Toast.makeText(mContext, "图文发布完成", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             } else {
                 input_tw.setText("");
@@ -289,12 +290,18 @@ public class PictureActivity extends BaseActivity {
             }
         }
     }
+
+    /**
+     * 压缩图片
+     * @param file
+     * @return
+     */
     private File picCompressor(File file) {
         File compressedImage = new Compressor.Builder(this)
                 .setMaxWidth(640)
                 .setMaxHeight(480)
                 .setQuality(75)
-                .setCompressFormat(Bitmap.CompressFormat.WEBP)
+                .setCompressFormat(Bitmap.CompressFormat.JPEG)
                 .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
                         Environment.DIRECTORY_PICTURES).getAbsolutePath())
                 .build()

@@ -1,11 +1,9 @@
 package mr.li.dance.ui.TXT;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -17,7 +15,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,9 +60,8 @@ public class PostVideoActivity extends BaseActivity implements View.OnClickListe
     private ImageView             fistImage;
     private int                   dynamic_id;
     private String                video_name;
-    private AlertDialog.Builder   myDialog;
+
     ProgressBar pb;
-    private PopupWindow popupWindow;
     // private AlertDialog alertDialog;
 
     @Override
@@ -111,11 +107,7 @@ public class PostVideoActivity extends BaseActivity implements View.OnClickListe
        /* myDialog = new AlertDialog.Builder(this);
         myDialog.setView(view);
         alertDialog = myDialog.create();*/
-        popupWindow = new PopupWindow(view,
-                WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, true);
-        popupWindow.setFocusable(true);
-        popupWindow.setOutsideTouchable(true);
-        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+
     }
 
     //点击右按钮
@@ -126,12 +118,6 @@ public class PostVideoActivity extends BaseActivity implements View.OnClickListe
             Toast.makeText(mContext, "标题与内容不能为空", Toast.LENGTH_SHORT).show();
             return;
         } else {
-            View rootview = LayoutInflater.from(this).inflate(R.layout.fabu_sp_activity, null);
-           /* popupWindow.showAtLocation(rootview, Gravity.CENTER, 0, 0);
-            WindowManager.LayoutParams lp = getWindow().getAttributes();
-            lp.alpha = 0.3f;
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-            getWindow().setAttributes(lp);*/
             showProgress("", getString(R.string.record_camera_progress_message));
             // alertDialog.show();
             String userId = UserInfoManager.getSingleton().getUserId(this);
@@ -258,7 +244,7 @@ public class PostVideoActivity extends BaseActivity implements View.OnClickListe
                     fb_content.setText("");*/
 
                     Toast.makeText(mContext, "视频上传成功", Toast.LENGTH_SHORT).show();
-                   // popupWindow.dismiss();
+                    // popupWindow.dismiss();
                     hideProgress();
                     finish();
 
@@ -290,7 +276,9 @@ public class PostVideoActivity extends BaseActivity implements View.OnClickListe
     public ProgressDialog showProgress(String title, String message) {
         return showProgress(title, message, -1);
     }
+
     protected ProgressDialog mProgressDialog;
+
     public ProgressDialog showProgress(String title, String message, int theme) {
         if (mProgressDialog == null) {
             if (theme > 0)
