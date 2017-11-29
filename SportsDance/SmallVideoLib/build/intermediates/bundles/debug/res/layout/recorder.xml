@@ -23,9 +23,16 @@
             android:id="@+id/shan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@+id/v"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
             android:button="@drawable/check_off_on"
             />
+        <View
+            android:id="@+id/v"
+            android:layout_width="1dp"
+            android:layout_centerInParent="true"
+            android:layout_height="1dp"/>
 
         <ImageView
             android:id="@+id/reversal"
@@ -33,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/shan"
+            android:layout_toRightOf="@+id/v"
             android:background="@drawable/fanzhuan"
             />
 

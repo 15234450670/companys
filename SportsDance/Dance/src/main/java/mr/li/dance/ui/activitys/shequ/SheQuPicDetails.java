@@ -187,8 +187,8 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
                     }
                 });
                 int is_upvote = data.getIs_upvote();
-                Log.e("is_upvotess",is_upvote+"");
-                isDianZan = (1!= is_upvote);
+                Log.e("is_upvotess", is_upvote + "");
+                isDianZan = (1 != is_upvote);
 
             }
             //图片列表适配器
@@ -244,7 +244,6 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
 
         }
         type = true;
-
 
     }
 

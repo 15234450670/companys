@@ -54,18 +54,19 @@ public final class R {
         public static int x_guan=0x7f02001e;
     }
     public static final class id {
-        public static int bottom_layout=0x7f060008;
-        public static int media_recorder_surfaceview=0x7f060005;
-        public static int media_recorder_text=0x7f06000b;
-        public static int record_controller=0x7f06000a;
-        public static int record_preview=0x7f060006;
-        public static int record_progress=0x7f060007;
-        public static int reversal=0x7f060003;
+        public static int bottom_layout=0x7f060009;
+        public static int media_recorder_surfaceview=0x7f060006;
+        public static int media_recorder_text=0x7f06000c;
+        public static int record_controller=0x7f06000b;
+        public static int record_preview=0x7f060007;
+        public static int record_progress=0x7f060008;
+        public static int reversal=0x7f060004;
         public static int shan=0x7f060002;
-        public static int successful=0x7f060004;
+        public static int successful=0x7f060005;
         public static int title_back=0x7f060001;
         public static int title_layout=0x7f060000;
-        public static int title_next=0x7f060009;
+        public static int title_next=0x7f06000a;
+        public static int v=0x7f060003;
     }
     public static final class layout {
         public static int recorder=0x7f030000;

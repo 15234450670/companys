@@ -60,11 +60,11 @@
 
             <TextView
                 android:id="@+id/shequ_time"
-                style="@style/text_white_style_30"
+                style="@style/text_white_style_24"
                 android:layout_below="@+id/shequ_name"
                 android:text=""
                 android:textSize="@dimen/spacing_20"
-                android:textColor="@color/black"/>
+                android:textColor="#666666"/>
         </RelativeLayout>
     </LinearLayout>
     <TextView
@@ -75,7 +75,6 @@
         android:textSize="@dimen/spacing_20"
         android:maxLines="2"
         android:text=""
-
         android:visibility="gone"
         android:textColor="#666666"/>
     <TextView
@@ -94,7 +93,7 @@
         android:layout_marginLeft="@dimen/spacing_20"
         android:layout_marginRight="@dimen/spacing_20"
         android:text=""
-
+        android:maxLines="2"
         android:textColor="#666666"/>
 
     <View

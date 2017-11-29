@@ -1,11 +1,14 @@
 package mr.li.dance.ui.activitys.newActivitys;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.yanzhenjie.recyclerview.swipe.Closeable;
 import com.yanzhenjie.recyclerview.swipe.OnSwipeMenuItemClickListener;
@@ -127,7 +130,8 @@ public class Shequ_look extends SwipeListActivity {
                 closeable.smoothCloseMenu();// 关闭被点击的菜单。
                 if (direction == SwipeMenuRecyclerView.RIGHT_DIRECTION) {
                     DataBean homeItem = adapter.getItem(adapterPosition);
-                    cancelCollect(homeItem);
+                   // cancelCollect(homeItem);
+                    Dialogs( homeItem);
                 }
             }
         };
@@ -151,7 +155,7 @@ public class Shequ_look extends SwipeListActivity {
                 String userId = UserInfoManager.getSingleton().getUserId(Shequ_look.this);
                 if (userid.equals(userId)) {
                     int width = getResources().getDimensionPixelSize(R.dimen.spacing_99);
-                    int height = getResources().getDimensionPixelSize(R.dimen.spacing_99);
+                    int height = getResources().getDimensionPixelSize(R.dimen.spacing_135);
                     int textsize = getResources().getDimensionPixelSize(R.dimen.textsize12);
                     // 添加右侧的，如果不添加，则右侧不会出现菜单。
                     {
@@ -170,7 +174,32 @@ public class Shequ_look extends SwipeListActivity {
         };
         return swipeMenuCreator;
     }
+    private void Dialogs(final DataBean homeItem) {
+        AlertDialog dialog = new AlertDialog.Builder(mContext)
+                .setTitle("提示")
+                .setMessage("是否取消关注?")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(mContext, "已取消关注", Toast.LENGTH_SHORT).show();
+                        cancelCollect(homeItem);
+                        dialogInterface.dismiss();
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
 
+                        dialogInterface.dismiss();
+                    }
+                })
+                .create();
+        dialog.show();
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
+        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+        dialog.setCanceledOnTouchOutside(false);
+
+    }
 
     public static void lunch(Context context, String id) {
         Intent intent = new Intent(context, Shequ_look.class);

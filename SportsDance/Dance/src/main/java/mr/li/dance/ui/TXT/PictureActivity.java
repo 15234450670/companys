@@ -41,7 +41,6 @@ import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.NToast;
 import mr.li.dance.utils.UserInfoManager;
 
-import static mr.li.dance.R.id.input_zw;
 
 /**
  * 作者: SuiFeng
@@ -94,11 +93,14 @@ public class PictureActivity extends BaseActivity {
     @Override
     public void onHeadRightButtonClick(View v) {
         super.onHeadRightButtonClick(v);
+
         String title = input_tw.getText().toString().trim();
         String content = input_content.getText().toString().trim();
+
         String userId = UserInfoManager.getSingleton().getUserId(this);
         Request<String> request = ParameterUtils.getSingleton().getPersonAddDongTai(userId, 1, title, content);
         request(AppConfigs.FA_DONGTAI, request, false);
+
     }
 
     @Override
@@ -106,7 +108,7 @@ public class PictureActivity extends BaseActivity {
         super.initDatas();
         input_tw = (EditText) mDanceViewHolder.getView(R.id.input_tw);
         tw_zs = mDanceViewHolder.getTextView(R.id.tw_zs);
-        input_content = (EditText) mDanceViewHolder.getView(input_zw);
+        input_content = (EditText) mDanceViewHolder.getView(R.id.input_zw);
         gv_tjtp = (GridView) mDanceViewHolder.getView(R.id.gv_tjtp);
         LimitTitle();
     }
@@ -152,8 +154,9 @@ public class PictureActivity extends BaseActivity {
             PersonTuWen reponseResult = JsonMananger.getReponseResult(response, PersonTuWen.class);
             dynamic_id = reponseResult.getDynamic_id();
             if (allSelectedPicture.size() != 0) {
+
                 for (int i = 0; i < allSelectedPicture.size(); i++) {
-                    Log.e("allSelectedPicture",allSelectedPicture.get(i)) ;
+                    Log.e("allSelectedPicture", allSelectedPicture.get(i));
                     z++;
                     File file = new File(allSelectedPicture.get(i));
                     File file1 = picCompressor(file);
@@ -179,12 +182,14 @@ public class PictureActivity extends BaseActivity {
                     allSelectedPicture.clear();
                     gridAdapter.notifyDataSetChanged();*/
                     Toast.makeText(mContext, "图文发布完成", Toast.LENGTH_SHORT).show();
+
                     finish();
                 }
             } else {
                 input_tw.setText("");
                 input_content.setText("");
                 NToast.shortToast(this, reponseResult.getData());
+
             }
 
         }
@@ -276,6 +281,7 @@ public class PictureActivity extends BaseActivity {
             startActivityForResult(intent, REQUEST_PICK);
         }
     }
+
     @SuppressWarnings("unchecked")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -308,4 +314,6 @@ public class PictureActivity extends BaseActivity {
                 .compressToFile(file);
         return compressedImage;
     }
+
+
 }

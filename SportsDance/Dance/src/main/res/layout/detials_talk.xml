@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+              android:layout_marginTop="@dimen/spacing_20"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -63,10 +64,10 @@
 
                 <TextView
                     android:id="@+id/shequ_time"
-                    style="@style/text_white_style_30"
+                    style="@style/text_white_style_24"
                     android:layout_below="@+id/shequ_name"
                     android:text=""
-                    android:textColor="@color/black"/>
+                    android:textColor="#666666"/>
             </RelativeLayout>
         </LinearLayout>
 
