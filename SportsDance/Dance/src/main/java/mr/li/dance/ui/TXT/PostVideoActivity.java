@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewStub;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -246,6 +247,7 @@ public class PostVideoActivity extends BaseActivity implements View.OnClickListe
                     Toast.makeText(mContext, "视频上传成功", Toast.LENGTH_SHORT).show();
                     // popupWindow.dismiss();
                     hideProgress();
+                    hintKbTwo();
                     finish();
 
                 }
@@ -302,6 +304,18 @@ public class PostVideoActivity extends BaseActivity implements View.OnClickListe
     public void hideProgress() {
         if (mProgressDialog != null) {
             mProgressDialog.dismiss();
+        }
+    }
+
+    /**
+     * 关闭软键盘
+     */
+    private void hintKbTwo() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm.isActive() && getCurrentFocus() != null) {
+            if (getCurrentFocus().getWindowToken() != null) {
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
         }
     }
 

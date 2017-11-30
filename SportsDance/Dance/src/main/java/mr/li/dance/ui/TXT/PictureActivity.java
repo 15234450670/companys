@@ -1,5 +1,6 @@
 package mr.li.dance.ui.TXT;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -156,7 +158,6 @@ public class PictureActivity extends BaseActivity {
             if (allSelectedPicture.size() != 0) {
 
                 for (int i = 0; i < allSelectedPicture.size(); i++) {
-                    Log.e("allSelectedPicture", allSelectedPicture.get(i));
                     z++;
                     File file = new File(allSelectedPicture.get(i));
                     File file1 = picCompressor(file);
@@ -182,7 +183,7 @@ public class PictureActivity extends BaseActivity {
                     allSelectedPicture.clear();
                     gridAdapter.notifyDataSetChanged();*/
                     Toast.makeText(mContext, "图文发布完成", Toast.LENGTH_SHORT).show();
-
+                    hintKbTwo();
                     finish();
                 }
             } else {
@@ -194,7 +195,6 @@ public class PictureActivity extends BaseActivity {
 
         }
     }
-
 
     /**
      * 展示图片的GridView的适配器
@@ -315,5 +315,15 @@ public class PictureActivity extends BaseActivity {
         return compressedImage;
     }
 
-
+    /**
+     * 关闭软键盘
+     */
+    private void hintKbTwo() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm.isActive() && getCurrentFocus() != null) {
+            if (getCurrentFocus().getWindowToken() != null) {
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        }
+    }
 }

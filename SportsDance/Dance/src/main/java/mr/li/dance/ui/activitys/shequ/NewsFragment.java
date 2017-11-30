@@ -65,7 +65,6 @@ public class NewsFragment extends BaseListFragment {
         adapter = new SheQuAdapter(getActivity(), this);
         return adapter;
     }
-
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
