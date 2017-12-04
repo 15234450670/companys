@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.umeng.analytics.MobclickAgent;
@@ -64,7 +66,7 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
     private ImageView      imageView;
     private PersonInfo     titleData;
     private RelativeLayout editTextBodyLl;
-    private ImageView      sendIv;
+    private TextView       sendIv;
     private EditText       circleEt;
     boolean isCollected;
     private String id;
@@ -90,7 +92,7 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
         listViewUtils = (RecyclerView) mDanceViewHolder.getView(R.id.list_view);
         imageView = mDanceViewHolder.getImageView(R.id.details_look);
         editTextBodyLl = ((RelativeLayout) mDanceViewHolder.getView(R.id.editTextBodyLl));
-        sendIv = mDanceViewHolder.getImageView(R.id.sendIv);
+        sendIv = mDanceViewHolder.getTextView(R.id.sendIv);
         circleEt = mDanceViewHolder.getEditText(R.id.circleEt);
         mScrollView = ((ScrollView) findViewById(R.id.scrollView));
         editTextBodyLl.addOnLayoutChangeListener(this);
@@ -156,7 +158,7 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
                 }
             }, false, false);
         }
-
+        initDatas();
     }
 
     @Override
@@ -166,7 +168,6 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
         if (what == AppConfigs.person_details) {
             SheQuDetailsResponse reponseResult = JsonMananger.getReponseResult(response, SheQuDetailsResponse.class);
             data = reponseResult.getData();
-
             if (!MyStrUtil.isEmpty(data)) {
                 id = data.getId();
                 dataId = data.getId();
@@ -260,9 +261,8 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
                         break;
                     case "分享":
                         ShareUtils shareUtils = new ShareUtils(SheQuPicDetails.this);
-                        String shareUrl = String.format(AppConfigs.shequ_detial, data.getId());
                         String mShareContent = data.getTitle();
-                        shareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_21, shareUrl, mShareContent);
+                        shareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_21, AppConfigs.shequ_detial + data.getId(), mShareContent);
                         break;
                     case "举报":
 
@@ -388,9 +388,13 @@ public class SheQuPicDetails extends BaseActivity implements View.OnClickListene
                 request(AppConfigs.user_collection, personCancelLook, false);
                 break;
             case R.id.sendIv:
-                reuqestNet(id, type);
-                SoftInputUtils.closeInput(this, getCurrentFocus());
-                circleEt.getText().clear();
+                String s = circleEt.getText().toString();
+                if (!TextUtils.isEmpty(s)) {
+                    reuqestNet(id, type);
+                    SoftInputUtils.closeInput(this, getCurrentFocus());
+                    circleEt.getText().clear();
+                }
+
                 break;
         }
     }

@@ -11,9 +11,8 @@
 
         <Button
             android:id="@+id/btn_back"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_alignParentLeft="true"
+            android:layout_width="15dp"
+            android:layout_height="20dp"
             android:layout_centerVertical="true"
             android:layout_margin="8dp"
             android:background="@drawable/back_icon"

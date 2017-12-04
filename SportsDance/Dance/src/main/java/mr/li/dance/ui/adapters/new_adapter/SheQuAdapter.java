@@ -102,16 +102,17 @@ public class SheQuAdapter extends DanceBaseAdapter {
                 OnePic(holder);
                 ImageView imageView = holder.danceViewHolder.getImageView(R.id.sq_ship_iv);
                 imageView.setVisibility(View.GONE);
-                holder.danceViewHolder.setImageByUrlOrFilePath(R.id.imageView, mDatas.get(position).getPicture_arr().get(0), R.drawable.default_banner);
+               // holder.danceViewHolder.setImageByUrlOrFilePath(R.id.imageView, mDatas.get(position).getPicture_arr().get(0), R.drawable.default_banner);
+                 holder.danceViewHolder.setImageByUrlOrFilePath1(R.id.imageView, mDatas.get(position).getPicture_arr().get(0), R.drawable.default_banner);
             } else if (picture_arr.size() == 2) {
                 TwoPic(holder);
-                holder.danceViewHolder.setImageByUrlOrFilePath(R.id.imageView_two_1, mDatas.get(position).getPicture_arr().get(0), R.drawable.default_banner);
-                holder.danceViewHolder.setImageByUrlOrFilePath(R.id.imageView_two_2, mDatas.get(position).getPicture_arr().get(1), R.drawable.default_banner);
+                holder.danceViewHolder.setImageByUrlOrFilePath1(R.id.imageView_two_1, mDatas.get(position).getPicture_arr().get(0), R.drawable.default_banner);
+                holder.danceViewHolder.setImageByUrlOrFilePath1(R.id.imageView_two_2, mDatas.get(position).getPicture_arr().get(1), R.drawable.default_banner);
             } else if (picture_arr.size() >= 3) {
                 ThreePic(holder);
-                holder.danceViewHolder.setImageByUrlOrFilePath(R.id.imageView_three_1, mDatas.get(position).getPicture_arr().get(0), R.drawable.default_banner);
-                holder.danceViewHolder.setImageByUrlOrFilePath(R.id.imageView_three_2, mDatas.get(position).getPicture_arr().get(1), R.drawable.default_banner);
-                holder.danceViewHolder.setImageByUrlOrFilePath(R.id.imageView_three_3, mDatas.get(position).getPicture_arr().get(2), R.drawable.default_banner);
+                holder.danceViewHolder.setImageByUrlOrFilePath1(R.id.imageView_three_1, mDatas.get(position).getPicture_arr().get(0), R.drawable.default_banner);
+                holder.danceViewHolder.setImageByUrlOrFilePath1(R.id.imageView_three_2, mDatas.get(position).getPicture_arr().get(1), R.drawable.default_banner);
+                holder.danceViewHolder.setImageByUrlOrFilePath1(R.id.imageView_three_3, mDatas.get(position).getPicture_arr().get(2), R.drawable.default_banner);
             }
 
         } else {

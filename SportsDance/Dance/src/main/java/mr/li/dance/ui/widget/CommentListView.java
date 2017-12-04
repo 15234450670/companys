@@ -13,11 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import mr.li.dance.R;
 import mr.li.dance.models.DetailsInfo;
-import mr.li.dance.ui.activitys.base.DanceApplication;
 import mr.li.dance.ui.spannable.CircleMovementMethod;
 import mr.li.dance.ui.spannable.SpannableClickable;
 import mr.li.dance.utils.UrlUtils;
@@ -128,10 +126,10 @@ public class CommentListView extends LinearLayout {
         if (!TextUtils.isEmpty(toReplyName)) {
 
 
-            if (!name.equals(toReplyName)) {
-                builder.append(" 回复 ");
-                builder.append(setClickableSpan(name, mDatas.getId()));
-            }
+            //  if (!name.equals(toReplyName)) {
+            builder.append(" 回复 ");
+            builder.append(setClickableSpan(name, mDatas.getId()));
+            //  }
 
         }
         builder.append(": ");
@@ -173,7 +171,7 @@ public class CommentListView extends LinearLayout {
         subjectSpanText.setSpan(new SpannableClickable(itemColor) {
                                     @Override
                                     public void onClick(View widget) {
-                                        Toast.makeText(DanceApplication.instances, textStr + " &id = " + id, Toast.LENGTH_SHORT).show();
+                                        //   Toast.makeText(DanceApplication.instances, textStr + " &id = " + id, Toast.LENGTH_SHORT).show();
                                     }
                                 }, 0, subjectSpanText.length(),
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);

@@ -8,8 +8,8 @@ package mr.li.dance.utils;
 
 public class AppConfigs {
     //  private final static String MAINurl = "http://work.cdsf.org.cn";//测试环境
-    private final static String MAINurl = "http://kf.cdsf.org.cn";//测试环境
-    //    private final static String MAINurl = "http://cdsf.org.cn";//正式环境
+      private final static String MAINurl = "http://kf.cdsf.org.cn";//测试环境
+    //  private final static String MAINurl = "http://cdsf.org.cn";//正式环境
 
     private final static String DomainUrl = MAINurl + "/mobileClient";
     private final static String SHAREURL  = MAINurl + "/h5";
@@ -28,6 +28,7 @@ public class AppConfigs {
     public final static String tach_detial    = SHAREURL + "/share.spjx?id=";
     //社区分享
     public final static String shequ_detial   = SHAREURL + "/share.shequ?id=";
+
     //红包活动
     public final static String money_chou     = SHAREURL;
     //赛事规则，赛事设项 赛程表 分享

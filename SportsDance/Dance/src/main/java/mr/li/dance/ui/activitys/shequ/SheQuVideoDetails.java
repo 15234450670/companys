@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -73,7 +74,7 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
     private ArrayList<DetailsInfo> detailsInfo;
     private DetailsListAdapter     adapter;
     private RelativeLayout         editTextBodyLl;
-    private ImageView              sendIv;
+    private TextView               sendIv;
     private EditText               circleEt;
     private ScrollView             mScrollView;
     private int                    keyHeight;
@@ -94,7 +95,7 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
         setTitle("视频详情");
         listViewUtils = (RecyclerView) mDanceViewHolder.getView(R.id.list_view);
         editTextBodyLl = ((RelativeLayout) mDanceViewHolder.getView(R.id.editTextBodyLl));
-        sendIv = mDanceViewHolder.getImageView(R.id.sendIv);
+        sendIv = mDanceViewHolder.getTextView(R.id.sendIv);
         circleEt = mDanceViewHolder.getEditText(R.id.circleEt);
         mScrollView = ((ScrollView) findViewById(R.id.scrollView));
         editTextBodyLl.addOnLayoutChangeListener(this);
@@ -160,7 +161,7 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
                     }
                 });
                 int is_upvote = data.getIs_upvote();
-                isDianZan = (1!= is_upvote);
+                isDianZan = (1 != is_upvote);
             }
             String path = data.getVideo().get(0);
 
@@ -257,6 +258,7 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
 
             }
         }, false, false);
+        initDatas();
     }
 
     //删除动态
@@ -356,9 +358,13 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
                 request(AppConfigs.user_collection, personCancelLook, false);
                 break;
             case R.id.sendIv:
-                reuqestNet(id, type);
-                SoftInputUtils.closeInput(this, getCurrentFocus());
-                circleEt.getText().clear();
+                String s = circleEt.getText().toString();
+                if (!TextUtils.isEmpty(s)) {
+                    reuqestNet(id, type);
+                    SoftInputUtils.closeInput(this, getCurrentFocus());
+                    circleEt.getText().clear();
+                }
+
                 break;
         }
     }
@@ -388,9 +394,10 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
                         break;
                     case "分享":
                         ShareUtils shareUtils = new ShareUtils(SheQuVideoDetails.this);
-                        String shareUrl = String.format(AppConfigs.shequ_detial, data.getId());
+
                         String mShareContent = data.getTitle();
-                        shareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_21, shareUrl, mShareContent);
+                        shareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_21, AppConfigs.shequ_detial+data.getId(), mShareContent);
+
                         break;
                     case "举报":
 
@@ -410,6 +417,7 @@ public class SheQuVideoDetails extends BaseActivityApp implements View.OnClickLi
             dialog.dispalyOther();//别人的动态
         }
     }
+
     //点赞
     public void onHeadRightButtonClick2(View v) {
         int operation = isDianZan ? 1 : 2;

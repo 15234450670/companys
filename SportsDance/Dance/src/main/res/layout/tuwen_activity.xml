@@ -17,7 +17,7 @@
             android:background="@null"
             android:gravity="center_vertical"
             android:hint="图文标题..."
-            android:textColor="#bbbbbb"
+            android:textColor="@color/black"
             android:textColorHint="#bbbbbb"
             android:textSize="@dimen/textsize24"/>
 
@@ -49,7 +49,7 @@
         android:background="@null"
         android:gravity="left"
         android:hint="再说点什么..."
-        android:textColor="#bbbbbb"
+        android:textColor="@color/black"
         android:textColorHint="#bbbbbb"
         android:textSize="@dimen/textsize30"/>
 

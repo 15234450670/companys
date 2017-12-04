@@ -1,94 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fadeScrollbars="true"
+            android:fillViewport="true"
+            android:orientation="vertical">
 
-    <!--<RelativeLayout
-        android:id="@+id/fabushiping_rl_sp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/spacing_378"
-        android:layout_marginLeft="@dimen/spacing_40"
-        android:layout_marginRight="@dimen/spacing_40"
-        android:layout_marginTop="@dimen/spacing_30"
-        android:background="#e7e7e7">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/iv"
+        <ViewStub
+            android:id="@+id/stub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/spacing_150"
-            android:src="@drawable/shipin"/>
+            android:inflatedId="@+id/subTree"
+            android:layout="@layout/video_stubview"/>
 
-        <TextView
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/spacing_20"
+            android:layout_marginRight="@dimen/spacing_20"
+            android:layout_marginTop="@dimen/spacing_30"
+            android:background="#e1e1e1"/>
+
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/iv"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/spacing_15"
-            android:gravity="center"
-            android:text="拍视屏"
-            android:textColor="#999999"
-            android:textSize="@dimen/textsize24"/>
-    </RelativeLayout>-->
-    <ViewStub
-        android:id="@+id/stub"
-        android:inflatedId="@+id/subTree"
-        android:layout="@layout/video_stubview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/spacing_20"
-        android:layout_marginRight="@dimen/spacing_20"
-        android:layout_marginTop="@dimen/spacing_30"
-        android:background="#e1e1e1"/>
+            android:layout_height="wrap_content">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/fb_title"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_80"
+                android:layout_marginLeft="@dimen/spacing_45"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="视屏标题..."
+                android:textColor="@color/black"
+                android:textColorHint="#bbbbbb"
+                android:textSize="@dimen/textsize24"/>
+
+            <TextView
+                android:id="@+id/mzs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="@dimen/spacing_40"
+                android:text="25"
+                android:textColor="#bbbbbb"
+                android:textSize="@dimen/textsize18"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/spacing_20"
+            android:layout_marginRight="@dimen/spacing_20"
+            android:background="#e1e1e1"/>
 
         <EditText
-            android:id="@+id/fb_title"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/spacing_80"
-            android:layout_marginLeft="@dimen/spacing_45"
+            android:id="@+id/fb_content"
+            style="@style/text_white_style_30"
+            android:layout_margin="@dimen/spacing_40"
             android:background="@null"
-            android:gravity="center_vertical"
-            android:hint="视屏标题..."
-            android:textColor="#bbbbbb"
-            android:textColorHint="#bbbbbb"
-            android:textSize="@dimen/textsize24"/>
+            android:hint="再说点什么..."
+            android:textColor="#333333"
+            android:textColorHint="#bbbbbb"/>
+    </LinearLayout>
 
-        <TextView
-            android:id="@+id/mzs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerInParent="true"
-            android:layout_marginRight="@dimen/spacing_40"
-            android:text="25"
-            android:textColor="#bbbbbb"
-            android:textSize="@dimen/textsize18"/>
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/spacing_20"
-        android:layout_marginRight="@dimen/spacing_20"
-        android:background="#e1e1e1"/>
-
-    <EditText
-        android:id="@+id/fb_content"
-        style="@style/text_white_style_30"
-        android:layout_margin="@dimen/spacing_40"
-        android:background="@null"
-        android:hint="再说点什么..."
-        android:textColor="#333333"
-        android:textColorHint="#bbbbbb"/>
-</LinearLayout>
+</ScrollView>

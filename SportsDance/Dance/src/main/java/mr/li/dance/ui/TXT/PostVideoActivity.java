@@ -87,6 +87,13 @@ public class PostVideoActivity extends BaseActivity implements View.OnClickListe
     }
 
     @Override
+    public void onHeadLeftButtonClick(View v) {
+        super.onHeadLeftButtonClick(v);
+        finish();
+        hintKbTwo();
+    }
+
+    @Override
     public void initDatas() {
         super.initDatas();
         ViewStub stub = (ViewStub) mDanceViewHolder.getView(R.id.stub);
@@ -115,16 +122,17 @@ public class PostVideoActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void onHeadRightButtonClick(View v) {
         super.onHeadRightButtonClick(v);
-        if (TextUtils.isEmpty(fb_title.getText().toString()) && TextUtils.isEmpty(fb_content.getText().toString())) {
+        if (MyStrUtil.isEmpty(fb_title.getText().toString()) || MyStrUtil.isEmpty(fb_content.getText().toString())) {
             Toast.makeText(mContext, "标题与内容不能为空", Toast.LENGTH_SHORT).show();
             return;
-        } else {
-            showProgress("", getString(R.string.record_camera_progress_message));
-            // alertDialog.show();
-            String userId = UserInfoManager.getSingleton().getUserId(this);
-            Request<String> takeDynamicId = ParameterUtils.getSingleton().getPersonAddDongTai(userId, 2, fb_title.getText().toString(), fb_content.getText().toString());
-            request(AppConfigs.FA_DONGTAI, takeDynamicId, false);
         }
+
+        showProgress("", getString(R.string.record_camera_progress_message));
+        // alertDialog.show();
+        String userId = UserInfoManager.getSingleton().getUserId(this);
+        Request<String> takeDynamicId = ParameterUtils.getSingleton().getPersonAddDongTai(userId, 2, fb_title.getText().toString(), fb_content.getText().toString());
+        request(AppConfigs.FA_DONGTAI, takeDynamicId, false);
+
     }
 
     @Override

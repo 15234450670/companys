@@ -162,8 +162,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         match_layout = (BottomRelativeLayout) findViewById(R.id.match_layout);
         //  examination_layout = (BottomRelativeLayout) findViewById(examination_layout);
         mine_layout = (BottomRelativeLayout) findViewById(R.id.mine_layout);
-       fabu_layout = (BottomRelativeLayout) findViewById(R.id.fabu_layout);
-      shequ_layout = (BottomRelativeLayout) findViewById(R.id.shequ_layout);
+        fabu_layout = (BottomRelativeLayout) findViewById(R.id.fabu_layout);
+        shequ_layout = (BottomRelativeLayout) findViewById(R.id.shequ_layout);
         floatImage = (ImageView) findViewById(R.id.floatImage);
 
         home_layout.setOnClickListener(this);

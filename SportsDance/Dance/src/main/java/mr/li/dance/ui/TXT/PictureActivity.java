@@ -40,6 +40,7 @@ import mr.li.dance.models.PersonUpPicSucceed;
 import mr.li.dance.ui.activitys.base.BaseActivity;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
+import mr.li.dance.utils.NLog;
 import mr.li.dance.utils.NToast;
 import mr.li.dance.utils.UserInfoManager;
 
@@ -105,6 +106,7 @@ public class PictureActivity extends BaseActivity {
 
     }
 
+
     @Override
     public void initDatas() {
         super.initDatas();
@@ -113,6 +115,13 @@ public class PictureActivity extends BaseActivity {
         input_content = (EditText) mDanceViewHolder.getView(R.id.input_zw);
         gv_tjtp = (GridView) mDanceViewHolder.getView(R.id.gv_tjtp);
         LimitTitle();
+    }
+
+    @Override
+    public void onHeadLeftButtonClick(View v) {
+        super.onHeadLeftButtonClick(v);
+        finish();
+        hintKbTwo();
     }
 
     //限制标题数量
@@ -167,7 +176,7 @@ public class PictureActivity extends BaseActivity {
                         public void onSucceed(int what, String response) {
                             PersonUpPicSucceed reponseResult1 = JsonMananger.getReponseResult(response, PersonUpPicSucceed.class);
                             mData = reponseResult1.getData();
-                            Log.e("data-->", mData.toString() + z);
+                            NLog.e("data-->", mData.toString() + z);
 
                         }
 
@@ -304,9 +313,9 @@ public class PictureActivity extends BaseActivity {
      */
     private File picCompressor(File file) {
         File compressedImage = new Compressor.Builder(this)
-                .setMaxWidth(640)
-                .setMaxHeight(480)
-                .setQuality(75)
+                .setMaxWidth(1334)
+                .setMaxHeight(750)
+                .setQuality(95)
                 .setCompressFormat(Bitmap.CompressFormat.JPEG)
                 .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
                         Environment.DIRECTORY_PICTURES).getAbsolutePath())

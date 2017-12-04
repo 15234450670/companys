@@ -65,7 +65,9 @@
 
             <ImageView
                 android:id="@+id/examination_icon"
-                style="@style/bottom_icon_style"
+              android:layout_width="20dp"
+                android:layout_height="18dp"
+                android:scaleType="fitXY"
                 android:layout_centerHorizontal="true"
                 android:focusable="false"
                 android:src="@drawable/shequ2"/>
@@ -95,7 +97,9 @@
 
             <ImageView
                 android:id="@+id/examination_icon1"
-                style="@style/bottom_icon_style"
+                android:layout_width="20dp"
+                android:layout_height="18dp"
+                android:scaleType="fitXY"
                 android:layout_centerHorizontal="true"
                 android:focusable="false"
                 android:src="@drawable/fabu_icon"/>

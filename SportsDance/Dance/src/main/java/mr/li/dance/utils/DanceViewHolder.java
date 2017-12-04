@@ -19,8 +19,8 @@ import mr.li.dance.utils.glide.ImageLoaderManager;
 
 public class DanceViewHolder {
     private SparseArray<View> mViews;//集合类，layout里包含的View,以view的id作为key，value是view对象
-    private View itemView;
-    private Context mContext;
+    private View              itemView;
+    private Context           mContext;
 
     public DanceViewHolder(Context context, View mainView) {
         this.itemView = mainView;
@@ -89,9 +89,10 @@ public class DanceViewHolder {
         View view = findViewById(viewId);
         view.setBackgroundResource(resId);
     }
+
     public void setButton(int viewId, int resId) {
         Button view = findViewById(viewId);
-       view.setTextColor(resId);
+        view.setTextColor(resId);
     }
 
     public void setImageResDrawable(int viewId, int resId, int defaultId) {
@@ -102,24 +103,34 @@ public class DanceViewHolder {
 
     }
 
+    public void setImageByUrlOrFilePath1(int viewId, String urlOrFilePath, int defaultId) {
+        ImageView view = getImageView(viewId);
+        if (view != null) {
+            ImageLoaderManager.getSingleton().Loads(mContext, urlOrFilePath, view, defaultId);
+        }
+    }
+
     public void setImageByUrlOrFilePath(int viewId, String urlOrFilePath, int defaultId) {
         ImageView view = getImageView(viewId);
         if (view != null) {
             ImageLoaderManager.getSingleton().Load(mContext, urlOrFilePath, view, defaultId);
         }
     }
+
     public void setImageByUrlOrFilePaths(int viewId, String urlOrFilePath) {
         ImageView view = getImageView(viewId);
         if (view != null) {
             ImageLoaderManager.getSingleton().Load(mContext, urlOrFilePath, view);
         }
     }
-    public void setImageByUrlOrFilePaths1(int viewId,int id) {
+
+    public void setImageByUrlOrFilePaths1(int viewId, int id) {
         ImageView view = getImageView(viewId);
         if (view != null) {
             ImageLoaderManager.getSingleton().Load(mContext, id, view);
         }
     }
+
     public void setRoundImageByUrlOrFilePath(int viewId, String urlOrFilePath, int defaultId) {
         ImageView view = getImageView(viewId);
         if (view != null) {

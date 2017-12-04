@@ -62,6 +62,13 @@ public class ImageLoaderManager {
             e.printStackTrace();
         }
     }
+    public void Loads(Context context, String imgUrl, final ImageView imageView, int defaultDrawable){
+        NLog.d("ImageLoaderManager", "imgUrl = " + imgUrl);
+
+            Glide.with(context).load(imgUrl).asBitmap().centerCrop().dontTransform().dontAnimate().diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(defaultDrawable).into(imageView);
+
+
+    }
 
     public void LoadBySize(Context context, String imgUrl, ImageView imageView, int defaultDrawable, int itemWidth, int itemHeight) {
         float degree = 0f;

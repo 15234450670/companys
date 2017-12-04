@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -97,28 +96,7 @@ public class DetailsListAdapter extends BaseRecyclerAdapter<DetailsInfo> {
         }
         if (position < countAddress) {
             ImageView image = holder.getImageView(R.id.pic_item);
-            int hight = item.getAddress().get(position).getHight();
-            Log.e("hight",hight+"");
-            /*if (hight!=0) {
-                ViewGroup.MarginLayoutParams margin9 = new ViewGroup.MarginLayoutParams(
-                        image.getLayoutParams());
-                margin9.setMargins(20,20,20,0);
-                RelativeLayout.LayoutParams layoutParams9 = new RelativeLayout.LayoutParams(margin9);
-                WindowManager wm = (WindowManager)context
-                        .getSystemService(Context.WINDOW_SERVICE);
-                int width = wm.getDefaultDisplay().getWidth();
-                layoutParams9.height = hight;//设置图片的高度
-                layoutParams9.width = width; //设置图片的宽度
-                image.setScaleType(ImageView.ScaleType.FIT_XY);
-                image.setLayoutParams(layoutParams9);
-                holder.setImageByUrlOrFilePath1(image, item.getAddress().get(position).getAddress(), R.drawable.default_banner);
-            } else {
-                holder.setImageByUrlOrFilePath(R.id.pic_item, item.getAddress().get(position).getAddress(), R.drawable.default_banner);
-
-            }*/
             holder.setImageByUrlOrFilePath1(image, item.getAddress().get(position).getAddress(), R.drawable.default_banner);
-
-
         } else {
             holder.setText(R.id.shequ_time, item.getComm().get(position - countAddress).getComment_time());
             holder.setText(R.id.shequ_name, item.getComm().get(position - countAddress).getUser().get(0).getUsername());
