@@ -45,21 +45,21 @@ import mr.li.dance.R;
 public class SelectPictureActivity extends Activity {
 
     // 最多选择图片的个数
-    private static int MAX_NUM = 9;
+    private static       int MAX_NUM      = 9;
     private static final int TAKE_PICTURE = 520;
 
-    public static final String INTENT_MAX_NUM = "intent_max_num";
+    public static final String INTENT_MAX_NUM          = "intent_max_num";
     public static final String INTENT_SELECTED_PICTURE = "intent_selected_picture";
 
-    private Context context;
-    private GridView gridview;
+    private Context        context;
+    private GridView       gridview;
     private PictureAdapter adapter;
 
     /**
      * 临时的辅助类，用于防止同一个文件夹的多次扫描
      */
-    private HashMap<String, Integer> tmpDir = new HashMap<String, Integer>();
-    private ArrayList<ImageFloder> mDirPaths = new ArrayList<ImageFloder>();
+    private HashMap<String, Integer> tmpDir    = new HashMap<String, Integer>();
+    private ArrayList<ImageFloder>   mDirPaths = new ArrayList<ImageFloder>();
 
     /**
      * 具体下载图片，缓存图片，显示图片的具体执行类，它有两个具体的方法displayImage(...)、loadImage(...)，
@@ -90,9 +90,10 @@ public class SelectPictureActivity extends Activity {
 
     private String cameraPath = null;
 
-    private int isExisted ;
+    private int isExisted;
 
     private ArrayList<String> existedPictureList = new ArrayList<String>();
+    private ImageView btn_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,11 +112,11 @@ public class SelectPictureActivity extends Activity {
         loader = ImageLoader.getInstance();
 
         options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.ic_launcher)//设置图片在下载期间显示的图片
+                .showImageOnLoading(R.drawable.default_banner)//设置图片在下载期间显示的图片
 
-                .showImageForEmptyUri(R.drawable.ic_launcher)//设置图片Uri为空或是错误的时候显示的图片
+                .showImageForEmptyUri(R.drawable.default_banner)//设置图片Uri为空或是错误的时候显示的图片
 
-                .showImageOnFail(R.drawable.ic_launcher)//设置图片加载/解码过程中错误时候显示的图片
+                .showImageOnFail(R.drawable.default_banner)//设置图片加载/解码过程中错误时候显示的图片
 
                 .cacheInMemory(true)//设置下载的图片是否缓存在内存中
 
@@ -216,6 +217,7 @@ public class SelectPictureActivity extends Activity {
         });
 
         listview = (ListView) findViewById(R.id.listview);
+        btn_back = (ImageView) findViewById(R.id.btn_back);
         folderAdapter = new FolderAdapter();
         listview.setAdapter(folderAdapter);
         listview.setOnItemClickListener(new OnItemClickListener() {
@@ -228,6 +230,12 @@ public class SelectPictureActivity extends Activity {
             }
         });
         getThumbnail();
+        btn_back.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
     /**
@@ -276,9 +284,6 @@ public class SelectPictureActivity extends Activity {
         }
     }
 
-    public void back(View v) {
-        onBackPressed();
-    }
 
     class PictureAdapter extends BaseAdapter {
         @Override
@@ -331,13 +336,13 @@ public class SelectPictureActivity extends Activity {
                     public void onClick(View v) {
 
                         //若选中的图片多于所设置的上限，不再加入
-                        if (!v.isSelected() &&  isExisted + selectedPicture.size() + 1 > MAX_NUM) {
+                        if (!v.isSelected() && isExisted + selectedPicture.size() + 1 > MAX_NUM) {
                             Toast.makeText(context, getResources().getString(R.string.chose_at_most) + MAX_NUM + getResources().getString(R.string.sheet), Toast.LENGTH_SHORT).show();
                             return;
                         }
 
                         //二次选择，移除
-                        if (selectedPicture.contains(item.path)|| existedPictureList.contains(item.path)) {
+                        if (selectedPicture.contains(item.path) || existedPictureList.contains(item.path)) {
                             selectedPicture.remove(item.path);
                         } else {
 
@@ -345,10 +350,10 @@ public class SelectPictureActivity extends Activity {
                             selectedPicture.add(item.path);
                         }
 
-                        btn_ok.setEnabled(selectedPicture.size()>0);
-                        btn_ok.setText(getResources().getString(R.string.complete) + (selectedPicture.size()+ isExisted) + "/" + MAX_NUM);
+                        btn_ok.setEnabled(selectedPicture.size() > 0);
+                        btn_ok.setText(getResources().getString(R.string.complete) + (selectedPicture.size() + isExisted) + "/" + MAX_NUM);
 
-                        v.setSelected(selectedPicture.contains(item.path)|| existedPictureList.contains(item.path));
+                        v.setSelected(selectedPicture.contains(item.path) || existedPictureList.contains(item.path));
                     }
                 });
 
@@ -362,7 +367,7 @@ public class SelectPictureActivity extends Activity {
     //自定义的一个类用来缓存convertview
     class ViewHolder {
         ImageView iv;
-        Button checkBox;
+        Button    checkBox;
     }
 
     /**
@@ -413,8 +418,8 @@ public class SelectPictureActivity extends Activity {
     class FolderViewHolder {
         ImageView id_dir_item_image;
         ImageView choose;
-        TextView id_dir_item_name;
-        TextView id_dir_item_count;
+        TextView  id_dir_item_name;
+        TextView  id_dir_item_count;
     }
 
     /**
@@ -422,7 +427,7 @@ public class SelectPictureActivity extends Activity {
      */
     private void getThumbnail() {
         Cursor mCursor = mContentResolver.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                new String[] { MediaStore.Images.ImageColumns.DATA }, "", null,
+                new String[]{MediaStore.Images.ImageColumns.DATA}, "", null,
                 MediaStore.MediaColumns.DATE_ADDED + " DESC");
 
         if (mCursor.moveToFirst()) {

@@ -102,8 +102,8 @@ public class SheQuAdapter extends DanceBaseAdapter {
                 OnePic(holder);
                 ImageView imageView = holder.danceViewHolder.getImageView(R.id.sq_ship_iv);
                 imageView.setVisibility(View.GONE);
-               // holder.danceViewHolder.setImageByUrlOrFilePath(R.id.imageView, mDatas.get(position).getPicture_arr().get(0), R.drawable.default_banner);
-                 holder.danceViewHolder.setImageByUrlOrFilePath1(R.id.imageView, mDatas.get(position).getPicture_arr().get(0), R.drawable.default_banner);
+                // holder.danceViewHolder.setImageByUrlOrFilePath(R.id.imageView, mDatas.get(position).getPicture_arr().get(0), R.drawable.default_banner);
+                holder.danceViewHolder.setImageByUrlOrFilePath1(R.id.imageView, mDatas.get(position).getPicture_arr().get(0), R.drawable.default_banner);
             } else if (picture_arr.size() == 2) {
                 TwoPic(holder);
                 holder.danceViewHolder.setImageByUrlOrFilePath1(R.id.imageView_two_1, mDatas.get(position).getPicture_arr().get(0), R.drawable.default_banner);
@@ -124,7 +124,7 @@ public class SheQuAdapter extends DanceBaseAdapter {
         }
         ImageView imageView = holder.danceViewHolder.getImageView(R.id.shequ_dianz_iv);
         int is_upvote = mDatas.get(position).getIs_upvote();
-        Log.e("is_upvote",is_upvote+"");
+        Log.e("is_upvote", is_upvote + "");
         if (is_upvote == 1) {
             imageView.setImageResource(R.drawable.dianzan2);
         } else {
@@ -197,6 +197,7 @@ public class SheQuAdapter extends DanceBaseAdapter {
         //个人信息
         final ShequInfo.UserBean user = mDatas.get(position).getUser();
         final String userId = UserInfoManager.getSingleton().getUserId(mContext);//自己的ID
+        Log.e("Userid : ",userId);
         final String uid = mDatas.get(position).getUid();//别人的ID
         //点击头像去个人主页
         View view = holder.danceViewHolder.getView(R.id.shequ_ll_min);

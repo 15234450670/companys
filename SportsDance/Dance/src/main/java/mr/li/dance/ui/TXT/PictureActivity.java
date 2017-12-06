@@ -1,17 +1,18 @@
 package mr.li.dance.ui.TXT;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Environment;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import id.zelory.compressor.Compressor;
+import mabeijianxi.camera.util.StringUtils;
 import mr.li.dance.R;
 import mr.li.dance.https.CallServer;
 import mr.li.dance.https.HttpListener;
@@ -42,6 +44,7 @@ import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.NLog;
 import mr.li.dance.utils.NToast;
+import mr.li.dance.utils.TimeOut;
 import mr.li.dance.utils.UserInfoManager;
 
 
@@ -96,16 +99,24 @@ public class PictureActivity extends BaseActivity {
     @Override
     public void onHeadRightButtonClick(View v) {
         super.onHeadRightButtonClick(v);
+        showProgress("", getString(R.string.record_camera_progress_message));
+        if (TimeOut.isFastClick()) {
+            String title = input_tw.getText().toString().trim();
+            String content = input_content.getText().toString().trim();
+            String userId = UserInfoManager.getSingleton().getUserId(this);
+            Request<String> request = ParameterUtils.getSingleton().getPersonAddDongTai(userId, 1, title, content);
+            request(AppConfigs.FA_DONGTAI, request, false);
+        }
 
-        String title = input_tw.getText().toString().trim();
-        String content = input_content.getText().toString().trim();
-
-        String userId = UserInfoManager.getSingleton().getUserId(this);
-        Request<String> request = ParameterUtils.getSingleton().getPersonAddDongTai(userId, 1, title, content);
-        request(AppConfigs.FA_DONGTAI, request, false);
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ImageLoader.getInstance().clearDiskCache();
+        ImageLoader.getInstance().clearMemoryCache();
+    }
 
     @Override
     public void initDatas() {
@@ -162,12 +173,16 @@ public class PictureActivity extends BaseActivity {
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
         if (what == AppConfigs.FA_DONGTAI) {
-            PersonTuWen reponseResult = JsonMananger.getReponseResult(response, PersonTuWen.class);
+            final PersonTuWen reponseResult = JsonMananger.getReponseResult(response, PersonTuWen.class);
             dynamic_id = reponseResult.getDynamic_id();
             if (allSelectedPicture.size() != 0) {
-
                 for (int i = 0; i < allSelectedPicture.size(); i++) {
                     z++;
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    options.inJustDecodeBounds = true;
+                    BitmapFactory.decodeFile(allSelectedPicture.get(i), options);
+                    String type = options.outMimeType;
+                    Log.e("image type -> ", type);
                     File file = new File(allSelectedPicture.get(i));
                     File file1 = picCompressor(file);
                     Request<String> getfabutupian = ParameterUtils.getSingleton().getfabutupian(1, dynamic_id, file1);
@@ -180,6 +195,7 @@ public class PictureActivity extends BaseActivity {
 
                         }
 
+
                         @Override
                         public void onFailed(int what, int responseCode, String response) {
                             Log.e("response:", response + "-------" + responseCode);
@@ -191,18 +207,36 @@ public class PictureActivity extends BaseActivity {
                     input_content.setText("");
                     allSelectedPicture.clear();
                     gridAdapter.notifyDataSetChanged();*/
-                    Toast.makeText(mContext, "图文发布完成", Toast.LENGTH_SHORT).show();
                     hintKbTwo();
-                    finish();
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(mContext, "图文发布完成", Toast.LENGTH_SHORT).show();
+                            hideProgress();
+                            finish();
+                        }
+                    }, 3000);
+
+
                 }
             } else {
                 input_tw.setText("");
                 input_content.setText("");
-                NToast.shortToast(this, reponseResult.getData());
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        NToast.shortToast(PictureActivity.this, reponseResult.getData());
+                        hideProgress();
+
+                    }
+                }, 3000);
 
             }
 
         }
+
     }
 
     /**
@@ -312,16 +346,16 @@ public class PictureActivity extends BaseActivity {
      * @return
      */
     private File picCompressor(File file) {
-        File compressedImage = new Compressor.Builder(this)
-                .setMaxWidth(1334)
-                .setMaxHeight(750)
+       File compressedImageFile = Compressor.getDefault(this).compressToFile(file);
+        /*File compressedImage = new Compressor.Builder(this)
+
                 .setQuality(95)
                 .setCompressFormat(Bitmap.CompressFormat.JPEG)
                 .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
                         Environment.DIRECTORY_PICTURES).getAbsolutePath())
                 .build()
-                .compressToFile(file);
-        return compressedImage;
+                .compressToFile(file);*/
+        return compressedImageFile;
     }
 
     /**
@@ -333,6 +367,40 @@ public class PictureActivity extends BaseActivity {
             if (getCurrentFocus().getWindowToken() != null) {
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
+        }
+    }
+
+
+
+    public ProgressDialog showProgress(String title, String message) {
+        return showProgress(title, message, -1);
+    }
+
+    protected ProgressDialog mProgressDialog;
+
+    public ProgressDialog showProgress(String title, String message, int theme) {
+        if (mProgressDialog == null) {
+            if (theme > 0)
+                mProgressDialog = new ProgressDialog(this, theme);
+            else
+                mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            mProgressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            mProgressDialog.setCanceledOnTouchOutside(false);// 不能取消
+            mProgressDialog.setCancelable(false);
+            mProgressDialog.setIndeterminate(true);// 设置进度条是否不明确
+        }
+
+        if (!StringUtils.isEmpty(title))
+            mProgressDialog.setTitle(title);
+        mProgressDialog.setMessage(message);
+        mProgressDialog.show();
+        return mProgressDialog;
+    }
+
+    public void hideProgress() {
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
         }
     }
 }

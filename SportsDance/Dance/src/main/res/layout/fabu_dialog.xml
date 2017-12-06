@@ -15,6 +15,7 @@
         android:padding="@dimen/spacing_20"
         android:src="@drawable/guanbi2"/>
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -97,7 +97,7 @@
 
             <ImageView
                 android:id="@+id/examination_icon1"
-                android:layout_width="20dp"
+                android:layout_width="25dp"
                 android:layout_height="18dp"
                 android:scaleType="fitXY"
                 android:layout_centerHorizontal="true"

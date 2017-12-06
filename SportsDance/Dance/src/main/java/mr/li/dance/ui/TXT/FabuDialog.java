@@ -34,10 +34,10 @@ import mr.li.dance.R;
  * 修订历史:
  */
 public class FabuDialog extends Dialog implements View.OnClickListener {
-    Context mcontext;
+    Context             mcontext;
     DialogClickListener dialogClickListener;
-    private final int PERMISSION_REQUEST_CODE = 0x001;
-    private static final String[] permissionManifest = {
+    private final        int      PERMISSION_REQUEST_CODE = 0x001;
+    private static final String[] permissionManifest      = {
             Manifest.permission.CAMERA,
             Manifest.permission.RECORD_AUDIO,
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -82,6 +82,7 @@ public class FabuDialog extends Dialog implements View.OnClickListener {
         this.dismiss();
     }
 
+
     @Override
     public void onClick(View view) {
         this.dismiss();
@@ -102,6 +103,7 @@ public class FabuDialog extends Dialog implements View.OnClickListener {
                 break;
         }
     }
+
 
     private void initSmallVideo() {
         // 设置拍摄视频缓存路径
@@ -140,31 +142,31 @@ public class FabuDialog extends Dialog implements View.OnClickListener {
     }
 
     private void playVideo() {
-//        BaseMediaBitrateConfig recordMode;
-//        BaseMediaBitrateConfig compressMode = null;
+//                BaseMediaBitrateConfig recordMode;
+//                BaseMediaBitrateConfig compressMode = null;
 //
-//        recordMode = new AutoVBRMode();
-//        recordMode.setVelocity("medium");
-
-//      FFMpegUtils.captureThumbnails("/storage/emulated/0/DCIM/mabeijianxi/1496455533800/1496455533800.mp4", "/storage/emulated/0/DCIM/mabeijianxi/1496455533800/1496455533800.jpg", "1");
-
-//        MediaRecorderConfig config = new MediaRecorderConfig.Buidler()
-//                .fullScreen(false)
-//                .recordTimeMax(Integer.valueOf(60000))
-//                .recordTimeMin(Integer.valueOf(3000))
-//                .maxFrameRate(Integer.valueOf(maxFramerate))
-//                .videoBitrate(Integer.valueOf(bitrate))
-//                .captureThumbnailsTime(1)
-//                .build();
-//        MediaRecorderActivity.goSmallVideoRecorder((Activity) mcontext, PlayerVideoActivity.class.getName(), config);
+//                recordMode = new AutoVBRMode();
+//                recordMode.setVelocity("medium");
+//
+//              FFMpegUtils.captureThumbnails("/storage/emulated/0/DCIM/mabeijianxi/1496455533800/1496455533800.mp4", "/storage/emulated/0/DCIM/mabeijianxi/1496455533800/1496455533800.jpg", "1");
+//
+//                MediaRecorderConfig config = new MediaRecorderConfig.Buidler()
+//                        .fullScreen(false)
+//                        .recordTimeMax(Integer.valueOf(60000))
+//                        .recordTimeMin(Integer.valueOf(3000))
+//                        .maxFrameRate(Integer.valueOf(maxFramerate))
+//                        .videoBitrate(Integer.valueOf(bitrate))
+//                        .captureThumbnailsTime(1)
+//                        .build();
+//                MediaRecorderActivity.goSmallVideoRecorder((Activity) mcontext, PlayerVideoActivity.class.getName(), config);
 
 
         MediaRecorderConfig config = new MediaRecorderConfig.Buidler()
                 .doH264Compress(new AutoVBRMode()
-//                        .setVelocity(BaseMediaBitrateConfig.Velocity.ULTRAFAST)
+                        //                        .setVelocity(BaseMediaBitrateConfig.Velocity.ULTRAFAST)
                 )
                 .setMediaBitrateConfig(new AutoVBRMode()
-//                        .setVelocity(BaseMediaBitrateConfig.Velocity.ULTRAFAST)
+                        //                        .setVelocity(BaseMediaBitrateConfig.Velocity.ULTRAFAST)
                 )
                 .smallVideoWidth(480)
                 .smallVideoHeight(360)

@@ -8,15 +8,14 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
        >
-
-        <Button
+        <ImageView
             android:id="@+id/btn_back"
-            android:layout_width="15dp"
-            android:layout_height="20dp"
+            android:layout_width="20dp"
+            android:layout_height="17dp"
             android:layout_centerVertical="true"
-            android:layout_margin="8dp"
-            android:background="@drawable/back_icon"
-            android:onClick="back" />
+            android:gravity="center_vertical"
+            android:src="@drawable/back_icon"/>
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -81,6 +80,7 @@
         </RelativeLayout>
 
         <ListView
+            android:background="@color/white"
             android:id="@+id/listview"
             android:layout_width="match_parent"
             android:layout_height="360dp"

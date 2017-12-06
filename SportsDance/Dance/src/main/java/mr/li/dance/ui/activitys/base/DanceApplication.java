@@ -50,7 +50,7 @@ public class DanceApplication extends Application {
     public static boolean cdeInitSuccess;
 
     public static DanceApplication instances;
-    private String mDeviceToken;
+    private       String           mDeviceToken;
 
 
     public static DanceApplication getInstance() {
@@ -162,8 +162,8 @@ public class DanceApplication extends Application {
         }
     }
 
-    private static final String TAG = DanceApplication.class.getName();
-    public static final String UPDATE_STATUS_ACTION = "com.umeng.message.example.action.UPDATE_STATUS";
+    private static final String TAG                  = DanceApplication.class.getName();
+    public static final  String UPDATE_STATUS_ACTION = "com.umeng.message.example.action.UPDATE_STATUS";
     private Handler handler;
 
     private void initPush() {
@@ -234,13 +234,13 @@ public class DanceApplication extends Application {
         UmengNotificationClickHandler notificationClickHandler = new UmengNotificationClickHandler() {
             @Override
             public void dealWithCustomAction(Context context, UMessage msg) {
+
                 Toast.makeText(context, msg.custom, Toast.LENGTH_LONG).show();
             }
         };
         //使用自定义的NotificationHandler，来结合友盟统计处理消息通知，参考http://bbs.umeng.com/thread-11112-1-1.html
         //CustomNotificationHandler notificationClickHandler = new CustomNotificationHandler();
         mPushAgent.setNotificationClickHandler(notificationClickHandler);
-
 
         //注册推送服务 每次调用register都会回调该接口
         mPushAgent.register(new IUmengRegisterCallback() {
