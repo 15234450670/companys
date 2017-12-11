@@ -122,6 +122,13 @@ public class AlbumActivity extends BaseListActivity<AlbumInfo> {
         intent.putExtra("sharecontent", shareContent);
         context.startActivity(intent);
     }
+    public static void lunchs(Context context, String id, String shareContent) {
+        Intent intent = new Intent(context, AlbumActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("id", id);
+        intent.putExtra("sharecontent", shareContent);
+        context.startActivity(intent);
+    }
 
     public static void lunch(Context context, String id, String shareContent, boolean isfromCollectPage) {
         Intent intent = new Intent(context, AlbumActivity.class);

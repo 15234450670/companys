@@ -345,6 +345,13 @@ public class ZhiBoDetailActivity extends BaseListActivity {
 
     public static void lunch(Context context, String id) {
         Intent intent = new Intent(context, ZhiBoDetailActivity.class);
+
+        intent.putExtra("itemid", id);
+        context.startActivity(intent);
+    }
+    public static void lunchs(Context context, String id) {
+        Intent intent = new Intent(context, ZhiBoDetailActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("itemid", id);
         context.startActivity(intent);
     }

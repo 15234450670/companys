@@ -180,7 +180,14 @@ public class TeachDetailsActivity extends BaseListActivity {
         intent.putExtra("title", title);
         context.startActivity(intent);
     }
-
+    public static void lunchs(Context context, String id, String pic, String title) {
+        Intent intent = new Intent(context, TeachDetailsActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("id", id);
+        intent.putExtra("pic", pic);
+        intent.putExtra("title", title);
+        context.startActivity(intent);
+    }
 
     @Override
     public void onSucceed(int what, String responseStr) {

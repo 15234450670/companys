@@ -87,7 +87,12 @@ public class MatchDetailActivity extends BaseActivity implements View.OnClickLis
         intent.putExtra("matchid", matchId);
         context.startActivity(intent);
     }
-
+    public static void lunchs(Context context, String matchId) {
+        Intent intent = new Intent(context, MatchDetailActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("matchid", matchId);
+        context.startActivity(intent);
+    }
 
     @Override
     public void onSucceed(int what, String response) {

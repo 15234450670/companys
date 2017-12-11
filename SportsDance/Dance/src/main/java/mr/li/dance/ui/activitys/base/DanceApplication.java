@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.os.Handler;
 import android.support.multidex.MultiDex;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
@@ -33,8 +34,17 @@ import com.yolanda.nohttp.NoHttp;
 
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import mr.li.dance.R;
+import mr.li.dance.ui.activitys.MyDanceWebActivity;
+import mr.li.dance.ui.activitys.album.AlbumActivity;
+import mr.li.dance.ui.activitys.match.MatchDetailActivity;
+import mr.li.dance.ui.activitys.music.SongActivity;
+import mr.li.dance.ui.activitys.newActivitys.TeachDetailsActivity;
+import mr.li.dance.ui.activitys.video.VideoDetailActivity;
+import mr.li.dance.ui.activitys.video.ZhiBoDetailActivity;
+import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.NLog;
 
 /**
@@ -51,6 +61,7 @@ public class DanceApplication extends Application {
 
     public static DanceApplication instances;
     private       String           mDeviceToken;
+    private       String           key;
 
 
     public static DanceApplication getInstance() {
@@ -232,10 +243,68 @@ public class DanceApplication extends Application {
          * 如果需启动Activity，需添加Intent.FLAG_ACTIVITY_NEW_TASK
          * */
         UmengNotificationClickHandler notificationClickHandler = new UmengNotificationClickHandler() {
+
+
             @Override
             public void dealWithCustomAction(Context context, UMessage msg) {
+                //   Toast.makeText(context, msg.custom, Toast.LENGTH_LONG).show();
+                String custom = msg.custom;
+                Map<String, String> map = msg.extra;
+                String type = map.get("type");
+                String value = map.get("id");
+                switch (type) {
+                    case "10101":
 
-                Toast.makeText(context, msg.custom, Toast.LENGTH_LONG).show();
+                        ZhiBoDetailActivity.lunchs(getApplicationContext(), value);
+                        break;
+                    case "10102":
+
+                        VideoDetailActivity.lunch(getApplicationContext(), value);
+                        break;
+                    case "10103":
+                        if (!TextUtils.isEmpty(custom)) {
+                            MyDanceWebActivity.lunchs(getApplicationContext(), MyDanceWebActivity.ZIXUNTYPE, custom, AppConfigs.ZixunShareUrl2 + value, true);
+                        } else {
+                            MyDanceWebActivity.lunchs(getApplicationContext(), MyDanceWebActivity.ZIXUNTYPE, "", AppConfigs.ZixunShareUrl2 + value, true);
+                        }
+
+                        break;
+                    case "10104":
+                        AlbumActivity.lunchs(getApplicationContext(), value, "");
+                        break;
+                    case "10105":
+                        MatchDetailActivity.lunchs(getApplicationContext(), value);
+                        break;
+                    case "10106":
+                        String url = map.get("url");
+                        MyDanceWebActivity.lunch(getApplicationContext(), MyDanceWebActivity.OTHERTYPE, "", url, value);
+
+                        break;
+                    case "10107":
+
+
+                        break;
+                    case "10108":
+                        if (!TextUtils.isEmpty(custom)) {
+                            SongActivity.lunchs(getApplicationContext(), value, custom);
+                        } else {
+                            SongActivity.lunchs(getApplicationContext(), value, "");
+                        }
+
+                        break;
+                    case "10109":
+                        if (!TextUtils.isEmpty(custom)) {
+                            TeachDetailsActivity.lunchs(getApplicationContext(), value, "", custom);
+                        } else {
+                            TeachDetailsActivity.lunchs(getApplicationContext(), value, "", "");
+                        }
+
+
+                        break;
+
+                }
+
+
             }
         };
         //使用自定义的NotificationHandler，来结合友盟统计处理消息通知，参考http://bbs.umeng.com/thread-11112-1-1.html

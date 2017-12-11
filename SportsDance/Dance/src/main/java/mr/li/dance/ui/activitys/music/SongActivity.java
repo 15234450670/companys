@@ -212,6 +212,15 @@ public class SongActivity extends BaseListActivity<GeDanInfo.DataBean.ListBean> 
         context.startActivity(intent);
     }
 
+    public static void lunchs(Context context, String mItemId, String name) {
+        Intent intent = new Intent(context, SongActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("itemid", mItemId);
+        intent.putExtra("name", name);
+        context.startActivity(intent);
+    }
+
+
     public static void lunch(Context context, String id, String shareContent, boolean isfromCollectPage) {
         Intent intent = new Intent(context, SongActivity.class);
         intent.putExtra("itemid", id);

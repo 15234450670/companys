@@ -319,6 +319,12 @@ public class VideoDetailActivity extends BaseListActivity {
         lunch(context, id, false);
 
     }
+    public static void lunchs(Context context, String id) {
+        Intent intent = new Intent(context, VideoDetailActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("itemid", id);
+        context.startActivity(intent);
+    }
 
     public static void lunch(Context context, String id, boolean isfromCollectPage) {
         Intent intent = new Intent(context, VideoDetailActivity.class);
@@ -327,6 +333,7 @@ public class VideoDetailActivity extends BaseListActivity {
         context.startActivity(intent);
 
     }
+
 
     @Override
     public void refresh() {
