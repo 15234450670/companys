@@ -15,6 +15,7 @@ public class AppConfigs {
     private final static String SHAREURL  = MAINurl + "/h5";
 
     public final static String LOGING_NAME     = "loging_phone";
+    public final static String LOGING_TIME     = "loging_time";
     public final static String LOGING_PASSWORD = "loging_password";
     public final static String USERINFOJSON    = "USERINFOJSON";
     public final static String USERID          = "USERID";
@@ -29,8 +30,10 @@ public class AppConfigs {
     //社区分享
     public final static String shequ_detial   = SHAREURL + "/share.shequ?id=";
 
-    //红包活动
-    public final static String money_chou     = SHAREURL;
+    //系统消息
+    public final static String systemManage     = SHAREURL+"/share.packet?id=";
+
+
     //赛事规则，赛事设项 赛程表 分享
     public final static String SAISHIShareUrl = SHAREURL + "/share.gcfx?id=%s&page=%s";
     //相册分享
@@ -53,6 +56,7 @@ public class AppConfigs {
 
     public final static String finishactivityAction = "finish.activity.action";
     public final static String updateinfoAction     = "update.userinfo.action";
+
 
 
     public final static int SENDMSG_REQUEST_CODE      = 0x001;
@@ -177,6 +181,7 @@ public class AppConfigs {
     public final static String CLICK_EVENT_30 = "30";//音乐
     public final static String CLICK_EVENT_31 = "31";//音乐
     public final static String CLICK_EVENT_32 = "32";//音乐
+
 
 
 }

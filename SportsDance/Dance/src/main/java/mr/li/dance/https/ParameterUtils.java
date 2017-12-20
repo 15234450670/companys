@@ -330,6 +330,34 @@ public class ParameterUtils {
     }
 
     /**
+     * 检查登陆
+     */
+    public Request<String> checkLogin(String userid, String version, String mobile_type, String mobile_xh, String device_token, String time) {
+        Request<String> request = getBaseRequestForPost("/startApp.record");
+        request.add("userid", userid);
+        request.add("version", version);
+        request.add("mobile_type", mobile_type);
+        request.add("mobile_xh", mobile_xh);
+        request.add("device_token", device_token);
+        request.add("time", time);
+        return request;
+    }
+
+    /**
+     * 推送活动/外链
+     */
+
+    public Request<String> PushLove(String type, String id) {
+        Request<String> request = getBaseRequestForPost("/startApp.open");
+        request.add("type", type);
+        request.add("id", id);
+
+        return request;
+    }
+
+
+
+    /**
      * 推荐页面获取
      * @return
      */
@@ -362,7 +390,6 @@ public class ParameterUtils {
 
     public Request<String> getHomeZhiboMapFromServer() {
         Request<String> request = getBaseRequestForPost("/home.zhibo");
-
         return request;
     }
 
@@ -1217,7 +1244,7 @@ public class ParameterUtils {
     }
 
     //社区详情
-    public Request<String> getPersonDetails(String dynamic_id, String userid,String attention_userid  ) {
+    public Request<String> getPersonDetails(String dynamic_id, String userid, String attention_userid) {
         Request<String> request = getBaseRequestForPost("/revisionCommunity.details");
         request.add("dynamic_id", dynamic_id);
         request.add("userid", userid);
@@ -1234,6 +1261,7 @@ public class ParameterUtils {
         request.add("content", content);
         return request;
     }
+
     //发布图片
     public Request<String> getfabutupian(int is_type, int dynamic_id, File file) {
         Request<String> request = getBaseRequestForPost("/community.mUpload");
@@ -1242,6 +1270,7 @@ public class ParameterUtils {
         request.add("file[]", file);
         return request;
     }
+
     //获取视频token
     public Request<String> getTakeVideoToken(String userid, String videoName) {
         Request<String> request = getBaseRequestForPost("/community.frontUpload");
@@ -1249,6 +1278,7 @@ public class ParameterUtils {
         request.add("video_name", videoName);
         return request;
     }
+
     //上传视频
     public Request<String> getVideo(String dynamic_id, String video_name) {
         Request<String> request = getBaseRequestForPost("/community.vUpload");
@@ -1269,7 +1299,7 @@ public class ParameterUtils {
     }
 
     //红包活动
-    public Request<String> getMoneyEvent(String userid, String sign,String activityid,String ymd) {
+    public Request<String> getMoneyEvent(String userid, String sign, String activityid, String ymd) {
         Request<String> request = getBaseRequestForPost("/activity.addNum");
         request.add("userid", userid);
         request.add("sign", sign);

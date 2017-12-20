@@ -90,16 +90,18 @@ public class UserInfoManager {
         editor.putString(AppConfigs.USERINFOJSON, "");
         editor.putString(AppConfigs.LOGING_PASSWORD, "");
         editor.putString(AppConfigs.LOGING_NAME, "");
+        editor.putString(AppConfigs.LOGING_TIME,"");
         editor.commit();
         BroadcastManager.getInstance(context).sendBroadcast(AppConfigs.updateinfoAction);
     }
 
-    public void saveLoginInfo(Context context, String loginName, String loginPwd) {
+    public void saveLoginInfo(Context context, String loginName, String loginPwd,String time) {
         mUserInfo = null;
         SharedPreferences mSp = context.getSharedPreferences("config", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = mSp.edit();
         editor.putString(AppConfigs.LOGING_NAME, loginName);
         editor.putString(AppConfigs.LOGING_PASSWORD, loginPwd);
+        editor.putString(AppConfigs.LOGING_TIME, time);
         editor.commit();
     }
 
@@ -111,7 +113,10 @@ public class UserInfoManager {
         SharedPreferences mSp = context.getSharedPreferences("config", Context.MODE_PRIVATE);
         return mSp.getString(AppConfigs.LOGING_NAME, "");
     }
-
+    public String getLoginTime(Context context) {
+        SharedPreferences mSp = context.getSharedPreferences("config", Context.MODE_PRIVATE);
+        return mSp.getString(AppConfigs.LOGING_TIME, "");
+    }
     public String getLoginPwd(Context context) {
         SharedPreferences mSp = context.getSharedPreferences("config", Context.MODE_PRIVATE);
         return mSp.getString(AppConfigs.LOGING_PASSWORD, "");
@@ -124,16 +129,19 @@ public class UserInfoManager {
 
     }
 
+
     public void saveMobile(Context context, String mobile) {
         mUserInfo.setMobile(mobile);
         saveUserInfo(context, mUserInfo);
     }
-
     public void savePicture(Context context, String picture) {
         mUserInfo.setPicture(picture);
         saveUserInfo(context, mUserInfo);
     }
-
+    public void saveTime(Context context, String time) {
+        mUserInfo.setTime(time);
+        saveUserInfo(context, mUserInfo);
+    }
     public void saveReal_name(Context context, String real_name) {
         mUserInfo.setReal_name(real_name);
         saveUserInfo(context, mUserInfo);

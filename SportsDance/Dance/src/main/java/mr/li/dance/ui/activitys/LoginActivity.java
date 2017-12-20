@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import com.umeng.socialize.UMShareAPI;
@@ -107,7 +108,7 @@ public class LoginActivity extends LoginAuthActivity implements View.OnClickList
         }
         closeKeyboard();
         String phone_xh = Utils.getSystemModel();
-        Request<String> request = ParameterUtils.getSingleton().getLoginMap(Utils.getVersionName(this), phone, passWord,phone_xh);
+        Request<String> request = ParameterUtils.getSingleton().getLoginMap(Utils.getVersionName(this), phone, passWord, phone_xh);
         CallServer.getRequestInstance().add(this, AppConfigs.login_loginMob, request, this, false, true);
     }
 
@@ -129,6 +130,11 @@ public class LoginActivity extends LoginAuthActivity implements View.OnClickList
 
     public static void lunch(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
+        context.startActivity(intent);
+    }
+    public static void lunchs(Context context) {
+        Intent intent = new Intent(context, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
 
@@ -182,13 +188,16 @@ public class LoginActivity extends LoginAuthActivity implements View.OnClickList
         if (what == AppConfigs.passport_isOpenid) {
             StringResponse stringResponse = JsonMananger.getReponseResult(response, StringResponse.class);
             UserInfo userInfo = JsonMananger.getReponseResult(stringResponse.getData(), UserInfo.class);
+            Log.e("LoginTime++++:::", userInfo.getTime());
             checkIsLogin(userInfo);
         } else {
             UserInfoResponse infoResponse = JsonMananger.getReponseResult(response, UserInfoResponse.class);
             UserInfo userInfo = infoResponse.getData();
             String loginName = mDanceViewHolder.getTextValue(R.id.login_name);
             String loginPwd = mDanceViewHolder.getTextValue(R.id.login_password);
-            UserInfoManager.getSingleton().saveLoginInfo(this, loginName, loginPwd);
+            String time = userInfo.getTime();
+            Log.e("LoginTime:::::-----", time);
+            UserInfoManager.getSingleton().saveLoginInfo(this, loginName, loginPwd, time);
             UserInfoManager.getSingleton().saveLoginInfo(this, userInfo);
             if (requestCode == -1) {
                 startActivity(new Intent(this, MainActivity.class));
@@ -219,7 +228,6 @@ public class LoginActivity extends LoginAuthActivity implements View.OnClickList
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         UMShareAPI.get(this).release();
     }
 
@@ -262,7 +270,7 @@ public class LoginActivity extends LoginAuthActivity implements View.OnClickList
 
 
     private void deleteOauth() {
-        UMShareAPI.get(LoginActivity.this).deleteOauth(LoginActivity.this, mSnsPlatform.mPlatform, new MyUMAuthListener(){
+        UMShareAPI.get(LoginActivity.this).deleteOauth(LoginActivity.this, mSnsPlatform.mPlatform, new MyUMAuthListener() {
             @Override
             public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
                 otherLogin(openid, source);

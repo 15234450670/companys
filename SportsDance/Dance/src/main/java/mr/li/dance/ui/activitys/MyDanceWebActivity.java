@@ -234,6 +234,15 @@ public class MyDanceWebActivity extends BaseActivity {
         intent.putExtra("showshare", true);
         context.startActivity(intent);
     }
+    public static void lunchs(Context context, int type, String title, String url, String shareUrl) {
+        Intent intent = new Intent(context, MyDanceWebActivity.class);
+        intent.putExtra("title", title);
+        intent.putExtra("url", url);
+        intent.putExtra("webtype", type);
+        intent.putExtra("shareUrl", shareUrl);
+        intent.putExtra("showshare", true);
+        context.startActivity(intent);
+    }
 
     public static void lunch(Context context, int type, String title, String url, String shareUrl, String wailianId) {
         Intent intent = new Intent(context, MyDanceWebActivity.class);

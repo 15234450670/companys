@@ -346,7 +346,7 @@ public class PictureActivity extends BaseActivity {
      * @return
      */
     private File picCompressor(File file) {
-       File compressedImageFile = Compressor.getDefault(this).compressToFile(file);
+        File compressedImageFile = Compressor.getDefault(this).compressToFile(file);
         /*File compressedImage = new Compressor.Builder(this)
 
                 .setQuality(95)
@@ -369,7 +369,6 @@ public class PictureActivity extends BaseActivity {
             }
         }
     }
-
 
 
     public ProgressDialog showProgress(String title, String message) {

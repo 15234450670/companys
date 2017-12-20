@@ -171,7 +171,7 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
                         break;
                     case 10103://z咨询
                         String url = String.format(AppConfigs.ZixunShareUrl, bannerInfo.getNumber());
-                      //  MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, "", url, true);
+                        //  MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, "", url, true);
                         if (!TextUtils.isEmpty(bannerInfo.getTitle())) {
                             MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, bannerInfo.getTitle(), AppConfigs.ZixunShareUrl2 + bannerInfo.getNumber(), true);
                         }
@@ -340,8 +340,8 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
 
                 HuoDongInfo reponseResult = JsonMananger.getReponseResult(response, HuoDongInfo.class);
                 Log.e("sdfsdf", "请求了:" + reponseResult.getData());
-                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, title, reponseResult.getData()+ base.number, url , base.getId());
-                Log.e("sdfsdf", "请求了2-->:" + reponseResult.getData()+ base.number);
+                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, title, reponseResult.getData() + base.number, url, base.getId());
+                Log.e("sdfsdf", "请求了2-->:" + reponseResult.getData() + base.number);
             }
 
             @Override

@@ -31,12 +31,19 @@ import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.common.QueuedWork;
 import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.rest.Request;
 
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import mr.li.dance.R;
+import mr.li.dance.https.CallServer;
+import mr.li.dance.https.HttpListener;
+import mr.li.dance.https.ParameterUtils;
+import mr.li.dance.models.HuoDongInfo;
+import mr.li.dance.models.PushLove;
+import mr.li.dance.ui.activitys.LoginActivity;
 import mr.li.dance.ui.activitys.MyDanceWebActivity;
 import mr.li.dance.ui.activitys.album.AlbumActivity;
 import mr.li.dance.ui.activitys.match.MatchDetailActivity;
@@ -45,7 +52,10 @@ import mr.li.dance.ui.activitys.newActivitys.TeachDetailsActivity;
 import mr.li.dance.ui.activitys.video.VideoDetailActivity;
 import mr.li.dance.ui.activitys.video.ZhiBoDetailActivity;
 import mr.li.dance.utils.AppConfigs;
+import mr.li.dance.utils.JsonMananger;
+import mr.li.dance.utils.MyStrUtil;
 import mr.li.dance.utils.NLog;
+import mr.li.dance.utils.UserInfoManager;
 
 /**
  * 作者: Lixuewei
@@ -61,7 +71,6 @@ public class DanceApplication extends Application {
 
     public static DanceApplication instances;
     private       String           mDeviceToken;
-    private       String           key;
 
 
     public static DanceApplication getInstance() {
@@ -98,7 +107,6 @@ public class DanceApplication extends Application {
 
     private void initUmengShare() {
         MobclickAgent.openActivityDurationTrack(false);
-
         initPush();
         Config.DEBUG = false;
         QueuedWork.isUseThreadPool = false;
@@ -219,6 +227,7 @@ public class DanceApplication extends Application {
                     case 1:
                         Notification.Builder builder = new Notification.Builder(context);
                         RemoteViews myNotificationView = new RemoteViews(context.getPackageName(), R.layout.notification_view);
+
                         myNotificationView.setTextViewText(R.id.notification_title, msg.title);
                         myNotificationView.setTextViewText(R.id.notification_text, msg.text);
                         myNotificationView.setImageViewBitmap(R.id.notification_large_icon, getLargeIcon(context, msg));
@@ -248,57 +257,126 @@ public class DanceApplication extends Application {
             @Override
             public void dealWithCustomAction(Context context, UMessage msg) {
                 //   Toast.makeText(context, msg.custom, Toast.LENGTH_LONG).show();
-                String custom = msg.custom;
+                // final String custom = msg.custom;
+                final String title = msg.title;
                 Map<String, String> map = msg.extra;
                 String type = map.get("type");
                 String value = map.get("id");
+                Log.e("map", "type = " + type + "- id = " + value + "- title = " + title);
+
                 switch (type) {
                     case "10101":
 
                         ZhiBoDetailActivity.lunchs(getApplicationContext(), value);
                         break;
                     case "10102":
-
-                        VideoDetailActivity.lunch(getApplicationContext(), value);
+                        VideoDetailActivity.lunchs(getApplicationContext(), value);
                         break;
                     case "10103":
-                        if (!TextUtils.isEmpty(custom)) {
-                            MyDanceWebActivity.lunchs(getApplicationContext(), MyDanceWebActivity.ZIXUNTYPE, custom, AppConfigs.ZixunShareUrl2 + value, true);
+
+                        if (!TextUtils.isEmpty(title)) {
+                            MyDanceWebActivity.lunchs(getApplicationContext(), MyDanceWebActivity.ZIXUNTYPE, title, AppConfigs.ZixunShareUrl2 + value, true);
                         } else {
-                            MyDanceWebActivity.lunchs(getApplicationContext(), MyDanceWebActivity.ZIXUNTYPE, "", AppConfigs.ZixunShareUrl2 + value, true);
+                            MyDanceWebActivity.lunchs(getApplicationContext(), MyDanceWebActivity.ZIXUNTYPE, "资讯详情", AppConfigs.ZixunShareUrl2 + value, true);
                         }
 
                         break;
                     case "10104":
-                        AlbumActivity.lunchs(getApplicationContext(), value, "");
+                        if (!TextUtils.isEmpty(title)) {
+                            AlbumActivity.lunchs(getApplicationContext(), value, title);
+                        } else {
+                            AlbumActivity.lunchs(getApplicationContext(), value, "相册详情");
+                        }
+
                         break;
                     case "10105":
                         MatchDetailActivity.lunchs(getApplicationContext(), value);
                         break;
                     case "10106":
-                        String url = map.get("url");
-                        MyDanceWebActivity.lunch(getApplicationContext(), MyDanceWebActivity.OTHERTYPE, "", url, value);
+                        Request<String> stringRequest = ParameterUtils.getSingleton().PushLove(type, value);
+                        CallServer.getRequestInstance().add(getApplicationContext(), 0, stringRequest, new HttpListener() {
+                            @Override
+                            public void onSucceed(int what, String response) {
+                                PushLove reponseResult = JsonMananger.getReponseResult(response, PushLove.class);
+                                String url = reponseResult.getData().getUrl();
+                                if (!MyStrUtil.isEmpty(title)) {
+                                    MyDanceWebActivity.lunchs(getApplicationContext(), MyDanceWebActivity.OTHERTYPE, title, url, false);
+                                } else {
+                                    MyDanceWebActivity.lunchs(getApplicationContext(), MyDanceWebActivity.OTHERTYPE, "外链", url, false);
+                                }
 
+                            }
+
+                            @Override
+                            public void onFailed(int what, int responseCode, String response) {
+
+                            }
+                        }, true, true);
                         break;
                     case "10107":
+                        if (!UserInfoManager.getSingleton().isLoading(getApplicationContext())) {
+                            LoginActivity.lunchs(getApplicationContext());
+                            return;
+                        }
+                        Request<String> request = ParameterUtils.getSingleton().PushLove(type, value);
+                        CallServer.getRequestInstance().add(getApplicationContext(), 0, request, new HttpListener() {
+                            @Override
+                            public void onSucceed(int what, String response) {
+                                PushLove reponseResult = JsonMananger.getReponseResult(response, PushLove.class);
+                                PushLove.DataBean data = reponseResult.getData();
+                                final String title = data.getTitle();
+                                String appid = data.getAppid();
+                                String appsecret = data.getAppsecret();
+                                final String number = data.getNumber();
+                                final String url = data.getUrl();
+                                String userId = UserInfoManager.getSingleton().getUserId(getApplicationContext());
+                                Request<String> huoDongInfoMap = ParameterUtils.getSingleton().getHuoDongInfoMap(appid, appsecret, url, userId);
+                                CallServer.getRequestInstance().add(getApplicationContext(), 0, huoDongInfoMap, new HttpListener() {
+                                    @Override
+                                    public void onSucceed(int what, String response) {
+                                        HuoDongInfo reponseResult = JsonMananger.getReponseResult(response, HuoDongInfo.class);
+                                        MyDanceWebActivity.lunchs(getApplicationContext(), MyDanceWebActivity.OTHERTYPE, title, reponseResult.getData() + number, url);
+                                    }
 
+                                    @Override
+                                    public void onFailed(int what, int responseCode, String response) {
+
+                                    }
+                                }, true, true);
+                            }
+
+                            @Override
+                            public void onFailed(int what, int responseCode, String response) {
+
+                            }
+                        }, true, true);
 
                         break;
                     case "10108":
-                        if (!TextUtils.isEmpty(custom)) {
-                            SongActivity.lunchs(getApplicationContext(), value, custom);
+                        if (!TextUtils.isEmpty(title)) {
+                            SongActivity.lunchs(getApplicationContext(), value, title);
                         } else {
-                            SongActivity.lunchs(getApplicationContext(), value, "");
+                            SongActivity.lunchs(getApplicationContext(), value, "歌单");
                         }
 
                         break;
                     case "10109":
-                        if (!TextUtils.isEmpty(custom)) {
-                            TeachDetailsActivity.lunchs(getApplicationContext(), value, "", custom);
+                        if (!TextUtils.isEmpty(title)) {
+                            TeachDetailsActivity.lunchs(getApplicationContext(), value, title);
                         } else {
-                            TeachDetailsActivity.lunchs(getApplicationContext(), value, "", "");
+                            TeachDetailsActivity.lunchs(getApplicationContext(), value, "教学详情");
                         }
 
+                        break;
+                    //系统消息
+                    case "10110":
+                        if (!TextUtils.isEmpty(title)) {
+                            MyDanceWebActivity.lunchs(getApplicationContext(), MyDanceWebActivity.ZIXUNTYPE, title, AppConfigs.systemManage + value, true);
+
+                        }  else{
+                            MyDanceWebActivity.lunchs(getApplicationContext(), MyDanceWebActivity.ZIXUNTYPE, "系统消息", AppConfigs.systemManage + value, true);
+
+                        }
 
                         break;
 
@@ -331,8 +409,10 @@ public class DanceApplication extends Application {
 
     }
 
+
     public String getDeviceToken() {
         return mDeviceToken;
     }
+
 
 }

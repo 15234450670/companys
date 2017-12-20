@@ -13,6 +13,7 @@ import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.StringResponse;
 import mr.li.dance.models.MyMessageInfo;
+import mr.li.dance.ui.activitys.MyDanceWebActivity;
 import mr.li.dance.ui.activitys.base.BaseListActivity;
 import mr.li.dance.ui.adapters.MyMessageAdapter;
 import mr.li.dance.utils.AppConfigs;
@@ -49,7 +50,8 @@ public class MyMessageActivity extends BaseListActivity<MyMessageInfo> {
 
     @Override
     public void itemClick(int position, MyMessageInfo value) {
-        MessageDetailActivity.lunch(this,value.getId());
+       // MessageDetailActivity.lunch(this,value.getId());
+        MyDanceWebActivity.lunch(this, MyDanceWebActivity.ZIXUNTYPE, value.getTitle(), AppConfigs.systemManage + value.getId());
     }
 
     @Override

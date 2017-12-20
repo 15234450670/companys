@@ -52,7 +52,7 @@ public class TeachDetailsActivity extends BaseListActivity {
     BaseItemAdapter mAdapter;
     int page = 1;
     String mId;
-    String mPic;
+   // String mPic;
     String mTitle;
     private IMediaDataVideoView videoView;
     private TextView            querydetail_tv;   //开始播放
@@ -67,6 +67,7 @@ public class TeachDetailsActivity extends BaseListActivity {
             handleVideoInfoEvent(event, bundle);// 处理视频信息事件
             handlePlayerEvent(event, bundle);// 处理播放器事件
         }
+
         @Override
         public String onGetVideoRateList(LinkedHashMap<String, String> map) {
             rateMap = map;
@@ -89,7 +90,7 @@ public class TeachDetailsActivity extends BaseListActivity {
     public void getIntentData() {
         super.getIntentData();
         mId = mIntentExtras.getString("id");
-        mPic = mIntentExtras.getString("pic");
+      //  mPic = mIntentExtras.getString("pic");
         mTitle = mIntentExtras.getString("title");
         content = mIntentExtras.getString("content");
     }
@@ -99,7 +100,7 @@ public class TeachDetailsActivity extends BaseListActivity {
         super.initViews();
         setTitle("教学详情");
         setRightImage(R.drawable.share_icon_001);
-        mDanceViewHolder.setImageByUrlOrFilePath(R.id.pic, mPic, R.drawable.default_video);   //图片
+
         mDanceViewHolder.setText(R.id.teach_title, mTitle);   //标题
         class_jieshao = (LinearLayout) mDanceViewHolder.getView(R.id.class_jieshao);   //课程介绍
         class_section = (LinearLayout) mDanceViewHolder.getView(R.id.class_section);  //课程章节
@@ -109,8 +110,8 @@ public class TeachDetailsActivity extends BaseListActivity {
         videoView.setVideoViewListener(mVideoViewListener);
         final RelativeLayout videoContainer = (RelativeLayout) findViewById(R.id.videoContainer);
         videoContainer.addView((View) videoView, VideoLayoutParams.computeContainerSize(this, 16, 9));
-
     }
+
     @Override
     public void initDatas() {
         super.initDatas();
@@ -167,7 +168,7 @@ public class TeachDetailsActivity extends BaseListActivity {
     public static void lunch(Fragment fragment, String id, String pic, String title, String content) {
         Intent intent = new Intent(fragment.getActivity(), TeachDetailsActivity.class);
         intent.putExtra("id", id);
-        intent.putExtra("pic", pic);
+      //  intent.putExtra("pic", pic);
         intent.putExtra("title", title);
         intent.putExtra("content", content);
         fragment.startActivity(intent);
@@ -176,15 +177,16 @@ public class TeachDetailsActivity extends BaseListActivity {
     public static void lunch(Context context, String id, String pic, String title) {
         Intent intent = new Intent(context, TeachDetailsActivity.class);
         intent.putExtra("id", id);
-        intent.putExtra("pic", pic);
+       // intent.putExtra("pic", pic);
         intent.putExtra("title", title);
         context.startActivity(intent);
     }
-    public static void lunchs(Context context, String id, String pic, String title) {
+
+    public static void lunchs(Context context, String id,  String title) {
         Intent intent = new Intent(context, TeachDetailsActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("id", id);
-        intent.putExtra("pic", pic);
+      //  intent.putExtra("pic", pic);
         intent.putExtra("title", title);
         context.startActivity(intent);
     }
@@ -202,6 +204,8 @@ public class TeachDetailsActivity extends BaseListActivity {
                 return;
             }
             List<TeachDetailInfo.DataBean.DetailBean> detail = reponseResult.getData().getDetail();
+
+            mDanceViewHolder.setImageByUrlOrFilePath(R.id.pic, detail.get(0).getImg(), R.drawable.default_video);   //图片
             if (!MyStrUtil.isEmpty(detail)) {
                 String described = detail.get(0).getDescribed();
                 if (!TextUtils.isEmpty(described)) {
@@ -293,10 +297,10 @@ public class TeachDetailsActivity extends BaseListActivity {
         String path = value1.getVideo_unique();
         setTeachDetail(path);
         for (int i = 0; i < otherList.size(); i++) {
-            if (i==position){
+            if (i == position) {
                 otherList.get(i).isClick = true;
 
-            }else {
+            } else {
                 otherList.get(i).isClick = false;
 
             }
@@ -325,7 +329,9 @@ public class TeachDetailsActivity extends BaseListActivity {
         super.onHeadRightButtonClick(v);
         showShareDialog();
     }
+
     ShareUtils mShareUtils;
+
     private void showShareDialog() {
         MobclickAgent.onEvent(this, AppConfigs.CLICK_EVENT_29);
         if (mShareUtils == null) {
