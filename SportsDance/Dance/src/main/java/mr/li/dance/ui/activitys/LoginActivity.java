@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 
 import com.umeng.socialize.UMShareAPI;
@@ -188,7 +187,6 @@ public class LoginActivity extends LoginAuthActivity implements View.OnClickList
         if (what == AppConfigs.passport_isOpenid) {
             StringResponse stringResponse = JsonMananger.getReponseResult(response, StringResponse.class);
             UserInfo userInfo = JsonMananger.getReponseResult(stringResponse.getData(), UserInfo.class);
-            Log.e("LoginTime++++:::", userInfo.getTime());
             checkIsLogin(userInfo);
         } else {
             UserInfoResponse infoResponse = JsonMananger.getReponseResult(response, UserInfoResponse.class);
@@ -196,7 +194,6 @@ public class LoginActivity extends LoginAuthActivity implements View.OnClickList
             String loginName = mDanceViewHolder.getTextValue(R.id.login_name);
             String loginPwd = mDanceViewHolder.getTextValue(R.id.login_password);
             String time = userInfo.getTime();
-            Log.e("LoginTime:::::-----", time);
             UserInfoManager.getSingleton().saveLoginInfo(this, loginName, loginPwd, time);
             UserInfoManager.getSingleton().saveLoginInfo(this, userInfo);
             if (requestCode == -1) {

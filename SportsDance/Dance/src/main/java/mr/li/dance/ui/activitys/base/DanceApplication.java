@@ -221,29 +221,29 @@ public class DanceApplication extends Application {
             /**
              * 自定义通知栏样式的回调方法
              * */
-            @Override
-            public Notification getNotification(Context context, UMessage msg) {
-                switch (msg.builder_id) {
-                    case 1:
-                        Notification.Builder builder = new Notification.Builder(context);
-                        RemoteViews myNotificationView = new RemoteViews(context.getPackageName(), R.layout.notification_view);
+        @Override
+        public Notification getNotification(Context context, UMessage msg) {
+            switch (msg.builder_id) {
+                case 1:
+                    Notification.Builder builder = new Notification.Builder(context);
+                    RemoteViews myNotificationView = new RemoteViews(context.getPackageName(), R.layout.notification_view);
 
-                        myNotificationView.setTextViewText(R.id.notification_title, msg.title);
-                        myNotificationView.setTextViewText(R.id.notification_text, msg.text);
-                        myNotificationView.setImageViewBitmap(R.id.notification_large_icon, getLargeIcon(context, msg));
-                        myNotificationView.setImageViewResource(R.id.notification_small_icon, getSmallIconId(context, msg));
-                        builder.setContent(myNotificationView)
-                                .setSmallIcon(getSmallIconId(context, msg))
-                                .setTicker(msg.ticker)
-                                .setAutoCancel(true);
+                    myNotificationView.setTextViewText(R.id.notification_title, msg.title);
+                    myNotificationView.setTextViewText(R.id.notification_text, msg.text);
+                    myNotificationView.setImageViewBitmap(R.id.notification_large_icon, getLargeIcon(context, msg));
+                    myNotificationView.setImageViewResource(R.id.notification_small_icon, getSmallIconId(context, msg));
+                    builder.setContent(myNotificationView)
+                            .setSmallIcon(getSmallIconId(context, msg))
+                            .setTicker(msg.ticker)
+                            .setAutoCancel(true);
 
-                        return builder.getNotification();
-                    default:
-                        //默认为0，若填写的builder_id并不存在，也使用默认。
-                        return super.getNotification(context, msg);
-                }
+                    return builder.getNotification();
+                default:
+                    //默认为0，若填写的builder_id并不存在，也使用默认。
+                    return super.getNotification(context, msg);
             }
-        };
+        }
+    };
         mPushAgent.setMessageHandler(messageHandler);
 
         /**
@@ -305,6 +305,7 @@ public class DanceApplication extends Application {
                                     MyDanceWebActivity.lunchs(getApplicationContext(), MyDanceWebActivity.OTHERTYPE, "外链", url, false);
                                 }
 
+
                             }
 
                             @Override
@@ -365,19 +366,18 @@ public class DanceApplication extends Application {
                             TeachDetailsActivity.lunchs(getApplicationContext(), value, title);
                         } else {
                             TeachDetailsActivity.lunchs(getApplicationContext(), value, "教学详情");
+
                         }
 
                         break;
                     //系统消息
                     case "10110":
+
                         if (!TextUtils.isEmpty(title)) {
                             MyDanceWebActivity.lunchs(getApplicationContext(), MyDanceWebActivity.ZIXUNTYPE, title, AppConfigs.systemManage + value, true);
-
                         }  else{
                             MyDanceWebActivity.lunchs(getApplicationContext(), MyDanceWebActivity.ZIXUNTYPE, "系统消息", AppConfigs.systemManage + value, true);
-
                         }
-
                         break;
 
                 }

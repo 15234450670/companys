@@ -36,6 +36,7 @@ public class NewPicFragment extends BaseListFragment<PhotoClassBean> {
     private String       path;
     private LinearLayout wu;
     private LinearLayout you;
+    String TAG = getClass().getSimpleName();
 
     @Override
     public void initViews() {
@@ -80,6 +81,7 @@ public class NewPicFragment extends BaseListFragment<PhotoClassBean> {
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
+        Log.e(TAG, response);
         HomeAlbumInfo reponseResult = JsonMananger.getReponseResult(response, HomeAlbumInfo.class);
         if (reponseResult.getData().getPhotoClass() != null) {
             adapter.addList(isRefresh, reponseResult.getData().getPhotoClass());

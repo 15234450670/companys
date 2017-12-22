@@ -215,6 +215,7 @@ public class MyDanceWebActivity extends BaseActivity {
         intent.putExtra("showshare", showShare);
         context.startActivity(intent);
     }
+
     public static void lunchs(Context context, int type, String title, String url, boolean showShare) {
         Intent intent = new Intent(context, MyDanceWebActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -234,8 +235,10 @@ public class MyDanceWebActivity extends BaseActivity {
         intent.putExtra("showshare", true);
         context.startActivity(intent);
     }
+
     public static void lunchs(Context context, int type, String title, String url, String shareUrl) {
         Intent intent = new Intent(context, MyDanceWebActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra("title", title);
         intent.putExtra("url", url);
         intent.putExtra("webtype", type);
