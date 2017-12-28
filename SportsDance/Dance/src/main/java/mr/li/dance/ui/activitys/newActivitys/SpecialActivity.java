@@ -78,7 +78,7 @@ public class SpecialActivity extends BaseListActivity{
         super.onSucceed(what, response);
         SpecialResponse reponseResult = JsonMananger.getReponseResult(response, SpecialResponse.class);
         ArrayList<SpecialInfo> data = reponseResult.getData();
-          adapter.addList(isRefresh,data);
+        adapter.addList(isRefresh,data);
     }
 
     @Override

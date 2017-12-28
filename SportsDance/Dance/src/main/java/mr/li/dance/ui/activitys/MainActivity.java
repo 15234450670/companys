@@ -131,6 +131,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             @Override
             public void binderHasCreated(MusicService.MyBinder mb) {
                 myBinder = mb;
+
             }
         });
         Intent intent = new Intent(this, MusicService.class);
@@ -181,6 +182,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         transaction.commit();
         checkVersion();
 
+
     }
 
 
@@ -209,15 +211,18 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             //社区
             case R.id.shequ_layout:
                 if (!UserInfoManager.getSingleton().isLoading(this)) {
-                    LoginActivity.lunch(this, 0x001);
+                    LoginActivity.lunch(this, 0x011);
                     return;
+                } else {
+
+                    if (!mShequFragment.isAdded()) {
+                        transaction.add(R.id.content_fl, mShequFragment);
+                    }
+                    MobclickAgent.onEvent(this, AppConfigs.CLICK_EVENT_8);
+                    mCurrentFragment = mShequFragment;
+                    shequ_layout.setClicked(true);
                 }
-                MobclickAgent.onEvent(this, AppConfigs.CLICK_EVENT_33);
-                if (!mShequFragment.isAdded()) {
-                    transaction.add(R.id.content_fl, mShequFragment);
-                }
-                mCurrentFragment = mShequFragment;
-                shequ_layout.setClicked(true);
+
                 break;
             // 发布
             case R.id.fabu_layout:

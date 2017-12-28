@@ -50,9 +50,13 @@ public class NewsFragment extends BaseListFragment {
 
     @Override
     public void initData() {
+        Log.e("kan","=============================================");
         String userid = UserInfoManager.getSingleton().getUserId(getActivity());
-        Request<String> request = ParameterUtils.getSingleton().getNewsFragment("1", String.valueOf(page), userid);
-        request(AppConfigs.shequ_news_fragment, request, false);
+        if (!MyStrUtil.isEmpty(userid)) {
+            Request<String> request = ParameterUtils.getSingleton().getNewsFragment("1", String.valueOf(page), userid);
+            request(AppConfigs.shequ_news_fragment, request, false);
+        }
+
     }
 
     @Override

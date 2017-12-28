@@ -141,6 +141,7 @@ public class SheQuAdapter extends DanceBaseAdapter {
         });
     }
 
+
     @Override
     public int getItemCount() {
         if (MyStrUtil.isEmpty(mDatas)) {
@@ -197,7 +198,7 @@ public class SheQuAdapter extends DanceBaseAdapter {
         //个人信息
         final ShequInfo.UserBean user = mDatas.get(position).getUser();
         final String userId = UserInfoManager.getSingleton().getUserId(mContext);//自己的ID
-        Log.e("Userid : ",userId);
+        Log.e("Userid : ", userId);
         final String uid = mDatas.get(position).getUid();//别人的ID
         //点击头像去个人主页
         View view = holder.danceViewHolder.getView(R.id.shequ_ll_min);

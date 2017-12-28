@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -57,7 +58,7 @@ public class ZhiBoDetailActivity extends BaseListActivity {
     private IMediaDataVideoView videoView;
     private String              mItemId;
     private String              mMatchId;
-          int page = 1;
+    int                           page               = 1;
     LinkedHashMap<String, String> rateMap            = new LinkedHashMap<String, String>();
     VideoViewListener             mVideoViewListener = new VideoViewListener() {
         @Override
@@ -101,6 +102,8 @@ public class ZhiBoDetailActivity extends BaseListActivity {
     @Override
     public void initViews() {
         super.initViews();
+        //应用运行时，保持屏幕高亮，不锁屏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setTitle("直播");
         videoView = new UIActionLiveVideoView(this);
         setActionLiveParameter(false);
@@ -122,7 +125,7 @@ public class ZhiBoDetailActivity extends BaseListActivity {
     @Override
     public void initDatas() {
         super.initDatas();
-        Request<String> request = ParameterUtils.getSingleton().getHZhiboDetailMap(mItemId,String.valueOf(page));
+        Request<String> request = ParameterUtils.getSingleton().getHZhiboDetailMap(mItemId, String.valueOf(page));
         request(AppConfigs.home_zhiboDetailL, request, true);
     }
 
@@ -199,7 +202,7 @@ public class ZhiBoDetailActivity extends BaseListActivity {
     public void getIntentData() {
         super.getIntentData();
         mItemId = mIntentExtras.getString("itemid");
-        Log.e("itemidssss",mItemId);
+        Log.e("itemidssss", mItemId);
 
     }
 
@@ -309,29 +312,30 @@ public class ZhiBoDetailActivity extends BaseListActivity {
     @Override
     public void onSucceed(int what, String responseStr) {
         super.onSucceed(what, responseStr);
-        Log.e(TAG,responseStr);
+        Log.e(TAG, responseStr);
         ZhiBo reponseResult = JsonMananger.getReponseResult(responseStr, ZhiBo.class);
         ArrayList<ZhiBo.DataBean.CompeteBean> compete = reponseResult.getData().getCompete();
         setZhiboDetail(compete);
         ArrayList<MenuBean> menu = reponseResult.getData().getMenu();
         if (!MyStrUtil.isEmpty(menu)) {
             mDanceViewHolder.getView(R.id.program).setVisibility(View.VISIBLE);
-            mAdapter.addList(isRefresh,menu);
+            mAdapter.addList(isRefresh, menu);
         }
     }
-   /* @Override
-    public void onSucceed(int what, String responseStr) {
-        //        super.onSucceed(what, responseStr);
-        // ZhiboDetailResponse detailResponse = JsonMananger.getReponseResult(responseStr, ZhiboDetailResponse.class);
-        //mAdapter.addList(true, detailResponse.getData().getOtherList());
+
+    /* @Override
+     public void onSucceed(int what, String responseStr) {
+         //        super.onSucceed(what, responseStr);
+         // ZhiboDetailResponse detailResponse = JsonMananger.getReponseResult(responseStr, ZhiboDetailResponse.class);
+         //mAdapter.addList(true, detailResponse.getData().getOtherList());
 
 
-    }*/
+     }*/
     @Override
     public void refresh() {
         super.refresh();
         page = 1;
-        Request<String> request = ParameterUtils.getSingleton().getHZhiboDetailMap(mItemId,String.valueOf(page));
+        Request<String> request = ParameterUtils.getSingleton().getHZhiboDetailMap(mItemId, String.valueOf(page));
         request(AppConfigs.home_zhiboDetailL, request, true);
     }
 
@@ -339,7 +343,7 @@ public class ZhiBoDetailActivity extends BaseListActivity {
     public void loadMore() {
         super.loadMore();
         page++;
-        Request<String> request = ParameterUtils.getSingleton().getHZhiboDetailMap(mItemId,String.valueOf(page));
+        Request<String> request = ParameterUtils.getSingleton().getHZhiboDetailMap(mItemId, String.valueOf(page));
         request(AppConfigs.home_zhiboDetailL, request, true);
     }
 
@@ -349,6 +353,7 @@ public class ZhiBoDetailActivity extends BaseListActivity {
         intent.putExtra("itemid", id);
         context.startActivity(intent);
     }
+
     public static void lunchs(Context context, String id) {
         Intent intent = new Intent(context, ZhiBoDetailActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

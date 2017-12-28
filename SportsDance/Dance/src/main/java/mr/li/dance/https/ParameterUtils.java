@@ -322,7 +322,7 @@ public class ParameterUtils {
         Request<String> request = getBaseRequestForPost("/login.loginMob");
         request.setCacheMode(CacheMode.ONLY_REQUEST_NETWORK);
         request.add("version", version);
-        request.add("mobile_type", "Android");
+        request.add("mobile_type", "1");
         request.add("mobile", mobile);
         request.add("password", password);
         request.add("phone_xh", phone_xh);
@@ -351,7 +351,6 @@ public class ParameterUtils {
         Request<String> request = getBaseRequestForPost("/startApp.open");
         request.add("type", type);
         request.add("id", id);
-
         return request;
     }
 

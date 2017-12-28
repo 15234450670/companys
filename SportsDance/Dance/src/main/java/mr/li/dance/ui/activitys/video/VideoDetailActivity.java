@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
 import com.lecloud.sdk.constant.PlayerEvent;
@@ -115,6 +116,8 @@ public class VideoDetailActivity extends BaseListActivity {
     @Override
     public void initViews() {
         super.initViews();
+        //应用运行时，保持屏幕高亮，不锁屏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setTitle("视频详情");
         setRightImage(R.drawable.collect_icon, R.drawable.share_icon_001);
         mRefreshLayout.setEnableLoadmore(false);

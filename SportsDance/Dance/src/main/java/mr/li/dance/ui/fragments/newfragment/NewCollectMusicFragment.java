@@ -88,6 +88,7 @@ public class NewCollectMusicFragment extends NewSwipeListFragments<BaseHomeItem>
 
     @Override
     public void init() {
+
         danceViewHolder.getImageView(R.id.nodate_icon).setImageResource(R.drawable.no_collect_videolsit);
         danceViewHolder.setText(R.id.nodate_desc, "您还没有收藏音乐");
         super.init();

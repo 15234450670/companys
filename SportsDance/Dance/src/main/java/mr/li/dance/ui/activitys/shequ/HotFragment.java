@@ -38,7 +38,7 @@ public class HotFragment extends BaseListFragment {
             SheQuPicDetails.lunch(getActivity(), shequInfo.getId(), shequInfo.getUid());
         } else {
             //视频
-            SheQuVideoDetails.lunch(getActivity(), shequInfo.getId(), shequInfo.getUid(),shequInfo.getVideo().picture);
+            SheQuVideoDetails.lunch(getActivity(), shequInfo.getId(), shequInfo.getUid(), shequInfo.getVideo().picture);
         }
     }
 
@@ -46,13 +46,16 @@ public class HotFragment extends BaseListFragment {
     public void onResume() {
         super.onResume();
         initData();
-}
+    }
 
     @Override
     public void initData() {
         String userid = UserInfoManager.getSingleton().getUserId(getActivity());
-        Request<String> request = ParameterUtils.getSingleton().getNewsFragment("2", String.valueOf(page), userid);
-        request(AppConfigs.shequ_news_fragment, request, false);
+        if (!MyStrUtil.isEmpty(userid)) {
+            Request<String> request = ParameterUtils.getSingleton().getNewsFragment("2", String.valueOf(page), userid);
+            request(AppConfigs.shequ_news_fragment, request, false);
+        }
+
     }
 
     @Override

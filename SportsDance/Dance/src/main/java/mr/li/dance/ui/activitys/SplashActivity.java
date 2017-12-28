@@ -37,7 +37,7 @@ public class SplashActivity extends Activity implements HttpListener {
             public void run() {
                 goToMain();
             }
-        }, 2000);
+        }, 3000);
     }
 
     @Override
@@ -84,6 +84,7 @@ public class SplashActivity extends Activity implements HttpListener {
                 UserInfoManager.getSingleton().clearInfo(this);
                 break;
         }
+
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }

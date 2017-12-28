@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -36,6 +37,7 @@ public class SheQuFragment extends BaseFragment implements ViewPager.OnPageChang
 
     @Override
     public void initData() {
+        Log.e("-----------------","zzzzzzzzzzzzzzzzzzzzzzzz");
         setScreen();
         mFragment.add(new NewsFragment());
         mFragment.add(new HotFragment());

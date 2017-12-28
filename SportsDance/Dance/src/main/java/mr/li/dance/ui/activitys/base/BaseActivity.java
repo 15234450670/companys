@@ -12,6 +12,7 @@ import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -361,12 +362,14 @@ public abstract class BaseActivity extends FragmentActivity implements HttpListe
                 NToast.shortToast(this, "网络连接错误");
                 break;
             case -1001:
+                Log.e("-1001", response);
                 NToast.shortToast(this, response);
                 break;
             default:
                 StringResponse stringResponse = JsonMananger.getReponseResult(response, StringResponse.class);
                 if (stringResponse != null) {
                     NToast.shortToast(this, stringResponse.getData());
+                    Log.e("-default", response);
                 }
                 break;
         }
