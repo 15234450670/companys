@@ -65,7 +65,15 @@ public class NewMusicFragment extends BaseListFragment {
     public int getContentView() {
         return R.layout.fragment_list_layout;
     }
-
+    @Override
+    public void initViews() {
+        super.initViews();
+        wu = (LinearLayout) mView.findViewById(R.id.wu);
+        you = (LinearLayout) mView.findViewById(R.id.rec);
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
+        mRecyclerview.setLayoutManager(layoutManager);
+        mRecyclerview.setAdapter(adapter);
+    }
     @Override
     public RecyclerView.Adapter getAdapter() {
         adapter = new NewMusicAdapter(getActivity());
@@ -117,15 +125,7 @@ public class NewMusicFragment extends BaseListFragment {
         }
     }
 
-    @Override
-    public void initViews() {
-        super.initViews();
-        wu = (LinearLayout) mView.findViewById(R.id.wu);
-        you = (LinearLayout) mView.findViewById(R.id.rec);
-        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
-        mRecyclerview.setLayoutManager(layoutManager);
-        mRecyclerview.setAdapter(adapter);
-    }
+
 
     @Override
     public void refresh() {

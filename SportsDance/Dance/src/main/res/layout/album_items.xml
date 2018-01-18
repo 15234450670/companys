@@ -7,7 +7,7 @@
     <RelativeLayout
         android:id="@+id/iamge_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/spacing_340"
+        android:layout_height="@dimen/spacing_398"
         android:layout_below="@+id/top_layout"
         android:layout_marginLeft="@dimen/spacing_20"
         android:layout_marginRight="@dimen/spacing_20"

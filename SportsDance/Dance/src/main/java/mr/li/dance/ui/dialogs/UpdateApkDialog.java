@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import mr.li.dance.R;
@@ -40,9 +39,11 @@ public class UpdateApkDialog extends Dialog implements View.OnClickListener {
         TextView confirm_btn = (TextView) findViewById(R.id.confirm_btn);
         TextView messagetext = (TextView) findViewById(R.id.content_tv);
         TextView version_tv = (TextView) findViewById(R.id.version_tv);
+        View view = findViewById(R.id.v);
         messagetext.setMovementMethod(ScrollingMovementMethod.getInstance());
         if (!canColose) {
             cancelBtn.setVisibility(View.GONE);
+            view.setVisibility(View.GONE);
         }
         messagetext.setText(desc);
         cancelBtn.setText(lefttext);

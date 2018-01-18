@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Dance/Dance.iml" filepath="$PROJECT_DIR$/Dance/Dance.iml" />
-      <module fileurl="file://$PROJECT_DIR$/LePlayerSdk/LePlayerSdk.iml" filepath="$PROJECT_DIR$/LePlayerSdk/LePlayerSdk.iml" />
-      <module fileurl="file://$PROJECT_DIR$/LePlayerSkin/LePlayerSkin.iml" filepath="$PROJECT_DIR$/LePlayerSkin/LePlayerSkin.iml" />
       <module fileurl="file://$PROJECT_DIR$/Pushlib/Pushlib.iml" filepath="$PROJECT_DIR$/Pushlib/Pushlib.iml" />
       <module fileurl="file://$PROJECT_DIR$/RefreshLibrary/RefreshLibrary.iml" filepath="$PROJECT_DIR$/RefreshLibrary/RefreshLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/SmallVideoLib/SmallVideoLib.iml" filepath="$PROJECT_DIR$/SmallVideoLib/SmallVideoLib.iml" />

@@ -94,12 +94,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setScreen();
+        //  setScreen();
         setContentView(getContentViewId());
-        // AndroidBug54971Workaround.assistActivity(findViewById(android.R.id.content));
         initDatas();
         initViews();
-        Scale();
+        //  Scale();
         mPushAgent = PushAgent.getInstance(getApplicationContext());
         mPushAgent.onAppStart();
 
@@ -356,7 +355,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     if (isForce) {
                         DownLoadApkActivity.lunch(MainActivity.this, downUrl, isForce);
                     } else {
-                        downLoad(downUrl);
+                        // downLoad(downUrl);
+                        DownLoadApkActivity.lunch(MainActivity.this, downUrl, isForce);
                     }
                 } else {
                     NToast.shortToast(MainActivity.this, "下载地址错误");
@@ -467,4 +467,5 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         unbindService(conn);
         mHandler.removeCallbacksAndMessages(null);
     }
+
 }

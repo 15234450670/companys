@@ -2,23 +2,12 @@ package mr.li.dance.ui.activitys.match;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.RelativeLayout;
 
-import com.lecloud.sdk.constant.PlayerEvent;
-import com.lecloud.sdk.constant.PlayerParams;
-import com.lecloud.sdk.constant.StatusCode;
-import com.lecloud.sdk.videoview.IMediaDataVideoView;
-import com.lecloud.sdk.videoview.VideoViewListener;
-import com.lecloud.skin.videoview.live.UIActionLiveVideoView;
 import com.yolanda.nohttp.rest.Request;
 
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
@@ -26,7 +15,6 @@ import mr.li.dance.https.response.StringResponse;
 import mr.li.dance.models.Match;
 import mr.li.dance.ui.activitys.MyDanceWebActivity;
 import mr.li.dance.ui.activitys.base.BaseActivity;
-import mr.li.dance.ui.widget.VideoLayoutParams;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.MyStrUtil;
@@ -48,7 +36,7 @@ public class MatchDetailActivity extends BaseActivity implements View.OnClickLis
     //    private String mShexiang;//比赛设项
     //    private String mSaiCheng;//比赛赛程
     //    private String mVedioLiveId;
-    private IMediaDataVideoView videoView;
+   // private IMediaDataVideoView videoView;
     private long                beginTime;
     LinkedHashMap<String, String> rateMap = new LinkedHashMap<String, String>();
 
@@ -73,6 +61,7 @@ public class MatchDetailActivity extends BaseActivity implements View.OnClickLis
     @Override
     public void initViews() {
         setTitle("赛事详情");
+        setRightImage(R.drawable.share_icon_001);
         mDanceViewHolder.setClickListener(R.id.score_layout, this);
         mDanceViewHolder.setClickListener(R.id.matchvideo_layout, this);
         mDanceViewHolder.setClickListener(R.id.wonderfulpic_layout, this);
@@ -103,6 +92,8 @@ public class MatchDetailActivity extends BaseActivity implements View.OnClickLis
         mMatchName = match.getTitle();
         setDataToView(match);
 
+
+
     }
 
     private void setDataToView(Match match) {
@@ -123,11 +114,10 @@ public class MatchDetailActivity extends BaseActivity implements View.OnClickLis
             mDanceViewHolder.setImageByUrlOrFilePath(R.id.video_bg, match.getImg(), R.drawable.default_banner);
         } else {
             mDanceViewHolder.setViewVisibility(R.id.video_bg, View.INVISIBLE);
-            startPlayVideo(match);
+            //startPlayVideo(match);
         }
 
     }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -177,7 +167,7 @@ public class MatchDetailActivity extends BaseActivity implements View.OnClickLis
         mShareUtils.showShareDilaog(countId, shareUrl, mShareContent);
     }
 
-    private void startPlayVideo(Match zhiBoInfo) {
+  /*  private void startPlayVideo(Match zhiBoInfo) {
         videoView = new UIActionLiveVideoView(this);
         setActionLiveParameter(false);
         if (videoView instanceof UIActionLiveVideoView) {
@@ -196,9 +186,9 @@ public class MatchDetailActivity extends BaseActivity implements View.OnClickLis
         mBundle.putBoolean("pano", true);
         mBundle.putBoolean("hasSkin", true);
         videoView.setDataSource(mBundle);
-    }
+    }*/
 
-    VideoViewListener mVideoViewListener = new VideoViewListener() {
+  /*  VideoViewListener mVideoViewListener = new VideoViewListener() {
         @Override
         public void onStateResult(int event, Bundle bundle) {
             handleVideoInfoEvent(event, bundle);// 处理视频信息事件
@@ -216,35 +206,35 @@ public class MatchDetailActivity extends BaseActivity implements View.OnClickLis
             }
             return "";
         }
-    };
+    };*/
 
 
     /**
      * 处理直播类事件
      */
-    private void handleLiveEvent(int state, Bundle bundle) {
-    }
+  /*  private void handleLiveEvent(int state, Bundle bundle) {
+    }*/
 
     /**
      * 处理视频信息类事件
      */
-    private void handleVideoInfoEvent(int state, Bundle bundle) {
-    }
+   /* private void handleVideoInfoEvent(int state, Bundle bundle) {
+    }*/
 
     /**
      * 处理播放器本身事件，具体事件可以参见IPlayer类
      */
-    private void handlePlayerEvent(int state, Bundle bundle) {
+   /* private void handlePlayerEvent(int state, Bundle bundle) {
         switch (state) {
             case PlayerEvent.ACTION_LIVE_PLAY_PROTOCOL:
                 setActionLiveParameter(bundle.getBoolean(PlayerParams.KEY_PLAY_USEHLS));
                 break;
             case PlayerEvent.PLAY_VIDEOSIZE_CHANGED:
-                /**
+                *//**
                  * 获取到视频的宽高的时候，此时可以通过视频的宽高计算出比例，进而设置视频view的显示大小。
                  * 如果不按照视频的比例进行显示的话，(以surfaceView为例子)内容会填充整个surfaceView。
                  * 意味着你的surfaceView显示的内容有可能是拉伸的
-                 */
+                 *//*
                 break;
 
             case PlayerEvent.PLAY_PREPARED:
@@ -278,9 +268,9 @@ public class MatchDetailActivity extends BaseActivity implements View.OnClickLis
             videoView.setCachePreSize(200);
             videoView.setCacheMaxSize(10000);
         }
-    }
+    }*/
 
-    @Override
+   /* @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         if (newConfig.orientation == ActivityInfo.SCREEN_ORIENTATION_USER) {
@@ -288,33 +278,33 @@ public class MatchDetailActivity extends BaseActivity implements View.OnClickLis
         } else {
             setHeadVisibility(View.VISIBLE);
         }
-        if (videoView != null) {
+        *//*if (videoView != null) {
             videoView.onConfigurationChanged(newConfig);
-        }
-    }
+        }*//*
+    }*/
 
     @Override
     public void onResume() {
         super.onResume();
-        if (videoView != null) {
+       /* if (videoView != null) {
             videoView.onResume();
-        }
+        }*/
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if (videoView != null) {
+        /*if (videoView != null) {
             videoView.onPause();
-        }
+        }*/
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (videoView != null) {
+        /*if (videoView != null) {
             videoView.onDestroy();
             videoView.setVideoViewListener(null);
-        }
+        }*/
     }
 }

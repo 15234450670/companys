@@ -88,6 +88,7 @@
                 android:textColor="@color/black" />
 
             <View
+                android:id="@+id/v"
                 android:layout_width="@dimen/spitline_width"
                 android:layout_height="@dimen/spacing_98"
                 android:background="@color/black" />

@@ -40,7 +40,7 @@ public class HomeFragment extends BaseFragment implements ViewPager.OnPageChange
 
     @Override
     public void initData() {
-    setScreen();
+    //setScreen();
         //        AndroidBug54971Workaround.assistActivity(danceViewHolder.getView(R.id.home_viewpager));
         mFragment.add(new RecommendFragment());
         mFragment.add(new DirectseedingFragment());

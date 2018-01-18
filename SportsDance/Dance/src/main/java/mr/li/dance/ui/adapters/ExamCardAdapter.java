@@ -3,7 +3,6 @@ package mr.li.dance.ui.adapters;
 import android.content.Context;
 import android.graphics.Bitmap;
 
-import com.bumptech.glide.Glide;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;

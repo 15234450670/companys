@@ -36,16 +36,6 @@ public class ExPandableAdapter extends BaseExpandableListAdapter {
         is_radio = new ArrayList<>();
     }
 
-    /**
-     * 那个tab被选中了
-     *
-     * @return
-     */
-    public int getTabPosition() {
-        PopGridViewAdapter popGridViewAdapter = adapterMap.get(0);
-        return popGridViewAdapter.getSelect();
-    }
-
     @Override
     public int getGroupCount() {
         return mData.size();

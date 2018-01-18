@@ -54,12 +54,13 @@ import mr.li.dance.utils.UserInfoManager;
  * 修订历史:
  */
 public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
-    private       int mExtraCount    = 2;//除了列表额外的加载项目数
-    private final int TYPE_1         = 1;//轮播页面
-    private final int TYPE_2         = 2;//按钮
-    private final int TYPE_SMALL_PIC = 3;//小图
-    private final int TYPE_BIG_PIC   = 4;//大图
-    private final int TYPE_MAIN      = 5;//正常的列表加载页面
+    private       String TAG            = getClass().getSimpleName();
+    private       int    mExtraCount    = 2;//除了列表额外的加载项目数
+    private final int    TYPE_1         = 1;//轮播页面
+    private final int    TYPE_2         = 2;//按钮
+    private final int    TYPE_SMALL_PIC = 3;//小图
+    private final int    TYPE_BIG_PIC   = 4;//大图
+    private final int    TYPE_MAIN      = 5;//正常的列表加载页面
     private List<BannerInfo> mLunBoDatas;  //轮播图集合
 
     private List<BaseHomeItem> mDatas;         //列表集合
@@ -256,7 +257,7 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
                     case 10106://外联
 
                         String url = mDatas.get(position).getUrl();
-                        Log.e("url>>>>>>", url);
+                        Log.e(TAG + "url == ", url);
                         String wailianId = mDatas.get(position).getId();
                         if (!MyStrUtil.isEmpty(url)) {
                             MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, mDatas.get(position).getTitle(), url, wailianId);
@@ -264,7 +265,7 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
                         break;
                     case 10107:
                         BaseHomeItem baseHomeItem = mDatas.get(position);
-                        Log.e("baseHomeItem", baseHomeItem.toString());
+                        Log.e(TAG + "baseHomeItem", baseHomeItem.toString());
                         if (mContext != null && UserInfoManager.getSingleton().isLoading(mContext)) {
                             if (!MyStrUtil.isEmpty(baseHomeItem.getUrl())) {
                                 huodong_listView(baseHomeItem);
@@ -306,13 +307,13 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
             public void onSucceed(int what, String response) {
 
                 HuoDongInfo reponseResult = JsonMananger.getReponseResult(response, HuoDongInfo.class);
-                Log.e("sdfsdf", "请求了:" + reponseResult.getData());
+                Log.e(TAG + "请求了:", reponseResult.getData());
                 MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, title, reponseResult.getData() + bannerInfo.getNumber(), url, bannerInfo.getId());
             }
 
             @Override
             public void onFailed(int what, int responseCode, String response) {
-                Log.e("sdfsdf", "失败了" + responseCode);
+                Log.e(TAG + "失败了:", responseCode + "");
             }
         }, true, true);
 
@@ -324,13 +325,13 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
      */
     public void huodong_listView(final BaseHomeItem base) {
         String appId = base.getAppid();
-        Log.e("appId:::", appId);
+        Log.e(TAG+"appId:::", appId);
         String appsecret = base.getAppsecret();
-        Log.e("appsecret::::", appsecret);
+        Log.e(TAG+"appsecret::::", appsecret);
         final String url = base.getUrl();
-        Log.e("url:::::", url);
+        Log.e(TAG+"url:::::", url);
         String userId = UserInfoManager.getSingleton().getUserId(mContext);
-        Log.e("userId", userId);
+        Log.e(TAG+"userId", userId);
         final String title = base.getTitle();
         Request<String> huoDongInfoMap = ParameterUtils.getSingleton().getHuoDongInfoMap(appId, appsecret, url, userId);
 
@@ -346,7 +347,7 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
 
             @Override
             public void onFailed(int what, int responseCode, String response) {
-                Log.e("sdfsdf", "失败了" + responseCode);
+                Log.e(TAG + "失败了:", responseCode + "");
             }
         }, true, true);
 

@@ -15,9 +15,9 @@ android {
         applicationId "mr.li.dance"
         minSdkVersion 19
         targetSdkVersion 19
-        versionCode 14
+        versionCode 15
 
-        versionName "2.3.0"
+        versionName "2.3.1"
       /*  ndk {
             // 设置支持的SO库架构
             abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
@@ -50,40 +50,47 @@ android {
     lintOptions {
         abortOnError false
     }
+
 }
-repositories {
+/*repositories {
     flatDir {
-        dirs project(':LePlayerSdk').file('libs')
+        //  dirs project(':LePlayerSdk').file('libs')
     }
 
+}*/
+allprojects {
+    repositories {
+        jcenter()
+        flatDir {
+            dirs 'libs'
+        }
+    }
 }
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
     compile project(':RefreshLibrary')
-    compile project(':LePlayerSkin')
+    //    compile project(':LePlayerSkin')
     compile project(':Pushlib')
     compile 'com.alibaba:fastjson:1.2.32'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     compile files('libs/alipaySdk-20170710.jar')
-    compile 'com.liaoinstan.springview:library:1.2.6'
-    compile 'com.youth.banner:banner:1.4.9'
-    compile 'com.android.support:design:24.1.1'
-    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
-    compile 'io.github.openfeign:feign-gson:9.5.1'
+    compile 'id.zelory:compressor:1.0.4'
     compile 'fm.jiecao:jiecaovideoplayer:4.8.3'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
-    compile 'id.zelory:compressor:1.0.4'
     //  ----------oos 阿里存储-----------------------------
     compile 'com.aliyun.dpa:oss-android-sdk:2.4.4'
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile 'com.squareup.okio:okio:1.9.0'
-//-----------------------------------------------
+    //-----------------------------------------------
     testCompile 'junit:junit:4.12'
     compile project(':SmallVideoLib')
+    //  ----------腾讯云-----------------------------
+    compile(name: 'LiteAVSDK_Player_3.9.2754', ext: 'aar')
+
+
 }
-build.mustRunAfter ':LePlayerSkin:build'
+//build.mustRunAfter ':LePlayerSkin:build'

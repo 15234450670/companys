@@ -74,7 +74,7 @@
     <string name="umeng_socialize_text_weixin_circle_key">微信朋友圈</string>
 
 
-    <string name="system_download_component_disable">下载服务不用,请您启用</string>
+    <string name="system_download_component_disable">下载服务不可用,请您启用</string>
     <string name="system_download_description">版本更新</string>
 
     <string name="new_zx">资讯</string>

@@ -16,8 +16,10 @@ import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.models.CheckLogin;
 import mr.li.dance.ui.activitys.base.DanceApplication;
 import mr.li.dance.utils.JsonMananger;
+import mr.li.dance.utils.NToast;
 import mr.li.dance.utils.UserInfoManager;
 import mr.li.dance.utils.Utils;
+import mr.li.dance.utils.isNetworkAvailable;
 
 
 /**
@@ -30,12 +32,21 @@ import mr.li.dance.utils.Utils;
 public class SplashActivity extends Activity implements HttpListener {
     private String             TAG     = getClass().getSimpleName();
     private android.os.Handler handler = new android.os.Handler();
+    private isNetworkAvailable is;
 
     public void initDatas() {
+        is = new isNetworkAvailable();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                goToMain();
+                if (is.isNetwork(SplashActivity.this)) {
+                    goToMain();
+                } else {
+                    startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                    NToast.longToast(SplashActivity.this, "当前没有可用网络！");
+                    finish();
+
+                }
             }
         }, 3000);
     }
@@ -46,6 +57,7 @@ public class SplashActivity extends Activity implements HttpListener {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_splash);
         initDatas();
+
 
     }
 
@@ -87,6 +99,7 @@ public class SplashActivity extends Activity implements HttpListener {
 
         startActivity(new Intent(this, MainActivity.class));
         finish();
+
     }
 
     @Override
@@ -114,3 +127,4 @@ public class SplashActivity extends Activity implements HttpListener {
     }
 
 }
+

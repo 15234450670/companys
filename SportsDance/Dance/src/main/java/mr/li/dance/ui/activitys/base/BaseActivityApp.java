@@ -96,7 +96,7 @@ public abstract class BaseActivityApp extends AppCompatActivity implements HttpL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setScreen();
+       // setScreen();
 
         super.setContentView(R.layout.layout_base);
         // AndroidBug54971Workaround.assistActivity(findViewById(getContentViewId()));
@@ -464,7 +464,8 @@ public abstract class BaseActivityApp extends AppCompatActivity implements HttpL
                     if (isForce) {
                         DownLoadApkActivity.lunch(BaseActivityApp.this, downUrl, isForce);
                     } else {
-                        downLoad(downUrl);
+                       // downLoad(downUrl);
+                        DownLoadApkActivity.lunch(BaseActivityApp.this, downUrl, isForce);
                     }
                 } else {
                     NToast.shortToast(BaseActivityApp.this, "下载地址错误");

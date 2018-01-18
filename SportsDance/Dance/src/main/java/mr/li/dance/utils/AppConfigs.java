@@ -8,8 +8,8 @@ package mr.li.dance.utils;
 
 public class AppConfigs {
     //  private final static String MAINurl = "http://work.cdsf.org.cn";//测试环境
-    //    private final static String MAINurl = "http://kf.cdsf.org.cn";//测试环境
-   private final static String MAINurl = "http://cdsf.org.cn";//正式环境
+       private final static String MAINurl = "http://kf.cdsf.org.cn";//测试环境
+    //   private final static String MAINurl = "http://cdsf.org.cn";//正式环境
 
     private final static String DomainUrl = MAINurl + "/mobileClient";
     private final static String SHAREURL  = MAINurl + "/h5";
@@ -19,20 +19,19 @@ public class AppConfigs {
     public final static String LOGING_PASSWORD = "loging_password";
     public final static String USERINFOJSON    = "USERINFOJSON";
     public final static String USERID          = "USERID";
-    public final static String KAOJIEXPLAIN   = DomainUrl + "/kaoji.explain";
+    public final static String KAOJIEXPLAIN    = DomainUrl + "/kaoji.explain";
     //课程介绍
-    public final static String TEACHERCLASS   = SHAREURL + "/share.Course?id=";
+    public final static String TEACHERCLASS    = SHAREURL + "/share.Course?id=";
     //资讯分享
-    public final static String ZixunShareUrl  = DomainUrl + "/home.zxdetailf?id=%s";
-    public final static String ZixunShareUrl2 = SHAREURL + "/share.zxfx?id=";
-    public final static String USER           = SHAREURL + "/share.Ament";
-    public final static String tach_detial    = SHAREURL + "/share.spjx?id=";
+    public final static String ZixunShareUrl   = DomainUrl + "/home.zxdetailf?id=%s";
+    public final static String ZixunShareUrl2  = SHAREURL + "/share.zxfx?id=";
+    public final static String USER            = SHAREURL + "/share.Ament";
+    public final static String tach_detial     = SHAREURL + "/share.spjx?id=";
     //社区分享
-    public final static String shequ_detial   = SHAREURL + "/share.shequ?id=";
+    public final static String shequ_detial    = SHAREURL + "/share.shequ?id=";
 
     //系统消息
-    public final static String systemManage     = SHAREURL+"/share.packet?id=";
-
+    public final static String systemManage = SHAREURL + "/share.packet?id=";
 
     //赛事规则，赛事设项 赛程表 分享
     public final static String SAISHIShareUrl = SHAREURL + "/share.gcfx?id=%s&page=%s";
@@ -56,7 +55,6 @@ public class AppConfigs {
 
     public final static String finishactivityAction = "finish.activity.action";
     public final static String updateinfoAction     = "update.userinfo.action";
-
 
 
     public final static int SENDMSG_REQUEST_CODE      = 0x001;
@@ -181,7 +179,6 @@ public class AppConfigs {
     public final static String CLICK_EVENT_30 = "30";//音乐
     public final static String CLICK_EVENT_31 = "31";//音乐
     public final static String CLICK_EVENT_32 = "32";//音乐
-
 
 
 }

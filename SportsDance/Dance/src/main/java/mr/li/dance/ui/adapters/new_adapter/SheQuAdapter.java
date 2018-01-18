@@ -158,6 +158,7 @@ public class SheQuAdapter extends DanceBaseAdapter {
     }
 
     private void TwoPic(MyViewHolder1 holder) {
+
         holder.danceViewHolder.setViewVisibility(R.id.iamge_layout, View.GONE);
         holder.danceViewHolder.setViewVisibility(R.id.iamge_layout_three, View.GONE);
         holder.danceViewHolder.setViewVisibility(R.id.iamge_layout_two, View.VISIBLE);

@@ -16,7 +16,7 @@
         android:layout_marginTop="@dimen/spacing_10"
         android:padding="@dimen/spacing_20"
         android:id="@+id/iv_quxiao"
-        android:src="@drawable/guanbi"
+        android:src="@drawable/guanbi2"
         android:layout_alignParentRight="true"
         android:layout_height="wrap_content"
        />

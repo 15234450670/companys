@@ -5,7 +5,6 @@ import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
@@ -75,7 +74,7 @@ public class ShowImageAdapter extends PagerAdapter {
         } catch (Exception e) {
         }
         final EasePhotoView mImageView = (EasePhotoView) mList.get(position);
-        mImageLoader.Load(mContext, mUrlList.get(position), mImageView, R.drawable.default_banner);
+        mImageLoader.Loads(mContext, mUrlList.get(position), mImageView, R.drawable.default_banner);
 
         mImageView.setOnViewTapListener(new PhotoViewAttacher.OnViewTapListener() {
             @Override

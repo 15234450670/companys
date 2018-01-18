@@ -36,7 +36,6 @@
             android:id="@+id/image_pic"
             android:layout_width="@dimen/spacing_234"
             android:layout_height="@dimen/spacing_234"
-            android:src="@drawable/ic_launcher"
             android:layout_alignTop="@+id/imageView6"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="43dp"/>

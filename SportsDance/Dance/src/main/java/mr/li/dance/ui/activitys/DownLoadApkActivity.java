@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -19,7 +17,6 @@ import com.yolanda.nohttp.download.DownloadRequest;
 import java.io.File;
 
 import mr.li.dance.R;
-import mr.li.dance.https.CallServer;
 import mr.li.dance.https.DownLoadCallServer;
 import mr.li.dance.ui.activitys.base.BaseActivity;
 import mr.li.dance.utils.NLog;
@@ -68,7 +65,7 @@ public class DownLoadApkActivity extends BaseActivity {
         rootPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/download/";
         DownLoadCallServer downLoadCallServer = DownLoadCallServer.getRequestInstance();
 
-        downUrl = "http://pboss.im2x.com/client/haotuandui_4.3.0.apk";
+       // downUrl = "http://pboss.im2x.com/client/haotuandui_4.3.0.apk";
         File file = new File(rootPath + downFileName);
         if (file.exists()) {
             file.delete();

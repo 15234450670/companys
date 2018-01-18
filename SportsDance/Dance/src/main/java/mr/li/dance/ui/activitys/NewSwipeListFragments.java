@@ -29,6 +29,7 @@ public abstract class NewSwipeListFragments<T> extends BaseListFragment<T> {
     }
 
     public abstract OnSwipeMenuItemClickListener getSwipeMenuItemClickListener();
+
     public abstract SwipeMenuCreator getSwipeMenuCreator();
 
     @Override
@@ -41,7 +42,8 @@ public abstract class NewSwipeListFragments<T> extends BaseListFragment<T> {
         super.onActivityCreated(savedInstanceState);
         init();
     }
-    public void init(){
+
+    public void init() {
 
         mSwipeMenuRecyclerView = (SwipeMenuRecyclerView) getActivity().findViewById(R.id.recyclerview);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());

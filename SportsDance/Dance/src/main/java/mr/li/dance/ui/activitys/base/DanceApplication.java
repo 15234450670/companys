@@ -5,7 +5,6 @@ import android.app.Application;
 import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.os.Handler;
 import android.support.multidex.MultiDex;
 import android.text.TextUtils;
@@ -13,11 +12,9 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
-import com.lecloud.sdk.api.stats.IAppStats;
-import com.lecloud.sdk.api.stats.ICdeSetting;
-import com.lecloud.sdk.config.LeCloudPlayerConfig;
-import com.lecloud.sdk.listener.OnInitCmfListener;
 import com.tencent.bugly.crashreport.CrashReport;
+import com.tencent.rtmp.TXLiveBase;
+import com.tencent.rtmp.TXLiveConstants;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.MsgConstant;
@@ -33,7 +30,6 @@ import com.umeng.socialize.common.QueuedWork;
 import com.yolanda.nohttp.NoHttp;
 import com.yolanda.nohttp.rest.Request;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -98,10 +94,18 @@ public class DanceApplication extends Application {
         super.onCreate();
         MultiDex.install(this);
         instances = this;
-        initLeShi();
+        //initLeShi();
+        initTencent();
         NoHttp.initialize(this); // NoHttp默认初始化。
         CrashReport.initCrashReport(getApplicationContext(), "1f85dd65d8", false);
         initUmengShare();
+    }
+
+    private void initTencent() {
+        TXLiveBase.setConsoleEnabled(true);
+        TXLiveBase.setLogLevel(TXLiveConstants.LOG_LEVEL_DEBUG);
+        String sdkVersionStr = TXLiveBase.getSDKVersionStr();
+        Log.d("liteavsdk", "liteav sdk version is : " + sdkVersionStr);
     }
 
 
@@ -120,7 +124,7 @@ public class DanceApplication extends Application {
 
     }
 
-    private void initLeShi() {
+   /* private void initLeShi() {
         String processName = getProcessName(this, android.os.Process.myPid());
         if (getApplicationInfo().packageName.equals(processName)) {
             //TODO CrashHandler是一个抓取崩溃log的工具类（可选）
@@ -179,7 +183,7 @@ public class DanceApplication extends Application {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 
     private static final String TAG                  = DanceApplication.class.getName();
     public static final  String UPDATE_STATUS_ACTION = "com.umeng.message.example.action.UPDATE_STATUS";

@@ -98,7 +98,8 @@ public abstract class BaseActivity extends FragmentActivity implements HttpListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setScreen();
+      //  setScreen();
+        initVideo();
         super.setContentView(R.layout.layout_base);
         // AndroidBug54971Workaround.assistActivity(findViewById(getContentViewId()));
         initTitleView();
@@ -122,6 +123,9 @@ public abstract class BaseActivity extends FragmentActivity implements HttpListe
         mRefreshLayout.setMaxHeadHeight(140);
         mRefreshLayout.setPureScrollModeOn();//只显示页面回弹效果
         mRefreshLayout.setOverScrollBottomShow(false);
+    }
+   public void initVideo(){
+
     }
 
     // 初始化公共头部
@@ -467,7 +471,8 @@ public abstract class BaseActivity extends FragmentActivity implements HttpListe
                     if (isForce) {
                         DownLoadApkActivity.lunch(BaseActivity.this, downUrl, isForce);
                     } else {
-                        downLoad(downUrl);
+                      //  downLoad(downUrl);
+                        DownLoadApkActivity.lunch(BaseActivity.this, downUrl, isForce);
                     }
                 } else {
                     NToast.shortToast(BaseActivity.this, "下载地址错误");

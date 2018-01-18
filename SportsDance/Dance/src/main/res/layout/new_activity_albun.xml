@@ -18,7 +18,7 @@
             <RelativeLayout
                 android:id="@+id/rr"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/spacing_300">
+                android:layout_height="@dimen/spacing_398">
 
                 <ImageView
                     android:id="@+id/background_iv"
@@ -36,7 +36,6 @@
                     android:layout_marginRight="@dimen/spacing_20"
                     android:layout_marginTop="@dimen/spacing_12"
                     android:gravity="center"
-                    android:textColor="#333333"
                     />
 
                 <LinearLayout
@@ -49,6 +48,7 @@
                     android:layout_marginRight="@dimen/spacing_20"
                     android:gravity="center"
                     android:orientation="vertical"
+                    android:layout_marginBottom="@dimen/spacing_20"
                     >
 
                     <ImageView

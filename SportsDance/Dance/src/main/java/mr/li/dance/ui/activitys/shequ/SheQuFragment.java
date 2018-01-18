@@ -38,7 +38,7 @@ public class SheQuFragment extends BaseFragment implements ViewPager.OnPageChang
     @Override
     public void initData() {
         Log.e("-----------------","zzzzzzzzzzzzzzzzzzzzzzzz");
-        setScreen();
+        //setScreen();
         mFragment.add(new NewsFragment());
         mFragment.add(new HotFragment());
         FragmentManager mFragmentManager = getChildFragmentManager();

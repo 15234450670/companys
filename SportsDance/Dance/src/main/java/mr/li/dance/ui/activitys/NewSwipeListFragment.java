@@ -19,7 +19,7 @@ import mr.li.dance.ui.fragments.BaseListFragment;
  * 修订历史:
  */
 public abstract class NewSwipeListFragment<T> extends BaseListFragment<T> {
-    protected SwipeMenuRecyclerView mSwipeMenuRecyclerView;
+    protected SwipeMenuRecyclerView        mSwipeMenuRecyclerView;
     protected OnSwipeMenuItemClickListener menuItemClickListener;
 
     @Override
@@ -29,6 +29,7 @@ public abstract class NewSwipeListFragment<T> extends BaseListFragment<T> {
     }
 
     public abstract OnSwipeMenuItemClickListener getSwipeMenuItemClickListener();
+
     public abstract SwipeMenuCreator getSwipeMenuCreator();
 
     @Override
@@ -42,8 +43,7 @@ public abstract class NewSwipeListFragment<T> extends BaseListFragment<T> {
         init();
     }
 
-
-    public void init(){
+    public void init() {
 
         mSwipeMenuRecyclerView = (SwipeMenuRecyclerView) getActivity().findViewById(R.id.recyclerview);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());

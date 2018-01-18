@@ -9,8 +9,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Dance" />
-            <option value="$PROJECT_DIR$/LePlayerSdk" />
-            <option value="$PROJECT_DIR$/LePlayerSkin" />
             <option value="$PROJECT_DIR$/Pushlib" />
             <option value="$PROJECT_DIR$/RefreshLibrary" />
             <option value="$PROJECT_DIR$/SmallVideoLib" />
