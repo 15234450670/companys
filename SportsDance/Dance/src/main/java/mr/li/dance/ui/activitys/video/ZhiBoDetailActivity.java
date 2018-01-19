@@ -73,8 +73,7 @@ public class ZhiBoDetailActivity extends BaseListActivity implements ITXLivePlay
     private ImageView        mBtnRenderRotation;
 
 
-    public static final int ACTIVITY_TYPE_LIVE_PLAY     = 2;
-    public static final int ACTIVITY_TYPE_REALTIME_PLAY = 5;
+    public static final int ACTIVITY_TYPE_LIVE_PLAY = 2;
 
 
     private int mCurrentRenderMode;
@@ -228,7 +227,7 @@ public class ZhiBoDetailActivity extends BaseListActivity implements ITXLivePlay
      */
     private boolean checkPlayUrl(final String playUrl) {
         if (TextUtils.isEmpty(playUrl) || (!playUrl.startsWith("http://") && !playUrl.startsWith("https://") && !playUrl.startsWith("rtmp://") && !playUrl.startsWith("/"))) {
-            Toast.makeText(getApplicationContext(), "播放地址不合法1，直播目前仅支持rtmp,flv播放方式!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "播放地址不合法，直播目前仅支持rtmp,flv播放方式!", Toast.LENGTH_SHORT).show();
             return false;
         }
 
@@ -239,16 +238,14 @@ public class ZhiBoDetailActivity extends BaseListActivity implements ITXLivePlay
                 } else if ((playUrl.startsWith("http://") || playUrl.startsWith("https://")) && playUrl.contains(".flv")) {
                     mPlayType = TXLivePlayer.PLAY_TYPE_LIVE_FLV;
                 } else {
-                    Toast.makeText(getApplicationContext(), "播放地址不合法2，直播目前仅支持rtmp,flv播放方式!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "播放地址不合法，直播目前仅支持rtmp,flv播放方式!", Toast.LENGTH_SHORT).show();
                     return false;
                 }
             }
             break;
-            case ACTIVITY_TYPE_REALTIME_PLAY:
-                mPlayType = TXLivePlayer.PLAY_TYPE_LIVE_RTMP_ACC;
-                break;
+
             default:
-                Toast.makeText(getApplicationContext(), "播放地址不合法3，目前仅支持rtmp,flv播放方式!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "播放地址不合法，目前仅支持rtmp,flv播放方式!", Toast.LENGTH_SHORT).show();
                 return false;
         }
         return true;
@@ -319,8 +316,8 @@ public class ZhiBoDetailActivity extends BaseListActivity implements ITXLivePlay
             return false;
         }
 
-        String playUrl = "rtmp://live.hkstv.hk.lxdns.com/live/hks";
-
+        String playUrl = AppConfigs.VIDEO_ZHIBO+zhiBoInfo.get(0).tencent_streamId+".flv";
+         Log.e(TAG,playUrl);
         if (!checkPlayUrl(playUrl)) {
             return false;
         }
@@ -345,7 +342,6 @@ public class ZhiBoDetailActivity extends BaseListActivity implements ITXLivePlay
         int result = mLivePlayer.startPlay(playUrl, mPlayType); // result返回值：0 success;  -1 empty url; -2 invalid url; -3 invalid playType;
         if (result != 0) {
             mBtnPlay.setBackgroundResource(R.drawable.video_resume);
-
             return false;
         }
 

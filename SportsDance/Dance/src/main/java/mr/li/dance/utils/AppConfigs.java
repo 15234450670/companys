@@ -56,6 +56,7 @@ public class AppConfigs {
     public final static String finishactivityAction = "finish.activity.action";
     public final static String updateinfoAction     = "update.userinfo.action";
 
+    public final static String VIDEO_ZHIBO     = "http://19627.liveplay.myqcloud.com/live/19627_";
 
     public final static int SENDMSG_REQUEST_CODE      = 0x001;
     public final static int home_index                = 0x0002;

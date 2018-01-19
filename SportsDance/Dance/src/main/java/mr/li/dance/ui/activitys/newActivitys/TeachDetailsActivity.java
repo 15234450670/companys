@@ -344,16 +344,15 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
             querydetail_tv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    mDanceViewHolder.getImageView(R.id.pic).setVisibility(View.GONE);
+                    mDanceViewHolder.getView(R.id.stop_layout).setVisibility(View.GONE);
                     //   setTeachDetail(otherList.get(0).getVideo_unique());
                     if (!MyStrUtil.isEmpty(otherList)) {
                         Log.e("xxxxx", "走了");
                         otherList.get(0).isClick = true;
                         mAdapter.notifyDataSetChanged();
-                    }
 
-                    mDanceViewHolder.getImageView(R.id.pic).setVisibility(View.GONE);
-                    mDanceViewHolder.getView(R.id.stop_layout).setVisibility(View.GONE);
+                    }
 
                 }
             });
@@ -403,7 +402,6 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
         startLoadingAnimation();
 
         mStartPlayTS = System.currentTimeMillis();
-
 
         //        Log.d(TAG, "mLivePlayerPreload load");
         //        mLivePlayerPreload.setAutoPlay(false);
@@ -657,6 +655,7 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
     public void onNetStatus(TXVodPlayer txVodPlayer, Bundle bundle) {
 
     }
+
 
     // TODO: 2018/1/13 这里开始是旋转逻辑 =========================
 

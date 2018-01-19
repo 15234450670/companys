@@ -284,7 +284,8 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
      */
     private boolean startPlayRtmp() {
 
-        String playUrl = "http://200024424.vod.myqcloud.com/200024424_709ae516bdf811e6ad39991f76a4df69.f20.mp4";
+       // String playUrl = "http://200024424.vod.myqcloud.com/200024424_709ae516bdf811e6ad39991f76a4df69.f20.mp4";
+        String playUrl ="http://1255612701.vod2.myqcloud.com/cc6dcbddvodgzp1255612701/862ec5d44564972819085293544/oXA7kEpaKDUA.mp4";
         if (TextUtils.isEmpty(playUrl)) {
             Toast.makeText(getApplicationContext(), "无播放地址", Toast.LENGTH_SHORT).show();
             return false;

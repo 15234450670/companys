@@ -63,7 +63,7 @@ public class ZhiBo extends BaseResponse {
              * dot_num : 23
              * picture : http://store.cdsf.org.cn/picture//464/0/0/afb34445c2532db94521c1d414e27f84.png
              */
-
+            public String tencent_streamId;
             private String match_id;
             private String name;
             private String activity_id;

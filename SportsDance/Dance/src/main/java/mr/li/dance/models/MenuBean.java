@@ -5,8 +5,8 @@ package mr.li.dance.models;
  * 版本:
  * 创建日期:2017/10/11 0011
  * 描述:
- * 修订历史:
- */
+        * 修订历史:
+        */
 public  class MenuBean {
     /**
      * title : 赛事预告1
