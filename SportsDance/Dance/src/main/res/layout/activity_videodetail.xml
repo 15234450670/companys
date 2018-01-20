@@ -36,6 +36,7 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_marginLeft="@dimen/spacing_20"
+                android:layout_marginRight="@dimen/spacing_20"
                 android:background="@drawable/video_resume"/>
 
             <SeekBar

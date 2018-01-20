@@ -63,10 +63,10 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
     // String mPic;
     String mTitle;
     // private IMediaDataVideoView videoView;
-    private TextView                                     querydetail_tv;   //开始播放
-    private LinearLayout                                 class_jieshao;
-    private LinearLayout                                 class_section;
-    private String                                       content;
+    private TextView querydetail_tv;   //开始播放
+    private LinearLayout class_jieshao;
+    private LinearLayout class_section;
+    private String content;
     /*LinkedHashMap<String, String> rateMap            = new LinkedHashMap<String, String>();
     VideoViewListener             mVideoViewListener = new VideoViewListener() {
 
@@ -90,24 +90,24 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
     private List<TeachDetailInfo.DataBean.OtherListBean> otherList;
 
 
-    private int             mCurrentRenderMode;
-    private int             mCurrentRenderRotation;
+    private int mCurrentRenderMode;
+    private int mCurrentRenderRotation;
     private TXVodPlayConfig mPlayConfig;
     String url = "http://200024424.vod.myqcloud.com/200024424_709ae516bdf811e6ad39991f76a4df69.f20.mp4";
     private TXVodPlayer mLivePlayer = null;
     private TXCloudVideoView mPlayerView;
-    private LinearLayout     play_progress;
-    private ImageView        mLoadingView;
+    private LinearLayout play_progress;
+    private ImageView mLoadingView;
 
     private boolean mVideoPlay;
-    private Button  mBtnPlay;
-    private boolean mVideoPause  = false;
-    private long    mStartPlayTS = 0;
-    private SeekBar  mSeekBar;
+    private Button mBtnPlay;
+    private boolean mVideoPause = false;
+    private long mStartPlayTS = 0;
+    private SeekBar mSeekBar;
     private TextView mTextDuration;
     private TextView mTextStart;
     private boolean mStartSeek = false;
-    private MyRotate  rotate;
+    private MyRotate rotate;
     private ImageView mBtnRenderRotation;
 
     private FrameLayout fl;
@@ -171,27 +171,7 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
             }
         });
         mBtnPlay = (Button) findViewById(R.id.btnPlay);
-        /**
-         * 点击播放
-         */
-        mBtnPlay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mVideoPlay) {
-                    if (!mLivePlayer.isPlaying()) {
-                        mLivePlayer.resume();
-                        mBtnPlay.setBackgroundResource(R.drawable.video_pause);
-                        fl.setBackgroundColor(0xff000000);
-                    } else {
-                        mLivePlayer.pause();
-                        mBtnPlay.setBackgroundResource(R.drawable.video_resume);
-                    }
-                    mVideoPause = !mVideoPause;
-                } else {
-                    mVideoPlay = startPlayRtmp();
-                }
-            }
-        });
+
         /**
          * 视频点击隐藏状态栏
          */
@@ -262,6 +242,25 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
         videoView.setVideoViewListener(mVideoViewListener);
         final RelativeLayout videoContainer = (RelativeLayout) findViewById(R.id.videoContainer);
         videoContainer.addView((View) videoView, VideoLayoutParams.computeContainerSize(this, 16, 9));*/
+    }
+
+    /**
+     * 一切就绪 开始播放
+     */
+    public void playStatus() {
+        mLivePlayer.resume();
+        mBtnPlay.setBackgroundResource(R.drawable.video_pause);
+        fl.setBackgroundColor(0xff000000);
+        mVideoPlay = true;
+    }
+
+    /**
+     * 一切就绪 停止播放
+     */
+    public void pauseStatus() {
+        mLivePlayer.pause();
+        mBtnPlay.setBackgroundResource(R.drawable.video_resume);
+        mVideoPlay = false;
     }
 
     @Override
@@ -349,9 +348,24 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
                     //   setTeachDetail(otherList.get(0).getVideo_unique());
                     if (!MyStrUtil.isEmpty(otherList)) {
                         Log.e("xxxxx", "走了");
+                        startPlayRtmp(otherList.get(0).getVideo_unique());
+
                         otherList.get(0).isClick = true;
                         mAdapter.notifyDataSetChanged();
+                        mBtnPlay.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
 
+                                final boolean isPlaying = mLivePlayer.isPlaying();
+
+                                if (isPlaying) {
+                                    pauseStatus();
+                                } else {
+                                    playStatus();
+                                }
+
+                            }
+                        });
                     }
 
                 }
@@ -362,9 +376,10 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
 
     /**
      * 开始播放的方法
+     *
      * @return
      */
-    private boolean startPlayRtmp() {
+    private boolean startPlayRtmp(String path) {
 
         String playUrl = "http://200024424.vod.myqcloud.com/200024424_709ae516bdf811e6ad39991f76a4df69.f20.mp4";
         if (TextUtils.isEmpty(playUrl)) {
@@ -546,8 +561,9 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
     @Override
     public void itemClick(int position, Object value) {
         TeachDetailInfo.DataBean.OtherListBean value1 = (TeachDetailInfo.DataBean.OtherListBean) value;
+
         String path = value1.getVideo_unique();
-        //setTeachDetail(path);
+        startPlayRtmp(path);
         for (int i = 0; i < otherList.size(); i++) {
             if (i == position) {
                 otherList.get(i).isClick = true;
@@ -696,8 +712,8 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
 
     /**
      * 横竖屏切换时的View变化
-     * @param b
-     *         true竖屏  false横屏
+     *
+     * @param b true竖屏  false横屏
      */
     private void showOrHideView(boolean b) {
 

@@ -165,6 +165,20 @@ public class ZhiBoDetailActivity extends BaseListActivity implements ITXLivePlay
         ZhiBo reponseResult = JsonMananger.getReponseResult(responseStr, ZhiBo.class);
         compete = reponseResult.getData().getCompete();
         startPlay(compete);
+        mBtnPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final boolean isPlaying = mLivePlayer.isPlaying();
+
+                if (isPlaying) {
+                    pauseStatus();
+                } else {
+                    playStatus();
+                }
+
+            }
+        });
         ArrayList<MenuBean> menu = reponseResult.getData().getMenu();
         if (!MyStrUtil.isEmpty(menu)) {
             mDanceViewHolder.getView(R.id.program).setVisibility(View.VISIBLE);
@@ -250,7 +264,24 @@ public class ZhiBoDetailActivity extends BaseListActivity implements ITXLivePlay
         }
         return true;
     }
+    /**
+     * 一切就绪 开始播放
+     */
+    public void playStatus() {
+        mLivePlayer.resume();
+        mBtnPlay.setBackgroundResource(R.drawable.video_pause);
+        ff.setBackgroundColor(0xff000000);
+        mIsPlaying = true;
+    }
 
+    /**
+     * 一切就绪 停止播放
+     */
+    public void pauseStatus() {
+        mLivePlayer.pause();
+        mBtnPlay.setBackgroundResource(R.drawable.video_resume);
+        mIsPlaying = false;
+    }
     /**
      * 开始播放
      */
@@ -399,14 +430,14 @@ public class ZhiBoDetailActivity extends BaseListActivity implements ITXLivePlay
                 play_progress.setVisibility(m == View.VISIBLE ? View.GONE : View.VISIBLE);
                 play_progress.bringToFront();
                 break;
-            case R.id.btnPlay:
+          /*  case R.id.btnPlay:
                 Log.d(TAG, "click playbtn isplay:" + mIsPlaying + " playtype:" + mPlayType);
                 if (mIsPlaying) {
                     stopPlay();
                 } else {
                     mIsPlaying = startPlay(compete);
                 }
-                break;
+                break;*/
             case R.id.btnOrientation:
                 if (mLivePlayer == null) {
                     return;

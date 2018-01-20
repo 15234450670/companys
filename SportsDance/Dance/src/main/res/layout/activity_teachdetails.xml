@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:clipToPadding="true"
-              android:fitsSystemWindows="true"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
 
     <FrameLayout
         android:id="@+id/video_frame"
@@ -17,8 +17,7 @@
             android:id="@+id/video_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            />
+            android:layout_centerInParent="true" />
 
         <LinearLayout
             android:id="@+id/play_progress"
@@ -36,28 +35,28 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_marginLeft="@dimen/spacing_20"
-                android:background="@drawable/video_resume"/>
+                android:layout_marginRight="@dimen/spacing_20"
+                android:background="@drawable/video_resume" />
 
             <SeekBar
                 android:id="@+id/seekbar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:thumb="@drawable/video_seekbar_icon"
-                />
+                android:thumb="@drawable/video_seekbar_icon" />
 
             <TextView
                 android:id="@+id/play_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="00:00"
-                android:textSize="13dp"/>
+                android:textSize="13dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" / "
-                android:textColor="@color/white"/>
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/duration"
@@ -65,15 +64,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
                 android:text="00:00"
-                android:textSize="13dp"/>
+                android:textSize="13dp" />
 
             <ImageView
                 android:id="@+id/btnOrientation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
-                android:src="@drawable/video_unfold"
-                />
+                android:src="@drawable/video_unfold" />
         </LinearLayout>
 
         <LinearLayout
@@ -92,7 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/spacing_30"
-                android:background="@drawable/video_back"/>
+                android:background="@drawable/video_back" />
 
 
             <TextView
@@ -102,7 +100,7 @@
                 android:layout_marginLeft="@dimen/spacing_30"
                 android:text=""
                 android:textColor="@color/white"
-                android:textSize="@dimen/textsize30"/>
+                android:textSize="@dimen/textsize30" />
 
         </LinearLayout>
         <!--android:background="@drawable/landscape"-->
@@ -112,21 +110,20 @@
             android:layout_height="34dp"
             android:layout_gravity="center"
             android:src="@drawable/loading_animation"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/pic"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="fitXY"/>
+            android:scaleType="fitXY" />
 
         <LinearLayout
             android:id="@+id/stop_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/teach_title"
@@ -136,7 +133,7 @@
                 android:layout_marginTop="@dimen/spacing_15"
                 android:gravity="center"
                 android:maxLines="2"
-                android:text=""/>
+                android:text="" />
 
             <TextView
                 android:id="@+id/querydetail_tv"
@@ -150,7 +147,7 @@
                 android:paddingLeft="@dimen/spacing_15"
                 android:paddingRight="@dimen/spacing_15"
                 android:paddingTop="@dimen/spacing_10"
-                android:text="开始观看"/>
+                android:text="开始观看" />
 
         </LinearLayout>
 
@@ -173,18 +170,17 @@
             <TextView
                 style="@style/text_black_style_30"
                 android:layout_weight="1"
-                android:text="课程介绍"
-                />
+                android:text="课程介绍" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="@dimen/spacing_20"
-                android:src="@drawable/jinru_item"/>
+                android:src="@drawable/jinru_item" />
         </LinearLayout>
 
-        <include layout="@layout/split_lines"/>
+        <include layout="@layout/split_lines" />
 
         <TextView
             android:id="@+id/jieshao"
@@ -195,13 +191,12 @@
             android:layout_marginTop="@dimen/spacing_20"
             android:maxLines="4"
             android:text=""
-            android:textColor="#666666"
-            />
+            android:textColor="#666666" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="5dp"
-            android:background="#e1e1e1"/>
+            android:background="#e1e1e1" />
     </LinearLayout>
 
     <LinearLayout
@@ -210,8 +205,7 @@
         android:layout_height="0dp"
         android:layout_weight="3"
         android:orientation="vertical"
-        android:visibility="invisible"
-        >
+        android:visibility="invisible">
 
         <TextView
             style="@style/text_black_style_30"
@@ -219,18 +213,17 @@
 
             />
 
-        <include layout="@layout/split_lines"/>
+        <include layout="@layout/split_lines" />
 
         <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
             android:id="@+id/refresh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerview"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
         </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
     </LinearLayout>
 

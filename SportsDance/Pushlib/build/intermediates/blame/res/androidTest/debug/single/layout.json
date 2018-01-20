@@ -2,5 +2,9 @@
     {
         "merged": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\Pushlib\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\upush_notification.xml",
         "source": "D:\\Danceapp\\zgtywd\\companys\\SportsDance\\Pushlib\\build\\intermediates\\bundles\\debug\\res\\layout\\upush_notification.xml"
+    },
+    {
+        "merged": "E:\\companys\\SportsDance\\Pushlib\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\upush_notification.xml",
+        "source": "E:\\companys\\SportsDance\\Pushlib\\build\\intermediates\\bundles\\debug\\res\\layout\\upush_notification.xml"
     }
 ]
