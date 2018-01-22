@@ -146,6 +146,7 @@ public class ZhiBoDetailActivity extends BaseListActivity implements ITXLivePlay
     public void initDatas() {
         super.initDatas();
         Request<String> request = ParameterUtils.getSingleton().getHZhiboDetailMap(mItemId, String.valueOf(page));
+        Log.e(TAG+"id:",mItemId);
         request(AppConfigs.home_zhiboDetailL, request, true);
     }
 
@@ -264,6 +265,7 @@ public class ZhiBoDetailActivity extends BaseListActivity implements ITXLivePlay
         }
         return true;
     }
+
     /**
      * 一切就绪 开始播放
      */
@@ -282,18 +284,19 @@ public class ZhiBoDetailActivity extends BaseListActivity implements ITXLivePlay
         mBtnPlay.setBackgroundResource(R.drawable.video_resume);
         mIsPlaying = false;
     }
+
     /**
      * 开始播放
      */
     private boolean startPlay(final List<ZhiBo.DataBean.CompeteBean> zhiBoInfo) {
         mMatchId = zhiBoInfo.get(0).getCompete_id();
-        mDanceViewHolder.setText(R.id.video_title, zhiBoInfo.get(0).getCompete_name());//视频名称
+        mDanceViewHolder.setText(R.id.video_title, zhiBoInfo.get(0).getName());//视频名称
         setRightImage(R.drawable.share_icon_001);
         mShareContent = zhiBoInfo.get(0).getName();
-        if (!TextUtils.isEmpty(mShareContent)) {
+
+        if (!MyStrUtil.isEmpty(zhiBoInfo.get(0).getCompete_name())) {
             View view = mDanceViewHolder.getView(R.id.class_jieshao);
             view.setVisibility(View.VISIBLE);
-            mDanceViewHolder.getView(R.id.v).setVisibility(View.VISIBLE);
             mDanceViewHolder.setText(R.id.matchname_tv, zhiBoInfo.get(0).getCompete_name());
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -303,7 +306,7 @@ public class ZhiBoDetailActivity extends BaseListActivity implements ITXLivePlay
             });
 
         } else {
-            mDanceViewHolder.getView(R.id.class_jieshao).setVisibility(View.GONE);
+            mDanceViewHolder.getView(R.id.class_jieshao).setVisibility(View.INVISIBLE);
         }
         mDanceViewHolder.setText(R.id.compete_trailer, zhiBoInfo.get(0).getCompete_trailer());
         int playStatus = -1;
@@ -347,8 +350,8 @@ public class ZhiBoDetailActivity extends BaseListActivity implements ITXLivePlay
             return false;
         }
 
-        String playUrl = AppConfigs.VIDEO_ZHIBO+zhiBoInfo.get(0).tencent_streamId+".flv";
-         Log.e(TAG,playUrl);
+        String playUrl = AppConfigs.VIDEO_ZHIBO + zhiBoInfo.get(0).tencent_streamId + ".flv";
+        Log.e(TAG, playUrl);
         if (!checkPlayUrl(playUrl)) {
             return false;
         }
@@ -430,14 +433,7 @@ public class ZhiBoDetailActivity extends BaseListActivity implements ITXLivePlay
                 play_progress.setVisibility(m == View.VISIBLE ? View.GONE : View.VISIBLE);
                 play_progress.bringToFront();
                 break;
-          /*  case R.id.btnPlay:
-                Log.d(TAG, "click playbtn isplay:" + mIsPlaying + " playtype:" + mPlayType);
-                if (mIsPlaying) {
-                    stopPlay();
-                } else {
-                    mIsPlaying = startPlay(compete);
-                }
-                break;*/
+
             case R.id.btnOrientation:
                 if (mLivePlayer == null) {
                     return;

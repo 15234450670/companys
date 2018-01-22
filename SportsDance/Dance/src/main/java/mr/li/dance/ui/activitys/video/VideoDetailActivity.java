@@ -94,32 +94,32 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
              return "";
          }
      };*/
-    private RecyclerView rv;
+    private RecyclerView     rv;
     private ArrayList<Video> otherList;
     private ArrayList<Video> album;
 
 
-    private int mCurrentRenderMode;
-    private int mCurrentRenderRotation;
+    private int             mCurrentRenderMode;
+    private int             mCurrentRenderRotation;
     private TXVodPlayConfig mPlayConfig;
     private TXVodPlayer mLivePlayer = null;
     private TXCloudVideoView mPlayerView;
-    private LinearLayout play_progress;
-    private ImageView mLoadingView;
+    private LinearLayout     play_progress;
+    private ImageView        mLoadingView;
 
     private boolean mVideoPlay;
-    private Button mBtnPlay;
-    private boolean mVideoPause = false;
-    private long mStartPlayTS = 0;
-    private SeekBar mSeekBar;
+    private Button  mBtnPlay;
+    private boolean mVideoPause  = false;
+    private long    mStartPlayTS = 0;
+    private SeekBar  mSeekBar;
     private TextView mTextDuration;
     private TextView mTextStart;
     private boolean mStartSeek = false;
-    private MyRotate rotate;
+    private MyRotate  rotate;
     private ImageView mBtnRenderRotation;
 
     private FrameLayout fl;
-    private Video detail;
+    private Video       detail;
 
     /**
      * 初始化播放模式
@@ -263,7 +263,6 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
 
     /**
      * 开始播放的方法
-     *
      * @return
      */
     private boolean startPlayRtmp(Video video) {
@@ -329,6 +328,7 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
         mLivePlayer.pause();
         mBtnPlay.setBackgroundResource(R.drawable.video_resume);
         mVideoPlay = false;
+
     }
 
     @Override
@@ -400,19 +400,6 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
                         playStatus();
                     }
 
-/*                if (mVideoPlay) {
-                    if (!) {
-                        mLivePlayer.resume();
-                        mBtnPlay.setBackgroundResource(R.drawable.video_pause);
-                        fl.setBackgroundColor(0xff000000);
-                    } else {
-                        mLivePlayer.pause();
-                        mBtnPlay.setBackgroundResource(R.drawable.video_resume);
-                    }
-                    mVideoPause = !mVideoPause;
-                } else {
-                    mVideoPlay = startPlayRtmp(detail);
-                }*/
                 }
             });
 
@@ -777,8 +764,8 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
 
     /**
      * 横竖屏切换时的View变化
-     *
-     * @param b true竖屏  false横屏
+     * @param b
+     *         true竖屏  false横屏
      */
     private void showOrHideView(boolean b) {
 
