@@ -109,6 +109,7 @@
 
         </LinearLayout>
 
+
         <ImageView
             android:id="@+id/loadingImageView"
             android:layout_width="34dp"

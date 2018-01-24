@@ -30,10 +30,11 @@ import static mr.li.dance.ui.activitys.MainActivity.myBinder;
  */
 public class NewHomeFragment extends BaseListFragment {
     New_HomeRecyclerAdapter mAdapter;
+    int page = 1;
 
     @Override
     public void initData() {
-        Request<String> request = ParameterUtils.getSingleton().getHomeIndexMap();
+        Request<String> request = ParameterUtils.getSingleton().getHomeIndexMap1(String.valueOf(page));
         request(AppConfigs.home_index, request, false);
     }
 
@@ -89,15 +90,16 @@ public class NewHomeFragment extends BaseListFragment {
     @Override
     public void refresh() {
         super.refresh();
-        Request<String> request = ParameterUtils.getSingleton().getHomeIndexMap();
+        Request<String> request = ParameterUtils.getSingleton().getHomeIndexMap1(String.valueOf(1));
         request(AppConfigs.home_index, request, false);
     }
 
     @Override
     public void loadMore() {
         super.loadMore();
-        Request<String> request = ParameterUtils.getSingleton().getHomeIndexPageMap(mAdapter.getNextPage());
-        request(AppConfigs.home_index_page, request, false);
+        page++;
+        Request<String> request = ParameterUtils.getSingleton().getHomeIndexMap1(String.valueOf(page));
+        request(AppConfigs.home_index, request, false);
     }
 
     @Override

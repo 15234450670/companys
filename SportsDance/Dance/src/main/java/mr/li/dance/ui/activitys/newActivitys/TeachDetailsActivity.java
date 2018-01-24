@@ -63,10 +63,10 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
     // String mPic;
     String mTitle;
     // private IMediaDataVideoView videoView;
-    private TextView querydetail_tv;   //开始播放
-    private LinearLayout class_jieshao;
-    private LinearLayout class_section;
-    private String content;
+    private TextView                                     querydetail_tv;   //开始播放
+    private LinearLayout                                 class_jieshao;
+    private LinearLayout                                 class_section;
+    private String                                       content;
     /*LinkedHashMap<String, String> rateMap            = new LinkedHashMap<String, String>();
     VideoViewListener             mVideoViewListener = new VideoViewListener() {
 
@@ -90,24 +90,24 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
     private List<TeachDetailInfo.DataBean.OtherListBean> otherList;
 
 
-    private int mCurrentRenderMode;
-    private int mCurrentRenderRotation;
+    private int             mCurrentRenderMode;
+    private int             mCurrentRenderRotation;
     private TXVodPlayConfig mPlayConfig;
     String url = "http://200024424.vod.myqcloud.com/200024424_709ae516bdf811e6ad39991f76a4df69.f20.mp4";
     private TXVodPlayer mLivePlayer = null;
     private TXCloudVideoView mPlayerView;
-    private LinearLayout play_progress;
-    private ImageView mLoadingView;
+    private LinearLayout     play_progress;
+    private ImageView        mLoadingView;
 
     private boolean mVideoPlay;
-    private Button mBtnPlay;
-    private boolean mVideoPause = false;
-    private long mStartPlayTS = 0;
-    private SeekBar mSeekBar;
+    private Button  mBtnPlay;
+    private boolean mVideoPause  = false;
+    private long    mStartPlayTS = 0;
+    private SeekBar  mSeekBar;
     private TextView mTextDuration;
     private TextView mTextStart;
     private boolean mStartSeek = false;
-    private MyRotate rotate;
+    private MyRotate  rotate;
     private ImageView mBtnRenderRotation;
 
     private FrameLayout fl;
@@ -307,7 +307,7 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
     @Override
     public void onSucceed(int what, String responseStr) {
         super.onSucceed(what, responseStr);
-        Log.e("xxxxxx", responseStr);
+        Log.e("teacherssss", responseStr);
         if (what == AppConfigs.home_tab_teach_details) {
             final TeachDetailInfo reponseResult = JsonMananger.getReponseResult(responseStr, TeachDetailInfo.class);
             if (reponseResult == null) {
@@ -343,12 +343,12 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
             querydetail_tv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mDanceViewHolder.getImageView(R.id.pic).setVisibility(View.GONE);
-                    mDanceViewHolder.getView(R.id.stop_layout).setVisibility(View.GONE);
-                    //   setTeachDetail(otherList.get(0).getVideo_unique());
-                    if (!MyStrUtil.isEmpty(otherList)) {
+                    if (!MyStrUtil.isEmpty(otherList.get(0).video)) {
+                        mDanceViewHolder.getImageView(R.id.pic).setVisibility(View.GONE);
+                        mDanceViewHolder.getView(R.id.stop_layout).setVisibility(View.GONE);
+                        //   setTeachDetail(otherList.get(0).getVideo_unique());
                         Log.e("xxxxx", "走了");
-                        startPlayRtmp(otherList.get(0).getVideo_unique());
+                        startPlayRtmp(otherList.get(0).video);
 
                         otherList.get(0).isClick = true;
                         mAdapter.notifyDataSetChanged();
@@ -366,6 +366,9 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
 
                             }
                         });
+
+                    } else {
+                        Toast.makeText(mContext, "解析视频出错", Toast.LENGTH_SHORT).show();
                     }
 
                 }
@@ -376,7 +379,6 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
 
     /**
      * 开始播放的方法
-     *
      * @return
      */
     private boolean startPlayRtmp(String path) {
@@ -488,22 +490,14 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
         }
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        if (mLivePlayer != null) {
-            mLivePlayer.pause();
-        }
-    }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (mVideoPlay && !mVideoPause) {
-            if (mLivePlayer != null) {
-                mLivePlayer.resume();
-            }
+
+        if (mLivePlayer != null) {
+            mLivePlayer.resume();
+
         }
     }
 
@@ -562,7 +556,7 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
     public void itemClick(int position, Object value) {
         TeachDetailInfo.DataBean.OtherListBean value1 = (TeachDetailInfo.DataBean.OtherListBean) value;
 
-        String path = value1.getVideo_unique();
+        String path = value1.video;
         startPlayRtmp(path);
         for (int i = 0; i < otherList.size(); i++) {
             if (i == position) {
@@ -712,8 +706,8 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
 
     /**
      * 横竖屏切换时的View变化
-     *
-     * @param b true竖屏  false横屏
+     * @param b
+     *         true竖屏  false横屏
      */
     private void showOrHideView(boolean b) {
 

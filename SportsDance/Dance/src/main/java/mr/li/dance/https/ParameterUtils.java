@@ -355,7 +355,6 @@ public class ParameterUtils {
     }
 
 
-
     /**
      * 推荐页面获取
      * @return
@@ -364,6 +363,7 @@ public class ParameterUtils {
         Request<String> request = getBaseRequestCacheForPost("/home.index");
         return request;
     }
+
 
     /**
      * 推荐页面分页获取
@@ -421,11 +421,9 @@ public class ParameterUtils {
      * @param id
      * @return
      */
-    public Request<String> getVideoDetailMap(String userid, String id, String page) {
-        Request<String> request = getBaseRequestForPost("/home.dianboDetail2");
+    public Request<String> getVideoDetailMap(String id) {
+        Request<String> request = getBaseRequestForPost("/revisionHome.dianboDetail");
         request.add("id", id);
-        request.add("userid", userid);
-        request.add("page", page);
         return request;
     }
 
@@ -443,7 +441,7 @@ public class ParameterUtils {
      * @return
      */
     public Request<String> getHomeDianbo2Map(String page) {
-        Request<String> request = getBaseRequestCacheForPost("/home.dianbo2");
+        Request<String> request = getBaseRequestCacheForPost("/revisionHome.dianbo");
         request.add("page", page);
         return request;
     }
@@ -454,7 +452,7 @@ public class ParameterUtils {
      * @return
      */
     public Request<String> getVideoSpeial(String id, String page) {
-        Request<String> request = getBaseRequestCacheForPost("/home.albumList");
+        Request<String> request = getBaseRequestCacheForPost("/revisionHome.albumList");
         request.add("id", id);
         request.add("page", page);
         return request;
@@ -562,7 +560,7 @@ public class ParameterUtils {
      * 所有的Tab
      */
     public Request<String> getHomeTabhMap(String id, String type, String page) {
-        Request<String> request = getBaseRequestCacheForPost("/home.labelSearch");
+        Request<String> request = getBaseRequestCacheForPost("/revisionHome.labelSearch");
         request.add("id", id);
         request.add("type", type);
         request.add("page", page);
@@ -573,7 +571,7 @@ public class ParameterUtils {
      * 教学详情
      */
     public Request<String> getHomeTeachDetailsMap(String id, String page) {
-        Request<String> request = getBaseRequestCacheForPost("/home.teachDetail");
+        Request<String> request = getBaseRequestCacheForPost("/revisionHome.teachDetail");
         request.add("id", id);
         request.add("page", page);
         return request;
@@ -611,6 +609,9 @@ public class ParameterUtils {
         return request;
     }
 
+    /**
+     * 搜索
+     */
     public Request<String> getHomeSearchMap(String type, String content, int page) {
         Request<String> request = getBaseRequestForPost("/revisionHome.Search");
         request.add("type", type);
@@ -831,7 +832,7 @@ public class ParameterUtils {
      * @return
      */
     public Request<String> getMatchVedioMap(String id) {
-        Request<String> request = getBaseRequestCacheForPost("/match.matchVedio");
+        Request<String> request = getBaseRequestCacheForPost("/revisionMatch.matchVedio");
         request.add("id", id);
         return request;
     }
@@ -1304,6 +1305,14 @@ public class ParameterUtils {
         request.add("sign", sign);
         request.add("activityid", activityid);
         request.add("ymd", ymd);
+        return request;
+    }
+
+    /***
+     *   改版腾讯云后的的首页
+     */
+    public Request<String> getHomeIndexMap1(String page) {
+        Request<String> request = getBaseRequestCacheForPost("/revisionHome.index");
         return request;
     }
 

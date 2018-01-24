@@ -121,6 +121,7 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
     private FrameLayout fl;
     private Video       detail;
 
+
     /**
      * 初始化播放模式
      */
@@ -266,8 +267,9 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
      * @return
      */
     private boolean startPlayRtmp(Video video) {
-
-        String playUrl = "http://200024424.vod.myqcloud.com/200024424_709ae516bdf811e6ad39991f76a4df69.f20.mp4";
+        String playUrl = video.getVideo();
+        Log.e("playUrl", "-->" + playUrl);
+        //  String playUrl = "http://200024424.vod.myqcloud.com/200024424_709ae516bdf811e6ad39991f76a4df69.f20.mp4";
         if (TextUtils.isEmpty(playUrl)) {
             Toast.makeText(getApplicationContext(), "无播放地址", Toast.LENGTH_SHORT).show();
             return false;
@@ -315,10 +317,12 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
      * 一切就绪 开始播放
      */
     public void playStatus() {
+
         mLivePlayer.resume();
         mBtnPlay.setBackgroundResource(R.drawable.video_pause);
         fl.setBackgroundColor(0xff000000);
         mVideoPlay = true;
+
     }
 
     /**
@@ -400,6 +404,7 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
                         playStatus();
                     }
 
+
                 }
             });
 
@@ -424,10 +429,12 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
         stopLoadingAnimation();
         if (mLivePlayer != null) {
             mLivePlayer.setVodListener(null);
-            mLivePlayer.stopPlay(true);
+            mLivePlayer.stopPlay(false);
         }
         mVideoPause = false;
         mVideoPlay = false;
+
+
     }
 
     /**
@@ -455,7 +462,7 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
     public void initDatas() {
         super.initDatas();
         String userId = UserInfoManager.getSingleton().getUserId(this);
-        Request<String> request = ParameterUtils.getSingleton().getVideoDetailMap(userId, mItemId, "1");
+        Request<String> request = ParameterUtils.getSingleton().getVideoDetailMap(mItemId);
         Log.e("mId", mItemId);
         request(AppConfigs.home_dianboDetailL, request, true);
     }
@@ -466,11 +473,11 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
 
         String Compete_name = video.getCompete_name();
         mShareContent = video.getName();
-        *//*if (MyStrUtil.isEmpty(Compete_name)) {
+        if (MyStrUtil.isEmpty(Compete_name)) {
             mDanceViewHolder.setViewVisibility(R.id.brief_tv, View.GONE);
         } else {
             mDanceViewHolder.setText(R.id.brief_tv, video.getCompete_name());
-        }*//*
+        }
         mDanceViewHolder.setText(R.id.type_tv, "赛事相关视频");
         Bundle mBundle = new Bundle();
         mBundle.putString(PlayerParams.KEY_PLAY_UUID, AppConfigs.KEY_PLAY_UUID);
@@ -479,8 +486,8 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
         shareUrl = String.format(AppConfigs.SHAREMOV, mItemId);
         videoView.setPanorama(true);
         videoView.setDataSource(mBundle);
-    }*/
-
+    }
+*/
 
     @Override
     public void getIntentData() {
@@ -515,28 +522,21 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
     @Override
     public void onPause() {
         super.onPause();
+        Log.d(TAG, "onPause");
         if (mLivePlayer != null) {
             mLivePlayer.pause();
         }
+
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        if (mLivePlayer != null) {
-            mLivePlayer.pause();
-        }
-    }
 
     @Override
     public void onResume() {
         super.onResume();
         Log.d(TAG, "onResume");
-        if (mVideoPlay && !mVideoPause) {
-            if (mLivePlayer != null) {
-                mLivePlayer.resume();
-            }
+        if (mLivePlayer != null) {
+            mLivePlayer.resume();
+
         }
     }
 
@@ -700,6 +700,7 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
             if (mSeekBar != null) {
                 mSeekBar.setProgress(0);
             }
+
 
         } else if (event == TXLiveConstants.PLAY_EVT_PLAY_LOADING) {
             startLoadingAnimation();
