@@ -111,6 +111,8 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
     private ImageView mBtnRenderRotation;
 
     private FrameLayout fl;
+    private Button      btnvideo;
+    private int         num;
 
     /**
      * 初始化播放模式
@@ -151,6 +153,7 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
         class_jieshao = (LinearLayout) mDanceViewHolder.getView(R.id.class_jieshao);   //课程介绍
         class_section = (LinearLayout) mDanceViewHolder.getView(R.id.class_section);  //课程章节
         querydetail_tv = mDanceViewHolder.getTextView(R.id.querydetail_tv);
+        btnvideo = mDanceViewHolder.getButton(R.id.btnvideo);
 
 
         mPlayerView = (TXCloudVideoView) mDanceViewHolder.getView(R.id.video_view);
@@ -172,23 +175,7 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
         });
         mBtnPlay = (Button) findViewById(R.id.btnPlay);
 
-        /**
-         * 视频点击隐藏状态栏
-         */
-        fl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LinearLayout view = (LinearLayout) mDanceViewHolder.getView(R.id.stop_layout);
-                int visibility = view.getVisibility();
-                if (visibility == View.GONE) {
-                    final int m = play_progress.getVisibility();
-                    play_progress.setVisibility(m == View.VISIBLE ? View.GONE : View.VISIBLE);
-                    mDanceViewHolder.getView(R.id.video_top).setVisibility(m == View.VISIBLE ? View.GONE : View.VISIBLE);
-                    play_progress.bringToFront();
-                }
 
-            }
-        });
         /**
          * 点击切换横竖屏
          */
@@ -337,42 +324,26 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
 
                 class_section.setVisibility(View.VISIBLE);
                 mAdapter.refresh(reponseResult.getData().getOtherList());
+                //点击开始播放
+                querydetail_tv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (!MyStrUtil.isEmpty(otherList.get(0).video)) {
 
-            }
-            //点击开始播放
-            querydetail_tv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (!MyStrUtil.isEmpty(otherList.get(0).video)) {
-                        mDanceViewHolder.getImageView(R.id.pic).setVisibility(View.GONE);
-                        mDanceViewHolder.getView(R.id.stop_layout).setVisibility(View.GONE);
-                        //   setTeachDetail(otherList.get(0).getVideo_unique());
-                        Log.e("xxxxx", "走了");
-                        startPlayRtmp(otherList.get(0).video);
+                            startPlayRtmp(otherList.get(0).video);
 
-                        otherList.get(0).isClick = true;
-                        mAdapter.notifyDataSetChanged();
-                        mBtnPlay.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
+                        } else {
+                            Toast.makeText(mContext, "解析视频路径出错", Toast.LENGTH_SHORT).show();
+                        }
 
-                                final boolean isPlaying = mLivePlayer.isPlaying();
-
-                                if (isPlaying) {
-                                    pauseStatus();
-                                } else {
-                                    playStatus();
-                                }
-
-                            }
-                        });
-
-                    } else {
-                        Toast.makeText(mContext, "解析视频出错", Toast.LENGTH_SHORT).show();
                     }
+                });
 
-                }
-            });
+            } else {
+                querydetail_tv.setOnClickListener(null);
+                Toast.makeText(mContext, "暂无课程章节", Toast.LENGTH_SHORT).show();
+            }
+
 
         }
     }
@@ -382,9 +353,9 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
      * @return
      */
     private boolean startPlayRtmp(String path) {
-
-        String playUrl = "http://200024424.vod.myqcloud.com/200024424_709ae516bdf811e6ad39991f76a4df69.f20.mp4";
-        if (TextUtils.isEmpty(playUrl)) {
+        mDanceViewHolder.getImageView(R.id.pic).setVisibility(View.GONE);
+        mDanceViewHolder.getView(R.id.stop_layout).setVisibility(View.GONE);
+        if (TextUtils.isEmpty(path)) {
             Toast.makeText(getApplicationContext(), "无播放地址", Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -407,7 +378,7 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
         mPlayConfig.setHeaders(header);
         mLivePlayer.setConfig(mPlayConfig);
         mLivePlayer.setAutoPlay(true);
-        int result = mLivePlayer.startPlay(playUrl); // result返回值：0 success;  -1 empty url;
+        int result = mLivePlayer.startPlay(path); // result返回值：0 success;  -1 empty url;
         if (result != 0) {
             mBtnPlay.setBackgroundResource(R.drawable.video_resume);
             fl.setBackgroundResource(R.drawable.default_banner);
@@ -419,10 +390,40 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
         startLoadingAnimation();
 
         mStartPlayTS = System.currentTimeMillis();
+        /**
+         * 视频点击隐藏状态栏
+         */
+        fl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LinearLayout view = (LinearLayout) mDanceViewHolder.getView(R.id.stop_layout);
+                int visibility = view.getVisibility();
+                if (visibility == View.GONE) {
+                    final int m = play_progress.getVisibility();
+                    play_progress.setVisibility(m == View.VISIBLE ? View.GONE : View.VISIBLE);
+                    mDanceViewHolder.getView(R.id.video_top).setVisibility(m == View.VISIBLE ? View.GONE : View.VISIBLE);
+                    play_progress.bringToFront();
+                }
 
-        //        Log.d(TAG, "mLivePlayerPreload load");
-        //        mLivePlayerPreload.setAutoPlay(false);
-        //        mLivePlayerPreload.startPlay("http://baobab.wdjcdn.com/14571455324031.mp4");
+            }
+        });
+        mBtnPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final boolean isPlaying = mLivePlayer.isPlaying();
+
+                if (isPlaying) {
+                    pauseStatus();
+                } else {
+                    playStatus();
+                }
+
+            }
+        });
+        otherList.get(0).isClick = true;
+        mAdapter.notifyDataSetChanged();
+
         return true;
     }
 
@@ -435,7 +436,7 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
         stopLoadingAnimation();
         if (mLivePlayer != null) {
             mLivePlayer.setVodListener(null);
-            mLivePlayer.stopPlay(true);
+            mLivePlayer.stopPlay(false);
         }
         mVideoPause = false;
         mVideoPlay = false;
@@ -554,19 +555,28 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
     }*/
     @Override
     public void itemClick(int position, Object value) {
+
         TeachDetailInfo.DataBean.OtherListBean value1 = (TeachDetailInfo.DataBean.OtherListBean) value;
-
         String path = value1.video;
-        startPlayRtmp(path);
-        for (int i = 0; i < otherList.size(); i++) {
-            if (i == position) {
-                otherList.get(i).isClick = true;
+        if (!MyStrUtil.isEmpty(path)) {
+            mDanceViewHolder.getImageView(R.id.pic).setVisibility(View.GONE);
+            mDanceViewHolder.getView(R.id.stop_layout).setVisibility(View.GONE);
+            startPlayRtmp(path);
+            for (int i = 0; i < otherList.size(); i++) {
+                if (i == position) {
+                    num = i;
+                    otherList.get(i).isClick = true;
 
-            } else {
-                otherList.get(i).isClick = false;
+                } else {
+                    otherList.get(i).isClick = false;
 
+                }
             }
+        } else {
+            Toast.makeText(mContext, "视频路径错误", Toast.LENGTH_SHORT).show();
         }
+
+
         mAdapter.notifyDataSetChanged();
 
     }
@@ -632,6 +642,10 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
             }
             return;
         } else if (event == TXLiveConstants.PLAY_ERR_NET_DISCONNECT || event == TXLiveConstants.PLAY_EVT_PLAY_END || event == TXLiveConstants.PLAY_ERR_FILE_NOT_FOUND) {
+            mDanceViewHolder.getView(R.id.video_top).setVisibility(View.GONE);
+            mDanceViewHolder.getView(R.id.play_progress).setVisibility(View.GONE);
+            fl.setOnClickListener(null);
+            btnvideo.setVisibility(View.VISIBLE);
             stopPlayRtmp();
             mVideoPlay = false;
             mVideoPause = false;
@@ -641,6 +655,13 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
             if (mSeekBar != null) {
                 mSeekBar.setProgress(0);
             }
+            btnvideo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    btnvideo.setVisibility(View.GONE);
+                    startPlayRtmp(otherList.get(num).video);
+                }
+            });
 
         } else if (event == TXLiveConstants.PLAY_EVT_PLAY_LOADING) {
             startLoadingAnimation();

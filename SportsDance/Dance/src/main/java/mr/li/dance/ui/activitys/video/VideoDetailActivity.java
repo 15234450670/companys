@@ -120,6 +120,7 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
 
     private FrameLayout fl;
     private Video       detail;
+    private Button      btnvideo;
 
 
     /**
@@ -164,6 +165,7 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
         setTitle("视频详情");
         mPlayerView = (TXCloudVideoView) mDanceViewHolder.getView(R.id.video_view);
         play_progress = (LinearLayout) mDanceViewHolder.getView(R.id.play_progress);
+        btnvideo = mDanceViewHolder.getButton(R.id.btnvideo);
         mDanceViewHolder.getImageView(R.id.video_finish).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -179,23 +181,7 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
         fl = (FrameLayout) findViewById(R.id.video_frame);
         mLoadingView = mDanceViewHolder.getImageView(R.id.loadingImageView);
         mBtnPlay = (Button) findViewById(R.id.btnPlay);
-        /**
-         * 点击播放
-         */
 
-        /**
-         * 视频点击隐藏状态栏
-         */
-        fl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final int m = play_progress.getVisibility();
-                mDanceViewHolder.getView(R.id.video_top).setVisibility(m == View.VISIBLE ? View.GONE : View.VISIBLE);
-                play_progress.setVisibility(m == View.VISIBLE ? View.GONE : View.VISIBLE);
-                play_progress.bringToFront();
-
-            }
-        });
         /**
          * 点击切换横竖屏
          */
@@ -306,10 +292,35 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
 
         mStartPlayTS = System.currentTimeMillis();
 
+        /**
+         * 视频点击隐藏状态栏
+         */
+        fl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final int m = play_progress.getVisibility();
+                mDanceViewHolder.getView(R.id.video_top).setVisibility(m == View.VISIBLE ? View.GONE : View.VISIBLE);
+                play_progress.setVisibility(m == View.VISIBLE ? View.GONE : View.VISIBLE);
+                play_progress.bringToFront();
 
-        //        Log.d(TAG, "mLivePlayerPreload load");
-        //        mLivePlayerPreload.setAutoPlay(false);
-        //        mLivePlayerPreload.startPlay("http://baobab.wdjcdn.com/14571455324031.mp4");
+            }
+        });
+
+        mBtnPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final boolean isPlaying = mLivePlayer.isPlaying();
+
+                if (isPlaying) {
+                    pauseStatus();
+                } else {
+                    playStatus();
+                }
+
+
+            }
+        });
         return true;
     }
 
@@ -392,21 +403,7 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
             // setVideoDetail(detailResponse.getData().getDetail());
             detail = detailResponse.getData().getDetail();
             startPlayRtmp(detail);
-            mBtnPlay.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                    final boolean isPlaying = mLivePlayer.isPlaying();
-
-                    if (isPlaying) {
-                        pauseStatus();
-                    } else {
-                        playStatus();
-                    }
-
-
-                }
-            });
 
         } else {
             StringResponse stringResponse = JsonMananger.getReponseResult(responseStr, StringResponse.class);
@@ -467,27 +464,6 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
         request(AppConfigs.home_dianboDetailL, request, true);
     }
 
- /*   private void setVideoDetail(Video video) {
-
-        videoView.resetPlayer();
-
-        String Compete_name = video.getCompete_name();
-        mShareContent = video.getName();
-        if (MyStrUtil.isEmpty(Compete_name)) {
-            mDanceViewHolder.setViewVisibility(R.id.brief_tv, View.GONE);
-        } else {
-            mDanceViewHolder.setText(R.id.brief_tv, video.getCompete_name());
-        }
-        mDanceViewHolder.setText(R.id.type_tv, "赛事相关视频");
-        Bundle mBundle = new Bundle();
-        mBundle.putString(PlayerParams.KEY_PLAY_UUID, AppConfigs.KEY_PLAY_UUID);
-        mBundle.putString(PlayerParams.KEY_PLAY_VUID, video.getVideo_unique());
-        mBundle.putString(PlayerParams.KEY_PLAY_PU, AppConfigs.KEY_PLAY_PU);
-        shareUrl = String.format(AppConfigs.SHAREMOV, mItemId);
-        videoView.setPanorama(true);
-        videoView.setDataSource(mBundle);
-    }
-*/
 
     @Override
     public void getIntentData() {
@@ -541,55 +517,6 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
     }
 
 
-   /* @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        if (newConfig.orientation == ActivityInfo.SCREEN_ORIENTATION_USER) {
-            setHeadVisibility(View.GONE);
-        } else {
-            setHeadVisibility(View.VISIBLE);
-        }
-       *//* if (videoView != null) {
-            videoView.onConfigurationChanged(newConfig);
-        }*//*
-    }*/
-
-    /**
-     * 处理播放器本身事件，具体事件可以参见IPlayer类
-     */
-   /* private void handlePlayerEvent(int state, Bundle bundle) {
-        switch (state) {
-            case PlayerEvent.PLAY_VIDEOSIZE_CHANGED:
-                *//**
-     * 获取到视频的宽高的时候，此时可以通过视频的宽高计算出比例，进而设置视频view的显示大小。
-     * 如果不按照视频的比例进行显示的话，(以surfaceView为例子)内容会填充整个surfaceView。
-     * 意味着你的surfaceView显示的内容有可能是拉伸的
-     *//*
-                break;
-
-            case PlayerEvent.PLAY_PREPARED:
-                // 播放器准备完成，此刻调用start()就可以进行播放了
-                if (videoView != null) {
-                    videoView.onStart();
-                }
-                break;
-            case PlayerEvent.PLAY_INFO:
-                int code = bundle.getInt(PlayerParams.KEY_RESULT_STATUS_CODE);
-                if (code == StatusCode.PLAY_INFO_VIDEO_RENDERING_START) {
-                    //播放第一帧
-                }
-                break;
-            default:
-                break;
-        }
-    }*/
-
-    /**
-     * 处理视频信息类事件
-     */
-    /*private void handleVideoInfoEvent(int state, Bundle bundle) {
-    }
-*/
     public static void lunch(Context context, String id) {
         lunch(context, id, false);
 
@@ -691,6 +618,10 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
             }
             return;
         } else if (event == TXLiveConstants.PLAY_ERR_NET_DISCONNECT || event == TXLiveConstants.PLAY_EVT_PLAY_END || event == TXLiveConstants.PLAY_ERR_FILE_NOT_FOUND) {
+            mDanceViewHolder.getView(R.id.play_progress).setVisibility(View.GONE);
+            mDanceViewHolder.getView(R.id.video_top).setVisibility(View.GONE);
+            fl.setOnClickListener(null);
+            btnvideo.setVisibility(View.VISIBLE);
             stopPlayRtmp();
             mVideoPlay = false;
             mVideoPause = false;
@@ -700,6 +631,13 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
             if (mSeekBar != null) {
                 mSeekBar.setProgress(0);
             }
+            btnvideo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    btnvideo.setVisibility(View.GONE);
+                    startPlayRtmp(detail);
+                }
+            });
 
 
         } else if (event == TXLiveConstants.PLAY_EVT_PLAY_LOADING) {
@@ -789,4 +727,79 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
     }
+
+
+    // TODO: 2018/1/25 0025 暂时没用
+
+     /*   private void setVideoDetail(Video video) {
+
+        videoView.resetPlayer();
+
+        String Compete_name = video.getCompete_name();
+        mShareContent = video.getName();
+        if (MyStrUtil.isEmpty(Compete_name)) {
+            mDanceViewHolder.setViewVisibility(R.id.brief_tv, View.GONE);
+        } else {
+            mDanceViewHolder.setText(R.id.brief_tv, video.getCompete_name());
+        }
+        mDanceViewHolder.setText(R.id.type_tv, "赛事相关视频");
+        Bundle mBundle = new Bundle();
+        mBundle.putString(PlayerParams.KEY_PLAY_UUID, AppConfigs.KEY_PLAY_UUID);
+        mBundle.putString(PlayerParams.KEY_PLAY_VUID, video.getVideo_unique());
+        mBundle.putString(PlayerParams.KEY_PLAY_PU, AppConfigs.KEY_PLAY_PU);
+        shareUrl = String.format(AppConfigs.SHAREMOV, mItemId);
+        videoView.setPanorama(true);
+        videoView.setDataSource(mBundle);
+    }
+*/
+
+       /* @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (newConfig.orientation == ActivityInfo.SCREEN_ORIENTATION_USER) {
+            setHeadVisibility(View.GONE);
+        } else {
+            setHeadVisibility(View.VISIBLE);
+        }
+       *//* if (videoView != null) {
+            videoView.onConfigurationChanged(newConfig);
+        }*//*
+    }*/
+
+    /**
+     * 处理播放器本身事件，具体事件可以参见IPlayer类
+     */
+   /* private void handlePlayerEvent(int state, Bundle bundle) {
+        switch (state) {
+            case PlayerEvent.PLAY_VIDEOSIZE_CHANGED:
+                *//**
+     * 获取到视频的宽高的时候，此时可以通过视频的宽高计算出比例，进而设置视频view的显示大小。
+     * 如果不按照视频的比例进行显示的话，(以surfaceView为例子)内容会填充整个surfaceView。
+     * 意味着你的surfaceView显示的内容有可能是拉伸的
+     *//*
+                break;
+
+            case PlayerEvent.PLAY_PREPARED:
+                // 播放器准备完成，此刻调用start()就可以进行播放了
+                if (videoView != null) {
+                    videoView.onStart();
+                }
+                break;
+            case PlayerEvent.PLAY_INFO:
+                int code = bundle.getInt(PlayerParams.KEY_RESULT_STATUS_CODE);
+                if (code == StatusCode.PLAY_INFO_VIDEO_RENDERING_START) {
+                    //播放第一帧
+                }
+                break;
+            default:
+                break;
+        }
+    }*/
+
+    /**
+     * 处理视频信息类事件
+     */
+    /*private void handleVideoInfoEvent(int state, Bundle bundle) {
+    }
+*/
 }

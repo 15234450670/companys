@@ -108,7 +108,13 @@
                 android:textSize="@dimen/textsize30"/>
 
         </LinearLayout>
-
+        <Button
+            android:id="@+id/btnvideo"
+            android:layout_width="@dimen/spacing_60"
+            android:layout_height="@dimen/spacing_60"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:background="@mipmap/home_icon_008"/>
 
         <ImageView
             android:id="@+id/loadingImageView"

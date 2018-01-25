@@ -153,10 +153,10 @@ public class BaseItemAdapter extends BaseRecyclerAdapter<BaseHomeItem> {
         }
         holder.setText(R.id.name, title);
         if (TextUtils.isEmpty(information.getWriter())) {
-            holder.getView(R.id.laiyuan).setVisibility(View.GONE);
+//            holder.getView(R.id.laiyuan).setVisibility(View.GONE);
         } else {
             holder.getView(R.id.laiyuan).setVisibility(View.VISIBLE);
-            holder.setText(R.id.from_tv, information.getWriter());
+            holder.setText(R.id.from_tv, "来源 ："+information.getWriter());
         }
 
         if ("1".equals(information.getImg_num())) {

@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.yolanda.nohttp.rest.Request;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import mr.li.dance.R;
@@ -41,6 +42,7 @@ public class SearchFragment extends BaseListFragment<BaseHomeItem> {
 
     private String mType;
     BaseItemAdapter mBaseItemAdapter;
+    List mList = new ArrayList();
 
     @Override
     public void onAttach(Activity activity) {
@@ -150,47 +152,61 @@ public class SearchFragment extends BaseListFragment<BaseHomeItem> {
         List list = null;
         if (TextUtils.equals("teach", mType)) {
             TeacherRespone indexResponse = JsonMananger.getReponseResult(response, TeacherRespone.class);
-            if (MyStrUtil.isEmpty(indexResponse.getData())) {
+            /*if (MyStrUtil.isEmpty(indexResponse.getData())) {
                 danceViewHolder.getView(R.id.wu).setVisibility(View.VISIBLE);
             } else {
                 danceViewHolder.getView(R.id.wu).setVisibility(View.GONE);
                 list = indexResponse.getData();
-            }
-
+            }*/
+            list = indexResponse.getData();
         } else if (TextUtils.equals("video", mType)) {
             HomeVideoIndexResponse indexResponse = JsonMananger.getReponseResult(response, HomeVideoIndexResponse.class);
-            if (MyStrUtil.isEmpty(indexResponse.getData())) {
+          /*  if (MyStrUtil.isEmpty(indexResponse.getData())) {
                 danceViewHolder.getView(R.id.wu).setVisibility(View.VISIBLE);
             } else {
                 danceViewHolder.getView(R.id.wu).setVisibility(View.GONE);
                 list = indexResponse.getData();
-            }
+            }*/
+            list = indexResponse.getData();
 
         } else if (TextUtils.equals("article", mType)) {
             ZiXunIndexResponse indexResponse = JsonMananger.getReponseResult(response, ZiXunIndexResponse.class);
-            if (MyStrUtil.isEmpty(indexResponse.getData())) {
+            /*if (MyStrUtil.isEmpty(indexResponse.getData())) {
                 danceViewHolder.getView(R.id.wu).setVisibility(View.VISIBLE);
             } else {
                 danceViewHolder.getView(R.id.wu).setVisibility(View.GONE);
                 list = indexResponse.getData();
-            }
+            }*/
+            list = indexResponse.getData();
         } else if (TextUtils.equals("photo_class", mType)) {
             HomeAlbumResponse indexResponse = JsonMananger.getReponseResult(response, HomeAlbumResponse.class);
-            if (MyStrUtil.isEmpty(indexResponse.getData())) {
+            /*if (MyStrUtil.isEmpty(indexResponse.getData())) {
                 danceViewHolder.getView(R.id.wu).setVisibility(View.VISIBLE);
             } else {
                 danceViewHolder.getView(R.id.wu).setVisibility(View.GONE);
                 list = indexResponse.getData();
-            }
+            }*/
+            list = indexResponse.getData();
         } else if (TextUtils.equals("music_class", mType)) {
             HomeMusicScreen indexResponse = JsonMananger.getReponseResult(response, HomeMusicScreen.class);
-            if (MyStrUtil.isEmpty(indexResponse.getData())) {
+           /* if (MyStrUtil.isEmpty(indexResponse.getData())) {
                 danceViewHolder.getView(R.id.wu).setVisibility(View.VISIBLE);
             } else {
                 danceViewHolder.getView(R.id.wu).setVisibility(View.GONE);
                 list = indexResponse.getData();
-            }
+            }*/
+            list = indexResponse.getData();
         }
-        mBaseItemAdapter.addList(isRefresh, list);
+
+        mList = list;
+         if (MyStrUtil.isEmpty(mList)){
+            danceViewHolder.getView(R.id.wu).setVisibility(View.VISIBLE);
+        } else {
+            danceViewHolder.getView(R.id.wu).setVisibility(View.GONE);
+            mBaseItemAdapter.addList(isRefresh, mList);
+        }
+
+       // mBaseItemAdapter.addList(isRefresh, list);
+
     }
 }
