@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -125,6 +126,12 @@ public class ZhiBoDetailActivity extends BaseListActivity implements ITXLivePlay
         if (mLivePlayer == null) {
             mLivePlayer = new TXLivePlayer(this);
         }
+        mDanceViewHolder.getView(R.id.video_finish).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         mPlayerView = (TXCloudVideoView) findViewById(R.id.video_view);
         play_progress = (LinearLayout) mDanceViewHolder.getView(R.id.play_progress);
@@ -146,7 +153,7 @@ public class ZhiBoDetailActivity extends BaseListActivity implements ITXLivePlay
     public void initDatas() {
         super.initDatas();
         Request<String> request = ParameterUtils.getSingleton().getHZhiboDetailMap(mItemId, String.valueOf(page));
-        Log.e(TAG+"id:",mItemId);
+        Log.e(TAG + "id:", mItemId);
         request(AppConfigs.home_zhiboDetailL, request, true);
     }
 
@@ -182,6 +189,7 @@ public class ZhiBoDetailActivity extends BaseListActivity implements ITXLivePlay
         });
         ArrayList<MenuBean> menu = reponseResult.getData().getMenu();
         if (!MyStrUtil.isEmpty(menu)) {
+            mDanceViewHolder.getView(R.id.jiemu).setVisibility(View.VISIBLE);
             mDanceViewHolder.getView(R.id.program).setVisibility(View.VISIBLE);
             mAdapter.addList(isRefresh, menu);
         }
@@ -306,7 +314,7 @@ public class ZhiBoDetailActivity extends BaseListActivity implements ITXLivePlay
             });
 
         } else {
-            mDanceViewHolder.getView(R.id.class_jieshao).setVisibility(View.INVISIBLE);
+            mDanceViewHolder.getView(R.id.class_jieshao).setVisibility(View.GONE);
         }
         mDanceViewHolder.setText(R.id.compete_trailer, zhiBoInfo.get(0).getCompete_trailer());
         int playStatus = -1;
@@ -485,23 +493,28 @@ public class ZhiBoDetailActivity extends BaseListActivity implements ITXLivePlay
      *         true竖屏  false横屏
      */
     private void showOrHideView(boolean flag) {
+        ViewGroup.LayoutParams layoutParams = ff.getLayoutParams();
         Log.e("flag", flag + "");
         mDanceViewHolder.getView(R.id.scroll).setVisibility(flag ? View.VISIBLE : View.GONE);
+        mDanceViewHolder.getView(R.id.class_jieshao).setVisibility(flag ? View.VISIBLE : View.GONE);
+        mDanceViewHolder.getView(R.id.jiemu).setVisibility(flag ? View.VISIBLE : View.GONE);
+
         mBtnRenderRotation.setImageDrawable(flag ? getResources().getDrawable(R.drawable.video_unfold) : getResources().getDrawable(R.drawable.video_packup));
         if (flag) {
+
             setHeadVisibility(View.VISIBLE);
             WindowManager.LayoutParams attr = getWindow().getAttributes();
             attr.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
             getWindow().setAttributes(attr);
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         } else {
+
             setHeadVisibility(View.GONE);
             WindowManager.LayoutParams lp = getWindow().getAttributes();
             lp.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
             getWindow().setAttributes(lp);
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
-
     }
 
 
@@ -513,8 +526,12 @@ public class ZhiBoDetailActivity extends BaseListActivity implements ITXLivePlay
         if (event == TXLiveConstants.PLAY_EVT_PLAY_BEGIN) {
             stopLoadingAnimation();
             Log.d("AutoMonitor", "PlayFirstRender,cost=" + (System.currentTimeMillis() - mStartPlayTS));
-        } else if (event == TXLiveConstants.PLAY_ERR_NET_DISCONNECT || event == TXLiveConstants.PLAY_EVT_PLAY_END) {
+        } else if (event == TXLiveConstants.PLAY_EVT_PLAY_END) {
             stopPlay();
+
+        } else if (event == TXLiveConstants.PLAY_ERR_NET_DISCONNECT) {
+            stopPlay();
+            Toast.makeText(getApplicationContext(), "信号不好，请退出重试", Toast.LENGTH_SHORT).show();
         } else if (event == TXLiveConstants.PLAY_EVT_PLAY_LOADING) {
             startLoadingAnimation();
         } else if (event == TXLiveConstants.PLAY_EVT_RCV_FIRST_I_FRAME) {

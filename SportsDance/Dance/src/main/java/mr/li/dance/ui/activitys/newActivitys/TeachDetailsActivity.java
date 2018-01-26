@@ -167,7 +167,7 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
         }
         fl = (FrameLayout) findViewById(R.id.video_frame);
         mLoadingView = mDanceViewHolder.getImageView(R.id.loadingImageView);
-        mDanceViewHolder.getImageView(R.id.video_finish).setOnClickListener(new View.OnClickListener() {
+        mDanceViewHolder.getView(R.id.video_finish).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

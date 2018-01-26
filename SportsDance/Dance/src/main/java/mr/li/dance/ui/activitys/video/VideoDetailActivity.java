@@ -166,7 +166,7 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
         mPlayerView = (TXCloudVideoView) mDanceViewHolder.getView(R.id.video_view);
         play_progress = (LinearLayout) mDanceViewHolder.getView(R.id.play_progress);
         btnvideo = mDanceViewHolder.getButton(R.id.btnvideo);
-        mDanceViewHolder.getImageView(R.id.video_finish).setOnClickListener(new View.OnClickListener() {
+        mDanceViewHolder.getView(R.id.video_finish).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

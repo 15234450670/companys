@@ -87,20 +87,25 @@
             android:orientation="horizontal"
             android:padding="5dp"
             android:visibility="visible">
-
-            <ImageView
+            <LinearLayout
                 android:id="@+id/video_finish"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_30"
-                android:background="@drawable/video_back"/>
+                android:layout_height="@dimen/spacing_80"
+                android:gravity="center"
+                >
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_30"
+                    android:layout_marginRight="@dimen/spacing_30"
+                    android:background="@drawable/video_back"/>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/video_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_30"
                 android:lines="1"
                 android:singleLine="true"
                 android:text=""
