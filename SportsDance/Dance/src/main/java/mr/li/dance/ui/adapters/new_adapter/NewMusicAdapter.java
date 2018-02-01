@@ -120,10 +120,6 @@ public class NewMusicAdapter extends DanceBaseAdapter {
                 s.Look();
             }
             super.loadMore();
-        } else {
-            if (s != null) {
-                s.NoSee();
-            }
         }
         notifyDataSetChanged();
     }
@@ -136,10 +132,6 @@ public class NewMusicAdapter extends DanceBaseAdapter {
                 s.Look();
             }
             super.loadMore();
-        } else {
-            if (s != null) {
-                s.NoSee();
-            }
         }
         notifyDataSetChanged();
     }

@@ -131,7 +131,7 @@ public class SearchFragment extends BaseListFragment<BaseHomeItem> {
     public void loadMore() {
         super.loadMore();
         Request<String> request = ParameterUtils.getSingleton().getHomeSearchMap(mType, searchContent, mBaseItemAdapter.getNextPage());
-        request(AppConfigs.home_Search, request, false);
+        request(AppConfigs.user_myAlbun, request, false);
     }
 
     public void refresh(String content, String type) {
@@ -147,35 +147,59 @@ public class SearchFragment extends BaseListFragment<BaseHomeItem> {
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
         Log.e("xxx", response);
-        List list = null;
-        if (TextUtils.equals("teach", mType)) {
-            TeacherRespone indexResponse = JsonMananger.getReponseResult(response, TeacherRespone.class);
+        if (what == AppConfigs.home_Search) {
+            List list = null;
+            if (TextUtils.equals("teach", mType)) {
+                TeacherRespone indexResponse = JsonMananger.getReponseResult(response, TeacherRespone.class);
 
-            list = indexResponse.getData();
-        } else if (TextUtils.equals("video", mType)) {
-            HomeVideoIndexResponse indexResponse = JsonMananger.getReponseResult(response, HomeVideoIndexResponse.class);
+                list = indexResponse.getData();
+            } else if (TextUtils.equals("video", mType)) {
+                HomeVideoIndexResponse indexResponse = JsonMananger.getReponseResult(response, HomeVideoIndexResponse.class);
 
-            list = indexResponse.getData();
+                list = indexResponse.getData();
 
-        } else if (TextUtils.equals("article", mType)) {
-            ZiXunIndexResponse indexResponse = JsonMananger.getReponseResult(response, ZiXunIndexResponse.class);
+            } else if (TextUtils.equals("article", mType)) {
+                ZiXunIndexResponse indexResponse = JsonMananger.getReponseResult(response, ZiXunIndexResponse.class);
 
-            list = indexResponse.getData();
-        } else if (TextUtils.equals("photo_class", mType)) {
-            HomeAlbumResponse indexResponse = JsonMananger.getReponseResult(response, HomeAlbumResponse.class);
+                list = indexResponse.getData();
+            } else if (TextUtils.equals("photo_class", mType)) {
+                HomeAlbumResponse indexResponse = JsonMananger.getReponseResult(response, HomeAlbumResponse.class);
 
-            list = indexResponse.getData();
-        } else if (TextUtils.equals("music_class", mType)) {
-            HomeMusicScreen indexResponse = JsonMananger.getReponseResult(response, HomeMusicScreen.class);
-            list = indexResponse.getData();
-        }
-        if (MyStrUtil.isEmpty(list)) {
+                list = indexResponse.getData();
+            } else if (TextUtils.equals("music_class", mType)) {
+                HomeMusicScreen indexResponse = JsonMananger.getReponseResult(response, HomeMusicScreen.class);
+                list = indexResponse.getData();
+            }
+          if (MyStrUtil.isEmpty(list)) {
             danceViewHolder.getView(R.id.wu).setVisibility(View.VISIBLE);
         } else {
             danceViewHolder.getView(R.id.wu).setVisibility(View.GONE);
+                 mBaseItemAdapter.addList(isRefresh, list);
+        }
+        } else if (what == AppConfigs.user_myAlbun) {
+            List list = null;
+            if (TextUtils.equals("teach", mType)) {
+                TeacherRespone indexResponse = JsonMananger.getReponseResult(response, TeacherRespone.class);
+
+                list = indexResponse.getData();
+            } else if (TextUtils.equals("video", mType)) {
+                HomeVideoIndexResponse indexResponse = JsonMananger.getReponseResult(response, HomeVideoIndexResponse.class);
+
+                list = indexResponse.getData();
+
+            } else if (TextUtils.equals("article", mType)) {
+                ZiXunIndexResponse indexResponse = JsonMananger.getReponseResult(response, ZiXunIndexResponse.class);
+
+                list = indexResponse.getData();
+            } else if (TextUtils.equals("photo_class", mType)) {
+                HomeAlbumResponse indexResponse = JsonMananger.getReponseResult(response, HomeAlbumResponse.class);
+
+                list = indexResponse.getData();
+            } else if (TextUtils.equals("music_class", mType)) {
+                HomeMusicScreen indexResponse = JsonMananger.getReponseResult(response, HomeMusicScreen.class);
+                list = indexResponse.getData();
+            }
             mBaseItemAdapter.addList(isRefresh, list);
         }
-
-
-    }
+        }
 }

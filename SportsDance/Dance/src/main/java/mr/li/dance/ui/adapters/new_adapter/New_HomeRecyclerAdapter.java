@@ -90,7 +90,7 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
                 viewHolder = new HomeViewHolder(mContext, view);
                 break;
             case TYPE_BIG_PIC:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_albumnotitle, null);
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.jingxuan_item, null);
                 viewHolder = new HomeViewHolder(mContext, view);
                 break;
             default:

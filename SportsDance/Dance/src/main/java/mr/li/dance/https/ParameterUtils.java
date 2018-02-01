@@ -421,9 +421,10 @@ public class ParameterUtils {
      * @param id
      * @return
      */
-    public Request<String> getVideoDetailMap(String id) {
+    public Request<String> getVideoDetailMap(String id,String userid) {
         Request<String> request = getBaseRequestForPost("/revisionHome.dianboDetail");
         request.add("id", id);
+        request.add("userid",userid);
         return request;
     }
 
@@ -437,7 +438,7 @@ public class ParameterUtils {
     }
 
     /**
-     * 新  首页获取点播（视频）
+     * 新首页获取点播（视频）
      * @return
      */
     public Request<String> getHomeDianbo2Map(String page) {
@@ -1313,6 +1314,12 @@ public class ParameterUtils {
      */
     public Request<String> getHomeIndexMap1(String page) {
         Request<String> request = getBaseRequestCacheForPost("/revisionHome.index");
+        request.add("page",page);
+        return request;
+    }
+    public Request<String> getHomeIndexMap2(String page) {
+        Request<String> request = getBaseRequestCacheForPost("/revisionHome.indexPage");
+        request.add("page",page);
         return request;
     }
 

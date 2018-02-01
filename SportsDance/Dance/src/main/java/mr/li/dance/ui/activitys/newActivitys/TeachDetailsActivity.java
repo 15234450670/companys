@@ -45,6 +45,7 @@ import mr.li.dance.ui.widget.screenrotate.RotateCallBack;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.MyStrUtil;
+import mr.li.dance.utils.ScreenUtils;
 import mr.li.dance.utils.ShareUtils;
 
 
@@ -731,12 +732,13 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
      *         true竖屏  false横屏
      */
     private void showOrHideView(boolean b) {
-
+        boolean utils = ScreenUtils.hasNavBar(this);
         mDanceViewHolder.getView(R.id.class_section).setVisibility(b ? View.VISIBLE : View.GONE);
         // mDanceViewHolder.getTextView(R.id.matchname_tv).setVisibility(b ? View.VISIBLE : View.GONE);
         mBtnRenderRotation.setImageDrawable(b ? getResources().getDrawable(R.drawable.video_unfold) : getResources().getDrawable(R.drawable.video_packup));
 
         if (b) {
+            ScreenUtils.showFullScreen(this, false);
             setHeadVisibility(View.VISIBLE);
             mDanceViewHolder.getView(R.id.class_jieshao).setVisibility(View.VISIBLE);
             WindowManager.LayoutParams attr = getWindow().getAttributes();
@@ -744,6 +746,7 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
             getWindow().setAttributes(attr);
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         } else {
+            ScreenUtils.showFullScreen(this, utils);
             setHeadVisibility(View.GONE);
             mDanceViewHolder.getView(R.id.class_jieshao).setVisibility(View.GONE);
             WindowManager.LayoutParams lp = getWindow().getAttributes();

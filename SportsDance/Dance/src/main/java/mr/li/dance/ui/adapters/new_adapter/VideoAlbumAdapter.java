@@ -11,7 +11,7 @@ import mr.li.dance.ui.adapters.RecyclerViewHolder;
  * 作者: SuiFeng
  * 版本:
  * 创建日期:2017/9/27 0027
- * 描述:
+ * 描述:     赛事相关
  * 修订历史:
  */
 public class VideoAlbumAdapter extends BaseRecyclerAdapter<Video> {
@@ -28,7 +28,7 @@ public class VideoAlbumAdapter extends BaseRecyclerAdapter<Video> {
     public void bindData(RecyclerViewHolder holder, int position, Video item) {
         holder.setImageByUrlOrFilePath(R.id.detail_pic, item.getPicture(), R.drawable.default_banner);
         holder.setText(R.id.detail_title, item.getName());
-        holder.setText(R.id.detail_time,item.getStart_time());
+        holder.setText(R.id.detail_time,item.video_duration);
 
     }
 }

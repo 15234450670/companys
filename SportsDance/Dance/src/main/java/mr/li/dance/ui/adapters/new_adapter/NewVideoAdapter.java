@@ -165,10 +165,6 @@ public class NewVideoAdapter extends DanceBaseAdapter {
             if (s != null) {
                 s.Look();
             }
-        } else {
-            if (s != null) {
-                s.NoSee();
-            }
         }
         notifyDataSetChanged();
     }
@@ -180,10 +176,6 @@ public class NewVideoAdapter extends DanceBaseAdapter {
             super.loadMore();
             if (s != null) {
                 s.Look();
-            }
-        } else {
-            if (s != null) {
-                s.NoSee();
             }
         }
         notifyDataSetChanged();

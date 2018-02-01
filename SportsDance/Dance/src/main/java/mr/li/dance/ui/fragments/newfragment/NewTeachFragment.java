@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 import android.widget.LinearLayout;
 
 import com.yolanda.nohttp.rest.Request;
@@ -99,21 +98,21 @@ public class NewTeachFragment extends BaseListFragment {
             if (reponseResult.getData().getTeach() == null) {
                 LabelSeekInfo reponseResults = JsonMananger.getReponseResult(response, LabelSeekInfo.class);
                 ArrayList<TeachInfo> arr = reponseResults.getData().getArr();
-                if (MyStrUtil.isEmpty(arr)) {
-                    wu.setVisibility(View.VISIBLE);
+                if (!MyStrUtil.isEmpty(arr)) {
+                   /* wu.setVisibility(View.VISIBLE);
                     you.setVisibility(View.GONE);
                     wu.bringToFront();
                 } else {
                     wu.setVisibility(View.GONE);
                     you.setVisibility(View.VISIBLE);
-                    you.bringToFront();
+                    you.bringToFront();*/
                     mPageAdapter.addList(isRefresh, arr);
                 }
 
-
             }
+
         }
-        mPageAdapter.notifyDataSetChanged();
+        // mPageAdapter.notifyDataSetChanged();
     }
 
     @Override

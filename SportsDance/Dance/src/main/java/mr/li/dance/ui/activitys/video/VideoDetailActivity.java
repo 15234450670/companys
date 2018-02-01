@@ -51,6 +51,7 @@ import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.MyStrUtil;
 import mr.li.dance.utils.NToast;
+import mr.li.dance.utils.ScreenUtils;
 import mr.li.dance.utils.ShareUtils;
 import mr.li.dance.utils.UserInfoManager;
 
@@ -248,12 +249,101 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
 
     }
 
+    @Override
+    public void initDatas() {
+        super.initDatas();
+        String userId = UserInfoManager.getSingleton().getUserId(this);
+        Request<String> request = ParameterUtils.getSingleton().getVideoDetailMap(mItemId, userId);
+        Log.e("mId", mItemId);
+        request(AppConfigs.home_dianboDetailL, request, true);
+    }
+
+    @Override
+    public void getIntentData() {
+        super.getIntentData();
+        mItemId = mIntentExtras.getString("itemid");
+        isFromCollectpage = mIntentExtras.getBoolean("isfromcollectpage");
+    }
+
+    @Override
+    public void onSucceed(int what, String responseStr) {
+        super.onSucceed(what, responseStr);
+        Log.e(TAG, responseStr);
+        if (AppConfigs.home_dianboDetailL == what) {
+            final VideoDetailResponse detailResponse = JsonMananger.getReponseResult(responseStr, VideoDetailResponse.class);
+            if (!TextUtils.isEmpty(detailResponse.getData().getDetail().getCompete_name())) {
+                mDanceViewHolder.getView(R.id.class_jieshao).setVisibility(View.VISIBLE);
+                mDanceViewHolder.setText(R.id.jieshao, detailResponse.getData().getDetail().getCompete_name());
+                View view = mDanceViewHolder.getView(R.id.tiao);
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        MatchDetailActivity.lunch(mContext, detailResponse.getData().getDetail().getCompete_id());
+                    }
+                });
+            } else {
+                mDanceViewHolder.getView(R.id.class_jieshao).setVisibility(View.GONE);
+            }
+            final String compete_id = detailResponse.getData().getDetail().getCompete_id();
+            isCollected = (0 != detailResponse.getData().getCollection_id());
+            otherList = detailResponse.getData().getOtherList();
+            if (!MyStrUtil.isEmpty(otherList)) {
+                videoAlbumAdapter.addList(otherList);
+                View view = mDanceViewHolder.getView(R.id.ll);
+                view.setVisibility(View.VISIBLE);
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        MatchVideoActivity.lunch(mContext, compete_id);
+                    }
+                });
+            } else {
+                mDanceViewHolder.getView(R.id.ll).setVisibility(View.GONE);
+            }
+            album = detailResponse.getData().getAlbum();
+            if (!MyStrUtil.isEmpty(album)) {
+                View view = mDanceViewHolder.getView(R.id.zhuanji);
+                view.setVisibility(View.VISIBLE);
+                SpecialItemAdapter itemAdapter = new SpecialItemAdapter(this);
+                itemAdapter.addList(album);
+                itemAdapter.setItemClickListener(this);
+                rv.setAdapter(itemAdapter);
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        SpecialActivity.lunch(mContext, mItemId);
+                    }
+                });
+            } else {
+                mDanceViewHolder.getView(R.id.zhuanji).setVisibility(View.GONE);
+            }
+            mDanceViewHolder.setText(R.id.matchname_tv, detailResponse.getData().getDetail().getName());//视频名称
+            mDanceViewHolder.setText(R.id.video_title, detailResponse.getData().getDetail().getName());//视频名称
+            // setVideoDetail(detailResponse.getData().getDetail());
+            detail = detailResponse.getData().getDetail();
+            startPlayRtmp(detail);
+
+
+        } else {
+            StringResponse stringResponse = JsonMananger.getReponseResult(responseStr, StringResponse.class);
+            NToast.shortToast(this, stringResponse.getData());
+            isCollected = !isCollected;
+        }
+        if (isCollected) {
+            mRightIv.setImageResource(R.drawable.collect_icon_002);
+        } else {
+            mRightIv.setImageResource(R.drawable.collect_icon);
+        }
+    }
+
     /**
      * 开始播放的方法
      * @return
      */
     private boolean startPlayRtmp(Video video) {
         String playUrl = video.getVideo();
+        mShareContent = video.getName();
+        shareUrl = String.format(AppConfigs.SHAREMOV, mItemId);
         Log.e("playUrl", "-->" + playUrl);
         //  String playUrl = "http://200024424.vod.myqcloud.com/200024424_709ae516bdf811e6ad39991f76a4df69.f20.mp4";
         if (TextUtils.isEmpty(playUrl)) {
@@ -346,76 +436,6 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
 
     }
 
-    @Override
-    public void onSucceed(int what, String responseStr) {
-        super.onSucceed(what, responseStr);
-        Log.e(TAG, responseStr);
-        if (AppConfigs.home_dianboDetailL == what) {
-            final VideoDetailResponse detailResponse = JsonMananger.getReponseResult(responseStr, VideoDetailResponse.class);
-            if (!TextUtils.isEmpty(detailResponse.getData().getDetail().getCompete_name())) {
-                mDanceViewHolder.getView(R.id.class_jieshao).setVisibility(View.VISIBLE);
-                mDanceViewHolder.setText(R.id.jieshao, detailResponse.getData().getDetail().getCompete_name());
-                View view = mDanceViewHolder.getView(R.id.tiao);
-                view.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        MatchDetailActivity.lunch(mContext, detailResponse.getData().getDetail().getCompete_id());
-                    }
-                });
-            } else {
-                mDanceViewHolder.getView(R.id.class_jieshao).setVisibility(View.GONE);
-            }
-            final String compete_id = detailResponse.getData().getDetail().getCompete_id();
-            isCollected = (0 != detailResponse.getData().getCollection_id());
-            otherList = detailResponse.getData().getOtherList();
-            if (!MyStrUtil.isEmpty(otherList)) {
-                videoAlbumAdapter.addList(otherList);
-                View view = mDanceViewHolder.getView(R.id.ll);
-                view.setVisibility(View.VISIBLE);
-                view.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        MatchVideoActivity.lunch(mContext, compete_id);
-                    }
-                });
-            } else {
-                mDanceViewHolder.getView(R.id.ll).setVisibility(View.GONE);
-            }
-            album = detailResponse.getData().getAlbum();
-            if (!MyStrUtil.isEmpty(album)) {
-                View view = mDanceViewHolder.getView(R.id.zhuanji);
-                view.setVisibility(View.VISIBLE);
-                SpecialItemAdapter itemAdapter = new SpecialItemAdapter(this);
-                itemAdapter.addList(album);
-                itemAdapter.setItemClickListener(this);
-                rv.setAdapter(itemAdapter);
-                view.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        SpecialActivity.lunch(mContext, mItemId);
-                    }
-                });
-            } else {
-                mDanceViewHolder.getView(R.id.zhuanji).setVisibility(View.GONE);
-            }
-            mDanceViewHolder.setText(R.id.matchname_tv, detailResponse.getData().getDetail().getName());//视频名称
-            mDanceViewHolder.setText(R.id.video_title, detailResponse.getData().getDetail().getName());//视频名称
-            // setVideoDetail(detailResponse.getData().getDetail());
-            detail = detailResponse.getData().getDetail();
-            startPlayRtmp(detail);
-
-
-        } else {
-            StringResponse stringResponse = JsonMananger.getReponseResult(responseStr, StringResponse.class);
-            NToast.shortToast(this, stringResponse.getData());
-            isCollected = !isCollected;
-        }
-        if (isCollected) {
-            mRightIv.setImageResource(R.drawable.collect_icon_002);
-        } else {
-            mRightIv.setImageResource(R.drawable.collect_icon);
-        }
-    }
 
     /**
      * 结束播放
@@ -456,20 +476,53 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
 
 
     @Override
-    public void initDatas() {
-        super.initDatas();
-        String userId = UserInfoManager.getSingleton().getUserId(this);
-        Request<String> request = ParameterUtils.getSingleton().getVideoDetailMap(mItemId);
-        Log.e("mId", mItemId);
-        request(AppConfigs.home_dianboDetailL, request, true);
+    public void refresh() {
+        super.refresh();
+        initDatas();
     }
 
+    @Override
+    public void onHeadRightButtonClick(View v) {
+        if (!UserInfoManager.getSingleton().isLoading(this)) {
+            LoginActivity.lunch(this, 0x001);
+        } else {
+            String userId = UserInfoManager.getSingleton().getUserId(this);
+            int operation = isCollected ? 1 : 2;
+            Log.e("operation:v:", operation + "");
+            Request<String> request = ParameterUtils.getSingleton().getCollectionMap(userId, mItemId, 10602, operation);
+            request(AppConfigs.user_collection, request, false);
+        }
+    }
 
     @Override
-    public void getIntentData() {
-        super.getIntentData();
-        mItemId = mIntentExtras.getString("itemid");
-        isFromCollectpage = mIntentExtras.getBoolean("isfromcollectpage");
+    public void onBackPressed() {
+       /* if (isFromCollectpage && !isCollected) {
+            MyCollectActivity.lunch(this, true, mItemId);
+            finish();
+        } else {
+            super.onBackPressed();
+        }*/
+        finish();
+        super.onBackPressed();
+    }
+
+    @Override
+    public void onHeadLeftButtonClick(View v) {
+        onBackPressed();
+    }
+
+    public void onHeadRightButtonClick2(View v) {
+        showShareDialog();
+    }
+
+    ShareUtils mShareUtils;
+
+    private void showShareDialog() {
+
+        if (mShareUtils == null) {
+            mShareUtils = new ShareUtils(this);
+        }
+        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_18, shareUrl, mShareContent);
     }
 
     @Override
@@ -536,58 +589,6 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
         context.startActivity(intent);
 
     }
-
-
-    @Override
-    public void refresh() {
-        super.refresh();
-        initDatas();
-    }
-
-    @Override
-    public void onHeadRightButtonClick(View v) {
-        if (!UserInfoManager.getSingleton().isLoading(this)) {
-            LoginActivity.lunch(this, 0x001);
-        } else {
-            String userId = UserInfoManager.getSingleton().getUserId(this);
-            int operation = isCollected ? 1 : 2;
-            Log.e("operation:v:", operation + "");
-            Request<String> request = ParameterUtils.getSingleton().getCollectionMap(userId, mItemId, 10602, operation);
-            request(AppConfigs.user_collection, request, false);
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-       /* if (isFromCollectpage && !isCollected) {
-            MyCollectActivity.lunch(this, true, mItemId);
-            finish();
-        } else {
-            super.onBackPressed();
-        }*/
-        finish();
-        super.onBackPressed();
-    }
-
-    @Override
-    public void onHeadLeftButtonClick(View v) {
-        onBackPressed();
-    }
-
-    public void onHeadRightButtonClick2(View v) {
-        showShareDialog();
-    }
-
-    ShareUtils mShareUtils;
-
-    private void showShareDialog() {
-
-        if (mShareUtils == null) {
-            mShareUtils = new ShareUtils(this);
-        }
-        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_18, shareUrl, mShareContent);
-    }
-
 
     @Override
     public void onPlayEvent(TXVodPlayer player, int event, Bundle param) {
@@ -712,14 +713,16 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
 
         mDanceViewHolder.getTextView(R.id.matchname_tv).setVisibility(b ? View.VISIBLE : View.GONE);
         mBtnRenderRotation.setImageDrawable(b ? getResources().getDrawable(R.drawable.video_unfold) : getResources().getDrawable(R.drawable.video_packup));
-
+        boolean utils = ScreenUtils.hasNavBar(this);
         if (b) {
+            ScreenUtils.showFullScreen(this, false);
             setHeadVisibility(View.VISIBLE);
             WindowManager.LayoutParams attr = getWindow().getAttributes();
             attr.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
             getWindow().setAttributes(attr);
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         } else {
+            ScreenUtils.showFullScreen(this, utils);
             setHeadVisibility(View.GONE);
             WindowManager.LayoutParams lp = getWindow().getAttributes();
             lp.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
@@ -736,7 +739,7 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
         videoView.resetPlayer();
 
         String Compete_name = video.getCompete_name();
-        mShareContent = video.getName();
+
         if (MyStrUtil.isEmpty(Compete_name)) {
             mDanceViewHolder.setViewVisibility(R.id.brief_tv, View.GONE);
         } else {
@@ -747,7 +750,7 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
         mBundle.putString(PlayerParams.KEY_PLAY_UUID, AppConfigs.KEY_PLAY_UUID);
         mBundle.putString(PlayerParams.KEY_PLAY_VUID, video.getVideo_unique());
         mBundle.putString(PlayerParams.KEY_PLAY_PU, AppConfigs.KEY_PLAY_PU);
-        shareUrl = String.format(AppConfigs.SHAREMOV, mItemId);
+
         videoView.setPanorama(true);
         videoView.setDataSource(mBundle);
     }

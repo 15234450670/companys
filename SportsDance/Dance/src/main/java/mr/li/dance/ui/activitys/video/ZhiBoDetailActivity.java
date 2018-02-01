@@ -42,6 +42,7 @@ import mr.li.dance.ui.widget.screenrotate.RotateCallBack;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
 import mr.li.dance.utils.MyStrUtil;
+import mr.li.dance.utils.ScreenUtils;
 import mr.li.dance.utils.ShareUtils;
 import mr.li.dance.utils.TimerUtils;
 
@@ -498,17 +499,17 @@ public class ZhiBoDetailActivity extends BaseListActivity implements ITXLivePlay
         mDanceViewHolder.getView(R.id.scroll).setVisibility(flag ? View.VISIBLE : View.GONE);
         mDanceViewHolder.getView(R.id.class_jieshao).setVisibility(flag ? View.VISIBLE : View.GONE);
         mDanceViewHolder.getView(R.id.jiemu).setVisibility(flag ? View.VISIBLE : View.GONE);
-
+        boolean utils = ScreenUtils.hasNavBar(this);
         mBtnRenderRotation.setImageDrawable(flag ? getResources().getDrawable(R.drawable.video_unfold) : getResources().getDrawable(R.drawable.video_packup));
         if (flag) {
-
+            ScreenUtils.showFullScreen(this, false);
             setHeadVisibility(View.VISIBLE);
             WindowManager.LayoutParams attr = getWindow().getAttributes();
             attr.flags &= (~WindowManager.LayoutParams.FLAG_FULLSCREEN);
             getWindow().setAttributes(attr);
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         } else {
-
+            ScreenUtils.showFullScreen(this, utils);
             setHeadVisibility(View.GONE);
             WindowManager.LayoutParams lp = getWindow().getAttributes();
             lp.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;

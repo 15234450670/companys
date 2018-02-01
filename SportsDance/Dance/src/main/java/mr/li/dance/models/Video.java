@@ -33,7 +33,9 @@ public class Video extends BaseHomeItem {
     private String album_img;
     private String album_name;
     private String img_fm;
+    public String video_duration;
     public boolean isClick = false;
+
 
 
     public String getName() {

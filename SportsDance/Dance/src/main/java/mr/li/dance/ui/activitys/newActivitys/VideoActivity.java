@@ -52,14 +52,14 @@ import static mr.li.dance.ui.activitys.MainActivity.myBinder;
  * 修订历史:
  */
 public class VideoActivity extends BaseActivity {
-    private TabLayout tabLayout;
-    private ImageView label_pic;
+    private TabLayout      tabLayout;
+    private ImageView      label_pic;
     private IndexViewPager vp;
     List<Fragment> list = new ArrayList<>();
-    private ExpandableListView celv;
-    private ExPandableAdapter exPandableAdapter;
+    private ExpandableListView         celv;
+    private ExPandableAdapter          exPandableAdapter;
     private List<LabelSelect.DataBean> data;
-    private PopupWindow popupWindow;
+    private PopupWindow                popupWindow;
     int page = 1;
 
     @Override
@@ -210,7 +210,6 @@ public class VideoActivity extends BaseActivity {
             //展开
             celv.expandGroup(i);
         }
-
 
         View parent = findViewById(R.id.parent);
         popupWindow.setAnimationStyle(R.style.AnimationLeftFade);

@@ -85,6 +85,7 @@ public class NewHomeFragment extends BaseListFragment {
             HomeIndexResponse homeResponse = JsonMananger.getReponseResult(response, HomeIndexResponse.class);
             mAdapter.loadMore(homeResponse);
         }
+
     }
 
     @Override
@@ -98,8 +99,9 @@ public class NewHomeFragment extends BaseListFragment {
     public void loadMore() {
         super.loadMore();
         page++;
-        Request<String> request = ParameterUtils.getSingleton().getHomeIndexMap1(String.valueOf(page));
-        request(AppConfigs.home_index, request, false);
+        Log.e("page---", page + "");
+        Request<String> request = ParameterUtils.getSingleton().getHomeIndexMap2(String.valueOf(page));
+        request(AppConfigs.home_index_page, request, false);
     }
 
     @Override

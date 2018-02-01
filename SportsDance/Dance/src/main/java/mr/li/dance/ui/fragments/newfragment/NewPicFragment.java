@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 import android.widget.LinearLayout;
 
 import com.yolanda.nohttp.rest.Request;
@@ -88,19 +87,19 @@ public class NewPicFragment extends BaseListFragment<PhotoClassBean> {
         } else {
             LabelPicInfo reponseResult1 = JsonMananger.getReponseResult(response, LabelPicInfo.class);
             ArrayList<PhotoClassBean> arr = reponseResult1.getData().getArr();
-            if (MyStrUtil.isEmpty(arr)) {
-                wu.setVisibility(View.VISIBLE);
+            if (!MyStrUtil.isEmpty(arr)) {
+               /* wu.setVisibility(View.VISIBLE);
                 you.setVisibility(View.GONE);
                 wu.bringToFront();
             } else {
                 wu.setVisibility(View.GONE);
                 you.setVisibility(View.VISIBLE);
-                you.bringToFront();
+              you.bringToFront(); */
                 adapter.addList(isRefresh, arr);
             }
 
         }
-        adapter.notifyDataSetChanged();
+      //  adapter.notifyDataSetChanged();
 
     }
 
@@ -127,7 +126,7 @@ public class NewPicFragment extends BaseListFragment<PhotoClassBean> {
             request(AppConfigs.home_album, request, false);
         } else {
             Request<String> request = ParameterUtils.getSingleton().getHomeTabhMap(path, "10905", String.valueOf(page));
-            request(AppConfigs.home_album, request, false);
+            request(AppConfigs.home_dianbo, request, false);
         }
 
     }
