@@ -302,7 +302,7 @@ public class ZhiBoDetailActivity extends BaseListActivity implements ITXLivePlay
         mDanceViewHolder.setText(R.id.video_title, zhiBoInfo.get(0).getName());//视频名称
         setRightImage(R.drawable.share_icon_001);
         mShareContent = zhiBoInfo.get(0).getName();
-
+        shareUrl = String.format(AppConfigs.SHARELIVE, mItemId);
         if (!MyStrUtil.isEmpty(zhiBoInfo.get(0).getCompete_name())) {
             View view = mDanceViewHolder.getView(R.id.class_jieshao);
             view.setVisibility(View.VISIBLE);

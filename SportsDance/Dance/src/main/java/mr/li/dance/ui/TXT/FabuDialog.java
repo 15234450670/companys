@@ -180,7 +180,7 @@ public class FabuDialog extends Dialog implements View.OnClickListener {
     }
 
     public interface DialogClickListener {
-        public void selectItem(View view, String value);
+         void selectItem(View view, String value);
 
     }
 }

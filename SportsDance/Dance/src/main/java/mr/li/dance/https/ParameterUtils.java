@@ -614,11 +614,10 @@ public class ParameterUtils {
      * 搜索
      */
     public Request<String> getHomeSearchMap(String type, String content, int page) {
-        Request<String> request = getBaseRequestForPost("/revisionHome.Search");
+        Request<String> request = getBaseRequestForPost("/revisionHome.homeSearch");
         request.add("type", type);
         request.add("content", content);
         request.add("page", page);
-
         LogPage(page);
         return request;
     }
