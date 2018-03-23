@@ -2,10 +2,10 @@ package mr.li.dance.ui.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.view.View;
 import android.widget.TextView;
 
 import mr.li.dance.R;
-import mr.li.dance.models.ScoreGroupInfo;
 import mr.li.dance.models.ScoreInfo;
 
 /**
@@ -26,26 +26,33 @@ public class ScoreFromAdapter extends BaseRecyclerAdapter<ScoreInfo> {
 
     @Override
     public void bindData(RecyclerViewHolder holder, int position, ScoreInfo item) {
-        TextView rankingTv = holder.getTextView(R.id.ranking_tv);
-        switch (position) {
-            case 0:
-                rankingTv.setBackgroundResource(R.drawable.mathc_icon_008);
-                rankingTv.setTextColor(Color.parseColor("#9c5200"));
-                break;
-            case 1:
-                rankingTv.setTextColor(Color.parseColor("#254f5b"));
-                rankingTv.setBackgroundResource(R.drawable.mathc_icon_0010);
-                break;
-            case 2:
-                rankingTv.setTextColor(Color.parseColor("#643a00"));
-                rankingTv.setBackgroundResource(R.drawable.mathc_icon_009);
-                break;
-            default:
-                rankingTv.setTextColor(Color.parseColor("#ffffff"));
-                rankingTv.setBackgroundResource(R.drawable.mathc_icon_007);
-                break;
+        String result = item.getResult();
+        if (result.equals("0")) {
+            holder.getView(R.id.tubiao).setVisibility(View.GONE);
+        } else {
+            TextView rankingTv = holder.getTextView(R.id.ranking_tv);
+            switch (position) {
+                case 0:
+                    rankingTv.setBackgroundResource(R.drawable.mathc_icon_008);
+                    rankingTv.setTextColor(Color.parseColor("#9c5200"));
+                    break;
+                case 1:
+                    rankingTv.setTextColor(Color.parseColor("#254f5b"));
+                    rankingTv.setBackgroundResource(R.drawable.mathc_icon_0010);
+                    break;
+                case 2:
+                    rankingTv.setTextColor(Color.parseColor("#643a00"));
+                    rankingTv.setBackgroundResource(R.drawable.mathc_icon_009);
+                    break;
+                default:
+                    rankingTv.setTextColor(Color.parseColor("#ffffff"));
+                    rankingTv.setBackgroundResource(R.drawable.mathc_icon_007);
+                    break;
+            }
+            holder.setText(R.id.ranking_tv, item.getResult());
         }
-        holder.setText(R.id.ranking_tv, item.getResult());
+
+
         holder.setText(R.id.daibiaodui_tv, "代表队: " + item.getMan_org());
         holder.setText(R.id.beihao_tv, "背号: " + item.getBackid());
         holder.setText(R.id.member_tv, "参赛选手: " + item.getMan()+" "+item.getWoman());

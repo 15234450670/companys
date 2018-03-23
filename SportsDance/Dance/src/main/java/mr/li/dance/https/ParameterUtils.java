@@ -1322,5 +1322,67 @@ public class ParameterUtils {
         return request;
     }
 
+    /**
+     * 2.0 赛事 接口
+     */
+    //首页
+    public Request<String> getGameMap(String page) {
+        Request<String> request = getBaseRequestCacheForPost("/revisionMatch.index");
+        request.add("page",page);
+        return request;
+    }
+    //搜索
+    public Request<String> getGameMapSearch(String compete_year,String type,String state,String content,String page) {
+        Request<String> request = getBaseRequestCacheForPost("/revisionMatch.matchSearch");
+        request.add("compete_year",compete_year);
+        request.add("type",type);
+        request.add("state",state);
+        request.add("content",content);
+        request.add("page",page);
+        return request;
+    }
+    //详情
+    public Request<String> getGameMapDetail(String id) {
+        Request<String> request = getBaseRequestCacheForPost("/revisionMatch.detail");
+        request.add("id",id);
+        return request;
+    }
+    //新闻更多
+    public Request<String> getGameMapNew(String id,String page) {
+        Request<String> request = getBaseRequestCacheForPost("/revisionMatch.matchArticle");
+        request.add("id",id);
+        request.add("page",page);
+        return request;
+    }
+    //视频更多
+    public Request<String> getGameMapVideo(String id,String page) {
+        Request<String> request = getBaseRequestCacheForPost("/revisionMatch.matchVideo");
+        request.add("id",id);
+        request.add("page",page);
+        return request;
+    }
+    //图片更多
+    public Request<String> getGameMapPic(String id,String page) {
+        Request<String> request = getBaseRequestCacheForPost("/revisionMatch.matchPhotoClass");
+        request.add("id",id);
+        request.add("page",page);
+        return request;
+    }
+    //赛事介绍
+    public Request<String> getGameMapIntroduce(String id) {
+        Request<String> request = getBaseRequestCacheForPost("/revisionMatch.matchIntroduction");
+        request.add("id",id);
+        return request;
+    }
+    //组别查询
+    //图片更多
+    public Request<String> getGameMapGradeSearch(String id,String name ,String page) {
+        Request<String> request = getBaseRequestCacheForPost("/revisionMatch.searchGroup");
+        request.add("id",id);
+        request.add("name",name);
+        request.add("page",page);
+        return request;
+    }
+
 
 }

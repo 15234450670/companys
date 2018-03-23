@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_129"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="@dimen/spacing_129"
+                android:layout_marginLeft="@dimen/spacing_19"
+                android:layout_marginTop="@dimen/spacing_19"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:layout_width="90dp"
+                    android:layout_height="28dp"
+                    android:background="@drawable/rec_background">
+
+                    <TextView
+
+                        style="@style/text_white_style_28"
+                        android:layout_centerInParent="true"
+                        android:text="比赛时间"
+                        android:textColor="#333333"/>
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/creat_tv"
+                    style="@style/text_white_style_24"
+                    android:layout_marginTop="@dimen/spacing_10"
+                    android:text=""
+                    android:textColor="#666666"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="@dimen/spacing_129"
+                android:background="#e1e1e1"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="@dimen/spacing_129"
+                android:layout_marginLeft="@dimen/spacing_19"
+                android:layout_marginTop="@dimen/spacing_19"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:layout_width="90dp"
+                    android:layout_height="28dp"
+                    android:background="@drawable/rec_background">
+
+                    <TextView
+                        style="@style/text_white_style_28"
+                        android:layout_centerInParent="true"
+                        android:text="报名时间"
+                        android:textColor="#333333"/>
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/end_tv"
+                    style="@style/text_white_style_24"
+                    android:layout_marginTop="@dimen/spacing_10"
+                    android:text=""
+                    android:textColor="#666666"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <include layout="@layout/split_line"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_68"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/spacing_20"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/game_wdsf_icon"/>
+
+                <TextView
+                    android:id="@+id/wdsf_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text=""/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/video_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/spacing_20"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/game_video_icon"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="直播"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <include layout="@layout/split_line"/>
+
+        <LinearLayout
+            android:id="@+id/map_onclick"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_68"
+            android:layout_marginLeft="@dimen/spacing_19"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/map_address"
+                style="@style/text_white_style_34"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/map_icon"
+                android:text=""
+                android:textColor="#333333"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/spacing_20"
+                android:src="@drawable/right_enter"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_10"
+            android:background="#e1e1e1"/>
+
+        <LinearLayout
+            android:id="@+id/sponsor"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
+
+            <TextView
+                style="@style/text_white_style_28"
+                android:layout_marginBottom="@dimen/spacing_26"
+                android:layout_marginLeft="@dimen/spacing_20"
+                android:layout_marginTop="@dimen/spacing_20"
+                android:text="主办方"
+                android:textColor="#333333"/>
+
+            <include layout="@layout/game_list_layout"/>
+
+            <include layout="@layout/split_line"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/undertake"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/spacing_30"
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
+
+            <TextView
+                style="@style/text_white_style_28"
+                android:layout_marginBottom="@dimen/spacing_26"
+                android:layout_marginLeft="@dimen/spacing_20"
+                android:layout_marginTop="@dimen/spacing_30"
+                android:text="承办方"
+                android:textColor="#333333"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/undertake_rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/spacing_20"
+                android:layout_marginRight="@dimen/spacing_20"
+                android:layout_marginTop="@dimen/spacing_30">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <include layout="@layout/split_line"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/assist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/spacing_30"
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
+
+            <TextView
+                style="@style/text_white_style_28"
+                android:layout_marginBottom="@dimen/spacing_26"
+                android:layout_marginLeft="@dimen/spacing_20"
+                android:layout_marginTop="@dimen/spacing_30"
+                android:text="协办方"
+                android:textColor="#333333"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/assist_rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/spacing_20"
+                android:layout_marginRight="@dimen/spacing_20"
+                android:layout_marginTop="@dimen/spacing_30">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <include layout="@layout/split_line"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+</ScrollView>

@@ -16,6 +16,7 @@ import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.models.CheckLogin;
 import mr.li.dance.ui.activitys.base.DanceApplication;
 import mr.li.dance.utils.JsonMananger;
+import mr.li.dance.utils.MyStrUtil;
 import mr.li.dance.utils.NToast;
 import mr.li.dance.utils.UserInfoManager;
 import mr.li.dance.utils.Utils;
@@ -80,7 +81,7 @@ public class SplashActivity extends Activity implements HttpListener {
 
     @Override
     public void onSucceed(int what, String response) {
-        Log.e(TAG, "走了");
+       /* Log.e(TAG, "走了");
         CheckLogin reponseResult = JsonMananger.getReponseResult(response, CheckLogin.class);
         int errorCode = reponseResult.getErrorCode();
         switch (errorCode) {
@@ -96,15 +97,21 @@ public class SplashActivity extends Activity implements HttpListener {
                 UserInfoManager.getSingleton().clearInfo(this);
                 break;
         }
+        CheckLogin.StartPageBean startPage = reponseResult.getStartPage();
+        if (!MyStrUtil.isEmpty(startPage)) {
+            startActivity(new Intent(this, AdvertisingActivity.class));
+            finish();
+        } else {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        }*/
 
-        startActivity(new Intent(this, MainActivity.class));
-        finish();
 
     }
 
     @Override
     public void onFailed(int what, int responseCode, String response) {
-        Log.e(TAG, "走了-----");
+        Log.e(TAG, "走了-----" + response);
         CheckLogin reponseResult = JsonMananger.getReponseResult(response, CheckLogin.class);
         int errorCode = reponseResult.getErrorCode();
         switch (errorCode) {
@@ -121,8 +128,26 @@ public class SplashActivity extends Activity implements HttpListener {
                 break;
 
         }
-        startActivity(new Intent(this, MainActivity.class));
-        finish();
+        CheckLogin.StartPageBean startPage = reponseResult.getStartPage();
+        if (!MyStrUtil.isEmpty(startPage)) {
+            Intent intent = new Intent(SplashActivity.this, AdvertisingActivity.class);
+            intent.putExtra("type", startPage.getType());
+            intent.putExtra("number", startPage.getNumber());
+            intent.putExtra("title", startPage.getTitle());
+            intent.putExtra("img", startPage.getImg());
+            intent.putExtra("appid", startPage.getAppid());
+            intent.putExtra("appsecret", startPage.getAppsecret());
+            intent.putExtra("url", startPage.getUrl());
+
+            startActivity(intent);
+            finish();
+
+        } else {
+
+            startActivity(new Intent(SplashActivity.this,MainActivity.class));
+            finish();
+        }
+
 
     }
 

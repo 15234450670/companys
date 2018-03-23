@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical">
+
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+
+              android:orientation="vertical">
 
 
     <ImageView
@@ -12,12 +14,23 @@
         android:layout_gravity=""
         android:layout_marginLeft="@dimen/spacing_40"
         android:layout_marginRight="@dimen/spacing_40"
-        android:background="@drawable/mathc_icon_0014" />
+        android:background="@drawable/mathc_icon_0014"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:overScrollMode="never" />
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:overScrollMode="never"/>
+
+    <FrameLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#50000000"
+        >
+
+    </FrameLayout>
 
 </LinearLayout>

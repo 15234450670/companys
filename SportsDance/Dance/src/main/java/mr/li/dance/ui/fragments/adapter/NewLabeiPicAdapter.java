@@ -1,7 +1,6 @@
 package mr.li.dance.ui.fragments.adapter;
 
 import android.content.Context;
-import android.view.View;
 
 import mr.li.dance.R;
 import mr.li.dance.models.TeachInfo;
@@ -34,7 +33,7 @@ public class NewLabeiPicAdapter extends BaseRecyclerAdapter<TeachInfo> {
         if (!MyStrUtil.isEmpty(item.getPhotos())) {
             holder.setText(R.id.num_tv, "共 " + item.getPhotos() + " 张");
         } else {
-            holder.getView(R.id.picnum_tv).setVisibility(View.GONE);
+            holder.setText(R.id.num_tv, "共 " + item.sum + " 张");
         }
     }
 }

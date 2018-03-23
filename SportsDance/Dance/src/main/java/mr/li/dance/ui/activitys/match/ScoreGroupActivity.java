@@ -17,6 +17,7 @@ import mr.li.dance.https.response.StringResponse;
 import mr.li.dance.models.MatchShareInfo;
 import mr.li.dance.models.ScoreGroupInfo;
 import mr.li.dance.ui.activitys.base.BaseListActivity;
+import mr.li.dance.ui.activitys.game.GradeSearchActivity;
 import mr.li.dance.ui.adapters.ScoreGroupAdapter;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
@@ -42,16 +43,24 @@ public class ScoreGroupActivity extends BaseListActivity<ScoreGroupInfo> {
     public void getIntentData() {
         super.getIntentData();
         mMatchId = mIntentExtras.getString("matchid");
-        Log.e("id++++++++:::",mMatchId);
+        Log.e("id++++++++:::", mMatchId);
     }
 
     @Override
     public void initViews() {
         super.initViews();
-        setTitle("成绩查询");
-      //  setRightImage(R.drawable.share_icon_001);
+        setHeadVisibility(View.GONE);
+        mDanceViewHolder.setViewVisibility(R.id.btn_back, View.VISIBLE);
+        mDanceViewHolder.getView(R.id.search_layout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GradeSearchActivity.lunch(ScoreGroupActivity.this, mMatchId);
+            }
+        });
+        //  setRightImage(R.drawable.share_icon_001);
         Request<String> request = ParameterUtils.getSingleton().getmScoreQueryMap(mMatchId, 1);
         request(AppConfigs.match_scoreQuery, request, true);
+        finishs();
     }
 
     @Override
@@ -87,16 +96,16 @@ public class ScoreGroupActivity extends BaseListActivity<ScoreGroupInfo> {
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
-        if (what==AppConfigs.match_scoreQuery) {
+        if (what == AppConfigs.match_scoreQuery) {
             StringResponse stringResponse = JsonMananger.getReponseResult(response, StringResponse.class);
             String dataStr = stringResponse.getData();
             List<ScoreGroupInfo> list = JsonMananger.jsonToList(dataStr, ScoreGroupInfo.class);
             mScorefromAdapter.addList(isRefresh, list);
-        } else if (what==AppConfigs.match_share_cj) {
+        } else if (what == AppConfigs.match_share_cj) {
             MatchShareInfo reponseResult = JsonMananger.getReponseResult(response, MatchShareInfo.class);
-           String shareCJ = reponseResult.getData();
-          //  showShareDialog(shareCJ);
-            Log.e("data",shareCJ);
+            String shareCJ = reponseResult.getData();
+            //  showShareDialog(shareCJ);
+            Log.e("data", shareCJ);
         }
 
 
@@ -116,21 +125,35 @@ public class ScoreGroupActivity extends BaseListActivity<ScoreGroupInfo> {
     }
 
 
-
     /**
      * 分享成绩
      */
-    public void ShareCJ(){
+    public void ShareCJ() {
         Request<String> stringRequest = ParameterUtils.getSingleton().getmScoreShareMap(mMatchId);
         request(AppConfigs.match_share_cj, stringRequest, false);
     }
+
     ShareUtils mShareUtils;
+
     private void showShareDialog() {
         MobclickAgent.onEvent(this, AppConfigs.CLICK_EVENT_29);
         if (mShareUtils == null) {
             mShareUtils = new ShareUtils(this);
         }
 
-        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, AppConfigs.SHARESOURE+mMatchId,"成绩单");
+        mShareUtils.showShareDilaog(AppConfigs.CLICK_EVENT_29, AppConfigs.SHARESOURE + mMatchId, "成绩单");
+    }
+
+    /**
+     * 结束界面
+     */
+    public void finishs() {
+        mDanceViewHolder.setClickListener(R.id.btn_back, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
     }
 }

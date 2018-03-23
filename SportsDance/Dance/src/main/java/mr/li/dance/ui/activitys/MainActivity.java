@@ -15,6 +15,8 @@ import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -23,6 +25,7 @@ import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.ta.utdid2.android.utils.StringUtils;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.message.PushAgent;
 import com.yolanda.nohttp.rest.Request;
@@ -35,12 +38,19 @@ import mr.li.dance.https.CallServer;
 import mr.li.dance.https.HttpListener;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.StringResponse;
+import mr.li.dance.models.HuoDongInfo;
 import mr.li.dance.models.UpdateVersion;
 import mr.li.dance.ui.TXT.FabuDialog;
+import mr.li.dance.ui.activitys.album.AlbumActivity;
+import mr.li.dance.ui.activitys.match.MatchDetailActivity;
 import mr.li.dance.ui.activitys.music.MusicService;
 import mr.li.dance.ui.activitys.music.PlayMusicActivity;
 import mr.li.dance.ui.activitys.music.ServiceConn;
+import mr.li.dance.ui.activitys.music.SongActivity;
+import mr.li.dance.ui.activitys.newActivitys.TeachDetailsActivity;
 import mr.li.dance.ui.activitys.shequ.SheQuFragment;
+import mr.li.dance.ui.activitys.video.VideoDetailActivity;
+import mr.li.dance.ui.activitys.video.ZhiBoDetailActivity;
 import mr.li.dance.ui.dialogs.UpdateApkDialog;
 import mr.li.dance.ui.fragments.BaseFragment;
 import mr.li.dance.ui.fragments.main.ExaminationFragment;
@@ -96,6 +106,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         //  setScreen();
         setContentView(getContentViewId());
+        initAdv(); //广告
         initDatas();
         initViews();
         //  Scale();
@@ -103,6 +114,144 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         mPushAgent.onAppStart();
 
         MobclickAgent.onEvent(this, AppConfigs.CLICK_EVENT_17);
+    }
+
+    private void initAdv() {
+        Intent intent = getIntent();
+        String adv = intent.getStringExtra("adv");
+        if (!StringUtils.isEmpty(adv)) {
+            final String value = intent.getStringExtra("number");// id
+            final String title = intent.getStringExtra("title");
+            String type = intent.getStringExtra("type");
+            String appid = intent.getStringExtra("appid");
+            final String url = intent.getStringExtra("url");
+            String  appsecret = intent.getStringExtra("appsecret");
+            Log.e("main", "id: " + value + " title: " + title + " type: " + type + " appid: " + appid+"url:"+url+"appsecret:"+appsecret);
+            if (!TextUtils.isEmpty(type)) {
+                switch (type) {
+
+                    case "10101":
+
+                        ZhiBoDetailActivity.lunchs(getApplicationContext(), value);
+                        break;
+                    case "10102":
+
+                        VideoDetailActivity.lunchs(getApplicationContext(), value);
+                        break;
+                    case "10103":
+
+                        if (!TextUtils.isEmpty(title)) {
+                            MyDanceWebActivity.lunchs(getApplicationContext(), MyDanceWebActivity.ZIXUNTYPE, title, AppConfigs.ZixunShareUrl2 + value, true);
+                        } else {
+                            MyDanceWebActivity.lunchs(getApplicationContext(), MyDanceWebActivity.ZIXUNTYPE, "资讯详情", AppConfigs.ZixunShareUrl2 + value, true);
+                        }
+
+                        break;
+                    case "10104":
+                        if (!TextUtils.isEmpty(title)) {
+                            AlbumActivity.lunchs(getApplicationContext(), value, title);
+                        } else {
+                            AlbumActivity.lunchs(getApplicationContext(), value, "相册详情");
+                        }
+
+                        break;
+                    case "10105":
+                        MatchDetailActivity.lunchs(getApplicationContext(), value);
+                        break;
+                    case "10106":
+                           /* Request<String> stringRequest = ParameterUtils.getSingleton().PushLove(type, value);
+                            CallServer.getRequestInstance().add(getApplicationContext(), 0, stringRequest, new HttpListener() {
+                                @Override
+                                public void onSucceed(int what, String response) {
+                                    PushLove reponseResult = JsonMananger.getReponseResult(response, PushLove.class);
+                                    String url = reponseResult.getData().getUrl();
+                                    if (!MyStrUtil.isEmpty(title)) {
+                                        MyDanceWebActivity.lunch(getApplicationContext(), MyDanceWebActivity.OTHERTYPE, title, url, false);
+                                    } else {
+                                        MyDanceWebActivity.lunch(getApplicationContext(), MyDanceWebActivity.OTHERTYPE, "外链", url, false);
+                                    }
+
+                                }
+
+                                @Override
+                                public void onFailed(int what, int responseCode, String response) {
+
+                                }
+                            }, true, true);*/
+                        if (!MyStrUtil.isEmpty(title) && !MyStrUtil.isEmpty(url)) {
+                            MyDanceWebActivity.lunchs(getApplicationContext(), MyDanceWebActivity.OTHERTYPE, title, url, false);
+                        } else {
+                            MyDanceWebActivity.lunchs(getApplicationContext(), MyDanceWebActivity.OTHERTYPE, "外链", url, false);
+                        }
+                        break;
+                    case "10107":
+                        if (!UserInfoManager.getSingleton().isLoading(getApplicationContext())) {
+                            LoginActivity.lunchs(getApplicationContext());
+                            return;
+                        }
+                           /* Request<String> request = ParameterUtils.getSingleton().PushLove(type, value);
+                            CallServer.getRequestInstance().add(getApplicationContext(), 0, request, new HttpListener() {
+                                @Override
+                                public void onSucceed(int what, String response) {
+                                    PushLove reponseResult = JsonMananger.getReponseResult(response, PushLove.class);
+                                    PushLove.DataBean data = reponseResult.getData();
+                                    final String titles = data.getTitle();
+                                    String appid = data.getAppid();
+                                    String appsecret = data.getAppsecret();
+                                    final String number = data.getNumber();
+                                    final String url = data.getUrl();
+
+                                }
+
+                                @Override
+                                public void onFailed(int what, int responseCode, String response) {
+
+                                }
+                            }, true, true);*/
+                        String userId = UserInfoManager.getSingleton().getUserId(getApplicationContext());
+                        if (!MyStrUtil.isEmpty(appid) && !MyStrUtil.isEmpty(appsecret) && !MyStrUtil.isEmpty(url)) {
+                            Request<String> huoDongInfoMap = ParameterUtils.getSingleton().getHuoDongInfoMap(appid, appsecret, url, userId);
+                            CallServer.getRequestInstance().add(getApplicationContext(), 0, huoDongInfoMap, new HttpListener() {
+                                @Override
+                                public void onSucceed(int what, String response) {
+                                    HuoDongInfo reponseResult = JsonMananger.getReponseResult(response, HuoDongInfo.class);
+                                    MyDanceWebActivity.lunchs(getApplicationContext(), MyDanceWebActivity.OTHERTYPE, title, reponseResult.getData() + value, url);
+
+                                }
+
+                                @Override
+                                public void onFailed(int what, int responseCode, String response) {
+
+                                }
+                            }, true, true);
+                        }
+
+
+                        break;
+                    case "10108":
+                        if (!TextUtils.isEmpty(title)) {
+                            SongActivity.lunchs(getApplicationContext(), value, title);
+                        } else {
+                            SongActivity.lunchs(getApplicationContext(), value, "歌单");
+                        }
+
+                        break;
+                    case "10109":
+                        if (!TextUtils.isEmpty(title)) {
+                            TeachDetailsActivity.lunchs(getApplicationContext(), value, title);
+                        } else {
+                            TeachDetailsActivity.lunchs(getApplicationContext(), value, "教学详情");
+
+                        }
+
+                        break;
+
+                }
+            }
+
+        }
+
+
     }
 
     public int getContentViewId() {

@@ -401,4 +401,9 @@
         <!-- 显示对话框时当前的屏幕是否变暗 -->
         <item name="android:backgroundDimEnabled">true</item>
     </style>
+    <style name="TextAppearance.Design.Tab.Custom" parent="TextAppearance.AppCompat.Button">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="textAllCaps">true</item>
+    </style>
 </resources>

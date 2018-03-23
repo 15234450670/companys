@@ -28,6 +28,7 @@ import mr.li.dance.ui.adapters.AlbumAdapter;
 import mr.li.dance.ui.widget.SpacesItemDecoration;
 import mr.li.dance.utils.AppConfigs;
 import mr.li.dance.utils.JsonMananger;
+import mr.li.dance.utils.MyStrUtil;
 import mr.li.dance.utils.NToast;
 import mr.li.dance.utils.ShareUtils;
 import mr.li.dance.utils.UserInfoManager;
@@ -168,31 +169,34 @@ public class AlbumActivity extends BaseListActivity<AlbumInfo> {
         Log.e("response", response);
         if (what == AppConfigs.home_album) {
             final AlbumDetailInfo reponseResult = JsonMananger.getReponseResult(response, AlbumDetailInfo.class);
-            mAlbumUserId = reponseResult.getData().getClassInfo().getId();
-            if (!TextUtils.isEmpty(reponseResult.getData().getClassInfo().getCompete_name())) {
-                String compete_name = reponseResult.getData().getClassInfo().getCompete_name();
-                mDanceViewHolder.getView(R.id.class_jieshao).setVisibility(View.VISIBLE);
-                mDanceViewHolder.setText(R.id.jieshao, compete_name);
-                mDanceViewHolder.getView(R.id.class_jieshaos).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        MatchDetailActivity.lunch(mContext, reponseResult.getData().getClassInfo().getCompete_id());
-                    }
-                });
-            } else {
-                mDanceViewHolder.getView(R.id.class_jieshao).setVisibility(View.GONE);
+            if (!MyStrUtil.isEmpty(reponseResult)) {
+                mAlbumUserId = reponseResult.getData().getClassInfo().getId();
+                if (!TextUtils.isEmpty(reponseResult.getData().getClassInfo().getCompete_name())) {
+                    String compete_name = reponseResult.getData().getClassInfo().getCompete_name();
+                    mDanceViewHolder.getView(R.id.class_jieshao).setVisibility(View.VISIBLE);
+                    mDanceViewHolder.setText(R.id.jieshao, compete_name);
+                    mDanceViewHolder.getView(R.id.class_jieshaos).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            MatchDetailActivity.lunch(mContext, reponseResult.getData().getClassInfo().getCompete_id());
+                        }
+                    });
+                } else {
+                    mDanceViewHolder.getView(R.id.class_jieshao).setVisibility(View.GONE);
+                }
+                mAlbumAdapter.addList(isRefresh, reponseResult.getData().getPhotoInfo());
+                mDanceViewHolder.setText(R.id.name_tv, reponseResult.getData().getClassInfo().getCompete_name());
+                mDanceViewHolder.setText(R.id.num_tv, reponseResult.getData().getClassInfo().getPhotos());
+                mDanceViewHolder.setImageByUrlOrFilePath(R.id.background_iv, reponseResult.getData().getClassInfo().getImg_fm(), R.drawable.default_banner);
+                isCollected = (0 != reponseResult.getData().getClassInfo().getCollection_id());
+                shareUrl = String.format(AppConfigs.SHAREPHOTOURL, mId);
+                if (isCollected) {
+                    mRightIv.setImageResource(R.drawable.collect_icon_002);
+                } else {
+                    mRightIv.setImageResource(R.drawable.collect_icon);
+                }
             }
-            mAlbumAdapter.addList(isRefresh, reponseResult.getData().getPhotoInfo());
-            mDanceViewHolder.setText(R.id.name_tv, reponseResult.getData().getClassInfo().getCompete_name());
-            mDanceViewHolder.setText(R.id.num_tv, reponseResult.getData().getClassInfo().getPhotos());
-            mDanceViewHolder.setImageByUrlOrFilePath(R.id.background_iv, reponseResult.getData().getClassInfo().getImg_fm(), R.drawable.default_banner);
-            isCollected = (0 != reponseResult.getData().getClassInfo().getCollection_id());
-            shareUrl = String.format(AppConfigs.SHAREPHOTOURL, mId);
-            if (isCollected) {
-                mRightIv.setImageResource(R.drawable.collect_icon_002);
-            } else {
-                mRightIv.setImageResource(R.drawable.collect_icon);
-            }
+
         } /*else if (AppConfigs.home_photoDetail == what) {
             PhotoIndexResponse reponseResult = JsonMananger.getReponseResult(response, PhotoIndexResponse.class);
             mAlbumAdapter.addList(false, reponseResult.getData());

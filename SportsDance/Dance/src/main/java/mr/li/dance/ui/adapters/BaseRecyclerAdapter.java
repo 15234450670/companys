@@ -20,24 +20,26 @@ import mr.li.dance.utils.MyStrUtil;
  */
 
 public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<RecyclerViewHolder> {
-    public int currentPage=1;
-    protected final List<T> mData;
-    protected final Context mContext;
-    protected LayoutInflater mInflater;
-    protected ListViewItemClickListener mClickListener;
-    protected OnItemLongClickListener mLongClickListener;
+    public int currentPage = 1;
+    protected final List<T>                   mData;
+    protected final Context                   mContext;
+    protected       LayoutInflater            mInflater;
+    protected       ListViewItemClickListener mClickListener;
+    protected       OnItemLongClickListener   mLongClickListener;
 
     public BaseRecyclerAdapter(Context ctx) {
         mData = new ArrayList<T>();
         mContext = ctx;
         mInflater = LayoutInflater.from(ctx);
     }
-    public BaseRecyclerAdapter(Context ctx,ArrayList<T> datas) {
+
+    public BaseRecyclerAdapter(Context ctx, ArrayList<T> datas) {
         mData = new ArrayList<T>();
         mData.addAll(datas);
         mContext = ctx;
         mInflater = LayoutInflater.from(ctx);
     }
+
     @Override
     public RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final RecyclerViewHolder holder = new RecyclerViewHolder(mContext,
@@ -124,7 +126,32 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
         notifyDataSetChanged();
     }
 
-
+    public void addList(boolean isRefresh, List<T> list, String s, int i) {
+        if (isRefresh) {
+            currentPage = 1;
+            mData.clear();
+        }
+        if (s.equals("1")) {
+            if (!MyStrUtil.isEmpty(list)) {
+                this.mData.addAll(list);
+                currentPage++;
+            }
+        } else {
+            if (i == 0) {
+                if (!MyStrUtil.isEmpty(list)) {
+                    this.mData.addAll(list);
+                    currentPage++;
+                }
+            } else {
+                mData.clear();
+                if (!MyStrUtil.isEmpty(list)) {
+                    this.mData.addAll(list);
+                    currentPage++;
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
 
     public List<T> getmList() {
         return mData;
@@ -136,6 +163,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
         }
         return mData.get(position);
     }
+
     public abstract int getItemLayoutId(int viewType);
 
     public abstract void bindData(RecyclerViewHolder holder, int position, T item);
@@ -144,7 +172,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
         public void onItemLongClick(View itemView, int pos);
     }
 
-    public int getNextPage(){
+    public int getNextPage() {
         return currentPage++;
     }
 

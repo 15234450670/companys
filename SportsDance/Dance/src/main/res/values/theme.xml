@@ -29,5 +29,9 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowBackground">@drawable/splash_icon</item>
     </style>
+    <style name="AdvertisingTheme" parent="@android:style/Theme.Holo.Light">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
 
 </resources>

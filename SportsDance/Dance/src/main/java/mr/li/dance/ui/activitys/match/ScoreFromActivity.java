@@ -47,7 +47,7 @@ public class ScoreFromActivity extends BaseListActivity<ScoreInfo> {
     @Override
     public void initViews() {
         super.initViews();
-        setTitle("成绩单");
+        setTitle(mGroupName);
 
         Request<String> request = ParameterUtils.getSingleton().getmscoreQueryMMap(mMatchId, mGroupName, mScorefromAdapter.getNextPage());
         request(AppConfigs.match_scoreQueryM, request, true);

@@ -205,7 +205,7 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
                         SongActivity.lunch(mContext, bannerInfo.getNumber(), bannerInfo.getTitle());
                         break;
                     case 10109:
-                        TeachDetailsActivity.lunch(mContext, bannerInfo.getNumber(), bannerInfo.getImg(), bannerInfo.getTitle());
+                        TeachDetailsActivity.lunch(mContext, bannerInfo.getNumber(),  bannerInfo.getTitle());
                         break;
                 }
             }
@@ -280,7 +280,7 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
                         SongActivity.lunch(mContext, mDatas.get(position).getId(), mDatas.get(position).getTitle());
                         break;
                     case 10109:
-                        TeachDetailsActivity.lunch(mContext, mDatas.get(position).getId(), mDatas.get(position).getPicture_app(), mDatas.get(position).getTitle());
+                        TeachDetailsActivity.lunch(mContext, mDatas.get(position).getId(), mDatas.get(position).getTitle());
                         break;
 
                     default:

@@ -1,33 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
 
-    android:layout_height="match_parent">
-    <RelativeLayout
-        android:id="@+id/mobile_layout"
+              android:orientation="vertical">
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/spacing_25"
+        android:layout_marginBottom="@dimen/spacing_20"
         android:layout_marginTop="@dimen/spacing_20"
-        android:layout_marginLeft="@dimen/spacing_20"
-        android:layout_marginRight="@dimen/spacing_20"
-        android:paddingLeft="@dimen/spacing_20"
-        android:paddingRight="@dimen/spacing_20"
-        >
+        android:gravity="center"
+        android:orientation="horizontal">
 
-        <TextView
-            android:textColor="#333333"
-            android:id="@+id/groupname_tv"
-            style="@style/text_white_style_32"
-            android:layout_centerVertical="true"
-            android:text="组别" />
-        <TextView
-            android:textColor="#333333"
-            android:id="@+id/groupnum_tv"
-            style="@style/text_white_style_32"
-            android:layout_alignParentRight="true"
-            android:text="对数"
-            android:layout_centerVertical="true" />
-    </RelativeLayout>
-    <include layout="@layout/list_layout"/>
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="20dp"
+            android:layout_height="17dp"
+            android:layout_marginLeft="@dimen/spacing_20"
+            android:gravity="center_vertical"
+            android:src="@drawable/back_icon"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:id="@+id/search_layout"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/spacing_50"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/spacing_30"
+            android:layout_marginRight="@dimen/spacing_100"
+            android:layout_weight="1"
+            android:background="@drawable/search_shape_corner"
+            android:gravity="center_vertical"
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_20"
+                android:src="@drawable/icon_marchsearch"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_30"
+                android:text="输入组别查询"
+                android:textColor="#999999"
+                android:textSize="@dimen/textsize24"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <include layout="@layout/split_line"/>
+
+    <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
+        android:id="@+id/refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/spacing_20">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"/>
+
+    </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
 </LinearLayout>

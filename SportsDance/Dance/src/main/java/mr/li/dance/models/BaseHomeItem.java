@@ -35,6 +35,7 @@ public class BaseHomeItem {
     private String described;
     public String img_fm;
     public String number;
+    public String sum;
 
     public String getImg() {
         return img;

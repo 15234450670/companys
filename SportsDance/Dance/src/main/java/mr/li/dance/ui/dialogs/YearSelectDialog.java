@@ -44,11 +44,11 @@ public class YearSelectDialog {
         if (popupWindow == null) {
             LayoutInflater layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = layoutInflater.inflate(R.layout.popwindow_year, null);
-            View sanjiaoView = view.findViewById(R.id.sanjiao_icon);
+         View sanjiaoView = view.findViewById(R.id.sanjiao_icon);
             if (showSanjiaoRight) {
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 lp.gravity = Gravity.RIGHT;
-                sanjiaoView.setLayoutParams(lp);
+              sanjiaoView.setLayoutParams(lp);
             }
             popRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
             popRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
@@ -73,6 +73,7 @@ public class YearSelectDialog {
         WindowManager windowManager = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
         // 显示的位置为:屏幕的宽度的一半-PopupWindow的高度的一半
         popupWindow.showAsDropDown(parent,offx,-40);
+
 
         baseRecyclerAdapter.notifyDataSetChanged();
     }

@@ -6,6 +6,7 @@
               android:orientation="vertical">
     <include layout="@layout/new_collect"/>
 
+
     <LinearLayout
         android:background="@color/white"
         android:layout_marginTop="@dimen/spacing_20"

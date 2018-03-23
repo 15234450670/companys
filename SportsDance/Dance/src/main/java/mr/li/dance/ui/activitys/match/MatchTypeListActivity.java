@@ -49,6 +49,7 @@ public class MatchTypeListActivity extends BaseListActivity<Match> {
     public void getIntentData() {
         super.getIntentData();
         mType = mIntentExtras.getInt("type");
+
     }
 
     @Override
@@ -66,6 +67,7 @@ public class MatchTypeListActivity extends BaseListActivity<Match> {
     @Override
     public void initViews() {
         setHeadVisibility(View.GONE);
+
         super.initViews();
         mDanceViewHolder.setText(R.id.year_tv, mYears.get(0));
         switch (mType) {

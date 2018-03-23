@@ -8,8 +8,8 @@ package mr.li.dance.utils;
 
 public class AppConfigs {
     //  private final static String MAINurl = "http://work.cdsf.org.cn";//测试环境
-    //     private final static String MAINurl = "http://kf.cdsf.org.cn";//测试环境
-      private final static String MAINurl = "http://cdsf.org.cn";//正式环境
+    private final static String MAINurl = "http://kf.cdsf.org.cn";//测试环境
+    //   private final static String MAINurl = "http://cdsf.org.cn";//正式环境
 
     private final static String DomainUrl = MAINurl + "/mobileClient";
     private final static String SHAREURL  = MAINurl + "/h5";
@@ -56,7 +56,7 @@ public class AppConfigs {
     public final static String finishactivityAction = "finish.activity.action";
     public final static String updateinfoAction     = "update.userinfo.action";
 
-    public final static String VIDEO_ZHIBO     = "http://19627.liveplay.myqcloud.com/live/19627_";
+    public final static String VIDEO_ZHIBO = "http://19627.liveplay.myqcloud.com/live/19627_";
 
     public final static int SENDMSG_REQUEST_CODE      = 0x001;
     public final static int home_index                = 0x0002;
@@ -96,7 +96,8 @@ public class AppConfigs {
     public final static int user_collections          = 0x0035;//d
 
 
-    public final static int getMatch_index_code     = 0x0035;
+    public final static int getMatch_index_code = 0x0035;
+
     public final static int match_indexList         = 0x0036;
     public final static int match_matchSearch       = 0x0037;
     public final static int match_matchFenlei       = 0x0038;
@@ -141,6 +142,8 @@ public class AppConfigs {
     public final static int GET_TAKEVIDEO           = 0X0076; //视频上传
     public final static int GET_PUBLISH             = 0X0079; //发布评论
     public final static int GET_DYNSMICDEL          = 0X0080; //删除评论
+    public final static int getMatch_search         = 0x0081; //赛事搜索
+    public final static int getGame_detail          = 0x0082;  //赛事详情
 
     public static String getDomainUrl() {
         return DomainUrl;

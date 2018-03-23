@@ -7,6 +7,7 @@
     android:paddingTop="@dimen/spacing_30">
 
     <RelativeLayout
+        android:id="@+id/tubiao_item"
         android:layout_width="@dimen/spacing_192"
         android:layout_height="@dimen/spacing_135"
         android:background="@drawable/scorefrom_shape_bg">

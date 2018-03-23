@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-                android:background="@color/white"
-    android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white">
+
     <LinearLayout
         android:id="@+id/wu"
-        android:visibility="gone"
-        android:orientation="vertical"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:layout_height="match_parent">
+        android:orientation="vertical"
+        android:visibility="gone">
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:src="@drawable/wuneirong_yk"/>
+
         <TextView
-            android:layout_marginTop="@dimen/spacing_20"
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_20"
+            android:gravity="center"
             android:text="暂 无 内 容...."/>
 
     </LinearLayout>
 
-           <include layout="@layout/list_layout" />
+    <include layout="@layout/list_layout"/>
 
 </RelativeLayout>

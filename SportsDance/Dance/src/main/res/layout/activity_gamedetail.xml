@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/refresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:id="@+id/video_bg"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_400"
+                android:scaleType="fitXY"/>
+
+            <TextView
+                android:id="@+id/matchname_tv"
+                style="@style/text_yellow_style_28"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="@dimen/spacing_22"
+                android:layout_marginLeft="@dimen/spacing_20"
+                android:layout_marginRight="@dimen/spacing_20"
+                android:layout_marginTop="@dimen/spacing_22"
+                android:gravity="center_vertical"
+                android:maxLines="2"
+                android:text=""
+                android:textColor="#666666"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_10"
+                android:background="#e1e1e1"/>
+
+
+            <LinearLayout
+                android:id="@+id/detail_gameRank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_35"
+                    android:layout_marginLeft="@dimen/spacing_20"
+                    android:layout_marginRight="@dimen/spacing_20"
+                    android:layout_marginTop="@dimen/spacing_35"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/text_white_style_30"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="赛事介绍"
+                        android:textColor="#333333"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/right_enter"/>
+                </LinearLayout>
+
+                <include layout="@layout/split_line"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/detail_gameGrade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_35"
+                    android:layout_marginLeft="@dimen/spacing_20"
+                    android:layout_marginRight="@dimen/spacing_20"
+                    android:layout_marginTop="@dimen/spacing_35"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/text_white_style_30"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="成绩查询"
+                        android:textColor="#333333"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/right_enter"/>
+                </LinearLayout>
+
+                <include layout="@layout/split_line"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/detail_gameProgram"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_35"
+                    android:layout_marginLeft="@dimen/spacing_20"
+                    android:layout_marginRight="@dimen/spacing_20"
+                    android:layout_marginTop="@dimen/spacing_35"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/text_white_style_30"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="秩序册"
+                        android:textColor="#333333"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/right_enter"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_10"
+                android:background="#e1e1e1"/>
+
+            <LinearLayout
+                android:id="@+id/detail_gameNew"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                   android:visibility="gone"
+                >
+
+                <LinearLayout
+                    android:id="@+id/new_more"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_30"
+                    android:layout_marginLeft="@dimen/spacing_20"
+                    android:layout_marginRight="@dimen/spacing_20"
+                    android:layout_marginTop="@dimen/spacing_30"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/text_white_style_30"
+
+                        android:gravity="center_vertical"
+                        android:text="相关新闻"
+                        android:textColor="#333333"/>
+
+                    <TextView
+                        android:layout_weight="1"
+                        style="@style/text_white_style_30"
+                        android:layout_width="wrap_content"
+                        android:drawableRight="@drawable/right_enter"
+                        android:gravity="right"
+                        android:text="更多"
+                        android:textColor="#333333"/>
+                </LinearLayout>
+
+                <include layout="@layout/split_line"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spacing_10"
+                    android:background="#e1e1e1"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/detail_gameVideo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                 android:visibility="gone"
+                >
+
+                <LinearLayout
+                    android:id="@+id/video_more"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_30"
+                    android:layout_marginLeft="@dimen/spacing_20"
+                    android:layout_marginRight="@dimen/spacing_20"
+                    android:layout_marginTop="@dimen/spacing_30"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/text_white_style_30"
+                        android:layout_width="wrap_content"
+
+                        android:gravity="center_vertical"
+                        android:text="相关视频"
+                        android:textColor="#333333"/>
+
+                    <TextView
+
+                        style="@style/text_white_style_30"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:drawableRight="@drawable/right_enter"
+                        android:gravity="right"
+                        android:text="更多"
+                        android:textColor="#333333"/>
+                </LinearLayout>
+
+                <include layout="@layout/split_line"/>
+                <RelativeLayout
+                    android:id="@+id/iamge_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <RelativeLayout
+                  android:id="@+id/re"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/spacing_398"
+                        android:layout_below="@+id/headicon"
+                        android:layout_marginLeft="@dimen/spacing_20"
+                        android:layout_marginRight="@dimen/spacing_20"
+                        android:layout_marginTop="@dimen/spacing_20">
+
+                        <ImageView
+                            android:id="@+id/video_imageView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/default_video"/>
+
+                        <ImageView
+                            android:id="@+id/tubiao"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:src="@mipmap/home_icon_008"
+                            android:visibility="gone"/>
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/re"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/name"
+                            style="@style/text_yellow_style_30"
+                            android:layout_marginBottom="@dimen/spacing_22"
+                            android:layout_marginLeft="@dimen/spacing_40"
+                            android:layout_marginRight="@dimen/spacing_40"
+                            android:layout_marginTop="@dimen/spacing_20"
+                            android:singleLine="true"
+                            android:text=""
+                            android:textColor="#333333"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="6dp"
+                            android:layout_below="@+id/name_time"
+                            android:layout_marginBottom="@dimen/spacing_20"
+                            android:layout_marginTop="@dimen/spacing_20"
+                            android:background="#e1e1e1"/>
+                    </LinearLayout>
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/detail_gamePic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                 android:visibility="gone"
+                >
+
+                <LinearLayout
+                    android:id="@+id/pic_more"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_30"
+                    android:layout_marginLeft="@dimen/spacing_20"
+                    android:layout_marginRight="@dimen/spacing_20"
+                    android:layout_marginTop="@dimen/spacing_30"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/text_white_style_30"
+                        android:layout_width="wrap_content"
+                        android:gravity="center_vertical"
+                        android:text="相关图片"
+                        android:textColor="#333333"/>
+
+                    <TextView
+
+                        style="@style/text_white_style_30"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableRight="@drawable/right_enter"
+                        android:gravity="right"
+                        android:text="更多"
+                        android:textColor="#333333"/>
+                </LinearLayout>
+
+                <include layout="@layout/split_line"/>
+
+                <RelativeLayout
+                    android:id="@+id/pic_re"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/iamge_layout1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/spacing_398"
+                        android:layout_below="@+id/top_layout"
+                        android:layout_marginLeft="@dimen/spacing_20"
+                        android:layout_marginRight="@dimen/spacing_20"
+                        android:layout_marginTop="@dimen/spacing_20">
+
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/default_video"/>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/pic_name"
+                        style="@style/text_yellow_style_30"
+                        android:layout_below="@+id/iamge_layout1"
+                        android:layout_marginBottom="@dimen/spacing_22"
+                        android:layout_marginLeft="@dimen/spacing_40"
+                        android:layout_marginRight="@dimen/spacing_40"
+                        android:layout_marginTop="@dimen/spacing_20"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColor="#333333"/>
+
+
+                    <LinearLayout
+                        android:id="@+id/picnum_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/spacing_10"
+                        >
+
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/home_icon_001"/>
+
+                        <TextView
+                            android:id="@+id/num_tv"
+                            style="@style/text_white_style_20"
+                            android:layout_width="wrap_content"
+                            />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:layout_below="@+id/pic_name"
+                        android:background="@color/rc_text_color_tertiary"/>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+</com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>

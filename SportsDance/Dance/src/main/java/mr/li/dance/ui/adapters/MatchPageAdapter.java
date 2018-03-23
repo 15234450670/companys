@@ -225,31 +225,6 @@ public class MatchPageAdapter extends DanceBaseAdapter {
         holder.slideShowView.startPlay();
     }
 
-   /* public void huodong(final BannerInfo bannerInfo) {
-        String appId = bannerInfo.getId();
-        String appsecret = bannerInfo.getAppsecret();
-        final String url = bannerInfo.getUrl();
-        String userId = UserInfoManager.getSingleton().getUserId(mContext);
-        final String title = bannerInfo.getTitle();
-        Request<String> huoDongInfoMap = ParameterUtils.getSingleton().getHuoDongInfoMap(appId, appsecret, url, userId);
-
-        CallServer.getRequestInstance().add(mContext, 0, huoDongInfoMap, new HttpListener() {
-            @Override
-            public void onSucceed(int what, String response) {
-                HuoDongInfo reponseResult = JsonMananger.getReponseResult(response, HuoDongInfo.class);
-                Log.e("sdfsdf", "请求了:" + reponseResult.getData());
-              //  MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, title, reponseResult.getData()+activityid, bannerInfo.getId());
-                MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.OTHERTYPE, title, reponseResult.getData() + bannerInfo.getNumber(), url, bannerInfo.getId());
-                Log.e("sdfsdf", "请求了2:" + reponseResult.getData()+ bannerInfo.getNumber());
-            }
-
-            @Override
-            public void onFailed(int what, int responseCode, String response) {
-                Log.e("sdfsdf", "失败了" + responseCode);
-            }
-        }, true, true);
-
-    }*/
    public void huodongs(final BannerInfo bannerInfo) {
        String appId = bannerInfo.getAppid();
        String appsecret = bannerInfo.getAppsecret();

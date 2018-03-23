@@ -275,10 +275,9 @@ public class TeachDetailsActivity extends BaseListActivity implements ITXVodPlay
         fragment.startActivity(intent);
     }
 
-    public static void lunch(Context context, String id, String pic, String title) {
+    public static void lunch(Context context, String id, String title) {
         Intent intent = new Intent(context, TeachDetailsActivity.class);
         intent.putExtra("id", id);
-        // intent.putExtra("pic", pic);
         intent.putExtra("title", title);
         context.startActivity(intent);
     }
