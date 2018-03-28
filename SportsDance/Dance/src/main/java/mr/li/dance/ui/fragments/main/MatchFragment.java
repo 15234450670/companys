@@ -23,11 +23,10 @@ import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.GameHomeResponse;
 import mr.li.dance.ui.activitys.game.GameAdapter;
-import mr.li.dance.ui.activitys.match.SearchMatchActivity;
+import mr.li.dance.ui.activitys.game.SearchGameActivity;
 import mr.li.dance.ui.activitys.music.PlayMusicActivity;
 import mr.li.dance.ui.adapters.BaseRecyclerAdapter;
 import mr.li.dance.ui.adapters.ListViewItemClickListener;
-import mr.li.dance.ui.adapters.MatchPageAdapter;
 import mr.li.dance.ui.adapters.RecyclerViewHolder;
 import mr.li.dance.ui.fragments.BaseListFragment;
 import mr.li.dance.utils.AppConfigs;
@@ -46,8 +45,8 @@ import static mr.li.dance.ui.activitys.MainActivity.myBinder;
  */
 public class MatchFragment extends BaseListFragment implements View.OnClickListener {
     private String TAG = getClass().getSimpleName();
-     MatchPageAdapter mMatchpAdapter;
-    GameAdapter       adapter;
+   // MatchPageAdapter mMatchpAdapter;
+    GameAdapter      adapter;
     private ArrayList<String> mYears;
     private RecyclerView      popRecyclerView;
     private PopupWindow       popupWindow;
@@ -94,10 +93,12 @@ public class MatchFragment extends BaseListFragment implements View.OnClickListe
         danceViewHolder.getView(R.id.rank).setOnClickListener(this);
         danceViewHolder.getView(R.id.state).setOnClickListener(this);
         danceViewHolder.setText(R.id.year_tv, mYears.get(0));
+        // 搜索
         danceViewHolder.setClickListener(R.id.search_layout, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SearchMatchActivity.lunch(getActivity());
+               // SearchMatchActivity.lunch(getActivity());
+                SearchGameActivity.lunch(getActivity());
             }
         });
         danceViewHolder.setClickListener(R.id.btn_music, new View.OnClickListener() {

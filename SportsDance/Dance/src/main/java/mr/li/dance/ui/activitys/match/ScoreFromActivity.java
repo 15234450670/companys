@@ -22,7 +22,7 @@ import mr.li.dance.utils.JsonMananger;
  * 作者: Lixuewei
  * 版本: 1.0
  * 创建日期: 2017/6/5
- * 描述: 成绩查询组别对数列表页面
+ * 描述:  成绩查询组别对数列表页面
  * 修订历史:
  */
 

@@ -10,7 +10,7 @@ import mr.li.dance.ui.adapters.RecyclerViewHolder;
  * 作者: SuiFeng
  * 版本:
  * 创建日期:2018/3/23 0023
- * 描述:
+ * 描述:        赛事介绍主办方适配器
  * 修订历史:
  */
 public class SponsorAdapter extends BaseRecyclerAdapter<String> {

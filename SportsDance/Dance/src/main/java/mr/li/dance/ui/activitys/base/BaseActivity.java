@@ -108,10 +108,17 @@ public abstract class BaseActivity extends FragmentActivity implements HttpListe
         mContext = this;
         mCallServer = CallServer.getRequestInstance();
         getIntentData();
+        initMap(savedInstanceState);
         initDatas();
         initViews();
         initRefreshLayout();
+
     }
+
+    public void initMap(Bundle savedInstanceState) {
+
+    }
+
 
     public void initRefreshLayout() {
         mRefreshLayout = (TwinklingRefreshLayout) mDanceViewHolder.getView(R.id.refresh);

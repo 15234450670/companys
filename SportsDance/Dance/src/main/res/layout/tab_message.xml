@@ -190,7 +190,6 @@
             android:id="@+id/undertake"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/spacing_30"
             android:orientation="vertical"
             android:visibility="gone"
             >
@@ -199,7 +198,7 @@
                 style="@style/text_white_style_28"
                 android:layout_marginBottom="@dimen/spacing_26"
                 android:layout_marginLeft="@dimen/spacing_20"
-                android:layout_marginTop="@dimen/spacing_30"
+                android:layout_marginTop="@dimen/spacing_20"
                 android:text="承办方"
                 android:textColor="#333333"/>
 
@@ -207,9 +206,9 @@
                 android:id="@+id/undertake_rv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/spacing_30"
                 android:layout_marginLeft="@dimen/spacing_20"
-                android:layout_marginRight="@dimen/spacing_20"
-                android:layout_marginTop="@dimen/spacing_30">
+                android:layout_marginRight="@dimen/spacing_20">
 
             </android.support.v7.widget.RecyclerView>
 
@@ -221,7 +220,6 @@
             android:id="@+id/assist"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/spacing_30"
             android:orientation="vertical"
             android:visibility="gone"
             >
@@ -238,9 +236,9 @@
                 android:id="@+id/assist_rv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/spacing_30"
                 android:layout_marginLeft="@dimen/spacing_20"
-                android:layout_marginRight="@dimen/spacing_20"
-                android:layout_marginTop="@dimen/spacing_30">
+                android:layout_marginRight="@dimen/spacing_20">
 
             </android.support.v7.widget.RecyclerView>
 

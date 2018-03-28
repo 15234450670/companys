@@ -6,15 +6,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Toast;
 
 import com.yolanda.nohttp.rest.Request;
 
 import java.util.List;
 
+import mabeijianxi.camera.util.Log;
 import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.models.GameDetailResponse;
+import mr.li.dance.ui.activitys.MyDanceWebActivity;
 import mr.li.dance.ui.activitys.album.AlbumActivity;
 import mr.li.dance.ui.activitys.base.BaseActivity;
 import mr.li.dance.ui.activitys.match.ScoreGroupActivity;
@@ -28,7 +29,7 @@ import mr.li.dance.utils.ShareUtils;
  * 作者: SuiFeng
  * 版本:
  * 创建日期:2018/3/22 0022
- * 描述:
+ * 描述:        赛事详情
  * 修订历史:
  */
 public class GameDetailActivity extends BaseActivity implements View.OnClickListener {
@@ -41,6 +42,7 @@ public class GameDetailActivity extends BaseActivity implements View.OnClickList
     private View         detail_gamePic;
     private RecyclerView rv;
     private String       GameName;
+    private String TAG = getClass().getSimpleName();
 
     @Override
     public int getContentViewId() {
@@ -181,13 +183,15 @@ public class GameDetailActivity extends BaseActivity implements View.OnClickList
         switch (v.getId()) {
 
             case R.id.detail_gameRank:
-                GameIntroduceActivity.lunch(this,mMatchId);
+                GameIntroduceActivity.lunch(this, mMatchId);
                 break;
             case R.id.detail_gameGrade:
-                ScoreGroupActivity.lunch(this,mMatchId);
+                ScoreGroupActivity.lunch(this, mMatchId);
                 break;
             case R.id.detail_gameProgram:
-                Toast.makeText(mContext, "秩序册", Toast.LENGTH_SHORT).show();
+                String format = String.format(AppConfigs.GAMEPROGRAM, String.valueOf(mMatchId), String.valueOf(0));
+                Log.e(TAG,format);
+                MyDanceWebActivity.lunch(this, MyDanceWebActivity.MATCHOTHER3, "秩序册", format, true);
                 break;
             case R.id.new_more:
                 MoreNewActivity.lunch(this, mMatchId);
@@ -196,7 +200,7 @@ public class GameDetailActivity extends BaseActivity implements View.OnClickList
                 MoreVideoActivity.lunch(this, mMatchId);
                 break;
             case R.id.pic_more:
-                MoreAlbumActivity.lunch(this,mMatchId);
+                MoreAlbumActivity.lunch(this, mMatchId);
                 break;
         }
     }

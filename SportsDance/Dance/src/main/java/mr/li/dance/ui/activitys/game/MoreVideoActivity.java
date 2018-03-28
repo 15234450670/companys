@@ -21,7 +21,7 @@ import mr.li.dance.utils.JsonMananger;
  * 作者: SuiFeng
  * 版本:
  * 创建日期:2018/3/22 0022
- * 描述:
+ * 描述:     更多视频
  * 修订历史:
  */
 public class MoreVideoActivity extends BaseListActivity {

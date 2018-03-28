@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dip"
+        android:clickable="true"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/back_icon"
+            android:layout_width="20dp"
+            android:layout_height="17dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/spacing_10"
+            android:src="@drawable/back_icon"
+
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_60"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/spacing_76"
+            android:layout_toLeftOf="@+id/search_btn"
+            android:background="@drawable/search_shape_corner"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_30"
+                android:src="@drawable/icon_marchsearch"/>
+
+            <EditText
+                android:id="@+id/search_et"
+                style="@style/text_white_style_24"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/spacing_20"
+                android:background="@null"
+                android:hint="搜索需要的内容"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textColorHint="#b9b9b9"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/search_btn"
+            style="@style/text_white_style_28"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="@dimen/spacing_20"
+            android:layout_marginRight="@dimen/spacing_20"
+            android:text="搜索"
+            android:textColor="#333333"/>
+
+
+    </RelativeLayout>
+
+    <include layout="@layout/split_line"/>
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/game_select"
+        android:visibility="gone"/>
+
+    <include layout="@layout/list_layout"/>
+</LinearLayout>

@@ -50,8 +50,12 @@ public class AppConfigs {
     public final static String SHAREMUSIC     = SHAREURL + "/share.gdfx?id=";
     //播放界面分享
     public final static String SHAREMUSICS    = SHAREURL + "/share.gqfx?classid=";
-    public final static String KEY_PLAY_UUID  = "7fjvplaumn";
-    public final static String KEY_PLAY_PU    = "393628f9df";
+    //赛事秩序册
+    public final static String GAMEPROGRAM    = SHAREURL + "/share.zcx?competeid=%s&indexid=%s";
+
+    public final static String KEY_PLAY_UUID = "7fjvplaumn";
+    public final static String KEY_PLAY_PU   = "393628f9df";
+
 
     public final static String finishactivityAction = "finish.activity.action";
     public final static String updateinfoAction     = "update.userinfo.action";

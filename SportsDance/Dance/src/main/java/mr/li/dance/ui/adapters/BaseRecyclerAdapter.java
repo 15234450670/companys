@@ -153,6 +153,28 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<Recycl
         notifyDataSetChanged();
     }
 
+    public void addList(boolean isRefresh, List<T> list, int i) {
+        if (isRefresh) {
+            currentPage = 1;
+            mData.clear();
+        }
+
+        if (i == 0) {
+            if (!MyStrUtil.isEmpty(list)) {
+                this.mData.addAll(list);
+                currentPage++;
+            }
+        } else {
+            mData.clear();
+            if (!MyStrUtil.isEmpty(list)) {
+                this.mData.addAll(list);
+                currentPage++;
+            }
+        }
+
+        notifyDataSetChanged();
+    }
+
     public List<T> getmList() {
         return mData;
     }

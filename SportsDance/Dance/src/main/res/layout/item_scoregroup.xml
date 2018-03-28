@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingLeft="@dimen/spacing_25"
-    android:paddingRight="@dimen/spacing_25"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:paddingLeft="@dimen/spacing_25"
 
-    android:orientation="vertical">
+              android:paddingRight="@dimen/spacing_25">
 
     <RelativeLayout
         android:id="@+id/mobile_layout"
@@ -17,16 +17,18 @@
         android:paddingRight="@dimen/spacing_20">
 
         <TextView
+            android:id="@+id/groupnum_tv"
+            style="@style/text_white_style_24"
+            android:layout_centerVertical="true"
+            android:textColor="#333333"/>
+
+        <TextView
             android:id="@+id/groupname_tv"
             style="@style/text_white_style_28"
             android:layout_centerVertical="true"
-               android:textColor="#333333"
-            android:text="" />
-        <TextView
-            android:id="@+id/groupnum_tv"
-            style="@style/text_white_style_24"
-            android:textColor="#333333"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true" />
+            android:layout_toRightOf="@+id/groupnum_tv"
+            android:text=""
+            android:textColor="#333333"/>
+
     </RelativeLayout>
 </LinearLayout>

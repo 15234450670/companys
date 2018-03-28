@@ -12,7 +12,7 @@ import mr.li.dance.ui.adapters.RecyclerViewHolder;
  * 作者: SuiFeng
  * 版本:
  * 创建日期:2018/3/22 0022
- * 描述:
+ * 描述:       视频更多适配器
  * 修订历史:
  */
 public class MoreVideoAdapter extends BaseRecyclerAdapter<Video> {

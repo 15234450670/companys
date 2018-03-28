@@ -306,16 +306,30 @@
             android:name=".ui.activitys.game.GameIntroduceActivity"
             android:screenOrientation="portrait"
             />
-        <activity android:name=".ui.activitys.game.GradeSearchActivity"
+        <activity
+            android:name=".ui.activitys.game.GradeSearchActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".ui.activitys.game.SearchGameActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".ui.activitys.game.MapActivity"
                   android:screenOrientation="portrait"
             />
 
 
-        <service
+      <!--  <service
             android:name="com.letvcloud.cmf.MediaService"
-            android:process=":cmf"/>
+            android:process=":cmf"/>-->
 
         <service android:name=".ui.activitys.music.MusicService"></service>
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="5f5affe023c77e3d1f324f3b131e80fd">
+
+        </meta-data>
 
         <!-- 第三方登录分享 -->
 

@@ -90,6 +90,8 @@ dependencies {
     compile project(':SmallVideoLib')
     //  ----------腾讯云-----------------------------
     compile(name: 'LiteAVSDK_Player_3.9.2754', ext: 'aar')
+    //----------高德地图-----------
+    compile 'com.amap.api:map2d:latest.integration'
 
 
 }

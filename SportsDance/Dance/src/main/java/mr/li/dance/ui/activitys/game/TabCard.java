@@ -19,7 +19,7 @@ import mr.li.dance.utils.AppConfigs;
  * 作者: SuiFeng
  * 版本:
  * 创建日期:2018/3/22 0022
- * 描述:
+ * 描述:       赛程表
  * 修订历史:
  */
 public class TabCard extends BaseFragment {
