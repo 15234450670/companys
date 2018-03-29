@@ -22,7 +22,7 @@ import mr.li.dance.models.AlbumInfo;
 import mr.li.dance.ui.activitys.LoginActivity;
 import mr.li.dance.ui.activitys.MyDanceWebActivity;
 import mr.li.dance.ui.activitys.base.BaseListActivity;
-import mr.li.dance.ui.activitys.match.MatchDetailActivity;
+import mr.li.dance.ui.activitys.game.GameDetailActivity;
 import mr.li.dance.ui.activitys.mine.MyCollectActivity;
 import mr.li.dance.ui.adapters.AlbumAdapter;
 import mr.li.dance.ui.widget.SpacesItemDecoration;
@@ -178,7 +178,7 @@ public class AlbumActivity extends BaseListActivity<AlbumInfo> {
                     mDanceViewHolder.getView(R.id.class_jieshaos).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            MatchDetailActivity.lunch(mContext, reponseResult.getData().getClassInfo().getCompete_id());
+                            GameDetailActivity.lunch(mContext, reponseResult.getData().getClassInfo().getCompete_id());
                         }
                     });
                 } else {

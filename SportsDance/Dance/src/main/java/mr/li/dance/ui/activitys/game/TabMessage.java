@@ -40,7 +40,7 @@ public class TabMessage extends BaseFragment {
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
-        Log.e(TAG,response);
+        Log.e(TAG, response);
         GameTabResponse reponseResult = JsonMananger.getReponseResult(response, GameTabResponse.class);
         final GameTabResponse.DataBean data = reponseResult.getData();
         String start_time = data.getStart_time().replace("-", ".");
@@ -50,13 +50,13 @@ public class TabMessage extends BaseFragment {
         String end_sign_up = data.getEnd_sign_up().substring(5).replace("-", ".");
         danceViewHolder.setText(R.id.end_tv, start_sign_up + "-" + end_sign_up); //报名时间
         final String address = data.getAddress();
-        danceViewHolder.setText(R.id.map_address,address); //地址
+        danceViewHolder.setText(R.id.map_address, address); //地址
         //跳地图
         danceViewHolder.getView(R.id.map_onclick).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                MapActivity.lunch(getActivity(),address,data.getLongitude(),data.getLatitudes());
+                MapActivity.lunch(getActivity(), address, data.getLongitude(), data.getLatitudes());
             }
         });
         String type = data.getType(); //级别

@@ -42,7 +42,7 @@ import mr.li.dance.models.PushLove;
 import mr.li.dance.ui.activitys.LoginActivity;
 import mr.li.dance.ui.activitys.MyDanceWebActivity;
 import mr.li.dance.ui.activitys.album.AlbumActivity;
-import mr.li.dance.ui.activitys.match.MatchDetailActivity;
+import mr.li.dance.ui.activitys.game.GameDetailActivity;
 import mr.li.dance.ui.activitys.music.SongActivity;
 import mr.li.dance.ui.activitys.newActivitys.TeachDetailsActivity;
 import mr.li.dance.ui.activitys.video.VideoDetailActivity;
@@ -294,7 +294,7 @@ public class DanceApplication extends Application {
 
                         break;
                     case "10105":
-                        MatchDetailActivity.lunchs(getApplicationContext(), value);
+                        GameDetailActivity.lunchs(getApplicationContext(), value);
                         break;
                     case "10106":
                         Request<String> stringRequest = ParameterUtils.getSingleton().PushLove(type, value);

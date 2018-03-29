@@ -42,7 +42,7 @@ import mr.li.dance.models.HuoDongInfo;
 import mr.li.dance.models.UpdateVersion;
 import mr.li.dance.ui.TXT.FabuDialog;
 import mr.li.dance.ui.activitys.album.AlbumActivity;
-import mr.li.dance.ui.activitys.match.MatchDetailActivity;
+import mr.li.dance.ui.activitys.game.GameDetailActivity;
 import mr.li.dance.ui.activitys.music.MusicService;
 import mr.li.dance.ui.activitys.music.PlayMusicActivity;
 import mr.li.dance.ui.activitys.music.ServiceConn;
@@ -156,7 +156,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
                         break;
                     case "10105":
-                        MatchDetailActivity.lunchs(getApplicationContext(), value);
+                        GameDetailActivity.lunchs(getApplicationContext(), value);
                         break;
                     case "10106":
                            /* Request<String> stringRequest = ParameterUtils.getSingleton().PushLove(type, value);

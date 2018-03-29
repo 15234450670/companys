@@ -3,7 +3,6 @@ package mr.li.dance.ui.activitys.game;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.amap.api.maps2d.AMap;
 import com.amap.api.maps2d.CameraUpdateFactory;
@@ -121,7 +120,6 @@ public class MapActivity extends BaseActivity implements AMap.OnMapLoadedListene
 
     @Override
     public void onMapLoaded() {
-        Toast.makeText(mContext, "zoule", Toast.LENGTH_SHORT).show();
         LatLngBounds bounds = new LatLngBounds.Builder()
                 .include(latlng).build();
         aMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 15));

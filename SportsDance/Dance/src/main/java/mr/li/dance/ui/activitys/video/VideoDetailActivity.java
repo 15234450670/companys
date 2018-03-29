@@ -40,7 +40,7 @@ import mr.li.dance.https.response.VideoDetailResponse;
 import mr.li.dance.models.Video;
 import mr.li.dance.ui.activitys.LoginActivity;
 import mr.li.dance.ui.activitys.base.BaseListActivity;
-import mr.li.dance.ui.activitys.match.MatchDetailActivity;
+import mr.li.dance.ui.activitys.game.GameDetailActivity;
 import mr.li.dance.ui.activitys.match.MatchVideoActivity;
 import mr.li.dance.ui.activitys.newActivitys.SpecialActivity;
 import mr.li.dance.ui.adapters.new_adapter.SpecialItemAdapter;
@@ -278,7 +278,7 @@ public class VideoDetailActivity extends BaseListActivity implements ITXVodPlayL
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        MatchDetailActivity.lunch(mContext, detailResponse.getData().getDetail().getCompete_id());
+                        GameDetailActivity.lunch(mContext, detailResponse.getData().getDetail().getCompete_id());
                     }
                 });
             } else {

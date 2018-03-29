@@ -29,7 +29,7 @@ import mr.li.dance.models.ZiXunInfo;
 import mr.li.dance.ui.activitys.LoginActivity;
 import mr.li.dance.ui.activitys.MyDanceWebActivity;
 import mr.li.dance.ui.activitys.album.AlbumActivity;
-import mr.li.dance.ui.activitys.match.MatchDetailActivity;
+import mr.li.dance.ui.activitys.game.GameDetailActivity;
 import mr.li.dance.ui.activitys.music.DanceMusicActivity;
 import mr.li.dance.ui.activitys.video.VideoDetailActivity;
 import mr.li.dance.ui.activitys.video.ZhiBoDetailActivity;
@@ -191,7 +191,7 @@ public class ConsultationPageAdapter extends DanceBaseAdapter {
                                     AlbumActivity.lunch(mContext, bannerInfo.getNumber(), "");
                                     break;
                                 case 10105://赛事
-                                    MatchDetailActivity.lunch(mContext, bannerInfo.getNumber());
+                                    GameDetailActivity.lunch(mContext, bannerInfo.getNumber());
                                     break;
                                 case 10106://外联
                                     if (!MyStrUtil.isEmpty(bannerInfo.getUrl())) {

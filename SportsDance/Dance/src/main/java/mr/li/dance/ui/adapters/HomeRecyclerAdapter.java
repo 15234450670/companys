@@ -33,7 +33,7 @@ import mr.li.dance.ui.activitys.LoginActivity;
 import mr.li.dance.ui.activitys.MainActivity;
 import mr.li.dance.ui.activitys.MyDanceWebActivity;
 import mr.li.dance.ui.activitys.album.AlbumActivity;
-import mr.li.dance.ui.activitys.match.MatchDetailActivity;
+import mr.li.dance.ui.activitys.game.GameDetailActivity;
 import mr.li.dance.ui.activitys.music.SongActivity;
 import mr.li.dance.ui.activitys.video.VideoDetailActivity;
 import mr.li.dance.ui.activitys.video.ZhiBoDetailActivity;
@@ -218,7 +218,7 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
                         break;
                     case 10105://赛事
 
-                        MatchDetailActivity.lunch(mContext, bannerInfo.getNumber());
+                        GameDetailActivity.lunch(mContext, bannerInfo.getNumber());
                         break;
                     case 10106://外联
                         if (!MyStrUtil.isEmpty(bannerInfo.getUrl())) {
@@ -339,7 +339,7 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
                         MainActivity.floatImage.setVisibility(View.GONE);
                         MainActivity.myBinder.binderPause();
                     }
-                    MatchDetailActivity.lunch(mContext, id);
+                    GameDetailActivity.lunch(mContext, id);
                 }
             });
             holder.mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -427,7 +427,7 @@ public class HomeRecyclerAdapter extends DanceBaseAdapter {
                         if (MainActivity.myBinder.binderIsPlaying()){
                             MainActivity.myBinder.binderPause();
                         }
-                        MatchDetailActivity.lunch(mContext, mDatas.get(position).getCompete_id());
+                        GameDetailActivity.lunch(mContext, mDatas.get(position).getCompete_id());
                         break;
                     case 10106://外联
                         String url = mDatas.get(position).getUrl();

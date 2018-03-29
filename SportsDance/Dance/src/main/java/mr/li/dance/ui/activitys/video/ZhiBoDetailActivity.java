@@ -35,7 +35,7 @@ import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.models.MenuBean;
 import mr.li.dance.models.ZhiBo;
 import mr.li.dance.ui.activitys.base.BaseListActivity;
-import mr.li.dance.ui.activitys.match.MatchDetailActivity;
+import mr.li.dance.ui.activitys.game.GameDetailActivity;
 import mr.li.dance.ui.adapters.DirectseedSpeedAdapter;
 import mr.li.dance.ui.widget.screenrotate.MyRotate;
 import mr.li.dance.ui.widget.screenrotate.RotateCallBack;
@@ -310,7 +310,7 @@ public class ZhiBoDetailActivity extends BaseListActivity implements ITXLivePlay
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    MatchDetailActivity.lunch(mContext, zhiBoInfo.get(0).getCompete_id());
+                    GameDetailActivity.lunch(mContext, zhiBoInfo.get(0).getCompete_id());
                 }
             });
 
