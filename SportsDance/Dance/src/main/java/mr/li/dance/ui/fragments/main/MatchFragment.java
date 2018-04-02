@@ -76,7 +76,7 @@ public class MatchFragment extends BaseListFragment implements View.OnClickListe
         DateUtils dateUtils = new DateUtils();
         int currentYear = dateUtils.getmSelYear();
 
-        for (int i = currentYear; i >= (currentYear - 5); i--) {
+        for (int i = currentYear; i >= (currentYear - 4); i--) {
             Log.e("xx", i + "");
             mYears.add(String.valueOf(i));
         }

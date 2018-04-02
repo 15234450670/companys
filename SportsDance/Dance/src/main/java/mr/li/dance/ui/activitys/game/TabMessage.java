@@ -61,13 +61,17 @@ public class TabMessage extends BaseFragment {
         });
         String type = data.getType(); //级别
         switch (type) {
+
             case "10001":
+                danceViewHolder.setImageByUrlOrFilePaths1(R.id.game_image, R.drawable.game_wdsf_icon);
                 danceViewHolder.setText(R.id.wdsf_tv, "WDSF");
                 break;
             case "10002":
+                danceViewHolder.setImageByUrlOrFilePaths1(R.id.game_image, R.drawable.game_cdsf_icon);
                 danceViewHolder.setText(R.id.wdsf_tv, "CDSF");
                 break;
             case "10003":
+                danceViewHolder.getImageView(R.id.game_image).setVisibility(View.GONE);
                 danceViewHolder.setText(R.id.wdsf_tv, "地方赛事");
                 break;
         }

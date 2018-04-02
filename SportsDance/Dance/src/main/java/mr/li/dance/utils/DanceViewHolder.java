@@ -85,6 +85,14 @@ public class DanceViewHolder {
 
     }
 
+    public void setTextAndColor(int viewId, String value,int color) {
+        TextView view = findViewById(viewId);
+        if (view != null) {
+            view.setText(value);
+            view.setTextColor(mContext.getResources().getColor(color));
+        }
+    }
+
     public void setBackground(int viewId, int resId) {
         View view = findViewById(viewId);
         view.setBackgroundResource(resId);
