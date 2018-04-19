@@ -227,7 +227,7 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    private void bindVideo(BaseHomeItem video) {
+     private void bindVideo(BaseHomeItem video) {
         if (video.getShow_type().equals("2")) {
             danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, video.getPicture_app(), R.drawable.default_video);
             danceViewHolder.getView(R.id.share_layout).setVisibility(View.GONE);
@@ -242,7 +242,6 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
             danceViewHolder.setViewVisibility(R.id.picnum_tv, View.INVISIBLE);
             if (video.getType() == 10102) {
                 danceViewHolder.setText(R.id.from_tv, "视频");
-
 
             }
             if (!TextUtils.isEmpty(video.getSource())) {

@@ -45,10 +45,20 @@ public class TabMessage extends BaseFragment {
         final GameTabResponse.DataBean data = reponseResult.getData();
         String start_time = data.getStart_time().replace("-", ".");
         String end_time = data.getEnd_time().substring(5).replace("-", ".");
-        danceViewHolder.setText(R.id.creat_tv, start_time + "-" + end_time); //比赛时间
+        if (data.getStart_time().equals("0000-00-00")) {
+            danceViewHolder.setText(R.id.creat_tv, "  ----.--.--"); //比赛时间
+        } else {
+            danceViewHolder.setText(R.id.creat_tv, start_time + "-" + end_time); //比赛时间
+        }
+
         String start_sign_up = data.getStart_sign_up().replace("-", ".");
         String end_sign_up = data.getEnd_sign_up().substring(5).replace("-", ".");
-        danceViewHolder.setText(R.id.end_tv, start_sign_up + "-" + end_sign_up); //报名时间
+        if (data.getStart_sign_up().equals("0000-00-00")) {
+            danceViewHolder.setText(R.id.end_tv, "  ----.--.--"); //报名时间
+        } else {
+            danceViewHolder.setText(R.id.end_tv, start_sign_up + "-" + end_sign_up); //报名时间
+        }
+
         final String address = data.getAddress();
         danceViewHolder.setText(R.id.map_address, address); //地址
         //跳地图

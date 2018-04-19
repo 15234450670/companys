@@ -150,7 +150,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                   android:visibility="gone"
+                android:visibility="gone"
                 >
 
                 <LinearLayout
@@ -170,14 +170,27 @@
                         android:text="相关新闻"
                         android:textColor="#333333"/>
 
-                    <TextView
-                        android:layout_weight="1"
-                        style="@style/text_white_style_30"
-                        android:layout_width="wrap_content"
-                        android:drawableRight="@drawable/right_enter"
-                        android:gravity="right"
-                        android:text="更多"
-                        android:textColor="#333333"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/text_white_style_30"
+                            android:layout_width="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:text="更多"
+                            android:textColor="#333333"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dp"
+                            android:src="@drawable/right_enter"/>
+                    </LinearLayout>
+
+
                 </LinearLayout>
 
                 <include layout="@layout/split_line"/>
@@ -220,24 +233,36 @@
                         android:text="相关视频"
                         android:textColor="#333333"/>
 
-                    <TextView
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
-                        style="@style/text_white_style_30"
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
-                        android:drawableRight="@drawable/right_enter"
-                        android:gravity="right"
-                        android:text="更多"
-                        android:textColor="#333333"/>
+                        <TextView
+                            style="@style/text_white_style_30"
+                            android:layout_width="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:text="更多"
+                            android:textColor="#333333"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dp"
+                            android:src="@drawable/right_enter"/>
+                    </LinearLayout>
                 </LinearLayout>
 
                 <include layout="@layout/split_line"/>
+
                 <RelativeLayout
                     android:id="@+id/iamge_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <RelativeLayout
-                  android:id="@+id/re"
+                        android:id="@+id/re"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/spacing_398"
                         android:layout_below="@+id/headicon"
@@ -274,7 +299,8 @@
                             android:layout_marginLeft="@dimen/spacing_40"
                             android:layout_marginRight="@dimen/spacing_40"
                             android:layout_marginTop="@dimen/spacing_20"
-                            android:singleLine="true"
+                            android:lines="2"
+                            android:ellipsize="end"
                             android:text=""
                             android:textColor="#333333"/>
 
@@ -282,7 +308,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="6dp"
                             android:layout_below="@+id/name_time"
-                            android:layout_marginBottom="@dimen/spacing_20"
                             android:layout_marginTop="@dimen/spacing_20"
                             android:background="#e1e1e1"/>
                     </LinearLayout>
@@ -297,7 +322,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                 android:visibility="gone"
+                  android:visibility="gone"
                 >
 
                 <LinearLayout
@@ -317,15 +342,26 @@
                         android:text="相关图片"
                         android:textColor="#333333"/>
 
-                    <TextView
 
-                        style="@style/text_white_style_30"
-                        android:layout_width="wrap_content"
-                        android:layout_weight="1"
-                        android:drawableRight="@drawable/right_enter"
-                        android:gravity="right"
-                        android:text="更多"
-                        android:textColor="#333333"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/text_white_style_30"
+                            android:layout_width="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:text="更多"
+                            android:textColor="#333333"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dp"
+                            android:src="@drawable/right_enter"/>
+                    </LinearLayout>
                 </LinearLayout>
 
                 <include layout="@layout/split_line"/>
@@ -361,7 +397,8 @@
                         android:layout_marginLeft="@dimen/spacing_40"
                         android:layout_marginRight="@dimen/spacing_40"
                         android:layout_marginTop="@dimen/spacing_20"
-                        android:singleLine="true"
+                        android:lines="2"
+                        android:ellipsize="end"
                         android:text=""
                         android:textColor="#333333"/>
 

@@ -50,8 +50,8 @@ public class SearchGameActivity extends BaseListActivity implements View.OnClick
     private PopYearAdatper    popYearAdatper;
     private List<String>      rank_list;
     private List<String>      state_list;
-    String[] rank  = new String[]{"WDSF", "CDSF", "地方赛事"};
-    String[] state = new String[]{"直播中", "进行中", "报名中", "未开始", "已结束"};
+    String[] rank  = new String[]{"全部赛事", "WDSF", "CDSF", "地方赛事"};
+    String[] state = new String[]{"所有状态", "直播中", "进行中", "报名中", "未开始", "已结束"};
     private String state_tv;
     private String rank_tv;
     private String time_tv;
@@ -138,6 +138,9 @@ public class SearchGameActivity extends BaseListActivity implements View.OnClick
             Request<String> gameMapSearch = ParameterUtils.getSingleton().getGameMapSearch(time_tv, RANK_TYPE, STATE_TYPE, textValue, String.valueOf(page));
             request(AppConfigs.getMatch_search, gameMapSearch, false);
 
+        } else if (MyStrUtil.isEmpty(time_tv) && MyStrUtil.isEmpty(rank_tv) && MyStrUtil.isEmpty(state_tv)) {
+            Request<String> gameMapSearch = ParameterUtils.getSingleton().getGameMapSearch("", "", "", textValue, String.valueOf(page));
+            request(AppConfigs.getMatch_search, gameMapSearch, false);
         }
         isList = false;
        /* Request<String> request = ParameterUtils.getSingleton().getMatchMapFromServer();
@@ -171,6 +174,9 @@ public class SearchGameActivity extends BaseListActivity implements View.OnClick
         } else if (!MyStrUtil.isEmpty(time_tv) && !MyStrUtil.isEmpty(rank_tv) && !MyStrUtil.isEmpty(state_tv)) {
             Request<String> gameMapSearch = ParameterUtils.getSingleton().getGameMapSearch(time_tv, RANK_TYPE, STATE_TYPE, textValue, String.valueOf(page));
             request(AppConfigs.getMatch_search, gameMapSearch, false);
+        } else if (MyStrUtil.isEmpty(time_tv) && MyStrUtil.isEmpty(rank_tv) && MyStrUtil.isEmpty(state_tv)) {
+            Request<String> gameMapSearch = ParameterUtils.getSingleton().getGameMapSearch("", "", "", textValue, String.valueOf(page));
+            request(AppConfigs.getMatch_search, gameMapSearch, false);
         }
 
         isList = true;
@@ -186,14 +192,14 @@ public class SearchGameActivity extends BaseListActivity implements View.OnClick
                 finish();
                 break;
             case R.id.search_btn:
-
                 textValue = mDanceViewHolder.getTextValue(search_et);
                 Log.e(TAG, "textValue:" + textValue);
                 if (MyStrUtil.isEmpty(textValue)) {
                     Toast.makeText(mContext, "请输入要搜索的内容", Toast.LENGTH_SHORT).show();
                 } else {
-                    Request<String> gameMapSearch = ParameterUtils.getSingleton().getGameMapSearch("", "", "", textValue, String.valueOf(1));
-                    request(AppConfigs.getGame_detail, gameMapSearch, false);
+                   /* Request<String> gameMapSearch = ParameterUtils.getSingleton().getGameMapSearch("", "", "", textValue, String.valueOf(1));
+                    request(AppConfigs.getGame_detail, gameMapSearch, false);*/
+                    refresh();
                     mDanceViewHolder.getView(R.id.include).setVisibility(View.VISIBLE);
                 }
 
@@ -266,6 +272,9 @@ public class SearchGameActivity extends BaseListActivity implements View.OnClick
                     mDanceViewHolder.setText(R.id.rank_tv, value);
                     rank_tv = mDanceViewHolder.getTextValue(R.id.rank_tv);
                     switch (rank_tv) {
+                        case "全部赛事":
+                            RANK_TYPE = "";
+                            break;
                         case "WDSF":
                             RANK_TYPE = "10001";
                             break;
@@ -276,11 +285,14 @@ public class SearchGameActivity extends BaseListActivity implements View.OnClick
                             RANK_TYPE = "10003";
                             break;
                     }
-                    Log.e(TAG, "RANK_TYPE: " + RANK_TYPE);
+
                 } else {
                     mDanceViewHolder.setText(R.id.state_tv, value);
                     state_tv = mDanceViewHolder.getTextValue(R.id.state_tv);
                     switch (state_tv) {
+                        case "所有状态":
+                            STATE_TYPE = "";
+                            break;
                         case "报名中":
                             STATE_TYPE = "1";
                             break;
@@ -298,10 +310,9 @@ public class SearchGameActivity extends BaseListActivity implements View.OnClick
                             break;
 
                     }
-                    Log.e(TAG, "STATE_TYPE: " + STATE_TYPE);
+                    Log.e(TAG, "time_tv: " + time_tv + "textValue:" + textValue + "RANK_TYPE: " + RANK_TYPE + "STATE_TYPE: " + STATE_TYPE);
                 }
                 if (!MyStrUtil.isEmpty(time_tv) && MyStrUtil.isEmpty(rank_tv) && MyStrUtil.isEmpty(state_tv)) {
-                    Log.e(TAG, "time_tv: " + time_tv);
                     Request<String> gameMapSearch = ParameterUtils.getSingleton().getGameMapSearch(time_tv, "", "", textValue, String.valueOf(1));
                     request(AppConfigs.getMatch_search, gameMapSearch, false);
                 } else if (!MyStrUtil.isEmpty(rank_tv) && MyStrUtil.isEmpty(time_tv) && MyStrUtil.isEmpty(state_tv)) {

@@ -6,13 +6,19 @@
               android:orientation="vertical">
 
     <include layout="@layout/new_collect"/>
-   <include layout="@layout/game_select"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_marginTop="@dimen/spacing_16"
+        android:background="@color/line"/>
+
+    <include layout="@layout/game_select"/>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/spacing_20"
         android:background="@color/white"
         android:orientation="vertical">
 

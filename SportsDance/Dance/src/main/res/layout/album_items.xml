@@ -30,7 +30,8 @@
         android:layout_marginLeft="@dimen/spacing_40"
         android:layout_marginRight="@dimen/spacing_40"
         android:layout_marginTop="@dimen/spacing_20"
-        android:singleLine="true"
+        android:lines="2"
+        android:ellipsize="end"
         android:textColor="#333333"/>
 
 

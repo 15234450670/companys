@@ -54,9 +54,16 @@ public class GameAdapter extends BaseRecyclerAdapter<GameHomeResponse.DataBean> 
         holder.setImageByUrlOrFilePath(R.id.game_pic, item.getImg(), R.drawable.default_video);
         String end_date = item.getEnd_date();
         String start_date = item.getStart_date();
-        String replace = start_date.replace("-", ".");
-        String substring = end_date.substring(5).replace("-", ".");
-        holder.setText(R.id.game_tv_time, replace + "-" + substring);
+        if (start_date.equals("0000-00-00")) {
+            holder.setText(R.id.game_tv_time, "  ----.--.--");
+        } else {
+            String replace = start_date.replace("-", ".");
+            String substring = end_date.substring(5).replace("-", ".");
+            holder.setText(R.id.game_tv_time, replace + "-" + substring);
+        }
+
+
+
         holder.setText(R.id.game_tv_address, item.getProvince());
         holder.setText(R.id.game_tv, item.getTitle());
         holder.itemView.setOnClickListener(new View.OnClickListener() {

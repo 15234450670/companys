@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <dimen name="spitline_width">0.5dp</dimen>
     <dimen name="textandiconmargin">10dp</dimen>
     <dimen name="ksw_md_thumb_ripple_size">42dp</dimen>
@@ -7,7 +7,7 @@
     <dimen name="ksw_md_thumb_shadow_inset">11dp</dimen>
     <dimen name="ksw_md_thumb_shadow_inset_top">11dp</dimen>
     <dimen name="ksw_md_thumb_shadow_inset_bottom">10dp</dimen>
-
+    <dimen name="design_tab_text_size" tools:ignore="PrivateResource">14sp</dimen>
     <dimen name="home_spilitline_width">1.5dp</dimen>
 
     <dimen name="lubo_width">12dip</dimen>

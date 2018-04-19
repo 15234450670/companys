@@ -28,6 +28,7 @@ public class MoreVideoAdapter extends BaseRecyclerAdapter<Video> {
     @Override
     public void bindData(RecyclerViewHolder holder, int position, Video item) {
         holder.getImageView(R.id.tubiao).setVisibility(View.VISIBLE);
+        holder.getTextView(R.id.time_tv).setVisibility(View.GONE);
         holder.setImageByUrlOrFilePath(R.id.imageView, item.getPicture(), R.drawable.default_video);
         holder.setText(R.id.name, item.getName()) ;
 

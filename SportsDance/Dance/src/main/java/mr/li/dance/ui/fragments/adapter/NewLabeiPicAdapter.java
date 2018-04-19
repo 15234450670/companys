@@ -29,7 +29,7 @@ public class NewLabeiPicAdapter extends BaseRecyclerAdapter<TeachInfo> {
     @Override
     public void bindData(RecyclerViewHolder holder, int position, TeachInfo item) {
         holder.setText(R.id.name, item.getTitle());
-        holder.setImageByUrlOrFilePath(R.id.imageView, item.getImg_fm(), R.drawable.default_banner);
+        holder.setImageByUrlOrFilePath(R.id.imageView, item.getPicture(), R.drawable.default_banner);
         if (!MyStrUtil.isEmpty(item.getPhotos())) {
             holder.setText(R.id.num_tv, "共 " + item.getPhotos() + " 张");
         } else {

@@ -45,16 +45,16 @@ import static mr.li.dance.ui.activitys.MainActivity.myBinder;
  */
 public class MatchFragment extends BaseListFragment implements View.OnClickListener {
     private String TAG = getClass().getSimpleName();
-   // MatchPageAdapter mMatchpAdapter;
-    GameAdapter      adapter;
+    // MatchPageAdapter mMatchpAdapter;
+    GameAdapter adapter;
     private ArrayList<String> mYears;
     private RecyclerView      popRecyclerView;
     private PopupWindow       popupWindow;
     private PopYearAdatper    popYearAdatper;
     private List<String>      rank_list;
     private List<String>      state_list;
-    String[] rank  = new String[]{"WDSF", "CDSF", "地方赛事"};
-    String[] state = new String[]{"直播中", "进行中", "报名中", "未开始", "已结束"};
+    String[] rank  = new String[]{"全部赛事", "WDSF", "CDSF", "地方赛事"};
+    String[] state = new String[]{"所有状态", "直播中", "进行中", "报名中", "未开始", "已结束"};
     private String state_tv;
     private String rank_tv;
     private String time_tv;
@@ -65,6 +65,7 @@ public class MatchFragment extends BaseListFragment implements View.OnClickListe
     String STATE_TYPE;   //状态标识码
     String s;   //判断是哪个链接请求成功
     int    add;// 判断是否加载或刷新
+    private boolean isPop = false;//pop是否点击
 
 
     @Override
@@ -97,7 +98,7 @@ public class MatchFragment extends BaseListFragment implements View.OnClickListe
         danceViewHolder.setClickListener(R.id.search_layout, new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // SearchMatchActivity.lunch(getActivity());
+                // SearchMatchActivity.lunch(getActivity());
                 SearchGameActivity.lunch(getActivity());
             }
         });
@@ -242,20 +243,30 @@ public class MatchFragment extends BaseListFragment implements View.OnClickListe
         switch (v.getId()) {
             case R.id.year:
                 TYPE = 0;
+                //  danceViewHolder.setTextColor(R.id.year_tv, R.color.bottom_navigation);
+                //  danceViewHolder.setImageByUrlOrFilePaths1(R.id.year_image_right, R.drawable.mathc_icon_0014);
                 showPop(mYears, TYPE);
                 break;
             case R.id.rank:
                 TYPE = 1;
+                // danceViewHolder.setTextColor(R.id.rank_tv, R.color.bottom_navigation);
+                //  danceViewHolder.setImageByUrlOrFilePaths1(R.id.rank_image_right, R.drawable.mathc_icon_0014);
                 showPop(rank_list, TYPE);
                 break;
             case R.id.state:
                 TYPE = 2;
+                //danceViewHolder.setTextColor(R.id.state_tv, R.color.bottom_navigation);
+                // danceViewHolder.setImageByUrlOrFilePaths1(R.id.state_image_right, R.drawable.mathc_icon_0014);
                 showPop(state_list, TYPE);
                 break;
+
+
         }
+
     }
 
     private void showPop(List<String> mYears, final int type) {
+
         LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.popwindow_year, null);
         FrameLayout ll = (FrameLayout) view.findViewById(R.id.ll);
@@ -272,12 +283,17 @@ public class MatchFragment extends BaseListFragment implements View.OnClickListe
                 add = 0x01;
                 if (type == 0) {
                     danceViewHolder.setText(R.id.year_tv, value);
+
                     time_tv = danceViewHolder.getTextValue(R.id.year_tv);
 
                 } else if (type == 1) {
                     danceViewHolder.setText(R.id.rank_tv, value);
+
                     rank_tv = danceViewHolder.getTextValue(R.id.rank_tv);
                     switch (rank_tv) {
+                        case "全部赛事":
+                            RANK_TYPE = "";
+                            break;
                         case "WDSF":
                             RANK_TYPE = "10001";
                             break;
@@ -291,8 +307,12 @@ public class MatchFragment extends BaseListFragment implements View.OnClickListe
                     Log.e(TAG, "RANK_TYPE: " + RANK_TYPE);
                 } else {
                     danceViewHolder.setText(R.id.state_tv, value);
+
                     state_tv = danceViewHolder.getTextValue(R.id.state_tv);
                     switch (state_tv) {
+                        case "所以状态":
+                            STATE_TYPE = "";
+                            break;
                         case "报名中":
                             STATE_TYPE = "1";
                             break;
@@ -337,6 +357,7 @@ public class MatchFragment extends BaseListFragment implements View.OnClickListe
                     request(AppConfigs.getMatch_search, gameMapSearch, false);
                 }
                 popupWindow.dismiss();
+                // popDisMiss(type);
 
             }
 
@@ -345,6 +366,7 @@ public class MatchFragment extends BaseListFragment implements View.OnClickListe
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
+                // popDisMiss(type);
             }
         });
 
@@ -357,6 +379,35 @@ public class MatchFragment extends BaseListFragment implements View.OnClickListe
         popupWindow.showAsDropDown(danceViewHolder.getView(R.id.year_tv), 0, 0);
         popYearAdatper.notifyDataSetChanged();
     }
+
+   /* private void popDisMiss(final int t) {
+
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                switch (t) {
+                    case 0:
+                        danceViewHolder.setTextColor(R.id.year_tv, R.color.black);
+                        danceViewHolder.setImageByUrlOrFilePaths1(R.id.year_image_right, R.drawable.mathc_icon_0013);
+
+                        break;
+                    case 1:
+                        danceViewHolder.setTextColor(R.id.rank_tv, R.color.black);
+                        danceViewHolder.setImageByUrlOrFilePaths1(R.id.rank_image_right, R.drawable.mathc_icon_0013);
+
+                        break;
+                    case 2:
+
+                        danceViewHolder.setTextColor(R.id.state_tv, R.color.black);
+                        danceViewHolder.setImageByUrlOrFilePaths1(R.id.state_image_right, R.drawable.mathc_icon_0013);
+                        break;
+
+                }
+
+            }
+        });
+        popupWindow.dismiss();
+    }*/
 
     private class PopYearAdatper extends BaseRecyclerAdapter<String> {
         public PopYearAdatper(Context ctx) {

@@ -29,7 +29,6 @@ import mr.li.dance.utils.JsonMananger;
 public class ScoreFromActivity extends BaseListActivity<ScoreInfo> {
     ScoreFromAdapter mScorefromAdapter;
     private String mGroupName;
-
     private String mMatchId;
 
     @Override

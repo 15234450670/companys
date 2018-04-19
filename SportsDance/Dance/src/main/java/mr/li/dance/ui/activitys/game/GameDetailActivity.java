@@ -5,13 +5,13 @@ import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import com.yolanda.nohttp.rest.Request;
 
 import java.util.List;
 
-import mabeijianxi.camera.util.Log;
 import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.models.GameDetailResponse;
@@ -95,6 +95,7 @@ public class GameDetailActivity extends BaseActivity implements View.OnClickList
     @Override
     public void onSucceed(int what, String response) {
         super.onSucceed(what, response);
+        Log.e(TAG, response);
         GameDetailResponse reponseResult = JsonMananger.getReponseResult(response, GameDetailResponse.class);
         GameDetailResponse.DataBean data = reponseResult.getData();
         if (!MyStrUtil.isEmpty(data)) {
@@ -108,8 +109,8 @@ public class GameDetailActivity extends BaseActivity implements View.OnClickList
                 detail_gameGrade.setVisibility(View.GONE);
             }
             int competeZxc = data.getCompeteZxc();               //秩序册
-            String s = String.valueOf(competeZxc);
-            if (!MyStrUtil.isEmpty(s)) {
+
+            if (!MyStrUtil.isEmpty(competeZxc) && competeZxc == 1) {
                 detail_gameProgram.setVisibility(View.VISIBLE);
             } else {
                 detail_gameProgram.setVisibility(View.GONE);
@@ -190,7 +191,7 @@ public class GameDetailActivity extends BaseActivity implements View.OnClickList
                 break;
             case R.id.detail_gameProgram:
                 String format = String.format(AppConfigs.GAMEPROGRAM, String.valueOf(mMatchId), String.valueOf(0));
-                Log.e(TAG,format);
+                Log.e(TAG, format);
                 MyDanceWebActivity.lunch(this, MyDanceWebActivity.MATCHOTHER3, "秩序册", format, true);
                 break;
             case R.id.new_more:

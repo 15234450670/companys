@@ -139,6 +139,7 @@ public class DanceViewHolder {
         }
     }
 
+
     public void setRoundImageByUrlOrFilePath(int viewId, String urlOrFilePath, int defaultId) {
         ImageView view = getImageView(viewId);
         if (view != null) {

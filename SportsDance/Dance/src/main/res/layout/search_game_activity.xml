@@ -64,7 +64,6 @@
 
 
     </RelativeLayout>
-
     <include layout="@layout/split_line"/>
 
     <include
