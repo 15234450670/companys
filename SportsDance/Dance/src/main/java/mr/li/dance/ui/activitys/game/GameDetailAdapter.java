@@ -42,7 +42,7 @@ public class GameDetailAdapter extends BaseRecyclerAdapter<GameDetailResponse.Da
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyDanceWebActivity.lunch(c, MyDanceWebActivity.ZIXUNTYPE, item.getTitle(), AppConfigs.ZixunShareUrl2 + item.getId(), true);
+                MyDanceWebActivity.lunch(c, MyDanceWebActivity.ZIXUNTYPE, item.getTitle(), AppConfigs.ZixunShareUrl3 + item.getId(), AppConfigs.ZixunShareUrl2 + item.getId(),-1);
             }
         });
     }

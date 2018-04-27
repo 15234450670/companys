@@ -124,6 +124,7 @@ public class MyDanceWebActivity extends BaseActivity {
                 break;
             case ZIXUNTYPE:
                 mCountId = AppConfigs.CLICK_EVENT_21;
+                Log.e("资讯-->>", url);
                 mWebView.loadUrl(url);
                 break;
             case KAOJI:
@@ -226,16 +227,6 @@ public class MyDanceWebActivity extends BaseActivity {
         context.startActivity(intent);
     }
 
-    public static void lunch(Context context, int type, String title, String url, String wailianId) {
-        Intent intent = new Intent(context, MyDanceWebActivity.class);
-        intent.putExtra("title", title);
-        intent.putExtra("url", url);
-        intent.putExtra("webtype", type);
-        intent.putExtra("wailianid", wailianId);
-        intent.putExtra("showshare", true);
-        context.startActivity(intent);
-    }
-
     public static void lunchs(Context context, int type, String title, String url, String shareUrl) {
         Intent intent = new Intent(context, MyDanceWebActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -246,6 +237,29 @@ public class MyDanceWebActivity extends BaseActivity {
         intent.putExtra("showshare", true);
         context.startActivity(intent);
     }
+
+
+    public static void lunch(Context context, int type, String title, String url, String wailianId) {
+        Intent intent = new Intent(context, MyDanceWebActivity.class);
+        intent.putExtra("title", title);
+        intent.putExtra("url", url);
+        intent.putExtra("webtype", type);
+        intent.putExtra("wailianid", wailianId);
+        intent.putExtra("showshare", true);
+        context.startActivity(intent);
+    }
+
+    public static void lunch(Context context, int type, String title, String url, String shareUrl, int i) {
+        Intent intent = new Intent(context, MyDanceWebActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("title", title);
+        intent.putExtra("url", url);
+        intent.putExtra("webtype", type);
+        intent.putExtra("shareUrl", shareUrl);
+        intent.putExtra("showshare", true);
+        context.startActivity(intent);
+    }
+
 
     public static void lunch(Context context, int type, String title, String url, String shareUrl, String wailianId) {
         Intent intent = new Intent(context, MyDanceWebActivity.class);
@@ -287,6 +301,9 @@ public class MyDanceWebActivity extends BaseActivity {
         if (mShareUtils == null) {
             mShareUtils = new ShareUtils(this);
         }
+        /*if (mWebType == ZIXUNTYPE) {
+            mShareUtils.showShareDilaog(mCountId, url, mShareContent);
+        }*/
         if (MyStrUtil.isEmpty(shareUrl)) {
             mShareUtils.showShareDilaog(mCountId, url, mShareContent);
         } else {

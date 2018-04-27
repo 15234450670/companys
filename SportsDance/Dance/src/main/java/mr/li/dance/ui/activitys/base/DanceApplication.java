@@ -279,9 +279,9 @@ public class DanceApplication extends Application {
                     case "10103":
 
                         if (!TextUtils.isEmpty(title)) {
-                            MyDanceWebActivity.lunchs(getApplicationContext(), MyDanceWebActivity.ZIXUNTYPE, title, AppConfigs.ZixunShareUrl2 + value, true);
+                            MyDanceWebActivity.lunchs(getApplicationContext(), MyDanceWebActivity.ZIXUNTYPE, title, AppConfigs.ZixunShareUrl3 + value, AppConfigs.ZixunShareUrl2 + value);
                         } else {
-                            MyDanceWebActivity.lunchs(getApplicationContext(), MyDanceWebActivity.ZIXUNTYPE, "资讯详情", AppConfigs.ZixunShareUrl2 + value, true);
+                            MyDanceWebActivity.lunchs(getApplicationContext(), MyDanceWebActivity.ZIXUNTYPE, "资讯详情",AppConfigs.ZixunShareUrl3 + value, AppConfigs.ZixunShareUrl2 + value);
                         }
 
                         break;

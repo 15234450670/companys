@@ -36,6 +36,7 @@ public class BaseHomeItem {
     public String img_fm;
     public String number;
     public String sum;
+    public String timeFormat;
 
     public String getImg() {
         return img;

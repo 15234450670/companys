@@ -55,6 +55,7 @@
     <string name="record_preview_theme_load_faild">主题加载失败</string>
     <string name="record_preview_theme_original">原始</string>
     <string name="record_preview_title">预览</string>
+    <string name="record_progress_register">注册中请稍后…</string>
     <string name="record_read_object_faild">拍摄信息读取失败！请检查SD卡，稍后重试！</string>
     <string name="record_video_transcoding_faild">视频转码失败</string>
     <string name="record_video_transcoding_success">视频保存在:%s</string>

@@ -421,10 +421,10 @@ public class ParameterUtils {
      * @param id
      * @return
      */
-    public Request<String> getVideoDetailMap(String id,String userid) {
+    public Request<String> getVideoDetailMap(String id, String userid) {
         Request<String> request = getBaseRequestForPost("/revisionHome.dianboDetail");
         request.add("id", id);
-        request.add("userid",userid);
+        request.add("userid", userid);
         return request;
     }
 
@@ -1310,15 +1310,17 @@ public class ParameterUtils {
 
     /***
      *   改版腾讯云后的的首页
+     *   /revisionHome.index 第二版
      */
     public Request<String> getHomeIndexMap1(String page) {
         Request<String> request = getBaseRequestCacheForPost("/revisionHome.index");
-        request.add("page",page);
+        request.add("page", page);
         return request;
     }
+
     public Request<String> getHomeIndexMap2(String page) {
         Request<String> request = getBaseRequestCacheForPost("/revisionHome.indexPage");
-        request.add("page",page);
+        request.add("page", page);
         return request;
     }
 
@@ -1328,59 +1330,66 @@ public class ParameterUtils {
     //首页
     public Request<String> getGameMap(String page) {
         Request<String> request = getBaseRequestCacheForPost("/revisionMatch.index");
-        request.add("page",page);
+        request.add("page", page);
         return request;
     }
+
     //搜索
-    public Request<String> getGameMapSearch(String compete_year,String type,String state,String content,String page) {
+    public Request<String> getGameMapSearch(String compete_year, String type, String state, String content, String page) {
         Request<String> request = getBaseRequestCacheForPost("/revisionMatch.matchSearch");
-        request.add("compete_year",compete_year);
-        request.add("type",type);
-        request.add("state",state);
-        request.add("content",content);
-        request.add("page",page);
+        request.add("compete_year", compete_year);
+        request.add("type", type);
+        request.add("state", state);
+        request.add("content", content);
+        request.add("page", page);
         return request;
     }
+
     //详情
     public Request<String> getGameMapDetail(String id) {
         Request<String> request = getBaseRequestCacheForPost("/revisionMatch.detail");
-        request.add("id",id);
+        request.add("id", id);
         return request;
     }
+
     //新闻更多
-    public Request<String> getGameMapNew(String id,String page) {
+    public Request<String> getGameMapNew(String id, String page) {
         Request<String> request = getBaseRequestCacheForPost("/revisionMatch.matchArticle");
-        request.add("id",id);
-        request.add("page",page);
+        request.add("id", id);
+        request.add("page", page);
         return request;
     }
+
     //视频更多
-    public Request<String> getGameMapVideo(String id,String page) {
+    public Request<String> getGameMapVideo(String id, String page) {
         Request<String> request = getBaseRequestCacheForPost("/revisionMatch.matchVideo");
-        request.add("id",id);
-        request.add("page",page);
+        request.add("id", id);
+        request.add("page", page);
         return request;
     }
+
     //图片更多
-    public Request<String> getGameMapPic(String id,String page) {
+    public Request<String> getGameMapPic(String id, String page) {
         Request<String> request = getBaseRequestCacheForPost("/revisionMatch.matchPhotoClass");
-        request.add("id",id);
-        request.add("page",page);
+        request.add("id", id);
+        request.add("page", page);
         return request;
     }
+
     //赛事介绍
     public Request<String> getGameMapIntroduce(String id) {
         Request<String> request = getBaseRequestCacheForPost("/revisionMatch.matchIntroduction");
-        request.add("id",id);
+        request.add("id", id);
         return request;
     }
+
     //组别查询
     //图片更多
-    public Request<String> getGameMapGradeSearch(String id,String name ,String page) {
+    public Request<String> getGameMapGradeSearch(String id, String name, String page) {
         Request<String> request = getBaseRequestCacheForPost("/revisionMatch.searchGroup");
-        request.add("id",id);
-        request.add("name",name);
-        request.add("page",page);
+        request.add("id", id);
+        request.add("name", name);
+        request.add("page", page);
         return request;
     }
 

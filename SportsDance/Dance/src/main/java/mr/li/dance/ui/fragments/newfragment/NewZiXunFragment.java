@@ -141,7 +141,7 @@ public class NewZiXunFragment extends BaseListFragment {
     public void itemClick(int position, Object value) {
         ZiXunInfo ziXunInfo = (ZiXunInfo) value;
         // String url = String.format(AppConfigs.ZixunShareUrl, String.valueOf(ziXunInfo.getId()));
-        MyDanceWebActivity.lunch(getActivity(), MyDanceWebActivity.ZIXUNTYPE, ziXunInfo.getTitle(), AppConfigs.ZixunShareUrl2 + ziXunInfo.getId(), true);
+        MyDanceWebActivity.lunch(getActivity(), MyDanceWebActivity.ZIXUNTYPE, ziXunInfo.getTitle(), AppConfigs.ZixunShareUrl3 + ziXunInfo.getId(),  AppConfigs.ZixunShareUrl2 + ziXunInfo.getId(),-1);
 
     }
 

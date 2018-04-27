@@ -27,7 +27,7 @@ public class ScoreFromAdapter extends BaseRecyclerAdapter<ScoreInfo> {
     @Override
     public void bindData(RecyclerViewHolder holder, int position, ScoreInfo item) {
         String result = item.getResult();
-        if (result.equals("999")) {
+        if (result.equals("9999")) {
             holder.getView(R.id.tubiao_item).setVisibility(View.GONE);
         } else {
             TextView rankingTv = holder.getTextView(R.id.ranking_tv);

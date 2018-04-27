@@ -29,7 +29,7 @@ public class ImageLoaderManager {
         return singleton;
     }
 
-    public void Load(Context context, String imgUrl, ImageView imageView, int defaultDrawable) {
+     public void Load(Context context, String imgUrl, ImageView imageView, int defaultDrawable) {
         NLog.d("ImageLoaderManager", "imgUrl = " + imgUrl);
         try {
             Glide.with(context).load(imgUrl).dontTransform().diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(defaultDrawable).into(imageView);

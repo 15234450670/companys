@@ -97,6 +97,8 @@ private final String tag = getClass().getSimpleName();
 
     @Override
     public void itemClick(int position, TeachInfo ziXunInfo) {
-        MyDanceWebActivity.lunch(getActivity(), MyDanceWebActivity.ZIXUNTYPE, ziXunInfo.getTitle(), AppConfigs.ZixunShareUrl2 + ziXunInfo.getId(), true);
+      //  MyDanceWebActivity.lunch(getActivity(), MyDanceWebActivity.ZIXUNTYPE, ziXunInfo.getTitle(), AppConfigs.ZixunShareUrl2 + ziXunInfo.getId(), true);
+        MyDanceWebActivity.lunch(getActivity(), MyDanceWebActivity.ZIXUNTYPE, ziXunInfo.getTitle(), AppConfigs.ZixunShareUrl3 + ziXunInfo.getId(),  AppConfigs.ZixunShareUrl2 + ziXunInfo.getId(),-1);
+
     }
 }

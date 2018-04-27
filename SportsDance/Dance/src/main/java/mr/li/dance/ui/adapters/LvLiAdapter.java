@@ -1,7 +1,6 @@
 package mr.li.dance.ui.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 
 import mr.li.dance.R;
 import mr.li.dance.models.CertificateInfo;
@@ -73,7 +72,7 @@ public class LvLiAdapter extends BaseRecyclerAdapter<CertificateInfo> {
         holder.setText(R.id.danwei_tv, "考试承办单位: " + info.getOrgname());
         holder.setText(R.id.kaoguan_tv, "考官: " + info.getExaminername());
         holder.setText(R.id.examresult_tv, info.getExamresult());
-        holder.setText(R.id.examresult_tv, "合格");
+        // holder.setText(R.id.examresult_tv, "合格");
     }
 
     @Override

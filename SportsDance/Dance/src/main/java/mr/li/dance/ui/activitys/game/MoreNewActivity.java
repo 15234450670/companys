@@ -26,9 +26,10 @@ import mr.li.dance.utils.JsonMananger;
  * 修订历史:
  */
 public class MoreNewActivity extends BaseListActivity {
-    String       mMatchId;
+    String mMatchId;
     int page = 1;
     NewLabeiAdapter adapter;
+
     @Override
     public void getIntentData() {
         super.getIntentData();
@@ -38,8 +39,8 @@ public class MoreNewActivity extends BaseListActivity {
     @Override
     public void initDatas() {
         super.initDatas();
-        Request<String> gameMapNew = ParameterUtils.getSingleton().getGameMapNew(mMatchId,String.valueOf(page));
-        request(AppConfigs.home_album,gameMapNew,false);
+        Request<String> gameMapNew = ParameterUtils.getSingleton().getGameMapNew(mMatchId, String.valueOf(page));
+        request(AppConfigs.home_album, gameMapNew, false);
     }
 
     @Override
@@ -59,7 +60,7 @@ public class MoreNewActivity extends BaseListActivity {
     @Override
     public void itemClick(int position, Object value) {
         TeachInfo value1 = (TeachInfo) value;
-        MyDanceWebActivity.lunch(this, MyDanceWebActivity.ZIXUNTYPE, value1.getTitle(), AppConfigs.ZixunShareUrl2 + value1.getId(), true);
+        MyDanceWebActivity.lunch(this, MyDanceWebActivity.ZIXUNTYPE, value1.getTitle(), AppConfigs.ZixunShareUrl3 + value1.getId(), AppConfigs.ZixunShareUrl2 + value1.getId(), -1);
     }
 
     @Override
@@ -84,16 +85,16 @@ public class MoreNewActivity extends BaseListActivity {
     public void refresh() {
         super.refresh();
         page = 1;
-        Request<String> gameMapNew = ParameterUtils.getSingleton().getGameMapNew(mMatchId,String.valueOf(page));
-        request(AppConfigs.home_album,gameMapNew,false);
+        Request<String> gameMapNew = ParameterUtils.getSingleton().getGameMapNew(mMatchId, String.valueOf(page));
+        request(AppConfigs.home_album, gameMapNew, false);
     }
 
     @Override
     public void loadMore() {
         super.loadMore();
         page++;
-        Request<String> gameMapNew = ParameterUtils.getSingleton().getGameMapNew(mMatchId,String.valueOf(page));
-        request(AppConfigs.home_album,gameMapNew,false);
+        Request<String> gameMapNew = ParameterUtils.getSingleton().getGameMapNew(mMatchId, String.valueOf(page));
+        request(AppConfigs.home_album, gameMapNew, false);
 
     }
 }

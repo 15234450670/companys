@@ -9,7 +9,7 @@ package mr.li.dance.utils;
 public class AppConfigs {
     //  private final static String MAINurl = "http://work.cdsf.org.cn";//测试环境
     private final static String MAINurl = "http://kf.cdsf.org.cn";//测试环境
-    //   private final static String MAINurl = "http://cdsf.org.cn";//正式环境
+    //  private final static String MAINurl = "http://cdsf.org.cn";//正式环境
 
     private final static String DomainUrl = MAINurl + "/mobileClient";
     private final static String SHAREURL  = MAINurl + "/h5";
@@ -25,10 +25,12 @@ public class AppConfigs {
     //资讯分享
     public final static String ZixunShareUrl   = DomainUrl + "/home.zxdetailf?id=%s";
     public final static String ZixunShareUrl2  = SHAREURL + "/share.zxfx?id=";
-    public final static String USER            = SHAREURL + "/share.Ament";
-    public final static String tach_detial     = SHAREURL + "/share.spjx?id=";
+    public final static String ZixunShareUrl3  = SHAREURL + "/share.zx?id=";
+
+    public final static String USER         = SHAREURL + "/share.Ament";
+    public final static String tach_detial  = SHAREURL + "/share.spjx?id=";
     //社区分享
-    public final static String shequ_detial    = SHAREURL + "/share.shequ?id=";
+    public final static String shequ_detial = SHAREURL + "/share.shequ?id=";
 
     //系统消息
     public final static String systemManage = SHAREURL + "/share.packet?id=";

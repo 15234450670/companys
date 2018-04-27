@@ -48,12 +48,14 @@
     <color name="home_titletext_defaultcolor">#221469</color>
     <color name="cc_dot_orage">#fff08519</color>
     <color name="cc_dot_dark">#ffdcd3cb</color>
+    <color name="slide_view_default">#787979</color>
     <color name="line">#ececec</color>
     <color name="rc_conversation_list_divider_color">#dfdfdd</color>
     <color name="rc_ad_file_list_no_select_file_text_state">#9fcdfd</color>
     <color name="rc_ad_file_list_select_file_text_state">#ffffff</color>
      <color name="bottom_navigation" >#9b5fe1</color>
     <color name="red_normal">#FF0000</color>
+    <color name="slide_view" >#e60012</color>
     <color name="red_pressed">#FF6666</color>
 
     <color name="praise_item_default">#333333</color>
@@ -66,5 +68,4 @@
     <color name="name_selector_color">#cccccc</color>
     <color name="color_232323">#232323</color>
     <color name="b">#FFD9D9D9</color>
-
 </resources>

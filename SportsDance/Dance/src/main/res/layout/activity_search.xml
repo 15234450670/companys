@@ -93,12 +93,12 @@
                 android:text="@string/consultation"
                 android:textColor="#333333"/>
 
-            <RadioButton
+       <!--     <RadioButton
                 android:id="@+id/video_rb"
                 style="@style/search_titletext_style"
                 android:gravity="center"
                 android:text="@string/teach"
-                android:textColor="#333333"/>
+                android:textColor="#333333"/>-->
 
             <RadioButton
                 android:id="@+id/consultation_rb"
@@ -107,12 +107,12 @@
                 android:text="@string/vadio"
                 android:textColor="#333333"/>
 
-            <RadioButton
+          <!--  <RadioButton
                 android:id="@+id/picture_rb"
                 style="@style/search_titletext_style"
                 android:gravity="center"
                 android:text="@string/music"
-                android:textColor="#333333"/>
+                android:textColor="#333333"/>-->
 
             <RadioButton
                 android:id="@+id/music_rb"

@@ -98,6 +98,7 @@ int string record_preview_theme 0x7f05002b
 int string record_preview_theme_load_faild 0x7f05002c
 int string record_preview_theme_original 0x7f05002d
 int string record_preview_title 0x7f05002e
-int string record_read_object_faild 0x7f05002f
-int string record_video_transcoding_faild 0x7f050030
-int string record_video_transcoding_success 0x7f050031
+int string record_progress_register 0x7f05002f
+int string record_read_object_faild 0x7f050030
+int string record_video_transcoding_faild 0x7f050031
+int string record_video_transcoding_success 0x7f050032

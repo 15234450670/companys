@@ -174,7 +174,7 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
                         String url = String.format(AppConfigs.ZixunShareUrl, bannerInfo.getNumber());
                         //  MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, "", url, true);
                         if (!TextUtils.isEmpty(bannerInfo.getTitle())) {
-                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, bannerInfo.getTitle(), AppConfigs.ZixunShareUrl2 + bannerInfo.getNumber(), true);
+                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, bannerInfo.getTitle(), AppConfigs.ZixunShareUrl3 + bannerInfo.getNumber(),  AppConfigs.ZixunShareUrl2 + bannerInfo.getNumber(),-1);
                         }
                         break;
                     case 10104://图片
@@ -238,10 +238,10 @@ public class New_HomeRecyclerAdapter extends DanceBaseAdapter {
                     case 10103://赛事资讯
                         String saiShiurl = String.format(AppConfigs.ZixunShareUrl2, String.valueOf(mDatas.get(position).getId()));
                         if (!TextUtils.isEmpty(mDatas.get(position).getCompete_name())) {
-                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, mDatas.get(position).getCompete_name(), AppConfigs.ZixunShareUrl2 + mDatas.get(position).getId(), true);
+                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, mDatas.get(position).getCompete_name(), AppConfigs.ZixunShareUrl3 + mDatas.get(position).getId(),AppConfigs.ZixunShareUrl2 + mDatas.get(position).getId(),-1);
 
                         } else {
-                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, mDatas.get(position).getTitle(), AppConfigs.ZixunShareUrl2 + mDatas.get(position).getId(), true);
+                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, mDatas.get(position).getTitle(), AppConfigs.ZixunShareUrl3 + mDatas.get(position).getId(), AppConfigs.ZixunShareUrl2 + mDatas.get(position).getId(),-1);
                         }
 
                         break;

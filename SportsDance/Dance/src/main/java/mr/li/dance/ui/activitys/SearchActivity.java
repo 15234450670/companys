@@ -54,21 +54,22 @@ public class SearchActivity extends BaseActivity implements RadioGroup.OnChecked
         Bundle ziXunBundle = new Bundle();
         ziXunBundle.putString("type", "article");
         mZiXunFragment.setArguments(ziXunBundle);
-        //教学
+       /* //教学
         mTeachFragment = new SearchFragment();
         Bundle teachBundle = new Bundle();
         teachBundle.putString("type", "teach");
         mTeachFragment.setArguments(teachBundle);
+        //音乐
+        mMusicFragment = new SearchFragment();
+        Bundle musicBundle = new Bundle();
+        musicBundle.putString("type", "music_class");
+        mMusicFragment.setArguments(musicBundle);*/
         //视频
         mVideoFragment = new SearchFragment();
         Bundle videoBundle = new Bundle();
         videoBundle.putString("type", "video");
         mVideoFragment.setArguments(videoBundle);
-        //音乐
-        mMusicFragment = new SearchFragment();
-        Bundle musicBundle = new Bundle();
-        musicBundle.putString("type", "music_class");
-        mMusicFragment.setArguments(musicBundle);
+
         //图片
         mPicFragment = new SearchFragment();
         Bundle picBundle = new Bundle();
@@ -105,13 +106,13 @@ public class SearchActivity extends BaseActivity implements RadioGroup.OnChecked
 
                 mCurrentFragment = mZiXunFragment;
                 break;
-            case R.id.video_rb:
+           /* case R.id.video_rb:
                 if (!mTeachFragment.isAdded()) {
                     transaction.add(R.id.content_fl, mTeachFragment);
                 }
                 mCurrentFragment = mTeachFragment;
                 type = "teach";
-                break;
+                break;*/
             case R.id.consultation_rb:
                 if (!mVideoFragment.isAdded()) {
                     transaction.add(R.id.content_fl, mVideoFragment);
@@ -119,14 +120,14 @@ public class SearchActivity extends BaseActivity implements RadioGroup.OnChecked
                 type = "video";
                 mCurrentFragment = mVideoFragment;
                 break;
-            case R.id.picture_rb:
+           /* case R.id.picture_rb:
                 if (!mMusicFragment.isAdded()) {
                     transaction.add(R.id.content_fl, mMusicFragment);
                 }
                 type = "music_class";
 
                 mCurrentFragment = mMusicFragment;
-                break;
+                break;*/
             case R.id.music_rb:
                 if (!mPicFragment.isAdded()) {
                     transaction.add(R.id.content_fl, mPicFragment);

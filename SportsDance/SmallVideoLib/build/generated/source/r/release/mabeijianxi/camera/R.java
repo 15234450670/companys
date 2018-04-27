@@ -119,8 +119,9 @@ public final class R {
         public static int record_preview_theme_load_faild=0x7f05002c;
         public static int record_preview_theme_original=0x7f05002d;
         public static int record_preview_title=0x7f05002e;
-        public static int record_read_object_faild=0x7f05002f;
-        public static int record_video_transcoding_faild=0x7f050030;
-        public static int record_video_transcoding_success=0x7f050031;
+        public static int record_progress_register=0x7f05002f;
+        public static int record_read_object_faild=0x7f050030;
+        public static int record_video_transcoding_faild=0x7f050031;
+        public static int record_video_transcoding_success=0x7f050032;
     }
 }

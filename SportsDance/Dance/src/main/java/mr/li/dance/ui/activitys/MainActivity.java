@@ -55,7 +55,7 @@ import mr.li.dance.ui.dialogs.UpdateApkDialog;
 import mr.li.dance.ui.fragments.BaseFragment;
 import mr.li.dance.ui.fragments.main.ExaminationFragment;
 import mr.li.dance.ui.fragments.main.MatchFragment;
-import mr.li.dance.ui.fragments.newfragment.NewHomeFragment;
+import mr.li.dance.ui.fragments.newfragment.NewHomeFragmentTab;
 import mr.li.dance.ui.fragments.newfragment.NewMineFragment;
 import mr.li.dance.ui.widget.BottomRelativeLayout;
 import mr.li.dance.utils.AppConfigs;
@@ -74,7 +74,7 @@ import mr.li.dance.utils.updater.UpdaterUtils;
  * 作者: Lixuewei
  * 版本: 1.0
  * 创建日期: 2017/5/16
- * 描述: 主页承载页面
+ * 描述: 主页承载页面 (3种形式)
  * 修订历史:
  */
 
@@ -125,8 +125,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             String type = intent.getStringExtra("type");
             String appid = intent.getStringExtra("appid");
             final String url = intent.getStringExtra("url");
-            String  appsecret = intent.getStringExtra("appsecret");
-            Log.e("main", "id: " + value + " title: " + title + " type: " + type + " appid: " + appid+"url:"+url+"appsecret:"+appsecret);
+            String appsecret = intent.getStringExtra("appsecret");
+            Log.e("main", "id: " + value + " title: " + title + " type: " + type + " appid: " + appid + "url:" + url + "appsecret:" + appsecret);
             if (!TextUtils.isEmpty(type)) {
                 switch (type) {
 
@@ -141,9 +141,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     case "10103":
 
                         if (!TextUtils.isEmpty(title)) {
-                            MyDanceWebActivity.lunchs(getApplicationContext(), MyDanceWebActivity.ZIXUNTYPE, title, AppConfigs.ZixunShareUrl2 + value, true);
+                            MyDanceWebActivity.lunchs(getApplicationContext(), MyDanceWebActivity.ZIXUNTYPE, title, AppConfigs.ZixunShareUrl3 + value, AppConfigs.ZixunShareUrl2 + value);
                         } else {
-                            MyDanceWebActivity.lunchs(getApplicationContext(), MyDanceWebActivity.ZIXUNTYPE, "资讯详情", AppConfigs.ZixunShareUrl2 + value, true);
+                            MyDanceWebActivity.lunchs(getApplicationContext(), MyDanceWebActivity.ZIXUNTYPE, "资讯详情", AppConfigs.ZixunShareUrl3 + value, AppConfigs.ZixunShareUrl2 + value);
                         }
 
                         break;
@@ -267,8 +267,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             }
         });
         mFragmentManager = getSupportFragmentManager();
-        // mHomePageFragment = new HomeFragment();
-        mHomePageFragment = new NewHomeFragment();
+        // mHomePageFragment = new HomeFragment();   //第一版 首页
+        //  mHomePageFragment = new NewHomeFragment();   //第二版首页
+         mHomePageFragment = new NewHomeFragmentTab(); //第三版首页
         mMathcFragment = new MatchFragment();
         mExaminationFragment = new ExaminationFragment();
         // mMineFragment = new MineFragment();
@@ -287,6 +288,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
     /**
+     * 2
      * 缩放动画
      */
     private void Scale() {

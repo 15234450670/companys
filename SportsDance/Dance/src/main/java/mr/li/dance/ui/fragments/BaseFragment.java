@@ -36,10 +36,10 @@ import mr.li.dance.utils.StatusBarUtil;
  */
 
 public abstract class BaseFragment extends Fragment implements HttpListener {
-    protected View mView;
-    protected SharedPreferences mSp;
+    protected View                     mView;
+    protected SharedPreferences        mSp;
     protected SharedPreferences.Editor mEditor;
-    protected DanceViewHolder danceViewHolder;
+    protected DanceViewHolder          danceViewHolder;
 
     protected void setScreen() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -55,7 +55,7 @@ public abstract class BaseFragment extends Fragment implements HttpListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-       // setScreen();
+        // setScreen();
         mView = inflater.inflate(getContentView(), null, false);
         danceViewHolder = new DanceViewHolder(getActivity(), mView);
         mSp = getActivity().getSharedPreferences("config", Context.MODE_PRIVATE);
@@ -103,6 +103,7 @@ public abstract class BaseFragment extends Fragment implements HttpListener {
     protected void request(int what, Request request, boolean showLoginDialog) {
         CallServer.getRequestInstance().add(getActivity(), what, request, this, false, showLoginDialog);
     }
+
     @Override
     public void onPause() {
         // TODO Auto-generated method stub

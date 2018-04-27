@@ -1,14 +1,17 @@
 package mr.li.dance.ui.activitys;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 
 import com.yolanda.nohttp.rest.Request;
 
+import mabeijianxi.camera.util.StringUtils;
 import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.https.response.StringResponse;
@@ -92,6 +95,7 @@ public class SetPwdActivity extends BaseActivity implements View.OnClickListener
         }
         if (!TextUtils.equals(pwd, repeatpwd)) {
             NToast.shortToast(this, "俩次密码输入不一致");
+            return;
         } else {
             if (setType == 0) {
                 Log.e("setType:", setType + "");
@@ -104,7 +108,7 @@ public class SetPwdActivity extends BaseActivity implements View.OnClickListener
                 setPwd(pwd);
             }
         }
-
+        showProgress("", getString(R.string.record_progress_register));
     }
 
     /**
@@ -183,6 +187,7 @@ public class SetPwdActivity extends BaseActivity implements View.OnClickListener
             // PerfectInfoActivity.lunch(this, userInfo.getUserid());
         }
         hintKbTwo();
+        hideProgress();
         startActivity(new Intent(this, MainActivity.class));
 
     }
@@ -193,6 +198,38 @@ public class SetPwdActivity extends BaseActivity implements View.OnClickListener
             if (getCurrentFocus().getWindowToken() != null) {
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
+        }
+    }
+
+    public ProgressDialog showProgress(String title, String message) {
+        return showProgress(title, message, -1);
+    }
+
+    protected ProgressDialog mProgressDialog;
+
+    public ProgressDialog showProgress(String title, String message, int theme) {
+        if (mProgressDialog == null) {
+            if (theme > 0)
+                mProgressDialog = new ProgressDialog(this, theme);
+            else
+                mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            mProgressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            mProgressDialog.setCanceledOnTouchOutside(false);// 不能取消
+            mProgressDialog.setCancelable(false);
+            mProgressDialog.setIndeterminate(true);// 设置进度条是否不明确
+        }
+
+        if (!StringUtils.isEmpty(title))
+            mProgressDialog.setTitle(title);
+        mProgressDialog.setMessage(message);
+        mProgressDialog.show();
+        return mProgressDialog;
+    }
+
+    public void hideProgress() {
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
         }
     }
 }

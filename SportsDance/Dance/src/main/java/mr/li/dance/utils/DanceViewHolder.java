@@ -85,7 +85,7 @@ public class DanceViewHolder {
 
     }
 
-    public void setTextAndColor(int viewId, String value,int color) {
+    public void setTextAndColor(int viewId, String value, int color) {
         TextView view = findViewById(viewId);
         if (view != null) {
             view.setText(value);
@@ -146,6 +146,7 @@ public class DanceViewHolder {
             ImageLoaderManager.getSingleton().LoadRound(mContext, urlOrFilePath, view, defaultId);
         }
     }
+
 
     public void setClickListener(int viewId, View.OnClickListener listener) {
         View view = findViewById(viewId);

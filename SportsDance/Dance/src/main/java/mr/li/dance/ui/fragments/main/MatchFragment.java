@@ -310,7 +310,7 @@ public class MatchFragment extends BaseListFragment implements View.OnClickListe
 
                     state_tv = danceViewHolder.getTextValue(R.id.state_tv);
                     switch (state_tv) {
-                        case "所以状态":
+                        case "所有状态":
                             STATE_TYPE = "";
                             break;
                         case "报名中":
