@@ -57,7 +57,7 @@ public class Second_New_HomeRecyclerAdapter extends DanceBaseAdapter {
     private       String TAG            = getClass().getSimpleName();
     private       int    mExtraCount    = 1;//除了列表额外的加载项目数
     private final int    TYPE_1         = 1;//轮播页面
-   // private final int    TYPE_2         = 2;//按钮
+    // private final int    TYPE_2         = 2;//按钮
     private final int    TYPE_SMALL_PIC = 3;//小图
     private final int    TYPE_BIG_PIC   = 4;//大图
     private final int    TYPE_MAIN      = 5;//正常的列表加载页面
@@ -174,7 +174,7 @@ public class Second_New_HomeRecyclerAdapter extends DanceBaseAdapter {
                         String url = String.format(AppConfigs.ZixunShareUrl, bannerInfo.getNumber());
                         //  MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, "", url, true);
                         if (!TextUtils.isEmpty(bannerInfo.getTitle())) {
-                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, bannerInfo.getTitle(), AppConfigs.ZixunShareUrl3 + bannerInfo.getNumber(),  AppConfigs.ZixunShareUrl2 + bannerInfo.getNumber(),-1);
+                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, bannerInfo.getTitle(), AppConfigs.ZixunShareUrl3 + bannerInfo.getNumber(), AppConfigs.ZixunShareUrl2 + bannerInfo.getNumber(), -1);
                         }
                         break;
                     case 10104://图片
@@ -205,7 +205,7 @@ public class Second_New_HomeRecyclerAdapter extends DanceBaseAdapter {
                         SongActivity.lunch(mContext, bannerInfo.getNumber(), bannerInfo.getTitle());
                         break;
                     case 10109:
-                        TeachDetailsActivity.lunch(mContext, bannerInfo.getNumber(),  bannerInfo.getTitle());
+                        TeachDetailsActivity.lunch(mContext, bannerInfo.getNumber(), bannerInfo.getTitle());
                         break;
                 }
             }
@@ -238,10 +238,10 @@ public class Second_New_HomeRecyclerAdapter extends DanceBaseAdapter {
                     case 10103://赛事资讯
                         String saiShiurl = String.format(AppConfigs.ZixunShareUrl2, String.valueOf(mDatas.get(position).getId()));
                         if (!TextUtils.isEmpty(mDatas.get(position).getCompete_name())) {
-                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, mDatas.get(position).getCompete_name(), AppConfigs.ZixunShareUrl3 + mDatas.get(position).getId(),AppConfigs.ZixunShareUrl2 + mDatas.get(position).getId(),-1);
+                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, mDatas.get(position).getCompete_name(), AppConfigs.ZixunShareUrl3 + mDatas.get(position).getId(), AppConfigs.ZixunShareUrl2 + mDatas.get(position).getId(), -1);
 
                         } else {
-                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, mDatas.get(position).getTitle(), AppConfigs.ZixunShareUrl3 + mDatas.get(position).getId(), AppConfigs.ZixunShareUrl2 + mDatas.get(position).getId(),-1);
+                            MyDanceWebActivity.lunch(mContext, MyDanceWebActivity.ZIXUNTYPE, mDatas.get(position).getTitle(), AppConfigs.ZixunShareUrl3 + mDatas.get(position).getId(), AppConfigs.ZixunShareUrl2 + mDatas.get(position).getId(), -1);
                         }
 
                         break;
@@ -325,13 +325,13 @@ public class Second_New_HomeRecyclerAdapter extends DanceBaseAdapter {
      */
     public void huodong_listView(final BaseHomeItem base) {
         String appId = base.getAppid();
-        Log.e(TAG+"appId:::", appId);
+        Log.e(TAG + "appId:::", appId);
         String appsecret = base.getAppsecret();
-        Log.e(TAG+"appsecret::::", appsecret);
+        Log.e(TAG + "appsecret::::", appsecret);
         final String url = base.getUrl();
-        Log.e(TAG+"url:::::", url);
+        Log.e(TAG + "url:::::", url);
         String userId = UserInfoManager.getSingleton().getUserId(mContext);
-        Log.e(TAG+"userId", userId);
+        Log.e(TAG + "userId", userId);
         final String title = base.getTitle();
         Request<String> huoDongInfoMap = ParameterUtils.getSingleton().getHuoDongInfoMap(appId, appsecret, url, userId);
 
