@@ -81,7 +81,6 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
 
     private void bindOthers(BaseHomeItem albumInfo) {
         if (albumInfo.getShow_type().equals("2")) {
-          //  danceViewHolder.setText(R.id.name, albumInfo.getTitle());
             textView.setText( albumInfo.getTitle());
             danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, albumInfo.getPicture_app(), R.drawable.default_video);
             danceViewHolder.getView(R.id.share_layout).setVisibility(View.GONE);
@@ -90,12 +89,13 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
             danceViewHolder.setViewVisibility(R.id.typeicon_tv, View.INVISIBLE);
             danceViewHolder.setViewVisibility(R.id.picnum_tv, View.INVISIBLE);
             danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, albumInfo.getPicture_app(), R.drawable.default_video);
-           // danceViewHolder.setText(R.id.name, albumInfo.getTitle());
-            textView.setText( albumInfo.getTitle());
+
+
             danceViewHolder.setText(R.id.time_tv, albumInfo.getStart_time());
            /* if (albumInfo.getType() == 10106 || albumInfo.getType() == 10107) {
                 danceViewHolder.setText(R.id.from_tv, "活动");
             }*/
+            textView.setText( albumInfo.getTitle());
             danceViewHolder.setText(R.id.from_tv, albumInfo.timeFormat);
             danceViewHolder.setText(R.id.author, albumInfo.getWriter());
             if (!TextUtils.isEmpty(albumInfo.getSource())) {
@@ -116,7 +116,6 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
     private void bindTeach(BaseHomeItem teach) {
 
         if (teach.getShow_type().equals("2")) {
-           // danceViewHolder.setText(R.id.name, teach.getTitle());
             textView.setText( teach.getTitle());
             danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, teach.getPicture_app(), R.drawable.default_video);
             danceViewHolder.getView(R.id.share_layout).setVisibility(View.GONE);
@@ -124,7 +123,6 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
 
         } else {
             danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, teach.getPicture_app(), R.drawable.default_video);
-           // danceViewHolder.setText(R.id.name, teach.getTitle());
             textView.setText( teach.getTitle());
             danceViewHolder.setText(R.id.author, teach.getWriter());
             /*if (teach.getType() == 10109) {
@@ -223,14 +221,14 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
     private void bindZhibo(BaseHomeItem zhibo) {
         if (zhibo.getShow_type().equals("2")) {
            // danceViewHolder.setText(R.id.name, zhibo.getCompete_name());
-            textView.setText( zhibo.getCompete_name());
+            textView.setText( zhibo.getTitle());
             danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, zhibo.getPicture_app(), R.drawable.default_video);
             danceViewHolder.getView(R.id.share_layout).setVisibility(View.GONE);
             danceViewHolder.getView(R.id.name_time).setVisibility(View.GONE);
         } else {
             danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, zhibo.getPicture_app(), R.drawable.default_video);
            // danceViewHolder.setText(R.id.name, zhibo.getCompete_name());   //标题
-            textView.setText( zhibo.getCompete_name());
+            textView.setText( zhibo.getTitle());
             danceViewHolder.setText(R.id.time_tv, zhibo.getStart_time());  //时间
             danceViewHolder.setViewVisibility(R.id.typeicon_tv, View.VISIBLE);
             danceViewHolder.setImageResDrawable(R.id.typeicon_tv, R.drawable.home_icon_008, R.drawable.home_icon_008);
@@ -255,14 +253,14 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
     private void bindVideo(BaseHomeItem video) {
         if (video.getShow_type().equals("2")) {
            // danceViewHolder.setText(R.id.name, video.getCompete_name());
-            textView.setText( video.getCompete_name());
+            textView.setText( video.getTitle());
             danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, video.getPicture_app(), R.drawable.default_video);
             danceViewHolder.getView(R.id.share_layout).setVisibility(View.GONE);
             danceViewHolder.getView(R.id.name_time).setVisibility(View.GONE);
         } else {
             danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, video.getPicture_app(), R.drawable.default_video);
            // danceViewHolder.setText(R.id.name, video.getCompete_name());
-            textView.setText( video.getCompete_name());
+            textView.setText( video.getTitle());
             danceViewHolder.setText(R.id.time_tv, video.getStart_time());
             danceViewHolder.setViewVisibility(R.id.typeicon_tv, View.VISIBLE);
             danceViewHolder.setImageResDrawable(R.id.typeicon_tv, R.drawable.home_icon_005, R.drawable.home_icon_005);
@@ -286,12 +284,12 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
     private void bindInfomation(BaseHomeItem baseHomeItem) {
         if (baseHomeItem.getShow_type().equals("2")) {
             textView.setText( baseHomeItem.getTitle());
-            danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, baseHomeItem.getPicture(), R.drawable.default_video);
+            danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, baseHomeItem.getPicture_app(), R.drawable.default_video);
             danceViewHolder.getView(R.id.share_layout).setVisibility(View.GONE);
             danceViewHolder.getView(R.id.name_time).setVisibility(View.GONE);
         } else {
 
-            danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, baseHomeItem.getPicture(), R.drawable.default_video);
+            danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, baseHomeItem.getPicture_app(), R.drawable.default_video);
             textView.setText( baseHomeItem.getTitle());
             danceViewHolder.setText(R.id.time_tv, baseHomeItem.getStart_time());
             danceViewHolder.setViewVisibility(R.id.typeicon_tv, View.INVISIBLE);
@@ -326,7 +324,7 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
     private void bindImageInfo(BaseHomeItem albumInfo) {
         if (albumInfo.getShow_type().equals("2")) {
            // danceViewHolder.setText(R.id.name, albumInfo.getCompete_name());
-            textView.setText( albumInfo.getCompete_name());
+            textView.setText( albumInfo.getTitle());
             danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, albumInfo.getPicture_app(), R.drawable.default_video);
             danceViewHolder.getView(R.id.share_layout).setVisibility(View.GONE);
             danceViewHolder.getView(R.id.name_time).setVisibility(View.GONE);
@@ -334,7 +332,7 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
             danceViewHolder.setViewVisibility(R.id.typeicon_tv, View.INVISIBLE);
             danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, albumInfo.getPicture_app(), R.drawable.default_video);
            // danceViewHolder.setText(R.id.name, albumInfo.getCompete_name());
-            textView.setText( albumInfo.getCompete_name());
+            textView.setText( albumInfo.getTitle());
             danceViewHolder.setText(R.id.time_tv, albumInfo.getStart_time());
             danceViewHolder.setImageResDrawable(R.id.typeicon_tv, R.drawable.home_icon_005, R.drawable.home_icon_005);
             danceViewHolder.setText(R.id.type_tv, "精彩瞬间");
@@ -360,14 +358,14 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
     private void bindMatch(BaseHomeItem baseHomeItem) {
         if (baseHomeItem.getShow_type().equals("2")) {
            // danceViewHolder.setText(R.id.name, baseHomeItem.getCompete_name());
-            textView.setText( baseHomeItem.getCompete_name());
+            textView.setText( baseHomeItem.getTitle());
             danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, baseHomeItem.getPicture_app(), R.drawable.default_video);
             danceViewHolder.getView(R.id.share_layout).setVisibility(View.GONE);
             danceViewHolder.getView(R.id.name_time).setVisibility(View.GONE);
         } else {
             danceViewHolder.setRoundImageByUrlOrFilePath(R.id.imageView, baseHomeItem.getPicture_app(), R.drawable.default_video);
             //danceViewHolder.setText(R.id.name, baseHomeItem.getCompete_name());
-            textView.setText( baseHomeItem.getCompete_name());
+            textView.setText( baseHomeItem.getTitle());
             danceViewHolder.setText(R.id.starttime, "结束时间: " + baseHomeItem.getStart_time());
             danceViewHolder.setText(R.id.endtime, "结束时间: " + baseHomeItem.getEnd_time());
            /* switch (baseHomeItem.getCompete_type()) {

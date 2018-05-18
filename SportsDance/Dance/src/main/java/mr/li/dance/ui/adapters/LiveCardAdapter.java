@@ -6,15 +6,14 @@ import mr.li.dance.R;
 import mr.li.dance.models.LiveCard;
 
 /**
- * 作者: Lixuewei
- * 版本: 1.0
- * 创建日期: 2017/5/22
- * 描述: 直播或者视频控件下边的类似进度的适配器
+ * 作者: SuiFeng
+ * 版本:
+ * 创建日期:2018/5/18 0018
+ * 描述:
  * 修订历史:
  */
-
-public class DirectseedSpeedAdapter extends BaseRecyclerAdapter<LiveCard.DataBean.MenuBean> {
-    public DirectseedSpeedAdapter(Context ctx) {
+public class LiveCardAdapter extends BaseRecyclerAdapter<LiveCard.DataBean.MenuBean> {
+    public LiveCardAdapter(Context ctx) {
         super(ctx);
     }
 
@@ -28,4 +27,6 @@ public class DirectseedSpeedAdapter extends BaseRecyclerAdapter<LiveCard.DataBea
         holder.setText(R.id.num, item.getStart_time());
         holder.setText(R.id.name, item.getTitle());
     }
+
+
 }

@@ -410,7 +410,7 @@ public class ParameterUtils {
      * @return
      */
     public Request<String> getHZhiboDetailMap(String id, String page) {
-        Request<String> request = getBaseRequestForPost("/home.zhiboDetail2");
+        Request<String> request = getBaseRequestForPost("/revisionHome.zhiboDetail");
         request.add("id", id);
         request.add("page", page);
         return request;
@@ -1392,6 +1392,13 @@ public class ParameterUtils {
         request.add("page", page);
         return request;
     }
-
-
+    /**
+     *
+     */
+    public Request<String> getLiveCard(String id,String page) {
+        Request<String> request = getBaseRequestCacheForPost("/revisionHome.menu");
+        request.add("id", id);
+        request.add("page", page);
+        return request;
+    }
 }

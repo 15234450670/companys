@@ -150,7 +150,7 @@ public class AppConfigs {
     public final static int GET_DYNSMICDEL          = 0X0080; //删除评论
     public final static int getMatch_search         = 0x0081; //赛事搜索
     public final static int getGame_detail          = 0x0082;  //赛事详情
-
+    public final static int card_live          = 0x0083;  //节目单
     public static String getDomainUrl() {
         return DomainUrl;
     }

@@ -1,28 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-               android:gravity="center"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:orientation="vertical">
+
     <LinearLayout
-        android:layout_marginLeft="@dimen/spacing_20"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/spacing_84">
+        android:layout_height="@dimen/spacing_84"
+        android:layout_margin="@dimen/spacing_20"
+
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
         <TextView
-            android:layout_marginTop="@dimen/textsize28"
-            style="@style/text_white_style_24"
-            android:textColor="#333333"
             android:id="@+id/num"
-            android:text=""/>
+            style="@style/text_white_style_24"
+            android:text=""
+            android:textColor="@color/home_bg_color"/>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/spacing_10"
+
+            android:background="@color/red_normal"/>
+
         <TextView
             android:id="@+id/name"
-            android:layout_marginTop="@dimen/textsize28"
             style="@style/text_white_style_24"
             android:layout_width="match_parent"
-            android:textColor="#333333"
-            android:text=""/>
+            android:text=""
+            android:textColor="@color/home_bg_color"/>
     </LinearLayout>
-           <include layout="@layout/split_lines"/>
+
 
 </LinearLayout>

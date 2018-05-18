@@ -10,8 +10,8 @@ import java.util.Locale;
 public class TimerUtils {
 
     // TODO 用完没有释放
-    private static StringBuilder formatBuilder;
-    private static Formatter formatter;
+    private static StringBuilder    formatBuilder;
+    private static Formatter        formatter;
     private static SimpleDateFormat sdf;
     private static SimpleDateFormat sdf2;
 
@@ -26,7 +26,8 @@ public class TimerUtils {
     }
 
     /**
-     * @param times 时间为秒
+     * @param times
+     *         时间为秒
      * @return
      */
     public static String stringForTime(int times) {
@@ -45,15 +46,15 @@ public class TimerUtils {
         }
     }
 
-//    public static String stringForTime(long times) {
-//        if (String.valueOf(times).length() < String.valueOf(System.currentTimeMillis()).length()) {
-//            times = times * 1000;
-//        }
-//        if (sdf == null) {
-//            sdf = new SimpleDateFormat("HH:mm:ss");
-//        }
-//        return sdf.format(times);
-//    }
+    //    public static String stringForTime(long times) {
+    //        if (String.valueOf(times).length() < String.valueOf(System.currentTimeMillis()).length()) {
+    //            times = times * 1000;
+    //        }
+    //        if (sdf == null) {
+    //            sdf = new SimpleDateFormat("HH:mm:ss");
+    //        }
+    //        return sdf.format(times);
+    //    }
 
     public static Date stringToTimestamp(String time) {
         if (sdf2 == null) {
@@ -89,7 +90,6 @@ public class TimerUtils {
 
     /**
      * 判断是否直播中
-     *
      * @param startTime
      * @param endTime
      * @return -1 直播未开始 0 正在直播 1 直播一结束
@@ -107,4 +107,26 @@ public class TimerUtils {
         }
 
     }
+
+    /**
+     * 判断是否直播中
+     * @param startTime
+     * @param endTime
+     * @return -1 直播未开始 0 正在直播 1 直播一结束
+     */
+    public static int isPlaying(String beginTime, String startTime, String endTime) {
+        Date begin = stringToTimestamp(beginTime);
+        Date start = stringToTimestamp(startTime);
+        Date end = stringToTimestamp(endTime);
+
+        if (begin.getTime() < start.getTime()) {
+            return -1;
+        } else if (begin.getTime() < end.getTime()) {
+            return 0;
+        } else {
+            return 1;
+        }
+
+    }
+
 }

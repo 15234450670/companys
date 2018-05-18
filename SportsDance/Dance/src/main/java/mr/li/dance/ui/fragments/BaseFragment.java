@@ -51,11 +51,14 @@ public abstract class BaseFragment extends Fragment implements HttpListener {
             StatusBarUtil.StatusBarLightMode(getActivity());
         }
     }
+    public void initVideo(){
 
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         // setScreen();
+        initVideo();
         mView = inflater.inflate(getContentView(), null, false);
         danceViewHolder = new DanceViewHolder(getActivity(), mView);
         mSp = getActivity().getSharedPreferences("config", Context.MODE_PRIVATE);
