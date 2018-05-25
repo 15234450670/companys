@@ -1,5 +1,7 @@
 package mr.li.dance.utils;
 
+import android.util.Log;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -118,7 +120,9 @@ public class TimerUtils {
         Date begin = stringToTimestamp(beginTime);
         Date start = stringToTimestamp(startTime);
         Date end = stringToTimestamp(endTime);
-
+        Log.e("beginTime",begin.getTime()+"");
+        Log.e("startTime",start.getTime()+"");
+        Log.e("endTime",end.getTime()+"");
         if (begin.getTime() < start.getTime()) {
             return -1;
         } else if (begin.getTime() < end.getTime()) {

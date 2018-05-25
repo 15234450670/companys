@@ -29,28 +29,27 @@ import java.util.Map;
 
 import mr.li.dance.R;
 import mr.li.dance.models.ZhiBoBean;
+import mr.li.dance.ui.activitys.game.GameDetailActivity;
+import mr.li.dance.ui.activitys.video.ZhiBoDetailActivity;
 import mr.li.dance.ui.adapters.LiveImageAdapter;
 import mr.li.dance.ui.fragments.BaseFragment;
-import mr.li.dance.ui.widget.screenrotate.MyRotate;
+import mr.li.dance.ui.widget.FullyLinearLayoutManager;
 import mr.li.dance.utils.MyStrUtil;
-
-import static com.taobao.accs.ACCSManager.mContext;
 
 /**
  * 作者: SuiFeng
  * 版本:
- * 创建日期:2018/5/17 0017
- * 描述:    简介
+ * 创建日期:2018/5/23 0023
+ * 描述:
  * 修订历史:
  */
-public class SynopsisFragment extends BaseFragment implements ITXVodPlayListener {
-    private MyRotate rotate;
-    private Bundle                                    arguments;
+public class IntroduceFragment extends BaseFragment implements ITXVodPlayListener, View.OnClickListener {
     private ZhiBoBean.DataBean.AdVideoBean            adVideo;
     private ArrayList<ZhiBoBean.DataBean.AdWlinkBean> adWlink;
 
-    private String                                    brief;
-    private String                                    title;
+    private String brief;
+    private String title;
+    private Bundle arguments;
     boolean isFlag;
     private TextView         t;
     private TextView         tv;
@@ -68,16 +67,18 @@ public class SynopsisFragment extends BaseFragment implements ITXVodPlayListener
     private TextView  mTextStart;
     private TextView  mTextDuration;
     private boolean mStartSeek = false;
-    private FrameLayout fl;
+    private FrameLayout frame;
     private long mStartPlayTS = 0;
     private boolean mVideoPlay;
     private boolean mVideoPause = false;
     private ImageView    p;
     private RecyclerView rv;
+    private String       mId;
+    private String       name;
 
     @Override
     public int getContentView() {
-        return R.layout.live_synopsis;
+        return R.layout.introduce_zhibo;
     }
 
     @Override
@@ -90,36 +91,75 @@ public class SynopsisFragment extends BaseFragment implements ITXVodPlayListener
 
     @Override
     public void initData() {
-
         arguments = getArguments();
         if (arguments == null) {
             return;
         }
         isLive = arguments.getInt("isLive");
+        mId = arguments.getString("mId");
+        name = arguments.getString("name");
         adVideo = (ZhiBoBean.DataBean.AdVideoBean) arguments.getSerializable("adVideo");
         adWlink = arguments.getParcelableArrayList("adWlink");
         brief = arguments.getString("brief");
         title = arguments.getString("title");
-        Log.e("isLive->", isLive + "**" + adVideo + "--" + adWlink + "///" + brief + "..." + title);
-
+        Log.e("isLive->", isLive + "**" + mId + "--" + name + "///" + brief + "..." + title);
     }
 
     @Override
     public void initViews() {
-     //   ZhiBoDetailActivity.viewPager.setObjectForPosition(mView, 0);
+        TextView textView = danceViewHolder.getTextView(R.id.text1);
+        textView.setOnClickListener(this);
+        frame = (FrameLayout) danceViewHolder.getView(R.id.video_frame);
+        if (!MyStrUtil.isEmpty(name)) {
+            View view = danceViewHolder.getView(R.id.class_jieshao);
+            view.setVisibility(View.VISIBLE);
+            danceViewHolder.setText(R.id.matchname_tv, name);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    GameDetailActivity.lunch(getActivity(), mId);
+                }
+            });
+
+        }
         rv = (RecyclerView) danceViewHolder.getView(R.id.rv);
-        LinearLayoutManager manager1 = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
+        //  rv.setNestedScrollingEnabled(false);
+        FullyLinearLayoutManager manager1 = new FullyLinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         rv.setLayoutManager(manager1);
         LiveImageAdapter adapter = new LiveImageAdapter(getActivity());
         if (!MyStrUtil.isEmpty(adWlink)) {
             adapter.addList(adWlink);
             rv.setAdapter(adapter);
         }
-
-
-        fl = (FrameLayout) danceViewHolder.getView(R.id.video_frame);
         t = danceViewHolder.getTextView(R.id.t);
         tv = danceViewHolder.getTextView(R.id.tv);
+        p = danceViewHolder.getImageView(R.id.p);
+        t.setText(title);
+        t.setMaxLines(1);
+        t.setEllipsize(TextUtils.TruncateAt.END);
+        tv.setVisibility(View.GONE);
+        if (!MyStrUtil.isEmpty(brief)) {
+            p.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!isFlag) {
+                        p.setBackgroundResource(R.drawable.up_live);
+                        tv.setText(brief);
+                        t.setEllipsize(null);// 展开
+                        t.setSingleLine(isFlag);
+                        tv.setVisibility(View.VISIBLE);
+                        isFlag = true;
+                    } else {
+                        isFlag = false;
+                        p.setBackgroundResource(R.drawable.down_live);
+                        t.setMaxLines(1);
+                        t.setEllipsize(TextUtils.TruncateAt.END);
+                        tv.setVisibility(View.GONE);
+                    }
+                }
+            });
+        }
+
         mPlayerView = (TXCloudVideoView) danceViewHolder.getView(R.id.video_view);
         play_progress = (LinearLayout) danceViewHolder.getView(R.id.play_progress);
         btnvideo = danceViewHolder.getButton(R.id.btnvideo);
@@ -167,44 +207,26 @@ public class SynopsisFragment extends BaseFragment implements ITXVodPlayListener
                 }, 500);
             }
         });
-
-        p = danceViewHolder.getImageView(R.id.p);
-            t.setText(title);
-            t.setMaxLines(1);
-            t.setEllipsize(TextUtils.TruncateAt.END);
-            tv.setVisibility(View.GONE);
-            if (!MyStrUtil.isEmpty(brief)) {
-                p.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (!isFlag) {
-                            p.setBackgroundResource(R.drawable.up_live);
-                            tv.setText(brief);
-                            t.setEllipsize(null);// 展开
-                            t.setSingleLine(isFlag);
-                            tv.setVisibility(View.VISIBLE);
-                            isFlag = true;
-                        } else {
-                            isFlag = false;
-                            p.setBackgroundResource(R.drawable.down_live);
-                            t.setMaxLines(1);
-                            t.setEllipsize(TextUtils.TruncateAt.END);
-                            tv.setVisibility(View.GONE);
-                        }
-                    }
-                });
-        }
         /**
          * 判断是否直播中
          * @param startTime
          * @param endTime
          * @return -1 直播未开始 0 正在直播  -1 直播一结束
          */
-        if (!MyStrUtil.isEmpty(adVideo) && !MyStrUtil.isEmpty(adVideo.getUrl()) && isLive != 0) {
-            fl.setVisibility(View.VISIBLE);
+        if (!MyStrUtil.isEmpty(adVideo.getUrl()) && isLive != 0) {
+            frame.setVisibility(View.VISIBLE);
             startPlayRtmp(adVideo.getUrl());
         }
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.text1:
+                ZhiBoDetailActivity.viewPager.setCurrentItem(1);
+                break;
+        }
     }
 
     private boolean startPlayRtmp(String playUrl) {
@@ -214,7 +236,7 @@ public class SynopsisFragment extends BaseFragment implements ITXVodPlayListener
         }
 
         mBtnPlay.setBackgroundResource(R.drawable.video_pause);
-        fl.setBackgroundColor(0xff000000);
+        frame.setBackgroundColor(0xff000000);
         mLivePlayer.setPlayerView(mPlayerView);
         mLivePlayer.setVodListener(this);
         mLivePlayer.setRenderRotation(mCurrentRenderRotation);
@@ -228,7 +250,7 @@ public class SynopsisFragment extends BaseFragment implements ITXVodPlayListener
         int result = mLivePlayer.startPlay(playUrl); // result返回值：0 success;  -1 empty url;
         if (result != 0) {
             mBtnPlay.setBackgroundResource(R.drawable.video_resume);
-            fl.setBackgroundResource(R.drawable.default_banner);
+            frame.setBackgroundResource(R.drawable.default_banner);
             return false;
         }
         Log.w("video render", "timetrack start play");
@@ -240,11 +262,11 @@ public class SynopsisFragment extends BaseFragment implements ITXVodPlayListener
         /**
          * 视频点击隐藏状态栏
          */
-        fl.setOnClickListener(new View.OnClickListener() {
+        frame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final int m = play_progress.getVisibility();
-                danceViewHolder.getView(R.id.video_top).setVisibility(m == View.VISIBLE ? View.GONE : View.VISIBLE);
+                //                danceViewHolder.getView(R.id.video_top).setVisibility(m == View.VISIBLE ? View.GONE : View.VISIBLE);
                 play_progress.setVisibility(m == View.VISIBLE ? View.GONE : View.VISIBLE);
                 play_progress.bringToFront();
 
@@ -269,6 +291,9 @@ public class SynopsisFragment extends BaseFragment implements ITXVodPlayListener
         return true;
     }
 
+
+
+
     /**
      * 一切就绪 开始播放
      */
@@ -276,7 +301,7 @@ public class SynopsisFragment extends BaseFragment implements ITXVodPlayListener
 
         mLivePlayer.resume();
         mBtnPlay.setBackgroundResource(R.drawable.video_pause);
-        fl.setBackgroundColor(0xff000000);
+        frame.setBackgroundColor(0xff000000);
         mVideoPlay = true;
 
     }
@@ -341,11 +366,6 @@ public class SynopsisFragment extends BaseFragment implements ITXVodPlayListener
             mPlayerView = null;
         }
 
-        if (rotate != null) {
-            rotate.disable();
-            rotate.destory();
-            rotate = null;
-        }
 
         mPlayConfig = null;
     }
@@ -353,11 +373,8 @@ public class SynopsisFragment extends BaseFragment implements ITXVodPlayListener
     @Override
     public void onPause() {
         super.onPause();
-
-        if (mLivePlayer != null) {
-            mLivePlayer.pause();
-        }
-
+        Log.e("pause", "pause----->");
+        pauseStatus();
     }
 
 
@@ -365,20 +382,7 @@ public class SynopsisFragment extends BaseFragment implements ITXVodPlayListener
     public void onResume() {
         super.onResume();
 
-
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        Log.e("isVisibleToUser", isVisibleToUser + "");
-        if (!isVisibleToUser) {
-            if (mLivePlayer != null) {
-                pauseStatus();
-            }
-
-
-        }
+        //pauseStatus();
     }
 
 
@@ -412,8 +416,8 @@ public class SynopsisFragment extends BaseFragment implements ITXVodPlayListener
             return;
         } else if (event == TXLiveConstants.PLAY_ERR_NET_DISCONNECT || event == TXLiveConstants.PLAY_EVT_PLAY_END || event == TXLiveConstants.PLAY_ERR_FILE_NOT_FOUND) {
             danceViewHolder.getView(R.id.play_progress).setVisibility(View.GONE);
-            danceViewHolder.getView(R.id.video_top).setVisibility(View.GONE);
-            fl.setOnClickListener(null);
+            //   danceViewHolder.getView(R.id.video_top).setVisibility(View.GONE);
+            frame.setOnClickListener(null);
             btnvideo.setVisibility(View.VISIBLE);
             stopPlayRtmp();
             mVideoPlay = false;
@@ -452,7 +456,22 @@ public class SynopsisFragment extends BaseFragment implements ITXVodPlayListener
     }
 
     @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        Log.e("isVisibleToUser", isVisibleToUser + "");
+        if (!isVisibleToUser) {
+            if (mLivePlayer != null) {
+
+                pauseStatus();
+            }
+        }
+    }
+
+
+    @Override
     public void onNetStatus(TXVodPlayer txVodPlayer, Bundle bundle) {
 
     }
+
+
 }

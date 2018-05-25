@@ -133,90 +133,13 @@
 
     </FrameLayout>
 
-    <mr.li.dance.utils.util.VerticalScrollView
-        android:id="@+id/scroll"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:fillViewport="true"
-        >
+   <android.support.v4.view.ViewPager
+       android:id="@+id/vp"
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
+       android:layout_weight="2">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:id="@+id/class_jieshao"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone"
-                >
-
-                <TextView
-                    style="@style/text_black_style_30"
-                    android:text="相关赛事"
-                    />
-
-
-                <include layout="@layout/split_lines"/>
-
-                <LinearLayout
-                    android:id="@+id/class_jieshaos"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/matchname_tv"
-                        style="@style/text_black_style_28"
-                        android:layout_marginBottom="@dimen/spacing_20"
-                        android:layout_marginLeft="@dimen/spacing_20"
-                        android:layout_marginRight="@dimen/spacing_48"
-                        android:layout_marginTop="@dimen/spacing_20"
-                        android:layout_weight="1"
-                        android:text=""
-                        android:textColor="#666666"
-                        />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginRight="@dimen/spacing_20"
-                        android:src="@drawable/jinru_item"/>
-                </LinearLayout>
-
-                <View
-                    android:id="@+id/v"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/spacing_20"
-                    android:background="#e1e1e1"
-                    />
-
-            </LinearLayout>
-
-            <android.support.design.widget.TabLayout
-                android:id="@+id/tab"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:tabIndicatorColor="@color/red_normal"
-                app:tabMode="scrollable"
-                app:tabTextColor="@color/black"
-                />
-
-            <mr.li.dance.utils.util.ChildViewPager
-                android:id="@+id/vp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </mr.li.dance.utils.util.ChildViewPager>
-
-        </LinearLayout>
-
-
-    </mr.li.dance.utils.util.VerticalScrollView>
+   </android.support.v4.view.ViewPager>
 
 
 </LinearLayout>

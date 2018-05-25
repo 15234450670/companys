@@ -6,10 +6,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -37,8 +34,10 @@ import mr.li.dance.R;
 import mr.li.dance.https.ParameterUtils;
 import mr.li.dance.models.ZhiBoBean;
 import mr.li.dance.ui.activitys.base.BaseActivity;
-import mr.li.dance.ui.activitys.game.GameDetailActivity;
+import mr.li.dance.ui.adapters.ZhiBoPagerAdapter;
+import mr.li.dance.ui.fragments.video.CardFrag;
 import mr.li.dance.ui.fragments.video.CardFragment;
+import mr.li.dance.ui.fragments.video.IntroduceFragment;
 import mr.li.dance.ui.fragments.video.SynopsisFragment;
 import mr.li.dance.ui.widget.screenrotate.MyRotate;
 import mr.li.dance.ui.widget.screenrotate.RotateCallBack;
@@ -49,7 +48,7 @@ import mr.li.dance.utils.ScreenUtils;
 import mr.li.dance.utils.ShareUtils;
 import mr.li.dance.utils.TimerUtils;
 
-import static mr.li.dance.R.id.video_top;
+
 
 /**
  * 作者: Lixuewei
@@ -89,23 +88,25 @@ public class ZhiBoDetailActivity extends BaseActivity implements ITXLivePlayList
     protected int          mActivityType;
     private   LinearLayout play_progress;
 
-    private FrameLayout                     ff;
-    private ZhiBoBean.DataBean.LiveInfoBean compete;
-    private String[] titles = {"简介", "赛程表"};
-    private TabLayout           tab;
-    private ViewPager           viewPager;
-    private ArrayList<Fragment> list;
-    private MyViewPagerAdapter  myViewPagerAdapter;
-    private Bundle              synopsisBundle;
-    private SynopsisFragment    synopsisFragment;
-    private CardFragment        cardFragment;
-    private int             isLive;//判断直播是否开始
-    private Bundle              cardBundle;
+    private       FrameLayout                     ff;
+    private       ZhiBoBean.DataBean.LiveInfoBean compete;
+    // private String[] titles = {"简介", "赛程表"};
+    //private TabLayout           tab;
+    public static ViewPager                       viewPager;
+    private       ArrayList<Fragment>             list;
+
+    private Bundle            synopsisBundle;
+    private SynopsisFragment  synopsisFragment;
+    private CardFragment      cardFragment;
+    private Bundle            cardBundle;
+    private IntroduceFragment introduceFragment;
+    private CardFrag          cardFrag;
+    int playStatus = -1;
 
     @Override
     public void initVideo() {
         super.initVideo();
-        startOrientationListener();
+        // startOrientationListener();
         mCurrentRenderMode = TXLiveConstants.RENDER_MODE_FULL_FILL_SCREEN;
         mCurrentRenderRotation = TXLiveConstants.RENDER_ROTATION_PORTRAIT;
         mPlayConfig = new TXLivePlayConfig();
@@ -125,9 +126,9 @@ public class ZhiBoDetailActivity extends BaseActivity implements ITXLivePlayList
         setTitle("直播");
         registerForContextMenu(findViewById(R.id.btnPlay));
         ff = (FrameLayout) findViewById(R.id.video_frame);
-        tab = (TabLayout) mDanceViewHolder.getView(R.id.tab);
+        // tab = (TabLayout) mDanceViewHolder.getView(R.id.tab);
         viewPager = (ViewPager) mDanceViewHolder.getView(R.id.vp);
-        tab.setTabMode(TabLayout.MODE_FIXED);
+        //  tab.setTabMode(TabLayout.MODE_FIXED);
         list = new ArrayList<>();
 
         ff.setOnClickListener(this);
@@ -155,10 +156,12 @@ public class ZhiBoDetailActivity extends BaseActivity implements ITXLivePlayList
         mBtnRenderRotation.setOnClickListener(this);
         synopsisBundle = new Bundle();
         cardBundle = new Bundle();
-        synopsisFragment = new SynopsisFragment();
-        cardFragment = new CardFragment();
-        list.add(synopsisFragment);
-        list.add(cardFragment);
+      /*  synopsisFragment = new SynopsisFragment();
+        cardFragment = new CardFragment();*/
+        introduceFragment = new IntroduceFragment();
+        cardFrag = new CardFrag();
+        list.add(introduceFragment);
+        list.add(cardFrag);
 
     }
 
@@ -202,6 +205,8 @@ public class ZhiBoDetailActivity extends BaseActivity implements ITXLivePlayList
 
             }
         });
+
+
         if (!MyStrUtil.isEmpty(adVideo)) {
             synopsisBundle.putSerializable("adVideo", adVideo);
         }
@@ -214,15 +219,20 @@ public class ZhiBoDetailActivity extends BaseActivity implements ITXLivePlayList
         if (!MyStrUtil.isEmpty(compete.getLive_title())) {
             synopsisBundle.putString("title", compete.getLive_title());
         }
-        synopsisBundle.putInt("isLive", isLive);
-        synopsisFragment.setArguments(synopsisBundle);
+        synopsisBundle.putString("mId", compete.getCompete_id());
+        synopsisBundle.putString("name", compete.getCompete_name());
+        synopsisBundle.putInt("isLive", playStatus);
+        introduceFragment.setArguments(synopsisBundle);
+
 
         cardBundle.putString("id", mItemId);
-        cardFragment.setArguments(cardBundle);
+        cardBundle.putString("mId", compete.getCompete_id());
+        cardBundle.putString("name", compete.getCompete_name());
 
-        myViewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(myViewPagerAdapter);
-        tab.setupWithViewPager(viewPager);
+        cardFrag.setArguments(cardBundle);
+
+        ZhiBoPagerAdapter adapter = new ZhiBoPagerAdapter(getSupportFragmentManager(), list);
+        viewPager.setAdapter(adapter);
     }
 
     /* @Override
@@ -331,7 +341,7 @@ public class ZhiBoDetailActivity extends BaseActivity implements ITXLivePlayList
         setRightImage(R.drawable.share_icon_001);
         mShareContent = zhiBoInfo.getLive_title();
         shareUrl = String.format(AppConfigs.SHARELIVE, mItemId);
-        if (!MyStrUtil.isEmpty(zhiBoInfo.getCompete_name())) {
+      /*  if (!MyStrUtil.isEmpty(zhiBoInfo.getCompete_name())) {
             View view = mDanceViewHolder.getView(R.id.class_jieshao);
             view.setVisibility(View.VISIBLE);
             mDanceViewHolder.setText(R.id.matchname_tv, zhiBoInfo.getCompete_name());
@@ -344,9 +354,9 @@ public class ZhiBoDetailActivity extends BaseActivity implements ITXLivePlayList
 
         } else {
             mDanceViewHolder.getView(R.id.class_jieshao).setVisibility(View.GONE);
-        }
+        }*/
         //mDanceViewHolder.setText(R.id.compete_trailer, zhiBoInfo.get(0).getCompete_trailer());
-        int playStatus = -1;
+
         if (!MyStrUtil.isEmpty(zhiBoInfo.getTime()) && !MyStrUtil.isEmpty(zhiBoInfo.getBegin_time()) && !MyStrUtil.isEmpty(zhiBoInfo.getEnd_time())) {
             playStatus = TimerUtils.isPlaying(zhiBoInfo.getTime(), zhiBoInfo.getBegin_time(), zhiBoInfo.getEnd_time());
         } else {
@@ -356,7 +366,7 @@ public class ZhiBoDetailActivity extends BaseActivity implements ITXLivePlayList
         switch (playStatus) {
 
             case -1:
-                isLive = 0;
+
                 ff.setClickable(false);
                 mDanceViewHolder.getView(R.id.play_progress).setVisibility(View.INVISIBLE);   //视频底部
                 mDanceViewHolder.getView(R.id.video_top).setVisibility(View.INVISIBLE);        //视频顶部
@@ -366,7 +376,7 @@ public class ZhiBoDetailActivity extends BaseActivity implements ITXLivePlayList
                 mDanceViewHolder.setImageByUrlOrFilePaths(R.id.prepare_img, zhiBoInfo.getPicture_begin());
                 break;
             case 0:
-                isLive = 1;
+                startOrientationListener();
                 ff.setClickable(true);
                 mDanceViewHolder.getView(R.id.play_progress).setVisibility(View.VISIBLE);
                 mDanceViewHolder.getView(R.id.video_top).setVisibility(View.VISIBLE);
@@ -375,7 +385,7 @@ public class ZhiBoDetailActivity extends BaseActivity implements ITXLivePlayList
                 mDanceViewHolder.setViewVisibility(R.id.playstatus_layout, View.INVISIBLE);
                 break;
             case 1:
-                isLive = 0;
+
                 ff.setClickable(false);
                 mDanceViewHolder.getView(R.id.play_progress).setVisibility(View.INVISIBLE);
                 mDanceViewHolder.getView(R.id.video_top).setVisibility(View.INVISIBLE);
@@ -387,14 +397,14 @@ public class ZhiBoDetailActivity extends BaseActivity implements ITXLivePlayList
 
         }
         if (playStatus != 0) {
-            isLive = 0;
+
             return false;
         }
 
         String playUrl = AppConfigs.VIDEO_ZHIBO + zhiBoInfo.getTencent_streamId() + ".flv";
         Log.e(TAG, playUrl);
         if (!checkPlayUrl(playUrl)) {
-            isLive = 0;
+
             return false;
         }
         mBtnPlay.setBackgroundResource(R.drawable.video_pause);
@@ -472,7 +482,7 @@ public class ZhiBoDetailActivity extends BaseActivity implements ITXLivePlayList
         switch (v.getId()) {
             case R.id.video_frame:
                 final int m = play_progress.getVisibility();
-                mDanceViewHolder.getView(video_top).setVisibility(m == View.VISIBLE ? View.GONE : View.VISIBLE);
+                mDanceViewHolder.getView(R.id.video_top).setVisibility(m == View.VISIBLE ? View.GONE : View.VISIBLE);
                 play_progress.setVisibility(m == View.VISIBLE ? View.GONE : View.VISIBLE);
                 play_progress.bringToFront();
                 break;
@@ -491,6 +501,7 @@ public class ZhiBoDetailActivity extends BaseActivity implements ITXLivePlayList
      * 启用手机旋转监听
      */
     private void startOrientationListener() {
+
         rotate = new MyRotate(this);
         rotate.setCallBack(new RotateCallBack() {
             @Override
@@ -530,12 +541,13 @@ public class ZhiBoDetailActivity extends BaseActivity implements ITXLivePlayList
     private void showOrHideView(boolean flag) {
         ViewGroup.LayoutParams layoutParams = ff.getLayoutParams();
         Log.e("flag", flag + "");
-        mDanceViewHolder.getView(R.id.scroll).setVisibility(flag ? View.VISIBLE : View.GONE);
+        mDanceViewHolder.getView(R.id.vp).setVisibility(flag ? View.VISIBLE : View.GONE);
+      /*  mDanceViewHolder.getView(R.id.scroll).setVisibility(flag ? View.VISIBLE : View.GONE);
         if (!MyStrUtil.isEmpty(compete.getCompete_name())) {
             mDanceViewHolder.getView(R.id.class_jieshao).setVisibility(flag ? View.VISIBLE : View.GONE);
         } else {
             mDanceViewHolder.getView(R.id.class_jieshao).setVisibility(View.GONE);
-        }
+        }     */
 
         //  mDanceViewHolder.getView(R.id.jiemu).setVisibility(flag ? View.VISIBLE : View.GONE);
         boolean utils = ScreenUtils.hasNavBar(this);
@@ -637,29 +649,5 @@ public class ZhiBoDetailActivity extends BaseActivity implements ITXLivePlayList
 
 
     }
-
-    private class MyViewPagerAdapter extends FragmentPagerAdapter {
-
-        public MyViewPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return list.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return list.size();
-        }
-
-        //重写这个方法，将设置每个Tab的标题
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return titles[position];
-        }
-    }
-
 
 }
