@@ -29,7 +29,7 @@ public class LiveImageAdapter extends BaseRecyclerAdapter<ZhiBoBean.DataBean.AdW
     @Override
     public void bindData(RecyclerViewHolder holder, int position, final ZhiBoBean.DataBean.AdWlinkBean item) {
         ImageView imageView = holder.getImageView(R.id.image);
-        holder.setImageByUrlOrFilePath1(imageView, item.getImg_fm(), R.drawable.default_banner);
+        holder.setImageByUrlOrFilePath(R.id.image, item.getImg_fm(), R.drawable.default_banner);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,5 +39,4 @@ public class LiveImageAdapter extends BaseRecyclerAdapter<ZhiBoBean.DataBean.AdW
             }
         });
     }
-
 }

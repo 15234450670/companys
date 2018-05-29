@@ -118,6 +118,5 @@ public class CardFrag extends BaseListFragment {
 
     @Override
     public void itemClick(int position, Object value) {
-
     }
 }

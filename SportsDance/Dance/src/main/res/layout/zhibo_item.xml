@@ -15,18 +15,18 @@
 
         <TextView
             android:id="@+id/num"
+            android:layout_marginRight="@dimen/spacing_20"
             style="@style/text_white_style_24"
             android:text=""
             android:textColor="@color/home_bg_color"/>
 
         <View
             android:layout_width="2dp"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/spacing_10"
-
-            android:background="@color/red_normal"/>
+            android:layout_height="@dimen/spacing_40"
+            android:background="@color/slide_view"/>
 
         <TextView
+            android:layout_marginLeft="@dimen/spacing_20"
             android:id="@+id/name"
             style="@style/text_white_style_24"
             android:layout_width="match_parent"

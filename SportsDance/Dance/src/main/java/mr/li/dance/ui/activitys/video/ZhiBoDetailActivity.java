@@ -7,7 +7,6 @@ import android.content.pm.ActivityInfo;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -47,7 +46,7 @@ import mr.li.dance.utils.MyStrUtil;
 import mr.li.dance.utils.ScreenUtils;
 import mr.li.dance.utils.ShareUtils;
 import mr.li.dance.utils.TimerUtils;
-
+import mr.li.dance.utils.util.IndexViewPager;
 
 
 /**
@@ -92,7 +91,7 @@ public class ZhiBoDetailActivity extends BaseActivity implements ITXLivePlayList
     private       ZhiBoBean.DataBean.LiveInfoBean compete;
     // private String[] titles = {"简介", "赛程表"};
     //private TabLayout           tab;
-    public static ViewPager                       viewPager;
+    public static IndexViewPager                       viewPager;
     private       ArrayList<Fragment>             list;
 
     private Bundle            synopsisBundle;
@@ -127,7 +126,7 @@ public class ZhiBoDetailActivity extends BaseActivity implements ITXLivePlayList
         registerForContextMenu(findViewById(R.id.btnPlay));
         ff = (FrameLayout) findViewById(R.id.video_frame);
         // tab = (TabLayout) mDanceViewHolder.getView(R.id.tab);
-        viewPager = (ViewPager) mDanceViewHolder.getView(R.id.vp);
+        viewPager = (IndexViewPager) mDanceViewHolder.getView(R.id.vp);
         //  tab.setTabMode(TabLayout.MODE_FIXED);
         list = new ArrayList<>();
 

@@ -213,7 +213,8 @@ public class IntroduceFragment extends BaseFragment implements ITXVodPlayListene
          * @param endTime
          * @return -1 直播未开始 0 正在直播  -1 直播一结束
          */
-        if (!MyStrUtil.isEmpty(adVideo.getUrl()) && isLive != 0) {
+
+        if (!MyStrUtil.isEmpty(adVideo) && isLive != 0) {
             frame.setVisibility(View.VISIBLE);
             startPlayRtmp(adVideo.getUrl());
         }

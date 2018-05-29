@@ -62,11 +62,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/spacing_70"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <TextView
+                android:textSize="@dimen/spacing_30"
                 android:textColor="#e1e1e1"
                 android:id="@+id/text"
                 android:layout_width="0dp"
@@ -81,6 +80,7 @@
                 android:background="#e1e1e1"/>
 
             <TextView
+                android:textSize="@dimen/spacing_30"
                 android:textColor="@color/black"
                 android:id="@+id/text1"
                 android:layout_width="0dp"
@@ -89,6 +89,7 @@
                 android:gravity="center"
                 android:text="赛程表"/>
         </LinearLayout>
+        <include layout="@layout/split_line"/>
 
         <LinearLayout
             android:layout_width="match_parent"
