@@ -23,10 +23,11 @@ import mr.li.dance.utils.JsonMananger;
  */
 public class SecondHomeFragment extends BaseListFragment {
     Second_New_HomeRecyclerAdapter mAdapter;
-    int page = 1;
+    int page = -1;
 
     @Override
     public void initData() {
+        page = 1;
         Request<String> request = ParameterUtils.getSingleton().getHomeIndexMap1(String.valueOf(page));
         request(AppConfigs.home_index, request, false);
     }
@@ -65,7 +66,8 @@ public class SecondHomeFragment extends BaseListFragment {
     @Override
     public void refresh() {
         super.refresh();
-        Request<String> request = ParameterUtils.getSingleton().getHomeIndexMap1(String.valueOf(1));
+         page = 1;
+        Request<String> request = ParameterUtils.getSingleton().getHomeIndexMap1(String.valueOf(page));
         request(AppConfigs.home_index, request, false);
     }
 

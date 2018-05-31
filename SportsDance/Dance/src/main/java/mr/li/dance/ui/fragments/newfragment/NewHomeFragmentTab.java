@@ -67,6 +67,7 @@ public class NewHomeFragmentTab extends BaseFragment {
         tab.setupWithViewPager(viewPager);
     }
 
+
     private class MyViewPagerAdapter extends FragmentPagerAdapter {
 
         public MyViewPagerAdapter(FragmentManager fm) {
@@ -94,5 +95,7 @@ public class NewHomeFragmentTab extends BaseFragment {
     public int getContentView() {
         return R.layout.basefragment_all_tab;
     }
+
+
 
 }

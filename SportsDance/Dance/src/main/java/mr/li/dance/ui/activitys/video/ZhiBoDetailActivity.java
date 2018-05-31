@@ -91,7 +91,7 @@ public class ZhiBoDetailActivity extends BaseActivity implements ITXLivePlayList
     private       ZhiBoBean.DataBean.LiveInfoBean compete;
     // private String[] titles = {"简介", "赛程表"};
     //private TabLayout           tab;
-    public static IndexViewPager                       viewPager;
+    public static IndexViewPager                  viewPager;
     private       ArrayList<Fragment>             list;
 
     private Bundle            synopsisBundle;

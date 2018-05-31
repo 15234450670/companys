@@ -55,7 +55,7 @@ public class SecondMessageFragment extends BaseFragment {
     private ExPandableAdapter          exPandableAdapter;
     private List<LabelSelect.DataBean> data;
     private NewZiXunFragment           newZiXunFragment;
-    private NewViewPagerAdapter newViewPagerAdapter;
+    private NewViewPagerAdapter        newViewPagerAdapter;
 
     @Override
     public void initData() {
@@ -66,6 +66,7 @@ public class SecondMessageFragment extends BaseFragment {
     @Override
     public void initViews() {
         tabLayout = (TabLayout) danceViewHolder.getView(R.id.rv);
+
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override

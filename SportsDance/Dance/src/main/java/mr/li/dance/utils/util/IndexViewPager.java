@@ -62,4 +62,5 @@ public class IndexViewPager extends ViewPager {
         }
 
     }
+
 }

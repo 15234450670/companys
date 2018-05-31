@@ -221,6 +221,7 @@ public class IntroduceFragment extends BaseFragment implements ITXVodPlayListene
 
     }
 
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
