@@ -1313,13 +1313,13 @@ public class ParameterUtils {
      *   /revisionHome.index 第二版
      */
     public Request<String> getHomeIndexMap1(String page) {
-        Request<String> request = getBaseRequestCacheForPost("/revisionHome.index");
+        Request<String> request = getBaseRequestCacheForPost("/revisionHome.index2");
         request.add("page", page);
         return request;
     }
 
     public Request<String> getHomeIndexMap2(String page) {
-        Request<String> request = getBaseRequestCacheForPost("/revisionHome.indexPage");
+        Request<String> request = getBaseRequestCacheForPost("/revisionHome.indexPage2");
         request.add("page", page);
         return request;
     }
